@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -22,9 +21,9 @@ import cc.openxiot.android.ui.main.PageTitle
 fun ProfileScreen(
     currentOrgName: String?,
     currentProjectName: String?,
-    onLogout: () -> Unit,
     onNavigateToOrgPicker: () -> Unit = {},
-    onNavigateToProjectPicker: () -> Unit = {}
+    onNavigateToProjectPicker: () -> Unit = {},
+    onNavigateToAccount: () -> Unit = {}
 ) {
     val tokenManager = OpenXiotApp.instance.tokenManager
 
@@ -35,12 +34,13 @@ fun ProfileScreen(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(bottom = 16.dp)
         ) {
-            // Profile header
+            // Profile header (clickable → account detail)
             item {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(16.dp)
+                        .clickable(onClick = onNavigateToAccount),
                     shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = MaterialTheme.colorScheme.surface
@@ -59,7 +59,7 @@ fun ProfileScreen(
                             size = 56.dp
                         )
                         Spacer(modifier = Modifier.width(16.dp))
-                        Column {
+                        Column(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = tokenManager.username ?: "未登录",
                                 style = MaterialTheme.typography.titleLarge,
@@ -71,6 +71,11 @@ fun ProfileScreen(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
+                        Icon(
+                            Icons.Default.ChevronRight,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
             }
@@ -113,20 +118,9 @@ fun ProfileScreen(
                     },
                     onClick = { AppState.toggleDarkMode(tokenManager) }
                 )
-                SettingsCard(
-                    title = "退出登录",
-                    subtitle = "清除登录状态",
-                    icon = Icons.AutoMirrored.Filled.Logout,
-                    titleColor = MaterialTheme.colorScheme.error,
-                    onClick = {
-                        tokenManager.clear()
-                        onLogout()
-                    }
-                )
             }
         }
     }
-
 }
 
 @Composable

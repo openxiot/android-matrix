@@ -19,9 +19,9 @@ import cc.openxiot.android.ui.project.SpaceTreeContent
 fun MainScreen(
     currentOrgName: String?,
     currentProjectName: String?,
-    onLogout: () -> Unit,
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
+    onNavigateToAccount: () -> Unit = {},
     mainViewModel: MainViewModel = viewModel(),
     projectViewModel: ProjectViewModel = viewModel()
 ) {
@@ -91,9 +91,9 @@ fun MainScreen(
                 BottomTab.Profile -> ProfileScreen(
                     currentOrgName = currentOrgName,
                     currentProjectName = currentProjectName,
-                    onLogout = onLogout,
                     onNavigateToOrgPicker = onNavigateToOrgPicker,
-                    onNavigateToProjectPicker = onNavigateToProjectPicker
+                    onNavigateToProjectPicker = onNavigateToProjectPicker,
+                    onNavigateToAccount = onNavigateToAccount
                 )
             }
         }

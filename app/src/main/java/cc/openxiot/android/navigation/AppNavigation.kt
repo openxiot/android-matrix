@@ -10,6 +10,7 @@ import cc.openxiot.android.ui.login.LoginScreen
 import cc.openxiot.android.ui.main.MainScreen
 import cc.openxiot.android.ui.organization.OrganizationListScreen
 import cc.openxiot.android.ui.organization.OrganizationPickerScreen
+import cc.openxiot.android.ui.profile.AccountScreen
 import cc.openxiot.android.ui.project.ProjectManageScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
 
@@ -20,6 +21,7 @@ sealed class Screen(val route: String) {
     data object OrgManage : Screen("org_manage")
     data object ProjectPicker : Screen("project_picker")
     data object ProjectManage : Screen("project_manage")
+    data object Account : Screen("account")
 }
 
 @Composable
@@ -47,18 +49,27 @@ fun AppNavigation(
             MainScreen(
                 currentOrgName = tokenManager.currentOrgName,
                 currentProjectName = tokenManager.currentRootSpaceName,
+                onNavigateToOrgPicker = {
+                    navController.navigate(Screen.OrgPicker.route)
+                },
+                onNavigateToProjectPicker = {
+                    navController.navigate(Screen.ProjectPicker.route)
+                },
+                onNavigateToAccount = {
+                    navController.navigate(Screen.Account.route)
+                }
+            )
+        }
+
+        composable(Screen.Account.route) {
+            AccountScreen(
+                onBack = { navController.popBackStack() },
                 onLogout = {
                     tokenManager.clear()
                     RetrofitClient.setToken(null)
                     navController.navigate(Screen.Login.route) {
                         popUpTo(0) { inclusive = true }
                     }
-                },
-                onNavigateToOrgPicker = {
-                    navController.navigate(Screen.OrgPicker.route)
-                },
-                onNavigateToProjectPicker = {
-                    navController.navigate(Screen.ProjectPicker.route)
                 }
             )
         }

@@ -10,13 +10,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cc.openxiot.android.data.api.ProductEntity
 import cc.openxiot.android.ui.components.EmptyState
 import cc.openxiot.android.ui.components.LoadingIndicator
+import androidx.compose.ui.text.font.FontWeight
+import cc.openxiot.android.ui.main.PageTitle
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(
     viewModel: ProductViewModel = remember { ProductViewModel() }
@@ -24,14 +24,7 @@ fun ProductListScreen(
     val state by viewModel.uiState.collectAsState()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = {
-                Text("产品", fontWeight = FontWeight.Bold)
-            },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        )
+        PageTitle(title = "产品")
 
         when {
             state.isLoading -> LoadingIndicator()

@@ -22,10 +22,10 @@ import cc.openxiot.android.data.api.SpaceEntity
 import cc.openxiot.android.ui.components.AvatarImage
 import cc.openxiot.android.ui.components.LoadingIndicator
 import cc.openxiot.android.ui.components.ErrorMessage
+import cc.openxiot.android.ui.main.PageTitle
 import cc.openxiot.android.ui.organization.OrganizationViewModel
 import cc.openxiot.android.ui.project.ProjectViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
     orgViewModel: OrganizationViewModel,
@@ -46,12 +46,7 @@ fun ProfileScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = { Text("我", fontWeight = FontWeight.Bold) },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        )
+        PageTitle(title = "我")
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),

@@ -5,6 +5,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.ui.devices.DeviceListScreen
@@ -68,10 +69,13 @@ fun MainScreen(
                 BottomTab.Projects -> {
                     val rootId = mainViewModel.currentRootSpaceId
                     if (rootId != null) {
-                        SpaceTreeContent(
-                            rootId = rootId,
-                            viewModel = projectViewModel
-                        )
+                        Column {
+                            PageTitle(title = "项目")
+                            SpaceTreeContent(
+                                rootId = rootId,
+                                viewModel = projectViewModel
+                            )
+                        }
                     } else {
                         EmptyProjectHint(onLogout = onLogout)
                     }
@@ -106,5 +110,20 @@ private fun EmptyProjectHint(onLogout: () -> Unit) {
                 Text("退出登录")
             }
         }
+    }
+}
+
+@Composable
+fun PageTitle(title: String) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
+        )
     }
 }

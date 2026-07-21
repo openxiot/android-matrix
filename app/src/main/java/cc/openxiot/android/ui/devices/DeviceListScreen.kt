@@ -10,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.data.api.DeviceEntity
@@ -18,9 +17,10 @@ import cc.openxiot.android.ui.components.EmptyState
 import cc.openxiot.android.ui.components.LoadingIndicator
 import cc.openxiot.android.ui.components.OnlineIndicator
 import cc.openxiot.android.ui.components.ErrorMessage
+import androidx.compose.ui.text.font.FontWeight
+import cc.openxiot.android.ui.main.PageTitle
 import cc.openxiot.android.ui.project.ProjectViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeviceListScreen(
     rootId: String?,
@@ -35,15 +35,7 @@ fun DeviceListScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // Title bar
-        TopAppBar(
-            title = {
-                Text("设备", fontWeight = FontWeight.Bold)
-            },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surface
-            )
-        )
+        PageTitle(title = "设备")
 
         when {
             rootId == null -> EmptyState(message = "请先在「我」的页面选择项目")

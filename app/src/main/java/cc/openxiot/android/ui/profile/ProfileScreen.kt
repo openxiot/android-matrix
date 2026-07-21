@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.AppState
 import cc.openxiot.android.OpenXiotApp
-import cc.openxiot.android.data.api.Organization
 import cc.openxiot.android.data.api.SpaceEntity
 import cc.openxiot.android.ui.components.AvatarImage
 import cc.openxiot.android.ui.components.LoadingIndicator
@@ -30,12 +29,12 @@ import cc.openxiot.android.ui.project.ProjectViewModel
 fun ProfileScreen(
     orgViewModel: OrganizationViewModel,
     onLogout: () -> Unit,
+    onNavigateToOrganizations: () -> Unit = {},
     projectViewModel: ProjectViewModel = viewModel()
 ) {
     val tokenManager = OpenXiotApp.instance.tokenManager
     val orgState by orgViewModel.uiState.collectAsState()
     val projectState by projectViewModel.projectState.collectAsState()
-    var showOrgPicker by remember { mutableStateOf(false) }
     var showProjectPicker by remember { mutableStateOf(false) }
 
     // Load orgs when screen appears
@@ -97,9 +96,9 @@ fun ProfileScreen(
                 SectionHeader("当前组织")
                 SettingsCard(
                     title = orgState.currentOrgName ?: "未选择组织",
-                    subtitle = "点击切换组织",
+                    subtitle = "点击管理组织",
                     icon = Icons.Default.Group,
-                    onClick = { showOrgPicker = true }
+                    onClick = onNavigateToOrganizations
                 )
             }
 
@@ -142,44 +141,6 @@ fun ProfileScreen(
                 )
             }
         }
-    }
-
-    // Organization picker dialog
-    if (showOrgPicker) {
-        val orgs by orgViewModel.uiState.collectAsState()
-        AlertDialog(
-            onDismissRequest = { showOrgPicker = false },
-            title = { Text("选择组织") },
-            text = {
-                if (orgs.isLoading) {
-                    LoadingIndicator(modifier = Modifier.height(100.dp))
-                } else if (orgs.error != null) {
-                    ErrorMessage(message = orgs.error!!)
-                } else if (orgs.organizations.isEmpty()) {
-                    Text("暂无组织")
-                } else {
-                    LazyColumn {
-                        items(orgs.organizations) { org ->
-                            OrganizationPickerItem(
-                                org = org,
-                                isSelected = org.id == orgs.currentOrgId,
-                                onClick = {
-                                    orgViewModel.selectOrganization(org)
-                                    showOrgPicker = false
-                                    // Reload project list for new org
-                                    projectViewModel.loadRootSpaces(org.id)
-                                }
-                            )
-                        }
-                    }
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = { showOrgPicker = false }) {
-                    Text("取消")
-                }
-            }
-        )
     }
 
     // Project picker dialog
@@ -284,36 +245,6 @@ private fun SettingsCard(
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun OrganizationPickerItem(
-    org: Organization,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = org.name ?: org.id ?: "",
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-            )
-        }
-        if (isSelected) {
-            Icon(
-                Icons.Default.CheckCircle,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
         }
     }
 }

@@ -8,10 +8,12 @@ import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.data.api.RetrofitClient
 import cc.openxiot.android.ui.login.LoginScreen
 import cc.openxiot.android.ui.main.MainScreen
+import cc.openxiot.android.ui.organization.OrganizationListScreen
 
 sealed class Screen(val route: String) {
     data object Login : Screen("login")
     data object Main : Screen("main")
+    data object Organizations : Screen("organizations")
 }
 
 @Composable
@@ -43,7 +45,16 @@ fun AppNavigation(
                     navController.navigate(Screen.Login.route) {
                         popUpTo(0) { inclusive = true }
                     }
+                },
+                onNavigateToOrganizations = {
+                    navController.navigate(Screen.Organizations.route)
                 }
+            )
+        }
+
+        composable(Screen.Organizations.route) {
+            OrganizationListScreen(
+                onBack = { navController.popBackStack() }
             )
         }
     }

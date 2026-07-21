@@ -5,6 +5,9 @@ import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.DevicesOther
 import androidx.compose.material.icons.filled.Inventory2
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import cc.openxiot.android.OpenXiotApp
@@ -17,7 +20,7 @@ enum class BottomTab(val label: String, val icon: ImageVector) {
 }
 
 class MainViewModel : ViewModel() {
-    var currentTab: BottomTab = BottomTab.Projects
+    var currentTab by mutableStateOf(BottomTab.Projects)
         private set
 
     private val tokenManager = OpenXiotApp.instance.tokenManager

@@ -81,7 +81,7 @@ fun MainScreen(
                             )
                         }
                     } else {
-                        EmptyProjectHint(onLogout = onLogout)
+                        EmptyProjectHint(onNavigateToProjectPicker = onNavigateToProjectPicker)
                     }
                 }
                 BottomTab.Devices -> DeviceListScreen(
@@ -101,20 +101,20 @@ fun MainScreen(
 }
 
 @Composable
-private fun EmptyProjectHint(onLogout: () -> Unit) {
+private fun EmptyProjectHint(onNavigateToProjectPicker: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "请先在「我」的页面选择项目和组织",
+                text = "请先在「我」的页面选择项目",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(modifier = Modifier.height(16.dp))
-            OutlinedButton(onClick = onLogout) {
-                Text("退出登录")
+            FilledTonalButton(onClick = onNavigateToProjectPicker) {
+                Text("选择项目")
             }
         }
     }

@@ -29,6 +29,7 @@ fun MainScreen(
     Scaffold(
         bottomBar = {
             NavigationBar(
+                modifier = Modifier.height(56.dp),
                 containerColor = MaterialTheme.colorScheme.surface,
                 tonalElevation = 2.dp
             ) {
@@ -41,6 +42,7 @@ fun MainScreen(
                             Icon(
                                 tab.icon,
                                 contentDescription = tab.label,
+                                modifier = Modifier.size(22.dp),
                                 tint = if (selected)
                                     MaterialTheme.colorScheme.primary
                                 else
@@ -50,6 +52,7 @@ fun MainScreen(
                         label = {
                             Text(
                                 tab.label,
+                                style = MaterialTheme.typography.labelSmall,
                                 color = if (selected)
                                     MaterialTheme.colorScheme.primary
                                 else

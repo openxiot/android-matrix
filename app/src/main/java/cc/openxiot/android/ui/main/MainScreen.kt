@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.ui.devices.DeviceListScreen
 import cc.openxiot.android.ui.products.ProductListScreen
 import cc.openxiot.android.ui.profile.ProfileScreen
@@ -18,6 +17,8 @@ import cc.openxiot.android.ui.project.SpaceTreeContent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
+    currentOrgName: String?,
+    currentProjectName: String?,
     onLogout: () -> Unit,
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
@@ -25,7 +26,6 @@ fun MainScreen(
     projectViewModel: ProjectViewModel = viewModel()
 ) {
     val tabs = BottomTab.entries
-    val tokenManager = OpenXiotApp.instance.tokenManager
 
     Scaffold(
         bottomBar = {
@@ -89,8 +89,8 @@ fun MainScreen(
                 )
                 BottomTab.Products -> ProductListScreen()
                 BottomTab.Profile -> ProfileScreen(
-                    currentOrgName = tokenManager.currentOrgName,
-                    currentProjectName = tokenManager.currentRootSpaceName,
+                    currentOrgName = currentOrgName,
+                    currentProjectName = currentProjectName,
                     onLogout = onLogout,
                     onNavigateToOrgPicker = onNavigateToOrgPicker,
                     onNavigateToProjectPicker = onNavigateToProjectPicker

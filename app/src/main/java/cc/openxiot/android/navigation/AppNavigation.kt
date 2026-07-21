@@ -45,6 +45,8 @@ fun AppNavigation(
 
         composable(Screen.Main.route) {
             MainScreen(
+                currentOrgName = tokenManager.currentOrgName,
+                currentProjectName = tokenManager.currentRootSpaceName,
                 onLogout = {
                     tokenManager.clear()
                     RetrofitClient.setToken(null)

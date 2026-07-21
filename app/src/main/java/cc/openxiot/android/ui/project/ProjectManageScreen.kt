@@ -72,7 +72,7 @@ fun ProjectManageScreen(
                             ProjectManageCard(
                                 name = space.name ?: "未命名",
                                 type = space.type,
-                                isSelected = space.id == state.currentRootId,
+                                isSelected = space.id != null && space.id == state.currentRootId,
                                 onSelect = { viewModel.selectRootSpace(space) },
                                 onRename = { space.id?.let { id -> renameTarget = id to (space.name ?: "") } },
                                 onDelete = { space.id?.let { showDeleteConfirm = it } }

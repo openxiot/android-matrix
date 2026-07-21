@@ -64,7 +64,7 @@ fun OrganizationPickerScreen(
                             OrgPickerCard(
                                 name = org.name ?: org.id ?: "",
                                 memberCount = org.members?.size ?: 0,
-                                isSelected = org.id == uiState.currentOrgId,
+                                isSelected = org.id != null && org.id == uiState.currentOrgId,
                                 onClick = {
                                     viewModel.selectOrganization(org)
                                     onBack()

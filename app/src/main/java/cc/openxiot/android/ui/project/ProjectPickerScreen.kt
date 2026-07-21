@@ -68,7 +68,7 @@ fun ProjectPickerScreen(
                             ProjectPickerCard(
                                 name = space.name ?: "未命名",
                                 type = space.type,
-                                isSelected = space.id == state.currentRootId,
+                                isSelected = space.id != null && space.id == state.currentRootId,
                                 onClick = {
                                     viewModel.selectRootSpace(space)
                                     onBack()

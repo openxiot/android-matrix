@@ -68,7 +68,7 @@ fun OrganizationListScreen(
                         items(uiState.organizations, key = { it.id ?: it.name ?: "" }) { org ->
                             OrgManageCard(
                                 organization = org,
-                                isSelected = org.id == uiState.currentOrgId,
+                                isSelected = org.id != null && org.id == uiState.currentOrgId,
                                 onSelect = { viewModel.selectOrganization(org) },
                                 onRename = { renameTarget = org },
                                 onDelete = { showDeleteConfirm = org.id }

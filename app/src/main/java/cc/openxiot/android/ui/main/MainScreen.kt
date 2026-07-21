@@ -9,7 +9,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.ui.devices.DeviceListScreen
-import cc.openxiot.android.ui.organization.OrganizationViewModel
 import cc.openxiot.android.ui.products.ProductListScreen
 import cc.openxiot.android.ui.profile.ProfileScreen
 import cc.openxiot.android.ui.project.ProjectViewModel
@@ -22,8 +21,7 @@ fun MainScreen(
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     mainViewModel: MainViewModel = viewModel(),
-    projectViewModel: ProjectViewModel = viewModel(),
-    orgViewModel: OrganizationViewModel = viewModel()
+    projectViewModel: ProjectViewModel = viewModel()
 ) {
     val tabs = BottomTab.entries
 
@@ -89,7 +87,6 @@ fun MainScreen(
                 )
                 BottomTab.Products -> ProductListScreen()
                 BottomTab.Profile -> ProfileScreen(
-                    orgViewModel = orgViewModel,
                     onLogout = onLogout,
                     onNavigateToOrgPicker = onNavigateToOrgPicker,
                     onNavigateToProjectPicker = onNavigateToProjectPicker

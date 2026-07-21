@@ -13,32 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.AppState
 import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.ui.components.AvatarImage
 import cc.openxiot.android.ui.main.PageTitle
-import cc.openxiot.android.ui.organization.OrganizationViewModel
-import cc.openxiot.android.ui.project.ProjectViewModel
 
 @Composable
 fun ProfileScreen(
-    orgViewModel: OrganizationViewModel,
     onLogout: () -> Unit,
     onNavigateToOrgPicker: () -> Unit = {},
-    onNavigateToProjectPicker: () -> Unit = {},
-    projectViewModel: ProjectViewModel = viewModel()
+    onNavigateToProjectPicker: () -> Unit = {}
 ) {
     val tokenManager = OpenXiotApp.instance.tokenManager
-    val orgState by orgViewModel.uiState.collectAsState()
-    val projectState by projectViewModel.projectState.collectAsState()
-
-    // Load orgs when screen appears
-    LaunchedEffect(Unit) {
-        if (orgState.organizations.isEmpty()) {
-            orgViewModel.loadOrganizations()
-        }
-    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageTitle(title = "我")
@@ -91,7 +77,7 @@ fun ProfileScreen(
             item {
                 SectionHeader("当前组织")
                 SettingsCard(
-                    title = orgState.currentOrgName ?: "未选择组织",
+                    title = tokenManager.currentOrgName ?: "未选择组织",
                     subtitle = "点击管理组织",
                     icon = Icons.Default.Group,
                     onClick = onNavigateToOrgPicker
@@ -102,7 +88,7 @@ fun ProfileScreen(
             item {
                 SectionHeader("当前项目")
                 SettingsCard(
-                    title = projectState.currentRootName ?: "未选择项目",
+                    title = tokenManager.currentRootSpaceName ?: "未选择项目",
                     subtitle = "点击切换项目",
                     icon = Icons.Default.Business,
                     onClick = onNavigateToProjectPicker

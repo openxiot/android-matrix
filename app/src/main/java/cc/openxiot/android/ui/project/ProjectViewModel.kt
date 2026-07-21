@@ -89,6 +89,7 @@ class ProjectViewModel : ViewModel() {
         val rootId = space.id ?: return
         val rootName = space.name ?: rootId
         tokenManager.currentRootSpaceId = rootId
+        tokenManager.currentRootSpaceName = rootName
         _projectState.value = _projectState.value.copy(
             currentRootId = rootId,
             currentRootName = rootName

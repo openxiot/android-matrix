@@ -36,6 +36,10 @@ class TokenManager(context: Context) {
         get() = prefs.getString(KEY_ROOT_SPACE_ID, null)
         set(value) = prefs.edit { putString(KEY_ROOT_SPACE_ID, value) }
 
+    var currentRootSpaceName: String?
+        get() = prefs.getString(KEY_ROOT_SPACE_NAME, null)
+        set(value) = prefs.edit { putString(KEY_ROOT_SPACE_NAME, value) }
+
     var isDarkMode: Boolean
         get() = prefs.getBoolean(KEY_DARK_MODE, false)
         set(value) = prefs.edit { putBoolean(KEY_DARK_MODE, value) }
@@ -66,5 +70,6 @@ class TokenManager(context: Context) {
         private const val KEY_ORG_NAME = "current_org_name"
         private const val KEY_DARK_MODE = "dark_mode"
         private const val KEY_ROOT_SPACE_ID = "current_root_space_id"
+        private const val KEY_ROOT_SPACE_NAME = "current_root_space_name"
     }
 }

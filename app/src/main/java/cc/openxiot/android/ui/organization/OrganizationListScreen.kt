@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -59,7 +60,7 @@ fun OrganizationListScreen(
                         )
                     }
                     IconButton(onClick = onLogout) {
-                        Icon(Icons.Default.Logout, contentDescription = "退出登录")
+                        Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = "退出登录")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

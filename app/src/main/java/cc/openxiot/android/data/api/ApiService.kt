@@ -84,3 +84,8 @@ interface SiteService {
         @Body devices: List<DeviceRegistration>
     ): Response<ApiResponse<Unit>>
 }
+
+interface ProductService {
+    @GET("v1/product/basic/public")
+    suspend fun getProducts(): Response<ApiResponse<List<ProductEntity>>>
+}

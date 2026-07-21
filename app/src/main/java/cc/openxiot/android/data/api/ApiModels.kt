@@ -74,11 +74,19 @@ data class DeviceRegistration(
     @SerializedName("type") val type: String
 )
 
+data class LocalizedName(
+    @SerializedName("zh-CN") val zhCN: String? = null
+)
+
 data class ProductEntity(
     @SerializedName("id") val id: String? = null,
-    @SerializedName("name") val name: String? = null,
-    @SerializedName("description") val description: String? = null,
-    @SerializedName("type") val type: String? = null,
+    @SerializedName("name") val name: LocalizedName? = null,
+    @SerializedName("model") val model: String? = null,
+    @SerializedName("protocol") val protocol: String? = null,
+    @SerializedName("lifecycle") val lifecycle: String? = null,
     @SerializedName("icon") val icon: String? = null,
-    @SerializedName("version") val version: String? = null
-)
+    @SerializedName("organization") val organization: String? = null,
+    @SerializedName("template") val template: String? = null
+) {
+    val displayName: String get() = name?.zhCN ?: model ?: id ?: "未知产品"
+}

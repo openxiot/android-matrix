@@ -76,15 +76,15 @@ fun ProfileScreen(
             }
 
             // Current organization
-            item {
-                SectionHeader("当前组织")
-                SettingsCard(
-                    title = currentOrgName ?: "未选择组织",
-                    subtitle = "点击管理组织",
-                    icon = Icons.Default.Group,
-                    onClick = onNavigateToOrgPicker
-                )
-            }
+//            item {
+//                SectionHeader("当前组织")
+//                SettingsCard(
+//                    title = currentOrgName ?: "未选择组织",
+//                    subtitle = "点击管理组织",
+//                    icon = Icons.Default.Group,
+//                    onClick = onNavigateToOrgPicker
+//                )
+//            }
 
             // Current project
             item {

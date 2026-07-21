@@ -57,4 +57,13 @@ object RetrofitClient {
             .build()
             .create(SiteService::class.java)
     }
+
+    val productService: ProductService by lazy {
+        Retrofit.Builder()
+            .baseUrl(Constants.PRODUCT_BASE_URL + "/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ProductService::class.java)
+    }
 }

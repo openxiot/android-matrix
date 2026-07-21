@@ -26,7 +26,6 @@ fun MainScreen(
     orgViewModel: OrganizationViewModel = viewModel()
 ) {
     val tabs = BottomTab.entries
-    var selectedTab by remember { mutableStateOf(BottomTab.Projects) }
 
     Scaffold(
         bottomBar = {
@@ -36,10 +35,10 @@ fun MainScreen(
                 tonalElevation = 2.dp
             ) {
                 tabs.forEach { tab ->
-                    val selected = selectedTab == tab
+                    val selected = mainViewModel.currentTab == tab
                     NavigationBarItem(
                         selected = selected,
-                        onClick = { selectedTab = tab },
+                        onClick = { mainViewModel.selectTab(tab) },
                         icon = {
                             Icon(
                                 tab.icon,
@@ -70,7 +69,7 @@ fun MainScreen(
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
-            when (selectedTab) {
+            when (mainViewModel.currentTab) {
                 BottomTab.Projects -> {
                     val rootId = mainViewModel.currentRootSpaceId
                     if (rootId != null) {

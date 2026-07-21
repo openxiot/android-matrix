@@ -1,4 +1,4 @@
-package cc.openxiot.android.ui.organization
+package cc.openxiot.android.ui.project
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,23 +15,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import cc.openxiot.android.data.api.Organization
 import cc.openxiot.android.ui.components.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OrganizationListScreen(
+fun ProjectManageScreen(
     onBack: () -> Unit,
-    viewModel: OrganizationViewModel = viewModel()
+    viewModel: ProjectViewModel = viewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val state by viewModel.projectState.collectAsState()
     var showDeleteConfirm by remember { mutableStateOf<String?>(null) }
-    var renameTarget by remember { mutableStateOf<Organization?>(null) }
+    var renameTarget by remember { mutableStateOf<Pair<String, String>?>(null) }
+    var showCreateDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        viewModel.loadRootSpaces()
+    }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("组织管理", fontWeight = FontWeight.Bold) },
+                title = { Text("项目管理", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
@@ -44,34 +48,34 @@ fun OrganizationListScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { viewModel.showCreateDialog() },
+                onClick = { showCreateDialog = true },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "创建组织")
+                Icon(Icons.Default.Add, contentDescription = "创建项目")
             }
         }
     ) { padding ->
         Box(modifier = Modifier.padding(padding)) {
             when {
-                uiState.isLoading -> LoadingIndicator()
-                uiState.error != null -> ErrorMessage(
-                    message = uiState.error!!,
-                    onRetry = { viewModel.loadOrganizations() }
+                state.isLoading -> LoadingIndicator()
+                state.error != null -> ErrorMessage(
+                    message = state.error!!,
+                    onRetry = { viewModel.loadRootSpaces() }
                 )
-                uiState.organizations.isEmpty() -> EmptyState(message = "还没有组织，点击右下角按钮创建")
+                state.rootSpaces.isEmpty() -> EmptyState(message = "暂无项目，点击右下角按钮创建")
                 else -> {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(vertical = 8.dp)
                     ) {
-                        item { SectionHeader("我的组织") }
-                        items(uiState.organizations, key = { it.id ?: it.name ?: "" }) { org ->
-                            OrgManageCard(
-                                organization = org,
-                                isSelected = org.id == uiState.currentOrgId,
-                                onSelect = { viewModel.selectOrganization(org) },
-                                onRename = { renameTarget = org },
-                                onDelete = { showDeleteConfirm = org.id }
+                        items(state.rootSpaces, key = { it.id ?: it.name ?: "" }) { space ->
+                            ProjectManageCard(
+                                name = space.name ?: "未命名",
+                                type = space.type,
+                                isSelected = space.id == state.currentRootId,
+                                onSelect = { viewModel.selectRootSpace(space) },
+                                onRename = { space.id?.let { id -> renameTarget = id to (space.name ?: "") } },
+                                onDelete = { space.id?.let { showDeleteConfirm = it } }
                             )
                         }
                         item { Spacer(modifier = Modifier.height(80.dp)) }
@@ -82,64 +86,17 @@ fun OrganizationListScreen(
     }
 
     // Create dialog
-    if (uiState.showCreateDialog) {
-        var orgId by remember { mutableStateOf("") }
-        var orgName by remember { mutableStateOf("") }
+    if (showCreateDialog) {
+        var projectName by remember { mutableStateOf("") }
         AlertDialog(
-            onDismissRequest = { viewModel.hideCreateDialog() },
-            title = { Text("创建组织") },
-            text = {
-                Column {
-                    OutlinedTextField(
-                        value = orgId,
-                        onValueChange = { orgId = it },
-                        label = { Text("组织标识") },
-                        placeholder = { Text("如: my-company") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    OutlinedTextField(
-                        value = orgName,
-                        onValueChange = { orgName = it },
-                        label = { Text("组织名称") },
-                        placeholder = { Text("如: 我的公司") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        if (orgId.isNotBlank() && orgName.isNotBlank()) {
-                            viewModel.createOrganization(orgId, orgName)
-                        }
-                    },
-                    enabled = orgId.isNotBlank() && orgName.isNotBlank()
-                ) {
-                    Text("创建")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { viewModel.hideCreateDialog() }) {
-                    Text("取消")
-                }
-            }
-        )
-    }
-
-    // Rename dialog
-    renameTarget?.let { org ->
-        var newName by remember { mutableStateOf(org.name ?: "") }
-        AlertDialog(
-            onDismissRequest = { renameTarget = null },
-            title = { Text("重命名组织") },
+            onDismissRequest = { showCreateDialog = false },
+            title = { Text("创建项目") },
             text = {
                 OutlinedTextField(
-                    value = newName,
-                    onValueChange = { newName = it },
-                    label = { Text("组织名称") },
+                    value = projectName,
+                    onValueChange = { projectName = it },
+                    label = { Text("项目名称") },
+                    placeholder = { Text("请输入项目名称") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -147,7 +104,46 @@ fun OrganizationListScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        org.id?.let { viewModel.renameOrganization(it, newName) }
+                        viewModel.createSpace(
+                            name = projectName,
+                            type = "site",
+                            parentId = null,
+                            rootId = null
+                        )
+                        showCreateDialog = false
+                    },
+                    enabled = projectName.isNotBlank()
+                ) {
+                    Text("创建")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showCreateDialog = false }) {
+                    Text("取消")
+                }
+            }
+        )
+    }
+
+    // Rename dialog
+    renameTarget?.let { (spaceId, currentName) ->
+        var newName by remember { mutableStateOf(currentName) }
+        AlertDialog(
+            onDismissRequest = { renameTarget = null },
+            title = { Text("重命名项目") },
+            text = {
+                OutlinedTextField(
+                    value = newName,
+                    onValueChange = { newName = it },
+                    label = { Text("项目名称") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.renameRootSpace(spaceId, newName)
                         renameTarget = null
                     },
                     enabled = newName.isNotBlank()
@@ -163,13 +159,13 @@ fun OrganizationListScreen(
         )
     }
 
-    // Delete confirm dialog
-    showDeleteConfirm?.let { orgId ->
+    // Delete confirm
+    showDeleteConfirm?.let { spaceId ->
         ConfirmDialog(
-            title = "删除组织",
-            message = "确定要删除这个组织吗？",
+            title = "删除项目",
+            message = "确定要删除这个项目吗？如果项目下有空间数据，将无法删除。",
             onConfirm = {
-                viewModel.deleteOrganization(orgId)
+                viewModel.deleteSpace(spaceId, null)
                 showDeleteConfirm = null
             },
             onDismiss = { showDeleteConfirm = null }
@@ -178,8 +174,9 @@ fun OrganizationListScreen(
 }
 
 @Composable
-private fun OrgManageCard(
-    organization: Organization,
+private fun ProjectManageCard(
+    name: String,
+    type: String?,
     isSelected: Boolean,
     onSelect: () -> Unit,
     onRename: () -> Unit,
@@ -205,18 +202,30 @@ private fun OrgManageCard(
                 .padding(start = 16.dp, end = 4.dp, top = 4.dp, bottom = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AvatarImage(url = null, name = organization.name, size = 44.dp)
+            Surface(
+                modifier = Modifier.size(48.dp),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.primaryContainer
+            ) {
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        Icons.Default.Business,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = organization.name ?: organization.id ?: "",
+                    text = name,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Medium
                 )
-                val memberCount = organization.members?.size ?: 0
-                if (memberCount > 0) {
+                if (type != null) {
                     Text(
-                        text = "${memberCount} 位成员",
+                        text = "类型: ${type}",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

@@ -3,7 +3,6 @@ package cc.openxiot.android.ui.profile
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Logout
@@ -17,10 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.AppState
 import cc.openxiot.android.OpenXiotApp
-import cc.openxiot.android.data.api.SpaceEntity
 import cc.openxiot.android.ui.components.AvatarImage
-import cc.openxiot.android.ui.components.LoadingIndicator
-import cc.openxiot.android.ui.components.ErrorMessage
 import cc.openxiot.android.ui.main.PageTitle
 import cc.openxiot.android.ui.organization.OrganizationViewModel
 import cc.openxiot.android.ui.project.ProjectViewModel
@@ -29,13 +25,13 @@ import cc.openxiot.android.ui.project.ProjectViewModel
 fun ProfileScreen(
     orgViewModel: OrganizationViewModel,
     onLogout: () -> Unit,
-    onNavigateToOrganizations: () -> Unit = {},
+    onNavigateToOrgPicker: () -> Unit = {},
+    onNavigateToProjectPicker: () -> Unit = {},
     projectViewModel: ProjectViewModel = viewModel()
 ) {
     val tokenManager = OpenXiotApp.instance.tokenManager
     val orgState by orgViewModel.uiState.collectAsState()
     val projectState by projectViewModel.projectState.collectAsState()
-    var showProjectPicker by remember { mutableStateOf(false) }
 
     // Load orgs when screen appears
     LaunchedEffect(Unit) {
@@ -98,7 +94,7 @@ fun ProfileScreen(
                     title = orgState.currentOrgName ?: "未选择组织",
                     subtitle = "点击管理组织",
                     icon = Icons.Default.Group,
-                    onClick = onNavigateToOrganizations
+                    onClick = onNavigateToOrgPicker
                 )
             }
 
@@ -109,7 +105,7 @@ fun ProfileScreen(
                     title = projectState.currentRootName ?: "未选择项目",
                     subtitle = "点击切换项目",
                     icon = Icons.Default.Business,
-                    onClick = { showProjectPicker = true }
+                    onClick = onNavigateToProjectPicker
                 )
             }
 
@@ -143,39 +139,6 @@ fun ProfileScreen(
         }
     }
 
-    // Project picker dialog
-    if (showProjectPicker) {
-        AlertDialog(
-            onDismissRequest = { showProjectPicker = false },
-            title = { Text("选择项目") },
-            text = {
-                when {
-                    projectState.isLoading -> LoadingIndicator(modifier = Modifier.height(100.dp))
-                    projectState.error != null -> ErrorMessage(message = projectState.error!!)
-                    projectState.rootSpaces.isEmpty() -> Text("暂无项目，请先选择组织")
-                    else -> {
-                        LazyColumn {
-                            items(projectState.rootSpaces) { space ->
-                                ProjectPickerItem(
-                                    space = space,
-                                    isSelected = space.id == projectState.currentRootId,
-                                    onClick = {
-                                        projectViewModel.selectRootSpace(space)
-                                        showProjectPicker = false
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-            },
-            confirmButton = {
-                TextButton(onClick = { showProjectPicker = false }) {
-                    Text("取消")
-                }
-            }
-        )
-    }
 }
 
 @Composable
@@ -249,32 +212,3 @@ private fun SettingsCard(
     }
 }
 
-@Composable
-private fun ProjectPickerItem(
-    space: SpaceEntity,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = space.name ?: "未命名",
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-            )
-        }
-        if (isSelected) {
-            Icon(
-                Icons.Default.CheckCircle,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-}

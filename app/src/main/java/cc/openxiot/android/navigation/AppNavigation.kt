@@ -9,11 +9,17 @@ import cc.openxiot.android.data.api.RetrofitClient
 import cc.openxiot.android.ui.login.LoginScreen
 import cc.openxiot.android.ui.main.MainScreen
 import cc.openxiot.android.ui.organization.OrganizationListScreen
+import cc.openxiot.android.ui.organization.OrganizationPickerScreen
+import cc.openxiot.android.ui.project.ProjectManageScreen
+import cc.openxiot.android.ui.project.ProjectPickerScreen
 
 sealed class Screen(val route: String) {
     data object Login : Screen("login")
     data object Main : Screen("main")
-    data object Organizations : Screen("organizations")
+    data object OrgPicker : Screen("org_picker")
+    data object OrgManage : Screen("org_manage")
+    data object ProjectPicker : Screen("project_picker")
+    data object ProjectManage : Screen("project_manage")
 }
 
 @Composable
@@ -46,14 +52,37 @@ fun AppNavigation(
                         popUpTo(0) { inclusive = true }
                     }
                 },
-                onNavigateToOrganizations = {
-                    navController.navigate(Screen.Organizations.route)
+                onNavigateToOrgPicker = {
+                    navController.navigate(Screen.OrgPicker.route)
+                },
+                onNavigateToProjectPicker = {
+                    navController.navigate(Screen.ProjectPicker.route)
                 }
             )
         }
 
-        composable(Screen.Organizations.route) {
+        composable(Screen.OrgPicker.route) {
+            OrganizationPickerScreen(
+                onBack = { navController.popBackStack() },
+                onManage = { navController.navigate(Screen.OrgManage.route) }
+            )
+        }
+
+        composable(Screen.OrgManage.route) {
             OrganizationListScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.ProjectPicker.route) {
+            ProjectPickerScreen(
+                onBack = { navController.popBackStack() },
+                onManage = { navController.navigate(Screen.ProjectManage.route) }
+            )
+        }
+
+        composable(Screen.ProjectManage.route) {
+            ProjectManageScreen(
                 onBack = { navController.popBackStack() }
             )
         }

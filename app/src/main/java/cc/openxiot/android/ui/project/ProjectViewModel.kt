@@ -69,6 +69,22 @@ class ProjectViewModel : ViewModel() {
         }
     }
 
+    fun renameRootSpace(spaceId: String, newName: String) {
+        viewModelScope.launch {
+            spaceRepository.updateSpace(SpaceEntity(id = spaceId, name = newName))
+                .onSuccess {
+                    loadRootSpaces()
+                    if (_projectState.value.currentRootId == spaceId) {
+                        _projectState.value = _projectState.value.copy(currentRootName = newName)
+                        tokenManager.currentRootSpaceId = spaceId
+                    }
+                }
+                .onFailure { e ->
+                    _projectState.value = _projectState.value.copy(error = e.message)
+                }
+        }
+    }
+
     fun selectRootSpace(space: SpaceEntity) {
         val rootId = space.id ?: return
         val rootName = space.name ?: rootId

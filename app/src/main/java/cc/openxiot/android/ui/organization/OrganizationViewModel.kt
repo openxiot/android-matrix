@@ -91,6 +91,23 @@ class OrganizationViewModel : ViewModel() {
         }
     }
 
+    fun renameOrganization(id: String, newName: String) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(error = null)
+            repository.updateOrganization(id, newName)
+                .onSuccess {
+                    if (_uiState.value.currentOrgId == id) {
+                        tokenManager.currentOrgName = newName
+                        _uiState.value = _uiState.value.copy(currentOrgName = newName)
+                    }
+                    loadOrganizations()
+                }
+                .onFailure { e ->
+                    _uiState.value = _uiState.value.copy(error = e.message)
+                }
+        }
+    }
+
     fun deleteOrganization(id: String) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)

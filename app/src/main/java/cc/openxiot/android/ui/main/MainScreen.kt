@@ -19,7 +19,8 @@ import cc.openxiot.android.ui.project.SpaceTreeContent
 @Composable
 fun MainScreen(
     onLogout: () -> Unit,
-    onNavigateToOrganizations: () -> Unit = {},
+    onNavigateToOrgPicker: () -> Unit = {},
+    onNavigateToProjectPicker: () -> Unit = {},
     mainViewModel: MainViewModel = viewModel(),
     projectViewModel: ProjectViewModel = viewModel(),
     orgViewModel: OrganizationViewModel = viewModel()
@@ -91,7 +92,8 @@ fun MainScreen(
                 BottomTab.Profile -> ProfileScreen(
                     orgViewModel = orgViewModel,
                     onLogout = onLogout,
-                    onNavigateToOrganizations = onNavigateToOrganizations
+                    onNavigateToOrgPicker = onNavigateToOrgPicker,
+                    onNavigateToProjectPicker = onNavigateToProjectPicker
                 )
             }
         }

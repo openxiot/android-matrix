@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.ui.devices.DeviceListScreen
 import cc.openxiot.android.ui.products.ProductListScreen
 import cc.openxiot.android.ui.profile.ProfileScreen
@@ -24,6 +25,7 @@ fun MainScreen(
     projectViewModel: ProjectViewModel = viewModel()
 ) {
     val tabs = BottomTab.entries
+    val tokenManager = OpenXiotApp.instance.tokenManager
 
     Scaffold(
         bottomBar = {
@@ -87,6 +89,8 @@ fun MainScreen(
                 )
                 BottomTab.Products -> ProductListScreen()
                 BottomTab.Profile -> ProfileScreen(
+                    currentOrgName = tokenManager.currentOrgName,
+                    currentProjectName = tokenManager.currentRootSpaceName,
                     onLogout = onLogout,
                     onNavigateToOrgPicker = onNavigateToOrgPicker,
                     onNavigateToProjectPicker = onNavigateToProjectPicker

@@ -20,6 +20,8 @@ import cc.openxiot.android.ui.main.PageTitle
 
 @Composable
 fun ProfileScreen(
+    currentOrgName: String?,
+    currentProjectName: String?,
     onLogout: () -> Unit,
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {}
@@ -77,7 +79,7 @@ fun ProfileScreen(
             item {
                 SectionHeader("当前组织")
                 SettingsCard(
-                    title = tokenManager.currentOrgName ?: "未选择组织",
+                    title = currentOrgName ?: "未选择组织",
                     subtitle = "点击管理组织",
                     icon = Icons.Default.Group,
                     onClick = onNavigateToOrgPicker
@@ -88,7 +90,7 @@ fun ProfileScreen(
             item {
                 SectionHeader("当前项目")
                 SettingsCard(
-                    title = tokenManager.currentRootSpaceName ?: "未选择项目",
+                    title = currentProjectName ?: "未选择项目",
                     subtitle = "点击切换项目",
                     icon = Icons.Default.Business,
                     onClick = onNavigateToProjectPicker

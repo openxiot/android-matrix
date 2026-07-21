@@ -467,12 +467,6 @@ private fun DeviceItem(device: DeviceEntity) {
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Medium
                 )
-                Text(
-                    text = device.type ?: "",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1
-                )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 OnlineIndicator(isOnline = device.online == true)

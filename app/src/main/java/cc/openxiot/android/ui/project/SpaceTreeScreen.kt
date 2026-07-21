@@ -29,20 +29,11 @@ fun SpaceTreeScreen(
 ) {
     val treeState by viewModel.treeState.collectAsState()
     val projectState by viewModel.projectState.collectAsState()
-    val snackbarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(rootId) {
         viewModel.loadSpaceGraph(rootId)
         if (projectState.currentRootName == null) {
             viewModel.setCurrentRootName(treeState.rootSpace?.name ?: "项目")
-        }
-    }
-
-    // Error snackbar
-    LaunchedEffect(treeState.error) {
-        treeState.error?.let {
-            snackbarHostState.showSnackbar(it)
-            viewModel.clearTreeError()
         }
     }
 
@@ -74,7 +65,6 @@ fun SpaceTreeScreen(
                 )
             )
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) },
         floatingActionButton = {
             Column(horizontalAlignment = Alignment.End) {
                 FloatingActionButton(
@@ -94,57 +84,80 @@ fun SpaceTreeScreen(
             }
         }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
-            when {
-                treeState.isLoading -> LoadingIndicator()
-                treeState.error != null -> ErrorMessage(
-                    message = treeState.error!!,
-                    onRetry = { viewModel.loadSpaceGraph(rootId) }
-                )
-                treeState.rootSpace == null -> EmptyState(message = "空间数据为空")
-                else -> {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(vertical = 8.dp)
-                    ) {
-                        item { SectionHeader("空间结构") }
-                        treeState.rootSpace?.let { root ->
+        SpaceTreeContent(
+            rootId = rootId,
+            viewModel = viewModel,
+            modifier = Modifier.padding(padding)
+        )
+    }
+}
+
+@Composable
+fun SpaceTreeContent(
+    rootId: String,
+    viewModel: ProjectViewModel,
+    modifier: Modifier = Modifier
+) {
+    val treeState by viewModel.treeState.collectAsState()
+    val projectState by viewModel.projectState.collectAsState()
+
+    LaunchedEffect(rootId) {
+        viewModel.loadSpaceGraph(rootId)
+        if (projectState.currentRootName == null) {
+            viewModel.setCurrentRootName(treeState.rootSpace?.name ?: "项目")
+        }
+    }
+
+    Box(modifier = modifier) {
+        when {
+            treeState.isLoading -> LoadingIndicator()
+            treeState.error != null -> ErrorMessage(
+                message = treeState.error!!,
+                onRetry = { viewModel.loadSpaceGraph(rootId) }
+            )
+            treeState.rootSpace == null -> EmptyState(message = "空间数据为空")
+            else -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(vertical = 8.dp)
+                ) {
+                    item { SectionHeader("空间结构") }
+                    treeState.rootSpace?.let { root ->
+                        item {
+                            SpaceTreeNode(
+                                space = root,
+                                depth = 0,
+                                isExpanded = treeState.expandedIds.contains(root.id),
+                                onToggle = { viewModel.toggleExpanded(root.id ?: "") },
+                                onAddChild = { viewModel.showCreateDialog(root.id) },
+                                onDelete = { viewModel.showDeleteConfirm(root.id ?: "") },
+                                devices = treeState.devices
+                            )
+                        }
+                        root.children?.forEach { child ->
                             item {
-                                SpaceTreeNode(
-                                    space = root,
-                                    depth = 0,
-                                    isExpanded = treeState.expandedIds.contains(root.id),
-                                    onToggle = { viewModel.toggleExpanded(root.id ?: "") },
-                                    onAddChild = { viewModel.showCreateDialog(root.id) },
-                                    onDelete = { viewModel.showDeleteConfirm(root.id ?: "") },
+                                RecursiveSpaceTree(
+                                    space = child,
+                                    depth = 1,
+                                    expandedIds = treeState.expandedIds,
+                                    onToggle = { viewModel.toggleExpanded(it) },
+                                    onAddChild = { viewModel.showCreateDialog(it) },
+                                    onDelete = { viewModel.showDeleteConfirm(it) },
+                                    rootId = rootId,
                                     devices = treeState.devices
                                 )
                             }
-                            root.children?.forEach { child ->
-                                item {
-                                    RecursiveSpaceTree(
-                                        space = child,
-                                        depth = 1,
-                                        expandedIds = treeState.expandedIds,
-                                        onToggle = { viewModel.toggleExpanded(it) },
-                                        onAddChild = { viewModel.showCreateDialog(it) },
-                                        onDelete = { viewModel.showDeleteConfirm(it) },
-                                        rootId = rootId,
-                                        devices = treeState.devices
-                                    )
-                                }
-                            }
                         }
-
-                        if (treeState.devices.isNotEmpty()) {
-                            item { Spacer(Modifier.height(8.dp)) }
-                            item { SectionHeader("设备列表 (${treeState.devices.size})") }
-                            items(treeState.devices) { device ->
-                                DeviceItem(device = device)
-                            }
-                        }
-                        item { Spacer(modifier = Modifier.height(80.dp)) }
                     }
+
+                    if (treeState.devices.isNotEmpty()) {
+                        item { Spacer(Modifier.height(8.dp)) }
+                        item { SectionHeader("设备列表 (${treeState.devices.size})") }
+                        items(treeState.devices) { device ->
+                            DeviceItem(device = device)
+                        }
+                    }
+                    item { Spacer(modifier = Modifier.height(80.dp)) }
                 }
             }
         }

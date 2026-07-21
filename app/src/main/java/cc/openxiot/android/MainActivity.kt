@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
             OpenXiotTheme(darkTheme = AppState.isDarkMode) {
                 val navController = rememberNavController()
                 val startDestination = if (AppState.isLoggedIn) {
-                    Screen.Organizations.route
+                    Screen.Main.route
                 } else {
                     Screen.Login.route
                 }

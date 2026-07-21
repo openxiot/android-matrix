@@ -73,3 +73,12 @@ data class DeviceRegistration(
     @SerializedName("did") val did: String,
     @SerializedName("type") val type: String
 )
+
+data class ProductEntity(
+    @SerializedName("id") val id: String? = null,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("description") val description: String? = null,
+    @SerializedName("type") val type: String? = null,
+    @SerializedName("icon") val icon: String? = null,
+    @SerializedName("version") val version: String? = null
+)

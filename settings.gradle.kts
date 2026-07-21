@@ -15,5 +15,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "OpenXiot"
+rootProject.name = "android-app-site"
 include(":app")

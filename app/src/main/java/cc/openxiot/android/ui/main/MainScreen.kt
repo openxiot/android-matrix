@@ -27,13 +27,37 @@ fun MainScreen(
 
     Scaffold(
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surface,
+                tonalElevation = 2.dp
+            ) {
                 tabs.forEach { tab ->
+                    val selected = selectedTab == tab
                     NavigationBarItem(
-                        selected = selectedTab == tab,
+                        selected = selected,
                         onClick = { selectedTab = tab },
-                        icon = { Icon(tab.icon, contentDescription = tab.label) },
-                        label = { Text(tab.label) }
+                        icon = {
+                            Icon(
+                                tab.icon,
+                                contentDescription = tab.label,
+                                tint = if (selected)
+                                    MaterialTheme.colorScheme.primary
+                                else
+                                    MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        },
+                        label = {
+                            Text(
+                                tab.label,
+                                color = if (selected)
+                                    MaterialTheme.colorScheme.primary
+                                else
+                                    MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        },
+                        colors = NavigationBarItemDefaults.colors(
+                            indicatorColor = MaterialTheme.colorScheme.primaryContainer
+                        )
                     )
                 }
             }

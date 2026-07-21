@@ -11,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -50,16 +49,7 @@ fun LoginScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(
-                        MaterialTheme.colorScheme.primary,
-                        MaterialTheme.colorScheme.background
-                    ),
-                    startY = 0f,
-                    endY = 600f
-                )
-            ),
+            .background(MaterialTheme.colorScheme.primary),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -139,7 +129,7 @@ fun LoginScreen(
                         .height(52.dp),
                     shape = RoundedCornerShape(26.dp),
                     colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = Color.White
+                        contentColor = MaterialTheme.colorScheme.onPrimary
                     )
                 ) {
                     Icon(
@@ -171,7 +161,7 @@ fun LoginScreen(
             Text(
                 text = "v1.0.0",
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.White.copy(alpha = 0.4f)
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f)
             )
 
             Spacer(modifier = Modifier.height(24.dp))

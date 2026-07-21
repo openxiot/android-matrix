@@ -114,23 +114,15 @@ private fun DeviceCard(device: DeviceEntity) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = device.did ?: "未知设备",
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Medium
                 )
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                if (device.protocol != null) {
                     Text(
-                        text = device.type ?: "未分类",
-                        style = MaterialTheme.typography.bodySmall,
+                        text = device.protocol,
+                        style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                    if (device.protocol != null) {
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = device.protocol,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
                 }
             }
             Spacer(modifier = Modifier.width(8.dp))

@@ -1,0 +1,121 @@
+package cc.openxiot.android.ui.organization
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import cc.openxiot.android.OpenXiotApp
+import cc.openxiot.android.data.api.Organization
+import cc.openxiot.android.data.repository.OrganizationRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+
+data class OrgListUiState(
+    val isLoading: Boolean = true,
+    val organizations: List<Organization> = emptyList(),
+    val currentOrgId: String? = null,
+    val currentOrgName: String? = null,
+    val error: String? = null,
+    val showCreateDialog: Boolean = false
+)
+
+class OrganizationViewModel : ViewModel() {
+    private val repository = OrganizationRepository()
+    private val tokenManager = OpenXiotApp.instance.tokenManager
+
+    private val _uiState = MutableStateFlow(OrgListUiState(
+        currentOrgId = tokenManager.currentOrgId,
+        currentOrgName = tokenManager.currentOrgName
+    ))
+    val uiState: StateFlow<OrgListUiState> = _uiState.asStateFlow()
+
+    init {
+        loadOrganizations()
+    }
+
+    fun loadOrganizations() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            repository.getMyOrganizations()
+                .onSuccess { orgs ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        organizations = orgs
+                    )
+                    // Auto-select first org if none selected
+                    if (_uiState.value.currentOrgId == null && orgs.isNotEmpty()) {
+                        selectOrganization(orgs[0])
+                    }
+                }
+                .onFailure { e ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = e.message
+                    )
+                }
+        }
+    }
+
+    fun selectOrganization(org: Organization) {
+        val orgId = org.id ?: return
+        val orgName = org.name ?: orgId
+        tokenManager.currentOrgId = orgId
+        tokenManager.currentOrgName = orgName
+        _uiState.value = _uiState.value.copy(
+            currentOrgId = orgId,
+            currentOrgName = orgName
+        )
+    }
+
+    fun showCreateDialog() {
+        _uiState.value = _uiState.value.copy(showCreateDialog = true)
+    }
+
+    fun hideCreateDialog() {
+        _uiState.value = _uiState.value.copy(showCreateDialog = false)
+    }
+
+    fun createOrganization(id: String, name: String) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, showCreateDialog = false)
+            repository.createOrganization(id, name)
+                .onSuccess {
+                    loadOrganizations()
+                }
+                .onFailure { e ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = e.message
+                    )
+                }
+        }
+    }
+
+    fun deleteOrganization(id: String) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true)
+            repository.deleteOrganization(id)
+                .onSuccess {
+                    if (_uiState.value.currentOrgId == id) {
+                        tokenManager.currentOrgId = null
+                        tokenManager.currentOrgName = null
+                    }
+                    loadOrganizations()
+                }
+                .onFailure { e ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = e.message
+                    )
+                }
+        }
+    }
+
+    fun logout() {
+        tokenManager.clear()
+    }
+
+    fun clearError() {
+        _uiState.value = _uiState.value.copy(error = null)
+    }
+}

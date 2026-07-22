@@ -116,6 +116,7 @@ fun SpaceTreeContent(
                 onRetry = { viewModel.loadSpaceGraph(rootId) }
             )
             treeState.rootSpace == null -> EmptyState(message = "空间数据为空")
+            treeState.rootSpace?.children.isNullOrEmpty() && treeState.devices.isEmpty() -> EmptyState("请添加空间")
             else -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),

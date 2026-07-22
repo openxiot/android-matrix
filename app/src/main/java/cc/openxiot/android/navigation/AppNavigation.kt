@@ -11,7 +11,6 @@ import cc.openxiot.android.ui.main.MainScreen
 import cc.openxiot.android.ui.organization.OrganizationListScreen
 import cc.openxiot.android.ui.organization.OrganizationPickerScreen
 import cc.openxiot.android.ui.profile.AccountScreen
-import cc.openxiot.android.ui.project.ProjectManageScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
 import cc.openxiot.android.ui.project.SpaceTreeScreen
 
@@ -21,7 +20,6 @@ sealed class Screen(val route: String) {
     data object OrgPicker : Screen("org_picker")
     data object OrgManage : Screen("org_manage")
     data object ProjectPicker : Screen("project_picker")
-    data object ProjectManage : Screen("project_manage")
     data object ProjectEdit : Screen("project_edit/{rootId}")
     data object Account : Screen("account")
 }
@@ -102,21 +100,7 @@ fun AppNavigation(
 
         composable(Screen.ProjectPicker.route) {
             ProjectPickerScreen(
-                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
-                onManage = { navController.navigate(Screen.ProjectManage.route) {
-                    launchSingleTop = true
-                } }
-            )
-        }
-
-        composable(Screen.ProjectManage.route) {
-            ProjectManageScreen(
-                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
-                onEditProject = { rootId ->
-                    navController.navigate("project_edit/$rootId") {
-                        launchSingleTop = true
-                    }
-                }
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } }
             )
         }
 
@@ -124,7 +108,7 @@ fun AppNavigation(
             val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
             SpaceTreeScreen(
                 rootId = rootId,
-                onBack = { navController.navigate(Screen.ProjectManage.route) { launchSingleTop = true } }
+                onBack = { navController.navigate(Screen.ProjectPicker.route) { launchSingleTop = true } }
             )
         }
     }

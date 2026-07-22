@@ -30,7 +30,6 @@ object RetrofitClient {
         currentOrgId?.let {
             builder.addHeader("X-Org-Id", it)
         }
-        builder.addHeader("Content-Type", "application/json")
         chain.proceed(builder.build())
     }
 

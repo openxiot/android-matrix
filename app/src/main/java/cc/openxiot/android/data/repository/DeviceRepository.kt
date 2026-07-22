@@ -26,7 +26,11 @@ class DeviceRepository {
     }
 
     suspend fun addDeviceByQr(spaceId: String, qrContent: String): Result<Unit> = runCatching {
-        val response = service.addDeviceByQr(spaceId, qrContent)
+        val body = qrContent.split(",").mapNotNull { part ->
+            val kv = part.split(":", limit = 2)
+            if (kv.size == 2) kv[0].trim() to kv[1].trim() else null
+        }.toMap()
+        val response = service.addDeviceByQr(spaceId, body)
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {

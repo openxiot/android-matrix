@@ -121,32 +121,18 @@ fun SpaceTreeContent(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(vertical = 8.dp)
                 ) {
-                    item { SectionHeader("空间结构") }
-                    treeState.rootSpace?.let { root ->
+                    treeState.rootSpace?.children?.forEach { child ->
                         item {
-                            SpaceTreeNode(
-                                space = root,
+                            RecursiveSpaceTree(
+                                space = child,
                                 depth = 0,
-                                isExpanded = treeState.expandedIds.contains(root.id),
-                                onToggle = { viewModel.toggleExpanded(root.id ?: "") },
-                                onAddChild = { viewModel.showCreateDialog(root.id) },
-                                onDelete = { viewModel.showDeleteConfirm(root.id ?: "") },
+                                expandedIds = treeState.expandedIds,
+                                onToggle = { viewModel.toggleExpanded(it) },
+                                onAddChild = { viewModel.showCreateDialog(it) },
+                                onDelete = { viewModel.showDeleteConfirm(it) },
+                                rootId = rootId,
                                 devices = treeState.devices
                             )
-                        }
-                        root.children?.forEach { child ->
-                            item {
-                                RecursiveSpaceTree(
-                                    space = child,
-                                    depth = 1,
-                                    expandedIds = treeState.expandedIds,
-                                    onToggle = { viewModel.toggleExpanded(it) },
-                                    onAddChild = { viewModel.showCreateDialog(it) },
-                                    onDelete = { viewModel.showDeleteConfirm(it) },
-                                    rootId = rootId,
-                                    devices = treeState.devices
-                                )
-                            }
                         }
                     }
 

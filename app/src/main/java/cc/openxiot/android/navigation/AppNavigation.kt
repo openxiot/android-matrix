@@ -52,13 +52,19 @@ fun AppNavigation(
                 currentOrgName = tokenManager.currentOrgName,
                 currentProjectName = tokenManager.currentRootSpaceName,
                 onNavigateToOrgPicker = {
-                    navController.navigate(Screen.OrgPicker.route)
+                    navController.navigate(Screen.OrgPicker.route) {
+                        launchSingleTop = true
+                    }
                 },
                 onNavigateToProjectPicker = {
-                    navController.navigate(Screen.ProjectPicker.route)
+                    navController.navigate(Screen.ProjectPicker.route) {
+                        launchSingleTop = true
+                    }
                 },
                 onNavigateToAccount = {
-                    navController.navigate(Screen.Account.route)
+                    navController.navigate(Screen.Account.route) {
+                        launchSingleTop = true
+                    }
                 }
             )
         }
@@ -79,7 +85,9 @@ fun AppNavigation(
         composable(Screen.OrgPicker.route) {
             OrganizationPickerScreen(
                 onBack = { navController.popBackStack() },
-                onManage = { navController.navigate(Screen.OrgManage.route) }
+                onManage = { navController.navigate(Screen.OrgManage.route) {
+                    launchSingleTop = true
+                } }
             )
         }
 
@@ -92,7 +100,9 @@ fun AppNavigation(
         composable(Screen.ProjectPicker.route) {
             ProjectPickerScreen(
                 onBack = { navController.popBackStack() },
-                onManage = { navController.navigate(Screen.ProjectManage.route) }
+                onManage = { navController.navigate(Screen.ProjectManage.route) {
+                    launchSingleTop = true
+                } }
             )
         }
 
@@ -100,7 +110,9 @@ fun AppNavigation(
             ProjectManageScreen(
                 onBack = { navController.popBackStack() },
                 onEditProject = { rootId ->
-                    navController.navigate("project_edit/$rootId")
+                    navController.navigate("project_edit/$rootId") {
+                        launchSingleTop = true
+                    }
                 }
             )
         }

@@ -8,7 +8,6 @@ import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.data.api.RetrofitClient
 import cc.openxiot.android.ui.login.LoginScreen
 import cc.openxiot.android.ui.main.MainScreen
-import cc.openxiot.android.ui.organization.OrganizationListScreen
 import cc.openxiot.android.ui.organization.OrganizationPickerScreen
 import cc.openxiot.android.ui.profile.AccountScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
@@ -18,7 +17,6 @@ sealed class Screen(val route: String) {
     data object Login : Screen("login")
     data object Main : Screen("main")
     data object OrgPicker : Screen("org_picker")
-    data object OrgManage : Screen("org_manage")
     data object ProjectPicker : Screen("project_picker")
     data object ProjectEdit : Screen("project_edit/{rootId}")
     data object Account : Screen("account")
@@ -85,15 +83,6 @@ fun AppNavigation(
 
         composable(Screen.OrgPicker.route) {
             OrganizationPickerScreen(
-                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
-                onManage = { navController.navigate(Screen.OrgManage.route) {
-                    launchSingleTop = true
-                } }
-            )
-        }
-
-        composable(Screen.OrgManage.route) {
-            OrganizationListScreen(
                 onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } }
             )
         }

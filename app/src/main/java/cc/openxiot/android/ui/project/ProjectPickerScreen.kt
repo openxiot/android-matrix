@@ -46,7 +46,9 @@ fun ProjectPickerScreen(
     Scaffold(
         topBar = {
             Surface(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .statusBarsPadding(),
                 color = MaterialTheme.colorScheme.surface
             ) {
                 Row(

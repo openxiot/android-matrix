@@ -3,6 +3,7 @@ package cc.openxiot.android.ui.main
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -79,7 +80,16 @@ fun MainScreen(
                         Column {
                             PageTitle(
                                 title = currentProjectName ?: "项目",
-                                onClick = onNavigateToProjectPicker
+                                onClick = onNavigateToProjectPicker,
+                                actions = {
+                                    IconButton(onClick = { /* TODO */ }) {
+                                        Icon(
+                                            Icons.Default.Add,
+                                            contentDescription = "添加",
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                    }
+                                }
                             )
                             SpaceTreeContent(
                                 rootId = rootId,
@@ -130,41 +140,40 @@ private fun EmptyProjectHint(onNavigateToProjectPicker: () -> Unit) {
 fun PageTitle(
     title: String,
     onClick: (() -> Unit)? = null,
-    subtitle: String? = null
+    actions: @Composable RowScope.() -> Unit = {}
 ) {
     Surface(
-        modifier = Modifier
-            .fillMaxWidth()
-            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+        modifier = Modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.surface
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 12.dp),
+                .padding(horizontal = 12.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(modifier = Modifier.weight(1f)) {
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
-                if (subtitle != null) {
-                    Text(
-                        text = subtitle,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                if (onClick != null) {
+                    Icon(
+                        Icons.Default.ChevronRight,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(18.dp)
                     )
                 }
             }
-            if (onClick != null) {
-                Icon(
-                    Icons.Default.ChevronRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
+            actions()
         }
     }
 }

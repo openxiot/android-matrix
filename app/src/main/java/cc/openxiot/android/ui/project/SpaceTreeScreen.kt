@@ -3,6 +3,8 @@ package cc.openxiot.android.ui.project
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -309,7 +311,7 @@ fun SpaceTreeContent(
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 Column(
-                    modifier = Modifier.heightIn(max = 400.dp)
+                    modifier = Modifier.heightIn(max = 400.dp).verticalScroll(rememberScrollState())
                 ) {
                     treeState.rootSpace?.let { root ->
                         SpacePickerItem(

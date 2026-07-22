@@ -92,6 +92,8 @@ fun ProjectManageScreen(
         AlertDialog(
             onDismissRequest = { showCreateDialog = false },
             title = { Text("创建项目") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = projectName,
@@ -132,6 +134,8 @@ fun ProjectManageScreen(
         AlertDialog(
             onDismissRequest = { renameTarget = null },
             title = { Text("重命名项目") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = newName,

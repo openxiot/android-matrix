@@ -240,6 +240,8 @@ fun ConfirmDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = { Text(message) },
+        shape = MaterialTheme.shapes.medium,
+        containerColor = MaterialTheme.colorScheme.surface,
         confirmButton = {
             TextButton(onClick = onConfirm) {
                 Text("确认", color = MaterialTheme.colorScheme.error)
@@ -265,6 +267,8 @@ fun InputDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
+        shape = MaterialTheme.shapes.medium,
+        containerColor = MaterialTheme.colorScheme.surface,
         text = {
             OutlinedTextField(
                 value = text,

@@ -90,6 +90,8 @@ fun OrganizationListScreen(
         AlertDialog(
             onDismissRequest = { viewModel.hideCreateDialog() },
             title = { Text("创建组织") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 Column {
                     OutlinedTextField(
@@ -141,6 +143,8 @@ fun OrganizationListScreen(
         AlertDialog(
             onDismissRequest = { renameTarget = null },
             title = { Text("重命名组织") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = newName,

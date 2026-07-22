@@ -193,6 +193,8 @@ fun SpaceTreeContent(
         AlertDialog(
             onDismissRequest = { viewModel.hideCreateDialog() },
             title = { Text("添加空间") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 Column {
                     OutlinedTextField(
@@ -297,6 +299,8 @@ fun SpaceTreeContent(
             onDismissRequest = {},
             title = { Text("添加设备中...") },
             text = { Text("等待中... ${seconds}s") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             confirmButton = {}
         )
     }

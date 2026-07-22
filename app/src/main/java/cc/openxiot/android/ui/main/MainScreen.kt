@@ -82,15 +82,13 @@ fun MainScreen(
                                 title = currentProjectName ?: "项目",
                                 onClick = onNavigateToProjectPicker,
                                 actions = {
-                                    Icon(
-                                        Icons.Default.Add,
-                                        contentDescription = "添加",
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier
-                                            .size(24.dp)
-                                            .clickable { /* TODO */ }
-                                            .padding(4.dp)
-                                    )
+                                    IconButton(onClick = { /* TODO */ }) {
+                                        Icon(
+                                            Icons.Default.Add,
+                                            contentDescription = "添加",
+                                            tint = MaterialTheme.colorScheme.primary
+                                        )
+                                    }
                                 }
                             )
                             SpaceTreeContent(
@@ -152,23 +150,22 @@ fun PageTitle(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .padding(start = 12.dp, end = 4.dp),
+                .padding(start = 4.dp, end = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
-                    .padding(horizontal = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
-                if (onClick != null) {
+            if (onClick != null) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .clickable(onClick = onClick)
+                        .padding(horizontal = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
                     Spacer(Modifier.width(4.dp))
                     Icon(
                         Icons.Default.ChevronRight,
@@ -177,7 +174,15 @@ fun PageTitle(
                         modifier = Modifier.size(18.dp)
                     )
                 }
+            } else {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
             }
+            Spacer(modifier = Modifier.weight(1f))
             actions()
         }
     }

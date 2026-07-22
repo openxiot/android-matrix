@@ -13,8 +13,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.ui.components.*
 
@@ -26,6 +29,14 @@ fun OrganizationPickerScreen(
     viewModel: OrganizationViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    // Refresh org list when screen resumes (e.g. returning from management page)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.loadOrganizations()
+        }
+    }
 
     Scaffold(
         topBar = {

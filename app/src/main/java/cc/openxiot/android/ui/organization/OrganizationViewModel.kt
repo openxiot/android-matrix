@@ -62,6 +62,9 @@ class OrganizationViewModel : ViewModel() {
         val orgName = org.name ?: orgId
         tokenManager.currentOrgId = orgId
         tokenManager.currentOrgName = orgName
+        // Clear current project since it belongs to the previous org
+        tokenManager.currentRootSpaceId = null
+        tokenManager.currentRootSpaceName = null
         RetrofitClient.setOrgId(orgId)
         _uiState.value = _uiState.value.copy(
             currentOrgId = orgId,

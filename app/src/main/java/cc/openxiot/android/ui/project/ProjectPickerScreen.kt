@@ -13,8 +13,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.ui.components.*
 
@@ -27,8 +30,12 @@ fun ProjectPickerScreen(
 ) {
     val state by viewModel.projectState.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.loadRootSpaces()
+    // Refresh project list when screen resumes (e.g. returning from management page)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.loadRootSpaces()
+        }
     }
 
     Scaffold(

@@ -96,8 +96,18 @@ fun MainScreen(
                                 viewModel = projectViewModel
                             )
                         }
+                    } else if (currentOrgName == null) {
+                        EmptyHint(
+                            message = "请先选择当前组织",
+                            buttonText = "选择组织",
+                            onClick = onNavigateToOrgPicker
+                        )
                     } else {
-                        EmptyProjectHint(onNavigateToProjectPicker = onNavigateToProjectPicker)
+                        EmptyHint(
+                            message = "请先选择当前项目",
+                            buttonText = "选择项目",
+                            onClick = onNavigateToProjectPicker
+                        )
                     }
                 }
                 BottomTab.Devices -> DeviceListScreen(
@@ -117,20 +127,24 @@ fun MainScreen(
 }
 
 @Composable
-private fun EmptyProjectHint(onNavigateToProjectPicker: () -> Unit) {
+private fun EmptyHint(
+    message: String,
+    buttonText: String,
+    onClick: () -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "请先在「我」的页面选择项目",
+                text = message,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(modifier = Modifier.height(16.dp))
-            FilledTonalButton(onClick = onNavigateToProjectPicker) {
-                Text("选择项目")
+            FilledTonalButton(onClick = onClick) {
+                Text(buttonText)
             }
         }
     }

@@ -29,6 +29,17 @@ fun ProjectPickerScreen(
     val state by viewModel.projectState.collectAsState()
     var isRefreshing by remember { mutableStateOf(false) }
 
+    LaunchedEffect(Unit) {
+        viewModel.loadRootSpaces()
+    }
+
+    // Reset refresh indicator when loading completes after user pull-to-refresh
+    LaunchedEffect(state.isLoading) {
+        if (!state.isLoading) {
+            isRefreshing = false
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -54,7 +65,6 @@ fun ProjectPickerScreen(
             onRefresh = {
                 isRefreshing = true
                 viewModel.loadRootSpaces()
-                isRefreshing = false
             },
             modifier = Modifier.padding(padding)
         ) {

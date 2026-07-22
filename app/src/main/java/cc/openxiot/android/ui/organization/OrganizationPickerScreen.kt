@@ -40,14 +40,25 @@ fun OrganizationPickerScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text(if (isEditing) "组织管理" else "当前组织", fontWeight = FontWeight.Bold) },
-                navigationIcon = {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
-                },
-                actions = {
+                    Text(
+                        text = if (isEditing) "组织管理" else "当前组织",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f)
+                    )
                     if (!isEditing) {
                         IconButton(onClick = { isEditing = true }) {
                             Icon(Icons.Default.Edit, contentDescription = "编辑")
@@ -57,11 +68,8 @@ fun OrganizationPickerScreen(
                             Icon(Icons.Default.Close, contentDescription = "完成")
                         }
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
+                }
+            }
         },
         floatingActionButton = {
             if (isEditing) {

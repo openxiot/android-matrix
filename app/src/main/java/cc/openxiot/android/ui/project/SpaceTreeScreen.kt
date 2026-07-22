@@ -47,22 +47,26 @@ fun SpaceTreeScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = treeState.rootSpace?.name ?: projectState.currentRootName ?: "空间管理",
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                navigationIcon = {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
+                    Text(
+                        text = treeState.rootSpace?.name ?: projectState.currentRootName ?: "空间管理",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         },
         floatingActionButton = {
             var expanded by remember { mutableStateOf(false) }

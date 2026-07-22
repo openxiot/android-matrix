@@ -26,17 +26,26 @@ fun AccountScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("账号详情", fontWeight = FontWeight.Bold) },
-                navigationIcon = {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
+                    Text(
+                        text = "账号详情",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
     ) { padding ->
         Column(

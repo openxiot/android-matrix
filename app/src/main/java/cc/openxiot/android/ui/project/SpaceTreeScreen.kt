@@ -288,30 +288,23 @@ fun SpaceTreeContent(
 
     // Move device dialog
     treeState.showMoveDeviceDialog?.let { did ->
-        val allSpaces = remember(treeState.rootSpace) {
-            buildFlatSpaceList(treeState.rootSpace)
-        }
         var selectedSpaceId by remember { mutableStateOf<String?>(null) }
         AlertDialog(
             onDismissRequest = { viewModel.hideMoveDevice() },
             title = { Text("移动到空间") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
             text = {
-                Column {
-                    allSpaces.forEach { space ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { selectedSpaceId = space.id }
-                                .padding(vertical = 6.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            RadioButton(
-                                selected = selectedSpaceId == space.id,
-                                onClick = { selectedSpaceId = space.id }
-                            )
-                            Spacer(Modifier.width(8.dp))
-                            Text(space.name ?: space.id ?: "未知", style = MaterialTheme.typography.bodyMedium)
-                        }
+                Column(
+                    modifier = Modifier.heightIn(max = 400.dp)
+                ) {
+                    treeState.rootSpace?.let { root ->
+                        SpacePickerItem(
+                            space = root,
+                            depth = 0,
+                            selectedSpaceId = selectedSpaceId,
+                            onSelect = { selectedSpaceId = it }
+                        )
                     }
                 }
             },
@@ -324,6 +317,40 @@ fun SpaceTreeContent(
             dismissButton = {
                 TextButton(onClick = { viewModel.hideMoveDevice() }) { Text("取消") }
             }
+        )
+    }
+}
+
+@Composable
+private fun SpacePickerItem(
+    space: SpaceEntity,
+    depth: Int,
+    selectedSpaceId: String?,
+    onSelect: (String) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { space.id?.let { onSelect(it) } }
+            .padding(start = (16 + depth * 24).dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(
+            selected = selectedSpaceId == space.id,
+            onClick = { space.id?.let { onSelect(it) } }
+        )
+        Spacer(Modifier.width(8.dp))
+        Text(
+            text = space.name ?: space.id ?: "未知",
+            style = MaterialTheme.typography.bodyMedium
+        )
+    }
+    space.children?.forEach { child ->
+        SpacePickerItem(
+            space = child,
+            depth = depth + 1,
+            selectedSpaceId = selectedSpaceId,
+            onSelect = onSelect
         )
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -259,6 +260,15 @@ fun SpaceTreeContent(
                 setDesiredBarcodeFormats(ScanOptions.QR_CODE)
                 setPrompt("扫描设备二维码")
             })
+        }
+    }
+
+    // Show operation feedback messages
+    val context = LocalContext.current
+    LaunchedEffect(treeState.message) {
+        treeState.message?.let { msg ->
+            android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_SHORT).show()
+            viewModel.clearTreeMessage()
         }
     }
 }

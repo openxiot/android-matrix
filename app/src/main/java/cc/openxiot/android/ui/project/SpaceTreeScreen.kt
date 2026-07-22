@@ -347,6 +347,9 @@ private fun SpacePickerItem(
     selectedSpaceId: String?,
     onSelect: (String) -> Unit
 ) {
+    val hasChildren = space.children?.isNotEmpty() == true
+    var expanded by remember { mutableStateOf(true) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -354,23 +357,42 @@ private fun SpacePickerItem(
             .padding(start = (16 + depth * 24).dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        if (hasChildren) {
+            IconButton(
+                onClick = { expanded = !expanded },
+                modifier = Modifier.size(24.dp)
+            ) {
+                Icon(
+                    if (expanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        } else {
+            Spacer(Modifier.width(24.dp))
+        }
+        Spacer(Modifier.width(4.dp))
+        Text(
+            text = space.name ?: space.id ?: "未知",
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f)
+        )
+        Spacer(Modifier.width(8.dp))
         RadioButton(
             selected = selectedSpaceId == space.id,
             onClick = { space.id?.let { onSelect(it) } }
         )
-        Spacer(Modifier.width(8.dp))
-        Text(
-            text = space.name ?: space.id ?: "未知",
-            style = MaterialTheme.typography.bodyMedium
-        )
     }
-    space.children?.forEach { child ->
-        SpacePickerItem(
-            space = child,
-            depth = depth + 1,
-            selectedSpaceId = selectedSpaceId,
-            onSelect = onSelect
-        )
+    if (hasChildren && expanded) {
+        space.children?.forEach { child ->
+            SpacePickerItem(
+                space = child,
+                depth = depth + 1,
+                selectedSpaceId = selectedSpaceId,
+                onSelect = onSelect
+            )
+        }
     }
 }
 

@@ -82,13 +82,15 @@ fun MainScreen(
                                 title = currentProjectName ?: "项目",
                                 onClick = onNavigateToProjectPicker,
                                 actions = {
-                                    IconButton(onClick = { /* TODO */ }) {
-                                        Icon(
-                                            Icons.Default.Add,
-                                            contentDescription = "添加",
-                                            tint = MaterialTheme.colorScheme.primary
-                                        )
-                                    }
+                                    Icon(
+                                        Icons.Default.Add,
+                                        contentDescription = "添加",
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .clickable { /* TODO */ }
+                                            .padding(4.dp)
+                                    )
                                 }
                             )
                             SpaceTreeContent(
@@ -149,22 +151,25 @@ fun PageTitle(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 12.dp),
+                .height(48.dp)
+                .padding(start = 12.dp, end = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+                    .fillMaxHeight()
+                    .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
+                    .padding(horizontal = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(horizontal = 8.dp)
+                    fontWeight = FontWeight.Bold
                 )
                 if (onClick != null) {
+                    Spacer(Modifier.width(4.dp))
                     Icon(
                         Icons.Default.ChevronRight,
                         contentDescription = null,

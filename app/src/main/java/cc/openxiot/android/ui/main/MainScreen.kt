@@ -1,6 +1,9 @@
 package cc.openxiot.android.ui.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -74,7 +77,11 @@ fun MainScreen(
                     val rootId = mainViewModel.currentRootSpaceId
                     if (rootId != null) {
                         Column {
-                            PageTitle(title = "项目")
+                            PageTitle(
+                                title = currentProjectName ?: "项目",
+                                subtitle = if (currentProjectName != null) "点击切换项目" else null,
+                                onClick = onNavigateToProjectPicker
+                            )
                             SpaceTreeContent(
                                 rootId = rootId,
                                 viewModel = projectViewModel
@@ -121,16 +128,44 @@ private fun EmptyProjectHint(onNavigateToProjectPicker: () -> Unit) {
 }
 
 @Composable
-fun PageTitle(title: String) {
+fun PageTitle(
+    title: String,
+    onClick: (() -> Unit)? = null,
+    subtitle: String? = null
+) {
     Surface(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
         color = MaterialTheme.colorScheme.surface
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 20.dp, vertical = 12.dp)
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+                if (subtitle != null) {
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            if (onClick != null) {
+                Icon(
+                    Icons.Default.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
     }
 }

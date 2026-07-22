@@ -52,19 +52,16 @@ fun AppNavigation(
                 currentOrgName = tokenManager.currentOrgName,
                 currentProjectName = tokenManager.currentRootSpaceName,
                 onNavigateToOrgPicker = {
-                    navController.navigate(Screen.OrgPicker.route) {
-                        launchSingleTop = true
-                    }
+                    navController.currentDestination?.takeIf { it.route != Screen.OrgPicker.route }
+                        ?.let { navController.navigate(Screen.OrgPicker.route) { launchSingleTop = true } }
                 },
                 onNavigateToProjectPicker = {
-                    navController.navigate(Screen.ProjectPicker.route) {
-                        launchSingleTop = true
-                    }
+                    navController.currentDestination?.takeIf { it.route != Screen.ProjectPicker.route }
+                        ?.let { navController.navigate(Screen.ProjectPicker.route) { launchSingleTop = true } }
                 },
                 onNavigateToAccount = {
-                    navController.navigate(Screen.Account.route) {
-                        launchSingleTop = true
-                    }
+                    navController.currentDestination?.takeIf { it.route != Screen.Account.route }
+                        ?.let { navController.navigate(Screen.Account.route) { launchSingleTop = true } }
                 }
             )
         }

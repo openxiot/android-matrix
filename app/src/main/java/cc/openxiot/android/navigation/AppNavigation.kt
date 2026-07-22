@@ -64,6 +64,9 @@ fun AppNavigation(
                         popUpTo(Screen.Main.route) { inclusive = false }
                         launchSingleTop = true
                     }
+                },
+                onNavigateToProjectEdit = { rootId ->
+                    navController.navigate("project_edit/$rootId") { launchSingleTop = true }
                 }
             )
         }

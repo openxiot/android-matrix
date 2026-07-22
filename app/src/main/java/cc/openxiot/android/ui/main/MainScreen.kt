@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,6 +27,7 @@ fun MainScreen(
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
+    onNavigateToProjectEdit: ((String) -> Unit)? = null,
     mainViewModel: MainViewModel = viewModel(),
     projectViewModel: ProjectViewModel = viewModel()
 ) {
@@ -80,7 +82,14 @@ fun MainScreen(
                         Column {
                             PageTitle(
                                 title = currentProjectName ?: "项目",
-                                onClick = onNavigateToProjectPicker
+                                onClick = onNavigateToProjectPicker,
+                                actions = {
+                                    rootId.let { id ->
+                                        IconButton(onClick = { onNavigateToProjectEdit?.invoke(id) }) {
+                                            Icon(Icons.Default.Edit, contentDescription = "管理空间")
+                                        }
+                                    }
+                                }
                             )
                             SpaceTreeContent(
                                 rootId = rootId,

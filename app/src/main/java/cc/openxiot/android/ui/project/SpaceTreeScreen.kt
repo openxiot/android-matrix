@@ -258,6 +258,7 @@ fun SpaceTreeContent(
         if (treeState.showAddDeviceDialog) {
             qrScanner.launch(ScanOptions().apply {
                 setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+                setOrientationLocked(true)
                 setPrompt("扫描设备二维码")
             })
         }
@@ -270,6 +271,23 @@ fun SpaceTreeContent(
             android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_SHORT).show()
             viewModel.clearTreeMessage()
         }
+    }
+
+    // Loading dialog with countdown when adding device
+    if (treeState.isAddingDevice) {
+        var seconds by remember { mutableIntStateOf(0) }
+        LaunchedEffect(treeState.isAddingDevice) {
+            while (treeState.isAddingDevice) {
+                kotlinx.coroutines.delay(1000)
+                seconds++
+            }
+        }
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text("添加设备中...") },
+            text = { Text("等待中... ${seconds}s") },
+            confirmButton = {}
+        )
     }
 }
 

@@ -32,7 +32,8 @@ data class SpaceTreeUiState(
     val showDeleteConfirm: String? = null,
     val devices: List<DeviceEntity> = emptyList(),
     val showAddDeviceDialog: Boolean = false,
-    val message: String? = null
+    val message: String? = null,
+    val isAddingDevice: Boolean = false
 )
 
 class ProjectViewModel : ViewModel() {
@@ -240,14 +241,14 @@ class ProjectViewModel : ViewModel() {
 
     fun addDeviceByQr(spaceId: String, qrContent: String) {
         viewModelScope.launch {
-            _treeState.value = _treeState.value.copy(showAddDeviceDialog = false)
+            _treeState.value = _treeState.value.copy(showAddDeviceDialog = false, isAddingDevice = true)
             deviceRepository.addDeviceByQr(spaceId, qrContent)
                 .onSuccess {
                     _projectState.value.currentRootId?.let { loadSpaceGraph(it) }
-                    _treeState.value = _treeState.value.copy(message = "设备添加成功")
+                    _treeState.value = _treeState.value.copy(isAddingDevice = false, message = "设备添加成功")
                 }
                 .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(message = "添加设备失败: ${e.message}")
+                    _treeState.value = _treeState.value.copy(isAddingDevice = false, message = "添加设备失败: ${e.message}")
                 }
         }
     }

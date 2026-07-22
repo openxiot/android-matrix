@@ -13,6 +13,7 @@ import cc.openxiot.android.ui.organization.OrganizationPickerScreen
 import cc.openxiot.android.ui.profile.AccountScreen
 import cc.openxiot.android.ui.project.ProjectManageScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
+import cc.openxiot.android.ui.project.SpaceTreeScreen
 
 sealed class Screen(val route: String) {
     data object Login : Screen("login")
@@ -21,6 +22,7 @@ sealed class Screen(val route: String) {
     data object OrgManage : Screen("org_manage")
     data object ProjectPicker : Screen("project_picker")
     data object ProjectManage : Screen("project_manage")
+    data object ProjectEdit : Screen("project_edit/{rootId}")
     data object Account : Screen("account")
 }
 
@@ -96,6 +98,17 @@ fun AppNavigation(
 
         composable(Screen.ProjectManage.route) {
             ProjectManageScreen(
+                onBack = { navController.popBackStack() },
+                onEditProject = { rootId ->
+                    navController.navigate("project_edit/$rootId")
+                }
+            )
+        }
+
+        composable(Screen.ProjectEdit.route) { backStackEntry ->
+            val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
+            SpaceTreeScreen(
+                rootId = rootId,
                 onBack = { navController.popBackStack() }
             )
         }

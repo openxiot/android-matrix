@@ -21,6 +21,7 @@ import cc.openxiot.android.ui.components.*
 @Composable
 fun ProjectManageScreen(
     onBack: () -> Unit,
+    onEditProject: (String) -> Unit,
     viewModel: ProjectViewModel = viewModel()
 ) {
     val state by viewModel.projectState.collectAsState()
@@ -73,7 +74,7 @@ fun ProjectManageScreen(
                                 name = space.name ?: "未命名",
                                 type = space.type,
                                 isSelected = space.id != null && space.id == state.currentRootId,
-                                onSelect = { viewModel.selectRootSpace(space) },
+                                onSelect = { space.id?.let { onEditProject(it) } },
                                 onRename = { space.id?.let { id -> renameTarget = id to (space.name ?: "") } },
                                 onDelete = { space.id?.let { showDeleteConfirm = it } }
                             )

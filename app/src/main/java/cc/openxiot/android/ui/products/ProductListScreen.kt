@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DeviceHub
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,16 +23,32 @@ import cc.openxiot.android.ui.components.LoadingIndicator
 import cc.openxiot.android.ui.main.PageTitle
 import coil.compose.AsyncImage
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(
     viewModel: ProductViewModel = viewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
+    var isRefreshing by remember { mutableStateOf(false) }
+
+    LaunchedEffect(state.isLoading) {
+        if (!state.isLoading) {
+            isRefreshing = false
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageTitle(title = "产品")
 
-        when {
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
+            onRefresh = {
+                isRefreshing = true
+                viewModel.loadProducts()
+            },
+            modifier = Modifier.fillMaxSize()
+        ) {
+            when {
             state.isLoading -> LoadingIndicator()
             state.error != null -> ErrorMessage(
                 message = state.error!!,
@@ -56,6 +73,7 @@ fun ProductListScreen(
                     item { Spacer(modifier = Modifier.height(16.dp)) }
                 }
             }
+        }
         }
     }
 }

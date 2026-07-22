@@ -100,11 +100,9 @@ fun SpaceTreeContent(
 ) {
     val treeState by viewModel.treeState.collectAsState()
     val projectState by viewModel.projectState.collectAsState()
-    val scope = rememberCoroutineScope()
-
-    // Load graph when rootId changes
+    // Load graph when rootId changes, calling suspend function directly
     LaunchedEffect(rootId) {
-        viewModel.loadSpaceGraph(rootId)
+        viewModel.loadSpaceGraphInternal(rootId)
         if (projectState.currentRootName == null) {
             viewModel.setCurrentRootName(treeState.rootSpace?.name ?: "项目")
         }

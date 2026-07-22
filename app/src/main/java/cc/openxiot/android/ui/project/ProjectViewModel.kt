@@ -120,22 +120,26 @@ class ProjectViewModel : ViewModel() {
 
     fun loadSpaceGraph(rootId: String) {
         viewModelScope.launch {
-            _treeState.value = _treeState.value.copy(isLoading = true)
-            spaceRepository.getSpaceGraph(rootId)
-                .onSuccess { graph ->
-                    _treeState.value = _treeState.value.copy(
-                        isLoading = false,
-                        rootSpace = graph.spaces?.firstOrNull(),
-                        devices = graph.devices ?: emptyList()
-                    )
-                }
-                .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(
-                        isLoading = false,
-                        error = e.message
-                    )
-                }
+            loadSpaceGraphInternal(rootId)
         }
+    }
+
+    suspend fun loadSpaceGraphInternal(rootId: String) {
+        _treeState.value = _treeState.value.copy(isLoading = true)
+        spaceRepository.getSpaceGraph(rootId)
+            .onSuccess { graph ->
+                _treeState.value = _treeState.value.copy(
+                    isLoading = false,
+                    rootSpace = graph.spaces?.firstOrNull(),
+                    devices = graph.devices ?: emptyList()
+                )
+            }
+            .onFailure { e ->
+                _treeState.value = _treeState.value.copy(
+                    isLoading = false,
+                    error = e.message
+                )
+            }
     }
 
     fun toggleExpanded(spaceId: String) {

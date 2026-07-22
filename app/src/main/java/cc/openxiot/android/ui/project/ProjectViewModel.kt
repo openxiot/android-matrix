@@ -125,12 +125,13 @@ class ProjectViewModel : ViewModel() {
     }
 
     suspend fun loadSpaceGraphInternal(rootId: String) {
-        _treeState.value = _treeState.value.copy(isLoading = true)
+        _treeState.value = _treeState.value.copy(isLoading = true, error = null)
         spaceRepository.getSpaceGraph(rootId)
             .onSuccess { graph ->
                 val root = graph.spaces?.buildTree()
                 _treeState.value = _treeState.value.copy(
                     isLoading = false,
+                    error = null,
                     rootSpace = root,
                     devices = graph.devices ?: emptyList()
                 )

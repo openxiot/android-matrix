@@ -1,6 +1,10 @@
 package cc.openxiot.android.ui.project
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -70,31 +74,64 @@ fun SpaceTreeScreen(
             )
         },
         floatingActionButton = {
-            var showFabMenu by remember { mutableStateOf(false) }
-            Box {
+            var expanded by remember { mutableStateOf(false) }
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
+                AnimatedVisibility(
+                    visible = expanded,
+                    enter = fadeIn() + slideInVertically { it },
+                    exit = fadeOut() + slideOutVertically { it }
+                ) {
+                    Column(horizontalAlignment = Alignment.End) {
+                        // Add device
+                        SmallFloatingActionButton(
+                            onClick = {
+                                expanded = false
+                                viewModel.showAddDeviceDialog()
+                            },
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier.size(36.dp)
+                        ) {
+                            Icon(Icons.Default.Devices, contentDescription = null, modifier = Modifier.size(18.dp))
+                        }
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            "添加设备",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(Modifier.height(12.dp))
+
+                        // Add space
+                        SmallFloatingActionButton(
+                            onClick = {
+                                expanded = false
+                                viewModel.showCreateDialog(rootId)
+                            },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(36.dp)
+                        ) {
+                            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                        }
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            "添加空间",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(Modifier.height(12.dp))
+                    }
+                }
                 FloatingActionButton(
-                    onClick = { showFabMenu = true },
+                    onClick = { expanded = !expanded },
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = "添加")
-                }
-                DropdownMenu(
-                    expanded = showFabMenu,
-                    onDismissRequest = { showFabMenu = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text("添加空间") },
-                        onClick = {
-                            showFabMenu = false
-                            viewModel.showCreateDialog(rootId)
-                        }
-                    )
-                    DropdownMenuItem(
-                        text = { Text("添加设备") },
-                        onClick = {
-                            showFabMenu = false
-                            viewModel.showAddDeviceDialog()
-                        }
+                    Icon(
+                        if (expanded) Icons.Default.Close else Icons.Default.Add,
+                        contentDescription = "添加"
                     )
                 }
             }

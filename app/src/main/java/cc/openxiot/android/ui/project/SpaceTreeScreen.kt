@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.data.api.DeviceEntity
@@ -370,7 +371,8 @@ private fun RecursiveSpaceTree(
             spaceDevices.forEach { device ->
                 DeviceItem(
                     device = device,
-                    onClick = device.did?.let { did -> { onDeviceClick?.invoke(did) } }
+                    onClick = device.did?.let { did -> { onDeviceClick?.invoke(did) } },
+                    depth = depth + 1
                 )
             }
         }
@@ -492,12 +494,13 @@ private fun SpaceTreeNode(
 @Composable
 private fun DeviceItem(
     device: DeviceEntity,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
+    depth: Int = 0
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .padding(start = (12 + depth * 20).dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
             .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
@@ -523,7 +526,9 @@ private fun DeviceItem(
                 Text(
                     text = device.did ?: "未知设备",
                     style = MaterialTheme.typography.bodySmall,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
             Row(verticalAlignment = Alignment.CenterVertically) {

@@ -169,7 +169,8 @@ class ProjectViewModel : ViewModel() {
             )
             spaceRepository.createSpace(space)
                 .onSuccess {
-                    rootId?.let { loadSpaceTree(it) }
+                    if (rootId != null) loadSpaceTree(rootId)
+                    else loadRootSpaces()
                 }
                 .onFailure { e ->
                     _treeState.value = _treeState.value.copy(error = e.message)
@@ -190,7 +191,8 @@ class ProjectViewModel : ViewModel() {
             _treeState.value = _treeState.value.copy(showDeleteConfirm = null)
             spaceRepository.deleteSpace(spaceId)
                 .onSuccess {
-                    rootId?.let { loadSpaceTree(it) }
+                    if (rootId != null) loadSpaceTree(rootId)
+                    else loadRootSpaces()
                 }
                 .onFailure { e ->
                     _treeState.value = _treeState.value.copy(error = e.message)

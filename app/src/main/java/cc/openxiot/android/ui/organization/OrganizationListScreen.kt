@@ -85,6 +85,8 @@ fun OrganizationListScreen(
     if (uiState.showCreateDialog) {
         var orgId by remember { mutableStateOf("") }
         var orgName by remember { mutableStateOf("") }
+        val orgCodeRegex = Regex("^[a-zA-Z][a-zA-Z0-9-]*$")
+        val orgCodeValid = orgId.isBlank() || orgCodeRegex.matches(orgId)
         AlertDialog(
             onDismissRequest = { viewModel.hideCreateDialog() },
             title = { Text("创建组织") },
@@ -96,6 +98,10 @@ fun OrganizationListScreen(
                         label = { Text("组织标识") },
                         placeholder = { Text("如: my-company") },
                         singleLine = true,
+                        isError = orgId.isNotBlank() && !orgCodeValid,
+                        supportingText = if (orgId.isNotBlank() && !orgCodeValid) {
+                            { Text("以英文开头，只能包含英文、数字和中划线") }
+                        } else null,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(12.dp))
@@ -112,11 +118,11 @@ fun OrganizationListScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        if (orgId.isNotBlank() && orgName.isNotBlank()) {
+                        if (orgId.isNotBlank() && orgName.isNotBlank() && orgCodeValid) {
                             viewModel.createOrganization(orgId, orgName)
                         }
                     },
-                    enabled = orgId.isNotBlank() && orgName.isNotBlank()
+                    enabled = orgId.isNotBlank() && orgName.isNotBlank() && orgCodeValid
                 ) {
                     Text("创建")
                 }

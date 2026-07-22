@@ -28,7 +28,7 @@ class OrganizationRepository {
     suspend fun createOrganization(id: String, name: String): Result<Organization> = runCatching {
         val response = service.createOrganization(id, mapOf("name" to name))
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data!!
+            response.body()?.data ?: Organization(id = id, name = name)
         } else {
             throw Exception(response.body()?.message ?: "创建组织失败")
         }
@@ -37,7 +37,7 @@ class OrganizationRepository {
     suspend fun updateOrganization(id: String, name: String): Result<Organization> = runCatching {
         val response = service.updateOrganization(id, mapOf("name" to name))
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data!!
+            response.body()?.data ?: Organization(id = id, name = name)
         } else {
             throw Exception(response.body()?.message ?: "更新组织失败")
         }

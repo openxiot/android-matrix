@@ -100,7 +100,8 @@ fun SpaceTreeScreen(
         SpaceTreeContent(
             rootId = rootId,
             viewModel = viewModel,
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding(padding),
+            onDeviceClick = { viewModel.showMoveDevice(it) }
         )
     }
 }
@@ -110,7 +111,8 @@ fun SpaceTreeContent(
     rootId: String,
     viewModel: ProjectViewModel,
     modifier: Modifier = Modifier,
-    showActions: Boolean = true
+    showActions: Boolean = true,
+    onDeviceClick: ((String) -> Unit)? = null
 ) {
     val treeState by viewModel.treeState.collectAsState()
     // Load graph when rootId changes, calling suspend function directly
@@ -144,7 +146,7 @@ fun SpaceTreeContent(
                                 rootId = rootId,
                                 devices = treeState.devices,
                                 showActions = showActions,
-                                onDeviceClick = { viewModel.showMoveDevice(it) },
+                                onDeviceClick = onDeviceClick,
                                 productNames = treeState.productNames
                             )
                         }

@@ -366,9 +366,7 @@ private fun RecursiveSpaceTree(
                 )
             }
             // Render devices of this space inline
-            val spaceDevices = devices.filter { d ->
-                d.did?.let { did -> space.devices?.any { sd -> sd.did == did } == true } ?: false
-            }
+            val spaceDevices = devices.filter { it.space?.spaceId == space.id }
             spaceDevices.forEach { device ->
                 DeviceItem(
                     device = device,
@@ -391,9 +389,7 @@ private fun SpaceTreeNode(
     showActions: Boolean = true
 ) {
     val hasChildren = space.children?.isNotEmpty() == true
-    val spaceDevices = devices.filter { d ->
-        d.did?.let { did -> space.devices?.any { sd -> sd.did == did } == true } ?: false
-    }
+    val spaceDevices = devices.filter { it.space?.spaceId == space.id }
 
     Card(
         modifier = Modifier

@@ -61,7 +61,13 @@ data class DeviceEntity(
     @SerializedName("online") val online: Boolean? = null,
     @SerializedName("protocol") val protocol: String? = null,
     @SerializedName("lastOnline") val lastOnline: String? = null,
-    @SerializedName("lastOffline") val lastOffline: String? = null
+    @SerializedName("lastOffline") val lastOffline: String? = null,
+    @SerializedName("space") val space: DeviceSpaceRef? = null
+)
+
+data class DeviceSpaceRef(
+    @SerializedName("spaceId") val spaceId: String? = null,
+    @SerializedName("rootId") val rootId: String? = null
 )
 
 data class SpaceGraph(

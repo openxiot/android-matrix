@@ -2,6 +2,7 @@ package cc.openxiot.android.data.repository
 
 import cc.openxiot.android.data.api.DeviceEntity
 import cc.openxiot.android.data.api.DeviceRegistration
+import cc.openxiot.android.data.api.MoveDeviceRequest
 import cc.openxiot.android.data.api.RetrofitClient
 
 class DeviceRepository {
@@ -26,10 +27,10 @@ class DeviceRepository {
     }
 
     suspend fun moveDevice(spaceId: String, rootSpaceId: String, did: String): Result<Unit> = runCatching {
-        val body = mapOf(
-            "spaceId" to spaceId,
-            "rootSpaceId" to rootSpaceId,
-            "dids" to listOf(did)
+        val body = MoveDeviceRequest(
+            spaceId = spaceId,
+            rootSpaceId = rootSpaceId,
+            dids = listOf(did)
         )
         val response = service.updateDeviceSpace(body)
         if (!response.isSuccessful || response.body()?.success != true) {

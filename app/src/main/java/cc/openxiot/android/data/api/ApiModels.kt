@@ -74,6 +74,12 @@ data class DeviceRegistration(
     @SerializedName("type") val type: String
 )
 
+data class MoveDeviceRequest(
+    @SerializedName("spaceId") val spaceId: String,
+    @SerializedName("rootSpaceId") val rootSpaceId: String,
+    @SerializedName("dids") val dids: List<String>
+)
+
 data class LocalizedName(
     @SerializedName("zh-CN") val zhCN: String? = null
 )

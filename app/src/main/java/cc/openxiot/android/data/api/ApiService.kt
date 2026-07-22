@@ -91,7 +91,7 @@ interface SiteService {
     ): Response<ApiResponse<Unit>>
 
     @PUT("v1/device/many/space")
-    suspend fun updateDeviceSpace(@Body body: Map<String, Any>): Response<ApiResponse<Unit>>
+    suspend fun updateDeviceSpace(@Body body: MoveDeviceRequest): Response<ApiResponse<Unit>>
 }
 
 interface ProductService {

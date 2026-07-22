@@ -18,6 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.data.api.DeviceEntity
 import cc.openxiot.android.data.api.SpaceEntity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 import cc.openxiot.android.ui.components.*
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -242,49 +245,21 @@ fun SpaceTreeContent(
         )
     }
 
-    // Add device dialog
-    if (treeState.showAddDeviceDialog) {
-        var did by remember { mutableStateOf("") }
-        var deviceType by remember { mutableStateOf("") }
-        var selectedSpaceId by remember { mutableStateOf(rootId) }
-        AlertDialog(
-            onDismissRequest = { viewModel.hideAddDeviceDialog() },
-            title = { Text("添加设备") },
-            text = {
-                Column {
-                    OutlinedTextField(
-                        value = did,
-                        onValueChange = { did = it },
-                        label = { Text("设备 ID") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    OutlinedTextField(
-                        value = deviceType,
-                        onValueChange = { deviceType = it },
-                        label = { Text("设备类型") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        viewModel.addDevice(selectedSpaceId, did, deviceType)
-                    },
-                    enabled = did.isNotBlank()
-                ) {
-                    Text("添加")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { viewModel.hideAddDeviceDialog() }) {
-                    Text("取消")
-                }
-            }
-        )
+    // QR scanner for adding devices
+    val qrScanner = rememberLauncherForActivityResult(ScanContract()) { result ->
+        if (result.contents != null) {
+            viewModel.addDeviceByQr(rootId, result.contents)
+        } else {
+            viewModel.hideAddDeviceDialog()
+        }
+    }
+    LaunchedEffect(treeState.showAddDeviceDialog) {
+        if (treeState.showAddDeviceDialog) {
+            qrScanner.launch(ScanOptions().apply {
+                setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+                setPrompt("扫描设备二维码")
+            })
+        }
     }
 }
 

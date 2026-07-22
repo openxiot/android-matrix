@@ -83,6 +83,13 @@ interface SiteService {
         @Path("spaceId") spaceId: String,
         @Body devices: List<DeviceRegistration>
     ): Response<ApiResponse<Unit>>
+
+    @POST("v1/device/one/{spaceId}")
+    @Headers("Content-Type: application/json")
+    suspend fun addDeviceByQr(
+        @Path("spaceId") spaceId: String,
+        @Body body: String
+    ): Response<ApiResponse<Unit>>
 }
 
 interface ProductService {

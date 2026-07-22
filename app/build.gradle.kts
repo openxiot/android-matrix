@@ -58,6 +58,9 @@ dependencies {
     // Image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
 
+    // QR code scanning
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+
     // Core
     implementation("androidx.core:core-ktx:1.13.1")
 

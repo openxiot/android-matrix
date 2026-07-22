@@ -237,6 +237,19 @@ class ProjectViewModel : ViewModel() {
         }
     }
 
+    fun addDeviceByQr(spaceId: String, qrContent: String) {
+        viewModelScope.launch {
+            _treeState.value = _treeState.value.copy(showAddDeviceDialog = false)
+            deviceRepository.addDeviceByQr(spaceId, qrContent)
+                .onSuccess {
+                    _projectState.value.currentRootId?.let { loadSpaceGraph(it) }
+                }
+                .onFailure { e ->
+                    _treeState.value = _treeState.value.copy(error = e.message)
+                }
+        }
+    }
+
     fun clearProjectError() {
         _projectState.value = _projectState.value.copy(error = null)
     }

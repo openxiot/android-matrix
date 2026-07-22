@@ -24,4 +24,13 @@ class DeviceRepository {
             throw Exception(response.body()?.message ?: "添加设备失败")
         }
     }
+
+    suspend fun addDeviceByQr(spaceId: String, qrContent: String): Result<Unit> = runCatching {
+        val response = service.addDeviceByQr(spaceId, qrContent)
+        if (response.isSuccessful && response.body()?.success == true) {
+            Unit
+        } else {
+            throw Exception(response.body()?.message ?: "添加设备失败")
+        }
+    }
 }

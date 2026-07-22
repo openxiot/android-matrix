@@ -110,12 +110,6 @@ fun ProfileScreen(
                     title = if (AppState.isDarkMode) "深色模式" else "浅色模式",
                     subtitle = "点击切换主题",
                     icon = if (AppState.isDarkMode) Icons.Default.DarkMode else Icons.Default.LightMode,
-                    trailing = {
-                        Switch(
-                            checked = AppState.isDarkMode,
-                            onCheckedChange = { AppState.toggleDarkMode(tokenManager) }
-                        )
-                    },
                     onClick = { AppState.toggleDarkMode(tokenManager) }
                 )
             }

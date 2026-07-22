@@ -32,9 +32,6 @@ fun SpaceTreeScreen(
 
     LaunchedEffect(rootId) {
         viewModel.loadSpaceGraph(rootId)
-        if (projectState.currentRootName == null) {
-            viewModel.setCurrentRootName(treeState.rootSpace?.name ?: "项目")
-        }
     }
 
     Scaffold(
@@ -99,13 +96,9 @@ fun SpaceTreeContent(
     modifier: Modifier = Modifier
 ) {
     val treeState by viewModel.treeState.collectAsState()
-    val projectState by viewModel.projectState.collectAsState()
     // Load graph when rootId changes, calling suspend function directly
     LaunchedEffect(rootId) {
         viewModel.loadSpaceGraphInternal(rootId)
-        if (projectState.currentRootName == null) {
-            viewModel.setCurrentRootName(treeState.rootSpace?.name ?: "项目")
-        }
     }
 
     Box(modifier = modifier) {

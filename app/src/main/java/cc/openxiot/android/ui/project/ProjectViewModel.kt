@@ -134,6 +134,11 @@ class ProjectViewModel : ViewModel() {
                     rootSpace = root,
                     devices = graph.devices ?: emptyList()
                 )
+                if (_projectState.value.currentRootName == null) {
+                    val name = root?.name ?: "项目"
+                    _projectState.value = _projectState.value.copy(currentRootName = name)
+                    tokenManager.currentRootSpaceName = name
+                }
             }
             .onFailure { e ->
                 _treeState.value = _treeState.value.copy(

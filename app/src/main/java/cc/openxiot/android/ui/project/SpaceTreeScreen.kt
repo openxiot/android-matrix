@@ -101,11 +101,13 @@ fun SpaceTreeContent(
     val treeState by viewModel.treeState.collectAsState()
     val projectState by viewModel.projectState.collectAsState()
 
-    LaunchedEffect(rootId) {
+    // Load graph when rootId changes, ensure it fires even on first composition
+    DisposableEffect(rootId) {
         viewModel.loadSpaceGraph(rootId)
         if (projectState.currentRootName == null) {
             viewModel.setCurrentRootName(treeState.rootSpace?.name ?: "项目")
         }
+        onDispose { }
     }
 
     Box(modifier = modifier) {

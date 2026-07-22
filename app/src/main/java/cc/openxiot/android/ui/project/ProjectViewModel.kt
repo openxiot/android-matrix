@@ -47,17 +47,14 @@ class ProjectViewModel : ViewModel() {
     private val _treeState = MutableStateFlow(SpaceTreeUiState())
     val treeState: StateFlow<SpaceTreeUiState> = _treeState.asStateFlow()
 
-    fun loadRootSpaces(tenantId: String? = null) {
+    fun loadRootSpaces() {
         viewModelScope.launch {
             _projectState.value = _projectState.value.copy(isLoading = true, error = null)
             spaceRepository.getAllSpaces()
                 .onSuccess { spaces ->
-                    val filtered = if (tenantId != null) {
-                        spaces.filter { it.tenantId == tenantId }
-                    } else spaces
                     _projectState.value = _projectState.value.copy(
                         isLoading = false,
-                        rootSpaces = filtered
+                        rootSpaces = spaces
                     )
                 }
                 .onFailure { e ->

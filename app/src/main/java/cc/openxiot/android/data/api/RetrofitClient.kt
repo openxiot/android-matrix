@@ -11,9 +11,14 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
 
     private var authToken: String? = null
+    private var currentOrgId: String? = null
 
     fun setToken(token: String?) {
         authToken = token
+    }
+
+    fun setOrgId(orgId: String?) {
+        currentOrgId = orgId
     }
 
     private val authInterceptor = Interceptor { chain ->
@@ -21,6 +26,9 @@ object RetrofitClient {
         val builder = request.newBuilder()
         authToken?.let {
             builder.addHeader("Authorization", "Bearer $it")
+        }
+        currentOrgId?.let {
+            builder.addHeader("X-Org-Id", it)
         }
         builder.addHeader("Content-Type", "application/json")
         chain.proceed(builder.build())

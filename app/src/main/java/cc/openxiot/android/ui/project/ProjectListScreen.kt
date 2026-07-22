@@ -28,8 +28,8 @@ fun ProjectListScreen(
 ) {
     val state by viewModel.projectState.collectAsState()
 
-    LaunchedEffect(tenantId) {
-        viewModel.loadRootSpaces(tenantId)
+    LaunchedEffect(Unit) {
+        viewModel.loadRootSpaces()
     }
 
     Scaffold(
@@ -55,7 +55,7 @@ fun ProjectListScreen(
                 state.isLoading -> LoadingIndicator()
                 state.error != null -> ErrorMessage(
                     message = state.error!!,
-                    onRetry = { viewModel.loadRootSpaces(tenantId) }
+                    onRetry = { viewModel.loadRootSpaces() }
                 )
                 state.rootSpaces.isEmpty() -> EmptyState(message = "暂无项目")
                 else -> {

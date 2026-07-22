@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.data.api.Organization
+import cc.openxiot.android.data.api.RetrofitClient
 import cc.openxiot.android.data.repository.OrganizationRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -61,6 +62,7 @@ class OrganizationViewModel : ViewModel() {
         val orgName = org.name ?: orgId
         tokenManager.currentOrgId = orgId
         tokenManager.currentOrgName = orgName
+        RetrofitClient.setOrgId(orgId)
         _uiState.value = _uiState.value.copy(
             currentOrgId = orgId,
             currentOrgName = orgName

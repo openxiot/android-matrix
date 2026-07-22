@@ -22,8 +22,9 @@ class MainActivity : ComponentActivity() {
         // Init app state
         AppState.init(tokenManager)
 
-        // Restore auth token for API calls
+        // Restore auth token and org ID for API calls
         tokenManager.token?.let { RetrofitClient.setToken(it) }
+        tokenManager.currentOrgId?.let { RetrofitClient.setOrgId(it) }
 
         // Handle OAuth callback deep link from cold start
         intent?.data?.let { uri ->

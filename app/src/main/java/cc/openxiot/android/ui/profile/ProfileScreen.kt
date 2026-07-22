@@ -81,24 +81,24 @@ fun ProfileScreen(
             }
 
             // Current organization
-//            item {
-//                SectionHeader("当前组织")
-//                SettingsCard(
-//                    title = currentOrgName ?: "未选择组织",
-//                    subtitle = "点击管理组织",
-//                    icon = Icons.Default.Group,
-//                    onClick = onNavigateToOrgPicker
-//                )
-//            }
+            item {
+                SectionHeader("当前组织")
+                SettingsCard(
+                    title = currentOrgName ?: "未选择组织",
+                    subtitle = "选择组织后方可选择项目",
+                    icon = Icons.Default.Group,
+                    onClick = onNavigateToOrgPicker
+                )
+            }
 
             // Current project
             item {
                 SectionHeader("当前项目")
                 SettingsCard(
                     title = currentProjectName ?: "未选择项目",
-                    subtitle = "点击切换项目",
+                    subtitle = if (currentOrgName != null) "点击切换项目" else "请先选择组织",
                     icon = Icons.Default.Business,
-                    onClick = onNavigateToProjectPicker
+                    onClick = { if (currentOrgName != null) onNavigateToProjectPicker() }
                 )
             }
 

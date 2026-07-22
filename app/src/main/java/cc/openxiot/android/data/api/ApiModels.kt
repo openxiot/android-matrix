@@ -19,7 +19,7 @@ data class PlatformInfo(
 )
 
 data class Organization(
-    @SerializedName("_id") val id: String? = null,
+    @SerializedName("code") val id: String? = null,
     @SerializedName("name") val name: String? = null,
     @SerializedName("creator") val creator: Creator? = null,
     @SerializedName("members") val members: List<Member>? = null

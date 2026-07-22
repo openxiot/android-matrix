@@ -394,8 +394,8 @@ private fun SpaceTreeNode(
     devices: List<DeviceEntity>,
     showActions: Boolean = true
 ) {
-    val hasChildren = space.children?.isNotEmpty() == true
     val spaceDevices = devices.filter { it.space?.spaceId == space.id }
+    val hasExpandable = space.children?.isNotEmpty() == true || spaceDevices.isNotEmpty()
 
     Card(
         modifier = Modifier
@@ -420,7 +420,7 @@ private fun SpaceTreeNode(
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Expand icon
-            if (hasChildren) {
+            if (hasExpandable) {
                 Icon(
                     if (isExpanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
                     contentDescription = null,

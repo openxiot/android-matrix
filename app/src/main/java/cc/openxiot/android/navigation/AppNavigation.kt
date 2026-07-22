@@ -100,7 +100,10 @@ fun AppNavigation(
 
         composable(Screen.ProjectPicker.route) {
             ProjectPickerScreen(
-                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } }
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
+                onEditProject = { rootId ->
+                    navController.navigate("project_edit/$rootId") { launchSingleTop = true }
+                }
             )
         }
 

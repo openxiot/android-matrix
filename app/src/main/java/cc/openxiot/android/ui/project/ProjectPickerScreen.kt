@@ -22,6 +22,7 @@ import cc.openxiot.android.ui.components.*
 @Composable
 fun ProjectPickerScreen(
     onBack: () -> Unit,
+    onEditProject: ((String) -> Unit)? = null,
     viewModel: ProjectViewModel = viewModel()
 ) {
     val state by viewModel.projectState.collectAsState()
@@ -45,7 +46,7 @@ fun ProjectPickerScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (isEditing) "项目管理" else "项目", fontWeight = FontWeight.Bold) },
+                title = { Text(if (isEditing) "项目管理" else (state.currentRootName ?: "项目"), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
@@ -54,7 +55,7 @@ fun ProjectPickerScreen(
                 actions = {
                     if (!isEditing) {
                         IconButton(onClick = { isEditing = true }) {
-                            Icon(Icons.Default.Settings, contentDescription = "管理")
+                            Icon(Icons.Default.Edit, contentDescription = "编辑")
                         }
                     } else {
                         IconButton(onClick = { isEditing = false }) {
@@ -106,7 +107,7 @@ fun ProjectPickerScreen(
                                     name = space.name ?: "未命名",
                                     type = space.type,
                                     isSelected = false,
-                                    onSelect = { viewModel.selectRootSpace(space) },
+                                    onSelect = { space.id?.let { onEditProject?.invoke(it) } },
                                     onRename = { space.id?.let { id -> renameTarget = id to (space.name ?: "") } },
                                     onDelete = { space.id?.let { showDeleteConfirm = it } }
                                 )

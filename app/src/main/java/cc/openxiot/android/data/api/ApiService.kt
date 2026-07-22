@@ -98,9 +98,8 @@ interface ProductService {
     @GET("v1/product/basic/public")
     suspend fun getProducts(): Response<ApiResponse<List<ProductEntity>>>
 
-    @GET("v1/product/basic/one/org-model")
-    suspend fun getProductByOrgModel(
-        @Query("organizationId") orgId: String,
-        @Query("model") model: String
-    ): Response<ApiResponse<ProductEntity>>
+    @GET("v1/product/basic/visible/{organization}")
+    suspend fun getVisibleProducts(
+        @Path("organization") orgId: String
+    ): Response<ApiResponse<List<ProductEntity>>>
 }

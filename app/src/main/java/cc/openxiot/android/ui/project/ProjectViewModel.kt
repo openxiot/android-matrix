@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.data.api.DeviceEntity
 import cc.openxiot.android.data.api.DeviceRegistration
+import cc.openxiot.android.data.api.ProductEntity
 import cc.openxiot.android.data.api.RetrofitClient
 import cc.openxiot.android.data.api.SpaceEntity
 import cc.openxiot.android.data.api.SpaceGraph
@@ -149,13 +150,10 @@ class ProjectViewModel : ViewModel() {
                     _projectState.value = _projectState.value.copy(currentRootName = name)
                     tokenManager.currentRootSpaceName = name
                 }
-                // Fetch product names for device types
+                // Fetch product names for all device types at once
                 val orgId = tokenManager.currentOrgId
                 if (orgId != null) {
-                    val models = devices.mapNotNull { it.type }.filter { it !in productNameCache }.toSet()
-                    if (models.isNotEmpty()) {
-                        loadProductNames(orgId, models)
-                    }
+                    loadProductNames(orgId)
                 }
             }
             .onFailure { e ->
@@ -166,22 +164,19 @@ class ProjectViewModel : ViewModel() {
             }
     }
 
-    private suspend fun loadProductNames(orgId: String, models: Set<String>) {
-        models.forEach { model ->
-            try {
-                val response = productService.getProductByOrgModel(orgId, model)
-                if (response.isSuccessful && response.body()?.success == true) {
-                    val product = response.body()!!.data
-                    val name = product?.displayName ?: model
-                    productNameCache[model] = name
-                } else {
-                    productNameCache[model] = model
+    private suspend fun loadProductNames(orgId: String) {
+        try {
+            val response = productService.getVisibleProducts(orgId)
+            if (response.isSuccessful && response.body()?.success == true) {
+                val products = response.body()!!.data ?: emptyList()
+                products.forEach { product ->
+                    product.model?.let { model -> productNameCache[model] = product.displayName }
                 }
-            } catch (_: Exception) {
-                productNameCache[model] = model
+                _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
             }
+        } catch (_: Exception) {
+            // Silently fail, device names will fall back to type/did
         }
-        _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
     }
 
     fun toggleExpanded(spaceId: String) {

@@ -146,7 +146,18 @@ fun SpaceTreeContent(
     // Create space dialog
     if (treeState.showCreateDialog) {
         var spaceName by remember { mutableStateOf("") }
-        var spaceType by remember { mutableStateOf("building") }
+        val parentSpace = remember(treeState.createParentId, treeState.rootSpace) {
+            treeState.createParentId?.let { parentId ->
+                findSpaceById(treeState.rootSpace, parentId)
+            }
+        }
+        val defaultType = when (parentSpace?.type) {
+            "building" -> "floor"
+            "floor" -> "room"
+            "room" -> "zone"
+            else -> "building"
+        }
+        var spaceType by remember(treeState.showCreateDialog) { mutableStateOf(defaultType) }
         val types = listOf(
             "building" to "楼栋",
             "floor" to "楼层",
@@ -460,4 +471,13 @@ private fun DeviceItem(device: DeviceEntity) {
             }
         }
     }
+}
+
+/**
+ * Find a space by id in the space tree, searching recursively through children.
+ */
+private fun findSpaceById(root: SpaceEntity?, id: String): SpaceEntity? {
+    if (root == null) return null
+    if (root.id == id) return root
+    return root.children?.firstNotNullOfOrNull { findSpaceById(it, id) }
 }

@@ -49,19 +49,10 @@ fun SpaceTreeScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Column {
-                        Text(
-                            text = treeState.rootSpace?.name ?: projectState.currentRootName ?: "空间管理",
-                            fontWeight = FontWeight.Bold
-                        )
-                        treeState.rootSpace?.let { root ->
-                            Text(
-                                text = "空间 • ${root.type ?: ""}",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
+                    Text(
+                        text = treeState.rootSpace?.name ?: projectState.currentRootName ?: "空间管理",
+                        fontWeight = FontWeight.Bold
+                    )
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {

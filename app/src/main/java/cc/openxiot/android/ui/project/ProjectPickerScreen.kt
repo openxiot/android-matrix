@@ -46,7 +46,7 @@ fun ProjectPickerScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(if (isEditing) "项目管理" else (state.currentRootName ?: "项目"), fontWeight = FontWeight.Bold) },
+                title = { Text(if (isEditing) "项目管理" else "当前项目", fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")

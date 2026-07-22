@@ -80,42 +80,12 @@ fun MainScreen(
                         Column {
                             PageTitle(
                                 title = currentProjectName ?: "项目",
-                                onClick = onNavigateToProjectPicker,
-                                actions = {
-                                    var showMenu by remember { mutableStateOf(false) }
-                                    Box {
-                                        IconButton(onClick = { showMenu = true }) {
-                                            Icon(
-                                                Icons.Default.Add,
-                                                contentDescription = "添加",
-                                                tint = MaterialTheme.colorScheme.primary
-                                            )
-                                        }
-                                        DropdownMenu(
-                                            expanded = showMenu,
-                                            onDismissRequest = { showMenu = false }
-                                        ) {
-                                            DropdownMenuItem(
-                                                text = { Text("添加空间") },
-                                                onClick = {
-                                                    showMenu = false
-                                                    projectViewModel.showCreateDialog(rootId)
-                                                }
-                                            )
-                                            DropdownMenuItem(
-                                                text = { Text("添加设备") },
-                                                onClick = {
-                                                    showMenu = false
-                                                    projectViewModel.showAddDeviceDialog()
-                                                }
-                                            )
-                                        }
-                                    }
-                                }
+                                onClick = onNavigateToProjectPicker
                             )
                             SpaceTreeContent(
                                 rootId = rootId,
-                                viewModel = projectViewModel
+                                viewModel = projectViewModel,
+                                showActions = false
                             )
                         }
                     } else if (currentOrgName == null) {

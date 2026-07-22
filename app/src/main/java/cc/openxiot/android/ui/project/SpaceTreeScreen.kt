@@ -88,8 +88,8 @@ fun SpaceTreeScreen(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
-        },
-        { padding ->
+        }
+    ) { padding ->
         SpaceTreeContent(
             rootId = rootId,
             viewModel = viewModel,
@@ -102,7 +102,8 @@ fun SpaceTreeScreen(
 fun SpaceTreeContent(
     rootId: String,
     viewModel: ProjectViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showActions: Boolean = true
 ) {
     val treeState by viewModel.treeState.collectAsState()
     // Load graph when rootId changes, calling suspend function directly
@@ -134,7 +135,8 @@ fun SpaceTreeContent(
                                 onAddChild = { viewModel.showCreateDialog(it) },
                                 onDelete = { viewModel.showDeleteConfirm(it) },
                                 rootId = rootId,
-                                devices = treeState.devices
+                                devices = treeState.devices,
+                                showActions = showActions
                             )
                         }
                     }
@@ -295,7 +297,8 @@ private fun RecursiveSpaceTree(
     onAddChild: (String) -> Unit,
     onDelete: (String) -> Unit,
     rootId: String,
-    devices: List<DeviceEntity>
+    devices: List<DeviceEntity>,
+    showActions: Boolean
 ) {
     SpaceTreeNode(
         space = space,
@@ -304,7 +307,8 @@ private fun RecursiveSpaceTree(
         onToggle = { space.id?.let { onToggle(it) } },
         onAddChild = { space.id?.let { onAddChild(it) } },
         onDelete = { space.id?.let { onDelete(it) } },
-        devices = devices
+        devices = devices,
+        showActions = showActions
     )
     AnimatedVisibility(visible = expandedIds.contains(space.id)) {
         Column {
@@ -317,7 +321,8 @@ private fun RecursiveSpaceTree(
                     onAddChild = onAddChild,
                     onDelete = onDelete,
                     rootId = rootId,
-                    devices = devices
+                    devices = devices,
+                    showActions = showActions
                 )
             }
         }
@@ -332,7 +337,8 @@ private fun SpaceTreeNode(
     onToggle: () -> Unit,
     onAddChild: () -> Unit,
     onDelete: () -> Unit,
-    devices: List<DeviceEntity>
+    devices: List<DeviceEntity>,
+    showActions: Boolean = true
 ) {
     val hasChildren = space.children?.isNotEmpty() == true
     val spaceDevices = devices.filter { d ->
@@ -412,16 +418,17 @@ private fun SpaceTreeNode(
             }
 
             // Actions
-            IconButton(
-                onClick = onAddChild,
-                modifier = Modifier.size(32.dp)
-            ) {
-                Icon(Icons.Default.Add, contentDescription = "添加子空间", modifier = Modifier.size(18.dp))
-            }
-            if (depth > 0) {
+            if (showActions) {
                 IconButton(
-                    onClick = onDelete,
+                    onClick = onAddChild,
                     modifier = Modifier.size(32.dp)
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "添加子空间", modifier = Modifier.size(18.dp))
+                }
+                if (depth > 0) {
+                    IconButton(
+                        onClick = onDelete,
+                        modifier = Modifier.size(32.dp)
                 ) {
                     Icon(
                         Icons.Default.DeleteOutline,
@@ -429,6 +436,7 @@ private fun SpaceTreeNode(
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(18.dp)
                     )
+                }
                 }
             }
         }

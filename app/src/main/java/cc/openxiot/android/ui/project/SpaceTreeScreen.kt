@@ -148,6 +148,19 @@ fun SpaceTreeContent(
                         }
                     }
 
+                    // Render root space's devices (devices moved directly to root)
+                    val rootDevices = treeState.devices.filter { it.space?.spaceId == treeState.rootSpace?.id }
+                    rootDevices.forEach { device ->
+                        item {
+                            DeviceItem(
+                                device = device,
+                                onClick = device.did?.let { did -> { viewModel.showMoveDevice(did) } },
+                                depth = 0,
+                                productNames = treeState.productNames
+                            )
+                        }
+                    }
+
                     item { Spacer(modifier = Modifier.height(80.dp)) }
                 }
             }

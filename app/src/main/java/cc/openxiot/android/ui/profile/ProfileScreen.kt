@@ -110,6 +110,7 @@ fun ProfileScreen(
                     title = if (AppState.isDarkMode) "深色模式" else "浅色模式",
                     subtitle = "点击切换主题",
                     icon = if (AppState.isDarkMode) Icons.Default.DarkMode else Icons.Default.LightMode,
+                    showChevron = false,
                     onClick = { AppState.toggleDarkMode(tokenManager) }
                 )
             }
@@ -136,6 +137,7 @@ private fun SettingsCard(
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     trailing: (@Composable () -> Unit)? = null,
     titleColor: androidx.compose.ui.graphics.Color = MaterialTheme.colorScheme.onSurface,
+    showChevron: Boolean = true,
     onClick: () -> Unit
 ) {
     Card(
@@ -177,7 +179,7 @@ private fun SettingsCard(
             }
             if (trailing != null) {
                 trailing()
-            } else {
+            } else if (showChevron) {
                 Icon(
                     Icons.Default.ChevronRight,
                     contentDescription = null,

@@ -96,7 +96,7 @@ class ProjectViewModel : ViewModel() {
             currentRootId = rootId,
             currentRootName = rootName
         )
-        loadSpaceTree(rootId)
+        loadSpaceGraph(rootId)
     }
 
     fun loadSpaceTree(rootId: String) {
@@ -179,7 +179,7 @@ class ProjectViewModel : ViewModel() {
             )
             spaceRepository.createSpace(space)
                 .onSuccess {
-                    if (rootId != null) loadSpaceTree(rootId)
+                    if (rootId != null) loadSpaceGraph(rootId)
                     else loadRootSpaces()
                 }
                 .onFailure { e ->
@@ -201,7 +201,7 @@ class ProjectViewModel : ViewModel() {
             _treeState.value = _treeState.value.copy(showDeleteConfirm = null)
             spaceRepository.deleteSpace(spaceId)
                 .onSuccess {
-                    if (rootId != null) loadSpaceTree(rootId)
+                    if (rootId != null) loadSpaceGraph(rootId)
                     else loadRootSpaces()
                 }
                 .onFailure { e ->

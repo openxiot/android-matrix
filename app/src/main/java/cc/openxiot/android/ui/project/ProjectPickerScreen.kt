@@ -8,8 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Business
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,6 +27,7 @@ fun ProjectPickerScreen(
     viewModel: ProjectViewModel = viewModel()
 ) {
     val state by viewModel.projectState.collectAsState()
+    var isRefreshing by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -41,9 +42,6 @@ fun ProjectPickerScreen(
                     IconButton(onClick = onManage) {
                         Icon(Icons.Default.Settings, contentDescription = "管理")
                     }
-                    IconButton(onClick = { viewModel.loadRootSpaces() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "刷新")
-                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
@@ -51,7 +49,15 @@ fun ProjectPickerScreen(
             )
         }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
+            onRefresh = {
+                isRefreshing = true
+                viewModel.loadRootSpaces()
+                isRefreshing = false
+            },
+            modifier = Modifier.padding(padding)
+        ) {
             when {
                 state.isLoading -> LoadingIndicator()
                 state.error != null -> ErrorMessage(

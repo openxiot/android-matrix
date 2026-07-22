@@ -128,9 +128,10 @@ class ProjectViewModel : ViewModel() {
         _treeState.value = _treeState.value.copy(isLoading = true)
         spaceRepository.getSpaceGraph(rootId)
             .onSuccess { graph ->
+                val root = graph.spaces?.buildTree()
                 _treeState.value = _treeState.value.copy(
                     isLoading = false,
-                    rootSpace = graph.spaces?.firstOrNull(),
+                    rootSpace = root,
                     devices = graph.devices ?: emptyList()
                 )
             }
@@ -241,4 +242,22 @@ class ProjectViewModel : ViewModel() {
     fun setCurrentRootName(name: String) {
         _projectState.value = _projectState.value.copy(currentRootName = name)
     }
+}
+
+/**
+ * Build a nested tree from a flat list of spaces using parentId relationships.
+ * The first element is treated as the root.
+ */
+private fun List<SpaceEntity>.buildTree(): SpaceEntity? {
+    if (isEmpty()) return null
+    val byParentId = groupBy { it.parentId }
+
+    fun buildChildren(parentId: String?): List<SpaceEntity> {
+        return byParentId[parentId]?.map { space ->
+            space.copy(children = buildChildren(space.id))
+        } ?: emptyList()
+    }
+
+    val root = first()
+    return root.copy(children = buildChildren(root.id))
 }

@@ -378,11 +378,16 @@ private fun SpacePickerItem(
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.weight(1f)
         )
-        Spacer(Modifier.width(8.dp))
-        RadioButton(
-            selected = selectedSpaceId == space.id,
-            onClick = { space.id?.let { onSelect(it) } }
-        )
+        if (selectedSpaceId == space.id) {
+            Icon(
+                Icons.Default.Check,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(24.dp)
+            )
+        } else {
+            Spacer(Modifier.width(24.dp))
+        }
     }
     if (hasChildren && expanded) {
         space.children?.forEach { child ->

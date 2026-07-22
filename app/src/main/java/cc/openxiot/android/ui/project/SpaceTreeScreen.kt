@@ -142,7 +142,8 @@ fun SpaceTreeContent(
                                 rootId = rootId,
                                 devices = treeState.devices,
                                 showActions = showActions,
-                                onDeviceClick = { viewModel.showMoveDevice(it) }
+                                onDeviceClick = { viewModel.showMoveDevice(it) },
+                                productNames = treeState.productNames
                             )
                         }
                     }
@@ -338,7 +339,8 @@ private fun RecursiveSpaceTree(
     rootId: String,
     devices: List<DeviceEntity>,
     showActions: Boolean,
-    onDeviceClick: ((String) -> Unit)? = null
+    onDeviceClick: ((String) -> Unit)? = null,
+    productNames: Map<String, String> = emptyMap()
 ) {
     SpaceTreeNode(
         space = space,
@@ -363,7 +365,8 @@ private fun RecursiveSpaceTree(
                     rootId = rootId,
                     devices = devices,
                     showActions = showActions,
-                    onDeviceClick = onDeviceClick
+                    onDeviceClick = onDeviceClick,
+                    productNames = productNames
                 )
             }
             // Render devices of this space inline
@@ -372,7 +375,8 @@ private fun RecursiveSpaceTree(
                 DeviceItem(
                     device = device,
                     onClick = device.did?.let { did -> { onDeviceClick?.invoke(did) } },
-                    depth = depth + 1
+                    depth = depth + 1,
+                    productNames = productNames
                 )
             }
         }
@@ -495,7 +499,8 @@ private fun SpaceTreeNode(
 private fun DeviceItem(
     device: DeviceEntity,
     onClick: (() -> Unit)? = null,
-    depth: Int = 0
+    depth: Int = 0,
+    productNames: Map<String, String> = emptyMap()
 ) {
     Card(
         modifier = Modifier
@@ -524,7 +529,7 @@ private fun DeviceItem(
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = device.did ?: "未知设备",
+                    text = productNames[device.type] ?: device.type ?: device.did ?: "未知设备",
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium,
                     maxLines = 1,

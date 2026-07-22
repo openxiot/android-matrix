@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import cc.openxiot.android.OpenXiotApp
 import cc.openxiot.android.data.api.DeviceEntity
 import cc.openxiot.android.data.api.DeviceRegistration
+import cc.openxiot.android.data.api.RetrofitClient
 import cc.openxiot.android.data.api.SpaceEntity
 import cc.openxiot.android.data.api.SpaceGraph
 import cc.openxiot.android.data.repository.DeviceRepository
@@ -34,7 +35,8 @@ data class SpaceTreeUiState(
     val showAddDeviceDialog: Boolean = false,
     val message: String? = null,
     val isAddingDevice: Boolean = false,
-    val showMoveDeviceDialog: String? = null
+    val showMoveDeviceDialog: String? = null,
+    val productNames: Map<String, String> = emptyMap()
 )
 
 class ProjectViewModel : ViewModel() {
@@ -127,21 +129,33 @@ class ProjectViewModel : ViewModel() {
         }
     }
 
+    private val productNameCache = mutableMapOf<String, String>()
+    private val productService = RetrofitClient.productService
+
     suspend fun loadSpaceGraphInternal(rootId: String) {
         _treeState.value = _treeState.value.copy(isLoading = true, error = null)
         spaceRepository.getSpaceGraph(rootId)
             .onSuccess { graph ->
                 val root = graph.spaces?.buildTree()
+                val devices = graph.devices ?: emptyList()
                 _treeState.value = _treeState.value.copy(
                     isLoading = false,
                     error = null,
                     rootSpace = root,
-                    devices = graph.devices ?: emptyList()
+                    devices = devices
                 )
                 if (_projectState.value.currentRootName == null) {
                     val name = root?.name ?: "项目"
                     _projectState.value = _projectState.value.copy(currentRootName = name)
                     tokenManager.currentRootSpaceName = name
+                }
+                // Fetch product names for device types
+                val orgId = tokenManager.currentOrgId
+                if (orgId != null) {
+                    val models = devices.mapNotNull { it.type }.filter { it !in productNameCache }.toSet()
+                    if (models.isNotEmpty()) {
+                        loadProductNames(orgId, models)
+                    }
                 }
             }
             .onFailure { e ->
@@ -150,6 +164,24 @@ class ProjectViewModel : ViewModel() {
                     error = e.message
                 )
             }
+    }
+
+    private suspend fun loadProductNames(orgId: String, models: Set<String>) {
+        models.forEach { model ->
+            try {
+                val response = productService.getProductByOrgModel(orgId, model)
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val product = response.body()!!.data
+                    val name = product?.displayName ?: model
+                    productNameCache[model] = name
+                } else {
+                    productNameCache[model] = model
+                }
+            } catch (_: Exception) {
+                productNameCache[model] = model
+            }
+        }
+        _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
     }
 
     fun toggleExpanded(spaceId: String) {

@@ -64,37 +64,40 @@ fun SpaceTreeScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
                 },
-                actions = {
-                    var showMenu by remember { mutableStateOf(false) }
-                    Box {
-                        IconButton(onClick = { showMenu = true }) {
-                            Icon(Icons.Default.Add, contentDescription = "添加")
-                        }
-                        DropdownMenu(
-                            expanded = showMenu,
-                            onDismissRequest = { showMenu = false }
-                        ) {
-                            DropdownMenuItem(
-                                text = { Text("添加空间") },
-                                onClick = {
-                                    showMenu = false
-                                    viewModel.showCreateDialog(rootId)
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = { Text("添加设备") },
-                                onClick = {
-                                    showMenu = false
-                                    viewModel.showAddDeviceDialog()
-                                }
-                            )
-                        }
-                    }
-                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
+        },
+        floatingActionButton = {
+            var showFabMenu by remember { mutableStateOf(false) }
+            Box {
+                FloatingActionButton(
+                    onClick = { showFabMenu = true },
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "添加")
+                }
+                DropdownMenu(
+                    expanded = showFabMenu,
+                    onDismissRequest = { showFabMenu = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("添加空间") },
+                        onClick = {
+                            showFabMenu = false
+                            viewModel.showCreateDialog(rootId)
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("添加设备") },
+                        onClick = {
+                            showFabMenu = false
+                            viewModel.showAddDeviceDialog()
+                        }
+                    )
+                }
+            }
         }
     ) { padding ->
         SpaceTreeContent(

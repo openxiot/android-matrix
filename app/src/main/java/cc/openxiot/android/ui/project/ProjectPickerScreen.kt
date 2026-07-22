@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Business
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,9 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.ui.components.*
 
@@ -29,20 +27,6 @@ fun ProjectPickerScreen(
     viewModel: ProjectViewModel = viewModel()
 ) {
     val state by viewModel.projectState.collectAsState()
-
-    // Refresh project list when returning from management page (skip initial resume)
-    var resumedOnce by remember { mutableStateOf(false) }
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-    DisposableEffect(lifecycle) {
-        val observer = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME) {
-                if (resumedOnce) viewModel.loadRootSpaces()
-                resumedOnce = true
-            }
-        }
-        lifecycle.addObserver(observer)
-        onDispose { lifecycle.removeObserver(observer) }
-    }
 
     Scaffold(
         topBar = {
@@ -56,6 +40,9 @@ fun ProjectPickerScreen(
                 actions = {
                     IconButton(onClick = onManage) {
                         Icon(Icons.Default.Settings, contentDescription = "管理")
+                    }
+                    IconButton(onClick = { viewModel.loadRootSpaces() }) {
+                        Icon(Icons.Default.Refresh, contentDescription = "刷新")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

@@ -140,21 +140,12 @@ fun SpaceTreeContent(
                                 onDelete = { viewModel.showDeleteConfirm(it) },
                                 rootId = rootId,
                                 devices = treeState.devices,
-                                showActions = showActions
+                                showActions = showActions,
+                                onDeviceClick = { viewModel.showMoveDevice(it) }
                             )
                         }
                     }
 
-                    if (treeState.devices.isNotEmpty()) {
-                        item { Spacer(Modifier.height(8.dp)) }
-                        item { SectionHeader("设备列表 (${treeState.devices.size})") }
-                        items(treeState.devices) { device ->
-                            DeviceItem(
-                                device = device,
-                                onClick = device.did?.let { did -> { viewModel.showMoveDevice(did) } }
-                            )
-                        }
-                    }
                     item { Spacer(modifier = Modifier.height(80.dp)) }
                 }
             }
@@ -345,7 +336,8 @@ private fun RecursiveSpaceTree(
     onDelete: (String) -> Unit,
     rootId: String,
     devices: List<DeviceEntity>,
-    showActions: Boolean
+    showActions: Boolean,
+    onDeviceClick: ((String) -> Unit)? = null
 ) {
     SpaceTreeNode(
         space = space,
@@ -369,7 +361,18 @@ private fun RecursiveSpaceTree(
                     onDelete = onDelete,
                     rootId = rootId,
                     devices = devices,
-                    showActions = showActions
+                    showActions = showActions,
+                    onDeviceClick = onDeviceClick
+                )
+            }
+            // Render devices of this space inline
+            val spaceDevices = devices.filter { d ->
+                d.did?.let { did -> space.devices?.any { sd -> sd.did == did } == true } ?: false
+            }
+            spaceDevices.forEach { device ->
+                DeviceItem(
+                    device = device,
+                    onClick = device.did?.let { did -> { onDeviceClick?.invoke(did) } }
                 )
             }
         }

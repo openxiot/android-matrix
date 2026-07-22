@@ -114,7 +114,7 @@ fun SpaceTreeScreen(
                             contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             modifier = Modifier.size(36.dp)
                         ) {
-                            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(18.dp))
+                            Icon(Icons.Default.AccountTree, contentDescription = null, modifier = Modifier.size(18.dp))
                         }
                         Spacer(Modifier.height(4.dp))
                         Text(

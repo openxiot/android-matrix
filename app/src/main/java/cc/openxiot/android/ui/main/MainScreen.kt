@@ -79,7 +79,6 @@ fun MainScreen(
                         Column {
                             PageTitle(
                                 title = currentProjectName ?: "项目",
-                                subtitle = if (currentProjectName != null) "点击切换项目" else null,
                                 onClick = onNavigateToProjectPicker
                             )
                             SpaceTreeContent(

@@ -52,23 +52,29 @@ fun AppNavigation(
                 currentOrgName = tokenManager.currentOrgName,
                 currentProjectName = tokenManager.currentRootSpaceName,
                 onNavigateToOrgPicker = {
-                    navController.currentDestination?.takeIf { it.route != Screen.OrgPicker.route }
-                        ?.let { navController.navigate(Screen.OrgPicker.route) { launchSingleTop = true } }
+                    navController.navigate(Screen.OrgPicker.route) {
+                        popUpTo(Screen.Main.route) { inclusive = false }
+                        launchSingleTop = true
+                    }
                 },
                 onNavigateToProjectPicker = {
-                    navController.currentDestination?.takeIf { it.route != Screen.ProjectPicker.route }
-                        ?.let { navController.navigate(Screen.ProjectPicker.route) { launchSingleTop = true } }
+                    navController.navigate(Screen.ProjectPicker.route) {
+                        popUpTo(Screen.Main.route) { inclusive = false }
+                        launchSingleTop = true
+                    }
                 },
                 onNavigateToAccount = {
-                    navController.currentDestination?.takeIf { it.route != Screen.Account.route }
-                        ?.let { navController.navigate(Screen.Account.route) { launchSingleTop = true } }
+                    navController.navigate(Screen.Account.route) {
+                        popUpTo(Screen.Main.route) { inclusive = false }
+                        launchSingleTop = true
+                    }
                 }
             )
         }
 
         composable(Screen.Account.route) {
             AccountScreen(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
                 onLogout = {
                     tokenManager.clear()
                     RetrofitClient.setToken(null)
@@ -81,7 +87,7 @@ fun AppNavigation(
 
         composable(Screen.OrgPicker.route) {
             OrganizationPickerScreen(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
                 onManage = { navController.navigate(Screen.OrgManage.route) {
                     launchSingleTop = true
                 } }
@@ -90,13 +96,13 @@ fun AppNavigation(
 
         composable(Screen.OrgManage.route) {
             OrganizationListScreen(
-                onBack = { navController.popBackStack() }
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } }
             )
         }
 
         composable(Screen.ProjectPicker.route) {
             ProjectPickerScreen(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
                 onManage = { navController.navigate(Screen.ProjectManage.route) {
                     launchSingleTop = true
                 } }
@@ -105,7 +111,7 @@ fun AppNavigation(
 
         composable(Screen.ProjectManage.route) {
             ProjectManageScreen(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
                 onEditProject = { rootId ->
                     navController.navigate("project_edit/$rootId") {
                         launchSingleTop = true
@@ -118,7 +124,7 @@ fun AppNavigation(
             val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
             SpaceTreeScreen(
                 rootId = rootId,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.navigate(Screen.ProjectManage.route) { launchSingleTop = true } }
             )
         }
     }

@@ -47,6 +47,11 @@ class ProjectViewModel : ViewModel() {
     private val _treeState = MutableStateFlow(SpaceTreeUiState())
     val treeState: StateFlow<SpaceTreeUiState> = _treeState.asStateFlow()
 
+    init {
+        // Eagerly load space graph if a project is already selected
+        tokenManager.currentRootSpaceId?.let { loadSpaceGraph(it) }
+    }
+
     fun loadRootSpaces() {
         viewModelScope.launch {
             _projectState.value = _projectState.value.copy(isLoading = true, error = null)

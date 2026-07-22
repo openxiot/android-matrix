@@ -57,30 +57,39 @@ fun SpaceTreeScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
                 },
+                actions = {
+                    var showMenu by remember { mutableStateOf(false) }
+                    Box {
+                        IconButton(onClick = { showMenu = true }) {
+                            Icon(Icons.Default.Add, contentDescription = "添加")
+                        }
+                        DropdownMenu(
+                            expanded = showMenu,
+                            onDismissRequest = { showMenu = false }
+                        ) {
+                            DropdownMenuItem(
+                                text = { Text("添加空间") },
+                                onClick = {
+                                    showMenu = false
+                                    viewModel.showCreateDialog(rootId)
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("添加设备") },
+                                onClick = {
+                                    showMenu = false
+                                    viewModel.showAddDeviceDialog()
+                                }
+                            )
+                        }
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             )
         },
-        floatingActionButton = {
-            Column(horizontalAlignment = Alignment.End) {
-                FloatingActionButton(
-                    onClick = { viewModel.showAddDeviceDialog() },
-                    containerColor = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Icon(Icons.Default.Devices, contentDescription = "添加设备", modifier = Modifier.size(20.dp))
-                }
-                Spacer(modifier = Modifier.height(12.dp))
-                FloatingActionButton(
-                    onClick = { viewModel.showCreateDialog(rootId) },
-                    containerColor = MaterialTheme.colorScheme.primary
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "添加空间")
-                }
-            }
-        }
-    ) { padding ->
+        { padding ->
         SpaceTreeContent(
             rootId = rootId,
             viewModel = viewModel,

@@ -149,7 +149,10 @@ fun SpaceTreeContent(
                         item { Spacer(Modifier.height(8.dp)) }
                         item { SectionHeader("设备列表 (${treeState.devices.size})") }
                         items(treeState.devices) { device ->
-                            DeviceItem(device = device)
+                            DeviceItem(
+                                device = device,
+                                onClick = device.did?.let { did -> { viewModel.showMoveDevice(did) } }
+                            )
                         }
                     }
                     item { Spacer(modifier = Modifier.height(80.dp)) }
@@ -287,6 +290,47 @@ fun SpaceTreeContent(
             title = { Text("添加设备中...") },
             text = { Text("等待中... ${seconds}s") },
             confirmButton = {}
+        )
+    }
+
+    // Move device dialog
+    treeState.showMoveDeviceDialog?.let { did ->
+        val allSpaces = remember(treeState.rootSpace) {
+            buildFlatSpaceList(treeState.rootSpace)
+        }
+        var selectedSpaceId by remember { mutableStateOf<String?>(null) }
+        AlertDialog(
+            onDismissRequest = { viewModel.hideMoveDevice() },
+            title = { Text("移动到空间") },
+            text = {
+                Column {
+                    allSpaces.forEach { space ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { selectedSpaceId = space.id }
+                                .padding(vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedSpaceId == space.id,
+                                onClick = { selectedSpaceId = space.id }
+                            )
+                            Spacer(Modifier.width(8.dp))
+                            Text(space.name ?: space.id ?: "未知", style = MaterialTheme.typography.bodyMedium)
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = { selectedSpaceId?.let { viewModel.moveDeviceTo(it, did) } },
+                    enabled = selectedSpaceId != null
+                ) { Text("移动") }
+            },
+            dismissButton = {
+                TextButton(onClick = { viewModel.hideMoveDevice() }) { Text("取消") }
+            }
         )
     }
 }
@@ -447,11 +491,15 @@ private fun SpaceTreeNode(
 }
 
 @Composable
-private fun DeviceItem(device: DeviceEntity) {
+private fun DeviceItem(
+    device: DeviceEntity,
+    onClick: (() -> Unit)? = null
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp),
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -475,7 +523,7 @@ private fun DeviceItem(device: DeviceEntity) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = device.did ?: "未知设备",
-                    style = MaterialTheme.typography.titleSmall,
+                    style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -491,6 +539,18 @@ private fun DeviceItem(device: DeviceEntity) {
             }
         }
     }
+}
+
+/**
+ * Flatten a space tree into a list of all spaces.
+ */
+private fun buildFlatSpaceList(root: SpaceEntity?): List<SpaceEntity> {
+    if (root == null) return emptyList()
+    val result = mutableListOf(root)
+    root.children?.forEach { child ->
+        result.addAll(buildFlatSpaceList(child))
+    }
+    return result
 }
 
 /**

@@ -89,6 +89,9 @@ interface SiteService {
         @Path("spaceId") spaceId: String,
         @Body body: Map<String, String>
     ): Response<ApiResponse<Unit>>
+
+    @PUT("v1/device/many/space")
+    suspend fun updateDeviceSpace(@Body body: Map<String, Any>): Response<ApiResponse<Unit>>
 }
 
 interface ProductService {

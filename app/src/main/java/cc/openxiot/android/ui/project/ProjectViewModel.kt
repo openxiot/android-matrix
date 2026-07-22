@@ -33,7 +33,8 @@ data class SpaceTreeUiState(
     val devices: List<DeviceEntity> = emptyList(),
     val showAddDeviceDialog: Boolean = false,
     val message: String? = null,
-    val isAddingDevice: Boolean = false
+    val isAddingDevice: Boolean = false,
+    val showMoveDeviceDialog: String? = null
 )
 
 class ProjectViewModel : ViewModel() {
@@ -249,6 +250,29 @@ class ProjectViewModel : ViewModel() {
                 }
                 .onFailure { e ->
                     _treeState.value = _treeState.value.copy(isAddingDevice = false, message = "添加设备失败: ${e.message}")
+                }
+        }
+    }
+
+    fun showMoveDevice(did: String) {
+        _treeState.value = _treeState.value.copy(showMoveDeviceDialog = did)
+    }
+
+    fun hideMoveDevice() {
+        _treeState.value = _treeState.value.copy(showMoveDeviceDialog = null)
+    }
+
+    fun moveDeviceTo(spaceId: String, did: String) {
+        viewModelScope.launch {
+            val rootId = _projectState.value.currentRootId ?: return@launch
+            _treeState.value = _treeState.value.copy(showMoveDeviceDialog = null)
+            deviceRepository.moveDevice(spaceId, rootId, did)
+                .onSuccess {
+                    loadSpaceGraph(rootId)
+                    _treeState.value = _treeState.value.copy(message = "设备已移动")
+                }
+                .onFailure { e ->
+                    _treeState.value = _treeState.value.copy(message = "移动设备失败: ${e.message}")
                 }
         }
     }

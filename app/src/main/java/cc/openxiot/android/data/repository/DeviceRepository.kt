@@ -25,6 +25,18 @@ class DeviceRepository {
         }
     }
 
+    suspend fun moveDevice(spaceId: String, rootSpaceId: String, did: String): Result<Unit> = runCatching {
+        val body = mapOf(
+            "spaceId" to spaceId,
+            "rootSpaceId" to rootSpaceId,
+            "dids" to listOf(did)
+        )
+        val response = service.updateDeviceSpace(body)
+        if (!response.isSuccessful || response.body()?.success != true) {
+            throw Exception(response.body()?.message ?: "移动设备失败")
+        }
+    }
+
     suspend fun addDeviceByQr(spaceId: String, qrContent: String): Result<Unit> = runCatching {
         val body = qrContent.split(",").mapNotNull { part ->
             val kv = part.split(":", limit = 2)

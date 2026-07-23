@@ -59,7 +59,10 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.7.0")
 
     // QR code scanning
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0") {
+        exclude(group = "com.google.zxing")
+    }
+    implementation("com.google.zxing:core:3.5.3")
 
     // Core
     implementation("androidx.core:core-ktx:1.13.1")

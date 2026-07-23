@@ -116,63 +116,51 @@ private fun DeviceCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .height(IntrinsicSize.Min),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (productIcon != null) {
-                AsyncImage(
-                    model = productIcon,
-                    contentDescription = null,
-                    modifier = Modifier.size(48.dp),
-                    contentScale = ContentScale.Fit
-                )
-            } else {
-                Surface(
-                    modifier = Modifier.size(48.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    color = if (device.online == true)
-                        MaterialTheme.colorScheme.primaryContainer
-                    else
-                        MaterialTheme.colorScheme.surfaceVariant
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            Icons.Default.DevicesOther,
-                            contentDescription = null,
-                            tint = if (device.online == true)
-                                MaterialTheme.colorScheme.primary
-                            else
-                                MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(24.dp)
+            Row(modifier = Modifier.weight(1f).padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                if (productIcon != null) {
+                    AsyncImage(
+                        model = productIcon,
+                        contentDescription = null,
+                        modifier = Modifier.size(36.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                } else {
+                    Icon(
+                        Icons.Default.DevicesOther,
+                        contentDescription = null,
+                        tint = if (device.online == true) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                                       else MaterialTheme.colorScheme.error
+                        Canvas(modifier = Modifier.size(8.dp)) {
+                            drawCircle(color = dotColor)
+                        }
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            text = productName ?: device.type ?: device.did ?: "未知设备",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Medium,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    if (spaceName != null) {
+                        Text(
+                            text = spaceName,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
-                                   else MaterialTheme.colorScheme.error
-                    Canvas(modifier = Modifier.size(8.dp)) {
-                        drawCircle(color = dotColor)
-                    }
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = productName ?: device.type ?: device.did ?: "未知设备",
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Medium,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-                if (spaceName != null) {
-                    Text(
-                        text = spaceName,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
             if (onDetail != null) {
                 Box(
                     modifier = Modifier
@@ -188,6 +176,7 @@ private fun DeviceCard(
                         modifier = Modifier.size(20.dp)
                     )
                 }
+            }
             }
         }
     }

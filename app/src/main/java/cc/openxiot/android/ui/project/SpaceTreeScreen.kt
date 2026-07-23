@@ -648,50 +648,46 @@ private fun DeviceItem(
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(14.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (productIcon != null) {
-                coil.compose.AsyncImage(
-                    model = productIcon,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    contentScale = androidx.compose.ui.layout.ContentScale.Fit
-                )
-            } else {
-                Icon(
-                    Icons.Default.DevicesOther,
-                    contentDescription = null,
-                    tint = if (device.online == true) MaterialTheme.colorScheme.primary
-                           else MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(24.dp)
+        Row(modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min), verticalAlignment = Alignment.CenterVertically) {
+            Row(modifier = Modifier.weight(1f).padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                if (productIcon != null) {
+                    coil.compose.AsyncImage(
+                        model = productIcon,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                        contentScale = androidx.compose.ui.layout.ContentScale.Fit
+                    )
+                } else {
+                    Icon(
+                        Icons.Default.DevicesOther,
+                        contentDescription = null,
+                        tint = if (device.online == true) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.error
+                Canvas(modifier = Modifier.size(8.dp)) {
+                    drawCircle(color = dotColor)
+                }
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = productNames[extractModelFromUrn(device.type)]
+                        ?: extractTypeName(device.type)
+                        ?: device.type ?: device.did ?: "未知设备",
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
-            Spacer(modifier = Modifier.width(12.dp))
-            val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
-                           else MaterialTheme.colorScheme.error
-            Canvas(modifier = Modifier.size(8.dp)) {
-                drawCircle(color = dotColor)
-            }
-            Spacer(modifier = Modifier.width(6.dp))
-            Text(
-                text = productNames[extractModelFromUrn(device.type)]
-                    ?: extractTypeName(device.type)
-                    ?: device.type ?: device.did ?: "未知设备",
-                style = MaterialTheme.typography.bodySmall,
-                fontWeight = FontWeight.Medium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f)
-            )
             if (onDetail != null) {
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(40.dp)
+                        .width(44.dp)
                         .clickable(onClick = onDetail),
                     contentAlignment = Alignment.Center
                 ) {

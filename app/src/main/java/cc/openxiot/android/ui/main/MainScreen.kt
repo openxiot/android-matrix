@@ -28,6 +28,7 @@ fun MainScreen(
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
     onNavigateToProjectEdit: ((String) -> Unit)? = null,
+    onNavigateToDeviceDetail: ((String) -> Unit)? = null,
     mainViewModel: MainViewModel = viewModel(),
     projectViewModel: ProjectViewModel = viewModel()
 ) {
@@ -94,7 +95,8 @@ fun MainScreen(
                             SpaceTreeContent(
                                 rootId = rootId,
                                 viewModel = projectViewModel,
-                                showActions = false
+                                showActions = false,
+                                onDeviceDetail = onNavigateToDeviceDetail
                             )
                         }
                     } else if (currentOrgName == null) {

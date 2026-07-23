@@ -11,6 +11,7 @@ import cc.openxiot.android.ui.main.MainScreen
 import cc.openxiot.android.ui.organization.OrganizationPickerScreen
 import cc.openxiot.android.ui.profile.AccountScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
+import cc.openxiot.android.ui.device.DeviceDetailScreen
 import cc.openxiot.android.ui.project.SpaceTreeScreen
 
 sealed class Screen(val route: String) {
@@ -19,6 +20,7 @@ sealed class Screen(val route: String) {
     data object OrgPicker : Screen("org_picker")
     data object ProjectPicker : Screen("project_picker")
     data object ProjectEdit : Screen("project_edit/{rootId}")
+    data object DeviceDetail : Screen("device_detail/{did}")
     data object Account : Screen("account")
 }
 
@@ -67,6 +69,9 @@ fun AppNavigation(
                 },
                 onNavigateToProjectEdit = { rootId ->
                     navController.navigate("project_edit/$rootId") { launchSingleTop = true }
+                },
+                onNavigateToDeviceDetail = { did ->
+                    navController.navigate("device_detail/$did") { launchSingleTop = true }
                 }
             )
         }
@@ -103,7 +108,22 @@ fun AppNavigation(
             val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
             SpaceTreeScreen(
                 rootId = rootId,
-                onBack = { navController.navigate(Screen.ProjectPicker.route) { launchSingleTop = true } }
+                onBack = { navController.navigate(Screen.ProjectPicker.route) { launchSingleTop = true } },
+                onDeviceDetail = { did ->
+                    navController.navigate("device_detail/$did") { launchSingleTop = true }
+                }
+            )
+        }
+
+        composable(Screen.DeviceDetail.route) { backStackEntry ->
+            val did = backStackEntry.arguments?.getString("did") ?: return@composable
+            DeviceDetailScreen(
+                did = did,
+                onBack = { navController.popBackStack() },
+                onMoveDevice = { d ->
+                    // Navigate to project edit for moving device
+                    navController.popBackStack()
+                }
             )
         }
     }

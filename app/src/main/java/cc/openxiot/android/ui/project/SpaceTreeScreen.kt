@@ -36,6 +36,7 @@ import cc.openxiot.android.ui.components.*
 fun SpaceTreeScreen(
     rootId: String,
     onBack: () -> Unit,
+    onDeviceDetail: ((String) -> Unit)? = null,
     viewModel: ProjectViewModel = viewModel()
 ) {
     val treeState by viewModel.treeState.collectAsState()
@@ -138,7 +139,7 @@ fun SpaceTreeScreen(
             rootId = rootId,
             viewModel = viewModel,
             modifier = Modifier.padding(padding),
-            onDeviceClick = { viewModel.showMoveDevice(it) }
+            onDeviceDetail = onDeviceDetail
         )
     }
 }
@@ -149,7 +150,7 @@ fun SpaceTreeContent(
     viewModel: ProjectViewModel,
     modifier: Modifier = Modifier,
     showActions: Boolean = true,
-    onDeviceClick: ((String) -> Unit)? = null
+    onDeviceDetail: ((String) -> Unit)? = null
 ) {
     val treeState by viewModel.treeState.collectAsState()
     // Load graph when rootId changes, calling suspend function directly
@@ -183,7 +184,7 @@ fun SpaceTreeContent(
                                 rootId = rootId,
                                 devices = treeState.devices,
                                 showActions = showActions,
-                                onDeviceClick = onDeviceClick,
+                                onDeviceDetail = onDeviceDetail,
                                 productNames = treeState.productNames
                             )
                         }
@@ -195,7 +196,7 @@ fun SpaceTreeContent(
                         item {
                             DeviceItem(
                                 device = device,
-                                onClick = device.did?.let { did -> { viewModel.showMoveDevice(did) } },
+                                onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
                                 depth = 0,
                                 productNames = treeState.productNames
                             )
@@ -451,7 +452,7 @@ private fun RecursiveSpaceTree(
     rootId: String,
     devices: List<DeviceEntity>,
     showActions: Boolean,
-    onDeviceClick: ((String) -> Unit)? = null,
+    onDeviceDetail: ((String) -> Unit)? = null,
     productNames: Map<String, String> = emptyMap()
 ) {
     SpaceTreeNode(
@@ -477,7 +478,7 @@ private fun RecursiveSpaceTree(
                     rootId = rootId,
                     devices = devices,
                     showActions = showActions,
-                    onDeviceClick = onDeviceClick,
+                    onDeviceDetail = onDeviceDetail,
                     productNames = productNames
                 )
             }
@@ -486,7 +487,7 @@ private fun RecursiveSpaceTree(
             spaceDevices.forEach { device ->
                 DeviceItem(
                     device = device,
-                    onClick = device.did?.let { did -> { onDeviceClick?.invoke(did) } },
+                    onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
                     depth = depth + 1,
                     productNames = productNames
                 )

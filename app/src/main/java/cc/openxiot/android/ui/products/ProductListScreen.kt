@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -113,7 +114,7 @@ private fun ProductCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Surface(
-                    modifier = Modifier.size(52.dp),
+                    modifier = Modifier.size(36.dp),
                     shape = RoundedCornerShape(12.dp),
                     color = MaterialTheme.colorScheme.secondaryContainer
                 ) {
@@ -132,16 +133,16 @@ private fun ProductCard(
                                 Icons.Default.DeviceHub,
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                                modifier = Modifier.size(26.dp)
+                                modifier = Modifier.size(24.dp)
                             )
                         }
                     }
                 }
                 Spacer(modifier = Modifier.width(12.dp))
-                Column(modifier = Modifier.weight(1f)) {
+                Column {
                     Text(
                         text = product.displayName,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.Medium
                     )
                     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -159,8 +160,23 @@ private fun ProductCard(
                             )
                         }
                     }
-                    LifecycleBadge(lifecycle = product.lifecycle)
                 }
+            }
+            if (product.lifecycle != null) {
+                val badgeLabel: String
+                val badgeColor: Color
+                when (product.lifecycle) {
+                    "released" -> { badgeLabel = "已发布"; badgeColor = MaterialTheme.colorScheme.primary }
+                    "preview" -> { badgeLabel = "预览版"; badgeColor = MaterialTheme.colorScheme.tertiary }
+                    "development" -> { badgeLabel = "开发中"; badgeColor = MaterialTheme.colorScheme.error }
+                    else -> { badgeLabel = product.lifecycle; badgeColor = MaterialTheme.colorScheme.onSurfaceVariant }
+                }
+                Text(
+                    text = badgeLabel,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = badgeColor
+                )
+                Spacer(modifier = Modifier.width(4.dp))
             }
             Box(
                 modifier = Modifier
@@ -177,21 +193,4 @@ private fun ProductCard(
             }
         }
     }
-}
-
-@Composable
-private fun LifecycleBadge(lifecycle: String?) {
-    if (lifecycle == null) return
-    val (label, color) = when (lifecycle) {
-        "released" -> "已发布" to MaterialTheme.colorScheme.primary
-        "preview" -> "预览版" to MaterialTheme.colorScheme.tertiary
-        "development" -> "开发中" to MaterialTheme.colorScheme.error
-        else -> lifecycle to MaterialTheme.colorScheme.onSurfaceVariant
-    }
-    Spacer(modifier = Modifier.height(2.dp))
-    Text(
-        text = label,
-        style = MaterialTheme.typography.labelSmall,
-        color = color
-    )
 }

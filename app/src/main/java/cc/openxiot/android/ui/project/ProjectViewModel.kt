@@ -37,7 +37,8 @@ data class SpaceTreeUiState(
     val message: String? = null,
     val isAddingDevice: Boolean = false,
     val showMoveDeviceDialog: String? = null,
-    val productNames: Map<String, String> = emptyMap()
+    val productNames: Map<String, String> = emptyMap(),
+    val productIcons: Map<String, String> = emptyMap()
 )
 
 class ProjectViewModel : ViewModel() {
@@ -131,6 +132,7 @@ class ProjectViewModel : ViewModel() {
     }
 
     private val productNameCache = mutableMapOf<String, String>()
+    private val productIconCache = mutableMapOf<String, String>()
     private val productService = RetrofitClient.productService
 
     suspend fun loadSpaceGraphInternal(rootId: String) {
@@ -175,10 +177,14 @@ class ProjectViewModel : ViewModel() {
                 if (response.isSuccessful && response.body()?.success == true) {
                     val product = response.body()!!.data ?: continue
                     productNameCache[model] = product.displayName
+                    product.icon?.let { productIconCache[model] = it }
                 }
             } catch (_: Exception) { }
         }
-        _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
+        _treeState.value = _treeState.value.copy(
+            productNames = productNameCache.toMap(),
+            productIcons = productIconCache.toMap()
+        )
     }
 
     private suspend fun loadAllProductNames(orgId: String) {
@@ -191,9 +197,15 @@ class ProjectViewModel : ViewModel() {
                         if (model !in productNameCache) {
                             productNameCache[model] = product.displayName
                         }
+                        if (product.icon != null && model !in productIconCache) {
+                            productIconCache[model] = product.icon
+                        }
                     }
                 }
-                _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
+                _treeState.value = _treeState.value.copy(
+                    productNames = productNameCache.toMap(),
+                    productIcons = productIconCache.toMap()
+                )
             }
         } catch (_: Exception) { }
     }

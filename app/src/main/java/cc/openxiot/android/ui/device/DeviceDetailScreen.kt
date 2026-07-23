@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.data.api.DeviceEntity
 import cc.openxiot.android.ui.project.ProjectViewModel
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
 import cc.openxiot.android.ui.components.OnlineIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,7 +28,9 @@ fun DeviceDetailScreen(
 ) {
     val treeState by viewModel.treeState.collectAsState()
     val device = treeState.devices.find { it.did == did }
-    val productName = device?.type?.let { type -> treeState.productNames[extractModelFromUrn(type)] }
+    val model = device?.type?.let { extractModelFromUrn(it) }
+    val productName = model?.let { treeState.productNames[it] }
+    val productIcon = model?.let { treeState.productIcons[it] }
 
     Scaffold(
         topBar = {
@@ -86,13 +90,21 @@ fun DeviceDetailScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            Icons.Default.DevicesOther,
-                            contentDescription = null,
-                            tint = if (device.online == true) MaterialTheme.colorScheme.primary
-                                   else MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(32.dp)
-                        )
+                        if (productIcon != null) {
+                            AsyncImage(
+                                model = productIcon,
+                                contentDescription = null,
+                                modifier = Modifier.size(48.dp),
+                                contentScale = ContentScale.Fit
+                            )
+                        } else {
+                            Icon(
+                                Icons.Default.DevicesOther,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(48.dp)
+                            )
+                        }
                         Spacer(Modifier.width(12.dp))
                         Column {
                             Text(

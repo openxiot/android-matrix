@@ -70,9 +70,16 @@ class TokenManager(context: Context) {
         return try {
             val parts = t.split(".")
             if (parts.size < 2) return null
-            val payload = String(android.util.Base64.decode(parts[1], android.util.Base64.URL_SAFE))
+            val payload = try {
+                String(android.util.Base64.decode(parts[1], android.util.Base64.URL_SAFE or android.util.Base64.NO_PADDING))
+            } catch (_: Exception) {
+                String(android.util.Base64.decode(parts[1], android.util.Base64.DEFAULT))
+            }
             val json = org.json.JSONObject(payload)
+            // Try common JWT claims for user identifier
             json.optString("sub").takeIf { it.isNotEmpty() }
+                ?: json.optString("preferred_username").takeIf { it.isNotEmpty() }
+                ?: json.optString("clientId").takeIf { it.isNotEmpty() }
         } catch (_: Exception) { null }
     }
 

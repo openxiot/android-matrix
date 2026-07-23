@@ -35,16 +35,30 @@ class OrgDetailViewModel : ViewModel() {
     fun loadOrganization(orgId: String) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            // Try to extract developerId from token if not set
+            if (_uiState.value.currentUserId == null) {
+                tokenManager.developerId = tokenManager.extractDeveloperIdFromToken()
+                _uiState.value = _uiState.value.copy(currentUserId = tokenManager.developerId)
+            }
             repository.getOrganization(orgId)
                 .onSuccess { org ->
                     val members = org.members ?: emptyList()
                     val currentUserId = _uiState.value.currentUserId
-                    val isAdmin = members.any { it.developerId == currentUserId && it.role == "admin" }
+                    val currentUserName = tokenManager.username
+                    // Try matching by developerId, then by name
+                    val currentMember = members.find { it.developerId == currentUserId }
+                        ?: members.firstOrNull { it.name == currentUserName }
+                    val isAdmin = currentMember?.role == "admin"
+                    // Update currentUserId from matched member for subsequent operations
+                    if (currentMember != null && currentUserId == null) {
+                        _uiState.value = _uiState.value.copy(currentUserId = currentMember.developerId)
+                    }
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         organization = org,
                         members = members,
-                        isCurrentUserAdmin = isAdmin
+                        isCurrentUserAdmin = isAdmin,
+                        currentUserId = currentMember?.developerId ?: currentUserId
                     )
                 }
                 .onFailure { e ->

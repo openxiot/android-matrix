@@ -248,55 +248,74 @@ private fun MemberCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
+                .height(IntrinsicSize.Min)
+                .clickable(enabled = isAdmin && !isSelf, onClick = onChangeRole),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            AvatarImage(
-                url = null,
-                name = member.name,
-                size = 40.dp
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 12.dp, top = 12.dp, bottom = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                AvatarImage(
+                    url = null,
+                    name = member.name,
+                    size = 40.dp
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = member.name,
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.Medium,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        if (isSelf) {
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "我",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(2.dp))
                     Text(
-                        text = member.name,
-                        style = MaterialTheme.typography.titleSmall,
-                        fontWeight = FontWeight.Medium,
+                        text = member.developerId,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    if (isSelf) {
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "我",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    }
                 }
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = member.developerId,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                Spacer(modifier = Modifier.width(8.dp))
+                RoleBadge(role = member.role)
             }
-            Spacer(modifier = Modifier.width(8.dp))
-            RoleBadge(role = member.role)
             if (isAdmin && !isSelf) {
-                Spacer(modifier = Modifier.width(4.dp))
-                IconButton(onClick = onChangeRole, modifier = Modifier.size(32.dp)) {
-                    Icon(Icons.Default.SwapHoriz, contentDescription = "更改角色", modifier = Modifier.size(18.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(44.dp)
+                        .clickable(onClick = onChangeRole),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(Icons.Default.SwapHoriz, contentDescription = "更改角色", modifier = Modifier.size(20.dp))
                 }
-                IconButton(onClick = onRemove, modifier = Modifier.size(32.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(48.dp)
+                        .clickable(onClick = onRemove),
+                    contentAlignment = Alignment.Center
+                ) {
                     Icon(
-                        Icons.Default.RemoveCircleOutline,
+                        Icons.Default.DeleteOutline,
                         contentDescription = "移除",
                         tint = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(22.dp)
                     )
                 }
             }

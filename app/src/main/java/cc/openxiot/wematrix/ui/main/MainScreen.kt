@@ -27,6 +27,7 @@ fun MainScreen(
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
+    onNavigateToAbout: () -> Unit = {},
     onNavigateToDeviceDetail: ((String) -> Unit)? = null,
     onNavigateToDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     onNavigateToProductDetail: ((String) -> Unit)? = null,
@@ -153,7 +154,8 @@ fun MainScreen(
                     currentProjectName = currentProjectName,
                     onNavigateToOrgPicker = onNavigateToOrgPicker,
                     onNavigateToProjectPicker = onNavigateToProjectPicker,
-                    onNavigateToAccount = onNavigateToAccount
+                    onNavigateToAccount = onNavigateToAccount,
+                    onNavigateToAbout = onNavigateToAbout
                 )
             }
         }

@@ -26,6 +26,7 @@ import cc.openxiot.wematrix.ui.components.LoadingIndicator
 @Composable
 fun OrganizationPickerScreen(
     onBack: () -> Unit,
+    onNavigateToDetail: (String) -> Unit = {},
     viewModel: OrganizationViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -114,7 +115,7 @@ fun OrganizationPickerScreen(
                                 OrgManageCard(
                                     organization = org,
                                     isSelected = false,
-                                    onSelect = { viewModel.selectOrganization(org) },
+                                    onSelect = { org.id?.let { onNavigateToDetail(it) } },
                                     onRename = { renameTarget = org },
                                     onDelete = { showDeleteConfirm = org.id }
                                 )

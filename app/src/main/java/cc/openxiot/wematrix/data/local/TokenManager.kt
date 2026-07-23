@@ -40,6 +40,10 @@ class TokenManager(context: Context) {
         get() = prefs.getString(KEY_ROOT_SPACE_NAME, null)
         set(value) = prefs.edit { putString(KEY_ROOT_SPACE_NAME, value) }
 
+    var developerId: String?
+        get() = prefs.getString(KEY_DEVELOPER_ID, null)
+        set(value) = prefs.edit { putString(KEY_DEVELOPER_ID, value) }
+
     var isDarkMode: Boolean
         get() = prefs.getBoolean(KEY_DARK_MODE, false)
         set(value) = prefs.edit { putBoolean(KEY_DARK_MODE, value) }
@@ -61,6 +65,17 @@ class TokenManager(context: Context) {
         }
     }
 
+    fun extractDeveloperIdFromToken(): String? {
+        val t = token ?: return null
+        return try {
+            val parts = t.split(".")
+            if (parts.size < 2) return null
+            val payload = String(android.util.Base64.decode(parts[1], android.util.Base64.URL_SAFE))
+            val json = org.json.JSONObject(payload)
+            json.optString("sub").takeIf { it.isNotEmpty() }
+        } catch (_: Exception) { null }
+    }
+
     companion object {
         private const val KEY_TOKEN = "token"
         private const val KEY_USERNAME = "username"
@@ -69,6 +84,7 @@ class TokenManager(context: Context) {
         private const val KEY_ORG_ID = "current_org_id"
         private const val KEY_ORG_NAME = "current_org_name"
         private const val KEY_DARK_MODE = "dark_mode"
+        private const val KEY_DEVELOPER_ID = "developer_id"
         private const val KEY_ROOT_SPACE_ID = "current_root_space_id"
         private const val KEY_ROOT_SPACE_NAME = "current_root_space_name"
     }

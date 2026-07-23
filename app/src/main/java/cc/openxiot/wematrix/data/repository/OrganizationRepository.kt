@@ -69,4 +69,13 @@ class OrganizationRepository {
             throw Exception(response.body()?.message ?: "移除成员失败")
         }
     }
+
+    suspend fun updateMember(orgId: String, member: Member): Result<Unit> = runCatching {
+        val response = service.updateMember(orgId, member)
+        if (response.isSuccessful && response.body()?.success == true) {
+            Unit
+        } else {
+            throw Exception(response.body()?.message ?: "更新成员失败")
+        }
+    }
 }

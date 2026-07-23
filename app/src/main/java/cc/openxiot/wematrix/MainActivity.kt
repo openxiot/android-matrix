@@ -75,6 +75,7 @@ class MainActivity : ComponentActivity() {
                 tokenManager.username = name
                 tokenManager.avatar = avatar
                 tokenManager.platform = platform
+                tokenManager.developerId = tokenManager.extractDeveloperIdFromToken()
                 RetrofitClient.setToken(token)
                 AppState.setLoggedIn(tokenManager)
             }

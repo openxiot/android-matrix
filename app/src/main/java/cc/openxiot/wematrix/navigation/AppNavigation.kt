@@ -8,7 +8,9 @@ import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.ui.login.LoginScreen
 import cc.openxiot.wematrix.ui.main.MainScreen
+import cc.openxiot.wematrix.ui.organization.OrganizationDetailScreen
 import cc.openxiot.wematrix.ui.organization.OrganizationPickerScreen
+import cc.openxiot.wematrix.ui.profile.AboutScreen
 import cc.openxiot.wematrix.ui.profile.AccountScreen
 import cc.openxiot.wematrix.ui.project.ProjectPickerScreen
 import cc.openxiot.wematrix.ui.device.DeviceDetailScreen
@@ -23,10 +25,12 @@ sealed class Screen(val route: String) {
     data object OrgPicker : Screen("org_picker")
     data object ProjectPicker : Screen("project_picker")
     data object ProjectEdit : Screen("project_edit/{rootId}")
+    data object OrgDetail : Screen("org_detail/{orgId}")
     data object DeviceDetail : Screen("device_detail/{did}")
     data object DeviceOperation : Screen("device_operation/{did}?type={type}&spaceId={spaceId}")
     data object ProductDetail : Screen("product_detail/{productId}")
     data object Account : Screen("account")
+    data object About : Screen("about")
 }
 
 @Composable
@@ -72,6 +76,9 @@ fun AppNavigation(
                         launchSingleTop = true
                     }
                 },
+                onNavigateToAbout = {
+                    navController.navigate(Screen.About.route) { launchSingleTop = true }
+                },
 onNavigateToDeviceDetail = { did ->
                     navController.navigate("device_detail/$did") { launchSingleTop = true }
                 },
@@ -112,7 +119,10 @@ onNavigateToDeviceDetail = { did ->
 
         composable(Screen.OrgPicker.route) {
             OrganizationPickerScreen(
-                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } }
+                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
+                onNavigateToDetail = { orgId ->
+                    navController.navigate("org_detail/$orgId") { launchSingleTop = true }
+                }
             )
         }
 
@@ -128,6 +138,14 @@ onNavigateToDeviceDetail = { did ->
                 onEditProject = { rootId ->
                     navController.navigate("project_edit/$rootId") { launchSingleTop = true }
                 }
+            )
+        }
+
+        composable(Screen.OrgDetail.route) { backStackEntry ->
+            val orgId = backStackEntry.arguments?.getString("orgId") ?: return@composable
+            OrganizationDetailScreen(
+                orgId = orgId,
+                onBack = { navController.popBackStack() }
             )
         }
 
@@ -183,6 +201,12 @@ onNavigateToDeviceDetail = { did ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
             ProductDetailScreen(
                 productId = productId,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.About.route) {
+            AboutScreen(
                 onBack = { navController.popBackStack() }
             )
         }

@@ -25,7 +25,8 @@ fun ProfileScreen(
     currentProjectName: String?,
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
-    onNavigateToAccount: () -> Unit = {}
+    onNavigateToAccount: () -> Unit = {},
+    onNavigateToAbout: () -> Unit = {}
 ) {
     val tokenManager = WeMatrixApp.instance.tokenManager
 
@@ -114,6 +115,18 @@ fun ProfileScreen(
                     icon = if (AppState.isDarkMode) Icons.Default.DarkMode else Icons.Default.LightMode,
                     showChevron = false,
                     onClick = { AppState.toggleDarkMode(tokenManager) }
+                )
+            }
+
+            // About
+            item {
+                Spacer(Modifier.height(8.dp))
+                SectionHeader("其他")
+                SettingsCard(
+                    title = "关于",
+                    subtitle = "应用信息与版本",
+                    icon = Icons.Default.Info,
+                    onClick = onNavigateToAbout
                 )
             }
         }

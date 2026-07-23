@@ -185,7 +185,8 @@ fun SpaceTreeContent(
                                 devices = treeState.devices,
                                 showActions = showActions,
                                 onDeviceDetail = onDeviceDetail,
-                                productNames = treeState.productNames
+                                productNames = treeState.productNames,
+                                productIcons = treeState.productIcons
                             )
                         }
                     }
@@ -198,7 +199,8 @@ fun SpaceTreeContent(
                                 device = device,
                                 onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
                                 depth = 0,
-                                productNames = treeState.productNames
+                                productNames = treeState.productNames,
+                                productIcons = treeState.productIcons
                             )
                         }
                     }
@@ -453,7 +455,8 @@ private fun RecursiveSpaceTree(
     devices: List<DeviceEntity>,
     showActions: Boolean,
     onDeviceDetail: ((String) -> Unit)? = null,
-    productNames: Map<String, String> = emptyMap()
+    productNames: Map<String, String> = emptyMap(),
+    productIcons: Map<String, String> = emptyMap()
 ) {
     SpaceTreeNode(
         space = space,
@@ -479,7 +482,8 @@ private fun RecursiveSpaceTree(
                     devices = devices,
                     showActions = showActions,
                     onDeviceDetail = onDeviceDetail,
-                    productNames = productNames
+                    productNames = productNames,
+                    productIcons = productIcons
                 )
             }
             // Render devices of this space inline
@@ -489,7 +493,8 @@ private fun RecursiveSpaceTree(
                     device = device,
                     onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
                     depth = depth + 1,
-                    productNames = productNames
+                    productNames = productNames,
+                    productIcons = productIcons
                 )
             }
         }
@@ -613,8 +618,11 @@ private fun DeviceItem(
     device: DeviceEntity,
     onClick: (() -> Unit)? = null,
     depth: Int = 0,
-    productNames: Map<String, String> = emptyMap()
+    productNames: Map<String, String> = emptyMap(),
+    productIcons: Map<String, String> = emptyMap()
 ) {
+    val model = extractModelFromUrn(device.type)
+    val productIcon = model?.let { productIcons[it] }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -632,13 +640,22 @@ private fun DeviceItem(
                 .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                Icons.Default.DevicesOther,
-                contentDescription = null,
-                tint = if (device.online == true) MaterialTheme.colorScheme.primary
-                       else MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(24.dp)
-            )
+            if (productIcon != null) {
+                coil.compose.AsyncImage(
+                    model = productIcon,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    contentScale = androidx.compose.ui.layout.ContentScale.Fit
+                )
+            } else {
+                Icon(
+                    Icons.Default.DevicesOther,
+                    contentDescription = null,
+                    tint = if (device.online == true) MaterialTheme.colorScheme.primary
+                           else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(

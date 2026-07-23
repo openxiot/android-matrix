@@ -29,6 +29,7 @@ fun MainScreen(
     onNavigateToAccount: () -> Unit = {},
     onNavigateToProjectEdit: ((String) -> Unit)? = null,
     onNavigateToDeviceDetail: ((String) -> Unit)? = null,
+    onNavigateToDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     mainViewModel: MainViewModel = viewModel(),
     projectViewModel: ProjectViewModel = viewModel()
 ) {
@@ -96,7 +97,8 @@ fun MainScreen(
                                 rootId = rootId,
                                 viewModel = projectViewModel,
                                 showActions = false,
-                                onDeviceDetail = onNavigateToDeviceDetail
+                                onDeviceDetail = onNavigateToDeviceDetail,
+                                onDeviceOperation = onNavigateToDeviceOperation
                             )
                         }
                     } else if (currentOrgName == null) {

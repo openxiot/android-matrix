@@ -38,6 +38,7 @@ fun SpaceTreeScreen(
     rootId: String,
     onBack: () -> Unit,
     onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     viewModel: ProjectViewModel = viewModel()
 ) {
     val treeState by viewModel.treeState.collectAsState()
@@ -141,7 +142,7 @@ fun SpaceTreeScreen(
             viewModel = viewModel,
             modifier = Modifier.padding(padding),
             onDeviceDetail = onDeviceDetail,
-            onDeviceOperation = { did, type, spaceId -> /* TODO: navigate to operation */ }
+            onDeviceOperation = onDeviceOperation
         )
     }
 }
@@ -188,6 +189,7 @@ fun SpaceTreeContent(
                                 devices = treeState.devices,
                                 showActions = showActions,
                                 onDeviceDetail = onDeviceDetail,
+                                onDeviceOperation = onDeviceOperation,
                                 productNames = treeState.productNames,
                                 productIcons = treeState.productIcons
                             )
@@ -201,6 +203,9 @@ fun SpaceTreeContent(
                             DeviceItem(
                                 device = device,
                                 onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
+                                onOperation = device.did?.let { did ->
+                                    { onDeviceOperation?.invoke(did, device.type ?: "", rootId) }
+                                },
                                 depth = 0,
                                 productNames = treeState.productNames,
                                 productIcons = treeState.productIcons
@@ -458,6 +463,7 @@ private fun RecursiveSpaceTree(
     devices: List<DeviceEntity>,
     showActions: Boolean,
     onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     productNames: Map<String, String> = emptyMap(),
     productIcons: Map<String, String> = emptyMap()
 ) {
@@ -485,6 +491,7 @@ private fun RecursiveSpaceTree(
                     devices = devices,
                     showActions = showActions,
                     onDeviceDetail = onDeviceDetail,
+                    onDeviceOperation = onDeviceOperation,
                     productNames = productNames,
                     productIcons = productIcons
                 )
@@ -495,6 +502,9 @@ private fun RecursiveSpaceTree(
                 DeviceItem(
                     device = device,
                     onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
+                    onOperation = device.did?.let { did ->
+                        { onDeviceOperation?.invoke(did, device.type ?: "", device.space?.spaceId ?: rootId) }
+                    },
                     depth = depth + 1,
                     productNames = productNames,
                     productIcons = productIcons
@@ -661,6 +671,12 @@ private fun DeviceItem(
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
+            val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                           else MaterialTheme.colorScheme.error
+            Canvas(modifier = Modifier.size(8.dp)) {
+                drawCircle(color = dotColor)
+            }
+            Spacer(modifier = Modifier.width(6.dp))
             Text(
                 text = productNames[extractModelFromUrn(device.type)]
                     ?: extractTypeName(device.type)
@@ -671,20 +687,19 @@ private fun DeviceItem(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f)
             )
-            Spacer(modifier = Modifier.width(4.dp))
-            val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
-                           else MaterialTheme.colorScheme.error
-            Canvas(modifier = Modifier.size(8.dp)) {
-                drawCircle(color = dotColor)
-            }
             if (onDetail != null) {
-                Spacer(modifier = Modifier.width(4.dp))
-                IconButton(onClick = onDetail, modifier = Modifier.size(24.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(40.dp)
+                        .clickable(onClick = onDetail),
+                    contentAlignment = Alignment.Center
+                ) {
                     Icon(
                         Icons.Default.ChevronRight,
                         contentDescription = "详情",
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

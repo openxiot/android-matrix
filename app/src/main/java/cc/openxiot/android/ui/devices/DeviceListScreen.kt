@@ -151,6 +151,12 @@ private fun DeviceCard(
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                                   else MaterialTheme.colorScheme.error
+                    Canvas(modifier = Modifier.size(8.dp)) {
+                        drawCircle(color = dotColor)
+                    }
+                    Spacer(Modifier.width(6.dp))
                     Text(
                         text = productName ?: device.type ?: device.did ?: "未知设备",
                         style = MaterialTheme.typography.titleSmall,
@@ -158,12 +164,6 @@ private fun DeviceCard(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Spacer(Modifier.width(6.dp))
-                    val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
-                                   else MaterialTheme.colorScheme.error
-                    Canvas(modifier = Modifier.size(8.dp)) {
-                        drawCircle(color = dotColor)
-                    }
                 }
                 if (spaceName != null) {
                     Text(
@@ -174,12 +174,18 @@ private fun DeviceCard(
                 }
             }
             if (onDetail != null) {
-                IconButton(onClick = onDetail, modifier = Modifier.size(24.dp)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(40.dp)
+                        .clickable(onClick = onDetail),
+                    contentAlignment = Alignment.Center
+                ) {
                     Icon(
                         Icons.Default.ChevronRight,
                         contentDescription = "详情",
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

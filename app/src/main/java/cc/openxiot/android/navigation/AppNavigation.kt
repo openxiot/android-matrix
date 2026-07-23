@@ -74,6 +74,9 @@ fun AppNavigation(
                 },
                 onNavigateToDeviceDetail = { did ->
                     navController.navigate("device_detail/$did") { launchSingleTop = true }
+                },
+                onNavigateToDeviceOperation = { did, type, spaceId ->
+                    navController.navigate("device_operation/$did?type=${java.net.URLEncoder.encode(type, "UTF-8")}&spaceId=$spaceId") { launchSingleTop = true }
                 }
             )
         }
@@ -113,6 +116,9 @@ fun AppNavigation(
                 onBack = { navController.navigate(Screen.ProjectPicker.route) { launchSingleTop = true } },
                 onDeviceDetail = { did ->
                     navController.navigate("device_detail/$did") { launchSingleTop = true }
+                },
+                onDeviceOperation = { did, type, spaceId ->
+                    navController.navigate("device_operation/$did?type=${java.net.URLEncoder.encode(type, "UTF-8")}&spaceId=$spaceId") { launchSingleTop = true }
                 }
             )
         }

@@ -641,7 +641,7 @@ private fun DeviceItem(
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = productNames[device.type] ?: device.type ?: device.did ?: "未知设备",
+                    text = productNames[extractModelFromUrn(device.type)] ?: device.type ?: device.did ?: "未知设备",
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium,
                     maxLines = 1,
@@ -672,6 +672,16 @@ private fun buildFlatSpaceList(root: SpaceEntity?): List<SpaceEntity> {
         result.addAll(buildFlatSpaceList(child))
     }
     return result
+}
+
+/**
+ * Extract the model field from a device type URN.
+ * Format: urn:<ns>:device:<name>:<value>:<organization>:<model>:<version>
+ */
+private fun extractModelFromUrn(urn: String?): String? {
+    if (urn == null) return null
+    val parts = urn.split(":")
+    return if (parts.size >= 7) parts[6] else null
 }
 
 /**

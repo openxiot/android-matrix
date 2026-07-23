@@ -150,10 +150,10 @@ class ProjectViewModel : ViewModel() {
                     _projectState.value = _projectState.value.copy(currentRootName = name)
                     tokenManager.currentRootSpaceName = name
                 }
-                // Fetch product names for all device types at once
-                val orgId = tokenManager.currentOrgId
-                if (orgId != null) {
-                    loadProductNames(orgId)
+                // Fetch product names for all device types
+                val orgModels = devices.mapNotNull { extractOrgModel(it.type) }.toSet()
+                if (orgModels.isNotEmpty()) {
+                    loadProductNames(orgModels)
                 }
             }
             .onFailure { e ->
@@ -164,19 +164,23 @@ class ProjectViewModel : ViewModel() {
             }
     }
 
-    private suspend fun loadProductNames(orgId: String) {
-        try {
-            val response = productService.getVisibleProducts(orgId)
-            if (response.isSuccessful && response.body()?.success == true) {
-                val products = response.body()!!.data ?: emptyList()
-                products.forEach { product ->
-                    product.model?.let { model -> productNameCache[model] = product.displayName }
+    private suspend fun loadProductNames(orgModels: Set<Pair<String, String>>) {
+        for ((org, model) in orgModels) {
+            try {
+                val response = productService.getProductByOrgModel(org, model)
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val product = response.body()!!.data ?: continue
+                    productNameCache[model] = product.displayName
                 }
-                _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
-            }
-        } catch (_: Exception) {
-            // Silently fail, device names will fall back to type/did
+            } catch (_: Exception) { }
         }
+        _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
+    }
+
+    private fun extractOrgModel(urn: String?): Pair<String, String>? {
+        if (urn == null) return null
+        val parts = urn.split(":")
+        return if (parts.size >= 7) parts[5] to parts[6] else null
     }
 
     fun toggleExpanded(spaceId: String) {

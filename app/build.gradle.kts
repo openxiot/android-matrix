@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "cc.openxiot.android"
+    namespace = "cc.openxiot.wematrix"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "cc.openxiot.android"
+        applicationId = "cc.openxiot.wematrix"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

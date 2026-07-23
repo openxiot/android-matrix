@@ -1,0 +1,755 @@
+package cc.openxiot.wematrix.ui.project
+
+import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.data.api.DeviceEntity
+import cc.openxiot.wematrix.data.api.SpaceEntity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.ui.layout.ContentScale
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
+import cc.openxiot.wematrix.ui.components.ConfirmDialog
+import cc.openxiot.wematrix.ui.components.EmptyState
+import cc.openxiot.wematrix.ui.components.ErrorMessage
+import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.ui.components.SpaceTypeChip
+import coil.compose.AsyncImage
+import kotlinx.coroutines.delay
+import kotlin.collections.get
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SpaceTreeScreen(
+    rootId: String,
+    onBack: () -> Unit,
+    onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
+    viewModel: ProjectViewModel = viewModel()
+) {
+    val treeState by viewModel.treeState.collectAsState()
+    val projectState by viewModel.projectState.collectAsState()
+
+    LaunchedEffect(rootId) {
+        viewModel.loadSpaceGraph(rootId)
+    }
+
+    Scaffold(
+        topBar = {
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .statusBarsPadding(),
+                color = MaterialTheme.colorScheme.surface
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                    }
+                    Text(
+                        text = treeState.rootSpace?.name ?: projectState.currentRootName ?: "空间管理",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+        },
+        floatingActionButton = {
+            var expanded by remember { mutableStateOf(false) }
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
+                AnimatedVisibility(
+                    visible = expanded,
+                    enter = fadeIn() + slideInVertically { it },
+                    exit = fadeOut() + slideOutVertically { it }
+                ) {
+                    Column(horizontalAlignment = Alignment.End) {
+                        // Add device
+                        SmallFloatingActionButton(
+                            onClick = {
+                                expanded = false
+                                viewModel.showAddDeviceDialog()
+                            },
+                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier.size(36.dp)
+                        ) {
+                            Icon(Icons.Default.Devices, contentDescription = null, modifier = Modifier.size(18.dp))
+                        }
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            "添加设备",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(Modifier.height(12.dp))
+
+                        // Add space
+                        SmallFloatingActionButton(
+                            onClick = {
+                                expanded = false
+                                viewModel.showCreateDialog(rootId)
+                            },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(36.dp)
+                        ) {
+                            Icon(Icons.Default.AccountTree, contentDescription = null, modifier = Modifier.size(18.dp))
+                        }
+                        Spacer(Modifier.height(4.dp))
+                        Text(
+                            "添加空间",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(Modifier.height(12.dp))
+                    }
+                }
+                FloatingActionButton(
+                    onClick = { expanded = !expanded },
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    Icon(
+                        if (expanded) Icons.Default.Close else Icons.Default.Add,
+                        contentDescription = "添加"
+                    )
+                }
+            }
+        }
+    ) { padding ->
+        SpaceTreeContent(
+            rootId = rootId,
+            viewModel = viewModel,
+            modifier = Modifier.padding(padding),
+            onDeviceDetail = onDeviceDetail,
+            onDeviceOperation = onDeviceOperation
+        )
+    }
+}
+
+@Composable
+fun SpaceTreeContent(
+    rootId: String,
+    viewModel: ProjectViewModel,
+    modifier: Modifier = Modifier,
+    showActions: Boolean = true,
+    onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null
+) {
+    val treeState by viewModel.treeState.collectAsState()
+    // Load graph when rootId changes, calling suspend function directly
+    LaunchedEffect(rootId) {
+        viewModel.loadSpaceGraphInternal(rootId)
+    }
+
+    Box(modifier = modifier) {
+        when {
+            treeState.isLoading -> LoadingIndicator()
+            treeState.error != null -> ErrorMessage(
+                message = treeState.error!!,
+                onRetry = { viewModel.loadSpaceGraph(rootId) }
+            )
+            treeState.rootSpace == null -> EmptyState(message = "空间数据为空")
+            treeState.rootSpace?.children.isNullOrEmpty() && treeState.devices.isEmpty() -> EmptyState(
+                "请添加空间"
+            )
+            else -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(vertical = 8.dp)
+                ) {
+                    treeState.rootSpace?.children?.forEach { child ->
+                        item {
+                            RecursiveSpaceTree(
+                                space = child,
+                                depth = 0,
+                                expandedIds = treeState.expandedIds,
+                                onToggle = { viewModel.toggleExpanded(it) },
+                                onAddChild = { viewModel.showCreateDialog(it) },
+                                onDelete = { viewModel.showDeleteConfirm(it) },
+                                rootId = rootId,
+                                devices = treeState.devices,
+                                showActions = showActions,
+                                onDeviceDetail = onDeviceDetail,
+                                onDeviceOperation = onDeviceOperation,
+                                productNames = treeState.productNames,
+                                productIcons = treeState.productIcons
+                            )
+                        }
+                    }
+
+                    // Render root space's devices (devices moved directly to root)
+                    val rootDevices = treeState.devices.filter { it.space?.spaceId == treeState.rootSpace?.id }
+                    rootDevices.forEach { device ->
+                        item {
+                            DeviceItem(
+                                device = device,
+                                onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
+                                onOperation = device.did?.let { did ->
+                                    { onDeviceOperation?.invoke(did, device.type ?: "", rootId) }
+                                },
+                                depth = 0,
+                                productNames = treeState.productNames,
+                                productIcons = treeState.productIcons
+                            )
+                        }
+                    }
+
+                    item { Spacer(modifier = Modifier.height(80.dp)) }
+                }
+            }
+        }
+    }
+
+    // Create space dialog
+    if (treeState.showCreateDialog) {
+        var spaceName by remember { mutableStateOf("") }
+        val parentSpace = remember(treeState.createParentId, treeState.rootSpace) {
+            treeState.createParentId?.let { parentId ->
+                findSpaceById(treeState.rootSpace, parentId)
+            }
+        }
+        val defaultType = when (parentSpace?.type) {
+            "building" -> "floor"
+            "floor" -> "room"
+            "room" -> "zone"
+            else -> "building"
+        }
+        var spaceType by remember(treeState.showCreateDialog) { mutableStateOf(defaultType) }
+        val types = listOf(
+            "building" to "楼栋",
+            "floor" to "楼层",
+            "room" to "房间",
+            "zone" to "区域"
+        )
+        AlertDialog(
+            onDismissRequest = { viewModel.hideCreateDialog() },
+            title = { Text("添加空间") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.background,
+            text = {
+                Column {
+                    OutlinedTextField(
+                        value = spaceName,
+                        onValueChange = { spaceName = it },
+                        label = { Text("空间名称") },
+                        placeholder = { Text("请输入名称") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text("空间类型", style = MaterialTheme.typography.labelLarge)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    types.forEach { (type, label) ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { spaceType = type }
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = spaceType == type,
+                                onClick = { spaceType = type }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(label)
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        viewModel.createSpace(
+                            name = spaceName,
+                            type = spaceType,
+                            parentId = treeState.createParentId,
+                            rootId = rootId
+                        )
+                    },
+                    enabled = spaceName.isNotBlank()
+                ) {
+                    Text("添加")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { viewModel.hideCreateDialog() }) {
+                    Text("取消")
+                }
+            }
+        )
+    }
+
+    // Delete confirm
+    treeState.showDeleteConfirm?.let { spaceId ->
+        ConfirmDialog(
+            title = "删除空间",
+            message = "确定要删除这个空间吗？如果空间下有子空间，将无法删除。",
+            onConfirm = { viewModel.deleteSpace(spaceId, rootId) },
+            onDismiss = { viewModel.hideDeleteConfirm() }
+        )
+    }
+
+    // QR scanner for adding devices
+    val qrScanner = rememberLauncherForActivityResult(ScanContract()) { result ->
+        if (result.contents != null) {
+            viewModel.addDeviceByQr(rootId, result.contents)
+        } else {
+            viewModel.hideAddDeviceDialog()
+        }
+    }
+    LaunchedEffect(treeState.showAddDeviceDialog) {
+        if (treeState.showAddDeviceDialog) {
+            qrScanner.launch(ScanOptions().apply {
+                setDesiredBarcodeFormats(ScanOptions.QR_CODE)
+                setOrientationLocked(true)
+                setPrompt("扫描设备二维码")
+            })
+        }
+    }
+
+    // Show operation feedback messages
+    val context = LocalContext.current
+    LaunchedEffect(treeState.message) {
+        treeState.message?.let { msg ->
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            viewModel.clearTreeMessage()
+        }
+    }
+
+    // Loading dialog with countdown when adding device
+    if (treeState.isAddingDevice) {
+        var seconds by remember { mutableIntStateOf(0) }
+        LaunchedEffect(treeState.isAddingDevice) {
+            while (treeState.isAddingDevice) {
+                delay(1000)
+                seconds++
+            }
+        }
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text("添加设备中...") },
+            text = { Text("等待中... ${seconds}s") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
+            confirmButton = {}
+        )
+    }
+
+    // Move device dialog
+    treeState.showMoveDeviceDialog?.let { did ->
+        var selectedSpaceId by remember { mutableStateOf<String?>(null) }
+        AlertDialog(
+            onDismissRequest = { viewModel.hideMoveDevice() },
+            title = { Text("移动到空间") },
+            shape = MaterialTheme.shapes.medium,
+            containerColor = MaterialTheme.colorScheme.surface,
+            text = {
+                Column(
+                    modifier = Modifier.heightIn(max = 400.dp).verticalScroll(rememberScrollState())
+                ) {
+                    treeState.rootSpace?.let { root ->
+                        SpacePickerItem(
+                            space = root,
+                            depth = 0,
+                            selectedSpaceId = selectedSpaceId,
+                            onSelect = { selectedSpaceId = it }
+                        )
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = { selectedSpaceId?.let { viewModel.moveDeviceTo(it, did) } },
+                    enabled = selectedSpaceId != null
+                ) { Text("移动") }
+            },
+            dismissButton = {
+                TextButton(onClick = { viewModel.hideMoveDevice() }) { Text("取消") }
+            }
+        )
+    }
+}
+
+@Composable
+private fun SpacePickerItem(
+    space: SpaceEntity,
+    depth: Int,
+    selectedSpaceId: String?,
+    onSelect: (String) -> Unit
+) {
+    val hasChildren = space.children?.isNotEmpty() == true
+    var expanded by remember { mutableStateOf(true) }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { space.id?.let { onSelect(it) } }
+            .padding(start = (16 + depth * 24).dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if (hasChildren) {
+            IconButton(
+                onClick = { expanded = !expanded },
+                modifier = Modifier.size(24.dp)
+            ) {
+                Icon(
+                    if (expanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+        } else {
+            Spacer(Modifier.width(24.dp))
+        }
+        Spacer(Modifier.width(4.dp))
+        Text(
+            text = space.name ?: space.id ?: "未知",
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.weight(1f)
+        )
+        if (selectedSpaceId == space.id) {
+            Icon(
+                Icons.Default.Check,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(24.dp)
+            )
+        } else {
+            Spacer(Modifier.width(24.dp))
+        }
+    }
+    if (hasChildren && expanded) {
+        space.children?.forEach { child ->
+            SpacePickerItem(
+                space = child,
+                depth = depth + 1,
+                selectedSpaceId = selectedSpaceId,
+                onSelect = onSelect
+            )
+        }
+    }
+}
+
+@Composable
+private fun RecursiveSpaceTree(
+    space: SpaceEntity,
+    depth: Int,
+    expandedIds: Set<String>,
+    onToggle: (String) -> Unit,
+    onAddChild: (String) -> Unit,
+    onDelete: (String) -> Unit,
+    rootId: String,
+    devices: List<DeviceEntity>,
+    showActions: Boolean,
+    onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
+    productNames: Map<String, String> = emptyMap(),
+    productIcons: Map<String, String> = emptyMap()
+) {
+    SpaceTreeNode(
+        space = space,
+        depth = depth,
+        isExpanded = expandedIds.contains(space.id),
+        onToggle = { space.id?.let { onToggle(it) } },
+        onAddChild = { space.id?.let { onAddChild(it) } },
+        onDelete = { space.id?.let { onDelete(it) } },
+        devices = devices,
+        showActions = showActions
+    )
+    AnimatedVisibility(visible = expandedIds.contains(space.id)) {
+        Column {
+            space.children?.forEach { child ->
+                RecursiveSpaceTree(
+                    space = child,
+                    depth = depth + 1,
+                    expandedIds = expandedIds,
+                    onToggle = onToggle,
+                    onAddChild = onAddChild,
+                    onDelete = onDelete,
+                    rootId = rootId,
+                    devices = devices,
+                    showActions = showActions,
+                    onDeviceDetail = onDeviceDetail,
+                    onDeviceOperation = onDeviceOperation,
+                    productNames = productNames,
+                    productIcons = productIcons
+                )
+            }
+            // Render devices of this space inline
+            val spaceDevices = devices.filter { it.space?.spaceId == space.id }
+            spaceDevices.forEach { device ->
+                DeviceItem(
+                    device = device,
+                    onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
+                    onOperation = device.did?.let { did ->
+                        { onDeviceOperation?.invoke(did, device.type ?: "", device.space?.spaceId ?: rootId) }
+                    },
+                    depth = depth + 1,
+                    productNames = productNames,
+                    productIcons = productIcons
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun SpaceTreeNode(
+    space: SpaceEntity,
+    depth: Int,
+    isExpanded: Boolean,
+    onToggle: () -> Unit,
+    onAddChild: () -> Unit,
+    onDelete: () -> Unit,
+    devices: List<DeviceEntity>,
+    showActions: Boolean = true
+) {
+    val spaceDevices = devices.filter { it.space?.spaceId == space.id }
+    val hasExpandable = space.children?.isNotEmpty() == true || spaceDevices.isNotEmpty()
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = (12 + depth * 20).dp,
+                end = 16.dp,
+                top = 4.dp,
+                bottom = 4.dp
+            )
+            .clickable(onClick = onToggle),
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Expand icon
+            if (hasExpandable) {
+                Icon(
+                    if (isExpanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(20.dp)
+                )
+            } else {
+                Spacer(modifier = Modifier.width(20.dp))
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Type icon
+            val typeIcon = when (space.type?.lowercase()) {
+                "site" -> Icons.Default.Business
+                "building" -> Icons.Default.Apartment
+                "floor" -> Icons.Default.ViewAgenda
+                "room" -> Icons.Default.MeetingRoom
+                else -> Icons.Default.Place
+            }
+            Icon(
+                typeIcon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(22.dp)
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = space.name ?: "未命名",
+                    style = MaterialTheme.typography.titleSmall,
+                    fontWeight = FontWeight.Medium
+                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    SpaceTypeChip(type = space.type ?: "other")
+                    if (spaceDevices.isNotEmpty()) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "${spaceDevices.size} 设备",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+
+            // Actions
+            if (showActions) {
+                IconButton(
+                    onClick = onAddChild,
+                    modifier = Modifier.size(32.dp)
+                ) {
+                    Icon(Icons.Default.Add, contentDescription = "添加子空间", modifier = Modifier.size(18.dp))
+                }
+                if (depth > 0) {
+                    IconButton(
+                        onClick = onDelete,
+                        modifier = Modifier.size(32.dp)
+                ) {
+                    Icon(
+                        Icons.Default.DeleteOutline,
+                        contentDescription = "删除",
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun DeviceItem(
+    device: DeviceEntity,
+    onDetail: (() -> Unit)? = null,
+    onOperation: (() -> Unit)? = null,
+    depth: Int = 0,
+    productNames: Map<String, String> = emptyMap(),
+    productIcons: Map<String, String> = emptyMap()
+) {
+    val model = extractModelFromUrn(device.type)
+    val productIcon = model?.let { productIcons[it] }
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = (12 + depth * 20).dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
+            .then(if (onOperation != null) Modifier.clickable(onClick = onOperation) else Modifier),
+        shape = RoundedCornerShape(10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min), verticalAlignment = Alignment.CenterVertically) {
+            Row(modifier = Modifier.weight(1f).padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                if (productIcon != null) {
+                    AsyncImage(
+                        model = productIcon,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                } else {
+                    Icon(
+                        Icons.Default.DevicesOther,
+                        contentDescription = null,
+                        tint = if (device.online == true) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.error
+                Canvas(modifier = Modifier.size(8.dp)) {
+                    drawCircle(color = dotColor)
+                }
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = productNames[extractModelFromUrn(device.type)]
+                        ?: extractTypeName(device.type)
+                        ?: device.type ?: device.did ?: "未知设备",
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+            if (onDetail != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(44.dp)
+                        .clickable(onClick = onDetail),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        Icons.Default.ChevronRight,
+                        contentDescription = "详情",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Flatten a space tree into a list of all spaces.
+ */
+private fun buildFlatSpaceList(root: SpaceEntity?): List<SpaceEntity> {
+    if (root == null) return emptyList()
+    val result = mutableListOf(root)
+    root.children?.forEach { child ->
+        result.addAll(buildFlatSpaceList(child))
+    }
+    return result
+}
+
+/**
+ * Extract the model field from a device type URN.
+ * Format: urn:<ns>:device:<name>:<value>:<organization>:<model>:<version>
+ */
+private fun extractModelFromUrn(urn: String?): String? {
+    if (urn == null) return null
+    val parts = urn.split(":")
+    return if (parts.size >= 7) parts[6] else null
+}
+
+/**
+ * Extract the human-readable type name (4th field) from a device type URN.
+ * urn:<ns>:device:<name>:...  →  returns <name>
+ */
+private fun extractTypeName(urn: String?): String? {
+    if (urn == null) return null
+    val parts = urn.split(":")
+    return if (parts.size >= 4) parts[3] else null
+}
+
+/**
+ * Find a space by id in the space tree, searching recursively through children.
+ */
+private fun findSpaceById(root: SpaceEntity?, id: String): SpaceEntity? {
+    if (root == null) return null
+    if (root.id == id) return root
+    return root.children?.firstNotNullOfOrNull { findSpaceById(it, id) }
+}

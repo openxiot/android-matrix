@@ -129,4 +129,7 @@ interface ProductService {
         @Query("organizationId") orgId: String,
         @Query("model") model: String
     ): Response<ApiResponse<ProductEntity>>
+
+    @GET("v1/product/basic/one")
+    suspend fun getProductDetail(@Query("productId") productId: String): Response<ApiResponse<ProductEntity>>
 }

@@ -12,7 +12,9 @@ import kotlinx.coroutines.launch
 data class ProductUiState(
     val isLoading: Boolean = true,
     val products: List<ProductEntity> = emptyList(),
-    val error: String? = null
+    val error: String? = null,
+    val isDetailLoading: Boolean = false,
+    val detailError: String? = null
 )
 
 class ProductViewModel : ViewModel() {
@@ -45,6 +47,43 @@ class ProductViewModel : ViewModel() {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     error = e.message ?: "网络错误"
+                )
+            }
+        }
+    }
+
+    fun loadProductDetail(productId: String) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isDetailLoading = true, detailError = null)
+            try {
+                val response = productService.getProductDetail(productId)
+                if (response.isSuccessful && response.body()?.success == true) {
+                    val detail = response.body()!!.data
+                    if (detail != null) {
+                        val updated = _uiState.value.products.toMutableList()
+                        val idx = updated.indexOfFirst { it.id == productId }
+                        if (idx >= 0) updated[idx] = detail
+                        else updated.add(detail)
+                        _uiState.value = _uiState.value.copy(
+                            isDetailLoading = false,
+                            products = updated
+                        )
+                    } else {
+                        _uiState.value = _uiState.value.copy(
+                            isDetailLoading = false,
+                            detailError = "产品数据为空"
+                        )
+                    }
+                } else {
+                    _uiState.value = _uiState.value.copy(
+                        isDetailLoading = false,
+                        detailError = response.body()?.message ?: "获取产品详情失败"
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    isDetailLoading = false,
+                    detailError = e.message ?: "网络错误"
                 )
             }
         }

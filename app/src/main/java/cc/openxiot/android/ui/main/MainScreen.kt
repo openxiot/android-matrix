@@ -30,6 +30,7 @@ fun MainScreen(
     onNavigateToProjectEdit: ((String) -> Unit)? = null,
     onNavigateToDeviceDetail: ((String) -> Unit)? = null,
     onNavigateToDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
+    onNavigateToProductDetail: ((String) -> Unit)? = null,
     mainViewModel: MainViewModel = viewModel(),
     projectViewModel: ProjectViewModel = viewModel()
 ) {
@@ -120,7 +121,9 @@ fun MainScreen(
                     onDeviceDetail = onNavigateToDeviceDetail,
                     onDeviceOperation = onNavigateToDeviceOperation
                 )
-                BottomTab.Products -> ProductListScreen()
+                BottomTab.Products -> ProductListScreen(
+                    onProductDetail = onNavigateToProductDetail
+                )
                 BottomTab.Profile -> ProfileScreen(
                     currentOrgName = currentOrgName,
                     currentProjectName = currentProjectName,

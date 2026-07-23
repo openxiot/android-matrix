@@ -13,6 +13,7 @@ import cc.openxiot.android.ui.profile.AccountScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
 import cc.openxiot.android.ui.device.DeviceDetailScreen
 import cc.openxiot.android.ui.device.DeviceOperationScreen
+import cc.openxiot.android.ui.products.ProductDetailScreen
 import cc.openxiot.android.ui.project.SpaceTreeScreen
 
 sealed class Screen(val route: String) {
@@ -23,6 +24,7 @@ sealed class Screen(val route: String) {
     data object ProjectEdit : Screen("project_edit/{rootId}")
     data object DeviceDetail : Screen("device_detail/{did}")
     data object DeviceOperation : Screen("device_operation/{did}?type={type}&spaceId={spaceId}")
+    data object ProductDetail : Screen("product_detail/{productId}")
     data object Account : Screen("account")
 }
 
@@ -77,6 +79,9 @@ fun AppNavigation(
                 },
                 onNavigateToDeviceOperation = { did, type, spaceId ->
                     navController.navigate("device_operation/$did?type=${java.net.URLEncoder.encode(type, "UTF-8")}&spaceId=$spaceId") { launchSingleTop = true }
+                },
+                onNavigateToProductDetail = { productId ->
+                    navController.navigate("product_detail/$productId") { launchSingleTop = true }
                 }
             )
         }
@@ -142,6 +147,14 @@ fun AppNavigation(
                 deviceType = type,
                 deviceDid = did,
                 spaceId = spaceId,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.ProductDetail.route) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
+            ProductDetailScreen(
+                productId = productId,
                 onBack = { navController.popBackStack() }
             )
         }

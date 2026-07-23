@@ -155,7 +155,8 @@ class ProjectViewModel : ViewModel() {
                 val orgId = tokenManager.currentOrgId
                 if (orgModels.isNotEmpty()) {
                     loadProductNames(orgModels)
-                } else if (orgId != null) {
+                }
+                if (orgId != null) {
                     loadAllProductNames(orgId)
                 }
             }

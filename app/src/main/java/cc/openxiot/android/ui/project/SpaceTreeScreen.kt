@@ -139,7 +139,8 @@ fun SpaceTreeScreen(
             rootId = rootId,
             viewModel = viewModel,
             modifier = Modifier.padding(padding),
-            onDeviceDetail = onDeviceDetail
+            onDeviceDetail = onDeviceDetail,
+            onDeviceOperation = { did, type, spaceId -> /* TODO: navigate to operation */ }
         )
     }
 }
@@ -150,7 +151,8 @@ fun SpaceTreeContent(
     viewModel: ProjectViewModel,
     modifier: Modifier = Modifier,
     showActions: Boolean = true,
-    onDeviceDetail: ((String) -> Unit)? = null
+    onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null
 ) {
     val treeState by viewModel.treeState.collectAsState()
     // Load graph when rootId changes, calling suspend function directly

@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.android.data.api.DeviceEntity
+import cc.openxiot.android.data.api.SpaceEntity
 import cc.openxiot.android.ui.project.ProjectViewModel
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
@@ -146,19 +147,20 @@ fun DeviceDetailScreen(
 
             // Last online
             if (device.lastOnline != null) {
-                DetailRow(label = "最后上线", value = device.lastOnline)
+                DetailRow(label = "最后上线", value = formatUtcToLocal(device.lastOnline))
                 HorizontalDivider()
             }
 
             // Last offline
             if (device.lastOffline != null) {
-                DetailRow(label = "最后下线", value = device.lastOffline)
+                DetailRow(label = "最后下线", value = formatUtcToLocal(device.lastOffline))
                 HorizontalDivider()
             }
 
             // Space
             if (device.space?.spaceId != null) {
-                DetailRow(label = "所属空间", value = device.space.spaceId ?: "-")
+                val spaceName = findSpaceById(treeState.rootSpace, device.space.spaceId)?.name
+                DetailRow(label = "所属空间", value = spaceName ?: device.space.spaceId ?: "-")
             }
         }
     }
@@ -201,4 +203,24 @@ private fun extractTypeName(urn: String?): String? {
     if (urn == null) return null
     val parts = urn.split(":")
     return if (parts.size >= 4) parts[3] else null
+}
+
+private fun formatUtcToLocal(utcTime: String?): String {
+    if (utcTime == null) return "-"
+    return try {
+        val inputFormat = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", java.util.Locale.getDefault())
+        inputFormat.timeZone = java.util.TimeZone.getTimeZone("UTC")
+        val date = inputFormat.parse(utcTime)
+        if (date != null) {
+            val outputFormat = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+            outputFormat.timeZone = java.util.TimeZone.getDefault()
+            outputFormat.format(date)
+        } else utcTime
+    } catch (_: Exception) { utcTime }
+}
+
+private fun findSpaceById(root: SpaceEntity?, id: String?): SpaceEntity? {
+    if (root == null || id == null) return null
+    if (root.id == id) return root
+    return root.children?.firstNotNullOfOrNull { findSpaceById(it, id) }
 }

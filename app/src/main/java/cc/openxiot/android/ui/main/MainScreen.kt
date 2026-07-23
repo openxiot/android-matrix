@@ -117,7 +117,8 @@ fun MainScreen(
                 }
                 BottomTab.Devices -> DeviceListScreen(
                     rootId = mainViewModel.currentRootSpaceId,
-                    onDeviceDetail = onNavigateToDeviceDetail
+                    onDeviceDetail = onNavigateToDeviceDetail,
+                    onDeviceOperation = onNavigateToDeviceOperation
                 )
                 BottomTab.Products -> ProductListScreen()
                 BottomTab.Profile -> ProfileScreen(

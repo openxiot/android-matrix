@@ -34,6 +34,7 @@ import cc.openxiot.android.ui.project.ProjectViewModel
 fun DeviceListScreen(
     rootId: String?,
     onDeviceDetail: ((String) -> Unit)? = null,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     projectViewModel: ProjectViewModel = viewModel()
 ) {
     val treeState by projectViewModel.treeState.collectAsState()
@@ -78,6 +79,9 @@ fun DeviceListScreen(
                             productNames = treeState.productNames,
                             productIcons = treeState.productIcons,
                             rootSpace = treeState.rootSpace,
+                            onClick = device.did?.let { did ->
+                                { onDeviceOperation?.invoke(did, device.type ?: "", device.space?.spaceId ?: rootId ?: "") }
+                            },
                             onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } }
                         )
                     }
@@ -161,11 +165,12 @@ private fun DeviceCard(
                         )
                     }
                 }
+            }
             if (onDetail != null) {
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(40.dp)
+                        .width(48.dp)
                         .clickable(onClick = onDetail),
                     contentAlignment = Alignment.Center
                 ) {
@@ -176,7 +181,6 @@ private fun DeviceCard(
                         modifier = Modifier.size(20.dp)
                     )
                 }
-            }
             }
         }
     }

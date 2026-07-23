@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DevicesOther
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +27,7 @@ import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.main.PageTitle
 import cc.openxiot.wematrix.ui.project.ProjectViewModel
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeviceListScreen(
     rootId: String?,
@@ -35,6 +36,7 @@ fun DeviceListScreen(
     projectViewModel: ProjectViewModel = viewModel()
 ) {
     val treeState by projectViewModel.treeState.collectAsState()
+    var isRefreshing by remember { mutableStateOf(false) }
 
     LaunchedEffect(rootId) {
         if (rootId != null) {
@@ -42,45 +44,94 @@ fun DeviceListScreen(
         }
     }
 
+    LaunchedEffect(isRefreshing) {
+        if (isRefreshing && rootId != null) {
+            projectViewModel.loadSpaceGraphInternal(rootId)
+            isRefreshing = false
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         PageTitle(title = "设备")
 
-        when {
-            rootId == null -> EmptyState(message = "请先在「我」的页面选择项目")
-            treeState.isLoading -> LoadingIndicator()
-            treeState.error != null -> {
-                LaunchedEffect(treeState.error) {
-                    projectViewModel.clearTreeError()
-                }
-                ErrorMessage(
-                    message = treeState.error!!,
-                    onRetry = { projectViewModel.loadSpaceGraph(rootId) }
-                )
-            }
-            treeState.devices.isEmpty() -> EmptyState(message = "暂无设备")
-            else -> {
+        PullToRefreshBox(
+            isRefreshing = isRefreshing,
+            onRefresh = { isRefreshing = true },
+            modifier = Modifier.weight(1f)
+        ) {
+            Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
-                    contentPadding = PaddingValues(vertical = 8.dp)
+                    contentPadding = PaddingValues(vertical = 8.dp),
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    item {
-                        Text(
-                            text = "共 ${treeState.devices.size} 个设备",
-                            style = MaterialTheme.typography.titleSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
-                        )
-                    }
-                    items(treeState.devices) { device ->
-                        DeviceCard(
-                            device = device,
-                            productNames = treeState.productNames,
-                            productIcons = treeState.productIcons,
-                            rootSpace = treeState.rootSpace,
-                            onClick = device.did?.let { did ->
-                                { onDeviceOperation?.invoke(did, device.type ?: "", device.space?.spaceId ?: rootId ?: "") }
-                            },
-                            onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } }
-                        )
+                    if (rootId == null) {
+                        item {
+                            Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                Text(
+                                    text = "请先在「我」的页面选择项目",
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    } else if (treeState.isLoading && treeState.devices.isEmpty()) {
+                        item {
+                            Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                CircularProgressIndicator()
+                            }
+                        }
+                    } else if (treeState.error != null && treeState.devices.isEmpty()) {
+                        item {
+                            LaunchedEffect(treeState.error) {
+                                projectViewModel.clearTreeError()
+                            }
+                            Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text(
+                                        text = treeState.error!!,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Spacer(modifier = Modifier.height(16.dp))
+                                    OutlinedButton(onClick = { projectViewModel.loadSpaceGraph(rootId) }) {
+                                        Text("重试")
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (treeState.devices.isEmpty()) {
+                            item {
+                                Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                    Text(
+                                        text = "暂无设备",
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                        } else {
+                            item {
+                                Text(
+                                    text = "共 ${treeState.devices.size} 个设备",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
+                                )
+                            }
+                            items(treeState.devices) { device ->
+                                DeviceCard(
+                                    device = device,
+                                    productNames = treeState.productNames,
+                                    productIcons = treeState.productIcons,
+                                    rootSpace = treeState.rootSpace,
+                                    onClick = device.did?.let { did ->
+                                        { onDeviceOperation?.invoke(did, device.type ?: "", device.space?.spaceId ?: rootId ?: "") }
+                                    },
+                                    onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } }
+                                )
+                            }
+                        }
                     }
                     item { Spacer(modifier = Modifier.height(16.dp)) }
                 }

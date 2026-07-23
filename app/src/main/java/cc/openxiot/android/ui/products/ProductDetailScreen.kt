@@ -1,5 +1,7 @@
 package cc.openxiot.android.ui.products
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,12 +9,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.DeviceHub
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -30,6 +34,7 @@ fun ProductDetailScreen(
 ) {
     val state by viewModel.uiState.collectAsState()
     val product = state.products.find { it.id == productId }
+    val context = LocalContext.current
 
     LaunchedEffect(productId) {
         viewModel.loadProductDetail(productId)
@@ -82,76 +87,137 @@ fun ProductDetailScreen(
                         .padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    // Header card
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+                    HeaderCard(product = product)
+                    DetailCard(product = product)
+                    Button(
+                        onClick = { openJdApp(context) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
+                        shape = RoundedCornerShape(12.dp)
                     ) {
-                        Row(
-                            modifier = Modifier.padding(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Surface(
-                                modifier = Modifier.size(56.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.secondaryContainer
-                            ) {
-                                if (product.icon != null) {
-                                    AsyncImage(
-                                        model = product.icon,
-                                        contentDescription = product.displayName,
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                            .clip(RoundedCornerShape(12.dp)),
-                                        contentScale = ContentScale.Crop
-                                    )
-                                } else {
-                                    Box(contentAlignment = Alignment.Center) {
-                                        Icon(
-                                            Icons.Default.DeviceHub,
-                                            contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                                            modifier = Modifier.size(28.dp)
-                                        )
-                                    }
-                                }
-                            }
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Column {
-                                Text(
-                                    text = product.displayName,
-                                    style = MaterialTheme.typography.titleLarge,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                LifecycleBadge(lifecycle = product.lifecycle)
-                            }
-                        }
+                        Icon(
+                            Icons.Default.ShoppingCart,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("去京东购买", style = MaterialTheme.typography.titleSmall)
                     }
-
-                    // Detail info
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+                    OutlinedButton(
+                        onClick = { openTaobaoApp(context) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
+                        shape = RoundedCornerShape(12.dp)
                     ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            DetailRow(label = "产品 ID", value = product.id ?: "-")
-                            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                            DetailRow(label = "产品型号", value = product.model ?: "-")
-                            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                            DetailRow(label = "通信协议", value = product.protocol ?: "-")
-                            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                            if (product.organization != null) {
-                                DetailRow(label = "所属组织", value = product.organization)
-                                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-                            }
-                            if (product.template != null) {
-                                DetailRow(label = "模板", value = product.template)
-                            }
-                        }
+                        Icon(
+                            Icons.Default.ShoppingCart,
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("去淘宝购买", style = MaterialTheme.typography.titleSmall)
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
+            }
+        }
+    }
+}
+
+private fun openJdApp(context: android.content.Context) {
+    try {
+        val intent = context.packageManager.getLaunchIntentForPackage("com.jingdong.app.mall")
+        if (intent != null) {
+            context.startActivity(intent)
+        } else {
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.jd.com")))
+        }
+    } catch (_: Exception) {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.jd.com")))
+    }
+}
+
+private fun openTaobaoApp(context: android.content.Context) {
+    try {
+        val intent = context.packageManager.getLaunchIntentForPackage("com.taobao.taobao")
+        if (intent != null) {
+            context.startActivity(intent)
+        } else {
+            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.taobao.com")))
+        }
+    } catch (_: Exception) {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.taobao.com")))
+    }
+}
+
+@Composable
+private fun HeaderCard(product: ProductEntity) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Surface(
+                modifier = Modifier.size(56.dp),
+                shape = RoundedCornerShape(12.dp),
+                color = MaterialTheme.colorScheme.secondaryContainer
+            ) {
+                if (product.icon != null) {
+                    AsyncImage(
+                        model = product.icon,
+                        contentDescription = product.displayName,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(RoundedCornerShape(12.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.Default.DeviceHub,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                            modifier = Modifier.size(28.dp)
+                        )
                     }
                 }
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                Text(
+                    text = product.displayName,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+                LifecycleBadge(lifecycle = product.lifecycle)
+            }
+        }
+    }
+}
+
+@Composable
+private fun DetailCard(product: ProductEntity) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            DetailRow(label = "产品 ID", value = product.id ?: "-")
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            DetailRow(label = "产品型号", value = product.model ?: "-")
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            DetailRow(label = "通信协议", value = product.protocol ?: "-")
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+            if (product.organization != null) {
+                DetailRow(label = "所属组织", value = product.organization)
+                HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
             }
         }
     }
@@ -175,4 +241,21 @@ private fun DetailRow(label: String, value: String) {
             fontWeight = FontWeight.Medium
         )
     }
+}
+
+@Composable
+private fun LifecycleBadge(lifecycle: String?) {
+    if (lifecycle == null) return
+    val (label, color) = when (lifecycle) {
+        "released" -> "已发布" to MaterialTheme.colorScheme.primary
+        "preview" -> "预览版" to MaterialTheme.colorScheme.tertiary
+        "development" -> "开发中" to MaterialTheme.colorScheme.error
+        else -> lifecycle to MaterialTheme.colorScheme.onSurfaceVariant
+    }
+    Spacer(modifier = Modifier.height(2.dp))
+    Text(
+        text = label,
+        style = MaterialTheme.typography.labelSmall,
+        color = color
+    )
 }

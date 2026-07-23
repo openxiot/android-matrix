@@ -11,6 +11,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.*
@@ -199,7 +200,7 @@ fun SpaceTreeContent(
                         item {
                             DeviceItem(
                                 device = device,
-                                onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
+                                onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
                                 depth = 0,
                                 productNames = treeState.productNames,
                                 productIcons = treeState.productIcons
@@ -493,7 +494,7 @@ private fun RecursiveSpaceTree(
             spaceDevices.forEach { device ->
                 DeviceItem(
                     device = device,
-                    onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
+                    onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
                     depth = depth + 1,
                     productNames = productNames,
                     productIcons = productIcons
@@ -618,7 +619,7 @@ private fun SpaceTreeNode(
 @Composable
 private fun DeviceItem(
     device: DeviceEntity,
-    onClick: (() -> Unit)? = null,
+    onDetail: (() -> Unit)? = null,
     onOperation: (() -> Unit)? = null,
     depth: Int = 0,
     productNames: Map<String, String> = emptyMap(),
@@ -629,7 +630,8 @@ private fun DeviceItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = (12 + depth * 20).dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
+            .padding(start = (12 + depth * 20).dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
+            .then(if (onOperation != null) Modifier.clickable(onClick = onOperation) else Modifier),
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -642,58 +644,52 @@ private fun DeviceItem(
                 .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .weight(1f)
-                    .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                if (productIcon != null) {
-                    coil.compose.AsyncImage(
-                        model = productIcon,
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                        contentScale = androidx.compose.ui.layout.ContentScale.Fit
-                    )
-                } else {
+            if (productIcon != null) {
+                coil.compose.AsyncImage(
+                    model = productIcon,
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    contentScale = androidx.compose.ui.layout.ContentScale.Fit
+                )
+            } else {
+                Icon(
+                    Icons.Default.DevicesOther,
+                    contentDescription = null,
+                    tint = if (device.online == true) MaterialTheme.colorScheme.primary
+                           else MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = productNames[extractModelFromUrn(device.type)]
+                    ?: extractTypeName(device.type)
+                    ?: device.type ?: device.did ?: "未知设备",
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Medium,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f)
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                           else MaterialTheme.colorScheme.error
+            Canvas(modifier = Modifier.size(8.dp)) {
+                drawCircle(color = dotColor)
+            }
+            if (onDetail != null) {
+                Spacer(modifier = Modifier.width(4.dp))
+                IconButton(onClick = onDetail, modifier = Modifier.size(24.dp)) {
                     Icon(
-                        Icons.Default.DevicesOther,
-                        contentDescription = null,
-                        tint = if (device.online == true) MaterialTheme.colorScheme.primary
-                               else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(24.dp)
+                        Icons.Default.ChevronRight,
+                        contentDescription = "详情",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(18.dp)
                     )
                 }
-                Spacer(modifier = Modifier.width(12.dp))
-                Column {
-                    Text(
-                        text = productNames[extractModelFromUrn(device.type)]
-                            ?: extractTypeName(device.type)
-                            ?: device.type ?: device.did ?: "未知设备",
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Medium,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                    .then(if (onOperation != null) Modifier.clickable(onClick = onOperation) else Modifier)
-                    .padding(4.dp)
-            ) {
-                OnlineIndicator(isOnline = device.online == true)
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = if (device.online == true) "在线" else "离线",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = if (device.online == true) MaterialTheme.colorScheme.primary
-                           else MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
         }
     }
-}
 }
 
 /**

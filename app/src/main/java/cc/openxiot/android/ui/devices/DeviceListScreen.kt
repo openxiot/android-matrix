@@ -1,11 +1,14 @@
 package cc.openxiot.android.ui.devices
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DevicesOther
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -75,7 +78,7 @@ fun DeviceListScreen(
                             productNames = treeState.productNames,
                             productIcons = treeState.productIcons,
                             rootSpace = treeState.rootSpace,
-                            onClick = device.did?.let { did -> { onDeviceDetail?.invoke(did) } }
+                            onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } }
                         )
                     }
                     item { Spacer(modifier = Modifier.height(16.dp)) }
@@ -91,7 +94,8 @@ private fun DeviceCard(
     productNames: Map<String, String>,
     productIcons: Map<String, String>,
     rootSpace: SpaceEntity?,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
+    onDetail: (() -> Unit)? = null
 ) {
     val model = extractModelFromUrn(device.type)
     val productName = model?.let { productNames[it] }
@@ -115,25 +119,23 @@ private fun DeviceCard(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Surface(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = if (device.online == true)
-                    MaterialTheme.colorScheme.primaryContainer
-                else
-                    MaterialTheme.colorScheme.surfaceVariant
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    if (productIcon != null) {
-                        AsyncImage(
-                            model = productIcon,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .clip(RoundedCornerShape(12.dp)),
-                            contentScale = ContentScale.Fit
-                        )
-                    } else {
+            if (productIcon != null) {
+                AsyncImage(
+                    model = productIcon,
+                    contentDescription = null,
+                    modifier = Modifier.size(48.dp),
+                    contentScale = ContentScale.Fit
+                )
+            } else {
+                Surface(
+                    modifier = Modifier.size(48.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = if (device.online == true)
+                        MaterialTheme.colorScheme.primaryContainer
+                    else
+                        MaterialTheme.colorScheme.surfaceVariant
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
                         Icon(
                             Icons.Default.DevicesOther,
                             contentDescription = null,
@@ -148,13 +150,21 @@ private fun DeviceCard(
             }
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = productName ?: device.type ?: device.did ?: "未知设备",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = productName ?: device.type ?: device.did ?: "未知设备",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary
+                                   else MaterialTheme.colorScheme.error
+                    Canvas(modifier = Modifier.size(8.dp)) {
+                        drawCircle(color = dotColor)
+                    }
+                }
                 if (spaceName != null) {
                     Text(
                         text = spaceName,
@@ -163,16 +173,15 @@ private fun DeviceCard(
                     )
                 }
             }
-            Spacer(modifier = Modifier.width(8.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                OnlineIndicator(isOnline = device.online == true)
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = if (device.online == true) "在线" else "离线",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = if (device.online == true) MaterialTheme.colorScheme.primary
-                           else MaterialTheme.colorScheme.onSurfaceVariant
-                )
+            if (onDetail != null) {
+                IconButton(onClick = onDetail, modifier = Modifier.size(24.dp)) {
+                    Icon(
+                        Icons.Default.ChevronRight,
+                        contentDescription = "详情",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
             }
         }
     }

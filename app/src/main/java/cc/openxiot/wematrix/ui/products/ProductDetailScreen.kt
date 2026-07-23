@@ -61,7 +61,7 @@ fun ProductDetailScreen(
                     }
                     Text(
                         text = product?.displayName ?: "产品详情",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                 }

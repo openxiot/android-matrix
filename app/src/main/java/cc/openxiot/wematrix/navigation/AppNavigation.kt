@@ -72,10 +72,7 @@ fun AppNavigation(
                         launchSingleTop = true
                     }
                 },
-                onNavigateToProjectEdit = { rootId ->
-                    navController.navigate("project_edit/$rootId") { launchSingleTop = true }
-                },
-                onNavigateToDeviceDetail = { did ->
+onNavigateToDeviceDetail = { did ->
                     navController.navigate("device_detail/$did") { launchSingleTop = true }
                 },
                 onNavigateToDeviceOperation = { did, type, spaceId ->

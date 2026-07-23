@@ -64,7 +64,7 @@ fun DeviceOperationScreen(
                     }
                     Text(
                         text = "设备操作",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                 }

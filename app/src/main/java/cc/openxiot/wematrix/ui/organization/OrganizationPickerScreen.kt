@@ -60,7 +60,7 @@ fun OrganizationPickerScreen(
                     }
                     Text(
                         text = if (isEditing) "组织管理" else "当前组织",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
                     )

@@ -3,9 +3,9 @@ package cc.openxiot.wematrix.ui.main
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +17,7 @@ import cc.openxiot.wematrix.ui.products.ProductListScreen
 import cc.openxiot.wematrix.ui.profile.ProfileScreen
 import cc.openxiot.wematrix.ui.project.ProjectViewModel
 import cc.openxiot.wematrix.ui.project.SpaceTreeContent
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,7 +27,6 @@ fun MainScreen(
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
-    onNavigateToProjectEdit: ((String) -> Unit)? = null,
     onNavigateToDeviceDetail: ((String) -> Unit)? = null,
     onNavigateToDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     onNavigateToProductDetail: ((String) -> Unit)? = null,
@@ -81,25 +81,50 @@ fun MainScreen(
                 BottomTab.Projects -> {
                     val rootId = mainViewModel.currentRootSpaceId
                     if (rootId != null) {
-                        Column {
-                            PageTitle(
-                                title = currentProjectName ?: "项目",
-                                onClick = onNavigateToProjectPicker,
-                                actions = {
-                                    rootId.let { id ->
-                                        IconButton(onClick = { onNavigateToProjectEdit?.invoke(id) }) {
-                                            Icon(Icons.Default.Edit, contentDescription = "管理空间")
-                                        }
-                                    }
+                        val coroutineScope = rememberCoroutineScope()
+                        var isRefreshing by remember { mutableStateOf(false) }
+
+                        Column(modifier = Modifier.fillMaxSize()) {
+                            // Centered app name title bar
+                            Surface(
+                                modifier = Modifier.fillMaxWidth(),
+                                color = MaterialTheme.colorScheme.surface
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(48.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "微矩阵",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 }
-                            )
-                            SpaceTreeContent(
-                                rootId = rootId,
-                                viewModel = projectViewModel,
-                                showActions = false,
-                                onDeviceDetail = onNavigateToDeviceDetail,
-                                onDeviceOperation = onNavigateToDeviceOperation
-                            )
+                            }
+
+                            // Pull-to-refresh space tree
+                            PullToRefreshBox(
+                                isRefreshing = isRefreshing,
+                                onRefresh = {
+                                    coroutineScope.launch {
+                                        isRefreshing = true
+                                        projectViewModel.loadSpaceGraphInternal(rootId)
+                                        isRefreshing = false
+                                    }
+                                },
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                SpaceTreeContent(
+                                    rootId = rootId,
+                                    viewModel = projectViewModel,
+                                    showActions = false,
+                                    onRootSpaceClick = onNavigateToProjectPicker,
+                                    onDeviceDetail = onNavigateToDeviceDetail,
+                                    onDeviceOperation = onNavigateToDeviceOperation
+                                )
+                            }
                         }
                     } else if (currentOrgName == null) {
                         EmptyHint(
@@ -186,7 +211,7 @@ fun PageTitle(
                 ) {
                     Text(
                         text = title,
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(Modifier.width(4.dp))
@@ -200,7 +225,7 @@ fun PageTitle(
             } else {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(horizontal = 8.dp)
                 )

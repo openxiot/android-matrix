@@ -54,7 +54,7 @@ fun DeviceDetailScreen(
                     }
                     Text(
                         text = productName ?: "设备详情",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
                 }

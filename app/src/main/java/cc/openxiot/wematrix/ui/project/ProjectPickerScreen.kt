@@ -65,7 +65,7 @@ fun ProjectPickerScreen(
                     }
                     Text(
                         text = if (isEditing) "项目管理" else "当前项目",
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
                     )

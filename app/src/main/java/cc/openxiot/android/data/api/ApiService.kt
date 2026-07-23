@@ -92,6 +92,24 @@ interface SiteService {
 
     @PUT("v1/device/many/space")
     suspend fun updateDeviceSpace(@Body body: MoveDeviceRequest): Response<ApiResponse<Unit>>
+
+    @GET("v1/device/properties/{spaceId}")
+    suspend fun getDeviceProperties(
+        @Path("spaceId") spaceId: String,
+        @Query("pid") pid: List<String>
+    ): Response<ApiResponse<List<Map<String, Any?>>>>
+
+    @POST("v1/device/properties/{spaceId}")
+    suspend fun setDeviceProperties(
+        @Path("spaceId") spaceId: String,
+        @Body body: Map<String, Any>
+    ): Response<ApiResponse<List<Map<String, Any?>>>>
+
+    @POST("v1/device/actions/{spaceId}")
+    suspend fun invokeDeviceAction(
+        @Path("spaceId") spaceId: String,
+        @Body body: Map<String, Any>
+    ): Response<ApiResponse<List<Map<String, Any?>>>>
 }
 
 interface ProductService {
@@ -102,6 +120,9 @@ interface ProductService {
     suspend fun getVisibleProducts(
         @Path("organization") orgId: String
     ): Response<ApiResponse<List<ProductEntity>>>
+
+    @GET("v1/product/instance/one/{type}")
+    suspend fun getProductInstance(@Path("type") type: String): Response<ApiResponse<Map<String, Any?>>>
 
     @GET("v1/product/basic/one/org-model")
     suspend fun getProductByOrgModel(

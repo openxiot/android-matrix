@@ -12,6 +12,7 @@ import cc.openxiot.android.ui.organization.OrganizationPickerScreen
 import cc.openxiot.android.ui.profile.AccountScreen
 import cc.openxiot.android.ui.project.ProjectPickerScreen
 import cc.openxiot.android.ui.device.DeviceDetailScreen
+import cc.openxiot.android.ui.device.DeviceOperationScreen
 import cc.openxiot.android.ui.project.SpaceTreeScreen
 
 sealed class Screen(val route: String) {
@@ -21,6 +22,7 @@ sealed class Screen(val route: String) {
     data object ProjectPicker : Screen("project_picker")
     data object ProjectEdit : Screen("project_edit/{rootId}")
     data object DeviceDetail : Screen("device_detail/{did}")
+    data object DeviceOperation : Screen("device_operation/{did}?type={type}&spaceId={spaceId}")
     data object Account : Screen("account")
 }
 
@@ -121,9 +123,20 @@ fun AppNavigation(
                 did = did,
                 onBack = { navController.popBackStack() },
                 onMoveDevice = { d ->
-                    // Navigate to project edit for moving device
                     navController.popBackStack()
                 }
+            )
+        }
+
+        composable(Screen.DeviceOperation.route) { backStackEntry ->
+            val did = backStackEntry.arguments?.getString("did") ?: return@composable
+            val type = backStackEntry.arguments?.getString("type") ?: return@composable
+            val spaceId = backStackEntry.arguments?.getString("spaceId") ?: return@composable
+            DeviceOperationScreen(
+                deviceType = type,
+                deviceDid = did,
+                spaceId = spaceId,
+                onBack = { navController.popBackStack() }
             )
         }
     }

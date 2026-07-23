@@ -617,6 +617,7 @@ private fun SpaceTreeNode(
 private fun DeviceItem(
     device: DeviceEntity,
     onClick: (() -> Unit)? = null,
+    onOperation: (() -> Unit)? = null,
     depth: Int = 0,
     productNames: Map<String, String> = emptyMap(),
     productIcons: Map<String, String> = emptyMap()
@@ -626,8 +627,7 @@ private fun DeviceItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = (12 + depth * 20).dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
-            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+            .padding(start = (12 + depth * 20).dp, end = 16.dp, top = 4.dp, bottom = 4.dp),
         shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -640,35 +640,46 @@ private fun DeviceItem(
                 .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (productIcon != null) {
-                coil.compose.AsyncImage(
-                    model = productIcon,
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                    contentScale = androidx.compose.ui.layout.ContentScale.Fit
-                )
-            } else {
-                Icon(
-                    Icons.Default.DevicesOther,
-                    contentDescription = null,
-                    tint = if (device.online == true) MaterialTheme.colorScheme.primary
-                           else MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(24.dp)
-                )
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                if (productIcon != null) {
+                    coil.compose.AsyncImage(
+                        model = productIcon,
+                        contentDescription = null,
+                        modifier = Modifier.size(24.dp),
+                        contentScale = androidx.compose.ui.layout.ContentScale.Fit
+                    )
+                } else {
+                    Icon(
+                        Icons.Default.DevicesOther,
+                        contentDescription = null,
+                        tint = if (device.online == true) MaterialTheme.colorScheme.primary
+                               else MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(12.dp))
+                Column {
+                    Text(
+                        text = productNames[extractModelFromUrn(device.type)]
+                            ?: extractTypeName(device.type)
+                            ?: device.type ?: device.did ?: "未知设备",
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
             }
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = productNames[extractModelFromUrn(device.type)]
-                        ?: extractTypeName(device.type)
-                        ?: device.type ?: device.did ?: "未知设备",
-                    style = MaterialTheme.typography.bodySmall,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .then(if (onOperation != null) Modifier.clickable(onClick = onOperation) else Modifier)
+                    .padding(4.dp)
+            ) {
                 OnlineIndicator(isOnline = device.online == true)
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
@@ -680,6 +691,7 @@ private fun DeviceItem(
             }
         }
     }
+}
 }
 
 /**

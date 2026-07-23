@@ -641,7 +641,9 @@ private fun DeviceItem(
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = productNames[extractModelFromUrn(device.type)] ?: device.type ?: device.did ?: "未知设备",
+                    text = productNames[extractModelFromUrn(device.type)]
+                        ?: extractTypeName(device.type)
+                        ?: device.type ?: device.did ?: "未知设备",
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium,
                     maxLines = 1,
@@ -682,6 +684,16 @@ private fun extractModelFromUrn(urn: String?): String? {
     if (urn == null) return null
     val parts = urn.split(":")
     return if (parts.size >= 7) parts[6] else null
+}
+
+/**
+ * Extract the human-readable type name (4th field) from a device type URN.
+ * urn:<ns>:device:<name>:...  →  returns <name>
+ */
+private fun extractTypeName(urn: String?): String? {
+    if (urn == null) return null
+    val parts = urn.split(":")
+    return if (parts.size >= 4) parts[3] else null
 }
 
 /**

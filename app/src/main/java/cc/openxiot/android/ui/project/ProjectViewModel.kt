@@ -152,8 +152,11 @@ class ProjectViewModel : ViewModel() {
                 }
                 // Fetch product names for all device types
                 val orgModels = devices.mapNotNull { extractOrgModel(it.type) }.toSet()
+                val orgId = tokenManager.currentOrgId
                 if (orgModels.isNotEmpty()) {
                     loadProductNames(orgModels)
+                } else if (orgId != null) {
+                    loadAllProductNames(orgId)
                 }
             }
             .onFailure { e ->
@@ -175,6 +178,23 @@ class ProjectViewModel : ViewModel() {
             } catch (_: Exception) { }
         }
         _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
+    }
+
+    private suspend fun loadAllProductNames(orgId: String) {
+        try {
+            val response = productService.getVisibleProducts(orgId)
+            if (response.isSuccessful && response.body()?.success == true) {
+                val products = response.body()!!.data ?: emptyList()
+                products.forEach { product ->
+                    product.model?.let { model ->
+                        if (model !in productNameCache) {
+                            productNameCache[model] = product.displayName
+                        }
+                    }
+                }
+                _treeState.value = _treeState.value.copy(productNames = productNameCache.toMap())
+            }
+        } catch (_: Exception) { }
     }
 
     private fun extractOrgModel(urn: String?): Pair<String, String>? {

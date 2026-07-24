@@ -24,11 +24,13 @@ object RetrofitClient {
     private val authInterceptor = Interceptor { chain ->
         val request = chain.request()
         val builder = request.newBuilder()
-        authToken?.let {
-            builder.addHeader("Authorization", "Bearer $it")
-        }
-        currentOrgId?.let {
-            builder.addHeader("X-Org-Id", it)
+        if (request.url.host != "product.openxiot.cn") {
+            authToken?.let {
+                builder.addHeader("Authorization", "Bearer $it")
+            }
+            currentOrgId?.let {
+                builder.addHeader("X-Org-Id", it)
+            }
         }
         chain.proceed(builder.build())
     }

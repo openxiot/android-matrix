@@ -9,6 +9,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -93,22 +94,32 @@ fun DeviceDetailScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        if (productIcon != null) {
-                            AsyncImage(
-                                model = productIcon,
-                                contentDescription = null,
-                                modifier = Modifier.size(48.dp),
-                                contentScale = ContentScale.Fit
-                            )
-                        } else {
-                            Icon(
-                                Icons.Default.DevicesOther,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(48.dp)
-                            )
+                        Surface(
+                            modifier = Modifier.size(56.dp),
+                            shape = RoundedCornerShape(16.dp),
+                            color = MaterialTheme.colorScheme.secondaryContainer
+                        ) {
+                            if (productIcon != null) {
+                                AsyncImage(
+                                    model = productIcon,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .clip(RoundedCornerShape(16.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                            } else {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        Icons.Default.DevicesOther,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                                        modifier = Modifier.size(32.dp)
+                                    )
+                                }
+                            }
                         }
-                        Spacer(Modifier.width(12.dp))
+                        Spacer(Modifier.width(16.dp))
                         Column {
                             Text(
                                 text = productName ?: "未知产品",

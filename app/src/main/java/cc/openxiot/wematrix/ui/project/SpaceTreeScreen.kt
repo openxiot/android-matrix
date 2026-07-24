@@ -20,6 +20,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -735,21 +736,31 @@ private fun DeviceItem(
     ) {
         Row(modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min), verticalAlignment = Alignment.CenterVertically) {
             Row(modifier = Modifier.weight(1f).padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                if (productIcon != null) {
-                    AsyncImage(
-                        model = productIcon,
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                        contentScale = ContentScale.Fit
-                    )
-                } else {
-                    Icon(
-                        Icons.Default.DevicesOther,
-                        contentDescription = null,
-                        tint = if (device.online == true) MaterialTheme.colorScheme.primary
-                               else MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(24.dp)
-                    )
+                Surface(
+                    modifier = Modifier.size(36.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    color = MaterialTheme.colorScheme.secondaryContainer
+                ) {
+                    if (productIcon != null) {
+                        AsyncImage(
+                            model = productIcon,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(12.dp)),
+                            contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                Icons.Default.DevicesOther,
+                                contentDescription = null,
+                                tint = if (device.online == true) MaterialTheme.colorScheme.onSecondaryContainer
+                                       else MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
                 }
                 Spacer(modifier = Modifier.width(12.dp))
                 val dotColor = if (device.online == true) MaterialTheme.colorScheme.primary

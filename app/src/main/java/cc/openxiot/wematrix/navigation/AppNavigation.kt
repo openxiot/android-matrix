@@ -79,7 +79,7 @@ fun AppNavigation(
                 onNavigateToAbout = {
                     navController.navigate(Screen.About.route) { launchSingleTop = true }
                 },
-onNavigateToDeviceDetail = { did ->
+                onNavigateToDeviceDetail = { did ->
                     navController.navigate("device_detail/$did") { launchSingleTop = true }
                 },
                 onNavigateToDeviceOperation = { did, type, spaceId ->
@@ -119,7 +119,13 @@ onNavigateToDeviceDetail = { did ->
 
         composable(Screen.OrgPicker.route) {
             OrganizationPickerScreen(
-                onBack = { navController.navigate(Screen.Main.route) { popUpTo(Screen.Main.route) { inclusive = false }; launchSingleTop = true } },
+                onBack = {
+                    navController.navigate(Screen.Main.route) {
+                        popUpTo(Screen.Main.route) {
+                            inclusive = false
+                        }; launchSingleTop = true
+                    }
+                },
                 onNavigateToDetail = { orgId ->
                     navController.navigate("org_detail/$orgId") { launchSingleTop = true }
                 }

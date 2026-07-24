@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "cc.openxiot.wematrix"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "cc.openxiot.wematrix"
-        minSdk = 26
-        targetSdk = 36
+        minSdk = 29
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0.0"
     }
@@ -32,6 +32,27 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    packaging {
+        jniLibs {
+            excludes += listOf("META-INF/*")
+        }
+        resources {
+            excludes += listOf(
+                "META-INF/*",
+                "META-INF/NOTICE",
+                "META-INF/LICENSE",
+                "META-INF/INDEX.LIST",
+                "META-INF/native-image/io.netty/transport/native-image.properties",
+                "META-INF/native-image/io.netty/transport/reflection-gateway.json",
+                "META-INF/native-image/io.netty/codec-http2/native-image.properties",
+                "META-INF/native-image/io.netty/codec-http/native-image.properties",
+                "META-INF/native-image/io.netty/buffer/native-image.properties",
+                "META-INF/native-image/io.netty/handler/native-image.properties",
+                "META-INF/native-image/io.netty/common/native-image.properties"
+            )
+        }
     }
 }
 
@@ -67,5 +88,19 @@ dependencies {
     // Core
     implementation("androidx.core:core-ktx:1.13.1")
 
+    // Remote Compose
+    implementation("androidx.compose.remote:remote-core:1.0.0-alpha15")
+    implementation("androidx.compose.remote:remote-player-core:1.0.0-alpha15")
+    implementation("androidx.compose.remote:remote-player-view:1.0.0-alpha15")
+    implementation("androidx.compose.remote:remote-player-compose:1.0.0-alpha15")
+    implementation("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha15")
+    implementation("androidx.compose.remote:remote-creation-compose:1.0.0-alpha15")
+
+    // Openxiot
+    implementation("cc.openxiot:xiot-spec:0.1.5")
+    implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.5")
+    implementation("cc.openxiot:xiot-support-codegen-vertx:0.1.5")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-tooling-preview")
 }

@@ -252,7 +252,7 @@ private fun OrgSwipeCard(
     val arrowWidthPx = with(density) { 56.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
     val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
-    val isPastHalf by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 0.5f } }
+    val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
 
     Box(
         modifier = Modifier
@@ -273,10 +273,10 @@ private fun OrgSwipeCard(
                     .width(maxOffset)
                     .fillMaxHeight()
                     .background(
-                        if (isRightSwipe && isPastHalf) MaterialTheme.colorScheme.error
+                        if (isRightSwipe && isPastTwoThirds) MaterialTheme.colorScheme.error
                         else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f)
                     ),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.CenterStart
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -285,14 +285,14 @@ private fun OrgSwipeCard(
                     Icon(
                         Icons.Default.Delete,
                         contentDescription = null,
-                        tint = if (isRightSwipe && isPastHalf) Color.White
+                        tint = if (isRightSwipe && isPastTwoThirds) Color.White
                                else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
                         modifier = Modifier.size(20.dp)
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
                         "右滑删除",
-                        color = if (isRightSwipe && isPastHalf) Color.White
+                        color = if (isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Medium
@@ -309,10 +309,10 @@ private fun OrgSwipeCard(
                     .width(maxOffset)
                     .fillMaxHeight()
                     .background(
-                        if (!isRightSwipe && isPastHalf) MaterialTheme.colorScheme.primary
+                        if (!isRightSwipe && isPastTwoThirds) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
                     ),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.CenterEnd
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -321,14 +321,14 @@ private fun OrgSwipeCard(
                     Icon(
                         Icons.Default.Edit,
                         contentDescription = null,
-                        tint = if (!isRightSwipe && isPastHalf) Color.White
+                        tint = if (!isRightSwipe && isPastTwoThirds) Color.White
                                else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         modifier = Modifier.size(20.dp)
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
                         "修改名称",
-                        color = if (!isRightSwipe && isPastHalf) Color.White
+                        color = if (!isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Medium
@@ -357,7 +357,7 @@ private fun OrgSwipeCard(
                     detectHorizontalDragGestures(
                         onDragEnd = {
                             scope.launch {
-                                if (abs(offsetX.value) > maxOffsetPx * 0.5f) {
+                                if (abs(offsetX.value) > maxOffsetPx * 2f / 3f) {
                                     if (offsetX.value >= 0f) onDelete() else onRename()
                                 }
                                 offsetX.animateTo(0f)

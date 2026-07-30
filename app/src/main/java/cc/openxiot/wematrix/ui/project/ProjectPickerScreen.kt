@@ -240,7 +240,7 @@ private fun ProjectSwipeCard(
     val density = LocalDensity.current
     val maxOffset = 180.dp
     val maxOffsetPx = with(density) { maxOffset.toPx() }
-    val arrowWidthPx = with(density) { 56.dp.toPx() }
+    val arrowWidthPx = with(density) { 48.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
     val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
     val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
@@ -388,7 +388,7 @@ private fun ProjectSwipeCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Surface(
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(36.dp),
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.primaryContainer
                     ) {
@@ -405,7 +405,7 @@ private fun ProjectSwipeCard(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = space.name ?: "未命名",
-                            style = MaterialTheme.typography.titleMedium,
+                            style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Medium
                         )
                         if (space.type != null) {
@@ -420,13 +420,14 @@ private fun ProjectSwipeCard(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(56.dp),
+                        .width(48.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         Icons.AutoMirrored.Filled.KeyboardArrowRight,
                         contentDescription = "详情",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

@@ -249,7 +249,7 @@ private fun OrgSwipeCard(
     val density = LocalDensity.current
     val maxOffset = 180.dp
     val maxOffsetPx = with(density) { maxOffset.toPx() }
-    val arrowWidthPx = with(density) { 56.dp.toPx() }
+    val arrowWidthPx = with(density) { 48.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
     val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
     val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
@@ -399,7 +399,7 @@ private fun OrgSwipeCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Surface(
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(36.dp),
                         shape = RoundedCornerShape(12.dp),
                         color = MaterialTheme.colorScheme.primaryContainer
                     ) {
@@ -416,7 +416,7 @@ private fun OrgSwipeCard(
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
                             text = organization.name ?: organization.id ?: "",
-                            style = MaterialTheme.typography.titleMedium,
+                            style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Medium
                         )
                         val memberCount = organization.members?.size ?: 0
@@ -432,13 +432,14 @@ private fun OrgSwipeCard(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(56.dp),
+                        .width(48.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         Icons.AutoMirrored.Filled.KeyboardArrowRight,
                         contentDescription = "管理",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(20.dp)
                     )
                 }
             }

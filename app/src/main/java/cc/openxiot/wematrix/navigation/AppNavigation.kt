@@ -141,7 +141,7 @@ fun AppNavigation(
                         }; launchSingleTop = true
                     }
                 },
-                onEditProject = { rootId ->
+                onNavigateToDetail = { rootId ->
                     navController.navigate("project_edit/$rootId") { launchSingleTop = true }
                 }
             )

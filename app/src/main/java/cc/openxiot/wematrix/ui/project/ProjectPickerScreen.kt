@@ -1,45 +1,58 @@
 package cc.openxiot.wematrix.ui.project
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import kotlinx.coroutines.launch
+import kotlin.math.abs
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProjectPickerScreen(
     onBack: () -> Unit,
-    onEditProject: ((String) -> Unit)? = null,
+    onNavigateToDetail: (String) -> Unit = {},
     viewModel: ProjectViewModel = viewModel()
 ) {
     val state by viewModel.projectState.collectAsState()
     var isRefreshing by remember { mutableStateOf(false) }
-    var isEditing by remember { mutableStateOf(false) }
     var showDeleteConfirm by remember { mutableStateOf<String?>(null) }
-    var renameTarget by remember { mutableStateOf<Pair<String, String>?>(null) }
+    var renameTarget by remember { mutableStateOf<SpaceEntity?>(null) }
     var showCreateDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         viewModel.loadRootSpaces()
     }
 
-    // Reset refresh indicator when loading completes
     LaunchedEffect(state.isLoading) {
         if (!state.isLoading) {
             isRefreshing = false
@@ -64,31 +77,19 @@ fun ProjectPickerScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
                     Text(
-                        text = if (isEditing) "项目管理" else "当前项目",
+                        text = "当前项目",
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f)
+                        fontWeight = FontWeight.Bold
                     )
-                    if (!isEditing) {
-                        IconButton(onClick = { isEditing = true }) {
-                            Icon(Icons.Default.Edit, contentDescription = "编辑")
-                        }
-                    } else {
-                        IconButton(onClick = { isEditing = false }) {
-                            Icon(Icons.Default.Close, contentDescription = "完成")
-                        }
-                    }
                 }
             }
         },
         floatingActionButton = {
-            if (isEditing) {
-                FloatingActionButton(
-                    onClick = { showCreateDialog = true },
-                    containerColor = MaterialTheme.colorScheme.primary
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "创建项目")
-                }
+            FloatingActionButton(
+                onClick = { showCreateDialog = true },
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "创建项目")
             }
         }
     ) { padding ->
@@ -107,7 +108,7 @@ fun ProjectPickerScreen(
                     onRetry = { viewModel.loadRootSpaces() }
                 )
                 state.rootSpaces.isEmpty() -> EmptyState(
-                    message = if (isEditing) "暂无项目，点击右下角按钮创建" else "暂无项目"
+                    message = "暂无项目，点击右下角按钮创建"
                 )
                 else -> {
                     LazyColumn(
@@ -115,27 +116,19 @@ fun ProjectPickerScreen(
                         contentPadding = PaddingValues(vertical = 8.dp)
                     ) {
                         items(state.rootSpaces, key = { it.id ?: it.name ?: "" }) { space ->
-                            if (isEditing) {
-                                ProjectManageCard(
-                                    name = space.name ?: "未命名",
-                                    type = space.type,
-                                    isSelected = false,
-                                    onSelect = { space.id?.let { onEditProject?.invoke(it) } },
-                                    onRename = { space.id?.let { id -> renameTarget = id to (space.name ?: "") } },
-                                    onDelete = { space.id?.let { showDeleteConfirm = it } }
-                                )
-                            } else {
-                                ProjectPickerCard(
-                                    name = space.name ?: "未命名",
-                                    type = space.type,
-                                    isSelected = space.id != null && space.id == state.currentRootId,
-                                    onClick = {
-                                        viewModel.selectRootSpace(space)
-                                        onBack()
-                                    }
-                                )
-                            }
+                            ProjectSwipeCard(
+                                space = space,
+                                isSelected = space.id != null && space.id == state.currentRootId,
+                                onSelect = {
+                                    viewModel.selectRootSpace(space)
+                                    onBack()
+                                },
+                                onNavigateToDetail = { space.id?.let(onNavigateToDetail) },
+                                onDelete = { showDeleteConfirm = space.id },
+                                onRename = { renameTarget = space }
+                            )
                         }
+                        item { Spacer(modifier = Modifier.height(80.dp)) }
                     }
                 }
             }
@@ -184,9 +177,22 @@ fun ProjectPickerScreen(
         )
     }
 
+    // Delete confirm dialog
+    showDeleteConfirm?.let { spaceId ->
+        ConfirmDialog(
+            title = "删除项目",
+            message = "确定要删除这个项目吗？如果项目下有空间数据，将无法删除。",
+            onConfirm = {
+                viewModel.deleteSpace(spaceId, null)
+                showDeleteConfirm = null
+            },
+            onDismiss = { showDeleteConfirm = null }
+        )
+    }
+
     // Rename dialog
-    renameTarget?.let { (spaceId, currentName) ->
-        var newName by remember { mutableStateOf(currentName) }
+    renameTarget?.let { space ->
+        var newName by remember { mutableStateOf(space.name ?: "") }
         AlertDialog(
             onDismissRequest = { renameTarget = null },
             title = { Text("重命名项目") },
@@ -204,7 +210,7 @@ fun ProjectPickerScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        viewModel.renameRootSpace(spaceId, newName)
+                        space.id?.let { viewModel.renameRootSpace(it, newName) }
                         renameTarget = null
                     },
                     enabled = newName.isNotBlank()
@@ -219,146 +225,216 @@ fun ProjectPickerScreen(
             }
         )
     }
-
-    // Delete confirm
-    showDeleteConfirm?.let { spaceId ->
-        ConfirmDialog(
-            title = "删除项目",
-            message = "确定要删除这个项目吗？如果项目下有空间数据，将无法删除。",
-            onConfirm = {
-                viewModel.deleteSpace(spaceId, null)
-                showDeleteConfirm = null
-            },
-            onDismiss = { showDeleteConfirm = null }
-        )
-    }
 }
 
 @Composable
-private fun ProjectPickerCard(
-    name: String,
-    type: String?,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isSelected)
-                MaterialTheme.colorScheme.primaryContainer
-            else
-                MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Surface(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primaryContainer
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        Icons.Default.Business,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = name,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
-                )
-                if (type != null) {
-                    Text(
-                        text = "类型: ${type}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun ProjectManageCard(
-    name: String,
-    type: String?,
+private fun ProjectSwipeCard(
+    space: SpaceEntity,
     isSelected: Boolean,
     onSelect: () -> Unit,
-    onRename: () -> Unit,
-    onDelete: () -> Unit
+    onNavigateToDetail: () -> Unit,
+    onDelete: () -> Unit,
+    onRename: () -> Unit
 ) {
-    Card(
+    val scope = rememberCoroutineScope()
+    val density = LocalDensity.current
+    val maxOffset = 180.dp
+    val maxOffsetPx = with(density) { maxOffset.toPx() }
+    val arrowWidthPx = with(density) { 56.dp.toPx() }
+    val offsetX = remember { Animatable(0f) }
+    val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
+    val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable(onClick = onSelect),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+            .clipToBounds()
     ) {
+        // Background 两侧提示
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .matchParentSize()
+                .clip(RoundedCornerShape(12.dp))
         ) {
-            Surface(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primaryContainer
+            // 左：右滑删除（右滑时露出）
+            Box(
+                modifier = Modifier
+                    .width(maxOffset)
+                    .fillMaxHeight()
+                    .background(
+                        if (isRightSwipe && isPastTwoThirds) MaterialTheme.colorScheme.error
+                        else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f)
+                    ),
+                contentAlignment = Alignment.CenterStart
             ) {
-                Box(contentAlignment = Alignment.Center) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 20.dp)
+                ) {
                     Icon(
-                        Icons.Default.Business,
+                        Icons.Default.Delete,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.size(24.dp)
+                        tint = if (isRightSwipe && isPastTwoThirds) Color.White
+                               else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
                     )
-                }
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = name,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
-                )
-                if (type != null) {
+                    Spacer(Modifier.width(8.dp))
                     Text(
-                        text = "类型: ${type}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        "右滑删除",
+                        color = if (isRightSwipe && isPastTwoThirds) Color.White
+                                else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Medium
                     )
                 }
             }
-            IconButton(onClick = onRename) {
-                Icon(Icons.Default.Edit, contentDescription = "重命名")
-            }
-            IconButton(onClick = onDelete) {
-                Icon(
-                    Icons.Default.DeleteOutline,
-                    contentDescription = "删除",
-                    tint = MaterialTheme.colorScheme.error
-                )
+
+            // 中：占位
+            Spacer(Modifier.weight(1f))
+
+            // 右：左滑修改名称（左滑时露出）
+            Box(
+                modifier = Modifier
+                    .width(maxOffset)
+                    .fillMaxHeight()
+                    .background(
+                        if (!isRightSwipe && isPastTwoThirds) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
+                    ),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(end = 20.dp)
+                ) {
+                    Icon(
+                        Icons.Default.Edit,
+                        contentDescription = null,
+                        tint = if (!isRightSwipe && isPastTwoThirds) Color.White
+                               else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        "修改名称",
+                        color = if (!isRightSwipe && isPastTwoThirds) Color.White
+                                else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
             }
         }
+
+        // Foreground 卡片
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+                .pointerInput(onSelect, onNavigateToDetail) {
+                    detectTapGestures { offset ->
+                        if (offset.x >= size.width - arrowWidthPx) {
+                            onNavigateToDetail()
+                        } else {
+                            onSelect()
+                        }
+                    }
+                }
+                .pointerInput(onDelete, onRename) {
+                    detectHorizontalDragGestures(
+                        onDragEnd = {
+                            scope.launch {
+                                if (abs(offsetX.value) > maxOffsetPx * 2f / 3f) {
+                                    if (offsetX.value >= 0f) onDelete() else onRename()
+                                }
+                                offsetX.animateTo(0f)
+                            }
+                        },
+                        onDragCancel = {
+                            scope.launch { offsetX.animateTo(0f) }
+                        },
+                        onHorizontalDrag = { change, dragAmount ->
+                            change.consume()
+                            scope.launch {
+                                offsetX.snapTo(
+                                    (offsetX.value + dragAmount)
+                                        .coerceIn(-maxOffsetPx, maxOffsetPx)
+                                )
+                            }
+                        }
+                    )
+                },
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = if (isSelected)
+                    MaterialTheme.colorScheme.primaryContainer
+                else
+                    MaterialTheme.colorScheme.surface
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Surface(
+                        modifier = Modifier.size(48.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                Icons.Default.Business,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = space.name ?: "未命名",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+                        if (space.type != null) {
+                            Text(
+                                text = "类型: ${space.type}",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(56.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = "详情",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+
+    // 选中状态改变时重置滑动
+    LaunchedEffect(isSelected) {
+        offsetX.animateTo(0f)
     }
 }

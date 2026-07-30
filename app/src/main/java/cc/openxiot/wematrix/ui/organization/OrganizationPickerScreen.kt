@@ -249,7 +249,6 @@ private fun OrgSwipeCard(
     val density = LocalDensity.current
     val maxOffset = 180.dp
     val maxOffsetPx = with(density) { maxOffset.toPx() }
-    val arrowWidthPx = with(density) { 64.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
     val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
     val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
@@ -343,14 +342,8 @@ private fun OrgSwipeCard(
                 .fillMaxWidth()
                 .offset { IntOffset(offsetX.value.roundToInt(), 0) }
                 // Tap：点击内容区域选择，点击箭头进入详情
-                .pointerInput(onSelect, onNavigateToDetail) {
-                    detectTapGestures { offset ->
-                        if (offset.x >= size.width - arrowWidthPx) {
-                            onNavigateToDetail()
-                        } else {
-                            onSelect()
-                        }
-                    }
+                .pointerInput(onSelect) {
+                    detectTapGestures { onSelect() }
                 }
                 // Drag：水平双向拖动，松手后判定
                 .pointerInput(onDelete, onRename) {
@@ -432,7 +425,8 @@ private fun OrgSwipeCard(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(64.dp),
+                        .width(64.dp)
+                        .clickable(onClick = onNavigateToDetail),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(

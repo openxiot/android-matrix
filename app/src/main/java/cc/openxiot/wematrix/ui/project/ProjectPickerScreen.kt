@@ -240,7 +240,6 @@ private fun ProjectSwipeCard(
     val density = LocalDensity.current
     val maxOffset = 180.dp
     val maxOffsetPx = with(density) { maxOffset.toPx() }
-    val arrowWidthPx = with(density) { 64.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
     val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
     val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
@@ -333,14 +332,8 @@ private fun ProjectSwipeCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .offset { IntOffset(offsetX.value.roundToInt(), 0) }
-                .pointerInput(onSelect, onNavigateToDetail) {
-                    detectTapGestures { offset ->
-                        if (offset.x >= size.width - arrowWidthPx) {
-                            onNavigateToDetail()
-                        } else {
-                            onSelect()
-                        }
-                    }
+                .pointerInput(onSelect) {
+                    detectTapGestures { onSelect() }
                 }
                 .pointerInput(onDelete, onRename) {
                     detectHorizontalDragGestures(
@@ -420,7 +413,8 @@ private fun ProjectSwipeCard(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(64.dp),
+                        .width(64.dp)
+                        .clickable(onClick = onNavigateToDetail),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(

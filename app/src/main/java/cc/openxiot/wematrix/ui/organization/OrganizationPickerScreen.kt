@@ -1,19 +1,30 @@
 package cc.openxiot.wematrix.ui.organization
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.Organization
@@ -21,6 +32,9 @@ import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import kotlinx.coroutines.launch
+import kotlin.math.abs
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,11 +45,9 @@ fun OrganizationPickerScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var isRefreshing by remember { mutableStateOf(false) }
-    var isEditing by remember { mutableStateOf(false) }
     var showDeleteConfirm by remember { mutableStateOf<String?>(null) }
     var renameTarget by remember { mutableStateOf<Organization?>(null) }
 
-    // Reset refresh indicator when loading completes
     LaunchedEffect(uiState.isLoading) {
         if (!uiState.isLoading) {
             isRefreshing = false
@@ -60,31 +72,19 @@ fun OrganizationPickerScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
                     }
                     Text(
-                        text = if (isEditing) "组织管理" else "当前组织",
+                        text = "当前组织",
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f)
+                        fontWeight = FontWeight.Bold
                     )
-                    if (!isEditing) {
-                        IconButton(onClick = { isEditing = true }) {
-                            Icon(Icons.Default.Edit, contentDescription = "编辑")
-                        }
-                    } else {
-                        IconButton(onClick = { isEditing = false }) {
-                            Icon(Icons.Default.Close, contentDescription = "完成")
-                        }
-                    }
                 }
             }
         },
         floatingActionButton = {
-            if (isEditing) {
-                FloatingActionButton(
-                    onClick = { viewModel.showCreateDialog() },
-                    containerColor = MaterialTheme.colorScheme.primary
-                ) {
-                    Icon(Icons.Default.Add, contentDescription = "创建组织")
-                }
+            FloatingActionButton(
+                onClick = { viewModel.showCreateDialog() },
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "创建组织")
             }
         }
     ) { padding ->
@@ -103,7 +103,7 @@ fun OrganizationPickerScreen(
                     onRetry = { viewModel.loadOrganizations() }
                 )
                 uiState.organizations.isEmpty() -> EmptyState(
-                    message = if (isEditing) "还没有组织，点击右下角按钮创建" else "暂无组织"
+                    message = "还没有组织，点击右下角按钮创建"
                 )
                 else -> {
                     LazyColumn(
@@ -111,26 +111,19 @@ fun OrganizationPickerScreen(
                         contentPadding = PaddingValues(vertical = 8.dp)
                     ) {
                         items(uiState.organizations, key = { it.id ?: it.name ?: "" }) { org ->
-                            if (isEditing) {
-                                OrgManageCard(
-                                    organization = org,
-                                    isSelected = false,
-                                    onSelect = { org.id?.let { onNavigateToDetail(it) } },
-                                    onRename = { renameTarget = org },
-                                    onDelete = { showDeleteConfirm = org.id }
-                                )
-                            } else {
-                                OrgPickerCard(
-                                    name = org.name ?: org.id ?: "",
-                                    memberCount = org.members?.size ?: 0,
-                                    isSelected = org.id != null && org.id == uiState.currentOrgId,
-                                    onClick = {
-                                        viewModel.selectOrganization(org)
-                                        onBack()
-                                    }
-                                )
-                            }
+                            OrgSwipeCard(
+                                organization = org,
+                                isSelected = org.id != null && org.id == uiState.currentOrgId,
+                                onSelect = {
+                                    viewModel.selectOrganization(org)
+                                    onBack()
+                                },
+                                onNavigateToDetail = { org.id?.let(onNavigateToDetail) },
+                                onDelete = { showDeleteConfirm = org.id },
+                                onRename = { renameTarget = org }
+                            )
                         }
+                        item { Spacer(modifier = Modifier.height(80.dp)) }
                     }
                 }
             }
@@ -193,6 +186,19 @@ fun OrganizationPickerScreen(
         )
     }
 
+    // Delete confirm dialog
+    showDeleteConfirm?.let { orgId ->
+        ConfirmDialog(
+            title = "删除组织",
+            message = "确定要删除这个组织吗？",
+            onConfirm = {
+                viewModel.deleteOrganization(orgId)
+                showDeleteConfirm = null
+            },
+            onDismiss = { showDeleteConfirm = null }
+        )
+    }
+
     // Rename dialog
     renameTarget?.let { org ->
         var newName by remember { mutableStateOf(org.name ?: "") }
@@ -228,146 +234,219 @@ fun OrganizationPickerScreen(
             }
         )
     }
-
-    // Delete confirm dialog
-    showDeleteConfirm?.let { orgId ->
-        ConfirmDialog(
-            title = "删除组织",
-            message = "确定要删除这个组织吗？",
-            onConfirm = {
-                viewModel.deleteOrganization(orgId)
-                showDeleteConfirm = null
-            },
-            onDismiss = { showDeleteConfirm = null }
-        )
-    }
 }
 
 @Composable
-private fun OrgPickerCard(
-    name: String,
-    memberCount: Int,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isSelected)
-                MaterialTheme.colorScheme.primaryContainer
-            else
-                MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Surface(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primaryContainer
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        Icons.Default.Group,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.size(24.dp)
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = name,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
-                )
-                if (memberCount > 0) {
-                    Text(
-                        text = "${memberCount} 位成员",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun OrgManageCard(
+private fun OrgSwipeCard(
     organization: Organization,
     isSelected: Boolean,
     onSelect: () -> Unit,
-    onRename: () -> Unit,
-    onDelete: () -> Unit
+    onNavigateToDetail: () -> Unit,
+    onDelete: () -> Unit,
+    onRename: () -> Unit
 ) {
-    Card(
+    val scope = rememberCoroutineScope()
+    val density = LocalDensity.current
+    val maxOffset = 180.dp
+    val maxOffsetPx = with(density) { maxOffset.toPx() }
+    val arrowWidthPx = with(density) { 56.dp.toPx() }
+    val offsetX = remember { Animatable(0f) }
+    val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
+    val isPastHalf by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 0.5f } }
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(IntrinsicSize.Min)
             .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clickable(onClick = onSelect),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+            .clipToBounds()
     ) {
+        // Background 两侧提示
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .matchParentSize()
+                .clip(RoundedCornerShape(12.dp))
         ) {
-            Surface(
-                modifier = Modifier.size(48.dp),
-                shape = RoundedCornerShape(12.dp),
-                color = MaterialTheme.colorScheme.primaryContainer
+            // 左：右滑删除（右滑时露出）
+            Box(
+                modifier = Modifier
+                    .width(maxOffset)
+                    .fillMaxHeight()
+                    .background(
+                        if (isRightSwipe && isPastHalf) MaterialTheme.colorScheme.error
+                        else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f)
+                    ),
+                contentAlignment = Alignment.Center
             ) {
-                Box(contentAlignment = Alignment.Center) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 20.dp)
+                ) {
                     Icon(
-                        Icons.Default.Group,
+                        Icons.Default.Delete,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                        modifier = Modifier.size(24.dp)
+                        tint = if (isRightSwipe && isPastHalf) Color.White
+                               else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
                     )
-                }
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = organization.name ?: organization.id ?: "",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Medium
-                )
-                val memberCount = organization.members?.size ?: 0
-                if (memberCount > 0) {
+                    Spacer(Modifier.width(8.dp))
                     Text(
-                        text = "${memberCount} 位成员",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        "右滑删除",
+                        color = if (isRightSwipe && isPastHalf) Color.White
+                                else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Medium
                     )
                 }
             }
-            IconButton(onClick = onRename) {
-                Icon(Icons.Default.Edit, contentDescription = "重命名")
-            }
-            IconButton(onClick = onDelete) {
-                Icon(
-                    Icons.Default.DeleteOutline,
-                    contentDescription = "删除",
-                    tint = MaterialTheme.colorScheme.error
-                )
+
+            // 中：占位
+            Spacer(Modifier.weight(1f))
+
+            // 右：左滑重命名（左滑时露出）
+            Box(
+                modifier = Modifier
+                    .width(maxOffset)
+                    .fillMaxHeight()
+                    .background(
+                        if (!isRightSwipe && isPastHalf) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(end = 20.dp)
+                ) {
+                    Icon(
+                        Icons.Default.Edit,
+                        contentDescription = null,
+                        tint = if (!isRightSwipe && isPastHalf) Color.White
+                               else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        "修改名称",
+                        color = if (!isRightSwipe && isPastHalf) Color.White
+                                else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
             }
         }
+
+        // Foreground 卡片
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+                // Tap：点击内容区域选择，点击箭头进入详情
+                .pointerInput(onSelect, onNavigateToDetail) {
+                    detectTapGestures { offset ->
+                        if (offset.x >= size.width - arrowWidthPx) {
+                            onNavigateToDetail()
+                        } else {
+                            onSelect()
+                        }
+                    }
+                }
+                // Drag：水平双向拖动，松手后判定
+                .pointerInput(onDelete, onRename) {
+                    detectHorizontalDragGestures(
+                        onDragEnd = {
+                            scope.launch {
+                                if (abs(offsetX.value) > maxOffsetPx * 0.5f) {
+                                    if (offsetX.value >= 0f) onDelete() else onRename()
+                                }
+                                offsetX.animateTo(0f)
+                            }
+                        },
+                        onDragCancel = {
+                            scope.launch { offsetX.animateTo(0f) }
+                        },
+                        onHorizontalDrag = { change, dragAmount ->
+                            change.consume()
+                            scope.launch {
+                                offsetX.snapTo(
+                                    (offsetX.value + dragAmount)
+                                        .coerceIn(-maxOffsetPx, maxOffsetPx)
+                                )
+                            }
+                        }
+                    )
+                },
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = if (isSelected)
+                    MaterialTheme.colorScheme.primaryContainer
+                else
+                    MaterialTheme.colorScheme.surface
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Surface(
+                        modifier = Modifier.size(48.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                Icons.Default.Group,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = organization.name ?: organization.id ?: "",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Medium
+                        )
+                        val memberCount = organization.members?.size ?: 0
+                        if (memberCount > 0) {
+                            Text(
+                                text = "${memberCount} 位成员",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(56.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = "管理",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+        }
+    }
+
+    // 选中状态改变时重置滑动
+    LaunchedEffect(isSelected) {
+        offsetX.animateTo(0f)
     }
 }

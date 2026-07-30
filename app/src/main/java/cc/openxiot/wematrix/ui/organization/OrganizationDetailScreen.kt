@@ -1,6 +1,10 @@
 package cc.openxiot.wematrix.ui.organization
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,8 +16,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.Member
@@ -23,6 +33,9 @@ import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import kotlinx.coroutines.launch
+import kotlin.math.abs
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -235,91 +248,197 @@ private fun MemberCard(
     onChangeRole: () -> Unit,
     onRemove: () -> Unit
 ) {
-    Card(
+    val canInteract = isAdmin && !isSelf
+    val scope = rememberCoroutineScope()
+    val density = LocalDensity.current
+    val maxOffset = 180.dp
+    val maxOffsetPx = with(density) { maxOffset.toPx() }
+    val offsetX = remember { Animatable(0f) }
+    val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
+    val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+            .height(IntrinsicSize.Min)
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+            .clipToBounds()
     ) {
+        // Background 两侧提示
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Min)
-                .clickable(enabled = isAdmin && !isSelf, onClick = onChangeRole),
-            verticalAlignment = Alignment.CenterVertically
+                .matchParentSize()
+                .clip(RoundedCornerShape(12.dp))
         ) {
-            Row(
+            // 左：右滑移除成员（右滑时露出）
+            Box(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 12.dp, top = 12.dp, bottom = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .width(maxOffset)
+                    .fillMaxHeight()
+                    .background(
+                        if (isRightSwipe && isPastTwoThirds) MaterialTheme.colorScheme.error
+                        else MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f)
+                    ),
+                contentAlignment = Alignment.CenterStart
             ) {
-                AvatarImage(
-                    url = null,
-                    name = member.name,
-                    size = 40.dp
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = member.name,
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Medium,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                        if (isSelf) {
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text(
-                                text = "我",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = member.developerId,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                RoleBadge(role = member.role)
-            }
-            if (isAdmin && !isSelf) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(44.dp)
-                        .clickable(onClick = onChangeRole),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(Icons.Default.SwapHoriz, contentDescription = "更改角色", modifier = Modifier.size(20.dp))
-                }
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(48.dp)
-                        .clickable(onClick = onRemove),
-                    contentAlignment = Alignment.Center
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 20.dp)
                 ) {
                     Icon(
-                        Icons.Default.DeleteOutline,
-                        contentDescription = "移除",
-                        tint = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.size(22.dp)
+                        Icons.Default.Delete,
+                        contentDescription = null,
+                        tint = if (isRightSwipe && isPastTwoThirds) Color.White
+                               else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        "移除成员",
+                        color = if (isRightSwipe && isPastTwoThirds) Color.White
+                                else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            // 中：占位
+            Spacer(Modifier.weight(1f))
+
+            // 右：左滑更改角色（左滑时露出）
+            Box(
+                modifier = Modifier
+                    .width(maxOffset)
+                    .fillMaxHeight()
+                    .background(
+                        if (!isRightSwipe && isPastTwoThirds) MaterialTheme.colorScheme.primary
+                        else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f)
+                    ),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(end = 20.dp)
+                ) {
+                    Icon(
+                        Icons.Default.SwapHoriz,
+                        contentDescription = null,
+                        tint = if (!isRightSwipe && isPastTwoThirds) Color.White
+                               else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        "更改角色",
+                        color = if (!isRightSwipe && isPastTwoThirds) Color.White
+                                else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Medium
                     )
                 }
             }
         }
+
+        // Foreground 卡片
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+                .pointerInput(onChangeRole) {
+                    detectTapGestures {
+                        if (canInteract) onChangeRole()
+                    }
+                }
+                .then(
+                    if (canInteract) {
+                        Modifier.pointerInput(onChangeRole, onRemove) {
+                            detectHorizontalDragGestures(
+                                onDragEnd = {
+                                    scope.launch {
+                                        if (abs(offsetX.value) > maxOffsetPx * 2f / 3f) {
+                                            if (offsetX.value >= 0f) onRemove() else onChangeRole()
+                                        }
+                                        offsetX.animateTo(0f)
+                                    }
+                                },
+                                onDragCancel = {
+                                    scope.launch { offsetX.animateTo(0f) }
+                                },
+                                onHorizontalDrag = { change, dragAmount ->
+                                    change.consume()
+                                    scope.launch {
+                                        offsetX.snapTo(
+                                            (offsetX.value + dragAmount)
+                                                .coerceIn(-maxOffsetPx, maxOffsetPx)
+                                        )
+                                    }
+                                }
+                            )
+                        }
+                    } else Modifier
+                ),
+            shape = RoundedCornerShape(12.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(IntrinsicSize.Min),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 12.dp, top = 12.dp, bottom = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    AvatarImage(
+                        url = null,
+                        name = member.name,
+                        size = 40.dp
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column(modifier = Modifier.weight(1f)) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = member.name,
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Medium,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                            if (isSelf) {
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text(
+                                    text = "我",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = member.developerId,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(8.dp))
+                    RoleBadge(role = member.role)
+                }
+            }
+        }
+    }
+
+    // 选中状态改变时重置滑动
+    LaunchedEffect(isAdmin, isSelf) {
+        offsetX.animateTo(0f)
     }
 }
 

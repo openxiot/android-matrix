@@ -4,7 +4,6 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -345,11 +344,6 @@ private fun MemberCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .offset { IntOffset(offsetX.value.roundToInt(), 0) }
-                .pointerInput(onChangeRole) {
-                    detectTapGestures {
-                        if (canInteract) onChangeRole()
-                    }
-                }
                 .then(
                     if (canInteract) {
                         Modifier.pointerInput(onChangeRole, onRemove) {

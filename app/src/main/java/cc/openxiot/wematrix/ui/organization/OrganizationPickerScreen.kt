@@ -249,7 +249,7 @@ private fun OrgSwipeCard(
     val density = LocalDensity.current
     val maxOffset = 180.dp
     val maxOffsetPx = with(density) { maxOffset.toPx() }
-    val arrowWidthPx = with(density) { 48.dp.toPx() }
+    val arrowWidthPx = with(density) { 64.dp.toPx() }
     val offsetX = remember { Animatable(0f) }
     val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
     val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
@@ -432,7 +432,7 @@ private fun OrgSwipeCard(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .width(48.dp),
+                        .width(64.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(

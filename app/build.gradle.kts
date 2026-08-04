@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
@@ -15,8 +18,22 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        create("release") {
+            val props = Properties().apply {
+                val file = rootProject.file("keystore.properties")
+                if (file.exists()) load(FileInputStream(file))
+            }
+            storeFile = rootProject.file(props.getProperty("storeFile", ""))
+            storePassword = props.getProperty("storePassword")
+            keyAlias = props.getProperty("keyAlias")
+            keyPassword = props.getProperty("keyPassword")
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -100,6 +117,9 @@ dependencies {
     implementation("cc.openxiot:xiot-spec:0.1.5")
     implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.5")
     implementation("cc.openxiot:xiot-support-codegen-vertx:0.1.5")
+
+    // Weixin
+    implementation("com.tencent.mm.opensdk:wechat-sdk-android:+")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-tooling-preview")

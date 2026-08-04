@@ -77,7 +77,9 @@ class TokenManager(context: Context) {
             }
             val json = org.json.JSONObject(payload)
             // Try common JWT claims for user identifier
-            json.optString("sub").takeIf { it.isNotEmpty() }
+            // 服务端(service-account)OAuth 回调签发的 JWT 用 upn 存 accountId
+            json.optString("upn").takeIf { it.isNotEmpty() }
+                ?: json.optString("sub").takeIf { it.isNotEmpty() }
                 ?: json.optString("preferred_username").takeIf { it.isNotEmpty() }
                 ?: json.optString("clientId").takeIf { it.isNotEmpty() }
         } catch (_: Exception) { null }

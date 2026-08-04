@@ -2,9 +2,23 @@ package cc.openxiot.wematrix.data.repository
 
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.api.PlatformInfo
+import cc.openxiot.wematrix.data.api.OAuthToken
 
 class AuthRepository {
     private val service get() = RetrofitClient.accountService
+
+    /**
+     * 用微信授权 code 换登录 token。
+     * 服务端返回 JSON:{"success":true,"data":{"token":...,"name":...,"avatar":...,"platform":"weixin"}}
+     */
+    suspend fun exchangeWeixinCode(code: String): Result<OAuthToken> = runCatching {
+        val response = service.oauthLogin("weixin", code)
+        if (response.isSuccessful && response.body()?.success == true) {
+            response.body()!!.data ?: throw Exception("返回数据为空")
+        } else {
+            throw Exception(response.body()?.message ?: "登录失败")
+        }
+    }
 
     suspend fun getGithubPlatform(): Result<PlatformInfo> = runCatching {
         val response = service.getGithubPlatform()

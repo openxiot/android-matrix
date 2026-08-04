@@ -1,11 +1,10 @@
 package cc.openxiot.wematrix.ui.login
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.AppState
-import cc.openxiot.wematrix.ui.theme.Blue700
 
 @Composable
 fun LoginScreen(
@@ -42,8 +40,11 @@ fun LoginScreen(
         }
     }
 
+    // 收集微信授权结果(WXEntryActivity 写入 Weixin.authResult)
     LaunchedEffect(Unit) {
-        viewModel.loadGithubUrl()
+        Weixin.authResult.collect { resp ->
+            resp?.let { viewModel.handleWeixinResult(it) }
+        }
     }
 
     Box(
@@ -65,7 +66,7 @@ fun LoginScreen(
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Text(
-                        text = "S",
+                        text = "M",
                         fontSize = 40.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -76,7 +77,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "AI能源管理",
+                text = "矩阵",
                 style = MaterialTheme.typography.headlineLarge,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
@@ -85,7 +86,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "AI Energy Management",
+                text = "Matrix",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White.copy(alpha = 0.7f)
             )
@@ -97,10 +98,8 @@ fun LoginScreen(
             } else {
                 Button(
                     onClick = {
-                        uiState.githubUrl?.let { url ->
-                            context.startActivity(
-                                Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            )
+                        if (!Weixin.login(context)) {
+                            viewModel.showError("未安装微信或微信版本过低")
                         }
                     },
                     modifier = Modifier
@@ -108,13 +107,19 @@ fun LoginScreen(
                         .height(52.dp),
                     shape = RoundedCornerShape(26.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
-                    ),
-                    enabled = uiState.githubUrl != null
+                        containerColor = Color(0xFF07C160)
+                    )
                 ) {
+                    Icon(
+                        Icons.Default.Chat,
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = Color.White
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "使用 GitHub 登录",
-                        color = Blue700,
+                        text = "微信登录",
+                        color = Color.White,
                         fontWeight = FontWeight.Medium,
                         fontSize = 16.sp
                     )

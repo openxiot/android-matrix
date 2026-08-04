@@ -10,6 +10,7 @@
 *.jks
 *.keystore
 *.log
+keystore.properties
 # Android Profiling
 # Android Studio generated files and folders
 # Google Services (e.g. APIs or Firebase)

@@ -8,6 +8,13 @@ data class ApiResponse<T>(
     @SerializedName("message") val message: String? = null
 )
 
+data class OAuthToken(
+    @SerializedName("token") val token: String?,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("avatar") val avatar: String? = null,
+    @SerializedName("platform") val platform: String? = null
+)
+
 data class PlatformInfo(
     @SerializedName("platformId") val platformId: String,
     @SerializedName("platformName") val platformName: String,

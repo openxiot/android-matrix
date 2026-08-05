@@ -74,7 +74,7 @@ fun AboutScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "微矩阵",
+                text = "矩阵",
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold
             )

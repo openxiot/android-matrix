@@ -15,5 +15,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "android-wematrix"
+rootProject.name = "android-matrix"
 include(":app")

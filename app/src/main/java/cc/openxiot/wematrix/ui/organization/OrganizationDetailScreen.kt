@@ -100,7 +100,7 @@ fun OrganizationDetailScreen(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(vertical = 8.dp)
                     ) {
-                        items(uiState.members, key = { it.developerId }) { member ->
+                        items(uiState.members, key = { it.developerId ?: it.name ?: it.email ?: it.hashCode() }) { member ->
                             MemberCard(
                                 member = member,
                                 isAdmin = uiState.isCurrentUserAdmin,
@@ -193,7 +193,7 @@ fun OrganizationDetailScreen(
         var newRole by remember(member.developerId) { mutableStateOf(member.role) }
         AlertDialog(
             onDismissRequest = { viewModel.hideChangeRoleDialog() },
-            title = { Text("更改角色 - ${member.name}") },
+            title = { Text("更改角色 - ${member.name ?: member.developerId}") },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -217,7 +217,12 @@ fun OrganizationDetailScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        viewModel.updateMemberRole(orgId, member.developerId, memberName = member.name, newRole = newRole)
+                        viewModel.updateMemberRole(
+                            orgId,
+                            member.developerId ?: "",
+                            memberName = member.name ?: "",
+                            newRole = newRole ?: "member"
+                        )
                     },
                     enabled = newRole != member.role
                 ) { Text("确认") }
@@ -232,8 +237,8 @@ fun OrganizationDetailScreen(
     uiState.removeTarget?.let { member ->
         ConfirmDialog(
             title = "移除成员",
-            message = "确定要移除「${member.name}」吗？",
-            onConfirm = { viewModel.removeMember(orgId, member.developerId) },
+            message = "确定要移除「${member.name ?: member.developerId}」吗？",
+            onConfirm = { viewModel.removeMember(orgId, member.developerId ?: "") },
             onDismiss = { viewModel.hideRemoveConfirm() }
         )
     }
@@ -399,7 +404,7 @@ private fun MemberCard(
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = member.name,
+                                text = member.name ?: member.developerId ?: "未命名",
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Medium,
                                 maxLines = 1,
@@ -416,7 +421,7 @@ private fun MemberCard(
                         }
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
-                            text = member.developerId,
+                            text = member.developerId ?: "—",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 1,
@@ -437,7 +442,7 @@ private fun MemberCard(
 }
 
 @Composable
-private fun RoleBadge(role: String) {
+private fun RoleBadge(role: String?) {
     val (label, containerColor, contentColor) = when (role) {
         "admin" -> Triple("管理员", MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
         else -> Triple("成员", MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondaryContainer)

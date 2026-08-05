@@ -11,49 +11,49 @@ interface AccountService {
         @Query("code") code: String
     ): Response<ApiResponse<OAuthToken>>
 
-    @GET("developer/platform/all")
+    @GET("user/platform/all")
     suspend fun getPlatforms(): Response<ApiResponse<List<PlatformInfo>>>
 
-    @GET("developer/platform/github")
+    @GET("user/platform/github")
     suspend fun getGithubPlatform(): Response<ApiResponse<PlatformInfo>>
 
-    @GET("organization/many")
+    @GET("user/organization/many")
     suspend fun getMyOrganizations(): Response<ApiResponse<List<Organization>>>
 
-    @GET("organization/all")
+    @GET("user/organization/all")
     suspend fun getAllOrganizations(): Response<ApiResponse<List<Organization>>>
 
-    @GET("organization/one/{id}")
+    @GET("user/organization/one/{id}")
     suspend fun getOrganization(@Path("id") organizationId: String): Response<ApiResponse<Organization>>
 
-    @POST("organization/one/{id}")
+    @POST("user/organization/one/{id}")
     suspend fun createOrganization(
         @Path("id") organizationId: String,
         @Body body: Map<String, String>
     ): Response<ApiResponse<Organization>>
 
-    @PUT("organization/one/{id}")
+    @PUT("user/organization/one/{id}")
     suspend fun updateOrganization(
         @Path("id") organizationId: String,
         @Body body: Map<String, String>
     ): Response<ApiResponse<Organization>>
 
-    @DELETE("organization/one/{id}")
+    @DELETE("user/organization/one/{id}")
     suspend fun deleteOrganization(@Path("id") organizationId: String): Response<ApiResponse<Unit>>
 
-    @POST("organization/member/{orgId}")
+    @POST("user/organization/member/{orgId}")
     suspend fun addMember(
         @Path("orgId") orgId: String,
         @Body member: Member
     ): Response<ApiResponse<Unit>>
 
-    @DELETE("organization/member/{orgId}")
+    @DELETE("user/organization/member/{orgId}")
     suspend fun removeMember(
         @Path("orgId") orgId: String,
         @Query("memberId") memberId: String
     ): Response<ApiResponse<Unit>>
 
-    @PUT("organization/member/{orgId}")
+    @PUT("user/organization/member/{orgId}")
     suspend fun updateMember(
         @Path("orgId") orgId: String,
         @Body member: Member

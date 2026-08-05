@@ -2,7 +2,7 @@ package cc.openxiot.wematrix.util
 
 object Constants {
     const val ACCOUNT_BASE_URL = "https://account.openxiot.cn"
-    const val SITE_BASE_URL = "https://site.openxiot.cn"
+    const val SITE_BASE_URL = "https://matrix.openxiot.cn"
     const val PRODUCT_BASE_URL = "https://product.openxiot.cn"
 
     const val OAUTH_SCHEME = "openxiot"

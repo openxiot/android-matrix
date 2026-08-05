@@ -39,9 +39,9 @@ data class Creator(
 )
 
 data class Member(
-    @SerializedName("developerId") val developerId: String,
-    @SerializedName("name") val name: String,
-    @SerializedName("role") val role: String,
+    @SerializedName("developerId") val developerId: String? = null,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("role") val role: String? = null,
     @SerializedName("email") val email: String? = null
 )
 

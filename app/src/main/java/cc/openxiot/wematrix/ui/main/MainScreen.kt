@@ -2,6 +2,8 @@ package cc.openxiot.wematrix.ui.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -17,6 +19,7 @@ import cc.openxiot.wematrix.ui.products.ProductListScreen
 import cc.openxiot.wematrix.ui.profile.ProfileScreen
 import cc.openxiot.wematrix.ui.project.ProjectViewModel
 import cc.openxiot.wematrix.ui.project.SpaceTreeContent
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -77,86 +80,113 @@ fun MainScreen(
             }
         }
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
-            when (mainViewModel.currentTab) {
-                BottomTab.Projects -> {
-                    val rootId = mainViewModel.currentRootSpaceId
-                    if (rootId != null) {
-                        val coroutineScope = rememberCoroutineScope()
-                        var isRefreshing by remember { mutableStateOf(false) }
+        val pagerState = rememberPagerState(
+            initialPage = mainViewModel.currentTab.ordinal,
+            pageCount = { tabs.size }
+        )
 
-                        Column(modifier = Modifier.fillMaxSize()) {
-                            // Centered app name title bar
-                            Surface(
-                                modifier = Modifier.fillMaxWidth(),
-                                color = MaterialTheme.colorScheme.surface
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(48.dp),
-                                    contentAlignment = Alignment.Center
+        // 手指左右滑动 → 更新底部选中 Tab
+        LaunchedEffect(pagerState, tabs) {
+            snapshotFlow { pagerState.settledPage }
+                .distinctUntilChanged()
+                .collect { page ->
+                    mainViewModel.selectTab(tabs[page])
+                }
+        }
+
+        // 点击底部 Tab → 分页器动画滚动到对应页
+        LaunchedEffect(mainViewModel.currentTab) {
+            if (pagerState.settledPage != mainViewModel.currentTab.ordinal) {
+                pagerState.animateScrollToPage(mainViewModel.currentTab.ordinal)
+            }
+        }
+
+        Box(modifier = Modifier.padding(padding)) {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.fillMaxSize(),
+                beyondViewportPageCount = 0
+            ) { page ->
+                when (tabs[page]) {
+                    BottomTab.Projects -> {
+                        val rootId = mainViewModel.currentRootSpaceId
+                        if (rootId != null) {
+                            val coroutineScope = rememberCoroutineScope()
+                            var isRefreshing by remember { mutableStateOf(false) }
+
+                            Column(modifier = Modifier.fillMaxSize()) {
+                                // Centered app name title bar
+                                Surface(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    color = MaterialTheme.colorScheme.surface
                                 ) {
-                                    Text(
-                                        text = "微矩阵",
-                                        style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.Bold
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(48.dp),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = "矩阵",
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                    }
+                                }
+
+                                // Pull-to-refresh space tree
+                                PullToRefreshBox(
+                                    isRefreshing = isRefreshing,
+                                    onRefresh = {
+                                        coroutineScope.launch {
+                                            isRefreshing = true
+                                            projectViewModel.loadSpaceGraphInternal(rootId)
+                                            isRefreshing = false
+                                        }
+                                    },
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    SpaceTreeContent(
+                                        rootId = rootId,
+                                        viewModel = projectViewModel,
+                                        showActions = false,
+                                        onRootSpaceClick = onNavigateToProjectPicker,
+                                        onDeviceDetail = onNavigateToDeviceDetail,
+                                        onDeviceOperation = onNavigateToDeviceOperation
                                     )
                                 }
                             }
-
-                            // Pull-to-refresh space tree
-                            PullToRefreshBox(
-                                isRefreshing = isRefreshing,
-                                onRefresh = {
-                                    coroutineScope.launch {
-                                        isRefreshing = true
-                                        projectViewModel.loadSpaceGraphInternal(rootId)
-                                        isRefreshing = false
-                                    }
-                                },
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                SpaceTreeContent(
-                                    rootId = rootId,
-                                    viewModel = projectViewModel,
-                                    showActions = false,
-                                    onRootSpaceClick = onNavigateToProjectPicker,
-                                    onDeviceDetail = onNavigateToDeviceDetail,
-                                    onDeviceOperation = onNavigateToDeviceOperation
-                                )
-                            }
+                        } else if (currentOrgName == null) {
+                            EmptyHint(
+                                message = "请先选择当前组织",
+                                buttonText = "选择组织",
+                                onClick = onNavigateToOrgPicker
+                            )
+                        } else {
+                            EmptyHint(
+                                message = "请先选择当前项目",
+                                buttonText = "选择项目",
+                                onClick = onNavigateToProjectPicker
+                            )
                         }
-                    } else if (currentOrgName == null) {
-                        EmptyHint(
-                            message = "请先选择当前组织",
-                            buttonText = "选择组织",
-                            onClick = onNavigateToOrgPicker
-                        )
-                    } else {
-                        EmptyHint(
-                            message = "请先选择当前项目",
-                            buttonText = "选择项目",
-                            onClick = onNavigateToProjectPicker
-                        )
                     }
+                    BottomTab.Devices -> DeviceListScreen(
+                        rootId = mainViewModel.currentRootSpaceId,
+                        onDeviceDetail = onNavigateToDeviceDetail,
+                        onDeviceOperation = onNavigateToDeviceOperation
+                    )
+                    BottomTab.Products -> ProductListScreen(
+                        onProductDetail = onNavigateToProductDetail
+                    )
+                    BottomTab.Profile -> ProfileScreen(
+                        currentOrgName = currentOrgName,
+                        currentProjectName = currentProjectName,
+                        onNavigateToOrgPicker = onNavigateToOrgPicker,
+                        onNavigateToProjectPicker = onNavigateToProjectPicker,
+                        onNavigateToAccount = onNavigateToAccount,
+                        onNavigateToAbout = onNavigateToAbout
+                    )
                 }
-                BottomTab.Devices -> DeviceListScreen(
-                    rootId = mainViewModel.currentRootSpaceId,
-                    onDeviceDetail = onNavigateToDeviceDetail,
-                    onDeviceOperation = onNavigateToDeviceOperation
-                )
-                BottomTab.Products -> ProductListScreen(
-                    onProductDetail = onNavigateToProductDetail
-                )
-                BottomTab.Profile -> ProfileScreen(
-                    currentOrgName = currentOrgName,
-                    currentProjectName = currentProjectName,
-                    onNavigateToOrgPicker = onNavigateToOrgPicker,
-                    onNavigateToProjectPicker = onNavigateToProjectPicker,
-                    onNavigateToAccount = onNavigateToAccount,
-                    onNavigateToAbout = onNavigateToAbout
-                )
             }
         }
     }

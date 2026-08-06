@@ -60,59 +60,59 @@ interface AccountService {
     ): Response<ApiResponse<Unit>>
 }
 
-interface SiteService {
-    @GET("v1/space/all")
+interface MatrixService {
+    @GET("matrix/v1/space/all")
     suspend fun getAllSpaces(): Response<ApiResponse<List<SpaceEntity>>>
 
-    @GET("v1/space/one/{id}")
+    @GET("matrix/v1/space/one/{id}")
     suspend fun getSpace(@Path("id") spaceId: String): Response<ApiResponse<SpaceEntity>>
 
-    @GET("v1/space/tree/{rootId}")
+    @GET("matrix/v1/space/tree/{rootId}")
     suspend fun getSpaceTree(@Path("rootId") rootId: String): Response<ApiResponse<SpaceEntity>>
 
-    @GET("v1/space/graph/{rootId}")
+    @GET("matrix/v1/space/graph/{rootId}")
     suspend fun getSpaceGraph(@Path("rootId") rootId: String): Response<ApiResponse<SpaceGraph>>
 
-    @POST("v1/space/one")
+    @POST("matrix/v1/space/one")
     suspend fun createSpace(@Body space: SpaceEntity): Response<ApiResponse<SpaceEntity>>
 
-    @PUT("v1/space/one")
+    @PUT("matrix/v1/space/one")
     suspend fun updateSpace(@Body space: SpaceEntity): Response<ApiResponse<SpaceEntity>>
 
-    @DELETE("v1/space/one/{spaceId}")
+    @DELETE("matrix/v1/space/one/{spaceId}")
     suspend fun deleteSpace(@Path("spaceId") spaceId: String): Response<ApiResponse<Unit>>
 
-    @GET("v1/device/many/{spaceId}")
+    @GET("matrix/v1/device/many/{spaceId}")
     suspend fun getDevices(@Path("spaceId") spaceId: String): Response<ApiResponse<List<DeviceEntity>>>
 
-    @POST("v1/device/many/{spaceId}")
+    @POST("matrix/v1/device/many/{spaceId}")
     suspend fun addDevices(
         @Path("spaceId") spaceId: String,
         @Body devices: List<DeviceRegistration>
     ): Response<ApiResponse<Unit>>
 
-    @POST("v1/device/one/{spaceId}")
+    @POST("matrix/v1/device/one/{spaceId}")
     suspend fun addDeviceByQr(
         @Path("spaceId") spaceId: String,
         @Body body: Map<String, String>
     ): Response<ApiResponse<Unit>>
 
-    @PUT("v1/device/many/space")
+    @PUT("matrix/v1/device/many/space")
     suspend fun updateDeviceSpace(@Body body: MoveDeviceRequest): Response<ApiResponse<Unit>>
 
-    @GET("v1/device/properties/{spaceId}")
+    @GET("matrix/v1/device/properties/{spaceId}")
     suspend fun getDeviceProperties(
         @Path("spaceId") spaceId: String,
         @Query("pid") pid: List<String>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
-    @POST("v1/device/properties/{spaceId}")
+    @POST("matrix/v1/device/properties/{spaceId}")
     suspend fun setDeviceProperties(
         @Path("spaceId") spaceId: String,
         @Body body: Map<String, Any>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
-    @POST("v1/device/actions/{spaceId}")
+    @POST("matrix/v1/device/actions/{spaceId}")
     suspend fun invokeDeviceAction(
         @Path("spaceId") spaceId: String,
         @Body body: Map<String, Any>

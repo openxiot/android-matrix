@@ -5,7 +5,7 @@ import cc.openxiot.wematrix.data.api.SpaceGraph
 import cc.openxiot.wematrix.data.api.RetrofitClient
 
 class SpaceRepository {
-    private val service get() = RetrofitClient.siteService
+    private val service get() = RetrofitClient.matrixService
 
     suspend fun getAllSpaces(): Result<List<SpaceEntity>> = runCatching {
         val response = service.getAllSpaces()

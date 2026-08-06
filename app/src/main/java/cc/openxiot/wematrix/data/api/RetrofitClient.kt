@@ -58,13 +58,13 @@ object RetrofitClient {
             .create(AccountService::class.java)
     }
 
-    val siteService: SiteService by lazy {
+    val matrixService: MatrixService by lazy {
         Retrofit.Builder()
             .baseUrl(Constants.SITE_BASE_URL + "/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(SiteService::class.java)
+            .create(MatrixService::class.java)
     }
 
     val productService: ProductService by lazy {

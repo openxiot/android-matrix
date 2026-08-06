@@ -6,7 +6,7 @@ import cc.openxiot.wematrix.data.api.MoveDeviceRequest
 import cc.openxiot.wematrix.data.api.RetrofitClient
 
 class DeviceRepository {
-    private val service get() = RetrofitClient.siteService
+    private val service get() = RetrofitClient.matrixService
 
     suspend fun getDevices(spaceId: String): Result<List<DeviceEntity>> = runCatching {
         val response = service.getDevices(spaceId)

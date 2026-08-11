@@ -9,10 +9,10 @@ class AuthRepository {
 
     /**
      * 用微信授权 code 换登录 token。
-     * 服务端返回 JSON:{"success":true,"data":{"token":...,"name":...,"avatar":...,"platform":"weixin"}}
+     * 服务端返回 JSON:{"success":true,"data":{"token":...,"name":...,"avatar":...,"platform":"wechat"}}
      */
     suspend fun exchangeWeixinCode(code: String): Result<OAuthToken> = runCatching {
-        val response = service.oauthLogin("weixin", code)
+        val response = service.oauthLogin("wechat", code)
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: throw Exception("返回数据为空")
         } else {

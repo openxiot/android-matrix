@@ -5,7 +5,7 @@ import retrofit2.http.*
 
 interface AccountService {
     // 移动端直接换 token 的登录接口(区别于浏览器用的 callback 302 跳转),返回 JSON
-    @GET("user/oauth2/v1/login/{platformId}")
+    @GET("user/oauth2/v1/login/mobile/{platformId}")
     suspend fun oauthLogin(
         @Path("platformId") platformId: String,
         @Query("code") code: String

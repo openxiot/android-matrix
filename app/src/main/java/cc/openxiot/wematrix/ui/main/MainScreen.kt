@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.ui.devices.DeviceListScreen
+import cc.openxiot.wematrix.ui.home.HomeScreen
 import cc.openxiot.wematrix.ui.products.ProductListScreen
 import cc.openxiot.wematrix.ui.profile.ProfileScreen
 import cc.openxiot.wematrix.ui.project.ProjectViewModel
@@ -108,6 +109,7 @@ fun MainScreen(
                 beyondViewportPageCount = 0
             ) { page ->
                 when (tabs[page]) {
+                    BottomTab.Home -> HomeScreen()
                     BottomTab.Projects -> {
                         val rootId = mainViewModel.currentRootSpaceId
                         if (rootId != null) {

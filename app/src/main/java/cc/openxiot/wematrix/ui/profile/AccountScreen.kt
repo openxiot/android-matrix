@@ -49,10 +49,10 @@ fun AccountScreen(
         scope.launch {
             settingsRepository.updateSettings(enabled)
                 .onSuccess {
-                    if (!enabled) {
-                        tokenManager.clearCurrentSelection()
-                        RetrofitClient.setOrgId(null)
-                    }
+                    // 状态切换成功即清空已选组织与项目：
+                    // 禁用时清空历史选择；启用时清空此前在组织禁用状态下选的项目
+                    tokenManager.clearCurrentSelection()
+                    RetrofitClient.setOrgId(null)
                 }
                 .onFailure { e ->
                     organizationEnabled = previous
@@ -176,7 +176,7 @@ fun AccountScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "启用后可在「我」页面选择当前项目",
+                            text = "启用后可管理组织",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

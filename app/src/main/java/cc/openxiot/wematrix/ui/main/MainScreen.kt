@@ -159,7 +159,7 @@ fun MainScreen(
                                     )
                                 }
                             }
-                        } else if (currentOrgName == null) {
+                        } else if (organizationEnabled && currentOrgName == null) {
                             EmptyHint(
                                 message = "请先选择当前组织",
                                 buttonText = "选择组织",

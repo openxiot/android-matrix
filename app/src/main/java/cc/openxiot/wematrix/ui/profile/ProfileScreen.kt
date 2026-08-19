@@ -97,14 +97,21 @@ fun ProfileScreen(
                 }
             }
 
-            // Current project（始终显示）
+            // Current project（始终显示；组织禁用时也可直接进入项目选择）
             item {
                 SectionHeader("当前项目")
                 SettingsCard(
                     title = currentProjectName ?: "未选择项目",
-                    subtitle = if (currentOrgName != null) "点击切换项目" else "请先选择组织",
+                    subtitle = when {
+                        !organizationEnabled -> "请选择项目"
+                        currentOrgName != null -> "点击切换项目"
+                        else -> "请先选择组织"
+                    },
                     icon = Icons.Default.Business,
-                    onClick = { if (currentOrgName != null) onNavigateToProjectPicker() }
+                    onClick = {
+                        // 组织禁用或已选组织时均可进入；仅"组织启用但未选组织"时提示先选组织
+                        if (!organizationEnabled || currentOrgName != null) onNavigateToProjectPicker()
+                    }
                 )
             }
 

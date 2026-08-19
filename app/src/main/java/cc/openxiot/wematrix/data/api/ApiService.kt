@@ -82,6 +82,29 @@ interface MatrixService {
     @DELETE("matrix/v1/space/one/{spaceId}")
     suspend fun deleteSpace(@Path("spaceId") spaceId: String): Response<ApiResponse<Unit>>
 
+    // ---- 项目成员（根空间 access 条目） ----
+
+    @GET("matrix/v1/space/{rootId}/access")
+    suspend fun listAccesses(@Path("rootId") rootId: String): Response<ApiResponse<List<ProjectMember>>>
+
+    @POST("matrix/v1/space/{rootId}/access")
+    suspend fun addAccess(
+        @Path("rootId") rootId: String,
+        @Body body: Map<String, String>
+    ): Response<ApiResponse<Unit>>
+
+    @PUT("matrix/v1/space/{rootId}/access")
+    suspend fun updateAccess(
+        @Path("rootId") rootId: String,
+        @Body body: Map<String, String>
+    ): Response<ApiResponse<Unit>>
+
+    @DELETE("matrix/v1/space/{rootId}/access")
+    suspend fun removeAccess(
+        @Path("rootId") rootId: String,
+        @Query("memberId") memberId: String
+    ): Response<ApiResponse<Unit>>
+
     @GET("matrix/v1/device/many/{spaceId}")
     suspend fun getDevices(@Path("spaceId") spaceId: String): Response<ApiResponse<List<DeviceEntity>>>
 

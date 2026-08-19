@@ -45,6 +45,18 @@ data class Member(
     @SerializedName("email") val email: String? = null
 )
 
+/**
+ * 项目（根空间）成员视图，对应后端 matrix 服务 /access 返回的 SpaceAccessView
+ * （accesses 中 type = user 的条目）。与组织成员的 [Member]（developerId 字段）不同，
+ * 项目成员用 userId 标识账号。
+ */
+data class ProjectMember(
+    @SerializedName("userId") val userId: String? = null,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("role") val role: String? = null,
+    @SerializedName("remark") val remark: String? = null
+)
+
 data class SpaceEntity(
     @SerializedName("id") val id: String? = null,
     @SerializedName("tenantId") val tenantId: String? = null,
@@ -58,8 +70,21 @@ data class SpaceEntity(
     @SerializedName("sortOrder") val sortOrder: Int? = null,
     @SerializedName("children") val children: List<SpaceEntity>? = null,
     @SerializedName("devices") val devices: List<DeviceEntity>? = null,
+    @SerializedName("accesses") val accesses: List<SpaceAccess>? = null,
     @SerializedName("createTime") val createTime: String? = null,
     @SerializedName("updateTime") val updateTime: String? = null
+)
+
+/**
+ * 空间访问条目（SpaceEntity.accesses）：type = organization / user。
+ * 项目成员页用 organization 条目做管理员"组织兜底"判定。
+ */
+data class SpaceAccess(
+    @SerializedName("id") val id: String? = null,
+    @SerializedName("type") val type: String? = null,
+    @SerializedName("role") val role: String? = null,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("remark") val remark: String? = null
 )
 
 data class DeviceEntity(

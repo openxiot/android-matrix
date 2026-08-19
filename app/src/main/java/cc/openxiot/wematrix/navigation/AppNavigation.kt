@@ -13,6 +13,7 @@ import cc.openxiot.wematrix.ui.organization.OrganizationPickerScreen
 import cc.openxiot.wematrix.ui.profile.AboutScreen
 import cc.openxiot.wematrix.ui.profile.AccountScreen
 import cc.openxiot.wematrix.ui.project.ProjectPickerScreen
+import cc.openxiot.wematrix.ui.project.ProjectMemberScreen
 import cc.openxiot.wematrix.ui.device.DeviceDetailScreen
 import cc.openxiot.wematrix.ui.device.DeviceOperationScreen
 import cc.openxiot.wematrix.ui.products.ProductDetailScreen
@@ -25,6 +26,7 @@ sealed class Screen(val route: String) {
     data object OrgPicker : Screen("org_picker")
     data object ProjectPicker : Screen("project_picker")
     data object ProjectEdit : Screen("project_edit/{rootId}")
+    data object ProjectMember : Screen("project_member/{rootId}")
     data object OrgDetail : Screen("org_detail/{orgId}")
     data object DeviceDetail : Screen("device_detail/{did}")
     data object DeviceOperation : Screen("device_operation/{did}?type={type}&spaceId={spaceId}")
@@ -143,7 +145,18 @@ fun AppNavigation(
                 },
                 onNavigateToDetail = { rootId ->
                     navController.navigate("project_edit/$rootId") { launchSingleTop = true }
+                },
+                onNavigateToMembers = { rootId ->
+                    navController.navigate("project_member/$rootId") { launchSingleTop = true }
                 }
+            )
+        }
+
+        composable(Screen.ProjectMember.route) { backStackEntry ->
+            val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
+            ProjectMemberScreen(
+                rootId = rootId,
+                onBack = { navController.popBackStack() }
             )
         }
 

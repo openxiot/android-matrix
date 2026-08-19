@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
@@ -41,6 +42,7 @@ import kotlin.math.roundToInt
 fun ProjectPickerScreen(
     onBack: () -> Unit,
     onNavigateToDetail: (String) -> Unit = {},
+    onNavigateToMembers: (String) -> Unit = {},
     viewModel: ProjectViewModel = viewModel()
 ) {
     val state by viewModel.projectState.collectAsState()
@@ -124,6 +126,7 @@ fun ProjectPickerScreen(
                                     onBack()
                                 },
                                 onNavigateToDetail = { space.id?.let(onNavigateToDetail) },
+                                onNavigateToMembers = { space.id?.let(onNavigateToMembers) },
                                 onDelete = { showDeleteConfirm = space.id },
                                 onRename = { renameTarget = space }
                             )
@@ -233,6 +236,7 @@ private fun ProjectSwipeCard(
     isSelected: Boolean,
     onSelect: () -> Unit,
     onNavigateToDetail: () -> Unit,
+    onNavigateToMembers: () -> Unit,
     onDelete: () -> Unit,
     onRename: () -> Unit
 ) {
@@ -408,6 +412,32 @@ private fun ProjectSwipeCard(
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(56.dp)
+                        .clickable(onClick = onNavigateToMembers),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    ) {
+                        Icon(
+                            Icons.Default.Groups,
+                            contentDescription = "成员",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = "成员",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = 10.sp
+                        )
                     }
                 }
                 Box(

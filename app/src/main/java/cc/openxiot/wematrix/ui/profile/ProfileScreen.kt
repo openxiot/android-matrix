@@ -23,6 +23,7 @@ import cc.openxiot.wematrix.ui.main.PageTitle
 fun ProfileScreen(
     currentOrgName: String?,
     currentProjectName: String?,
+    organizationEnabled: Boolean = true,
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
@@ -94,15 +95,17 @@ fun ProfileScreen(
                 )
             }
 
-            // Current project
-            item {
-                SectionHeader("当前项目")
-                SettingsCard(
-                    title = currentProjectName ?: "未选择项目",
-                    subtitle = if (currentOrgName != null) "点击切换项目" else "请先选择组织",
-                    icon = Icons.Default.Business,
-                    onClick = { if (currentOrgName != null) onNavigateToProjectPicker() }
-                )
+            // Current project（组织未启用时不显示）
+            if (organizationEnabled) {
+                item {
+                    SectionHeader("当前项目")
+                    SettingsCard(
+                        title = currentProjectName ?: "未选择项目",
+                        subtitle = if (currentOrgName != null) "点击切换项目" else "请先选择组织",
+                        icon = Icons.Default.Business,
+                        onClick = { if (currentOrgName != null) onNavigateToProjectPicker() }
+                    )
+                }
             }
 
             // Settings

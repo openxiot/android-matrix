@@ -28,6 +28,7 @@ import kotlinx.coroutines.launch
 fun MainScreen(
     currentOrgName: String?,
     currentProjectName: String?,
+    organizationEnabled: Boolean = true,
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
@@ -183,6 +184,7 @@ fun MainScreen(
                     BottomTab.Profile -> ProfileScreen(
                         currentOrgName = currentOrgName,
                         currentProjectName = currentProjectName,
+                        organizationEnabled = organizationEnabled,
                         onNavigateToOrgPicker = onNavigateToOrgPicker,
                         onNavigateToProjectPicker = onNavigateToProjectPicker,
                         onNavigateToAccount = onNavigateToAccount,

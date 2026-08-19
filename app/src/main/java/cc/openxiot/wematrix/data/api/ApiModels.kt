@@ -32,6 +32,11 @@ data class Organization(
     @SerializedName("members") val members: List<Member>? = null
 )
 
+/** 用户设置（对应 service-account /user/settings），组织是否启用，默认 false */
+data class UserSettings(
+    @SerializedName("organizationEnabled") val organizationEnabled: Boolean = false
+)
+
 data class Creator(
     @SerializedName("id") val id: String? = null,
     @SerializedName("name") val name: String? = null,

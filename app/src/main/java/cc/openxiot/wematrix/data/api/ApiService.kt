@@ -58,6 +58,14 @@ interface AccountService {
         @Path("orgId") orgId: String,
         @Body member: Member
     ): Response<ApiResponse<Unit>>
+
+    // ---- 用户设置 ----
+
+    @GET("user/settings")
+    suspend fun getSettings(): Response<ApiResponse<UserSettings>>
+
+    @PUT("user/settings")
+    suspend fun updateSettings(@Body body: Map<String, Boolean>): Response<ApiResponse<UserSettings>>
 }
 
 interface MatrixService {

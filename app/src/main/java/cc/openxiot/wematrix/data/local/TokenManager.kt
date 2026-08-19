@@ -48,10 +48,25 @@ class TokenManager(context: Context) {
         get() = prefs.getBoolean(KEY_DARK_MODE, false)
         set(value) = prefs.edit { putBoolean(KEY_DARK_MODE, value) }
 
+    /** 组织是否启用（用户设置，对应后端 /user/settings，默认 false） */
+    var organizationEnabled: Boolean
+        get() = prefs.getBoolean(KEY_ORG_ENABLED, false)
+        set(value) = prefs.edit { putBoolean(KEY_ORG_ENABLED, value) }
+
     val isLoggedIn: Boolean get() = token != null
 
     fun clear() {
         prefs.edit { clear() }
+    }
+
+    /** 清空已选组织与项目（组织被禁用后调用） */
+    fun clearCurrentSelection() {
+        prefs.edit {
+            remove(KEY_ORG_ID)
+                .remove(KEY_ORG_NAME)
+                .remove(KEY_ROOT_SPACE_ID)
+                .remove(KEY_ROOT_SPACE_NAME)
+        }
     }
 
     fun clearSession() {
@@ -92,6 +107,7 @@ class TokenManager(context: Context) {
         private const val KEY_PLATFORM = "platform"
         private const val KEY_ORG_ID = "current_org_id"
         private const val KEY_ORG_NAME = "current_org_name"
+        private const val KEY_ORG_ENABLED = "organization_enabled"
         private const val KEY_DARK_MODE = "dark_mode"
         private const val KEY_DEVELOPER_ID = "developer_id"
         private const val KEY_ROOT_SPACE_ID = "current_root_space_id"

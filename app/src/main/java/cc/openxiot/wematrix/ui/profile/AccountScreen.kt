@@ -11,10 +11,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import android.widget.Toast
 import cc.openxiot.wematrix.WeMatrixApp
+import cc.openxiot.wematrix.data.api.RetrofitClient
+import cc.openxiot.wematrix.data.repository.UserSettingsRepository
 import cc.openxiot.wematrix.ui.components.AvatarImage
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,6 +28,39 @@ fun AccountScreen(
     onLogout: () -> Unit
 ) {
     val tokenManager = WeMatrixApp.instance.tokenManager
+    val settingsRepository = remember { UserSettingsRepository() }
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var organizationEnabled by remember { mutableStateOf(tokenManager.organizationEnabled) }
+
+    // 打开页面时从服务器同步一次设置（可能在其他端改过）
+    LaunchedEffect(Unit) {
+        settingsRepository.getSettings().onSuccess { settings ->
+            organizationEnabled = settings.organizationEnabled
+            tokenManager.organizationEnabled = settings.organizationEnabled
+        }
+    }
+
+    // 选中即保存；失败回滚；禁用成功后清空已选组织与项目
+    fun toggleOrganization(enabled: Boolean) {
+        val previous = organizationEnabled
+        organizationEnabled = enabled
+        tokenManager.organizationEnabled = enabled
+        scope.launch {
+            settingsRepository.updateSettings(enabled)
+                .onSuccess {
+                    if (!enabled) {
+                        tokenManager.clearCurrentSelection()
+                        RetrofitClient.setOrgId(null)
+                    }
+                }
+                .onFailure { e ->
+                    organizationEnabled = previous
+                    tokenManager.organizationEnabled = previous
+                    Toast.makeText(context, e.message ?: "更新设置失败", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -113,6 +151,45 @@ fun AccountScreen(
                     InfoRow(label = "当前项目", value = tokenManager.currentRootSpaceName ?: "未选择")
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Settings: 组织启用开关（选中即保存）
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "组织",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            text = "启用后可在「我」页面选择当前项目",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Spacer(modifier = Modifier.width(16.dp))
+                    Switch(
+                        checked = organizationEnabled,
+                        onCheckedChange = { enabled -> toggleOrganization(enabled) }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             Spacer(modifier = Modifier.weight(1f))
 

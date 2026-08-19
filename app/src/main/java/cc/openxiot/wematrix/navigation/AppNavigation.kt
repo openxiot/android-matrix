@@ -60,6 +60,7 @@ fun AppNavigation(
             MainScreen(
                 currentOrgName = tokenManager.currentOrgName,
                 currentProjectName = tokenManager.currentRootSpaceName,
+                organizationEnabled = tokenManager.organizationEnabled,
                 onNavigateToOrgPicker = {
                     navController.navigate(Screen.OrgPicker.route) {
                         popUpTo(Screen.Main.route) { inclusive = false }

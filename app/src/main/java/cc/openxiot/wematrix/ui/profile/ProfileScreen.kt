@@ -84,28 +84,28 @@ fun ProfileScreen(
                 }
             }
 
-            // Current organization
-            item {
-                SectionHeader("当前组织")
-                SettingsCard(
-                    title = currentOrgName ?: "未选择组织",
-                    subtitle = "选择组织后方可选择项目",
-                    icon = Icons.Default.Group,
-                    onClick = onNavigateToOrgPicker
-                )
-            }
-
-            // Current project（组织未启用时不显示）
+            // Current organization（组织未启用时不显示，对齐 webapp 隐藏"组织"菜单）
             if (organizationEnabled) {
                 item {
-                    SectionHeader("当前项目")
+                    SectionHeader("当前组织")
                     SettingsCard(
-                        title = currentProjectName ?: "未选择项目",
-                        subtitle = if (currentOrgName != null) "点击切换项目" else "请先选择组织",
-                        icon = Icons.Default.Business,
-                        onClick = { if (currentOrgName != null) onNavigateToProjectPicker() }
+                        title = currentOrgName ?: "未选择组织",
+                        subtitle = "选择组织后方可选择项目",
+                        icon = Icons.Default.Group,
+                        onClick = onNavigateToOrgPicker
                     )
                 }
+            }
+
+            // Current project（始终显示）
+            item {
+                SectionHeader("当前项目")
+                SettingsCard(
+                    title = currentProjectName ?: "未选择项目",
+                    subtitle = if (currentOrgName != null) "点击切换项目" else "请先选择组织",
+                    icon = Icons.Default.Business,
+                    onClick = { if (currentOrgName != null) onNavigateToProjectPicker() }
+                )
             }
 
             // Settings

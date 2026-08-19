@@ -412,6 +412,10 @@ private fun ProjectMemberCard(
                             )
                         }
                     } else Modifier
+                )
+                // 管理员点击成员卡片 → 编辑备注（点击与左右滑动手势共存）
+                .then(
+                    if (canManage) Modifier.clickable(onClick = onEditRemark) else Modifier
                 ),
             shape = RoundedCornerShape(12.dp),
             colors = CardDefaults.cardColors(
@@ -463,34 +467,12 @@ private fun ProjectMemberCard(
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis
                         )
-                        // 备注：管理员可点击编辑
-                        if (canManage) {
-                            Spacer(modifier = Modifier.height(2.dp))
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.clickable(onClick = onEditRemark)
-                            ) {
-                                Text(
-                                    text = if (member.remark.isNullOrBlank()) "点击添加备注"
-                                           else member.remark,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    modifier = Modifier.weight(1f, fill = false)
-                                )
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Icon(
-                                    Icons.Default.Edit,
-                                    contentDescription = "编辑备注",
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    modifier = Modifier.size(14.dp)
-                                )
-                            }
-                        } else if (!member.remark.isNullOrBlank()) {
+                        // 备注：管理员点击整个成员卡片即可编辑
+                        if (canManage || !member.remark.isNullOrBlank()) {
                             Spacer(modifier = Modifier.height(2.dp))
                             Text(
-                                text = member.remark,
+                                text = if (member.remark.isNullOrBlank()) "点击添加备注"
+                                       else member.remark,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 maxLines = 1,

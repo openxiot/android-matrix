@@ -29,9 +29,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.layout.ContentScale
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanOptions
+import android.app.Activity
+import android.content.Intent
+import cc.openxiot.wematrix.ui.scan.ScanQrActivity
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
@@ -335,26 +337,25 @@ fun SpaceTreeContent(
         )
     }
 
-    // QR scanner for adding devices
-    val qrScanner = rememberLauncherForActivityResult(ScanContract()) { result ->
-        if (result.contents != null) {
-            viewModel.addDeviceByQr(rootId, result.contents)
+    // QR/IMEI scanner for adding devices (custom portrait scan screen)
+    val context = LocalContext.current
+    val scannerLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val text = result.data?.getStringExtra(ScanQrActivity.EXTRA_RESULT)
+        if (result.resultCode == Activity.RESULT_OK && !text.isNullOrBlank()) {
+            viewModel.addDeviceByQr(rootId, text)
         } else {
             viewModel.hideAddDeviceDialog()
         }
     }
     LaunchedEffect(treeState.showAddDeviceDialog) {
         if (treeState.showAddDeviceDialog) {
-            qrScanner.launch(ScanOptions().apply {
-                setDesiredBarcodeFormats(ScanOptions.QR_CODE)
-                setOrientationLocked(true)
-                setPrompt("扫描设备二维码")
-            })
+            scannerLauncher.launch(Intent(context, ScanQrActivity::class.java))
         }
     }
 
     // Show operation feedback messages
-    val context = LocalContext.current
     LaunchedEffect(treeState.message) {
         treeState.message?.let { msg ->
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()

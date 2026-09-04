@@ -9,6 +9,7 @@ import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.data.repository.DeviceRepository
 import cc.openxiot.wematrix.data.repository.SpaceRepository
+import cc.openxiot.wematrix.util.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,6 +22,9 @@ data class ProjectUiState(
     val currentRootName: String? = null,
     val error: String? = null
 )
+
+/** 标准 IMEI 为 15 位纯数字（如 864317084946840） */
+private val IMEI_REGEX = Regex("""^\d{15}$""")
 
 data class SpaceTreeUiState(
     val isLoading: Boolean = true,
@@ -302,10 +306,20 @@ class ProjectViewModel : ViewModel() {
         }
     }
 
+    /**
+     * 扫码添加设备。特例：若扫到的是纯数字 IMEI（如 864317084946840），
+     * 先经 DTU 网关查询 DID，再以 did + key 登记设备，其中 key 取 IMEI 的值。
+     */
     fun addDeviceByQr(spaceId: String, qrContent: String) {
         viewModelScope.launch {
             _treeState.value = _treeState.value.copy(showAddDeviceDialog = false, isAddingDevice = true)
-            deviceRepository.addDeviceByQr(spaceId, qrContent)
+            val content = qrContent.trim()
+            val result = if (IMEI_REGEX.matches(content)) {
+                deviceRepository.addDeviceByImei(spaceId, content, Constants.DTU_ORG_ID)
+            } else {
+                deviceRepository.addDeviceByQr(spaceId, content)
+            }
+            result
                 .onSuccess {
                     _projectState.value.currentRootId?.let { loadSpaceGraph(it) }
                     _treeState.value = _treeState.value.copy(isAddingDevice = false, message = "设备添加成功")

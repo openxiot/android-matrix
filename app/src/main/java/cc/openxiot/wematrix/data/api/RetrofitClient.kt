@@ -23,8 +23,10 @@ object RetrofitClient {
 
     private val authInterceptor = Interceptor { chain ->
         val request = chain.request()
+        // 公开接口（product 的公开接口、DTU 的 IMEI 查询）不附加登录态
+        val isPublicHost = request.url.host == "product.openxiot.cn" || request.url.host == "ws.dtu.ap.openxiot.cn"
         val builder = request.newBuilder()
-        if (request.url.host != "product.openxiot.cn") {
+        if (!isPublicHost) {
             authToken?.let {
                 builder.addHeader("Authorization", "Bearer $it")
             }
@@ -74,5 +76,14 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ProductService::class.java)
+    }
+
+    val dtuService: DtuService by lazy {
+        Retrofit.Builder()
+            .baseUrl(Constants.DTU_BASE_URL + "/")
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(DtuService::class.java)
     }
 }

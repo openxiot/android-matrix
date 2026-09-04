@@ -171,3 +171,12 @@ interface ProductService {
     @GET("v1/product/basic/one")
     suspend fun getProductDetail(@Query("productId") productId: String): Response<ApiResponse<ProductEntity>>
 }
+
+interface DtuService {
+    /** 根据 IMEI 查询设备 DID，返回 { success, data = did } */
+    @GET("v1/did/by/imei")
+    suspend fun getDidByImei(
+        @Query("orgId") orgId: String,
+        @Query("imei") imei: String
+    ): Response<ApiResponse<String>>
+}

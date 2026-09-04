@@ -83,15 +83,15 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.activity:activity-compose:1.13.0")
-    implementation("androidx.navigation:navigation-compose:2.9.8")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.10.0")
+    implementation("androidx.navigation:navigation-compose:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.11.0")
 
     // Network
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-    implementation("com.squareup.okhttp3:okhttp:5.4.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.4.0")
+    implementation("com.squareup.okhttp3:okhttp:5.5.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.5.0")
 
     // Image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
@@ -100,27 +100,26 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0") {
         exclude(group = "com.google.zxing")
     }
-    implementation("com.google.zxing:core:3.5.3")
+    implementation("com.google.zxing:core:3.5.4")
 
     // Core
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.19.0")
 
     // Remote Compose
-    implementation("androidx.compose.remote:remote-core:1.0.0-alpha15")
-    implementation("androidx.compose.remote:remote-player-core:1.0.0-alpha15")
-    implementation("androidx.compose.remote:remote-player-view:1.0.0-alpha15")
-    implementation("androidx.compose.remote:remote-player-compose:1.0.0-alpha15")
-    implementation("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha15")
-    implementation("androidx.compose.remote:remote-creation-compose:1.0.0-alpha15")
+    implementation("androidx.compose.remote:remote-core:1.0.0-alpha18")
+    implementation("androidx.compose.remote:remote-player-core:1.0.0-alpha18")
+    implementation("androidx.compose.remote:remote-player-view:1.0.0-alpha18")
+    implementation("androidx.compose.remote:remote-player-compose:1.0.0-alpha18")
+    implementation("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha18")
+    implementation("androidx.compose.remote:remote-creation-compose:1.0.0-alpha18")
 
     // Openxiot
-    implementation("cc.openxiot:xiot-spec:0.1.5")
-    implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.5")
-    implementation("cc.openxiot:xiot-support-codegen-vertx:0.1.5")
+    implementation("cc.openxiot:xiot-spec:0.1.8")
+    implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.8")
+    implementation("cc.openxiot:xiot-support-codegen-vertx:0.1.8")
 
     // Weixin
-    implementation("com.tencent.mm.opensdk:wechat-sdk-android:+")
+    implementation("com.tencent.mm.opensdk:wechat-sdk-android:6.8.40")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-tooling-preview")
 }

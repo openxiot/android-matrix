@@ -97,6 +97,14 @@ data class DeviceEntity(
     @SerializedName("type") val type: String? = null,
     @SerializedName("online") val online: Boolean? = null,
     @SerializedName("protocol") val protocol: String? = null,
+    /**
+     * 父设备 did（空 = 顶层设备）。
+     *
+     * 设备之间的从属关系**只有这一个字段**：后端不下发 children，也没有「查子设备」的专用接口，
+     * 子设备要拿整张扁平设备表按 `parentId` 过滤出来（与 webapp-matrix 同一口径）。
+     * 空间图 `/space/graph/{rootId}` 返回的是原始 DeviceEntity，这个字段本来就在线上，之前只是没声明。
+     */
+    @SerializedName("parentId") val parentId: String? = null,
     @SerializedName("lastOnline") val lastOnline: String? = null,
     @SerializedName("lastOffline") val lastOffline: String? = null,
     @SerializedName("space") val space: DeviceSpaceRef? = null
@@ -109,7 +117,13 @@ data class DeviceSpaceRef(
 
 data class SpaceGraph(
     @SerializedName("spaces") val spaces: List<SpaceEntity>? = null,
-    @SerializedName("devices") val devices: List<DeviceEntity>? = null
+    @SerializedName("devices") val devices: List<DeviceEntity>? = null,
+    /**
+     * 该根空间下的全部 Modbus 服务（精简视图，见 [ModbusServiceBrief]）：
+     * 每项带 did / spaceId，用来把服务挂到对应的设备节点下。
+     * 后端在 Mongo 侧就投影掉了 functions / response，不会拖大这个响应体。
+     */
+    @SerializedName("services") val services: List<ModbusServiceBrief>? = null
 )
 
 data class DeviceRegistration(

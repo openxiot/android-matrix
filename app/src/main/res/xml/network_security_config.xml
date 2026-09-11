@@ -2,6 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.5.80</domain>
+        <domain includeSubdomains="true">192.168.5.62</domain>
         <!-- 如果需要添加更多域名或IP，可以继续添加 -->
         <!-- <domain includeSubdomains="true">your-domain.com</domain> -->
     </domain-config>

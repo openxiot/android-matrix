@@ -1,7 +1,9 @@
 package cc.openxiot.wematrix.ui.device
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
@@ -18,6 +20,8 @@ import cc.openxiot.wematrix.ui.project.ProjectViewModel
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import cc.openxiot.wematrix.ui.components.OnlineIndicator
+import cc.openxiot.wematrix.ui.modbus.DeviceServicesCard
+import cc.openxiot.wematrix.ui.modbus.ModbusServiceViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
@@ -27,14 +31,25 @@ import java.util.TimeZone
 fun DeviceDetailScreen(
     did: String,
     onBack: () -> Unit,
-    onMoveDevice: ((String) -> Unit)? = null,
-    viewModel: ProjectViewModel = viewModel()
+    /** 点服务行：传当前根空间（服务接口的鉴权作用域）与服务 id */
+    onServiceClick: ((spaceId: String, serviceId: String) -> Unit)? = null,
+    viewModel: ProjectViewModel = viewModel(),
+    serviceViewModel: ModbusServiceViewModel = viewModel()
 ) {
     val treeState by viewModel.treeState.collectAsState()
+    val projectState by viewModel.projectState.collectAsState()
+    val servicesState by serviceViewModel.deviceServices.collectAsState()
+    // 服务接口路径里的 spaceId 是鉴权作用域，统一用当前项目根空间（口径同 web）
+    val rootSpaceId = projectState.currentRootId
     val device = treeState.devices.find { it.did == did }
     val model = device?.type?.let { extractModelFromUrn(it) }
     val productName = model?.let { treeState.productNames[it] }
     val productIcon = model?.let { treeState.productIcons[it] }
+
+    // 服务按 did 取（/parent 只按 did 过滤），根空间只作鉴权作用域
+    LaunchedEffect(did, rootSpaceId) {
+        if (rootSpaceId != null) serviceViewModel.loadByDevice(rootSpaceId, did)
+    }
 
     Scaffold(
         topBar = {
@@ -60,22 +75,13 @@ fun DeviceDetailScreen(
                     )
                 }
             }
-        },
-        floatingActionButton = {
-            if (onMoveDevice != null && device?.did != null) {
-                FloatingActionButton(
-                    onClick = { onMoveDevice(device.did) },
-                    containerColor = MaterialTheme.colorScheme.secondary
-                ) {
-                    Icon(Icons.Default.DriveFileMove, contentDescription = "移动设备")
-                }
-            }
         }
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .verticalScroll(rememberScrollState())
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -175,6 +181,17 @@ fun DeviceDetailScreen(
                 val spaceName = findSpaceById(treeState.rootSpace, device.space.spaceId)?.name
                 DetailRow(label = "所属空间", value = spaceName ?: device.space.spaceId ?: "-")
             }
+
+            // Services（只读入口：点进服务详情页调用方法；新建/编辑/删除在移动端不做）
+            DeviceServicesCard(
+                services = servicesState.services,
+                isLoading = servicesState.isLoading && rootSpaceId != null,
+                error = servicesState.error,
+                onRetry = { rootSpaceId?.let { serviceViewModel.loadByDevice(it, did) } },
+                onServiceClick = { serviceId ->
+                    rootSpaceId?.let { onServiceClick?.invoke(it, serviceId) }
+                }
+            )
         }
     }
 }

@@ -33,6 +33,8 @@ fun MainScreen(
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
     onNavigateToAbout: () -> Unit = {},
+    onNavigateToModbus: () -> Unit = {},
+    onNavigateToModbusService: ((spaceId: String, serviceId: String) -> Unit)? = null,
     onNavigateToDeviceDetail: ((String) -> Unit)? = null,
     onNavigateToDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     onNavigateToProductDetail: ((String) -> Unit)? = null,
@@ -107,7 +109,11 @@ fun MainScreen(
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier.fillMaxSize(),
-                beyondViewportPageCount = 0
+                beyondViewportPageCount = 0,
+                // 关掉手指左右翻页：这个手势留给各个 Tab 自己的横向操作（轮播、横滑卡片等），
+                // 否则两者会抢同一个手势，横滑几下就翻到隔壁 Tab 去了。
+                // 切换 Tab 只走底部点击（下面的 animateScrollToPage 仍然有效）。
+                userScrollEnabled = false
             ) { page ->
                 when (tabs[page]) {
                     BottomTab.Home -> HomeScreen()
@@ -118,24 +124,9 @@ fun MainScreen(
                             var isRefreshing by remember { mutableStateOf(false) }
 
                             Column(modifier = Modifier.fillMaxSize()) {
-                                // Centered app name title bar
-                                Surface(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    color = MaterialTheme.colorScheme.surface
-                                ) {
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .height(48.dp),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Text(
-                                            text = "矩阵",
-                                            style = MaterialTheme.typography.titleMedium,
-                                            fontWeight = FontWeight.Bold
-                                        )
-                                    }
-                                }
+                                // 标题靠左：与「设备」「我」两个 Tab 的 PageTitle 对齐（原来这里是居中的，
+                                // 三个 Tab 摆在一起时那一行明显对不齐）
+                                PageTitle(title = "矩阵")
 
                                 // Pull-to-refresh space tree
                                 PullToRefreshBox(
@@ -155,7 +146,8 @@ fun MainScreen(
                                         showActions = false,
                                         onRootSpaceClick = onNavigateToProjectPicker,
                                         onDeviceDetail = onNavigateToDeviceDetail,
-                                        onDeviceOperation = onNavigateToDeviceOperation
+                                        onDeviceOperation = onNavigateToDeviceOperation,
+                                        onServiceClick = onNavigateToModbusService
                                     )
                                 }
                             }
@@ -176,7 +168,8 @@ fun MainScreen(
                     BottomTab.Devices -> DeviceListScreen(
                         rootId = mainViewModel.currentRootSpaceId,
                         onDeviceDetail = onNavigateToDeviceDetail,
-                        onDeviceOperation = onNavigateToDeviceOperation
+                        onDeviceOperation = onNavigateToDeviceOperation,
+                        onServiceClick = onNavigateToModbusService
                     )
                     BottomTab.Products -> ProductListScreen(
                         onProductDetail = onNavigateToProductDetail
@@ -188,7 +181,8 @@ fun MainScreen(
                         onNavigateToOrgPicker = onNavigateToOrgPicker,
                         onNavigateToProjectPicker = onNavigateToProjectPicker,
                         onNavigateToAccount = onNavigateToAccount,
-                        onNavigateToAbout = onNavigateToAbout
+                        onNavigateToAbout = onNavigateToAbout,
+                        onNavigateToModbus = onNavigateToModbus
                     )
                 }
             }

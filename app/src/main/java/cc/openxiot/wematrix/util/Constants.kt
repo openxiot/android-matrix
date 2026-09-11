@@ -9,6 +9,10 @@ object Constants {
     // DTU IMEI 查询所属组织（暂时写死）
     const val DTU_ORG_ID = "yinerda"
 
+    // 设备操作页：第三方平板端页面（暂时写死，全部设备共用；将来按型号映射时换成映射表）。
+    // 走的是明文 http，靠 network_security_config 里放行的 192.168.5.80 才加载得出来。
+    const val DEVICE_OPERATION_URL = "http://192.168.5.62:8000/air-conditioner-tablet.html"
+
     const val OAUTH_SCHEME = "openxiot"
     const val OAUTH_HOST = "oauth"
     const val OAUTH_PATH = "/callback"

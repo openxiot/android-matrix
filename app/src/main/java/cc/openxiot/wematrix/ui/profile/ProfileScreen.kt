@@ -27,7 +27,8 @@ fun ProfileScreen(
     onNavigateToOrgPicker: () -> Unit = {},
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
-    onNavigateToAbout: () -> Unit = {}
+    onNavigateToAbout: () -> Unit = {},
+    onNavigateToModbus: () -> Unit = {}
 ) {
     val tokenManager = WeMatrixApp.instance.tokenManager
 
@@ -128,10 +129,19 @@ fun ProfileScreen(
                 )
             }
 
-            // About
+            // 其他：设备点表入口对齐 web 的侧边栏 —— 只看「已启用组织」这一个开关
+            // （不看管理员、不看 DTU）。关掉时这张卡不渲染，「其他」标题仍归下面的「关于」
             item {
                 Spacer(Modifier.height(8.dp))
                 SectionHeader("其他")
+                if (organizationEnabled) {
+                    SettingsCard(
+                        title = "设备点表",
+                        subtitle = "Modbus 点表配置（只读）",
+                        icon = Icons.Default.TableChart,
+                        onClick = onNavigateToModbus
+                    )
+                }
                 SettingsCard(
                     title = "关于",
                     subtitle = "应用信息与版本",

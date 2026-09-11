@@ -105,14 +105,6 @@ dependencies {
     // Core
     implementation("androidx.core:core-ktx:1.19.0")
 
-    // Remote Compose
-    implementation("androidx.compose.remote:remote-core:1.0.0-alpha18")
-    implementation("androidx.compose.remote:remote-player-core:1.0.0-alpha18")
-    implementation("androidx.compose.remote:remote-player-view:1.0.0-alpha18")
-    implementation("androidx.compose.remote:remote-player-compose:1.0.0-alpha18")
-    implementation("androidx.compose.remote:remote-tooling-preview:1.0.0-alpha18")
-    implementation("androidx.compose.remote:remote-creation-compose:1.0.0-alpha18")
-
     // Openxiot
     implementation("cc.openxiot:xiot-spec:0.1.8")
     implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.8")

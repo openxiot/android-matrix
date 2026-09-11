@@ -27,7 +27,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.DeviceEntity
+import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.data.api.SpaceEntity
+import cc.openxiot.wematrix.ui.modbus.ModbusServiceRow
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.layout.ContentScale
@@ -50,6 +52,8 @@ fun SpaceTreeScreen(
     onBack: () -> Unit,
     onDeviceDetail: ((String) -> Unit)? = null,
     onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
+    /** 点服务行：传当前根空间（服务接口的鉴权作用域）与服务 id */
+    onServiceClick: ((spaceId: String, serviceId: String) -> Unit)? = null,
     viewModel: ProjectViewModel = viewModel()
 ) {
     val treeState by viewModel.treeState.collectAsState()
@@ -153,7 +157,8 @@ fun SpaceTreeScreen(
             viewModel = viewModel,
             modifier = Modifier.padding(padding),
             onDeviceDetail = onDeviceDetail,
-            onDeviceOperation = onDeviceOperation
+            onDeviceOperation = onDeviceOperation,
+            onServiceClick = onServiceClick
         )
     }
 }
@@ -166,6 +171,7 @@ fun SpaceTreeContent(
     showActions: Boolean = true,
     onDeviceDetail: ((String) -> Unit)? = null,
     onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
+    onServiceClick: ((spaceId: String, serviceId: String) -> Unit)? = null,
     contentPadding: PaddingValues = PaddingValues(vertical = 8.dp),
     onRootSpaceClick: (() -> Unit)? = null
 ) {
@@ -173,6 +179,14 @@ fun SpaceTreeContent(
     // Load graph when rootId changes, calling suspend function directly
     LaunchedEffect(rootId) {
         viewModel.loadSpaceGraphInternal(rootId)
+    }
+
+    // 子设备 / 服务都从空间图这张扁平表里按 did 现分组（后端没有 children 字段，见 DeviceTree.kt）。
+    // 按 devices / services 缓存：图不变时不重复算。
+    val deviceChildren = remember(treeState.devices) { buildDeviceChildren(treeState.devices) }
+    val deviceIds = remember(treeState.devices) { deviceDids(treeState.devices) }
+    val servicesByDid = remember(treeState.services) {
+        groupServicesByDid(treeState.services) { it.did }
     }
 
     Box(modifier = modifier) {
@@ -215,28 +229,42 @@ fun SpaceTreeContent(
                                 onDelete = { viewModel.showDeleteConfirm(it) },
                                 rootId = rootId,
                                 devices = treeState.devices,
+                                deviceChildren = deviceChildren,
+                                deviceIds = deviceIds,
+                                servicesByDid = servicesByDid,
+                                expandedDeviceIds = treeState.expandedDeviceIds,
+                                onToggleDevice = { viewModel.toggleDeviceExpanded(it) },
                                 showActions = showActions,
                                 onDeviceDetail = onDeviceDetail,
                                 onDeviceOperation = onDeviceOperation,
+                                onServiceClick = onServiceClick,
                                 productNames = treeState.productNames,
                                 productIcons = treeState.productIcons
                             )
                         }
                     }
 
-                    // Render root space's devices (devices moved directly to root)
-                    val rootDevices = treeState.devices.filter { it.space?.spaceId == treeState.rootSpace?.id }
+                    // Render root space's devices (devices moved directly to root).
+                    // 只铺「顶层设备」：有父设备且在表里能找到的，改为挂在父设备下面（见 DeviceSubtree），
+                    // 否则同一台设备会在空间层级和父设备下面各出现一次。
+                    val rootDevices = treeState.devices.filter {
+                        it.space?.spaceId == treeState.rootSpace?.id && isDeviceTreeRoot(it, deviceIds)
+                    }
                     rootDevices.forEach { device ->
                         item {
-                            DeviceItem(
+                            DeviceSubtree(
                                 device = device,
-                                onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
-                                onOperation = device.did?.let { did ->
-                                    { onDeviceOperation?.invoke(did, device.type ?: "", rootId) }
-                                },
                                 depth = 0,
+                                deviceChildren = deviceChildren,
+                                servicesByDid = servicesByDid,
+                                expandedDeviceIds = treeState.expandedDeviceIds,
+                                onToggleDevice = { viewModel.toggleDeviceExpanded(it) },
+                                rootId = rootId,
                                 productNames = treeState.productNames,
-                                productIcons = treeState.productIcons
+                                productIcons = treeState.productIcons,
+                                onDeviceDetail = onDeviceDetail,
+                                onDeviceOperation = onDeviceOperation,
+                                onServiceClick = onServiceClick
                             )
                         }
                     }
@@ -548,9 +576,15 @@ private fun RecursiveSpaceTree(
     onDelete: (String) -> Unit,
     rootId: String,
     devices: List<DeviceEntity>,
+    deviceChildren: Map<String, List<DeviceEntity>>,
+    deviceIds: Set<String>,
+    servicesByDid: Map<String, List<ModbusServiceBrief>>,
+    expandedDeviceIds: Set<String>,
+    onToggleDevice: (String) -> Unit,
     showActions: Boolean,
     onDeviceDetail: ((String) -> Unit)? = null,
     onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
+    onServiceClick: ((spaceId: String, serviceId: String) -> Unit)? = null,
     productNames: Map<String, String> = emptyMap(),
     productIcons: Map<String, String> = emptyMap()
 ) {
@@ -562,6 +596,7 @@ private fun RecursiveSpaceTree(
         onAddChild = { space.id?.let { onAddChild(it) } },
         onDelete = { space.id?.let { onDelete(it) } },
         devices = devices,
+        deviceIds = deviceIds,
         showActions = showActions
     )
     AnimatedVisibility(visible = expandedIds.contains(space.id)) {
@@ -576,28 +611,110 @@ private fun RecursiveSpaceTree(
                     onDelete = onDelete,
                     rootId = rootId,
                     devices = devices,
+                    deviceChildren = deviceChildren,
+                    deviceIds = deviceIds,
+                    servicesByDid = servicesByDid,
+                    expandedDeviceIds = expandedDeviceIds,
+                    onToggleDevice = onToggleDevice,
                     showActions = showActions,
                     onDeviceDetail = onDeviceDetail,
                     onDeviceOperation = onDeviceOperation,
+                    onServiceClick = onServiceClick,
                     productNames = productNames,
                     productIcons = productIcons
                 )
             }
-            // Render devices of this space inline
-            val spaceDevices = devices.filter { it.space?.spaceId == space.id }
+            // 这个空间下直挂的设备。只铺顶层设备：有父设备的挂到父设备下面，避免同一个 did 出现两次
+            val spaceDevices = devices.filter {
+                it.space?.spaceId == space.id && isDeviceTreeRoot(it, deviceIds)
+            }
             spaceDevices.forEach { device ->
-                DeviceItem(
+                DeviceSubtree(
                     device = device,
-                    onDetail = device.did?.let { did -> { onDeviceDetail?.invoke(did) } },
-                    onOperation = device.did?.let { did ->
-                        { onDeviceOperation?.invoke(did, device.type ?: "", device.space?.spaceId ?: rootId) }
-                    },
                     depth = depth + 1,
+                    deviceChildren = deviceChildren,
+                    servicesByDid = servicesByDid,
+                    expandedDeviceIds = expandedDeviceIds,
+                    onToggleDevice = onToggleDevice,
+                    rootId = rootId,
                     productNames = productNames,
-                    productIcons = productIcons
+                    productIcons = productIcons,
+                    onDeviceDetail = onDeviceDetail,
+                    onDeviceOperation = onDeviceOperation,
+                    onServiceClick = onServiceClick
                 )
             }
         }
+    }
+}
+
+/**
+ * 一台设备在树里的整棵子树：设备卡片本身 + （展开时）它依赖的服务、它的子设备。
+ *
+ * 顺序对齐 web 的设备页：**先服务行，后子设备**（`device.component.ts` 的 flattenDeviceRows）。
+ * 子设备递归下去 —— 子设备自己也可能有子设备。
+ *
+ * 服务挂在它依赖的设备下（比对 did）。空间图里没有对应记录的服务不在这里出现，
+ * 设备详情页那张卡走 /parent 接口，不受此限。
+ */
+@Composable
+private fun DeviceSubtree(
+    device: DeviceEntity,
+    depth: Int,
+    deviceChildren: Map<String, List<DeviceEntity>>,
+    servicesByDid: Map<String, List<ModbusServiceBrief>>,
+    expandedDeviceIds: Set<String>,
+    onToggleDevice: (String) -> Unit,
+    rootId: String,
+    productNames: Map<String, String>,
+    productIcons: Map<String, String>,
+    onDeviceDetail: ((String) -> Unit)?,
+    onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)?,
+    onServiceClick: ((spaceId: String, serviceId: String) -> Unit)?
+) {
+    val did = device.did ?: return
+    val children = deviceChildren[did].orEmpty()
+    val ownServices = servicesByDid[did].orEmpty()
+    // 「有子设备或有服务」才给箭头；没有的话留一段等宽空白，让同级设备的图标对齐
+    val hasNested = children.isNotEmpty() || ownServices.isNotEmpty()
+    val isExpanded = expandedDeviceIds.contains(did)
+
+    val spaceId = device.space?.spaceId ?: rootId
+
+    DeviceItem(
+        device = device,
+        onDetail = { onDeviceDetail?.invoke(did) },
+        onOperation = { onDeviceOperation?.invoke(did, device.type ?: "", spaceId) },
+        depth = depth,
+        hasNested = hasNested,
+        isExpanded = isExpanded,
+        onToggle = { onToggleDevice(did) },
+        productNames = productNames,
+        productIcons = productIcons
+    )
+
+    if (!hasNested || !isExpanded) return
+
+    ownServices.forEach { service ->
+        ModbusServiceRow(service = service, depth = depth + 1) {
+            service.id?.let { onServiceClick?.invoke(rootId, it) }
+        }
+    }
+    children.forEach { child ->
+        DeviceSubtree(
+            device = child,
+            depth = depth + 1,
+            deviceChildren = deviceChildren,
+            servicesByDid = servicesByDid,
+            expandedDeviceIds = expandedDeviceIds,
+            onToggleDevice = onToggleDevice,
+            rootId = rootId,
+            productNames = productNames,
+            productIcons = productIcons,
+            onDeviceDetail = onDeviceDetail,
+            onDeviceOperation = onDeviceOperation,
+            onServiceClick = onServiceClick
+        )
     }
 }
 
@@ -610,9 +727,14 @@ private fun SpaceTreeNode(
     onAddChild: () -> Unit,
     onDelete: () -> Unit,
     devices: List<DeviceEntity>,
+    deviceIds: Set<String>,
     showActions: Boolean = true
 ) {
-    val spaceDevices = devices.filter { it.space?.spaceId == space.id }
+    // 与展开后实际铺出来的那批设备用**同一个过滤**（有父设备的挂到父设备下面去了），
+    // 否则「本空间只有子设备、而父设备在别的空间」时，箭头点开会是空的。
+    val spaceDevices = devices.filter {
+        it.space?.spaceId == space.id && isDeviceTreeRoot(it, deviceIds)
+    }
     val hasExpandable = space.children?.isNotEmpty() == true || spaceDevices.isNotEmpty()
 
     Card(
@@ -719,6 +841,10 @@ private fun DeviceItem(
     onDetail: (() -> Unit)? = null,
     onOperation: (() -> Unit)? = null,
     depth: Int = 0,
+    /** 有子设备或有服务：卡片左边给一个展开箭头（与 [SpaceTreeNode] 同一个做法） */
+    hasNested: Boolean = false,
+    isExpanded: Boolean = false,
+    onToggle: (() -> Unit)? = null,
     productNames: Map<String, String> = emptyMap(),
     productIcons: Map<String, String> = emptyMap()
 ) {
@@ -736,7 +862,34 @@ private fun DeviceItem(
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Row(modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min), verticalAlignment = Alignment.CenterVertically) {
-            Row(modifier = Modifier.weight(1f).padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+            // 展开箭头：整张卡片点下去是「设备操作」，所以只有这一小块管展开，卡片本身不跟着切换
+            // （与 [SpaceTreeNode] 不同，那边整卡都是展开）。
+            // 触摸区对齐右边那颗「详情」chevron —— 44dp 宽 × 整卡高；小图标十几 dp，手指按不准。
+            if (hasNested) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(44.dp)
+                        .clickable { onToggle?.invoke() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        if (isExpanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
+                        contentDescription = if (isExpanded) "收起" else "展开",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+            } else {
+                Spacer(Modifier.width(44.dp))
+            }
+            // 左内边距让给上面的箭头槽了，右边距保持不变
+            Row(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 0.dp, top = 14.dp, end = 14.dp, bottom = 14.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Surface(
                     modifier = Modifier.size(36.dp),
                     shape = RoundedCornerShape(12.dp),

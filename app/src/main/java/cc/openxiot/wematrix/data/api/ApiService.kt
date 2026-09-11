@@ -148,6 +148,52 @@ interface MatrixService {
         @Path("spaceId") spaceId: String,
         @Body body: Map<String, Any>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
+
+    // ---- 设备点表（只读） ----
+    // 组织经拦截器附加的 X-Org-Id 携带，方法不传 orgId（口径同 web 的 modbus.service.ts）。
+    // 写接口（POST/PUT/DELETE 与 lifecycle 流转）本端不使用，故不声明。
+
+    /** 当前账号可见的全部设备点表：本组织私有 + 各组织公开 */
+    @GET("matrix/v1/modbus/config/visible")
+    suspend fun getVisibleModbusConfigs(): Response<ApiResponse<List<ModbusConfig>>>
+
+    /** 全部公开设备点表（仅要求登录，不校验组织）：未选组织时的回退 */
+    @GET("matrix/v1/modbus/config/public")
+    suspend fun getPublicModbusConfigs(): Response<ApiResponse<List<ModbusConfig>>>
+
+    /** 查询单条设备点表 */
+    @GET("matrix/v1/modbus/config/one/{id}")
+    suspend fun getModbusConfig(@Path("id") id: String): Response<ApiResponse<ModbusConfig>>
+
+    // ---- Modbus 服务 ----
+    // 路径里的 spaceId 是**鉴权作用域**而不是过滤条件：后端只拿它校验「当前用户是该空间成员」，
+    // 真正的查询按 id / did 走（见 ModbusServiceResource 的 requireSpaceMember）。
+    // 故这里统一传**当前项目根空间**，与 web 的 modbus.service.ts 同口径。
+    // 增删改需要空间管理员（POST/PUT/DELETE），本端不做，故不声明。
+
+    /** 查询单条服务（完整定义：含方法与请求帧） */
+    @GET("matrix/v1/modbus/service/one/{spaceId}/{id}")
+    suspend fun getModbusService(
+        @Path("spaceId") spaceId: String,
+        @Path("id") id: String
+    ): Response<ApiResponse<ModbusService>>
+
+    /** 列出挂在指定设备下的全部服务。只按 did 过滤，不受设备落点空间影响 */
+    @GET("matrix/v1/modbus/service/parent/{spaceId}/{did}")
+    suspend fun getModbusServicesByDevice(
+        @Path("spaceId") spaceId: String,
+        @Path("did") did: String
+    ): Response<ApiResponse<List<ModbusService>>>
+
+    /**
+     * 调用一个方法：把该方法的请求帧发给依赖设备，返回应答解出的「字段名 → 值」。
+     * 写方法（response 为空）返回空对象。
+     */
+    @POST("matrix/v1/modbus/service/invoke/{spaceId}")
+    suspend fun invokeModbusService(
+        @Path("spaceId") spaceId: String,
+        @Body body: InvokeModbusServiceRequest
+    ): Response<ApiResponse<Map<String, Any?>>>
 }
 
 interface ProductService {

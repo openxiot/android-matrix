@@ -16,6 +16,9 @@ import cc.openxiot.wematrix.ui.project.ProjectPickerScreen
 import cc.openxiot.wematrix.ui.project.ProjectMemberScreen
 import cc.openxiot.wematrix.ui.device.DeviceDetailScreen
 import cc.openxiot.wematrix.ui.device.DeviceOperationScreen
+import cc.openxiot.wematrix.ui.modbus.ModbusDetailScreen
+import cc.openxiot.wematrix.ui.modbus.ModbusListScreen
+import cc.openxiot.wematrix.ui.modbus.ModbusServiceDetailScreen
 import cc.openxiot.wematrix.ui.products.ProductDetailScreen
 import cc.openxiot.wematrix.ui.project.SpaceTreeScreen
 import java.net.URLEncoder
@@ -31,6 +34,14 @@ sealed class Screen(val route: String) {
     data object DeviceDetail : Screen("device_detail/{did}")
     data object DeviceOperation : Screen("device_operation/{did}?type={type}&spaceId={spaceId}")
     data object ProductDetail : Screen("product_detail/{productId}")
+    data object ModbusList : Screen("modbus_list")
+    data object ModbusDetail : Screen("modbus_detail/{configId}")
+
+    /**
+     * 服务详情。spaceId 是服务接口的**鉴权作用域**（后端只拿它校验空间成员，不参与过滤），
+     * 统一传当前项目根空间，口径同 web 的 modbus.service.ts。
+     */
+    data object ModbusServiceDetail : Screen("modbus_service_detail/{serviceId}?spaceId={spaceId}")
     data object Account : Screen("account")
     data object About : Screen("about")
 }
@@ -41,6 +52,15 @@ fun AppNavigation(
     startDestination: String
 ) {
     val tokenManager = WeMatrixApp.instance.tokenManager
+
+    // 服务详情被三处入口共用（项目页空间树、项目编辑页、设备详情页），抽成一个 lambda。
+    // 服务 id 是后端十六进制串、spaceId 是空间 id，都 URL 安全，不做 URLEncoder；
+    // 真出现特殊字符时照 device_operation 那条路由的写法补。
+    val navigateToModbusService: (spaceId: String, serviceId: String) -> Unit = { spaceId, serviceId ->
+        navController.navigate("modbus_service_detail/$serviceId?spaceId=$spaceId") {
+            launchSingleTop = true
+        }
+    }
 
     NavHost(
         navController = navController,
@@ -82,6 +102,10 @@ fun AppNavigation(
                 onNavigateToAbout = {
                     navController.navigate(Screen.About.route) { launchSingleTop = true }
                 },
+                onNavigateToModbus = {
+                    navController.navigate(Screen.ModbusList.route) { launchSingleTop = true }
+                },
+                onNavigateToModbusService = navigateToModbusService,
                 onNavigateToDeviceDetail = { did ->
                     navController.navigate("device_detail/$did") { launchSingleTop = true }
                 },
@@ -190,7 +214,8 @@ fun AppNavigation(
                             )
                         }&spaceId=$spaceId"
                     ) { launchSingleTop = true }
-                }
+                },
+                onServiceClick = navigateToModbusService
             )
         }
 
@@ -199,9 +224,7 @@ fun AppNavigation(
             DeviceDetailScreen(
                 did = did,
                 onBack = { navController.popBackStack() },
-                onMoveDevice = { d ->
-                    navController.popBackStack()
-                }
+                onServiceClick = navigateToModbusService
             )
         }
 
@@ -221,6 +244,35 @@ fun AppNavigation(
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
             ProductDetailScreen(
                 productId = productId,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.ModbusList.route) {
+            ModbusListScreen(
+                onBack = { navController.popBackStack() },
+                // 点表 id 是后端下发的十六进制串，URL 安全，不做 URLEncoder；
+                // 真出现特殊字符时，照上面 device_operation 那条路由的写法补
+                onConfigClick = { configId ->
+                    navController.navigate("modbus_detail/$configId") { launchSingleTop = true }
+                }
+            )
+        }
+
+        composable(Screen.ModbusDetail.route) { backStackEntry ->
+            val configId = backStackEntry.arguments?.getString("configId") ?: return@composable
+            ModbusDetailScreen(
+                configId = configId,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.ModbusServiceDetail.route) { backStackEntry ->
+            val serviceId = backStackEntry.arguments?.getString("serviceId") ?: return@composable
+            val spaceId = backStackEntry.arguments?.getString("spaceId") ?: return@composable
+            ModbusServiceDetailScreen(
+                spaceId = spaceId,
+                serviceId = serviceId,
                 onBack = { navController.popBackStack() }
             )
         }

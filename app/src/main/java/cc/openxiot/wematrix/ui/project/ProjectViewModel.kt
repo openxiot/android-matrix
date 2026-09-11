@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.DeviceRegistration
+import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.data.repository.DeviceRepository
@@ -30,11 +31,18 @@ data class SpaceTreeUiState(
     val isLoading: Boolean = true,
     val rootSpace: SpaceEntity? = null,
     val expandedIds: Set<String> = emptySet(),
+    /**
+     * 展开的设备（did）。与 [expandedIds]（空间 id）**分开存**：两者都是字符串，
+     * 混在一个 Set 里存在空间 id 和设备 did 撞键的风险（web 靠 `space:` / `device:` 前缀规避）。
+     */
+    val expandedDeviceIds: Set<String> = emptySet(),
     val error: String? = null,
     val showCreateDialog: Boolean = false,
     val createParentId: String? = null,
     val showDeleteConfirm: String? = null,
     val devices: List<DeviceEntity> = emptyList(),
+    /** 空间图里带回来的 Modbus 服务（精简视图）：按 did 挂到设备节点下 */
+    val services: List<ModbusServiceBrief> = emptyList(),
     val showAddDeviceDialog: Boolean = false,
     val message: String? = null,
     val isAddingDevice: Boolean = false,
@@ -147,7 +155,8 @@ class ProjectViewModel : ViewModel() {
                     isLoading = false,
                     error = null,
                     rootSpace = root,
-                    devices = devices
+                    devices = devices,
+                    services = graph.services ?: emptyList()
                 )
                 if (_projectState.value.currentRootName == null) {
                     val name = root?.name ?: "项目"
@@ -226,6 +235,15 @@ class ProjectViewModel : ViewModel() {
             current.add(spaceId)
         }
         _treeState.value = _treeState.value.copy(expandedIds = current)
+    }
+
+    /** 设备卡片（空间树 / 设备列表）的展开收起，键是 did */
+    fun toggleDeviceExpanded(deviceId: String) {
+        val current = _treeState.value.expandedDeviceIds.toMutableSet()
+        if (!current.remove(deviceId)) {
+            current.add(deviceId)
+        }
+        _treeState.value = _treeState.value.copy(expandedDeviceIds = current)
     }
 
     fun showCreateDialog(parentId: String?) {

@@ -176,7 +176,9 @@ fun DeviceListScreen(
                                     is DeviceListRow.ServiceRow -> ModbusServiceRow(
                                         service = row.service,
                                         depth = row.depth,
-                                        baseIndent = 16.dp
+                                        baseIndent = 16.dp,
+                                        // 本页设备卡片是 16dp 内边距 + 36dp 图标 = 68dp，服务行照它撑高
+                                        minHeight = 68.dp
                                     ) {
                                         // 这里 rootId 已被上面的分支判成非空
                                         row.service.id?.let { onServiceClick?.invoke(rootId, it) }

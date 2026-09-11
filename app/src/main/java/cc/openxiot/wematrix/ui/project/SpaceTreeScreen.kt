@@ -172,8 +172,7 @@ fun SpaceTreeContent(
     onDeviceDetail: ((String) -> Unit)? = null,
     onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     onServiceClick: ((spaceId: String, serviceId: String) -> Unit)? = null,
-    contentPadding: PaddingValues = PaddingValues(vertical = 8.dp),
-    onRootSpaceClick: (() -> Unit)? = null
+    contentPadding: PaddingValues = PaddingValues(vertical = 8.dp)
 ) {
     val treeState by viewModel.treeState.collectAsState()
     // Load graph when rootId changes, calling suspend function directly
@@ -197,27 +196,16 @@ fun SpaceTreeContent(
                 onRetry = { viewModel.loadSpaceGraph(rootId) }
             )
             treeState.rootSpace == null -> EmptyState(message = "空间数据为空")
-            treeState.rootSpace?.children.isNullOrEmpty() && treeState.devices.isEmpty() && onRootSpaceClick == null -> EmptyState(
-                "请添加空间"
+            // 根空间自己不出行（它的名字在页面标题上）。所以「树是空的」= 没有任何空间和设备，
+            // 这时两个入口给的提示不一样：编辑页能加空间，项目页（Tab）是只读的。
+            treeState.rootSpace?.children.isNullOrEmpty() && treeState.devices.isEmpty() -> EmptyState(
+                if (showActions) "请添加空间" else "该项目下还没有空间或设备"
             )
             else -> {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = contentPadding
                 ) {
-                    // Root space card (when used from main screen)
-                    if (onRootSpaceClick != null) {
-                        val root = treeState.rootSpace
-                        if (root != null) {
-                            item {
-                                RootSpaceCard(
-                                    root = root,
-                                    onClick = onRootSpaceClick
-                                )
-                            }
-                        }
-                    }
-
                     treeState.rootSpace?.children?.forEach { child ->
                         item {
                             RecursiveSpaceTree(
@@ -442,66 +430,6 @@ fun SpaceTreeContent(
                 TextButton(onClick = { viewModel.hideMoveDevice() }) { Text("取消") }
             }
         )
-    }
-}
-
-@Composable
-private fun RootSpaceCard(
-    root: SpaceEntity,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 12.dp, end = 16.dp, top = 4.dp, bottom = 4.dp)
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            val typeIcon = when (root.type?.lowercase()) {
-                "site" -> Icons.Default.Business
-                "building" -> Icons.Default.Apartment
-                "floor" -> Icons.Default.ViewAgenda
-                "room" -> Icons.Default.MeetingRoom
-                else -> Icons.Default.Place
-            }
-            Icon(
-                typeIcon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(22.dp)
-            )
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = root.name ?: "项目",
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Medium
-                )
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "当前项目",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-            Icon(
-                Icons.Default.ChevronRight,
-                contentDescription = "切换项目",
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(20.dp)
-            )
-        }
     }
 }
 

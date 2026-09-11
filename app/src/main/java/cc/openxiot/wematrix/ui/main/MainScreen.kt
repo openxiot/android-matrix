@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.ui.devices.DeviceListScreen
@@ -122,11 +123,31 @@ fun MainScreen(
                         if (rootId != null) {
                             val coroutineScope = rememberCoroutineScope()
                             var isRefreshing by remember { mutableStateOf(false) }
+                            val treeState by projectViewModel.treeState.collectAsState()
 
                             Column(modifier = Modifier.fillMaxSize()) {
-                                // 标题靠左：与「设备」「我」两个 Tab 的 PageTitle 对齐（原来这里是居中的，
-                                // 三个 Tab 摆在一起时那一行明显对不齐）
-                                PageTitle(title = "矩阵")
+                                // 标题靠左，显示当前项目的名称（根空间自己不再作为一行出现在树里）；
+                                // 名字优先取空间图里的（最新），图还没回来时退回登录态存的那个。
+                                // 右边那颗「>」进项目选择页 —— 原来这是树下那张「当前项目」卡片上的按钮。
+                                PageTitle(
+                                    title = treeState.rootSpace?.name ?: currentProjectName ?: "项目",
+                                    actions = {
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxHeight()
+                                                .width(48.dp)
+                                                .clickable(onClick = onNavigateToProjectPicker),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Icon(
+                                                Icons.Default.ChevronRight,
+                                                contentDescription = "切换项目",
+                                                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                modifier = Modifier.size(20.dp)
+                                            )
+                                        }
+                                    }
+                                )
 
                                 // Pull-to-refresh space tree
                                 PullToRefreshBox(
@@ -144,7 +165,6 @@ fun MainScreen(
                                         rootId = rootId,
                                         viewModel = projectViewModel,
                                         showActions = false,
-                                        onRootSpaceClick = onNavigateToProjectPicker,
                                         onDeviceDetail = onNavigateToDeviceDetail,
                                         onDeviceOperation = onNavigateToDeviceOperation,
                                         onServiceClick = onNavigateToModbusService
@@ -231,9 +251,12 @@ fun PageTitle(
                 .padding(start = 4.dp, end = 4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // 标题吃掉剩余宽度（过长的省略），右边 [actions] 的位置就一定留得出来 ——
+            // 项目页的标题是项目名、长度不可控，不留的话会把右边的「>」挤出屏幕。
             if (onClick != null) {
                 Row(
                     modifier = Modifier
+                        .weight(1f)
                         .fillMaxHeight()
                         .clickable(onClick = onClick)
                         .padding(horizontal = 8.dp),
@@ -242,7 +265,10 @@ fun PageTitle(
                     Text(
                         text = title,
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false)
                     )
                     Spacer(Modifier.width(4.dp))
                     Icon(
@@ -257,10 +283,13 @@ fun PageTitle(
                     text = title,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(horizontal = 8.dp)
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 8.dp)
                 )
             }
-            Spacer(modifier = Modifier.weight(1f))
             actions()
         }
     }

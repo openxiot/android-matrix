@@ -32,6 +32,10 @@ import cc.openxiot.wematrix.ui.theme.Blue500
  *
  * [baseIndent] 是同级设备卡片的起始缩进 —— 项目页的设备是 12dp、设备页是 16dp，
  * 两边都按自己的基准传，服务行才能和设备名对齐。（排在 `onClick` 前面，好让尾随 lambda 还是 `onClick`。）
+ *
+ * [minHeight] 是行高下限，也照同级设备卡片的高度传（项目页 64dp、设备页 68dp）——
+ * 服务行自己用的是 20dp 小图标，撑不到设备卡片那么高就会比同级卡片矮一截，
+ * 一列空间/设备/服务混排下来参差不齐。
  */
 @Composable
 fun ModbusServiceRow(
@@ -39,6 +43,8 @@ fun ModbusServiceRow(
     depth: Int,
     /** 同级设备卡片的起始缩进：项目页 12dp、设备页 16dp */
     baseIndent: Dp = 12.dp,
+    /** 同级设备卡片的高度：项目页 64dp（14dp 内边距 + 36dp 图标）、设备页 68dp（16dp + 36dp） */
+    minHeight: Dp = 64.dp,
     onClick: () -> Unit
 ) {
     Card(
@@ -58,7 +64,10 @@ fun ModbusServiceRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 14.dp),
+                // 高度交给 [minHeight] 定（对齐同级设备卡片），内容在中间垂直居中；
+                // 不再用垂直内边距撑 —— 那样高度会跟着图标/字号走，和卡片对不齐。
+                .heightIn(min = minHeight)
+                .padding(horizontal = 14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // web 的服务行用 nz-icon nzType="api"，这里取同一个意象

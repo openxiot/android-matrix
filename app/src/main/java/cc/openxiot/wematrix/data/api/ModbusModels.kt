@@ -21,6 +21,19 @@ data class ModbusCoilItem(
     @SerializedName("on") val on: Boolean? = null
 )
 
+/**
+ * 01/02 读位的单个位名称（位区按位打包，逐位取值靠它命名）。
+ *
+ * 与 [ModbusCoilItem.offset] 同口径（0 基、从起始地址起）：一边是写多线圈的偏移，
+ * 一边是读位区的偏移，同一个位区里这两套偏移是能对上的。
+ */
+data class ModbusBitName(
+    /** 位偏移（0 基，从起始地址起、< 位/线圈个数） */
+    @SerializedName("offset") val offset: Int? = null,
+    /** 位名称（生成服务时作为该位的应答字段名，取值 0/1） */
+    @SerializedName("name") val name: String? = null
+)
+
 /** 10 写多寄存器的单个寄存器条目 */
 data class ModbusRegisterItem(
     /** 数据地址（0 基） */
@@ -35,7 +48,17 @@ data class ModbusRegisterItem(
     @SerializedName("value") val value: Long? = null
 )
 
-/** 单个功能码动作（字段按功能码分组出现，用不到的为空） */
+/**
+ * 单个功能码动作（字段按功能码分组出现，用不到的为空）。
+ *
+ * 字段归属：
+ * - 01/02 读位：`quantity`（位/线圈个数）/ `bitNames`
+ * - 03/04 读寄存器：`quantity`（**值的个数**）/ `fieldNames` / `dataType` / `byteOrder` / `scale` / `unit`
+ * - 05 写单线圈：`coilState`
+ * - 06 写单寄存器：`registerValue`
+ * - 0F 写多线圈：`coils`
+ * - 10 写多寄存器：`registers`
+ */
 data class ModbusCommand(
     @SerializedName("name") val name: String? = null,
     /** 01|02|03|04|05|06|0F|10 */
@@ -44,7 +67,24 @@ data class ModbusCommand(
     @SerializedName("index") val index: Int? = null,
     /** 起始地址 = 0 基数据地址（线上值） */
     @SerializedName("start") val start: Int? = null,
+    /**
+     * 数量：03/04 为**值的个数**（每个值占数据格式的寄存器跨度 int16/uint16→1、
+     * int32/uint32/float32→2；string 时即字符串长度、整段算一个值，故恒为 1 个字段）；
+     * 01/02 为位/线圈个数。
+     *
+     * **请求帧里的数量不等于本值**：03/04 非 string 时要乘跨度（见 `frameQuantityOf`）。
+     */
     @SerializedName("quantity") val quantity: Int? = null,
+    /**
+     * 应答字段名称（03/04 读寄存器）：个数即应答字段数 —— 非 string 为 quantity 个、string 为 1 个。
+     * 01/02 读位改用 [bitNames]；写操作没有应答字段。
+     */
+    @SerializedName("fieldNames") val fieldNames: List<String> = emptyList(),
+    /**
+     * 位名称（01/02 读位）：给读回的位区里的若干位各自命名，生成服务时逐位填进应答字段的位清单；
+     * 缺省表示只按整段位掩码出一个字段。
+     */
+    @SerializedName("bitNames") val bitNames: List<ModbusBitName> = emptyList(),
     @SerializedName("dataType") val dataType: String? = null,
     /** ABCD | DCBA | BADC | CDAB */
     @SerializedName("byteOrder") val byteOrder: String? = null,

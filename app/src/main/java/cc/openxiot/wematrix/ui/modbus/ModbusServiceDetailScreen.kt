@@ -243,6 +243,82 @@ private fun MethodCard(
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Medium
             )
+
+            // 位清单：位是独立的结果键，调用后会与父字段一起出现在返回值里，
+            // 光看上面那行「整段位掩码」不知道里面还拆出了哪几位
+            bitListRows(function).takeIf { it.isNotEmpty() }?.let { rows ->
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = "应答位清单",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                rows.forEach { (field, bit) ->
+                    Text(
+                        text = "$field → $bit",
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
+            // 自动轮询与调用周期：两者是一件事的两面（跑不跑 / 多久跑一次），并排一行放。
+            // 写方法恒为 -（周期调用写方法等于周期性往寄存器里写值，后端直接拒）
+            Spacer(Modifier.height(4.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    text = "自动轮询",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.width(8.dp))
+                val polling = pollingLabel(function)
+                Text(
+                    text = polling,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium,
+                    color = if (isPollingOff(function)) {
+                        MaterialTheme.colorScheme.onSurfaceVariant
+                    } else {
+                        MaterialTheme.colorScheme.primary
+                    }
+                )
+                Spacer(Modifier.width(16.dp))
+                Text(
+                    text = "调用周期",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    // 停用时也照常显示周期 —— 那是留着待用的配置
+                    text = scheduleLabel(function),
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+
+            // 告警配置（只读）：列出每个出值配了哪几条规则。能否编辑由 web 的服务编辑页管，
+            // 移动端只让用户看明白「这个出值配了告警没有、配的是什么」
+            alarmedOutputs(function).takeIf { it.isNotEmpty() }?.let { outputs ->
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = "告警配置（${definedAlarmCount(function)}）",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                outputs.forEach { output ->
+                    Text(
+                        text = "${output.key}  " + output.alarms.joinToString("、") { alarm ->
+                            val brief = alarmRuleBrief(alarm)
+                            // 停用的规则也算进条数，但要标出来 —— 否则用户会以为它在生效
+                            if (alarm.enabled == true) brief else "$brief（已停用）"
+                        },
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
         }
     }
 }

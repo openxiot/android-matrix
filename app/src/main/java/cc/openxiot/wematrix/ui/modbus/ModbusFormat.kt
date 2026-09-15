@@ -11,6 +11,10 @@ import java.util.Locale
  * 列表页与详情页共用，免得两处说法不一致。
  *
  * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
+ *
+ * 文件末尾两个**值文案**函数（[valueText] / [numberText]）是采集值与告警样本共用的口径，
+ * 对齐 web 的 `typedef/utils/ValueUtils.ts`：同一个 `0.30000000000000004` 在告警页与两个
+ * 历史页上必须长得一样，各写一份迟早会走样 —— 故与点表口径放在同一处。
  */
 
 /** 功能码 → 中文名（point.options.ts 的 FC_OPTIONS） */
@@ -79,6 +83,26 @@ fun writeContentLabel(command: ModbusCommand): String = when (command.fc) {
 }
 
 /**
+ * 01/02 的**逐位命名**：`位偏移 → 位名称`，只列真正命名了的位。
+ *
+ * 走 [fitBitNames] 而不是直接读 `bitNames`：后者可能带着用户已经删掉、或数量改小后超出范围的
+ * 残名，而落库的是裁剪后的那份（见 PointOptions）。
+ */
+fun bitNameRows(command: ModbusCommand): List<Pair<Int, String>> =
+    fitBitNames(command.bitNames, expectedBitCount(command.fc, command.quantity))
+        .map { (it.offset ?: 0) to it.name.orEmpty() }
+
+/**
+ * 03/04 的应答字段名：按数量的口径补齐到该有的个数（用户没填的用默认名兜底），
+ * 与生成服务时 `response[].field` 同一套。
+ */
+fun fieldNameRows(command: ModbusCommand): List<String> = fitFieldNames(
+    command.fieldNames,
+    expectedFieldCount(command.fc, command.quantity, command.dataType),
+    fieldBaseName(command.name)
+)
+
+/**
  * 详情页每条功能码要展示的字段（标签 → 值）。
  *
  * 按功能码分组出现，用不到的字段**不显示**（而不是显示成 `-`）—— 这是 Modbus 的固有形状，
@@ -114,3 +138,42 @@ fun formatEpochMillis(timestamp: Long?): String {
     if (timestamp == null || timestamp <= 0) return "-"
     return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(timestamp))
 }
+
+/**
+ * 采样值的展示文案：数值收一收浮点误差，null 显示 `-`。
+ *
+ * 「值」在协议里可以是数值（含缩放后的浮点）、取值表的描述字符串、位区的 0/1，
+ * 故按运行时类型分支，而不是假定是数字。**数据、原样显示、不翻译。**
+ */
+fun valueText(value: Any?): String = when (value) {
+    null -> "-"
+    is Number -> numberText(value.toDouble())
+    // Gson 把 JSON 对象解成 LinkedTreeMap、数组解成 List，都没有好看的 toString
+    is Map<*, *>, is List<*> -> value.toString()
+    else -> value.toString()
+}
+
+/**
+ * 数值文案：整数不带小数点，浮点收到 4 位（0.30000000000000004 → 0.3）。
+ *
+ * 与 web 的 `Number(value.toFixed(4))` 同口径。`1e15` 以上不再收尾数（乘以 10000 会溢出 Long），
+ * 直接交给 Kotlin 自己的格式化 —— Modbus 寄存器解出来的值到不了那个量级。
+ */
+fun numberText(value: Double): String {
+    if (value.isNaN() || value.isInfinite()) return value.toString()
+    if (value == Math.floor(value) && Math.abs(value) < 1e15) return value.toLong().toString()
+    if (Math.abs(value) >= 1e15) return value.toString()
+    return (Math.round(value * 10000.0) / 10000.0).toString()
+}
+
+/**
+ * 把任意 JSON 值收成 Double：只有数值本身，以及能整串解析成数值的字符串才算。
+ * 取值表的描述（如「制冷」）会落到 null —— 调用方据此走「非数值」分支。
+ */
+fun asDoubleOrNull(value: Any?): Double? = when (value) {
+    null -> null
+    is Number -> value.toDouble()
+    is String -> value.trim().toDoubleOrNull()
+    else -> null
+}
+

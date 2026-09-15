@@ -2,6 +2,7 @@ package cc.openxiot.wematrix.ui.modbus
 
 import cc.openxiot.wematrix.data.api.ModbusServiceDevice
 import cc.openxiot.wematrix.data.api.ModbusServiceField
+import cc.openxiot.wematrix.data.api.ModbusServiceFieldAlarm
 import cc.openxiot.wematrix.data.api.ModbusServiceFunction
 import com.google.gson.Gson
 
@@ -20,6 +21,108 @@ const val WRITE_METHOD_HINT = "写方法：应答为请求回显，没有返回�
 
 /** 写方法调用成功后的简短提示 */
 const val WRITE_METHOD_SHORT = "设备已收到该帧"
+
+/**
+ * 请求帧里的功能码（两位大写 16 进制）：帧结构 `[slave][fc][...]`，即第二个字节。
+ *
+ * 帧缺失 / 太短 / 不是 16 进制时返回 null —— 判不出功能码就当「不是读方法」，
+ * 与后端从请求帧第二字节判定读写的口径一致（服务定义里不存 fc，只有这条帧）。
+ */
+fun functionFcOf(request: String?): String? {
+    val hex = request.orEmpty().replace(Regex("\\s+"), "")
+    if (hex.length < 4) return null
+    val fc = hex.substring(2, 4).uppercase()
+    return if (fc.matches(Regex("^[0-9A-F]{2}$"))) fc else null
+}
+
+/**
+ * 方法是否读方法（fc 01/02/03/04）。
+ *
+ * 只有读方法能挂自动调用周期：写方法的应答是请求回显，周期调用等于让服务端周期性地往寄存器里
+ * 写值，后端会直接拒。故「周期 / 轮询」两列对写方法恒为 `-`。
+ */
+fun isReadFunction(function: ModbusServiceFunction): Boolean =
+    functionFcOf(function.request) in setOf("01", "02", "03", "04")
+
+/**
+ * 方法的自动调用周期：没配周期（含全部写方法）= 只手动调用，显示 `-`；
+ * 配了就是周期值，**停用（开关关着）时也照常显示** —— 那是留着待用的配置。
+ */
+fun scheduleLabel(function: ModbusServiceFunction): String =
+    function.interval?.let { "$it 秒" } ?: "-"
+
+/**
+ * 自动轮询状态：启用 / 停用（周期保留）/ `-`（写方法或没配周期）。
+ *
+ * 定义里没写 `polling` 的按「有周期即启用」算（与后端校验的缺省判定一致）—— 故这里判的是
+ * `polling == false` 而不是 `polling == true`：缺省与 true 都算启用。
+ */
+fun pollingLabel(function: ModbusServiceFunction): String {
+    if (!isReadFunction(function) || function.interval == null) return "-"
+    return if (function.polling == false) "停用" else "启用"
+}
+
+/** 轮询处于「停用」态（周期留着、只是暂停）：页面上给它一个弱化的配色 */
+fun isPollingOff(function: ModbusServiceFunction): Boolean =
+    isReadFunction(function) && function.interval != null && function.polling == false
+
+/**
+ * 一条告警规则的一句话：`温度过高(>80)`。
+ *
+ * 用**符号**而不是「超过」那类词：这是与 `uint16/2B` 摆在一起的技术摘要，符号与定义里存的值
+ * 逐字对齐。`threshold` 走 [numberText]：Gson 把 JSON 数字都解成 Double，80 会显示成 80.0。
+ */
+fun alarmRuleBrief(alarm: ModbusServiceFieldAlarm): String {
+    val target = alarm.threshold?.let { numberText(it) } ?: alarm.state.orEmpty()
+    return "${alarm.text.orEmpty()}(${alarm.compare.orEmpty()}$target)"
+}
+
+/**
+ * 一个方法配了告警的**出值**（应答字段 + 位清单里各一位），按定义顺序；没配的出值不列。
+ *
+ * 位是独立的结果键 —— 后端逐位把 0/1 写进返回值，所以位与它的父字段各占一行、各配各的告警；
+ * 只挂父字段的话「位 = 1 就告警」根本够不着。
+ */
+data class ServiceOutputAlarms(
+    /** 出值名：invoke 返回值里的 key，也是告警行里的 `field`（**数据、不翻译**） */
+    val key: String,
+    /** 这个出值的一组规则，按定义顺序（顺序参与运行期的裁决） */
+    val alarms: List<ModbusServiceFieldAlarm>
+)
+
+fun alarmedOutputs(function: ModbusServiceFunction): List<ServiceOutputAlarms> {
+    val outputs = mutableListOf<ServiceOutputAlarms>()
+    for (field in function.response) {
+        val fieldKey = field.field.orEmpty()
+        if (field.alarms.isNotEmpty()) outputs += ServiceOutputAlarms(fieldKey, field.alarms)
+        for (bit in field.bitList) {
+            if (bit.alarms.isNotEmpty()) {
+                outputs += ServiceOutputAlarms(bit.field.orEmpty(), bit.alarms)
+            }
+        }
+    }
+    return outputs
+}
+
+/**
+ * 一个方法配了多少条告警规则：全部出值加起来的条数。
+ *
+ * **停用的规则也算**：数的是「配了几条」，不是「此刻有几条生效」—— 后者随值上下起伏，
+ * 不该出现在配置页上。写方法没有出值，恒为 0。
+ */
+fun definedAlarmCount(function: ModbusServiceFunction): Int =
+    alarmedOutputs(function).sumOf { it.alarms.size }
+
+/**
+ * 应答字段里的**位清单**（01/02 位区逐位取值）：每行「所属字段 → 位名」。
+ *
+ * 位是独立的结果键，调用后会与父字段一起出现在返回值里，故要在应答字段区块单独列出
+ * —— 光看「整段位掩码」那一行，用户不知道里面还拆出了哪几位。
+ */
+fun bitListRows(function: ModbusServiceFunction): List<Pair<String, String>> =
+    function.response.flatMap { field ->
+        field.bitList.map { bit -> (field.field.orEmpty()) to (bit.field.orEmpty()) }
+    }
 
 /**
  * 调用坐标 `#siid · #aiid`：帧发给依赖设备的哪个服务、哪个方法。

@@ -114,4 +114,8 @@ dependencies {
     implementation("com.tencent.mm.opensdk:wechat-sdk-android:6.8.40")
 
     debugImplementation("androidx.compose.ui:ui-tooling")
+
+    // 工程里唯一的测试源集：只在 app/src/test 下，钉住 Modbus 帧生成与数量口径的逐字节结果
+    // （见 RequestFrameTest）。纯 JVM 计算，不起模拟器。
+    testImplementation("junit:junit:4.13.2")
 }

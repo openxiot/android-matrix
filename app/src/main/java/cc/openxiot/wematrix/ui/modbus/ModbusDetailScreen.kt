@@ -25,9 +25,11 @@ import cc.openxiot.wematrix.ui.theme.Red
 /**
  * 设备点表详情（只读）。
  *
- * **只读是明确的能力边界，不是没做完**：新建/编辑/删除功能码、拖拽排序、发布与生命周期流转、
- * 命令帧（请求帧）预览，这些要么需要写接口、要么需要本端生成 Modbus 帧，移动端都不做。
- * 所以这里除了返回没有第二个按钮 —— 将来要加，先想清楚权限口径。
+ * **只读是明确的能力边界，不是没做完**：新建/编辑/删除功能码、拖拽排序、发布与生命周期流转
+ * 都要写接口，移动端不做。所以这里除了返回没有第二个按钮 —— 将来要加，先想清楚权限口径。
+ *
+ * 唯一的例外是每行的「命令」：它**不写任何东西**，只是照着这份定义当场算出请求帧与两条应答帧
+ * 给现场排障看（见 [CommandFrameDialog]）。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,6 +39,10 @@ fun ModbusDetailScreen(
     viewModel: ModbusViewModel = viewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
+    val config = state.detail
+
+    // 正在预览「命令」的那条功能码；null = 没开对话框
+    var previewCommand by remember { mutableStateOf<ModbusCommand?>(null) }
 
     LaunchedEffect(configId) { viewModel.loadDetail(configId) }
 
@@ -71,7 +77,6 @@ fun ModbusDetailScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            val config = state.detail
             when {
                 state.isDetailLoading && config == null -> LoadingIndicator()
 
@@ -104,11 +109,23 @@ fun ModbusDetailScreen(
                         // index 是点表内的顺序（后端生成虚拟设备实例时 action 的 iid 就是它），
                         // 缺省的后排到末尾
                         val commands = config.commands.sortedBy { it.index ?: Int.MAX_VALUE }
-                        items(commands) { command -> CommandCard(command) }
+                        items(commands) { command ->
+                            CommandCard(command) { previewCommand = command }
+                        }
                     }
                 }
             }
         }
+    }
+
+    // 帧是照着这份定义当场算的（见 CommandFrameDialog），不发送任何东西。
+    // 从站地址取自点表的设备信息：缺省时对话框会说「生成不了」而不是拿 0 兜
+    previewCommand?.let { command ->
+        CommandFrameDialog(
+            command = command,
+            slaveId = config?.slave?.slaveId,
+            onDismiss = { previewCommand = null }
+        )
     }
 }
 
@@ -163,7 +180,7 @@ private fun DeviceInfoCard(config: ModbusConfig) {
 }
 
 @Composable
-private fun CommandCard(command: ModbusCommand) {
+private fun CommandCard(command: ModbusCommand, onShowCommand: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -201,6 +218,42 @@ private fun CommandCard(command: ModbusCommand) {
 
             commandFields(command).forEach { (label, value) ->
                 DetailRow(label, value, MaterialTheme.typography.bodySmall)
+            }
+
+            // 01/02 的逐位命名：位区读回来是一段掩码，用户在这里填的位名决定它拆成哪几个字段
+            bitNameRows(command).takeIf { it.isNotEmpty() }?.let { rows ->
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = "位名称（${rows.size}）",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                rows.forEach { (offset, name) ->
+                    DetailRow("位 $offset", name, MaterialTheme.typography.bodySmall)
+                }
+            }
+
+            // 03/04 的应答字段名：读回来的每个值将来叫什么（服务里 response[].field 就是它）
+            fieldNameRows(command).takeIf { it.isNotEmpty() }?.let { rows ->
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = "应答字段名（${rows.size}）",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                rows.forEachIndexed { i, name ->
+                    DetailRow("字段 ${i + 1}", name, MaterialTheme.typography.bodySmall)
+                }
+            }
+
+            Spacer(Modifier.height(4.dp))
+
+            // 本端只预览、不发送：帧是照着这份定义当场算出来的
+            TextButton(
+                onClick = onShowCommand,
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
+            ) {
+                Text("命令", style = MaterialTheme.typography.labelLarge)
             }
         }
     }

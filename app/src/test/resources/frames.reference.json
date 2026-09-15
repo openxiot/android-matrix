@@ -1,0 +1,569 @@
+[
+  {
+    "name": "01_read_coils_q8",
+    "slaveId": 1,
+    "command": {
+      "name": "读开关状态",
+      "fc": "01",
+      "start": 0,
+      "quantity": 8,
+      "bitNames": [
+        {
+          "offset": 0,
+          "name": "泵1"
+        },
+        {
+          "offset": 3,
+          "name": "泵2"
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 01 00 00 00 08 3D CC",
+      "response": "01 01 01 00 51 88",
+      "exception": "01 81 ?? ?? ??",
+      "frameQuantity": 8,
+      "bitCount": 8,
+      "fieldCount": 0,
+      "bitNames": [
+        [
+          "0",
+          "泵1"
+        ],
+        [
+          "3",
+          "泵2"
+        ]
+      ],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "01_read_coils_q1",
+    "slaveId": 247,
+    "command": {
+      "name": "读线圈",
+      "fc": "01",
+      "start": 19,
+      "quantity": 1
+    },
+    "expected": {
+      "request": "F7 01 00 13 00 01 18 99",
+      "response": "F7 01 01 00 62 00",
+      "exception": "F7 81 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 1,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "02_read_discrete_q16",
+    "slaveId": 2,
+    "command": {
+      "fc": "02",
+      "start": 100,
+      "quantity": 16
+    },
+    "expected": {
+      "request": "02 02 00 64 00 10 38 2A",
+      "response": "02 02 02 00 00 FD B8",
+      "exception": "02 82 ?? ?? ??",
+      "frameQuantity": 16,
+      "bitCount": 16,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "03_read_holding_q10_int16",
+    "slaveId": 1,
+    "command": {
+      "name": "读温度",
+      "fc": "03",
+      "start": 0,
+      "quantity": 10,
+      "dataType": "int16",
+      "byteOrder": "ABCD"
+    },
+    "expected": {
+      "request": "01 03 00 00 00 0A C5 CD",
+      "response": "01 03 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 A3 67",
+      "exception": "01 83 ?? ?? ??",
+      "frameQuantity": 10,
+      "bitCount": 0,
+      "fieldCount": 10,
+      "bitNames": [],
+      "fieldNames": [
+        "温度 1",
+        "温度 2",
+        "温度 3",
+        "温度 4",
+        "温度 5",
+        "温度 6",
+        "温度 7",
+        "温度 8",
+        "温度 9",
+        "温度 10"
+      ]
+    }
+  },
+  {
+    "name": "03_read_holding_q5_int32",
+    "slaveId": 1,
+    "command": {
+      "fc": "03",
+      "start": 100,
+      "quantity": 5,
+      "dataType": "int32",
+      "byteOrder": "CDAB"
+    },
+    "expected": {
+      "request": "01 03 00 64 00 0A 84 12",
+      "response": "01 03 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 A3 67",
+      "exception": "01 83 ?? ?? ??",
+      "frameQuantity": 10,
+      "bitCount": 0,
+      "fieldCount": 5,
+      "bitNames": [],
+      "fieldNames": [
+        " 1",
+        " 2",
+        " 3",
+        " 4",
+        " 5"
+      ]
+    }
+  },
+  {
+    "name": "03_read_holding_q4_float32",
+    "slaveId": 3,
+    "command": {
+      "fc": "03",
+      "start": 200,
+      "quantity": 4,
+      "dataType": "float32",
+      "byteOrder": "DCBA"
+    },
+    "expected": {
+      "request": "03 03 00 C8 00 08 C4 10",
+      "response": "03 03 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 9D E1",
+      "exception": "03 83 ?? ?? ??",
+      "frameQuantity": 8,
+      "bitCount": 0,
+      "fieldCount": 4,
+      "bitNames": [],
+      "fieldNames": [
+        " 1",
+        " 2",
+        " 3",
+        " 4"
+      ]
+    }
+  },
+  {
+    "name": "03_read_holding_q6_string",
+    "slaveId": 1,
+    "command": {
+      "fc": "03",
+      "start": 300,
+      "quantity": 6,
+      "dataType": "string"
+    },
+    "expected": {
+      "request": "01 03 01 2C 00 06 05 FD",
+      "response": "01 03 0C 00 00 00 00 00 00 00 00 00 00 00 00 93 70",
+      "exception": "01 83 ?? ?? ??",
+      "frameQuantity": 6,
+      "bitCount": 0,
+      "fieldCount": 1,
+      "bitNames": [],
+      "fieldNames": [
+        ""
+      ]
+    }
+  },
+  {
+    "name": "03_read_holding_q0",
+    "slaveId": 1,
+    "command": {
+      "fc": "03",
+      "start": 0,
+      "quantity": 0,
+      "dataType": "int16"
+    },
+    "expected": {
+      "request": "01 03 00 00 00 01 84 0A",
+      "response": "01 03 02 00 00 B8 44",
+      "exception": "01 83 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 1,
+      "bitNames": [],
+      "fieldNames": [
+        ""
+      ]
+    }
+  },
+  {
+    "name": "03_field_base_name",
+    "slaveId": 1,
+    "command": {
+      "name": "读开关状态",
+      "fc": "03",
+      "start": 0,
+      "quantity": 2,
+      "dataType": "uint16",
+      "fieldNames": [
+        "",
+        "自定义"
+      ]
+    },
+    "expected": {
+      "request": "01 03 00 00 00 02 C4 0B",
+      "response": "01 03 04 00 00 00 00 FA 33",
+      "exception": "01 83 ?? ?? ??",
+      "frameQuantity": 2,
+      "bitCount": 0,
+      "fieldCount": 2,
+      "bitNames": [],
+      "fieldNames": [
+        "开关状态 1",
+        "自定义"
+      ]
+    }
+  },
+  {
+    "name": "04_read_input_q3_uint32",
+    "slaveId": 4,
+    "command": {
+      "fc": "04",
+      "start": 7,
+      "quantity": 3,
+      "dataType": "uint32",
+      "byteOrder": "BADC"
+    },
+    "expected": {
+      "request": "04 04 00 07 00 06 C1 9C",
+      "response": "04 04 0C 00 00 00 00 00 00 00 00 00 00 00 00 50 B4",
+      "exception": "04 84 ?? ?? ??",
+      "frameQuantity": 6,
+      "bitCount": 0,
+      "fieldCount": 3,
+      "bitNames": [],
+      "fieldNames": [
+        " 1",
+        " 2",
+        " 3"
+      ]
+    }
+  },
+  {
+    "name": "05_write_coil_on",
+    "slaveId": 1,
+    "command": {
+      "name": "开泵",
+      "fc": "05",
+      "start": 8,
+      "coilState": "on"
+    },
+    "expected": {
+      "request": "01 05 00 08 FF 00 0D F8",
+      "response": "01 05 00 08 FF 00 0D F8",
+      "exception": "01 85 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "05_write_coil_off",
+    "slaveId": 1,
+    "command": {
+      "fc": "05",
+      "start": 8,
+      "coilState": "off"
+    },
+    "expected": {
+      "request": "01 05 00 08 00 00 4C 08",
+      "response": "01 05 00 08 00 00 4C 08",
+      "exception": "01 85 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "06_write_reg_0x1234",
+    "slaveId": 1,
+    "command": {
+      "fc": "06",
+      "start": 10,
+      "registerValue": 4660
+    },
+    "expected": {
+      "request": "01 06 00 0A 12 34 A4 BF",
+      "response": "01 06 00 0A 12 34 A4 BF",
+      "exception": "01 86 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "06_write_reg_ffff",
+    "slaveId": 1,
+    "command": {
+      "fc": "06",
+      "start": 10,
+      "registerValue": 65535
+    },
+    "expected": {
+      "request": "01 06 00 0A FF FF A8 78",
+      "response": "01 06 00 0A FF FF A8 78",
+      "exception": "01 86 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "06_write_reg_uint32_pattern",
+    "slaveId": 1,
+    "command": {
+      "fc": "06",
+      "start": 10,
+      "registerValue": 4294967295
+    },
+    "expected": {
+      "request": "01 06 00 0A FF FF A8 78",
+      "response": "01 06 00 0A FF FF A8 78",
+      "exception": "01 86 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "0f_write_3_coils",
+    "slaveId": 1,
+    "command": {
+      "name": "写多个线圈",
+      "fc": "0F",
+      "start": 20,
+      "coils": [
+        {
+          "offset": 0,
+          "on": true
+        },
+        {
+          "offset": 2,
+          "on": true
+        },
+        {
+          "offset": 9,
+          "on": true
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 0F 00 14 00 0A 02 05 02 64 BD",
+      "response": "01 0F 00 14 00 0A 95 C8",
+      "exception": "01 8F ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "0f_write_10_coils_all_on",
+    "slaveId": 1,
+    "command": {
+      "fc": "0F",
+      "start": 0,
+      "coils": [
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        },
+        {
+          "on": true
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 0F 00 00 00 0A 02 FF 03 E4 C9",
+      "response": "01 0F 00 00 00 0A D5 CC",
+      "exception": "01 8F ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "0f_write_no_coils",
+    "slaveId": 1,
+    "command": {
+      "fc": "0F",
+      "start": 0,
+      "coils": []
+    },
+    "expected": {
+      "request": null,
+      "response": null,
+      "exception": null,
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "10_write_mixed_registers",
+    "slaveId": 1,
+    "command": {
+      "name": "写多寄存器",
+      "fc": "10",
+      "start": 50,
+      "registers": [
+        {
+          "dataType": "int16",
+          "byteOrder": "ABCD",
+          "value": 300
+        },
+        {
+          "dataType": "int32",
+          "byteOrder": "CDAB",
+          "value": 123456
+        },
+        {
+          "dataType": "uint16",
+          "byteOrder": "DCBA",
+          "value": 1
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 10 00 32 00 04 08 01 2C E2 40 00 01 01 00 65 EE",
+      "response": "01 10 00 32 00 04 60 05",
+      "exception": "01 90 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "10_write_float32_pattern",
+    "slaveId": 1,
+    "command": {
+      "fc": "10",
+      "start": 0,
+      "registers": [
+        {
+          "dataType": "float32",
+          "byteOrder": "ABCD",
+          "value": 4294967295
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 10 00 00 00 02 04 FF FF FF FF F2 3B",
+      "response": "01 10 00 00 00 02 41 C8",
+      "exception": "01 90 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "10_write_negative_int16",
+    "slaveId": 1,
+    "command": {
+      "fc": "10",
+      "start": 0,
+      "registers": [
+        {
+          "dataType": "int16",
+          "value": -5
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 10 00 00 00 01 02 FF FB A6 23",
+      "response": "01 10 00 00 00 01 01 C9",
+      "exception": "01 90 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  },
+  {
+    "name": "10_write_unknown_type",
+    "slaveId": 1,
+    "command": {
+      "fc": "10",
+      "start": 0,
+      "registers": [
+        {
+          "value": 7
+        }
+      ]
+    },
+    "expected": {
+      "request": "01 10 00 00 00 01 02 00 07 E7 92",
+      "response": "01 10 00 00 00 01 01 C9",
+      "exception": "01 90 ?? ?? ??",
+      "frameQuantity": 1,
+      "bitCount": 0,
+      "fieldCount": 0,
+      "bitNames": [],
+      "fieldNames": []
+    }
+  }
+]

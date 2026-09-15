@@ -57,6 +57,45 @@ data class ModbusServiceFieldValue(
 )
 
 /**
+ * 一个出值的阈值告警规则，是**一组**（[ModbusServiceField.alarms]）里的一条。
+ * 分级配置就靠这个数组表达：温度「低于 20 告警 / 超过 26 提示 / 超过 28 警告 / 超过 30 严重」
+ * 是同一个出值上的四条规则。
+ *
+ * 客户端**只读**：增删改都在 web 的点表/服务编辑器里做，本端仅把配了什么显示出来。
+ * 尤其 [id] 别拿去当 key 之外用 —— 它是「这条开着的告警是哪条规则开的」的身份凭据。
+ */
+data class ModbusServiceFieldAlarm(
+    /** 规则身份（前端生成、随配置落库）；后端只校验、不下发回前端 */
+    @SerializedName("id") val id: String? = null,
+    /** 缺省 / false = 不告警，**配置原样留着**（与 interval 配了却暂停轮询同口径） */
+    @SerializedName("enabled") val enabled: Boolean? = null,
+    /** `>` 超过 / `>=` 达到 / `<` 低于 / `<=` 低于等于 / `=` 等于（符号不翻译） */
+    @SerializedName("compare") val compare: String? = null,
+    /** 数值阈值；`=` 且字段带取值表时改用 [state] */
+    @SerializedName("threshold") val threshold: Double? = null,
+    /** `=` 的比较目标：取值表里的 description（**服务端数据，原样显示**） */
+    @SerializedName("state") val state: String? = null,
+    /** INFO 提示 / WARN 警告 / CRITICAL 严重 */
+    @SerializedName("level") val level: String? = null,
+    /** 告警文本（用户自己填的，如「温度过高」）—— **用户数据，永不翻译** */
+    @SerializedName("text") val text: String? = null
+)
+
+/**
+ * 位区字段里的具名位：除字段自身那份整段位掩码外，把该位单独作为一个 0/1 取值输出（key 即 [field]）。
+ *
+ * 偏移是 0 基、从位区起点（请求的起始地址）算起；帧内按 LSB-first 取位，
+ * 即第 `offset/8` 个数据字节的第 `offset%8` 位。
+ */
+data class ModbusServiceFieldBit(
+    @SerializedName("offset") val offset: Int? = null,
+    /** 该位的取值名：invoke 返回值里这个位的 key（**服务端数据，原样显示**） */
+    @SerializedName("field") val field: String? = null,
+    /** 该位自己的一组告警规则（位是独立的结果键，比的是那一位的 0/1） */
+    @SerializedName("alarms") val alarms: List<ModbusServiceFieldAlarm> = emptyList()
+)
+
+/**
  * 应答帧里的一个字段：描述「从数据区第几段开始、多少字节、怎么解」。
  *
  * 一个方法的应答数据区按 [index] 升序、以 [bytes] 依次累加偏移切分。
@@ -79,7 +118,11 @@ data class ModbusServiceField(
     /** 单位（展示用，如 ℃ / %），不影响取值 */
     @SerializedName("unit") val unit: String? = null,
     /** 线上键名 `value-list` */
-    @SerializedName("value-list") val valueList: List<ModbusServiceFieldValue> = emptyList()
+    @SerializedName("value-list") val valueList: List<ModbusServiceFieldValue> = emptyList(),
+    /** 线上键名 `bit-list`（01/02 位区逐位取值；缺省 = 只按整段位掩码出一个字段） */
+    @SerializedName("bit-list") val bitList: List<ModbusServiceFieldBit> = emptyList(),
+    /** 该字段出值的一组阈值告警规则，按声明顺序排列（缺省 / 空 = 没配） */
+    @SerializedName("alarms") val alarms: List<ModbusServiceFieldAlarm> = emptyList()
 )
 
 /**
@@ -95,6 +138,18 @@ data class ModbusServiceFunction(
     @SerializedName("name") val name: String? = null,
     /** 请求帧：完整的 Modbus RTU 帧 16 进制字符串（含 CRC16），原样交给设备发送 */
     @SerializedName("request") val request: String? = null,
+    /**
+     * 服务端自动调用本方法的周期（秒）：到点自动 invoke 一次，再按 response 解出字段值；
+     * 缺省表示没配周期 —— 后端用 null 表达同一件事，不用 0。取值 5 ~ 3600 秒。
+     *
+     * **配了周期不等于会跑**：跑不跑看 [polling]。只对读方法有意义（写方法上不会出现）。
+     */
+    @SerializedName("interval") val interval: Int? = null,
+    /**
+     * 是否启用自动轮询：true = 按 [interval] 周期调用；false = 保留周期但暂停（随时可再开）；
+     * 缺省 = **按 [interval] 判定**，配了周期即启用 —— 与加这个字段之前的定义一致。
+     */
+    @SerializedName("polling") val polling: Boolean? = null,
     /** 应答解析规则；空数组表示写方法 */
     @SerializedName("response") val response: List<ModbusServiceField> = emptyList()
 )

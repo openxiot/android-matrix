@@ -160,6 +160,40 @@ fun carryInNumeric(range: ModbusHistoryRange): Double? = range.carryIn?.let { sa
 private fun dateTime(at: Long): String =
     SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(at))
 
+/**
+ * epoch 毫秒 → `yyyy-MM-dd`（只到天）。筛选条上回显「自定义查的是哪两天」用它 ——
+ * 窗口是按整天展开的，把 `23:59:59.999` 那半秒也显示出来只会让人以为窗口歪了。
+ */
+fun epochDate(at: Long?): String {
+    if (at == null || at <= 0) return "-"
+    return formatEpochMillis(at).substring(0, 10)
+}
+
+/**
+ * epoch 毫秒 → `MM-dd HH:mm:ss`（**省掉年份**）。
+ *
+ * 告警与服务历史两张清单里，这一列旁边还有别的字要放，年份（而且几乎总是今年）最不值钱 ——
+ * 与 web 两张表的 `date: 'MM-dd HH:mm:ss'` 同口径。
+ */
+fun epochShort(at: Long?): String {
+    if (at == null || at <= 0) return "-"
+    return formatEpochMillis(at).substring(5)
+}
+
+/**
+ * 曲线图横轴刻度的文案：**按窗口跨度选粒度**，与 web 的 `axisTime` 同口径。
+ *
+ * 一小时的窗口里 `HH:mm:ss` 才看得出节奏，七天的窗口里到分钟就够、再细只会把刻度挤成一团。
+ */
+fun axisTimeText(at: Long, spanMillis: Long): String {
+    val pattern = when {
+        spanMillis <= 6 * 3600L * 1000 -> "HH:mm:ss"
+        spanMillis <= 3 * 24 * 3600L * 1000 -> "HH:mm"
+        else -> "MM-dd HH:mm"
+    }
+    return SimpleDateFormat(pattern, Locale.getDefault()).format(Date(at))
+}
+
 private fun sameDay(a: Long, b: Long): Boolean {
     val calendar = Calendar.getInstance()
     calendar.timeInMillis = a

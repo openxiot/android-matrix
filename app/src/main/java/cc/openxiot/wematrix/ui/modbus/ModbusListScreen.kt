@@ -20,6 +20,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.ModbusConfig
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
+import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.theme.Blue500
 import cc.openxiot.wematrix.ui.theme.Gray500
@@ -173,29 +174,14 @@ private fun ModbusConfigCard(config: ModbusConfig, onClick: () -> Unit) {
     }
 }
 
-/** 小标签：可见度 / 生命周期。配色对齐 web 的 nz-tag（开发中=蓝、预览=橙、已发布=绿） */
-@Composable
-internal fun InfoChip(text: String, color: Color, modifier: Modifier = Modifier) {
-    Surface(
-        modifier = modifier,
-        shape = RoundedCornerShape(4.dp),
-        color = color.copy(alpha = 0.15f)
-    ) {
-        Text(
-            text = text,
-            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-            style = MaterialTheme.typography.labelSmall,
-            color = color
-        )
-    }
-}
-
+/** 可见度标签的配色（公开=绿、私有=灰） */
 internal fun visibilityColor(visibility: String?): Color = when (visibility) {
     "public" -> Green
     "private" -> Gray500
     else -> Gray500
 }
 
+/** 生命周期标签的配色，对齐 web 的 nz-tag（开发中=蓝、预览=橙、已发布=绿） */
 internal fun lifecycleColor(lifecycle: String?): Color = when (lifecycle ?: "development") {
     "development" -> Blue500
     "preview" -> Orange

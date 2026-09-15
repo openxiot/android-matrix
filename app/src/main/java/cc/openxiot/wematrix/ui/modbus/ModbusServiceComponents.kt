@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import cc.openxiot.wematrix.data.api.ModbusService
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.ui.theme.Blue500
+import cc.openxiot.wematrix.ui.components.InfoChip
 
 /**
  * 服务在两处的展示件：

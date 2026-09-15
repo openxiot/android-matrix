@@ -289,3 +289,24 @@ fun InputDialog(
         }
     )
 }
+
+/**
+ * 一枚小标签：可见度 / 生命周期 / 告警级别 / 状态都用它。
+ *
+ * 底色取 `color` 的 15% 透明度、文字用原色 —— 比实心底色安静，成排出现时不至于把那一行压得看不清。
+ */
+@Composable
+fun InfoChip(text: String, color: Color, modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier,
+        shape = RoundedCornerShape(4.dp),
+        color = color.copy(alpha = 0.15f)
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+            style = MaterialTheme.typography.labelSmall,
+            color = color
+        )
+    }
+}

@@ -19,6 +19,7 @@ import cc.openxiot.wematrix.data.api.ModbusCommand
 import cc.openxiot.wematrix.data.api.ModbusConfig
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
+import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.theme.Red
 

@@ -194,6 +194,120 @@ interface MatrixService {
         @Path("spaceId") spaceId: String,
         @Body body: InvokeModbusServiceRequest
     ): Response<ApiResponse<Map<String, Any?>>>
+
+    // ---- 数据看板统计 ----
+    // 与查询服务同口径（空间成员），spaceId 在 Path 上、统一传当前项目**根空间**。
+    // **范围含子空间**：设备、服务、告警、故障都取该空间整棵子树。
+
+    /**
+     * 数据看板一屏的聚合数字。
+     *
+     * `from` 必填（后端拒无起点的查询：那是全表扫）；`to` 传 null = 到现在，
+     * 响应里的 `to` 是**实际生效**的那个值，页面的曲线右端以它为准。
+     * 窗口上限 31 天，超了后端报错（不会静默截断）。
+     */
+    @GET("matrix/v1/statistics/overview/{spaceId}")
+    suspend fun getStatisticsOverview(
+        @Path("spaceId") spaceId: String,
+        @Query("from") from: Long,
+        @Query("to") to: Long?
+    ): Response<ApiResponse<OverviewStatistics>>
+
+    // ---- Modbus 采集历史（只读） ----
+    // 服务端按各方法的 interval 自动调用依赖设备、把读到的值落库，下面三个接口分别取
+    // 「当前值 / 序列 / 失败清单」。spaceId 同样是**鉴权作用域**（见上）。
+    //
+    // **每个可空查询参数都是「不传 = 不限」**：Retrofit 对 null 参数默认就不拼进 URL，
+    // 正好是要的行为 —— 故**绝不能**给它们默认值（给了 false / 空串就永远查不了对应的子集）。
+    // 服务端对这些空值的口径：`serviceId` 不传 = 整个空间（含子空间），响应里每条 item
+    // 自带 serviceId 认领归属。
+
+    /** 每个方法最后一次**成功**采到的字段值 + 那一刻，以及最近一次失败 */
+    @GET("matrix/v1/modbus/history/current/{spaceId}/{serviceId}")
+    suspend fun getHistoryCurrent(
+        @Path("spaceId") spaceId: String,
+        @Path("serviceId") serviceId: String
+    ): Response<ApiResponse<ModbusHistoryCurrent>>
+
+    /**
+     * 一个方法的某一个字段在 [from, to] 内的序列。
+     *
+     * `to` 缺省 = 现在；`maxPoints` 缺省 500、后端夹到 [1, 2000]，原始样本超过它就返回降采样桶。
+     * 窗口内原始样本超过 2 万条时后端直接报错，要求收窄 from/to（不会静默截断）。
+     */
+    @GET("matrix/v1/modbus/history/range/{spaceId}")
+    suspend fun getHistoryRange(
+        @Path("spaceId") spaceId: String,
+        @Query("serviceId") serviceId: String,
+        @Query("functionIndex") functionIndex: Int,
+        @Query("field") field: String,
+        @Query("from") from: Long,
+        @Query("to") to: Long?,
+        @Query("maxPoints") maxPoints: Int?
+    ): Response<ApiResponse<ModbusHistoryRange>>
+
+    /**
+     * 某服务（或整个空间）在 [from, to] 内的采集失败清单 + 汇总，items 按时间倒序。
+     *
+     * `serviceId` / `type` / `functionIndex` 传 null = 不限；`limit` 缺省 200、后端夹到 [1, 1000]。
+     * `type` 是**失败类型**筛选（后端枚举名，见 ModbusHistoryFormat 的映射）—— 现页面按类型
+     * 展示汇总而不按它筛，故调用方暂时一律传 null，参数留着是为了让契约完整。
+     */
+    @GET("matrix/v1/modbus/history/failures/{spaceId}")
+    suspend fun getHistoryFailures(
+        @Path("spaceId") spaceId: String,
+        @Query("from") from: Long,
+        @Query("to") to: Long?,
+        @Query("serviceId") serviceId: String?,
+        @Query("functionIndex") functionIndex: Int?,
+        @Query("type") type: String?,
+        @Query("limit") limit: Int?
+    ): Response<ApiResponse<ModbusHistoryFailures>>
+
+    // ---- 阈值告警 ----
+
+    /**
+     * 某服务（或整个空间）在 [from, to] 内的阈值告警清单 + 汇总，items 按 `at` 倒序。
+     *
+     * `serviceId` 不传 = **整个空间（含子空间）**：后端把空间下所有服务的告警合成一条时间倒序的
+     * 清单，`limit` 与 `truncated` 也按整份清单算。「这个项目现在哪儿在告警」就是这一条，
+     * 不必按服务扇出 N 个请求。
+     *
+     * `level` / `field` / `serviceId` 传 null = 不限；`open` / `handled` 是**三态**
+     * （true 只看未恢复/未处理、false 只看已恢复/已处理、null 不限）—— 它们的 null 与 false
+     * **必须区分开**，用 false 表达「不传」就永远查不了「只看已恢复」的那些。
+     *
+     * `from` 必填（后端拒无起点的查询），`to` 传 null = 到现在。
+     */
+    @GET("matrix/v1/modbus/alarm/many/{spaceId}")
+    suspend fun getModbusAlarms(
+        @Path("spaceId") spaceId: String,
+        @Query("from") from: Long,
+        @Query("to") to: Long?,
+        @Query("serviceId") serviceId: String?,
+        @Query("functionIndex") functionIndex: Int?,
+        @Query("field") field: String?,
+        @Query("level") level: String?,
+        @Query("open") openState: Boolean?,
+        @Query("handled") handled: Boolean?,
+        @Query("limit") limit: Int?
+    ): Response<ApiResponse<ModbusAlarmList>>
+
+    /**
+     * 处理一条告警：处理人取当前登录账号，返回**更新后的那一条**，页面据此就地替换该行、
+     * 不整页刷新。
+     *
+     * 重复点击算成功（后端把「已经处理过了」当成功返回）：页面不必自己做「点过了就禁用」，
+     * 但仍应就地更新，否则用户会以为没生效。该告警不属于传入空间的子树时后端拒绝（拿别人的 id 点不了）。
+     *
+     * 本端**唯一的新增写操作**，且是 web 已有的幂等接口；请求体照 web 传一个空对象。
+     */
+    @POST("matrix/v1/modbus/alarm/handle/{spaceId}/{id}")
+    suspend fun handleModbusAlarm(
+        @Path("spaceId") spaceId: String,
+        @Path("id") id: String,
+        @Body body: Map<String, Any?>
+    ): Response<ApiResponse<ModbusAlarm>>
 }
 
 interface ProductService {

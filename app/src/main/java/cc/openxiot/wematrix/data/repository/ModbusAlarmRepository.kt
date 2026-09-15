@@ -52,6 +52,7 @@ class ModbusAlarmRepository {
 
     /** 处理一条告警：返回**更新后的那一条**，页面据此就地替换该行、不整页刷新 */
     suspend fun handle(spaceId: String, id: String): Result<ModbusAlarm> = runCatching {
+        // 空对象：后端这个接口不看 body（照 web 传 `{}`；类型上的 @JvmSuppressWildcards 见 ApiService 的文件头）
         val response = service.handleModbusAlarm(spaceId, id, emptyMap())
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: throw Exception("告警不存在")

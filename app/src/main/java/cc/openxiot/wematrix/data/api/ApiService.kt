@@ -3,6 +3,19 @@ package cc.openxiot.wematrix.data.api
 import retrofit2.Response
 import retrofit2.http.*
 
+/**
+ * 各服务的 Retrofit 接口。
+ *
+ * **`@Body` 的泛型实参一律写 `@JvmSuppressWildcards`**（如 `Map<String, @JvmSuppressWildcards Any?>`）：
+ * Kotlin 生成 Java 签名时，对非 final 的实参（`Any` / `Any?`）会补一个通配符 ——
+ * `Map<String, Any?>` 编出来是 `Map<String, ? extends Object>`，而 Retrofit **拒绝**参数类型里
+ * 出现通配符与类型变量。麻烦的是它**懒校验**：`create()` 一声不吭，等真的点了那个按钮才抛
+ * `Parameter type must not include a type variable or wildcard`（告警页的「处理」就这么炸过一次）。
+ * 实参是 final 类（`String` / `Boolean`）时 Kotlin 本来就不补通配符，故本文件里 `Map<String, String>`
+ * 那几处不带也安全；`Any` / `Any?` 这种非 final 的则一律要带。
+ *
+ * 这类错编译期与 lint 都看不见，由 [ApiServiceSignatureTest] 在构建期逐个方法解析一遍钉住。
+ */
 interface AccountService {
     // 移动端直接换 token 的登录接口(区别于浏览器用的 callback 302 跳转),返回 JSON
     @GET("user/oauth2/v1/login/mobile/{platformId}")
@@ -140,13 +153,13 @@ interface MatrixService {
     @POST("matrix/v1/device/properties/{spaceId}")
     suspend fun setDeviceProperties(
         @Path("spaceId") spaceId: String,
-        @Body body: Map<String, Any>
+        @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
     @POST("matrix/v1/device/actions/{spaceId}")
     suspend fun invokeDeviceAction(
         @Path("spaceId") spaceId: String,
-        @Body body: Map<String, Any>
+        @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
     // ---- 设备点表（只读） ----
@@ -300,13 +313,14 @@ interface MatrixService {
      * 重复点击算成功（后端把「已经处理过了」当成功返回）：页面不必自己做「点过了就禁用」，
      * 但仍应就地更新，否则用户会以为没生效。该告警不属于传入空间的子树时后端拒绝（拿别人的 id 点不了）。
      *
-     * 本端**唯一的新增写操作**，且是 web 已有的幂等接口；请求体照 web 传一个空对象。
+     * 本端**唯一的新增写操作**，且是 web 已有的幂等接口；后端这个方法的签名里没有 body 参数
+     * （web 的 `{}` 是 Angular `post()` 必须给个 body 的产物），本端照 web 传一个空对象。
      */
     @POST("matrix/v1/modbus/alarm/handle/{spaceId}/{id}")
     suspend fun handleModbusAlarm(
         @Path("spaceId") spaceId: String,
         @Path("id") id: String,
-        @Body body: Map<String, Any?>
+        @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): Response<ApiResponse<ModbusAlarm>>
 }
 

@@ -117,7 +117,12 @@ fun MainScreen(
                 userScrollEnabled = false
             ) { page ->
                 when (tabs[page]) {
-                    BottomTab.Home -> HomeScreen()
+                    BottomTab.Home -> HomeScreen(
+                        // 看板整个项目级的数：根空间作为接口的鉴权作用域（与项目页同一个来源）
+                        rootId = mainViewModel.currentRootSpaceId,
+                        // 服务清单挂在设备下，没有独立的服务列表页，故两张卡都去设备页
+                        onNavigateToDevices = { mainViewModel.selectTab(BottomTab.Devices) }
+                    )
                     BottomTab.Projects -> {
                         val rootId = mainViewModel.currentRootSpaceId
                         if (rootId != null) {

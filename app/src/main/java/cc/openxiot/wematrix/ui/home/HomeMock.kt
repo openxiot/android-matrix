@@ -1,16 +1,21 @@
 package cc.openxiot.wematrix.ui.home
 
 import java.time.LocalDate
-import java.time.LocalTime
 import kotlin.math.floor
 import kotlin.math.roundToInt
 
 /**
- * 首页数据看板 mock 数据。
+ * 首页**唯一还伪造**的两张能耗卡（本月能耗数字 + 日能耗曲线）。
  *
- * 与 web 端 webapp-matrix/src/app/pages/dashboard/dashboard.mock.ts 保持一致：
+ * 为什么它还是 mock：后端没有能耗采集 —— 这一条与 web 的 `dashboard.mock.ts` 完全一致
+ * （删掉它需要先有电表数据，不是前端的活）。看板上其余每一个数字都已接 `GET /statistics/overview`。
+ *
+ * 与 web 端保持一致的造法：
  *   - 用 mulberry32 种子 PRNG，以「当天日期」为种子 → 同一天内刷新稳定，跨天自然变化
- *   - 类型名直接产出中文短语
+ *   - 工作日偏高、周末偏低，叠加日常波动
+ *
+ * 设备与告警的 mock 已经删掉（那份数现在来自真实接口）；`mulberry32` / `randInt` 留着，
+ * 是因为能耗这条线还要它们。
  */
 
 /** mulberry32 种子 PRNG：同一种子产生相同的伪随机序列，返回 [0, 1) */
@@ -36,15 +41,6 @@ private fun seedOf(date: LocalDate): Int =
 private fun randInt(rand: () -> Double, min: Int, max: Int): Int =
     floor(rand() * (max - min + 1)).toInt() + min
 
-data class DeviceTypeStat(val type: String, val count: Int)
-
-data class DeviceStats(
-    val total: Int,
-    val online: Int,
-    val offline: Int,
-    val byType: List<DeviceTypeStat>
-)
-
 data class DailyEnergy(val date: String, val value: Int)
 
 data class EnergyStats(
@@ -52,28 +48,7 @@ data class EnergyStats(
     val daily: List<DailyEnergy>
 )
 
-data class AlarmTypeStat(val type: String, val count: Int)
-
-data class AlarmPoint(val time: String, val count: Int)
-
-data class AlarmStats(
-    val todayCount: Int,
-    val byType: List<AlarmTypeStat>,
-    val curve: List<AlarmPoint>
-)
-
-private val DEVICE_TYPES = listOf("智能网关", "温湿度传感器", "智能插座", "智能门锁", "网络摄像头", "烟感传感器")
-private val ALARM_TYPES = listOf("高温报警", "烟雾报警", "非法闯入", "电量过低", "设备离线", "门未关闭")
-
-fun mockDeviceStats(date: LocalDate): DeviceStats {
-    val rand = mulberry32(seedOf(date))
-    val byType = DEVICE_TYPES.map { DeviceTypeStat(it, randInt(rand, 12, 42)) }
-    val total = byType.sumOf { it.count }
-    // 在线率约 75% ~ 95%
-    val online = (total * (0.75 + rand() * 0.2)).roundToInt()
-    return DeviceStats(total = total, online = online, offline = total - online, byType = byType)
-}
-
+/** 近 30 天（含今天）的日能耗 + 本月合计；同一天内稳定 */
 fun mockEnergyStats(date: LocalDate): EnergyStats {
     val rand = mulberry32(seedOf(date) + 1)
     val daily = mutableListOf<DailyEnergy>()
@@ -93,23 +68,4 @@ fun mockEnergyStats(date: LocalDate): EnergyStats {
         monthTotal += value
     }
     return EnergyStats(monthTotal = monthTotal, daily = daily)
-}
-
-fun mockAlarmStats(date: LocalDate, now: LocalTime): AlarmStats {
-    val rand = mulberry32(seedOf(date) + 2)
-    val byType = ALARM_TYPES.map { AlarmTypeStat(it, randInt(rand, 1, 12)) }
-    val todayCount = byType.sumOf { it.count }
-    // 近 24 小时，以当前整点为终点；夜间休息时段报警偏少
-    val curve = mutableListOf<AlarmPoint>()
-    for (i in 23 downTo 0) {
-        val h = (now.hour - i + 24) % 24
-        val night = h >= 23 || h < 6
-        curve.add(
-            AlarmPoint(
-                time = "%02d:00".format(h),
-                count = maxOf(0, (if (night) 1 else 3) + randInt(rand, -1, 4))
-            )
-        )
-    }
-    return AlarmStats(todayCount = todayCount, byType = byType, curve = curve)
 }

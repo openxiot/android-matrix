@@ -353,7 +353,12 @@ private fun ServiceCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+            .then(
+                // 整张卡片可点（原先只有服务名那一小块能点，卡片其余部分按下去没反应），
+                // 与 CardItem / HomeScreen 的写法一致：onClick 为空时连 clickable 都不挂
+                service.id?.let { id -> Modifier.clickable { onServiceClick(id) } } ?: Modifier
+            ),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -370,9 +375,8 @@ private fun ServiceCard(
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier
-                        .weight(1f)
-                        .clickable { service.id?.let(onServiceClick) }
+                    // 点整张卡片就行（见 Card 的 modifier），这里不再单独挂 clickable
+                    modifier = Modifier.weight(1f)
                 )
                 Icon(
                     Icons.Default.ChevronRight,

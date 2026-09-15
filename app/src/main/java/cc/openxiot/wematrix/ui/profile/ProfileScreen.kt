@@ -28,7 +28,9 @@ fun ProfileScreen(
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
     onNavigateToAbout: () -> Unit = {},
-    onNavigateToModbus: () -> Unit = {}
+    onNavigateToModbus: () -> Unit = {},
+    onNavigateToAlarm: () -> Unit = {},
+    onNavigateToHistory: () -> Unit = {}
 ) {
     val tokenManager = WeMatrixApp.instance.tokenManager
 
@@ -129,8 +131,10 @@ fun ProfileScreen(
                 )
             }
 
-            // 其他：设备点表入口对齐 web 的侧边栏 —— 只看「已启用组织」这一个开关
-            // （不看管理员、不看 DTU）。关掉时这张卡不渲染，「其他」标题仍归下面的「关于」
+            // 其他：四张卡的顺序对齐 web 的侧边栏 —— 设备点表 / 告警 / 历史，最后才是「关于」
+            // （「关于」是这一页自己的事，不属于功能入口，放最底下）。
+            // 只有设备点表跟「已启用组织」这个开关走（不看管理员、不看 DTU）——
+            // 告警与历史在 web 的侧边栏上没有这个门，故照样不设
             item {
                 Spacer(Modifier.height(8.dp))
                 SectionHeader("其他")
@@ -142,6 +146,18 @@ fun ProfileScreen(
                         onClick = onNavigateToModbus
                     )
                 }
+                SettingsCard(
+                    title = "告警",
+                    subtitle = "Modbus 告警记录与处理",
+                    icon = Icons.Default.Notifications,
+                    onClick = onNavigateToAlarm
+                )
+                SettingsCard(
+                    title = "历史",
+                    subtitle = "采集历史与曲线",
+                    icon = Icons.Default.History,
+                    onClick = onNavigateToHistory
+                )
                 SettingsCard(
                     title = "关于",
                     subtitle = "应用信息与版本",

@@ -6,6 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.RetrofitClient
+import cc.openxiot.wematrix.ui.alarm.AlarmScreen
+import cc.openxiot.wematrix.ui.history.HistoryScreen
+import cc.openxiot.wematrix.ui.history.ServiceHistoryScreen
 import cc.openxiot.wematrix.ui.login.LoginScreen
 import cc.openxiot.wematrix.ui.main.MainScreen
 import cc.openxiot.wematrix.ui.organization.OrganizationDetailScreen
@@ -42,6 +45,20 @@ sealed class Screen(val route: String) {
      * 统一传当前项目根空间，口径同 web 的 modbus.service.ts。
      */
     data object ModbusServiceDetail : Screen("modbus_service_detail/{serviceId}?spaceId={spaceId}")
+
+    /**
+     * 告警与历史。`rootId` 是当前项目根空间 —— 与设备页 / 首页看板同一个来源，
+     * 对这三组接口来说它是**鉴权作用域**（后端只拿它校验空间成员，不参与过滤），
+     * 口径同 [ModbusServiceDetail]。
+     */
+    data object Alarm : Screen("alarm/{rootId}")
+    data object History : Screen("history/{rootId}")
+
+    /**
+     * 单服务历史。`rootId` 与 [History] 同义（[ModbusHistoryRepository] 那三组接口都按空间鉴权），
+     * 故不必再单带一个 spaceId 查询参数。
+     */
+    data object ServiceHistory : Screen("service_history/{rootId}/{serviceId}")
     data object Account : Screen("account")
     data object About : Screen("about")
 }
@@ -121,6 +138,12 @@ fun AppNavigation(
                 },
                 onNavigateToProductDetail = { productId ->
                     navController.navigate("product_detail/$productId") { launchSingleTop = true }
+                },
+                onNavigateToAlarm = { rootId ->
+                    navController.navigate("alarm/$rootId") { launchSingleTop = true }
+                },
+                onNavigateToHistory = { rootId ->
+                    navController.navigate("history/$rootId") { launchSingleTop = true }
                 }
             )
         }
@@ -272,6 +295,44 @@ fun AppNavigation(
             val spaceId = backStackEntry.arguments?.getString("spaceId") ?: return@composable
             ModbusServiceDetailScreen(
                 spaceId = spaceId,
+                serviceId = serviceId,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Alarm.route) { backStackEntry ->
+            val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
+            AlarmScreen(
+                rootId = rootId,
+                onBack = { navController.popBackStack() },
+                // 告警清单上的服务名点得进去：去它的采集历史（与历史页的服务卡同一个去处），
+                // 排查一个告警接下来要看的就是这段采集曲线
+                onNavigateToServiceHistory = { serviceId ->
+                    navController.navigate("service_history/$rootId/$serviceId") {
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+
+        composable(Screen.History.route) { backStackEntry ->
+            val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
+            HistoryScreen(
+                rootId = rootId,
+                onBack = { navController.popBackStack() },
+                onNavigateToServiceHistory = { serviceId ->
+                    navController.navigate("service_history/$rootId/$serviceId") {
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+
+        composable(Screen.ServiceHistory.route) { backStackEntry ->
+            val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
+            val serviceId = backStackEntry.arguments?.getString("serviceId") ?: return@composable
+            ServiceHistoryScreen(
+                rootId = rootId,
                 serviceId = serviceId,
                 onBack = { navController.popBackStack() }
             )

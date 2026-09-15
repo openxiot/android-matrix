@@ -1,0 +1,170 @@
+package cc.openxiot.wematrix.ui.modbus
+
+import cc.openxiot.wematrix.data.api.ModbusHistoryPoint
+import cc.openxiot.wematrix.data.api.ModbusHistoryRange
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
+
+/**
+ * Modbus 采集历史的展示口径，逐条对齐 webapp-matrix 的
+ * `src/app/typedef/define/modbus/ModbusHistory.ts` 与两个历史页
+ * （`pages/main/history/`、`device/services/service/history/`）。
+ *
+ * 一条硬规矩：**来自服务端的文本一律原样显示、永不翻译** —— 字段名、单位、取值表的描述串、
+ * 失败消息都在其列。本文件只把**后端枚举名**（失败类型）换成页面自己的词，
+ * 且未收录的枚举名一律原样给出。
+ *
+ * 时间窗口与降采样桶的口径由**三个页面共用**（告警页 / 项目级历史 / 单服务历史）：
+ * web 侧是三份各写一遍，Android 收在这一处，免得日后改一档要改三遍。
+ *
+ * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
+ */
+
+/**
+ * 时间范围预设：三档「最近 N」+ 自定义给绝对时刻。
+ *
+ * 与 web 三个页面同一个口径。`to` 一律取当下（自定义除外），`from` 由 [spanMillis] 往前推。
+ */
+enum class RangePreset(val spanMillis: Long, val label: String) {
+    HOUR_1(3600L * 1000, "最近 1 小时"),
+    HOUR_24(24 * 3600L * 1000, "最近 24 小时"),
+    DAY_7(7 * 24 * 3600L * 1000, "最近 7 天"),
+    CUSTOM(0, "自定义");
+
+    /** 预设档才推得出窗口；自定义由用户给的两个绝对时刻决定 */
+    val isPreset: Boolean get() = this != CUSTOM
+}
+
+/** 预设档的 `[now - 跨度, now]`；自定义档返回 null（窗口由用户选的两个时刻决定） */
+fun presetWindow(preset: RangePreset, now: Long): Pair<Long, Long>? {
+    if (!preset.isPreset) return null
+    return (now - preset.spanMillis) to now
+}
+
+/** 三个预设档，按页面下拉的顺序 */
+val rangePresets: List<RangePreset> = RangePreset.entries.toList()
+
+/**
+ * 采集失败的类型（后端 `ModbusFailureType` 的枚举名，线上就是这些字符串）。
+ *
+ * 页面按它给下拉/汇总排序，不另排一遍。
+ */
+val failureTypes: List<String> = listOf(
+    "NO_RESPONSE",
+    "SLAVE_EXCEPTION",
+    "DEVICE_ERROR",
+    "CRC_MISMATCH",
+    "FRAME_MISMATCH",
+    "INVALID_FRAME",
+    "FIELD_DEFINITION_ERROR",
+    "CONFIG_ERROR",
+    "TRANSPORT_ERROR",
+    "UNKNOWN"
+)
+
+/**
+ * 枚举名 → 界面标签。
+ *
+ * 兜底那类用的是「未知失败」而不是词典里现成的「未定义」：后者会让人以为「少配了一处定义」
+ * 而去翻服务定义，可它其实只是「没归入以上任何一类」。宁可说不知道，也不给一个把人引偏的分类。
+ *
+ * `remoteCode` 不在这里翻：只有从站异常应答那个码是 Modbus 异常码（1/2/3/4…），
+ * 依赖设备报错的远端码是 DTU 厂商自己的状态码，我们并不知道它的含义，猜着翻反而会误导排查。
+ */
+private val FAILURE_LABELS: Map<String, String> = mapOf(
+    "NO_RESPONSE" to "设备无应答",
+    "SLAVE_EXCEPTION" to "异常应答",
+    "DEVICE_ERROR" to "依赖设备报错",
+    "CRC_MISMATCH" to "CRC 校验失败",
+    "FRAME_MISMATCH" to "报文长度不符",
+    "INVALID_FRAME" to "报文非法",
+    "FIELD_DEFINITION_ERROR" to "字段定义错误",
+    "CONFIG_ERROR" to "服务配置错误",
+    "TRANSPORT_ERROR" to "方法调用失败",
+    "UNKNOWN" to "未知失败"
+)
+
+/**
+ * 失败类型（+ 远端码）→ 界面标签：有远端码就缀在后面（`异常应答 (2)`）。
+ *
+ * 枚举名本身不在这里露脸，页面各按各的位置附上 —— 排查时要拿它去搜后端日志，得留在明面上，
+ * 但那是版式的事。`type` 缺失（老数据可能没有）给 `-`；没收录的枚举名原样给出。
+ */
+fun failureLabel(type: String?, remoteCode: Int?): String {
+    if (type.isNullOrEmpty()) return "-"
+    val label = FAILURE_LABELS[type] ?: type
+    return if (remoteCode != null) "$label ($remoteCode)" else label
+}
+
+/**
+ * 这个点是不是降采样桶。
+ *
+ * 与 web 的 `isBucket` 同判据（有没有 `until` 这个键）—— 序列的两种形态由它区分，
+ * 而不是靠父级的 `downsampled`：类型判断跟着点本身走，函数才不必再要一个上下文参数。
+ */
+fun isBucket(point: ModbusHistoryPoint): Boolean = point.until != null
+
+/**
+ * 原始样本的数值：非数值（取值表的描述串、null）给 null，曲线上留成断点。
+ */
+fun sampleNumeric(point: ModbusHistoryPoint): Double? = asDoubleOrNull(point.value)
+
+/**
+ * 桶的均值：非数值字段的统计量全是 null，那这一桶就画不出来。
+ */
+fun bucketNumeric(point: ModbusHistoryPoint): Double? = point.avg
+
+/**
+ * 降采样桶的展示文案：有统计量（数值字段）时给「均值 (最小 ~ 最大)」，与曲线图上
+ * 「实线 + 两条虚线」是同三个数；非数值字段没有统计量，退回桶首尾的状态值。
+ */
+fun bucketText(point: ModbusHistoryPoint): String {
+    val avg = point.avg
+    if (avg != null) {
+        val rangeText = if (point.min != null && point.max != null) {
+            " (${numberText(point.min)} ~ ${numberText(point.max)})"
+        } else {
+            ""
+        }
+        return "${numberText(avg)}$rangeText"
+    }
+    val first = valueText(point.first)
+    val last = valueText(point.last)
+    return if (first == last) first else "$first ~ $last"
+}
+
+/** 一行采样/桶的值文案：桶走 [bucketText]，样本走 [valueText] */
+fun historyPointText(point: ModbusHistoryPoint): String =
+    if (isBucket(point)) bucketText(point) else valueText(point.value)
+
+/**
+ * 采集时刻：桶写成「起点 ~ 终点」，跨天时终点写全，同一天只写时分秒。
+ *
+ * 库里存的是**毫秒**时间戳，故不能拿 DeviceDetailScreen 那个解析 ISO 串的函数来用。
+ */
+fun historyTimeText(at: Long, until: Long?): String {
+    val head = dateTime(at)
+    if (until == null || until == at) return head
+    val tail = dateTime(until)
+    return "$head ~ ${if (sameDay(at, until)) tail.substring(11) else tail}"
+}
+
+/**
+ * 窗口之前那条 `carryIn` 的数值：把它补在 `from` 那一刻，曲线才不会从左边缘凭空缺一截
+ * （看起来像「那段时间没采到」）。取不到数值时返回 null，曲线就照旧从窗口内第一条开始。
+ */
+fun carryInNumeric(range: ModbusHistoryRange): Double? = range.carryIn?.let { sampleNumeric(it) }
+
+private fun dateTime(at: Long): String =
+    SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date(at))
+
+private fun sameDay(a: Long, b: Long): Boolean {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = a
+    val dayA = calendar.get(Calendar.YEAR) to calendar.get(Calendar.DAY_OF_YEAR)
+    calendar.timeInMillis = b
+    val dayB = calendar.get(Calendar.YEAR) to calendar.get(Calendar.DAY_OF_YEAR)
+    return dayA == dayB
+}

@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import cc.openxiot.wematrix.WeMatrixApp
+import cc.openxiot.wematrix.ui.core.SessionState
 
 enum class BottomTab(val label: String, val icon: ImageVector) {
     Home("首页", Icons.Default.Home),
@@ -29,7 +30,9 @@ class MainViewModel : ViewModel() {
 
     val currentOrgId: String? get() = tokenManager.currentOrgId
     val currentOrgName: String? get() = tokenManager.currentOrgName
-    val currentRootSpaceId: String? get() = tokenManager.currentRootSpaceId
+
+    /** 读响应式来源（[SessionState]）而不是 SharedPreferences：切项目后本组合才会重组刷新。 */
+    val currentRootSpaceId: String? get() = SessionState.currentRootSpaceId
 
     fun selectTab(tab: BottomTab) {
         currentTab = tab

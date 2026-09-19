@@ -123,17 +123,7 @@ fun MainScreen(
                 when (tabs[page]) {
                     BottomTab.Home -> HomeScreen(
                         // 看板整个项目级的数：根空间作为接口的鉴权作用域（与项目页同一个来源）
-                        rootId = mainViewModel.currentRootSpaceId,
-                        // 服务清单挂在设备下，没有独立的服务列表页，故两张卡都去设备页
-                        onNavigateToDevices = { mainViewModel.selectTab(BottomTab.Devices) },
-                        // 首页那两张卡与「我」页的两个入口去同一个地方：没选项目时按不动
-                        // （那时首页本来也是空态，点不点得出无关紧要，但不能拿 null 去拼路由）
-                        onNavigateToAlarm = {
-                            mainViewModel.currentRootSpaceId?.let(onNavigateToAlarm)
-                        },
-                        onNavigateToHistory = {
-                            mainViewModel.currentRootSpaceId?.let(onNavigateToHistory)
-                        }
+                        rootId = mainViewModel.currentRootSpaceId
                     )
                     BottomTab.Projects -> {
                         val rootId = mainViewModel.currentRootSpaceId

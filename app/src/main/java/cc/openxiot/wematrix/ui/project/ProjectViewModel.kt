@@ -10,6 +10,7 @@ import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.data.repository.DeviceRepository
 import cc.openxiot.wematrix.data.repository.SpaceRepository
+import cc.openxiot.wematrix.ui.core.SessionState
 import cc.openxiot.wematrix.util.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -107,8 +108,8 @@ class ProjectViewModel : ViewModel() {
     fun selectRootSpace(space: SpaceEntity) {
         val rootId = space.id ?: return
         val rootName = space.name ?: rootId
-        tokenManager.currentRootSpaceId = rootId
-        tokenManager.currentRootSpaceName = rootName
+        // 走 SessionState：持久值 + 响应式值一起写，否则切项目回来看板不会刷新
+        SessionState.setRootSpace(rootId, rootName)
         _projectState.value = _projectState.value.copy(
             currentRootId = rootId,
             currentRootName = rootName

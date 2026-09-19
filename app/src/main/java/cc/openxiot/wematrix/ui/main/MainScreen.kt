@@ -40,6 +40,7 @@ fun MainScreen(
     onNavigateToAlarm: (rootId: String) -> Unit = {},
     onNavigateToHistory: (rootId: String) -> Unit = {},
     onNavigateToModbusService: ((spaceId: String, serviceId: String) -> Unit)? = null,
+    onNavigateToDashboardEdit: ((rootId: String) -> Unit)? = null,
     onNavigateToDeviceDetail: ((String) -> Unit)? = null,
     onNavigateToDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     onNavigateToProductDetail: ((String) -> Unit)? = null,
@@ -123,7 +124,12 @@ fun MainScreen(
                 when (tabs[page]) {
                     BottomTab.Home -> HomeScreen(
                         // 看板整个项目级的数：根空间作为接口的鉴权作用域（与项目页同一个来源）
-                        rootId = mainViewModel.currentRootSpaceId
+                        rootId = mainViewModel.currentRootSpaceId,
+                        onEditDashboard = {
+                            mainViewModel.currentRootSpaceId?.let { rootId ->
+                                onNavigateToDashboardEdit?.invoke(rootId)
+                            }
+                        }
                     )
                     BottomTab.Projects -> {
                         val rootId = mainViewModel.currentRootSpaceId

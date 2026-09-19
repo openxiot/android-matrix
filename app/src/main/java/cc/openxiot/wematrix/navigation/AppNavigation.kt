@@ -9,6 +9,7 @@ import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.ui.alarm.AlarmScreen
 import cc.openxiot.wematrix.ui.history.HistoryScreen
 import cc.openxiot.wematrix.ui.history.ServiceHistoryScreen
+import cc.openxiot.wematrix.ui.home.DashboardEditScreen
 import cc.openxiot.wematrix.ui.login.LoginScreen
 import cc.openxiot.wematrix.ui.main.MainScreen
 import cc.openxiot.wematrix.ui.organization.OrganizationDetailScreen
@@ -61,6 +62,9 @@ sealed class Screen(val route: String) {
     data object ServiceHistory : Screen("service_history/{rootId}/{serviceId}")
     data object Account : Screen("account")
     data object About : Screen("about")
+
+    /** 首页看板的二级编辑页。rootId 是当前项目根空间（鉴权作用域，同首页）。 */
+    data object DashboardEdit : Screen("dashboard_edit/{rootId}")
 }
 
 @Composable
@@ -144,6 +148,9 @@ fun AppNavigation(
                 },
                 onNavigateToHistory = { rootId ->
                     navController.navigate("history/$rootId") { launchSingleTop = true }
+                },
+                onNavigateToDashboardEdit = { rootId ->
+                    navController.navigate("dashboard_edit/$rootId") { launchSingleTop = true }
                 }
             )
         }
@@ -334,6 +341,14 @@ fun AppNavigation(
             ServiceHistoryScreen(
                 rootId = rootId,
                 serviceId = serviceId,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.DashboardEdit.route) { backStackEntry ->
+            val rootId = backStackEntry.arguments?.getString("rootId") ?: return@composable
+            DashboardEditScreen(
+                rootId = rootId,
                 onBack = { navController.popBackStack() }
             )
         }

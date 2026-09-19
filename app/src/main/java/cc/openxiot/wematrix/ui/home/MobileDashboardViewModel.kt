@@ -42,7 +42,9 @@ data class MobileDashboardUiState(
     /** 级联候选（进编辑态取一次）；设备/服务/方法/字段的选择都读它 */
     val catalog: MobileCatalog? = null,
     /** 保存 / 恢复的反馈（含服务端冲突原文） */
-    val message: String? = null
+    val message: String? = null,
+    /** 刚保存成功（编辑页据此自动返回上一页）；下一次进编辑态 / 退出时清掉 */
+    val saved: Boolean = false
 )
 
 /**
@@ -136,21 +138,10 @@ class MobileDashboardViewModel : ViewModel() {
                 saving = false,
                 pickerVisible = false,
                 editingId = null,
-                message = null
+                message = null,
+                saved = false
             )
         }
-    }
-
-    fun exitEdit() {
-        _uiState.value = _uiState.value.copy(
-            editing = false,
-            draft = emptyList(),
-            dirty = false,
-            saving = false,
-            pickerVisible = false,
-            editingId = null,
-            message = null
-        )
     }
 
     fun showPicker() {
@@ -244,7 +235,8 @@ class MobileDashboardViewModel : ViewModel() {
                         saving = false,
                         editingId = null,
                         pickerVisible = false,
-                        message = null
+                        message = null,
+                        saved = true
                     )
                     load(rootId) // 按新布局取一次数
                 }

@@ -204,27 +204,71 @@ private fun EditingContent(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            draft.forEachIndexed { index, widget ->
-                val dragging = dragId == widget.id
-                DashboardPreview(
-                    widget = widget,
-                    data = state.previewById[widget.id],
-                    error = state.previewMessageById[widget.id],
-                    dragging = dragging,
-                    dragOffsetPx = dragOffsetPx,
-                    onClick = { widget.id?.let(onOpen) },
-                    onDragStart = { dragId = widget.id; dragOffsetPx = 0f },
-                    onDragDelta = { dy -> if (dragging) dragOffsetPx += dy },
-                    onDragEnd = {
-                        if (dragging) {
-                            val step = (dragOffsetPx / thresholdPx).roundToInt()
-                            val target = (index + step).coerceIn(0, draft.size - 1)
-                            if (target != index) onMove(index, target)
-                        }
-                        dragId = null
-                        dragOffsetPx = 0f
+            // 与首页只读一致的排布：FULL 整宽、连续两个 HALF 并排占一行 —— 半宽就该显示成半宽。
+            var i = 0
+            while (i < draft.size) {
+                val widget = draft[i]
+                val mate = i + 1 < draft.size
+                    && widget.size == DashboardTypes.SIZE_HALF
+                    && draft[i + 1].size == DashboardTypes.SIZE_HALF
+                if (mate) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        EditPreviewSlot(
+                            widget = draft[i], index = i, state = state,
+                            dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
+                            onOpen = onOpen, onMove = onMove,
+                            onDragStart = { dragId = draft[i].id; dragOffsetPx = 0f },
+                            onDragDelta = { dy -> if (dragId == draft[i].id) dragOffsetPx += dy },
+                            onDragEnd = {
+                                if (dragId == draft[i].id) {
+                                    val step = (dragOffsetPx / thresholdPx).roundToInt()
+                                    val target = (i + step).coerceIn(0, draft.size - 1)
+                                    if (target != i) onMove(i, target)
+                                }
+                                dragId = null; dragOffsetPx = 0f
+                            },
+                            modifier = Modifier.weight(1f)
+                        )
+                        EditPreviewSlot(
+                            widget = draft[i + 1], index = i + 1, state = state,
+                            dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
+                            onOpen = onOpen, onMove = onMove,
+                            onDragStart = { dragId = draft[i + 1].id; dragOffsetPx = 0f },
+                            onDragDelta = { dy -> if (dragId == draft[i + 1].id) dragOffsetPx += dy },
+                            onDragEnd = {
+                                if (dragId == draft[i + 1].id) {
+                                    val step = (dragOffsetPx / thresholdPx).roundToInt()
+                                    val target = (i + 1 + step).coerceIn(0, draft.size - 1)
+                                    if (target != i + 1) onMove(i + 1, target)
+                                }
+                                dragId = null; dragOffsetPx = 0f
+                            },
+                            modifier = Modifier.weight(1f)
+                        )
                     }
-                )
+                    i += 2
+                } else {
+                    EditPreviewSlot(
+                        widget = widget, index = i, state = state,
+                        dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
+                        onOpen = onOpen, onMove = onMove,
+                        onDragStart = { dragId = widget.id; dragOffsetPx = 0f },
+                        onDragDelta = { dy -> if (dragId == widget.id) dragOffsetPx += dy },
+                        onDragEnd = {
+                            if (dragId == widget.id) {
+                                val step = (dragOffsetPx / thresholdPx).roundToInt()
+                                val target = (i + step).coerceIn(0, draft.size - 1)
+                                if (target != i) onMove(i, target)
+                            }
+                            dragId = null; dragOffsetPx = 0f
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    i += 1
+                }
             }
             if (draft.isEmpty()) EmptyState("还没有卡片，点下方「添加」加一张")
             AddCardButton(onClick = onShowPicker)
@@ -253,7 +297,37 @@ private fun EditingContent(
     }
 }
 
-/** 一张草稿卡的实时预览：虚线框 = 可编辑，点按开编辑器、长按拖动排序。 */
+/** 编辑列里的一个槽：把草稿卡按它自己的下标接线到共享的拖动状态。 */
+@Composable
+private fun EditPreviewSlot(
+    widget: MobileDashboardWidget,
+    index: Int,
+    state: MobileDashboardUiState,
+    dragId: String?,
+    dragOffsetPx: Float,
+    thresholdPx: Float,
+    onOpen: (String) -> Unit,
+    onMove: (Int, Int) -> Unit,
+    onDragStart: () -> Unit,
+    onDragDelta: (Float) -> Unit,
+    onDragEnd: () -> Unit,
+    modifier: Modifier
+) {
+    DashboardPreview(
+        widget = widget,
+        data = state.previewById[widget.id],
+        error = state.previewMessageById[widget.id],
+        dragging = dragId == widget.id,
+        dragOffsetPx = dragOffsetPx,
+        modifier = modifier,
+        onClick = { widget.id?.let(onOpen) },
+        onDragStart = onDragStart,
+        onDragDelta = onDragDelta,
+        onDragEnd = onDragEnd
+    )
+}
+
+/** 一张草稿卡的实时预览：虚线框 = 可编辑；点按开编辑器、长按（点住）拖动排序。 */
 @Composable
 private fun DashboardPreview(
     widget: MobileDashboardWidget,
@@ -261,14 +335,14 @@ private fun DashboardPreview(
     error: String?,
     dragging: Boolean,
     dragOffsetPx: Float,
+    modifier: Modifier,
     onClick: () -> Unit,
     onDragStart: () -> Unit,
     onDragDelta: (Float) -> Unit,
     onDragEnd: () -> Unit
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .graphicsLayer {
                 if (dragging) {
                     translationY = dragOffsetPx

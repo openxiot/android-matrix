@@ -1,17 +1,17 @@
 package cc.openxiot.wematrix.ui.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -19,11 +19,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -39,10 +37,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.addOutline
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -57,9 +63,12 @@ import kotlin.math.roundToInt
  * 「编辑布局」二级页（首页的编辑态搬到这里）。
  *
  * **没有底部导航栏**：作为独立 destination 压在 Main（带底栏的骨架）之上，顶栏是返回图标 +
- * 「编辑布局」。改动的是**草稿**（VM `draft`），不入库，直到「保存布局」；保存成功后 [saved]
+ * 「编辑布局」。改动的是**草稿**（VM `draft`），不入库，直到「保存布局」；保存成功后 [MobileDashboardUiState.saved]
  * 置位、自动 `onBack` 回首页（首页在 RESUMED 时重取，能看到新布局）。返回图标在有未保存改动时
  * 会先弹一个「丢弃」确认。
+ *
+ * 列表 = 草稿每张卡的**实时预览**（虚线框 = 可编辑）：点按卡打开它的编辑器弹层（同 webapp），
+ * 长按拖动排序；末尾一张虚线「添加」卡代替原悬浮按钮。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,6 +89,10 @@ fun DashboardEditScreen(
     // 保存成功 → 自动返回首页。
     LaunchedEffect(state.saved) {
         if (state.saved) onBack()
+    }
+    // 草稿每动一次 → 防抖重 render 预览。
+    LaunchedEffect(rootId, state.draft) {
+        dashboardViewModel.schedulePreview(rootId)
     }
 
     val requestExit = {
@@ -158,7 +171,7 @@ fun DashboardEditScreen(
 private fun EditingContent(
     state: MobileDashboardUiState,
     productSpec: ProductSpecRepository,
-    contentPadding: androidx.compose.foundation.layout.PaddingValues,
+    contentPadding: PaddingValues,
     onShowPicker: () -> Unit,
     onDismissPicker: () -> Unit,
     onAdd: (String) -> Unit,
@@ -174,59 +187,48 @@ private fun EditingContent(
     val thresholdPx = with(LocalDensity.current) { 96.dp.toPx() }
     val editingWidget = draft.firstOrNull { it.id == state.editingId }
 
-    Box(Modifier.fillMaxSize().padding(contentPadding)) {
-        Column(Modifier.fillMaxSize()) {
-            state.message?.let { msg ->
-                Text(
-                    text = msg,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-                )
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                draft.forEachIndexed { index, widget ->
-                    val dragging = dragId == widget.id
-                    DraftCard(
-                        widget = widget,
-                        index = index,
-                        total = draft.size,
-                        isDragging = dragging,
-                        dragOffsetPx = dragOffsetPx,
-                        onClick = { widget.id?.let(onOpen) },
-                        onDragStart = { dragId = widget.id; dragOffsetPx = 0f },
-                        onDragDelta = { dy -> if (dragging) dragOffsetPx += dy },
-                        onDragEnd = {
-                            if (dragging) {
-                                val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                val target = (index + step).coerceIn(0, draft.size - 1)
-                                if (target != index) onMove(index, target)
-                            }
-                            dragId = null
-                            dragOffsetPx = 0f
-                        }
-                    )
-                }
-                if (draft.isEmpty()) EmptyState("还没有卡片，点右下角 ＋ 添加")
-                Spacer(Modifier.height(80.dp))
-            }
+    Column(Modifier.fillMaxSize().padding(contentPadding)) {
+        state.message?.let { msg ->
+            Text(
+                text = msg,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            )
         }
 
-        FloatingActionButton(
-            onClick = onShowPicker,
+        Column(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .navigationBarsPadding()
-                .padding(16.dp)
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Icon(Icons.Filled.Add, contentDescription = "添加卡片")
+            draft.forEachIndexed { index, widget ->
+                val dragging = dragId == widget.id
+                DashboardPreview(
+                    widget = widget,
+                    data = state.previewById[widget.id],
+                    error = state.previewMessageById[widget.id],
+                    dragging = dragging,
+                    dragOffsetPx = dragOffsetPx,
+                    onClick = { widget.id?.let(onOpen) },
+                    onDragStart = { dragId = widget.id; dragOffsetPx = 0f },
+                    onDragDelta = { dy -> if (dragging) dragOffsetPx += dy },
+                    onDragEnd = {
+                        if (dragging) {
+                            val step = (dragOffsetPx / thresholdPx).roundToInt()
+                            val target = (index + step).coerceIn(0, draft.size - 1)
+                            if (target != index) onMove(index, target)
+                        }
+                        dragId = null
+                        dragOffsetPx = 0f
+                    }
+                )
+            }
+            if (draft.isEmpty()) EmptyState("还没有卡片，点下方「添加」加一张")
+            AddCardButton(onClick = onShowPicker)
+            Spacer(Modifier.height(12.dp))
         }
     }
 
@@ -251,26 +253,28 @@ private fun EditingContent(
     }
 }
 
-/** 编辑态的一张草稿卡：点按编辑、长按拖动排序（只算纵向）。 */
+/** 一张草稿卡的实时预览：虚线框 = 可编辑，点按开编辑器、长按拖动排序。 */
 @Composable
-private fun DraftCard(
+private fun DashboardPreview(
     widget: MobileDashboardWidget,
-    index: Int,
-    total: Int,
-    isDragging: Boolean,
+    data: Map<String, Any?>?,
+    error: String?,
+    dragging: Boolean,
     dragOffsetPx: Float,
     onClick: () -> Unit,
     onDragStart: () -> Unit,
     onDragDelta: (Float) -> Unit,
     onDragEnd: () -> Unit
 ) {
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = if (isDragging) 6.dp else 0.dp),
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .graphicsLayer { if (isDragging) translationY = dragOffsetPx }
+            .graphicsLayer {
+                if (dragging) {
+                    translationY = dragOffsetPx
+                    alpha = 0.92f
+                }
+            }
             .pointerInput(widget.id) {
                 detectDragGesturesAfterLongPress(
                     onDragStart = { onDragStart() },
@@ -282,40 +286,61 @@ private fun DraftCard(
                     }
                 )
             }
+            .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = if (dragging) 2.dp else 1.5.dp)
+            .padding(2.dp)
+            .clickable(onClick = onClick)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(Modifier.weight(1f)) {
-                Text(
-                    text = DashboardTypes.resolveTitle(widget.title, null, widget.type),
-                    style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.SemiBold
-                )
-                Text(
-                    text = typeLabel(widget.type) + sizeLabel(widget.size),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
+        DashboardWidgetHost(
+            widget = widget,
+            data = data,
+            error = error,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+/** 末尾一张虚线的「添加」卡 —— 代替悬浮按钮。 */
+@Composable
+private fun AddCardButton(onClick: () -> Unit) {
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(88.dp)
+            .dashedBorder(color = MaterialTheme.colorScheme.outline, strokeWidth = 1.5.dp)
+            .clickable(onClick = onClick)
+    ) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text(
-                text = "${index + 1}/$total",
-                style = MaterialTheme.typography.labelMedium,
+                text = "＋ 添加",
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(Modifier.width(8.dp))
         }
     }
 }
 
-private fun typeLabel(type: String?): String = when (type) {
-    DashboardTypes.STAT -> "统计 · "
-    DashboardTypes.LINE -> "曲线 · "
-    DashboardTypes.DISTRIBUTION -> "分布 · "
-    DashboardTypes.DEVICE -> "设备 · "
-    DashboardTypes.SERVICE -> "服务 · "
-    else -> ""
+/** 虚线圆角边框（编辑态卡片 / 加卡占位用）。 */
+private fun Modifier.dashedBorder(
+    color: Color,
+    shape: Shape = RoundedCornerShape(16.dp),
+    strokeWidth: Dp = 1.5.dp,
+    dash: Dp = 9.dp,
+    gap: Dp = 9.dp
+): Modifier = drawWithCache {
+    val effects = PathEffect.dashPathEffect(floatArrayOf(dash.toPx(), gap.toPx()))
+    val stroke = Stroke(width = strokeWidth.toPx(), pathEffect = effects)
+    val outline = shape.createOutline(size, layoutDirection, this)
+    onDrawBehind {
+        drawPath(
+            path = Path().apply { addOutline(outline) },
+            color = color,
+            style = stroke
+        )
+    }
 }
-
-private fun sizeLabel(size: String?): String = if (size == DashboardTypes.SIZE_HALF) "半宽" else "整宽"

@@ -6,6 +6,8 @@ import cc.openxiot.wematrix.data.api.MobileCatalog
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.data.repository.MobileDashboardCatalogRepository
 import cc.openxiot.wematrix.data.repository.MobileDashboardRepository
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,6 +33,9 @@ data class MobileDashboardUiState(
     val messageById: Map<String, String> = emptyMap(),
 
     // ---- 编辑态 ----
+    /** 编辑页的**实时预览**：按草稿 render 出的每张卡取数（按 id 收，同 [dataById]/[messageById]） */
+    val previewById: Map<String, Map<String, Any?>> = emptyMap(),
+    val previewMessageById: Map<String, String> = emptyMap(),
     val editing: Boolean = false,
     val draft: List<MobileDashboardWidget> = emptyList(),
     val dirty: Boolean = false,
@@ -68,54 +73,93 @@ class MobileDashboardViewModel : ViewModel() {
 
     private var idCounter = 0L
 
+    /** 页面下拉刷新入口：挂起等整页重取完（只在回来更新指示器时用）。 */
+    suspend fun refreshNow(rootId: String?) {
+        doLoad(rootId)
+    }
+
     /**
      * 取整页：布局 + 每张卡的取数。每次进首页都重取（切 Tab / 切项目回来都取一次）：
      * 接口只读、代价几次请求，比让用户看一份可能过期的数划算。
      */
     fun load(rootId: String?) {
+        viewModelScope.launch { doLoad(rootId) }
+    }
+
+    private suspend fun doLoad(rootId: String?) {
         if (rootId.isNullOrEmpty()) {
             _uiState.value = MobileDashboardUiState()
             return
         }
+        // 已有布局就不打转（切 Tab 回来的重取），免得整页闪一下空白
+        _uiState.value = _uiState.value.copy(
+            isLoading = _uiState.value.widgets.isEmpty(),
+            error = null
+        )
 
-        viewModelScope.launch {
-            // 已有布局就不打转（切 Tab 回来的重取），免得整页闪一下空白
-            _uiState.value = _uiState.value.copy(
-                isLoading = _uiState.value.widgets.isEmpty(),
-                error = null
+        val layout = repository.getLayout(rootId).getOrElse { e ->
+            _uiState.value = MobileDashboardUiState(error = e.message ?: "网络错误")
+            return
+        }
+
+        val result = repository.render(rootId, layout.widgets).getOrElse { e ->
+            _uiState.value = MobileDashboardUiState(
+                widgets = layout.widgets,
+                error = e.message ?: "取数失败"
             )
+            return
+        }
 
-            val layout = repository.getLayout(rootId).getOrElse { e ->
-                _uiState.value = MobileDashboardUiState(error = e.message ?: "网络错误")
-                return@launch
+        val dataById = HashMap<String, Map<String, Any?>>()
+        val messageById = HashMap<String, String>()
+        result.widgets.forEach { item ->
+            if (item.success && item.data != null) {
+                dataById[item.id.orEmpty()] = item.data
+            } else {
+                item.id?.let { messageById[it] = item.message ?: "取数失败" }
             }
+        }
+        committed = layout.widgets
+        _uiState.value = MobileDashboardUiState(
+            isLoading = false,
+            widgets = layout.widgets,
+            version = layout.version ?: 0,
+            dataById = dataById,
+            messageById = messageById,
+            catalog = _uiState.value.catalog
+        )
+    }
 
-            val result = repository.render(rootId, layout.widgets).getOrElse { e ->
-                _uiState.value = MobileDashboardUiState(
-                    widgets = layout.widgets,
-                    error = e.message ?: "取数失败"
-                )
-                return@launch
-            }
+    // ---- 编辑预览（草稿实时 render） ----
 
-            val dataById = HashMap<String, Map<String, Any?>>()
-            val messageById = HashMap<String, String>()
-            result.widgets.forEach { item ->
+    private var previewJob: Job? = null
+
+    /**
+     * 草稿的实时预览：草稿每变一次就**防抖** 400ms 后按草稿真 render 一遍，填 [previewById] /
+     * [previewMessageById]。不完整 / 未配满的卡后端会逐卡回 message（不拖垮整页），正好在编辑器里
+     * 亮出「哪里还没配」。render 只读、代价每次编辑一两个 POST，值得 —— 编辑器看到的是真实卡效果。
+     */
+    fun schedulePreview(rootId: String?) {
+        val draft = _uiState.value.draft
+        if (rootId.isNullOrEmpty() || draft.isEmpty()) {
+            _uiState.value = _uiState.value.copy(previewById = emptyMap(), previewMessageById = emptyMap())
+            return
+        }
+        previewJob?.cancel()
+        previewJob = viewModelScope.launch {
+            delay(400)
+            if (draft != _uiState.value.draft) return@launch // 防抖期间又被改了，交给下一次调度
+            val resp = repository.render(rootId, draft).getOrNull() ?: return@launch // 整页挂了：保留上次预览
+            val data = HashMap<String, Map<String, Any?>>()
+            val msg = HashMap<String, String>()
+            resp.widgets.forEach { item ->
                 if (item.success && item.data != null) {
-                    dataById[item.id.orEmpty()] = item.data
+                    data[item.id.orEmpty()] = item.data
                 } else {
-                    item.id?.let { messageById[it] = item.message ?: "取数失败" }
+                    item.id?.let { msg[it] = item.message ?: "配置不完整" }
                 }
             }
-            committed = layout.widgets
-            _uiState.value = MobileDashboardUiState(
-                isLoading = false,
-                widgets = layout.widgets,
-                version = layout.version ?: 0,
-                dataById = dataById,
-                messageById = messageById,
-                catalog = _uiState.value.catalog
-            )
+            _uiState.value = _uiState.value.copy(previewById = data, previewMessageById = msg)
         }
     }
 
@@ -139,7 +183,9 @@ class MobileDashboardViewModel : ViewModel() {
                 pickerVisible = false,
                 editingId = null,
                 message = null,
-                saved = false
+                saved = false,
+                previewById = emptyMap(),
+                previewMessageById = emptyMap()
             )
         }
     }

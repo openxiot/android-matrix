@@ -151,6 +151,11 @@ class ProjectViewModel : ViewModel() {
         spaceRepository.getSpaceGraph(rootId)
             .onSuccess { graph ->
                 val root = graph.spaces?.buildTree()
+                // 管理员态：根空间 access 里挂了一条 admin（组织或账号）即给编辑权。
+                // 客户端只是隐藏入口，服务端 PUT 仍强制管理员，两处不冲突。
+                root?.accesses?.let { accesses ->
+                    SessionState.setCanEdit(rootId, accesses.any { it.role == "admin" })
+                }
                 val devices = graph.devices ?: emptyList()
                 _treeState.value = _treeState.value.copy(
                     isLoading = false,

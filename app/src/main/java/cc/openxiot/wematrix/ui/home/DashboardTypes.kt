@@ -84,4 +84,68 @@ object DashboardTypes {
         val preset = titleKey?.takeIf { it.isNotBlank() }
         return user ?: preset ?: defaultTitle(type)
     }
+
+    // ---- 时间窗口 ----
+
+    /** 相对窗口的常见档（小时），配了就可直接存 `{kind:"last", hours:n}`。 */
+    val WINDOW_HOURS = listOf(1, 6, 24, 72, 168)
+
+    fun defaultWindow(): Map<String, Any?> = mapOf("kind" to "last", "hours" to 24)
+
+    /** 这一栏该不该给 window 配置（按类型 + 当前选值）。 */
+    fun needsWindow(type: String?, config: Map<String, Any?>): Boolean = when (type) {
+        STAT -> statNeedsWindow(config["metric"] as? String)
+        LINE -> true
+        DISTRIBUTION -> distributionNeedsWindow(config["dimension"] as? String)
+        else -> false
+    }
+
+    /**
+     * window 合法性：`{kind:"last", hours:1..744}` 或 `{kind:"range", from<to}`。
+     * 缺 window（本卡不需要）也算合法。
+     */
+    @Suppress("UNCHECKED_CAST")
+    fun windowValid(type: String?, config: Map<String, Any?>): Boolean {
+        if (!needsWindow(type, config)) return true
+        val w = config["window"] as? Map<*, *> ?: return false
+        return when (w["kind"]) {
+            "last" -> (w["hours"] as? Number)?.toLong()?.let { it in 1..744 } == true
+            "range" -> {
+                val from = (w["from"] as? Number)?.toLong()
+                val to = (w["to"] as? Number)?.toLong()
+                from != null && to != null && from < to
+            }
+            else -> false
+        }
+    }
+
+    /** 这张卡的 config 是否齐了（编辑器「保存」在齐之前禁用，镜像 web `canCommit`）。 */
+    @Suppress("UNCHECKED_CAST")
+    fun canCommit(type: String?, config: Map<String, Any?>): Boolean {
+        // 各分支都收成一个 Boolean 表达式，别用 return 打断 when 的类型推导
+        return when (type) {
+            STAT -> !(config["metric"] as? String).isNullOrBlank() && windowValid(type, config)
+            LINE -> {
+                val source = config["source"] as? String
+                when {
+                    source.isNullOrBlank() || !windowValid(type, config) -> false
+                    source == "alarmCount" -> true
+                    else -> {
+                        val fn = (config["functionIndex"] as? Number)?.toInt() ?: 0
+                        !(config["field"] as? String).isNullOrBlank()
+                            && (config["serviceId"] as? String)?.isNotBlank() == true
+                            && fn >= 1
+                    }
+                }
+            }
+            DISTRIBUTION -> !(config["dimension"] as? String).isNullOrBlank() && windowValid(type, config)
+            DEVICE -> !(config["did"] as? String).isNullOrBlank() && !(config["pid"] as? String).isNullOrBlank()
+            SERVICE -> {
+                val fields = config["fields"] as? List<*>
+                val fn = (config["functionIndex"] as? Number)?.toInt() ?: 0
+                !(config["serviceId"] as? String).isNullOrBlank() && fn >= 1 && !fields.isNullOrEmpty()
+            }
+            else -> false
+        }
+    }
 }

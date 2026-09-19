@@ -39,4 +39,9 @@ object SessionState {
         // 项目变了，旧项目的管理员缓存作废（也可能这本就是同一个）
         canEditById.clear()
     }
+
+    /** 登记一个项目的管理员态（项目图加载时算一次）。 */
+    fun setCanEdit(rootId: String, canEdit: Boolean) {
+        canEditById[rootId] = canEdit
+    }
 }

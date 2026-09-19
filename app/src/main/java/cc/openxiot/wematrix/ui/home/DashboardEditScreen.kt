@@ -207,67 +207,72 @@ private fun EditingContent(
             // 与首页只读一致的排布：FULL 整宽、连续两个 HALF 并排占一行 —— 半宽就该显示成半宽。
             var i = 0
             while (i < draft.size) {
-                val widget = draft[i]
-                val mate = i + 1 < draft.size
-                    && widget.size == DashboardTypes.SIZE_HALF
-                    && draft[i + 1].size == DashboardTypes.SIZE_HALF
+                // 把当前位置定成活板值再闭包引用 —— 拖拽收到的回调用它，不能在循环跑完后再
+                // 读共享的 `var i`（那时 i == draft.size，会越界）。
+                val firstIdx = i
+                val secondIdx = i + 1
+                val widgetA = draft[firstIdx]
+                val mate = secondIdx < draft.size
+                    && widgetA.size == DashboardTypes.SIZE_HALF
+                    && draft[secondIdx].size == DashboardTypes.SIZE_HALF
                 if (mate) {
+                    val widgetB = draft[secondIdx]
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         EditPreviewSlot(
-                            widget = draft[i], index = i, state = state,
+                            widget = widgetA, index = firstIdx, state = state,
                             dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
                             onOpen = onOpen, onMove = onMove,
-                            onDragStart = { dragId = draft[i].id; dragOffsetPx = 0f },
-                            onDragDelta = { dy -> if (dragId == draft[i].id) dragOffsetPx += dy },
+                            onDragStart = { dragId = widgetA.id; dragOffsetPx = 0f },
+                            onDragDelta = { dy -> if (dragId == widgetA.id) dragOffsetPx += dy },
                             onDragEnd = {
-                                if (dragId == draft[i].id) {
+                                if (dragId == widgetA.id) {
                                     val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                    val target = (i + step).coerceIn(0, draft.size - 1)
-                                    if (target != i) onMove(i, target)
+                                    val target = (firstIdx + step).coerceIn(0, draft.size - 1)
+                                    if (target != firstIdx) onMove(firstIdx, target)
                                 }
                                 dragId = null; dragOffsetPx = 0f
                             },
                             modifier = Modifier.weight(1f)
                         )
                         EditPreviewSlot(
-                            widget = draft[i + 1], index = i + 1, state = state,
+                            widget = widgetB, index = secondIdx, state = state,
                             dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
                             onOpen = onOpen, onMove = onMove,
-                            onDragStart = { dragId = draft[i + 1].id; dragOffsetPx = 0f },
-                            onDragDelta = { dy -> if (dragId == draft[i + 1].id) dragOffsetPx += dy },
+                            onDragStart = { dragId = widgetB.id; dragOffsetPx = 0f },
+                            onDragDelta = { dy -> if (dragId == widgetB.id) dragOffsetPx += dy },
                             onDragEnd = {
-                                if (dragId == draft[i + 1].id) {
+                                if (dragId == widgetB.id) {
                                     val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                    val target = (i + 1 + step).coerceIn(0, draft.size - 1)
-                                    if (target != i + 1) onMove(i + 1, target)
+                                    val target = (secondIdx + step).coerceIn(0, draft.size - 1)
+                                    if (target != secondIdx) onMove(secondIdx, target)
                                 }
                                 dragId = null; dragOffsetPx = 0f
                             },
                             modifier = Modifier.weight(1f)
                         )
                     }
-                    i += 2
+                    i = secondIdx + 1
                 } else {
                     EditPreviewSlot(
-                        widget = widget, index = i, state = state,
+                        widget = widgetA, index = firstIdx, state = state,
                         dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
                         onOpen = onOpen, onMove = onMove,
-                        onDragStart = { dragId = widget.id; dragOffsetPx = 0f },
-                        onDragDelta = { dy -> if (dragId == widget.id) dragOffsetPx += dy },
+                        onDragStart = { dragId = widgetA.id; dragOffsetPx = 0f },
+                        onDragDelta = { dy -> if (dragId == widgetA.id) dragOffsetPx += dy },
                         onDragEnd = {
-                            if (dragId == widget.id) {
+                            if (dragId == widgetA.id) {
                                 val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                val target = (i + step).coerceIn(0, draft.size - 1)
-                                if (target != i) onMove(i, target)
+                                val target = (firstIdx + step).coerceIn(0, draft.size - 1)
+                                if (target != firstIdx) onMove(firstIdx, target)
                             }
                             dragId = null; dragOffsetPx = 0f
                         },
                         modifier = Modifier.fillMaxWidth()
                     )
-                    i += 1
+                    i = secondIdx
                 }
             }
             if (draft.isEmpty()) EmptyState("还没有卡片，点下方「添加」加一张")

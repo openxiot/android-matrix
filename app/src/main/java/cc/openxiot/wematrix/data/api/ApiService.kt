@@ -322,6 +322,42 @@ interface MatrixService {
         @Path("id") id: String,
         @Body body: Map<String, @JvmSuppressWildcards Any?>
     ): Response<ApiResponse<ModbusAlarm>>
+
+    // ---- 移动端看板（可自定义首页） ----
+    // 只读（layout/preset/render/catalog）成员可调；PUT 保存需空间管理员。
+    // spaceId 是**鉴权作用域**，统一传当前项目根空间。@Body 都是具体类，无通配符问题。
+
+    /** 读布局；从未保存时后端返回预置（version=0），不会 404。 */
+    @GET("matrix/v1/dashboard/mobile/layout/{spaceId}")
+    suspend fun getMobileLayout(
+        @Path("spaceId") spaceId: String
+    ): Response<ApiResponse<MobileDashboardLayout>>
+
+    /** 保存布局（乐观锁 CAS：带上的 version 不匹配则被服务端拒绝）。 */
+    @PUT("matrix/v1/dashboard/mobile/layout/{spaceId}")
+    suspend fun saveMobileLayout(
+        @Path("spaceId") spaceId: String,
+        @Body layout: MobileDashboardLayout
+    ): Response<ApiResponse<MobileDashboardLayout>>
+
+    /** 只读预置（不进库，无副作用）。 */
+    @GET("matrix/v1/dashboard/mobile/layout/{spaceId}/preset")
+    suspend fun getMobileLayoutPreset(
+        @Path("spaceId") spaceId: String
+    ): Response<ApiResponse<MobileDashboardLayout>>
+
+    /** 取数：body 的 widgets 为空 = 渲染已保存布局；非空 = 渲染草稿。 */
+    @POST("matrix/v1/dashboard/mobile/render/{spaceId}")
+    suspend fun renderMobileDashboard(
+        @Path("spaceId") spaceId: String,
+        @Body request: MobileRenderRequest
+    ): Response<ApiResponse<MobileRenderResponse>>
+
+    /** 编辑器候选清单（复用 web 的 catalog：成员可读，返回全量设备 + 服务定义）。 */
+    @GET("matrix/v1/dashboard/web/catalog/{spaceId}")
+    suspend fun getDashboardCatalog(
+        @Path("spaceId") spaceId: String
+    ): Response<ApiResponse<MobileCatalog>>
 }
 
 interface ProductService {

@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.ui.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
@@ -13,10 +14,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -38,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.Shape
@@ -45,11 +47,12 @@ import androidx.compose.ui.graphics.addOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
@@ -68,7 +71,8 @@ import kotlin.math.roundToInt
  * 会先弹一个「丢弃」确认。
  *
  * 列表 = 草稿每张卡的**实时预览**（虚线框 = 可编辑）：点按卡打开它的编辑器弹层（同 webapp），
- * 长按拖动排序；末尾一张虚线「添加」卡代替原悬浮按钮。
+ * **长按拖拽排序**：拖到哪个槽，那里就画出虚线框+背景色的落点占位，其它行自动让位（animateItem 滑动），
+ * 被拖的行本身保持原尺寸、随手指浮动；松手把最终顺序整体交还草稿。末尾一张虚线「添加」卡代替原悬浮按钮。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -151,7 +155,7 @@ fun DashboardEditScreen(
                 onDeleteCard = dashboardViewModel::removeWidget,
                 onOpen = dashboardViewModel::openEditor,
                 onCloseEditor = dashboardViewModel::closeEditor,
-                onMove = dashboardViewModel::moveWidget
+                onReorder = dashboardViewModel::applyReorder
             )
         }
     }
@@ -179,13 +183,64 @@ private fun EditingContent(
     onDeleteCard: (String) -> Unit,
     onOpen: (String) -> Unit,
     onCloseEditor: () -> Unit,
-    onMove: (Int, Int) -> Unit
+    onReorder: (List<MobileDashboardWidget>) -> Unit
 ) {
     val draft = state.draft
-    var dragId by remember { mutableStateOf<String?>(null) }
-    var dragOffsetPx by remember { mutableStateOf(0f) }
-    val thresholdPx = with(LocalDensity.current) { 96.dp.toPx() }
+    val density = LocalDensity.current
     val editingWidget = draft.firstOrNull { it.id == state.editingId }
+
+    // 草稿派生的**显示行**：连续两个 HALF 并排成一行、FULL 独占一行。拖拽时在本地 `rows` 上实时让位，
+    // 松手才把最终顺序整体交还 draft（draft 变 → remember(draft) 重建 rows，两处一致）。
+    var rows by remember(draft) { mutableStateOf(buildRows(draft)) }
+
+    // ---- 拖拽共享状态（长按某个槽开始，整页一个 dragId，各行按自己的槽接线） ----
+    var dragKey by remember { mutableStateOf<String?>(null) }          // 正在被拖的行签名（id 拼接）
+    var dragStartRows by remember { mutableStateOf<List<List<MobileDashboardWidget>>>(emptyList()) } // 取消时还原
+    var dragInsertIndex by remember { mutableStateOf(0) }              // 当前落点行下标
+    var dragRowHeightPx by remember { mutableStateOf(0f) }             // 被拖行高度（跨过 = 让一格）
+    var dragOffsetPx by remember { mutableStateOf(0f) }                // 手指相对起始的纵向位移
+    var rowHeights by remember { mutableStateOf<Map<String, Int>>(emptyMap()) }
+
+    val startDrag = { signature: String ->
+        dragStartRows = rows
+        dragKey = signature
+        dragInsertIndex = rows.indexOfFirst { rowSignature(it) == signature }.coerceAtLeast(0)
+        dragOffsetPx = 0f
+        // 高度从 onSizeChanged 缓存里取：比实时测量稳，跨格子算步长用
+        dragRowHeightPx = (rowHeights[signature] ?: 168).toFloat()
+    }
+    val finishDrag = {
+        dragKey = null
+        dragOffsetPx = 0f
+        dragInsertIndex = 0
+        dragRowHeightPx = 0f
+    }
+    val commitDrag = {
+        onReorder(rows.flatten())
+        finishDrag()
+    }
+    val cancelDrag = {
+        rows = dragStartRows
+        finishDrag()
+    }
+
+    // 每跨过一行的高度 → 实时让位：把被拖行整行换到新下标，同时把已消耗的整步高位从 offset 里扣掉，
+    // 让浮动卡片始终贴手指，而不是跟着槽跳。
+    val moveBy = { dy: Float ->
+        if (dragRowHeightPx > 0f && rows.isNotEmpty()) {
+            dragOffsetPx += dy
+            val step = (dragOffsetPx / dragRowHeightPx).roundToInt()
+            val target = (dragInsertIndex + step).coerceIn(0, rows.lastIndex)
+            if (target != dragInsertIndex) {
+                val list = rows.toMutableList()
+                val item = list.removeAt(dragInsertIndex)
+                list.add(target, item)
+                rows = list
+                dragInsertIndex = target
+                dragOffsetPx -= step * dragRowHeightPx
+            }
+        }
+    }
 
     Column(Modifier.fillMaxSize().padding(contentPadding)) {
         state.message?.let { msg ->
@@ -197,87 +252,80 @@ private fun EditingContent(
             )
         }
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+        LazyColumn(
+            state = rememberLazyListState(),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // 与首页只读一致的排布：FULL 整宽、连续两个 HALF 并排占一行 —— 半宽就该显示成半宽。
-            var i = 0
-            while (i < draft.size) {
-                // 把当前位置定成活板值再闭包引用 —— 拖拽收到的回调用它，不能在循环跑完后再
-                // 读共享的 `var i`（那时 i == draft.size，会越界）。
-                val firstIdx = i
-                val secondIdx = i + 1
-                val widgetA = draft[firstIdx]
-                val mate = secondIdx < draft.size
-                    && widgetA.size == DashboardTypes.SIZE_HALF
-                    && draft[secondIdx].size == DashboardTypes.SIZE_HALF
-                if (mate) {
-                    val widgetB = draft[secondIdx]
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        EditPreviewSlot(
-                            widget = widgetA, index = firstIdx, state = state,
-                            dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
-                            onOpen = onOpen, onMove = onMove,
-                            onDragStart = { dragId = widgetA.id; dragOffsetPx = 0f },
-                            onDragDelta = { dy -> if (dragId == widgetA.id) dragOffsetPx += dy },
-                            onDragEnd = {
-                                if (dragId == widgetA.id) {
-                                    val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                    val target = (firstIdx + step).coerceIn(0, draft.size - 1)
-                                    if (target != firstIdx) onMove(firstIdx, target)
+            if (rows.isEmpty()) {
+                item(key = "empty") { EmptyState("还没有卡片，点下方「添加」加一张") }
+            }
+            itemsIndexed(rows, key = { _, row -> rowSignature(row) }) { _, row ->
+                val signature = rowSignature(row)
+                val isDragged = dragKey == signature
+                val placeholderHeight = with(density) { dragRowHeightPx.coerceAtLeast(1f).dp }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        // 非被拖行用 animateItem 让位时平滑滑开；被拖行自己的行号变化由浮动位移接管
+                        .then(if (isDragged) Modifier else Modifier.animateItem())
+                        .zIndex(if (isDragged) 1f else 0f)
+                        .onSizeChanged {
+                            if (!isDragged) rowHeights = rowHeights + (signature to it.height)
+                        }
+                        .pointerInput(signature, draft.size) {
+                            detectDragGesturesAfterLongPress(
+                                onDragStart = { startDrag(signature) },
+                                onDragEnd = { commitDrag() },
+                                onDragCancel = { cancelDrag() },
+                                onDrag = { change, amount ->
+                                    change.consume()
+                                    moveBy(amount.y)
                                 }
-                                dragId = null; dragOffsetPx = 0f
-                            },
-                            modifier = Modifier.weight(1f)
+                            )
+                        }
+                ) {
+                    if (isDragged) {
+                        // 落点占位：可放置的位置 = 虚线框 + 背景色（也是松手后的归位格）
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(placeholderHeight)
+                                .background(
+                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.10f),
+                                    RoundedCornerShape(16.dp)
+                                )
+                                .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
                         )
-                        EditPreviewSlot(
-                            widget = widgetB, index = secondIdx, state = state,
-                            dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
-                            onOpen = onOpen, onMove = onMove,
-                            onDragStart = { dragId = widgetB.id; dragOffsetPx = 0f },
-                            onDragDelta = { dy -> if (dragId == widgetB.id) dragOffsetPx += dy },
-                            onDragEnd = {
-                                if (dragId == widgetB.id) {
-                                    val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                    val target = (secondIdx + step).coerceIn(0, draft.size - 1)
-                                    if (target != secondIdx) onMove(secondIdx, target)
+                        // 被拖的卡片本体：**尺寸不变**（宽度随行、高度即卡片高），只随手指上下浮动
+                        RowCard(
+                            row = row,
+                            state = state,
+                            editable = false,
+                            onOpen = onOpen,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .graphicsLayer {
+                                    translationY = dragOffsetPx
+                                    alpha = 0.95f
+                                    shadowElevation = 8.dp.toPx()
                                 }
-                                dragId = null; dragOffsetPx = 0f
-                            },
-                            modifier = Modifier.weight(1f)
+                        )
+                    } else {
+                        RowCard(
+                            row = row,
+                            state = state,
+                            editable = true,
+                            onOpen = onOpen,
+                            modifier = Modifier.fillMaxWidth()
                         )
                     }
-                    i = secondIdx + 1
-                } else {
-                    EditPreviewSlot(
-                        widget = widgetA, index = firstIdx, state = state,
-                        dragId = dragId, dragOffsetPx = dragOffsetPx, thresholdPx = thresholdPx,
-                        onOpen = onOpen, onMove = onMove,
-                        onDragStart = { dragId = widgetA.id; dragOffsetPx = 0f },
-                        onDragDelta = { dy -> if (dragId == widgetA.id) dragOffsetPx += dy },
-                        onDragEnd = {
-                            if (dragId == widgetA.id) {
-                                val step = (dragOffsetPx / thresholdPx).roundToInt()
-                                val target = (firstIdx + step).coerceIn(0, draft.size - 1)
-                                if (target != firstIdx) onMove(firstIdx, target)
-                            }
-                            dragId = null; dragOffsetPx = 0f
-                        },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    i = secondIdx
                 }
             }
-            if (draft.isEmpty()) EmptyState("还没有卡片，点下方「添加」加一张")
-            AddCardButton(onClick = onShowPicker)
-            Spacer(Modifier.height(12.dp))
+            item(key = "add") { AddCardButton(onClick = onShowPicker) }
+            item(key = "spacer") { Spacer(Modifier.height(12.dp)) }
         }
     }
 
@@ -302,81 +350,68 @@ private fun EditingContent(
     }
 }
 
-/** 编辑列里的一个槽：把草稿卡按它自己的下标接线到共享的拖动状态。 */
+/** 一个显示行：FULL 独占一行整宽；连续两个 HALF 并排（weight 各半）占一行。 */
 @Composable
-private fun EditPreviewSlot(
-    widget: MobileDashboardWidget,
-    index: Int,
+private fun RowCard(
+    row: List<MobileDashboardWidget>,
     state: MobileDashboardUiState,
-    dragId: String?,
-    dragOffsetPx: Float,
-    thresholdPx: Float,
+    editable: Boolean,
     onOpen: (String) -> Unit,
-    onMove: (Int, Int) -> Unit,
-    onDragStart: () -> Unit,
-    onDragDelta: (Float) -> Unit,
-    onDragEnd: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    if (row.size == 2) {
+        Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            CardSlot(row[0], state, editable, onOpen, Modifier.weight(1f))
+            CardSlot(row[1], state, editable, onOpen, Modifier.weight(1f))
+        }
+    } else {
+        CardSlot(row[0], state, editable, onOpen, modifier)
+    }
+}
+
+/** 行里的一张卡：实时预览 + 虚线框（可编辑）+ 点按开编辑器。被拖时（editable=false）去掉虚线、原样浮动。 */
+@Composable
+private fun CardSlot(
+    widget: MobileDashboardWidget,
+    state: MobileDashboardUiState,
+    editable: Boolean,
+    onOpen: (String) -> Unit,
     modifier: Modifier
 ) {
-    DashboardPreview(
+    DashboardWidgetHost(
         widget = widget,
         data = state.previewById[widget.id],
         error = state.previewMessageById[widget.id],
-        dragging = dragId == widget.id,
-        dragOffsetPx = dragOffsetPx,
-        modifier = modifier,
-        onClick = { widget.id?.let(onOpen) },
-        onDragStart = onDragStart,
-        onDragDelta = onDragDelta,
-        onDragEnd = onDragEnd
+        modifier = modifier
+            .then(if (editable) Modifier.dashedBorder(MaterialTheme.colorScheme.primary, strokeWidth = 1.5.dp) else Modifier)
+            .then(if (editable) Modifier.padding(2.dp) else Modifier)
+            .clickable { widget.id?.let(onOpen) }
     )
 }
 
-/** 一张草稿卡的实时预览：虚线框 = 可编辑；点按开编辑器、长按（点住）拖动排序。 */
-@Composable
-private fun DashboardPreview(
-    widget: MobileDashboardWidget,
-    data: Map<String, Any?>?,
-    error: String?,
-    dragging: Boolean,
-    dragOffsetPx: Float,
-    modifier: Modifier,
-    onClick: () -> Unit,
-    onDragStart: () -> Unit,
-    onDragDelta: (Float) -> Unit,
-    onDragEnd: () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .graphicsLayer {
-                if (dragging) {
-                    translationY = dragOffsetPx
-                    alpha = 0.92f
-                }
-            }
-            .pointerInput(widget.id) {
-                detectDragGesturesAfterLongPress(
-                    onDragStart = { onDragStart() },
-                    onDragEnd = { onDragEnd() },
-                    onDragCancel = { onDragEnd() },
-                    onDrag = { change, amount ->
-                        change.consume()
-                        onDragDelta(amount.y)
-                    }
-                )
-            }
-            .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = if (dragging) 2.dp else 1.5.dp)
-            .padding(2.dp)
-            .clickable(onClick = onClick)
-    ) {
-        DashboardWidgetHost(
-            widget = widget,
-            data = data,
-            error = error,
-            modifier = Modifier.fillMaxWidth()
-        )
+/** 把草稿按「FULL 一行 / 连续两个 HALF 并排一行」派生成显示行（与首页只读排布同口径）。 */
+private fun buildRows(widgets: List<MobileDashboardWidget>): List<List<MobileDashboardWidget>> {
+    val result = mutableListOf<List<MobileDashboardWidget>>()
+    var i = 0
+    while (i < widgets.size) {
+        val w = widgets[i]
+        val mate = i + 1 < widgets.size
+            && w.size == DashboardTypes.SIZE_HALF
+            && widgets[i + 1].size == DashboardTypes.SIZE_HALF
+        if (mate) {
+            result.add(listOf(w, widgets[i + 1]))
+            i += 2
+        } else {
+            result.add(listOf(w))
+            i += 1
+        }
     }
+    return result
 }
+
+/** 行在 LazyColumn 里的稳定 key（也是拖拽签名）：行内 id 拼接。 */
+private fun rowSignature(row: List<MobileDashboardWidget>): String =
+    row.joinToString("~") { it.id.orEmpty() }
 
 /** 末尾一张虚线的「添加」卡 —— 代替悬浮按钮。 */
 @Composable

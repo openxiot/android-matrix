@@ -260,6 +260,17 @@ class MobileDashboardViewModel : ViewModel() {
         refreshDirty()
     }
 
+    /**
+     * 拖拽结束后把**最终顺序**整体交还草稿（只换顺序、不改卡内容）。编辑页拖拽时在本地显示行上
+     * 实时让位，松手只调这一次 —— 比每跨一格调一次 [moveWidget] 少一串中间态。
+     */
+    fun applyReorder(newOrder: List<MobileDashboardWidget>) {
+        val draft = _uiState.value.draft
+        if (draft.size != newOrder.size) return
+        _uiState.value = _uiState.value.copy(draft = newOrder)
+        refreshDirty()
+    }
+
     private fun refreshDirty() {
         _uiState.value = _uiState.value.copy(dirty = _uiState.value.draft != committed)
     }

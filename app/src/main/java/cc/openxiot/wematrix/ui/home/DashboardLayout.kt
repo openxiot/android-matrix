@@ -135,19 +135,26 @@ fun deriveSides(widgets: List<MobileDashboardWidget>): List<MobileDashboardWidge
 }
 
 /**
- * 新加一张半宽卡时它该占哪半格：**只看最后一张**（新卡永远追加在末尾）。
- * 末张是落单的 `LEFT`（右半格空着）→ `RIGHT` 填进去；其余（末张是 `RIGHT`、整宽，或还没有卡）
- * → `LEFT` 另起一行。
+ * 一张半宽卡插在 [index] 位时该占哪半格：**只看它前面那一张**。
+ * 前一张的有效半格是 `LEFT`（它的右半格空着）→ `RIGHT` 填进去（这等于「并排放到它右边」）；
+ * 其余（前一张是 `RIGHT`、整宽，或它前面没有卡）→ `LEFT` 另起一行。
  *
- * 不做全局搜索：中间被整宽卡打断留下的空右半格，按排布规则**永远填不上**（新卡追加在末尾，
- * 够不回去），去找它只会把卡放到用户没指的地方。
+ * 只要这一个判断就够了：状态机里「当前行右半格空不空」**只**由前一张卡的有效半格决定。
  */
-fun nextHalfSide(widgets: List<MobileDashboardWidget>): String =
-    if (effectiveSides(widgets).lastOrNull() == DashboardTypes.SIDE_LEFT) {
+fun nextHalfSide(widgets: List<MobileDashboardWidget>, index: Int): String =
+    if (effectiveSides(widgets.take(index.coerceIn(0, widgets.size))).lastOrNull() == DashboardTypes.SIDE_LEFT) {
         DashboardTypes.SIDE_RIGHT
     } else {
         DashboardTypes.SIDE_LEFT
     }
+
+/**
+ * 追加一张半宽卡（加卡 / 拖到末尾）时它该占哪半格：就是 [nextHalfSide] 在末尾那一处。
+ *
+ * 不做全局搜索：中间被整宽卡打断留下的空右半格，**不是不能填**，而是追加够不回去 ——
+ * 要去填它得靠拖动（候选里选那一格），自动去找只会把卡放到用户没指的地方。
+ */
+fun nextHalfSide(widgets: List<MobileDashboardWidget>): String = nextHalfSide(widgets, widgets.size)
 
 /**
  * 落位的**唯一**产物函数：把 [dragId] 那张从 [draft] 里摘掉，再按 `(index, side)` 插回去。

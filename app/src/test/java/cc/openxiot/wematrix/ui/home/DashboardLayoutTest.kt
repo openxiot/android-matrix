@@ -277,10 +277,31 @@ class DashboardLayoutTest {
         assertEquals(LEFT, nextHalfSide(listOf(half("a", LEFT), half("b", RIGHT))))
     }
 
-    /** 中间被整宽卡打断留下的空右半格**永远填不上**（新卡追加在末尾，够不回去）—— 别去全局搜索。 */
+    /** 追加在末尾时，中间被整宽卡打断留下的空右半格够不回去（要填它只能靠拖动）。 */
     @Test
     fun nextHalfSide_doesNotReachBackToAHalfOpenedBeforeAFullCard() {
         assertEquals(LEFT, nextHalfSide(deriveSides(listOf(half("a", LEFT), full("f")))))
+    }
+
+    /** 插在中间（改尺寸成半宽那一处）：只看**它前面那张**，与后面有什么无关。 */
+    @Test
+    fun nextHalfSide_atAnIndexLooksOnlyAtTheCardBeforeIt() {
+        val pairThenFull = deriveSides(listOf(half("a"), half("b"), full("f")))
+        assertEquals(LEFT, nextHalfSide(pairThenFull, 0))    // 插到最前
+        assertEquals(LEFT, nextHalfSide(pairThenFull, 2))    // 前一张是满行的右卡
+        assertEquals(LEFT, nextHalfSide(pairThenFull, 3))    // 前一张是整宽卡
+        assertEquals(LEFT, nextHalfSide(emptyList(), 0))
+
+        // 前一张是**落单的左半卡**（右半格空着）→ 填进去并排
+        val loneLeft = deriveSides(listOf(half("a", LEFT), full("f")))
+        assertEquals(RIGHT, nextHalfSide(loneLeft, 1))
+    }
+
+    /** 两个重载是同一件事：不带下标就是「追加在末尾」。 */
+    @Test
+    fun nextHalfSide_withoutIndexIsTheAppendPosition() {
+        val draft = deriveSides(listOf(half("a"), half("b"), full("f")))
+        assertEquals(nextHalfSide(draft), nextHalfSide(draft, draft.size))
     }
 
     // ===== 物化 =====

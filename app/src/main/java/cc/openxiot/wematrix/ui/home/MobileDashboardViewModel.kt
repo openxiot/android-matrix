@@ -180,11 +180,15 @@ class MobileDashboardViewModel : ViewModel() {
             // version 从 0 起步。只搬 widgets 不搬 version 的话，保存会一直提交 0 —— 而库里已有
             // 文档时（version ≥ 1）服务端 CAS 每次都判「别人改过了」，布局永远存不进去。
             val version = loaded?.version ?: _uiState.value.version
-            committed = widgets
+            // 半格**物化**：草稿里每张半宽卡都带显式 side，是「拖动只纵向让位」的前提
+            // （见 DashboardLayout 文件头那条不变量）。**基线也过一遍**，这样「物化」本身不算改动 ——
+            // 否则打开编辑页什么都没做，「保存布局」就已经是可点的了。
+            val settled = deriveSides(widgets)
+            committed = settled
             _uiState.value = _uiState.value.copy(
                 editing = true,
                 version = version,
-                draft = widgets.map(::copyWidget),
+                draft = settled.map(::copyWidget),
                 catalog = catalog,
                 dirty = false,
                 saving = false,
@@ -206,12 +210,19 @@ class MobileDashboardViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(pickerVisible = false)
     }
 
-    /** picker 加一张卡：默认 config + 默认尺寸，插到末尾，顺手打开它的编辑器。 */
+    /**
+     * picker 加一张卡：默认 config + 默认尺寸，插到末尾，顺手打开它的编辑器。
+     *
+     * 半宽卡的半格按 [nextHalfSide] 定：末张是落单的 `LEFT`（右半格空着）就填进去并排，
+     * 否则另起一行靠左。
+     */
     fun addWidget(type: String) {
+        val size = DashboardTypes.defaultSize(type)
         val widget = MobileDashboardWidget(
             id = "draft-" + (++idCounter),
             type = type,
-            size = DashboardTypes.defaultSize(type),
+            size = size,
+            side = if (size == DashboardTypes.SIZE_HALF) nextHalfSide(_uiState.value.draft) else null,
             config = DashboardTypes.defaultConfig(type)
         )
         _uiState.value = _uiState.value.copy(
@@ -230,15 +241,28 @@ class MobileDashboardViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(editingId = null)
     }
 
-    /** 保存编辑器里改完的卡（title / size / config 整体替换，保留 id 与 type）。 */
+    /**
+     * 保存编辑器里改完的卡（title / size / config 整体替换，保留 id 与 type）。
+     *
+     * 尺寸变化会牵动半格：改成整宽 → 清掉 `side`（它没有半格）；刚改成半宽 → 按 [nextHalfSide]
+     * 补一个默认位。**尺寸没动就原样保留它自己的半格** —— 那是用户拖出来的，重开编辑器保存一次
+     * 不能把它抹掉。
+     */
     fun commitCard(id: String, title: String?, size: String, config: Map<String, Any?>) {
         val draft = _uiState.value.draft
         val idx = draft.indexOfFirst { it.id == id }
         if (idx < 0) return
+        val before = draft[idx]
+        val keepSide = size == DashboardTypes.SIZE_HALF && size == before.size && before.side != null
         val updated = draft.toMutableList().apply {
-            this[idx] = this[idx].copy(
+            this[idx] = before.copy(
                 title = title?.takeIf { it.isNotBlank() },
                 size = size,
+                side = when {
+                    size != DashboardTypes.SIZE_HALF -> null
+                    keepSide -> before.side
+                    else -> nextHalfSide(draft, idx)
+                },
                 config = config
             )
         }
@@ -249,6 +273,11 @@ class MobileDashboardViewModel : ViewModel() {
         refreshDirty()
     }
 
+    /**
+     * 删掉一张卡：只把它从草稿里摘掉，**不动别的卡** —— 删掉一对里的左半张，右半张留在右半格、
+     * 左边空着。这是「半格写在自己身上」白拿的：`side` 是每张卡自己的字段，谁也不靠邻居推，
+     * 所以没有任何需要「补位」的地方（要空白还是满格，用户自己拖）。
+     */
     fun removeWidget(id: String) {
         _uiState.value = _uiState.value.copy(
             draft = _uiState.value.draft.filterNot { it.id == id },
@@ -257,20 +286,12 @@ class MobileDashboardViewModel : ViewModel() {
         refreshDirty()
     }
 
-    /** 长按拖拽：把 from 位置的那张卡换到 to 位置（其余顺移）。 */
-    fun moveWidget(from: Int, to: Int) {
-        val draft = _uiState.value.draft
-        if (from !in draft.indices || to !in draft.indices || from == to) return
-        val list = draft.toMutableList()
-        val item = list.removeAt(from)
-        list.add(to, item)
-        _uiState.value = _uiState.value.copy(draft = list)
-        refreshDirty()
-    }
-
     /**
      * 拖拽结束后把**最终顺序**整体交还草稿（只换顺序、不改卡内容）。编辑页拖拽时在本地显示行上
-     * 实时让位，松手只调这一次 —— 比每跨一格调一次 [moveWidget] 少一串中间态。
+     * 实时让位，松手只调这一次 —— 比每跨一格调一次少一串中间态。
+     *
+     * 传进来的是 [arrange] 的产物：**展示的那份列表就是这一份**，所以卡不会回弹、落点框也不可能
+     * 和落点对不上。
      */
     fun applyReorder(newOrder: List<MobileDashboardWidget>) {
         val draft = _uiState.value.draft
@@ -325,7 +346,8 @@ class MobileDashboardViewModel : ViewModel() {
                 .onSuccess { preset ->
                     _uiState.value = _uiState.value.copy(
                         saving = false,
-                        draft = preset.widgets,
+                        // 预置直接进草稿，仍需手动保存；半格照样物化一遍（服务端已推导，这里不依赖它）
+                        draft = deriveSides(preset.widgets),
                         message = "已载入默认布局，仍需手动保存"
                     )
                     refreshDirty()

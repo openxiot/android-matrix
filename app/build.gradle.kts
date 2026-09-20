@@ -14,8 +14,8 @@ android {
         applicationId = "cc.openxiot.wematrix"
         minSdk = 29
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
     }
 
     signingConfigs {
@@ -83,7 +83,7 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.activity:activity-compose:1.13.0")
-    implementation("androidx.navigation:navigation-compose:2.10.0")
+    implementation("androidx.navigation:navigation-compose:2.10.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.11.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.11.0")
 
@@ -106,9 +106,9 @@ dependencies {
     implementation("androidx.core:core-ktx:1.19.0")
 
     // Openxiot
-    implementation("cc.openxiot:xiot-spec:0.1.8")
-    implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.8")
-    implementation("cc.openxiot:xiot-support-codegen-vertx:0.1.8")
+    implementation("cc.openxiot:xiot-spec:0.1.9")
+    implementation("cc.openxiot:xiot-spec-codec-vertx:0.1.9")
+    implementation("cc.openxiot:xiot-support-codegen-vertx:0.1.9")
 
     // Weixin
     implementation("com.tencent.mm.opensdk:wechat-sdk-android:6.8.40")

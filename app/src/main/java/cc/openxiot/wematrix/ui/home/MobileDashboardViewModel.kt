@@ -44,6 +44,8 @@ data class MobileDashboardUiState(
     val pickerVisible: Boolean = false,
     /** 正在编辑的卡 id（null = 没有开着的编辑器）；编辑态下每张卡可点开 */
     val editingId: String? = null,
+    /** [editingId] 那张是**刚加进来、还没提交过**的新卡：关掉编辑器要把它撤掉（见 [closeEditor]） */
+    val editingIsNew: Boolean = false,
     /** 级联候选（进编辑态取一次）；设备/服务/方法/字段的选择都读它 */
     val catalog: MobileCatalog? = null,
     /** 保存 / 恢复的反馈（含服务端冲突原文） */
@@ -194,6 +196,7 @@ class MobileDashboardViewModel : ViewModel() {
                 saving = false,
                 pickerVisible = false,
                 editingId = null,
+                editingIsNew = false,
                 message = null,
                 saved = false,
                 previewById = emptyMap(),
@@ -233,17 +236,38 @@ class MobileDashboardViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(
             draft = draft + widget,
             pickerVisible = false,
-            editingId = widget.id
+            editingId = widget.id,
+            editingIsNew = true
         )
         refreshDirty()
     }
 
     fun openEditor(id: String) {
-        _uiState.value = _uiState.value.copy(editingId = id, message = null)
+        _uiState.value = _uiState.value.copy(editingId = id, editingIsNew = false, message = null)
     }
 
+    /**
+     * 关掉编辑器。
+     *
+     * **刚加进来、还没提交过的卡，关掉 = 撤销** —— 与 web `cancelEditor` 同口径（`editorIsNew`
+     * 时把那张 filter 掉）：用户点了「添加卡片」、弹层里又没配完，滑掉它就该当没加过，
+     * 而不是在草稿里留一张 config 空着、要他自己再删一次的卡。
+     *
+     * 已经在草稿里的老卡关掉只是收弹层：它的改动本来就只在弹层里，点「确认」才写回草稿。
+     */
     fun closeEditor() {
-        _uiState.value = _uiState.value.copy(editingId = null)
+        val state = _uiState.value
+        val id = state.editingId
+        if (state.editingIsNew && id != null) {
+            _uiState.value = state.copy(
+                draft = state.draft.filterNot { it.id == id },
+                editingId = null,
+                editingIsNew = false
+            )
+            refreshDirty()
+            return
+        }
+        _uiState.value = state.copy(editingId = null)
     }
 
     /**
@@ -273,7 +297,9 @@ class MobileDashboardViewModel : ViewModel() {
         }
         _uiState.value = _uiState.value.copy(
             draft = updated,
-            editingId = null
+            editingId = null,
+            // 提交过就不再是「新卡」，之后关弹层不该把它撤掉
+            editingIsNew = false
         )
         refreshDirty()
     }
@@ -284,9 +310,12 @@ class MobileDashboardViewModel : ViewModel() {
      * 所以没有任何需要「补位」的地方（要空白还是满格，用户自己拖）。
      */
     fun removeWidget(id: String) {
-        _uiState.value = _uiState.value.copy(
-            draft = _uiState.value.draft.filterNot { it.id == id },
-            editingId = if (_uiState.value.editingId == id) null else _uiState.value.editingId
+        val state = _uiState.value
+        val closing = state.editingId == id
+        _uiState.value = state.copy(
+            draft = state.draft.filterNot { it.id == id },
+            editingId = if (closing) null else state.editingId,
+            editingIsNew = if (closing) false else state.editingIsNew
         )
         refreshDirty()
     }
@@ -325,6 +354,7 @@ class MobileDashboardViewModel : ViewModel() {
                         version = layout.version ?: 0,
                         saving = false,
                         editingId = null,
+                        editingIsNew = false,
                         pickerVisible = false,
                         message = null,
                         saved = true

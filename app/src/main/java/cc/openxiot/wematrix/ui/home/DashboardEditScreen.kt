@@ -450,7 +450,19 @@ private fun EditingContent(
                             widget = dragged,
                             data = state.previewById[dragged.id],
                             error = state.previewMessageById[dragged.id],
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                // 手上这张卡整圈画**实线**框（静置卡是细虚线、落点槽位是 tertiary 虚线，
+                                // 只有它是实线），移动时一眼认得出。口径同 [SlotHost] 的静置卡：
+                                // 框画在本层、再用 2dp 内边距把卡缩进去，框才不会被 Card 自己的
+                                // 不透明面盖掉一半（链上先画的画在下面）。
+                                // 这一层就是**卡自身**的宽度（半宽右卡由 FloatingCardSlot 缩到右半边），
+                                // 不是整行宽 —— 不会重演之前那个半宽幽灵阴影。
+                                .solidBorder(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    strokeWidth = 2.dp
+                                )
+                                .padding(2.dp)
                         )
                     }
                 }
@@ -633,6 +645,28 @@ private fun Modifier.dashedBorder(
 ): Modifier = drawWithCache {
     val effects = PathEffect.dashPathEffect(floatArrayOf(dash.toPx(), gap.toPx()))
     val stroke = Stroke(width = strokeWidth.toPx(), pathEffect = effects)
+    val outline = shape.createOutline(size, layoutDirection, this)
+    onDrawBehind {
+        drawPath(
+            path = Path().apply { addOutline(outline) },
+            color = color,
+            style = stroke
+        )
+    }
+}
+
+/**
+ * 实线圆角边框（**拖动中的浮动卡**用）。
+ *
+ * 静置的卡是 primary 细虚线、落点槽位是 tertiary 虚线，都是「虚线」；手上这张改成**实线**，
+ * 一眼就能看出"正在移动的是它"，不会和底下的卡、以及那个虚线落点槽位混在一起。
+ */
+private fun Modifier.solidBorder(
+    color: Color,
+    shape: Shape = RoundedCornerShape(16.dp),
+    strokeWidth: Dp = 2.dp
+): Modifier = drawWithCache {
+    val stroke = Stroke(width = strokeWidth.toPx())
     val outline = shape.createOutline(size, layoutDirection, this)
     onDrawBehind {
         drawPath(

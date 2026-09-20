@@ -289,21 +289,15 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
             FilterOption("alarmCount", "整点告警曲线"),
             FilterOption("serviceField", "一条服务字段曲线")
         ),
-        onSelect = { s ->
-            if (s != null) {
-                val base = HashMap(config).apply { this["source"] = s }
-                if (s == "alarmCount") {
-                    base.remove("serviceId"); base.remove("functionIndex"); base.remove("field")
-                    base.remove("maxPoints"); base.remove("showFailureShadow")
-                }
-                onChange(base)
-            }
-        }
+        // 换源**只改 source**，不清「服务 / 方法 / 字段」那一组 —— 与 web `setLineSource`
+        // 同口径（那条注释写了理由：它们只对 serviceField 那一支有意义，换到别处留着不会生效，
+        // 换回来时还能接着上次的选择）。后端 `validateLine` 只校验它认得的那几个键，多余键不报错。
+        onSelect = { s -> if (s != null) onChange(DashboardTypes.configWith(config, "source", s)) }
     )
     WindowEditor(config["window"]) { w -> onChange(HashMap(config).apply { this["window"] = w }) }
 
     if (source == "serviceField") {
-        ServiceCascade(config, catalog, single = true, activeKey = "field") { k, v -> onChange(HashMap(config).apply { this[k] = v }) }
+        ServiceCascade(config, catalog, single = true, activeKey = "field") { k, v -> onChange(DashboardTypes.configWith(config, k, v)) }
     }
 }
 
@@ -311,14 +305,15 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
 private fun ServiceConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onChange: (Map<String, Any?>) -> Unit) {
     SectionLabel("服务 · 方法 · 字段")
     // fields 是**多选**：换服务/方法会清掉旧字段（SIID/字段变了就不该残留旧值）
-    ServiceCascade(config, catalog, single = false, activeKey = "fields") { k, v -> onChange(HashMap(config).apply { this[k] = v }) }
+    ServiceCascade(config, catalog, single = false, activeKey = "fields") { k, v -> onChange(DashboardTypes.configWith(config, k, v)) }
 }
 
 /**
  * 服务 → 方法 → 字段 三级级联，line（只读字段单条）/ service（多选字段）共用。
  *
- * 服务与方法都选对后字段区才出现；换服务 / 换方法都把选中的字段清掉（旧服务/方法的字段
- * 在新上下文里没有意义）。级联选出来的键经 [set] 写回 config：
+ * 服务与方法都选对后字段区才出现；换服务 / 换方法都把选中的字段**删掉**（旧服务/方法的字段
+ * 在新上下文里没有意义）—— 是删键而不是写个空值，与 web 的 `undefined` 同口径
+ * （见 [DashboardTypes.configWith]）。级联选出来的键经 [set] 写回 config：
  * `serviceId`（十六进制）、`functionIndex`（1 起）、[activeKey]（"field" 单条 / "fields" 列表）。
  */
 @Composable
@@ -338,7 +333,7 @@ private fun ServiceCascade(
             if (id != null) {
                 set("serviceId", id)
                 set("functionIndex", 1) // 默认第一个方法，减少一次点击
-                set(activeKey, if (single) null as Any? else emptyList<String>())
+                set(activeKey, null) // 下游字段删键（换了服务，旧字段名不再成立）
             }
         },
         placeholder = "请选择服务"
@@ -354,7 +349,7 @@ private fun ServiceCascade(
         onSelect = { idx ->
             if (idx != null) {
                 set("functionIndex", idx)
-                set(activeKey, if (single) null as Any? else emptyList<String>())
+                set(activeKey, null) // 同上：换方法，旧字段名不再成立
             }
         },
         placeholder = if (service == null) "先选服务" else "请选择方法"

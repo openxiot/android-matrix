@@ -91,6 +91,22 @@ object DashboardTypes {
         return user ?: preset ?: defaultTitle(type)
     }
 
+    // ---- config 改写 ----
+
+    /**
+     * config 改写：**`null` 是删键，不是写一个「键在、值为 null」的项**。
+     *
+     * 两条理由：
+     * - 与 web 同口径 —— 那边「没配」就是键不存在（`setConfig(k, undefined)`，codec 直接不发）；
+     * - 后端校验器对「键在、值为 null」是要**报错**的：`booleanErr` 按 `containsKey` 判
+     *   （null 不是 Boolean → `config.showUnit must be a boolean`），`limit` 同理
+     *   （`config.limit must be a number`）。
+     *
+     * 返回新 map，**不改**传进来的那份。
+     */
+    fun configWith(config: Map<String, Any?>, key: String, value: Any?): Map<String, Any?> =
+        if (value == null) config - key else HashMap(config).apply { this[key] = value }
+
     // ---- 时间窗口 ----
 
     /** 相对窗口的常见档（小时），配了就可直接存 `{kind:"last", hours:n}`。 */

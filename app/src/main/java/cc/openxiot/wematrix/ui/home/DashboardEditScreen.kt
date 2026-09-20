@@ -203,10 +203,11 @@ private fun EditingContent(
     var dragOriginRow by remember { mutableStateOf(0) }        // 起始所在行
     var dragOffsetPx by remember { mutableStateOf(0f) }        // 手指纵向位移
     var dragTargetRow by remember { mutableStateOf(0) }        // 当前落点行
-    // 每张卡的实测尺寸（px）：标注框 = 卡片实际大小
+    // 每张卡的实测尺寸（px）：行高/落点映射用
     var cardSizes by remember { mutableStateOf<Map<String, IntSize>>(emptyMap()) }
+    // 被拖卡**当前渲染高**（px）：从浮动卡本体实测回填，保证原/落点标注与卡等大
+    var dragCardH by remember { mutableStateOf(0) }
 
-    val cardHeightPx = { id: String? -> cardSizes[id]?.height ?: 0 }
     val rowHeightPx = { row: List<MobileDashboardWidget> ->
         row.mapNotNull { cardSizes[it.id]?.height }.maxOrNull() ?: 160
     }
@@ -284,7 +285,7 @@ private fun EditingContent(
                 val signature = rowSignature(row)
                 val isTargetRow = dragId != null && ri == dragTargetRow
                 val originRowHasDrag = dragId != null && ri == dragOriginRow
-                val heightPx = with(density) { cardHeightPx(dragId).dp }
+                val markerH = with(density) { (dragCardH.takeIf { it > 0 } ?: 160).dp }
 
                 Box(
                     modifier = Modifier
@@ -317,7 +318,9 @@ private fun EditingContent(
                         onOpen = onOpen,
                         dragId = dragId,
                         dragOffsetPx = dragOffsetPx,
-                        onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) }
+                        dragCardH = dragCardH,
+                        onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) },
+                        onDragHeight = { dragCardH = it }
                     )
                     // 落点行 → 标注「可以放置的位置」：虚线框 + tertiary 背景色，尺寸 = 卡片实际大小
                     if (isTargetRow && !originRowHasDrag && dragId != null) {
@@ -329,7 +332,7 @@ private fun EditingContent(
                                     .fillMaxWidth(
                                         if (dragged.size == DashboardTypes.SIZE_HALF) 0.5f else 1f
                                     )
-                                    .height(heightPx.coerceAtLeast(1.dp))
+                                    .height(markerH)
                                     .background(
                                         MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f),
                                         RoundedCornerShape(16.dp)
@@ -368,7 +371,8 @@ private fun EditingContent(
 
 /**
  * 一个显示行：FULL 独占一行整宽；连续两个 HALF 并排（weight 各半）占一行。
- * 行里的那张「被拖卡」：原位置画 primary 虚线框 + 背景，卡本体照常在此列但随手指上下浮动（改变尺寸）；其余卡原样。
+ * 落单的 HALF **保持半宽**（不「占位补成整宽」），只靠左。
+ * 行里的那张「被拖卡」：原位置画 primary 虚线框 + 背景，卡本体在此列但随手指上下浮动；其余卡原样。
  */
 @Composable
 private fun RowContent(
@@ -377,22 +381,25 @@ private fun RowContent(
     onOpen: (String) -> Unit,
     dragId: String?,
     dragOffsetPx: Float,
-    onSize: (String, IntSize) -> Unit
+    dragCardH: Int,
+    onSize: (String, IntSize) -> Unit,
+    onDragHeight: (Int) -> Unit
 ) {
     if (row.size == 2) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, onSize, Modifier.weight(1f))
-            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, onSize, Modifier.weight(1f))
+            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragCardH, onSize, onDragHeight, Modifier.weight(1f))
+            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, dragCardH, onSize, onDragHeight, Modifier.weight(1f))
         }
     } else {
-        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, onSize, Modifier.fillMaxWidth())
+        val wide = if (row[0].size == DashboardTypes.SIZE_HALF) 0.5f else 1f
+        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragCardH, onSize, onDragHeight, Modifier.fillMaxWidth(wide))
     }
 }
 
 /**
  * 一张卡。isDragged = 这张卡正在被拖：
- * - 先画 primary 虚线框 + 背景色占位（= 原位置标注，尺寸与卡一致）；
- * - 再画卡本体（尺寸不变），`graphicsLayer.translationY = dragOffsetPx` 让原卡随手指浮动。
+ * - 先画 primary 虚线框 + 背景色占位（= 原位置标注，宽=槽位、高=卡高，与卡等大）；
+ * - 再画卡本体（尺寸不变），`graphicsLayer.translationY = dragOffsetPx` 让原卡随手指浮动，并回填实测高。
  */
 @Composable
 private fun CardHost(
@@ -401,24 +408,29 @@ private fun CardHost(
     onOpen: (String) -> Unit,
     dragId: String?,
     dragOffsetPx: Float,
+    dragCardH: Int,
     onSize: (String, IntSize) -> Unit,
+    onDragHeight: (Int) -> Unit,
     modifier: Modifier
 ) {
     val isDragged = dragId == widget.id
+    val density = LocalDensity.current
+    val markerH = with(density) { (dragCardH.takeIf { it > 0 } ?: 160).dp }
     Box(
         modifier = modifier
             .onSizeChanged { if (!isDragged) onSize(widget.id.orEmpty(), it) }
             .then(if (isDragged) Modifier.zIndex(1f) else Modifier)
     ) {
         if (isDragged) {
-            // 原位置标注：primary 虚线 + 背景，跟卡等大
+            // 原位置标注：primary 虚线 + 背景，宽=槽位、高=卡高
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .height(markerH)
                     .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.10f), RoundedCornerShape(16.dp))
                     .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
             )
-            // 卡本体：尺寸不变，只随手指浮动
+            // 卡本体：尺寸不变，只随手指浮动；顺带把实测高回填，让标注和它等大
             DashboardWidgetHost(
                 widget = widget,
                 data = state.previewById[widget.id],
@@ -430,13 +442,17 @@ private fun CardHost(
                         alpha = 0.95f
                         shadowElevation = 8.dp.toPx()
                     }
+                    .onSizeChanged { onDragHeight(it.height) }
             )
         } else {
+            // 卡始终包一层 fillMaxWidth：DashboardWidgetHost 的 Card 默认包内容宽，
+            // 直接传槽宽 modifier 会让半宽卡缩成内容宽（≈ 1/4），必须让它填满槽位。
             DashboardWidgetHost(
                 widget = widget,
                 data = state.previewById[widget.id],
                 error = state.previewMessageById[widget.id],
-                modifier = modifier
+                modifier = Modifier
+                    .fillMaxWidth()
                     .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 1.5.dp)
                     .padding(2.dp)
                     .clickable { widget.id?.let(onOpen) }

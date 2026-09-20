@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
  * 首页（可自定义看板）——**只读**渲染。
  *
  * 顺序 = 布局 `widgets[]`（= 阅读顺序）。`FULL` 整宽、**连续两个 HALF 并排**占一行；
- * 落单的 HALF 也整宽占一行（占位补齐）。数分两处取（见 [MobileDashboardViewModel]）：布局
+ * 落单的 HALF 保持半宽（口径同编辑页，不占位补齐）。数分两处取（见 [MobileDashboardViewModel]）：布局
  * （未保存时后端返回预置）→ 统一 render 每张卡。**没取到 / 未选项目都是空态**，不放一屏 0。
  *
  * 「编辑」入口在标题行右侧、**仅空间管理员**（[SessionState.canEditById]）可见，点了进二级页
@@ -103,7 +103,7 @@ fun HomeScreen(
     }
 }
 
-/** 只读排布：FULL 整宽、连续两个 HALF 并排占一行。 */
+/** 只读排布：FULL 整宽、连续两个 HALF 并排占一行；落单的 HALF 保持半宽（不占位补齐）。 */
 @Composable
 private fun ReadOnlyContent(state: MobileDashboardUiState, modifier: Modifier = Modifier) {
     Column(
@@ -138,11 +138,13 @@ private fun ReadOnlyContent(state: MobileDashboardUiState, modifier: Modifier = 
                 }
                 i += 2
             } else {
+                // 落单 HALF：保持半宽、靠左，和编辑页口径一致（不要把卡「占位补成整宽」）
+                val soloWide = if (widget.size == DashboardTypes.SIZE_HALF) 0.5f else 1f
                 DashboardWidgetHost(
                     widget = widget,
                     data = state.dataById[widget.id],
                     error = state.messageById[widget.id],
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(soloWide)
                 )
                 i += 1
             }

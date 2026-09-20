@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -26,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import cc.openxiot.wematrix.data.api.MobileCatalog
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
@@ -268,6 +271,13 @@ private fun DistributionConfig(config: Map<String, Any?>, onChange: (Map<String,
         onSelect = { d -> if (d != null) onChange(HashMap(config).apply { this["dimension"] = d }) },
         placeholder = "请选择"
     )
+    // 显示层折算（[truncateSlices]）：后端全量下发，改这个不必重新取数
+    NumberField(
+        label = "显示片数",
+        value = DashboardTypes.configInt(config, "limit"),
+        range = 1..100,
+        placeholder = "不限制"
+    ) { n -> onChange(DashboardTypes.configWith(config, "limit", n)) }
     if (DashboardTypes.distributionNeedsWindow(config["dimension"] as? String)) {
         WindowEditor(config["window"]) { w -> onChange(HashMap(config).apply { this["window"] = w }) }
     }
@@ -301,6 +311,21 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
 
     if (source == "serviceField") {
         ServiceCascade(config, catalog, single = true, activeKey = "field") { k, v -> onChange(DashboardTypes.configWith(config, k, v)) }
+        // 竖线说的是「这个方法的采集什么时候失败过」，与读数本身是两件事（web 同款文案）
+        SwitchRow(
+            label = "显示采集失败竖线",
+            checked = DashboardTypes.configBool(config, "showFailureShadow", default = true),
+            onCheckedChange = { onChange(DashboardTypes.configWith(config, "showFailureShadow", it)) }
+        )
+        // 降采样只对「服务字段」这一支存在：告警条数曲线是后端按整点**零填充**的，
+        // 每个整点都在数组里，没有「点太多」这回事（取数也不读这个键）。所以它跟竖线一样
+        // 只在这一支里出现 —— 摆一个改了没反应的控件比不摆更糟（web 那条注释的原话）。
+        NumberField(
+            label = "最大点数",
+            value = DashboardTypes.configInt(config, "maxPoints"),
+            range = 1..2000,
+            placeholder = "不限制"
+        ) { n -> onChange(DashboardTypes.configWith(config, "maxPoints", n)) }
     }
 }
 
@@ -309,6 +334,15 @@ private fun ServiceConfig(config: Map<String, Any?>, catalog: MobileCatalog?, on
     SectionLabel("服务 · 方法 · 字段")
     // fields 是**多选**：换服务/方法会清掉旧字段（SIID/字段变了就不该残留旧值）
     ServiceCascade(config, catalog, single = false, activeKey = "fields") { k, v -> onChange(DashboardTypes.configWith(config, k, v)) }
+    // 单位是点表里的用户数据，不是文案 —— 关掉只是不缀它
+    SwitchRow(
+        label = "显示单位",
+        checked = DashboardTypes.configBool(config, "showUnit", default = true),
+        onCheckedChange = { onChange(DashboardTypes.configWith(config, "showUnit", it)) }
+    )
+    // 设备卡**不给**这个开关：web 那边的设备单位是本地产品规格里查的（`property.unit`），
+    // 后端 payload 只有 pid/type/value/error、根本没有 unit 这个键，而只读卡片壳也拿不到
+    // 规格仓库 —— 摆一个改了没反应的开关比不摆更糟。
 }
 
 /**
@@ -445,6 +479,63 @@ private fun SectionLabel(text: String) {
         style = MaterialTheme.typography.labelMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         modifier = Modifier.padding(top = 4.dp)
+    )
+}
+
+// ===== 可选字段（开关 / 数字） =====
+
+/** 一行开关：左边文案、右边 `Switch`。缺省值见各调用处的 [DashboardTypes.configBool]。 */
+@Composable
+private fun SwitchRow(label: String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f)
+        )
+        Switch(checked = checked, onCheckedChange = onCheckedChange)
+    }
+}
+
+/**
+ * 可选数字项（最大点数 / 显示片数）：**留空 = 不限制（删键）**，填了必须落在 [range] 里。
+ *
+ * 输入只收数字。**范围外的值不写进 config**（原地标红提示，config 里当没设）——
+ * 这一条比 web 严：web 的 `nz-input-number` 只设下限、超上限照写，于是能存出一份后端必拒的
+ * config（`config.maxPoints must be between 1 and 2000`），要等保存整份布局时才报错。
+ * 移动端保存是一次 PUT 整屏，宁可当场标红。
+ */
+@Composable
+private fun NumberField(
+    label: String,
+    value: Int?,
+    range: IntRange,
+    placeholder: String,
+    onValueChange: (Int?) -> Unit
+) {
+    var text by remember(label) { mutableStateOf(value?.toString() ?: "") }
+    val parsed = text.toIntOrNull()
+    val invalid = text.isNotEmpty() && (parsed == null || parsed !in range)
+    OutlinedTextField(
+        value = text,
+        onValueChange = { raw ->
+            val digits = raw.filter { it.isDigit() }.take(4)
+            text = digits
+            val n = digits.toIntOrNull()
+            onValueChange(if (n != null && n in range) n else null)
+        },
+        label = { Text(label) },
+        placeholder = { Text(placeholder) },
+        isError = invalid,
+        supportingText = if (invalid) {
+            { Text("${range.first} ~ ${range.last}，留空不限制") }
+        } else {
+            null
+        },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        modifier = Modifier.fillMaxWidth()
     )
 }
 

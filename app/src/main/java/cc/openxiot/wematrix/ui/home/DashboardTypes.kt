@@ -107,6 +107,19 @@ object DashboardTypes {
     fun configWith(config: Map<String, Any?>, key: String, value: Any?): Map<String, Any?> =
         if (value == null) config - key else HashMap(config).apply { this[key] = value }
 
+    /**
+     * config 里的布尔开关：**缺键、或者值不是 Boolean 时取 [default]**。
+     *
+     * 与 web `readBoolean(config, key, default)` 逐条同口径（那边把 `'false'` 这种字符串、
+     * `0`、`[]`、`null` 都钉了「走缺省」，见 `dashboard.config.spec.ts`）。三个开关
+     * （`showUnit` / `showFailureShadow`）的缺省都是「显示 / 画」。
+     */
+    fun configBool(config: Map<String, Any?>, key: String, default: Boolean): Boolean =
+        config[key] as? Boolean ?: default
+
+    /** config 里的整数项（`limit` / `maxPoints`）：不是数字就是「没设」（null）。 */
+    fun configInt(config: Map<String, Any?>, key: String): Int? = (config[key] as? Number)?.toInt()
+
     // ---- 时间窗口 ----
 
     /** 相对窗口的常见档（小时），配了就可直接存 `{kind:"last", hours:n}`。 */

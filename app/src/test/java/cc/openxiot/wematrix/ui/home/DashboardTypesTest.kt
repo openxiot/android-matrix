@@ -63,4 +63,38 @@ class DashboardTypesTest {
 
         assertTrue(next.isEmpty())
     }
+
+    // ---- configBool：缺键 / 非布尔都走缺省（web `readBoolean` 同口径） ----
+
+    @Test
+    fun configBool_写了就用写的() {
+        assertTrue(DashboardTypes.configBool(mapOf("showUnit" to true), "showUnit", false))
+        assertFalse(DashboardTypes.configBool(mapOf("showUnit" to false), "showUnit", true))
+    }
+
+    @Test
+    fun configBool_缺键取缺省() {
+        assertTrue(DashboardTypes.configBool(emptyMap(), "showUnit", true))
+        assertFalse(DashboardTypes.configBool(emptyMap(), "showUnit", false))
+    }
+
+    @Test
+    fun configBool_非布尔值一律走缺省() {
+        // 这三个正是 web spec 里钉的：'false' 字符串 / 0 / null 都不是 Boolean
+        assertTrue(DashboardTypes.configBool(mapOf("showUnit" to "false"), "showUnit", true))
+        assertTrue(DashboardTypes.configBool(mapOf("showUnit" to 0), "showUnit", true))
+        assertTrue(DashboardTypes.configBool(mapOf("showUnit" to null), "showUnit", true))
+    }
+
+    // ---- configInt ----
+
+    @Test
+    fun configInt_数字能读_别的都是没设() {
+        assertEquals(500, DashboardTypes.configInt(mapOf("maxPoints" to 500), "maxPoints"))
+        assertEquals(24, DashboardTypes.configInt(mapOf("maxPoints" to 24L), "maxPoints"))
+        assertEquals(5, DashboardTypes.configInt(mapOf("maxPoints" to 5.0), "maxPoints"))
+        assertNull(DashboardTypes.configInt(mapOf("maxPoints" to "500"), "maxPoints"))
+        assertNull(DashboardTypes.configInt(mapOf("maxPoints" to null), "maxPoints"))
+        assertNull(DashboardTypes.configInt(emptyMap(), "maxPoints"))
+    }
 }

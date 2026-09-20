@@ -65,9 +65,21 @@ fun DashboardWidgetHost(
             } else {
                 when (widget.type) {
                     DashboardTypes.STAT -> StatView(data, metric = widget.config["metric"] as? String)
-                    DashboardTypes.DISTRIBUTION -> DistributionView(data)
-                    DashboardTypes.LINE -> LineView(data)
-                    DashboardTypes.SERVICE -> ServiceView(data)
+                    // 下面这三个开关（显示片数 / 失败竖线 / 显示单位）是**显示决策**，
+                    // 后端取数层不读它们（`DashboardWidgetDataService` 一处都不看，
+                    // 全量下发分组、照样给 failures 与 unit）—— 所以在这里生效，改开关不必重取数。
+                    DashboardTypes.DISTRIBUTION -> DistributionView(
+                        data = data,
+                        limit = DashboardTypes.configInt(widget.config, "limit")
+                    )
+                    DashboardTypes.LINE -> LineView(
+                        data = data,
+                        showFailureShadow = DashboardTypes.configBool(widget.config, "showFailureShadow", true)
+                    )
+                    DashboardTypes.SERVICE -> ServiceView(
+                        data = data,
+                        showUnit = DashboardTypes.configBool(widget.config, "showUnit", true)
+                    )
                     DashboardTypes.DEVICE -> DeviceView(data)
                     else -> EmptyBody("未知卡片类型")
                 }
@@ -150,14 +162,18 @@ private fun StatUnit(metric: String?): String? = when (metric) {
 
 // ===== 数据分布 =====
 
+/**
+ * 环形图。`limit`（「显示片数」）是**显示层**的截断：后端全量下发、不打上限也不读这个键，
+ * 所以「前 N + 其他」在这里折（[truncateSlices]，与 web `truncatePoints` 同边界）。
+ */
 @Composable
-private fun DistributionView(data: Map<String, Any?>?) {
-    val slices = data?.let { MobileRenderFormat.slicesOf(it, "groups") } ?: emptyList()
-    if (slices.isEmpty()) {
+private fun DistributionView(data: Map<String, Any?>?, limit: Int?) {
+    val all = data?.let { MobileRenderFormat.slicesOf(it, "groups") } ?: emptyList()
+    if (all.isEmpty()) {
         EmptyBody("暂无数据")
         return
     }
-    DonutChart(slices.map { it.name to it.count })
+    DonutChart(truncateSlices(all, limit, "其他").map { it.name to it.count })
 }
 
 // ===== 曲线 =====
@@ -169,13 +185,13 @@ private fun DistributionView(data: Map<String, Any?>?) {
  *   （[HistoryFieldChart]）。它以 `serviceId` / `maxPoints` 键存在与否区别于 alarmCount。
  */
 @Composable
-private fun LineView(data: Map<String, Any?>?) {
+private fun LineView(data: Map<String, Any?>?, showFailureShadow: Boolean) {
     if (data == null) {
         EmptyBody("尚未取到数")
         return
     }
     if (data.containsKey("serviceId")) {
-        serviceFieldLine(data)
+        serviceFieldLine(data, showFailureShadow)
         return
     }
     val buckets = MobileRenderFormat.bucketsOf(data, "points")
@@ -195,13 +211,19 @@ private fun hourLabel(at: Long): String =
         .format(Instant.ofEpochMilli(at).atZone(ZoneId.systemDefault()))
 
 @Composable
-private fun serviceFieldLine(data: Map<String, Any?>) {
+private fun serviceFieldLine(data: Map<String, Any?>, showFailureShadow: Boolean) {
     val range = MobileRenderFormat.gsonRange(data)
     if (range.points.isEmpty() && range.carryIn == null) {
         EmptyBody("暂无数据")
         return
     }
-    val failures = (data["failures"] as? List<*>)?.mapNotNull { (it as? Number)?.toLong() } ?: emptyList()
+    // 关掉竖线时：取数层照样把 failures 发下来（后端不看这个开关 —— 「画不画」是展示决策），
+    // 画不画由这里定：给个空清单就是「一条都不画」。
+    val failures = if (showFailureShadow) {
+        (data["failures"] as? List<*>)?.mapNotNull { (it as? Number)?.toLong() } ?: emptyList()
+    } else {
+        emptyList()
+    }
     val unit = data["unit"]?.toString() ?: ""
     val step = data["step"] == true
     val series = buildHistorySeries(range, failures)
@@ -219,8 +241,12 @@ private fun serviceFieldLine(data: Map<String, Any?>) {
 
 // ===== 服务卡 =====
 
+/**
+ * 服务卡。`showUnit`（「显示单位」）关掉时**只不缀单位**，值照旧 —— 单位是点表里的用户数据，
+ * 不是文案（与 web `service.state.ts` 的 `unit: showUnit ? row.unit : ''` 同口径）。
+ */
 @Composable
-private fun ServiceView(data: Map<String, Any?>?) {
+private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean) {
     if (data == null) {
         EmptyBody("尚未取到数")
         return
@@ -245,7 +271,7 @@ private fun ServiceView(data: Map<String, Any?>?) {
                     modifier = Modifier.weight(1f)
                 )
                 Text(
-                    text = rowValue(row),
+                    text = rowValue(row, showUnit),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium,
                     color = MaterialTheme.colorScheme.onSurface
@@ -269,11 +295,11 @@ private fun ServiceView(data: Map<String, Any?>?) {
     }
 }
 
-private fun rowValue(row: MobileRenderFormat.ServiceRow): String {
+private fun rowValue(row: MobileRenderFormat.ServiceRow, showUnit: Boolean): String {
     if (!row.hasValue) return "-"
     if (row.bit) return if (row.value == true) "开" else "关"
     val text = row.value?.toString() ?: return "-"
-    return if (row.unit.isNotBlank()) "$text ${row.unit}" else text
+    return if (showUnit && row.unit.isNotBlank()) "$text ${row.unit}" else text
 }
 
 private fun friendlyTime(ms: Long): String =

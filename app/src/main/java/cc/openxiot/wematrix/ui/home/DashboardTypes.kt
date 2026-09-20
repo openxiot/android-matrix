@@ -23,6 +23,12 @@ object DashboardTypes {
     const val SIZE_FULL = "FULL"
     const val SIZE_HALF = "HALF"
 
+    // ---- 半宽卡占哪半格（只有 HALF 卡有） ----
+    /** 占左半格：另起一行（右边没别的卡就是空的）。 */
+    const val SIDE_LEFT = "LEFT"
+    /** 占右半格：当前行右半格空着就填进去，否则另起一行、左半格空着。 */
+    const val SIDE_RIGHT = "RIGHT"
+
     // ---- stat.metric ----
     val STAT_METRICS = listOf(
         "devices.total", "devices.online", "services.total",

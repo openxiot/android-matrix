@@ -7,8 +7,9 @@ import com.google.gson.annotations.SerializedName
  * `/matrix/v1/dashboard/mobile` 与复用的 `/matrix/v1/dashboard/web/catalog`。
  *
  * 布局 = 一张卡的**有序数组**（数组顺序 = 阅读顺序，竖屏自上而下），卡片尺寸只有
- * `FULL` / `HALF` 两档（HALF 仅 stat 卡可用，可与另一张 HALF 并排）—— 没有 web 那种
- * 24 列网格的 x/y。**config 语义与 web 逐字同构**（服务端共享渲染核心 + 同一校验器），
+ * `FULL` / `HALF` 两档（HALF 仅 stat 卡可用）—— 没有 web 那种 24 列网格的 x/y，
+ * 但半宽卡记自己**占哪半格**（`side`），见 [MobileDashboardWidget.side]。
+ * **config 语义与 web 逐字同构**（服务端共享渲染核心 + 同一校验器），
  * 所以各类型卡片的 config 键在这里不另造一套。
  *
  * 展示用的 `creator` / `updater` 本端不读（无界面展示处），模型里就不声明 —— Gson 忽略未知键。
@@ -35,6 +36,17 @@ data class MobileDashboardWidget(
     @SerializedName("titleKey") val titleKey: String? = null,
     /** FULL | HALF；HALF 仅 stat 卡合法 */
     @SerializedName("size") val size: String? = null,
+    /**
+     * `LEFT` | `RIGHT`：这张半宽卡占**这一行的哪半格**。**只有 HALF 卡有**（整宽卡带了也被忽略）。
+     *
+     * 它取代了「连续两张 HALF 就算并排」那条隐式配对：抽走一对里的左半张，右半张**原地不动**
+     * （左半格空着），不会再横着滑过去 —— 横向不补位，只有纵向让位。
+     *
+     * 服务端读布局时已把缺省值推好下发（见 `MobileDashboardWidgetSides`），所以正常不会见到
+     * `null`；真缺省时按数组顺序推：当前行右半格空着 → `RIGHT`，否则 `LEFT`（全缺省 = 两张并排
+     * 的老样子）。排布规则见 ui/home/DashboardLayout.kt。
+     */
+    @SerializedName("side") val side: String? = null,
     /** 按 type 的异构配置（见 [DashboardTypes] 与后端校验器） */
     @SerializedName("config") val config: Map<String, Any?> = emptyMap()
 )

@@ -310,7 +310,7 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
     WindowEditor(config["window"]) { w -> onChange(HashMap(config).apply { this["window"] = w }) }
 
     if (source == "serviceField") {
-        ServiceCascade(config, catalog, single = true, activeKey = "field") { k, v -> onChange(DashboardTypes.configWith(config, k, v)) }
+        ServiceCascade(config, catalog, single = true, activeKey = "field", onChange = onChange)
         // 竖线说的是「这个方法的采集什么时候失败过」，与读数本身是两件事（web 同款文案）
         SwitchRow(
             label = "显示采集失败竖线",
@@ -333,7 +333,7 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
 private fun ServiceConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onChange: (Map<String, Any?>) -> Unit) {
     SectionLabel("服务 · 方法 · 字段")
     // fields 是**多选**：换服务/方法会清掉旧字段（SIID/字段变了就不该残留旧值）
-    ServiceCascade(config, catalog, single = false, activeKey = "fields") { k, v -> onChange(DashboardTypes.configWith(config, k, v)) }
+    ServiceCascade(config, catalog, single = false, activeKey = "fields", onChange = onChange)
     // 单位是点表里的用户数据，不是文案 —— 关掉只是不缀它
     SwitchRow(
         label = "显示单位",
@@ -350,8 +350,14 @@ private fun ServiceConfig(config: Map<String, Any?>, catalog: MobileCatalog?, on
  *
  * 服务与方法都选对后字段区才出现；换服务 / 换方法都把选中的字段**删掉**（旧服务/方法的字段
  * 在新上下文里没有意义）—— 是删键而不是写个空值，与 web 的 `undefined` 同口径
- * （见 [DashboardTypes.configWith]）。级联选出来的键经 [set] 写回 config：
+ * （见 [DashboardTypes.configWith]）。级联选出来的键经 [edit] 写回 config：
  * `serviceId`（十六进制）、`functionIndex`（1 起）、[activeKey]（"field" 单条 / "fields" 列表）。
+ *
+ * **[edit] 而不是连着调三次 `onChange`，是这个控件的要害**：这里每次交互要同时改几个键
+ * （换服务 = 服务 + 方法 + 清字段），而 `config` 是**组合时那份值**（普通参数，不是 State）——
+ * 连写三次的话，三次都拿着同一份旧 map 去算，谁最后谁赢，净效果等于**一个字都没改**
+ * （选服务 → 服务框弹回「请选择服务」，看着就是「选不中」）。所以：**一次交互只 onChange 一次**，
+ * 几个键在 [edit] 里折进同一份 map。
  */
 @Composable
 private fun ServiceCascade(
@@ -359,8 +365,12 @@ private fun ServiceCascade(
     catalog: MobileCatalog?,
     single: Boolean,
     activeKey: String,
-    set: (String, Any?) -> Unit
+    onChange: (Map<String, Any?>) -> Unit
 ) {
+    fun edit(vararg pairs: Pair<String, Any?>) {
+        onChange(DashboardTypes.configWith(config, *pairs))
+    }
+
     val services = readServices(catalog)
     FilterDropdown(
         label = "服务",
@@ -373,9 +383,7 @@ private fun ServiceCascade(
                 // 候选项里的任何一项，字段区也就永远不出现。真一个可读方法都没有时删键
                 // （下拉显示「请选择方法」，「确认」按 [DashboardTypes.canCommit] 灰着）。
                 val first = readFunctions(services.firstOrNull { it.id == id }).firstOrNull()?.index
-                set("serviceId", id)
-                set("functionIndex", first)
-                set(activeKey, null) // 下游字段删键（换了服务，旧字段名不再成立）
+                edit("serviceId" to id, "functionIndex" to first, activeKey to null)
             }
         },
         placeholder = "请选择服务"
@@ -390,8 +398,7 @@ private fun ServiceCascade(
         options = functions.map { FilterOption(it.index ?: -1, it.name ?: "方法 ${it.index}") },
         onSelect = { idx ->
             if (idx != null) {
-                set("functionIndex", idx)
-                set(activeKey, null) // 同上：换方法，旧字段名不再成立
+                edit("functionIndex" to idx, activeKey to null) // 换方法，旧字段名不再成立
             }
         },
         placeholder = if (service == null) "先选服务" else "请选择方法"
@@ -403,8 +410,11 @@ private fun ServiceCascade(
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             fields.forEach { f ->
                 val name = f.field ?: return@forEach
-                val selected = config["field"] == name
-                FilterChip(selected = selected, onClick = { set("field", name) }, label = { Text(name) })
+                FilterChip(
+                    selected = config[activeKey] == name,
+                    onClick = { edit(activeKey to name) },
+                    label = { Text(name) }
+                )
             }
         }
     } else {
@@ -415,7 +425,7 @@ private fun ServiceCascade(
                 val name = f.field ?: return@forEach
                 FilterChip(
                     selected = name in selected,
-                    onClick = { set(activeKey, selected.toMutableSet().apply { if (!add(name)) remove(name) }.toList()) },
+                    onClick = { edit(activeKey to selected.toMutableSet().apply { if (!add(name)) remove(name) }.toList()) },
                     label = { Text(name) }
                 )
             }

@@ -108,6 +108,18 @@ object DashboardTypes {
         if (value == null) config - key else HashMap(config).apply { this[key] = value }
 
     /**
+     * **一次**交互写多个键：`configWith(config, "serviceId" to id, "functionIndex" to 1, "fields" to null)`。
+     *
+     * 存在的理由是一个很难自己发现的坑：传给编辑器的 `config` 是**组合时那份 map**（普通参数，
+     * 不是 State），所以连写两次 —— `onChange(configWith(config, "a", 1))` 之后再来一次
+     * `onChange(configWith(config, "b", 2))` —— 两次都拿着同一份旧 map 算，后者把前者**整个覆盖**，
+     * 净效果等于一个字都没改。换服务要同时改三个键，撞上的就是这个：服务框弹回「请选择服务」，
+     * 看着像「选不中」。要走出口只有在**一次** onChange 里写完，这个函数就是那个「一次」。
+     */
+    fun configWith(config: Map<String, Any?>, vararg pairs: Pair<String, Any?>): Map<String, Any?> =
+        pairs.fold(config) { acc, (key, value) -> configWith(acc, key, value) }
+
+    /**
      * config 里的布尔开关：**缺键、或者值不是 Boolean 时取 [default]**。
      *
      * 与 web `readBoolean(config, key, default)` 逐条同口径（那边把 `'false'` 这种字符串、

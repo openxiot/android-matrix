@@ -64,6 +64,41 @@ class DashboardTypesTest {
         assertTrue(next.isEmpty())
     }
 
+    // ---- configWith(一次写多个键)：换服务要同时改服务/方法/字段，就得走这个 ----
+
+    @Test
+    fun configWith_一次写多个键_每个键都落在同一份结果里() {
+        val config = mapOf<String, Any?>("serviceId" to "0x01", "fields" to listOf("a"))
+
+        val next = DashboardTypes.configWith(
+            config,
+            "serviceId" to "0x02",
+            "functionIndex" to 3,
+            "fields" to null
+        )
+
+        assertEquals("0x02", next["serviceId"])
+        assertEquals(3, next["functionIndex"])
+        assertFalse("null 值照旧是删键", next.containsKey("fields"))
+    }
+
+    @Test
+    fun configWith_一次写多个键_不碰原map_也不像连着写两次那样互相覆盖() {
+        val config = mapOf<String, Any?>("source" to "serviceField")
+
+        val next = DashboardTypes.configWith(config, "serviceId" to "0x01", "functionIndex" to 3)
+
+        assertEquals(3, next.size) // 旧键 + 两个新键，两个新键都在
+        assertEquals(1, config.size)
+    }
+
+    @Test
+    fun configWith_一个键都不写就是原样() {
+        val config = mapOf<String, Any?>("did" to "d1")
+
+        assertEquals(config, DashboardTypes.configWith(config, *emptyArray<Pair<String, Any?>>()))
+    }
+
     // ---- configBool：缺键 / 非布尔都走缺省（web `readBoolean` 同口径） ----
 
     @Test

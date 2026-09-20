@@ -35,6 +35,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -62,6 +63,7 @@ import cc.openxiot.wematrix.data.repository.ProductSpecRepository
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 /**
@@ -195,33 +197,22 @@ private fun EditingContent(
     val density = LocalDensity.current
     val editingWidget = draft.firstOrNull { it.id == state.editingId }
 
-    // 草稿派生的**显示行**：连续两个 HALF 并排成一行、FULL 独占一行。拖拽期间行序不变（只挪卡片）。
-    val rows = remember(draft) { buildRows(draft) }
-
     // ---- 单卡拖拽状态（长按最外层 Box 开始；行在实时让位重排时手势不中断，故不挂在行上） ----
     val listState = rememberLazyListState()
-    var dragId by remember { mutableStateOf<String?>(null) }   // 正在拖的那张一的卡 id
-    var dragOriginRow by remember { mutableStateOf(0) }        // 起始所在行
-    var dragPlaceIdx by remember { mutableStateOf(0) }         // 草稿里的**插入位**（让位实时挪到这）
-    var dragOffsetPx by remember { mutableStateOf(0f) }        // 手指纵向位移
+    var dragId by remember { mutableStateOf<String?>(null) }   // 正在拖的那张卡 id
+    var dragPlaceIdx by remember { mutableStateOf(0) }         // 被拖卡在「去掉自己」序列里的插入位
+    var dragOffsetPx by remember { mutableStateOf(0f) }        // 手指纵向位移（浮动卡跟随用）
     var dragOffsetX by remember { mutableStateOf(0f) }         // 手指横向位移（半宽成对左右互移用）
     var dragSwap by remember { mutableStateOf(false) }         // 半宽成对：越过行中隔线 → 换到同伴位置
     var dragAnchorPx by remember { mutableStateOf(0f) }        // 起始卡在**视口**里的 y（浮动卡叠加的坐标基准）
-    // 每张卡的实测尺寸（px）：行高/落点映射/标注高度都用它
+    // 每张卡的实测尺寸（px）：插槽高度用
     var cardSizes by remember { mutableStateOf<Map<String, IntSize>>(emptyMap()) }
-    // 被拖卡实测高（px）：取拖前测下来的原高，卡在该宽度下内容高稳定；读存量最稳，保证插槽与卡等大。
     val dragCardH = dragId?.let { cardSizes[it]?.height } ?: 0
     // 插槽高度（dp）：cardSizes 存的是 px，要除以 density 才得当 dp（直接 .dp 会呈 3x）。
     val dragMarkerH = with(density) { if (dragCardH > 0) (dragCardH / density.density).dp else 150.dp }
 
-    val rowHeightPx = { row: List<MobileDashboardWidget> ->
-        row.mapNotNull { cardSizes[it.id]?.height }.maxOrNull() ?: 160
-    }
-    val rowTopPx = { r: Int ->
-        rows.take(r).sumOf { rowHeightPx(it) }
-    }
-    // 让位展示序：起始草稿里把被拖卡挪到 dragPlaceIdx —— **只改显示**，草稿/预览不动。
-    // 落点一行就是那张被拖卡的插槽（tertiary 标记），其余卡随之 animateItem 让位。
+    // 让位展示序：把被拖卡挪到 dragPlaceIdx —— **只改显示**，草稿/预览不动。
+    // 落点那行就是被拖卡的插槽（tertiary 标记），其余卡随之 animateItem 让位。
     val displaySeq =
         if (dragId == null) draft
         else {
@@ -234,44 +225,96 @@ private fun EditingContent(
     // 行签名 → 行内容：命中 y 后反查是哪个行/哪张卡
     val rowByKey = displayRows.associate { rowSignature(it) to it }
 
-    // 长按某张卡开始拖。
     fun startDrag(cardId: String, row: List<MobileDashboardWidget>) {
-        val originRow = rows.indexOfFirst { it.any { c -> c.id == cardId } }
-        if (originRow < 0) return
+        val idx = draft.indexOfFirst { it.id == cardId }
+        if (idx < 0) return
         dragId = cardId
-        dragOriginRow = originRow
-        dragPlaceIdx = draft.indexOfFirst { it.id == cardId }.coerceAtLeast(0)
+        dragPlaceIdx = idx
         dragOffsetPx = 0f
         dragOffsetX = 0f
         dragSwap = false
+        // 浮动卡的坐标基准 = 起始行当前在视口里的 y
         dragAnchorPx = listState.layoutInfo.visibleItemsInfo
             .firstOrNull { it.key == rowSignature(row) }?.offset?.toFloat() ?: 0f
     }
 
-    fun moveBy(dy: Float) {
-        if (dragId == null || rows.isEmpty()) return
-        dragOffsetPx += dy
-        // 卡中心当前落到的行：基线 = 起始行顶（指位是相对位移，不能跟行的绝对坐标比）。
-        // 卡高从 state 现读（拖拽手势闭包是早期捕获，不能信那里的旧值）
-        val h = dragId?.let { cardSizes[it]?.height } ?: 160
-        val base = rowTopPx(dragOriginRow)
-        val cardCenter = base + dragOffsetPx + h / 2f
-        var t = 0
-        for (r in rows.indices) {
-            val bottom = rowTopPx(r) + rowHeightPx(rows[r])
-            if (cardCenter < bottom) { t = r; break }
-            t = r + 1
+    /**
+     * 长按起点：按 y 命中**展示行**、按 x 选半宽行的左/右卡。
+     *
+     * `LazyListItemInfo.size` 是主轴（纵向）尺寸的 Int，取不到宽度，故横向从中点分左右直接用
+     * 容器宽 —— 行两边是 16dp 对称内边距，行自身的中点就是容器中点。
+     */
+    fun startDragAt(start: Offset, boxWidth: Float) {
+        val info = listState.layoutInfo.visibleItemsInfo.firstOrNull {
+            it.index < displayRows.size && start.y >= it.offset && start.y <= it.offset + it.size
+        } ?: return
+        val key = info.key as? String ?: return
+        val row = rowByKey[key] ?: return
+        val picked = when {
+            row.size > 1 && start.x > boxWidth / 2f -> row[1]
+            row.size > 1 -> row[0]
+            else -> row[0]
         }
-        // 目标行 → 插入位（与提交重排同一套换算），让位实时把展示序挪到这
-        val s = draft.filterNot { it.id == dragId }
-        var idx = rows.take(t.coerceIn(0, rows.lastIndex)).sumOf { it.size }
-        if (dragOriginRow < t) idx -= 1
-        dragPlaceIdx = idx.coerceIn(0, s.size)
+        picked.id?.let { startDrag(it, row) }
+    }
+
+    /**
+     * 把 [card] 插进「去掉自己」的序列 `s` 的第 `p` 位后，它在展示行里的行号。
+     * 纯序列推算 —— 和渲染用的是同一套 [buildRows]，不涉及任何坐标几何。
+     */
+    fun cardRowIndex(s: List<MobileDashboardWidget>, card: MobileDashboardWidget, p: Int): Int {
+        val seq = s.toMutableList().apply { add(p.coerceIn(0, size), card) }
+        return buildRows(seq).indexOfFirst { row -> row.any { it.id == card.id } }
+    }
+
+    fun dragBy(amount: Offset, fingerY: Float, boxWidth: Float) {
+        val id = dragId ?: return
+        if (displayRows.isEmpty()) return
+        dragOffsetPx += amount.y
+        if (amount.x != 0f) {
+            dragOffsetX += amount.x
+            // 半宽成对：依草稿相邻判定左右卡，卡中心越过行中隔线 → 与同伴互换
+            val oi = draft.indexOfFirst { it.id == id }
+            if (oi >= 0) {
+                val isPair = (oi > 0 && draft[oi - 1].size == DashboardTypes.SIZE_HALF) ||
+                    (oi + 1 < draft.size && draft[oi + 1].size == DashboardTypes.SIZE_HALF)
+                if (isPair) {
+                    val left = oi + 1 < draft.size && draft[oi + 1].size == DashboardTypes.SIZE_HALF
+                    dragSwap = if (left)
+                        (boxWidth * 0.25f + dragOffsetX) > boxWidth / 2f
+                    else
+                        (boxWidth * 0.75f + dragOffsetX) < boxWidth / 2f
+                }
+            }
+        }
+        // 手指压在展示序的哪一行
+        val d = listState.layoutInfo.visibleItemsInfo.firstOrNull {
+            it.index < displayRows.size && fingerY >= it.offset && fingerY <= it.offset + it.size
+        }?.index ?: return // 落在行间距 / 列表外：保持现落点
+        // 落点 = 手指所在的那一行：在 0..|s| 里选一个插入位 p，使这张卡的行号最接近 d。
+        // 行号只由序列决定（见 [cardRowIndex]），所以「落点行」永远和实际渲染出来的行一致 ——
+        // 老写法按卡高累加推算绝对行位、漏算 12dp 行间距，落点会一直偏一点。
+        // 行号对这张卡不可达时（如落单半宽卡只能并排或独占一行）退到行号最接近的候选，
+        // 再用「离当前插入位最近」打破平手，插槽始终连续跟手、不卡住也不抖。
+        val s = draft.filterNot { it.id == id }
+        val card = draft.first { it.id == id }
+        var best = dragPlaceIdx
+        var bestRowDist = Int.MAX_VALUE
+        var bestMoveDist = Int.MAX_VALUE
+        for (p in 0..s.size) {
+            val rowDist = abs(cardRowIndex(s, card, p) - d)
+            val moveDist = abs(p - dragPlaceIdx)
+            if (rowDist < bestRowDist || (rowDist == bestRowDist && moveDist < bestMoveDist)) {
+                bestRowDist = rowDist
+                bestMoveDist = moveDist
+                best = p
+            }
+        }
+        dragPlaceIdx = best
     }
 
     fun resetDrag() {
         dragId = null
-        dragOriginRow = 0
         dragPlaceIdx = 0
         dragOffsetPx = 0f
         dragOffsetX = 0f
@@ -312,6 +355,15 @@ private fun EditingContent(
         resetDrag()
     }
 
+    // 手势挂在 pointerInput 上，而它的 key（listState / draft.size）在拖拽与重排期间都不变 →
+    // 闭包不会刷新，直接调上面的函数会一直用**启动那一刻**的 draft/displayRows/rowByKey 快照
+    // （重排一次后行签名全变、旧表里查不到 → 半宽卡就再也拿不起来）。经 rememberUpdatedState
+    // 每次重组刷新引用，手势永远调到最新一次重组的函数。
+    val currentStartDrag by rememberUpdatedState<(Offset, Float) -> Unit> { s, w -> startDragAt(s, w) }
+    val currentDragBy by rememberUpdatedState<(Offset, Float, Float) -> Unit> { a, y, w -> dragBy(a, y, w) }
+    val currentCommitDrag by rememberUpdatedState<() -> Unit> { commitDrag() }
+    val currentCancelDrag by rememberUpdatedState<() -> Unit> { cancelDrag() }
+
     Column(Modifier.fillMaxSize().padding(contentPadding)) {
         state.message?.let { msg ->
             Text(
@@ -326,43 +378,15 @@ private fun EditingContent(
             modifier = Modifier
                 .fillMaxSize()
                 // 拖拽统一挂**最外层**：行在实时让位重排时 pointerInput 的 key 不变，手势不中断
-                .pointerInput(listState, draft.size) {
+                .pointerInput(listState) {
                     detectDragGesturesAfterLongPress(
-                        onDragStart = { start: Offset ->
-                            val info = listState.layoutInfo.visibleItemsInfo.firstOrNull {
-                                start.y >= it.offset && start.y <= it.offset + it.size
-                            }
-                            val row = info?.key?.let(rowByKey::get)
-                            if (row != null) {
-                                val picked = when {
-                                    row.size > 1 && start.x > size.width / 2f -> row[1]
-                                    row.size > 1 -> row[0]
-                                    else -> row[0]
-                                }
-                                picked.id?.let { startDrag(it, row) }
-                            }
-                        },
-                        onDragEnd = { commitDrag() },
-                        onDragCancel = { cancelDrag() },
+                        onDragStart = { start: Offset -> currentStartDrag(start, size.width.toFloat()) },
+                        onDragEnd = { currentCommitDrag() },
+                        onDragCancel = { currentCancelDrag() },
                         onDrag = { change, amount ->
                             change.consume()
-                            moveBy(amount.y)
-                            if (amount.x != 0f) {
-                                dragOffsetX += amount.x
-                                // 半宽成对：依草稿相邻判定左右卡，卡中心越过行中隔线 → 与同伴互换
-                                val oi = draft.indexOfFirst { it.id == dragId }
-                                if (oi >= 0) {
-                                    val isPair = (oi > 0 && draft[oi - 1].size == DashboardTypes.SIZE_HALF) ||
-                                        (oi + 1 < draft.size && draft[oi + 1].size == DashboardTypes.SIZE_HALF)
-                                    if (isPair) {
-                                        val left = oi + 1 < draft.size && draft[oi + 1].size == DashboardTypes.SIZE_HALF
-                                        dragSwap = if (left)
-                                            (size.width * 0.25f + dragOffsetX) > size.width / 2f
-                                        else
-                                            (size.width * 0.75f + dragOffsetX) < size.width / 2f
-                                    }
-                                }
-                            }
+                            // change.position 是本节点（= 视口）坐标，用来判定手指落在哪一行
+                            currentDragBy(amount, change.position.y, size.width.toFloat())
                         }
                     )
                 }
@@ -443,7 +467,8 @@ private fun EditingContent(
 /**
  * 一个显示行：FULL 独占一行整宽；连续两个 HALF 并排（weight 各半）占一行。
  * 落单的 HALF **保持半宽**（不「占位补成整宽」），只靠左。
- * 行里的那张「被拖卡」：原位置画 primary 虚线框 + 背景，卡本体在此列但随手指上下浮动；其余卡原样。
+ *
+ * 传入的 `row` 已是**展示序**的行：被拖卡不在原位置，而在它的落点行（见 [SlotHost]）。
  */
 @Composable
 private fun RowContent(

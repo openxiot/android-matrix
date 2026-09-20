@@ -439,7 +439,11 @@ private fun EditingContent(
                                 translationY = dragAnchorPx + dragOffsetPx
                                 translationX = dragOffsetX
                                 alpha = 0.95f
-                                shadowElevation = 8.dp.toPx()
+                                // 不要在这里打 shadowElevation：这一层是**整行宽**的（半宽右卡
+                                // 左边还留着一个占位 Spacer），而 graphicsLayer 的投影是按图层的
+                                // 矩形外框投的、不认内容 —— 会凭空在卡左边投出半宽一块阴影。
+                                // 卡本体（DashboardWidgetHost 的 Card）本来就是 0 高度，跟随手感
+                                // 靠 0.95 的透明度和虚线槽位表达，不需要投影。
                             }
                     ) {
                         DashboardWidgetHost(

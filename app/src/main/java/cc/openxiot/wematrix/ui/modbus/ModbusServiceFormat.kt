@@ -70,10 +70,11 @@ fun isPollingOff(function: ModbusServiceFunction): Boolean =
  * 一条告警规则的一句话：`温度过高(>80)`。
  *
  * 用**符号**而不是「超过」那类词：这是与 `uint16/2B` 摆在一起的技术摘要，符号与定义里存的值
- * 逐字对齐。`threshold` 走 [numberText]：Gson 把 JSON 数字都解成 Double，80 会显示成 80.0。
+ * 逐字对齐。`threshold` 走 [configNumberText]（**不是** [numberText]）：阈值是用户配的数，
+ * 收成 2 位就把 20.125 说成 20.13，而 web 原样显示 —— 那是配置值，得说得出「我配的是多少」。
  */
 fun alarmRuleBrief(alarm: ModbusServiceFieldAlarm): String {
-    val target = alarm.threshold?.let { numberText(it) } ?: alarm.state.orEmpty()
+    val target = alarm.threshold?.let { configNumberText(it) } ?: alarm.state.orEmpty()
     return "${alarm.text.orEmpty()}(${alarm.compare.orEmpty()}$target)"
 }
 
@@ -177,23 +178,19 @@ fun unitOf(function: ModbusServiceFunction?, fieldName: String): String? =
  *
  * **必须处理 Gson 的数值归一**：调用返回的是 `Map<String, Any?>`，声明类型是 Object，
  * Gson 会把**所有** JSON 数字反序列化成 Double，于是 scale=1 的读数会显示成 `1.0`，
- * 而 web 显示 `1`。所以整数值的 Double 走 Long 再 toString。
+ * 而 web 显示 `1`。数值一律交给 [numberText]（整数不带小数点、浮点最多 2 位）—— 与 web 的
+ * `formatValue` → `valueText` 逐字对齐：float32 寄存器解出来是 `23.4567890167…`，
+ * 两端都只说 `23.46`。
  *
  * 注意 scale 与 value-list **后端已经应用过**（ModbusResponseParser），这里只是格式化，
  * 不要再缩放一次。
  */
 fun formatInvokeValue(value: Any?): String = when (value) {
     null -> "-"
-    is Double -> if (value == Math.floor(value) && !value.isInfinite()) {
-        value.toLong().toString()
-    } else {
-        value.toString()
-    }
-    is Float -> if (value.toDouble() == Math.floor(value.toDouble())) {
-        value.toLong().toString()
-    } else {
-        value.toString()
-    }
+    // Float 先抬成 Double 再收：Float 的二进制尾巴更长（23.456789f 的 Double 形是
+    // 23.4567890167…），收 2 位正好把两边抹平
+    is Double -> numberText(value)
+    is Float -> numberText(value.toDouble())
     else -> value.toString()
 }
 

@@ -95,6 +95,9 @@ fun alarmCloseLabel(closeType: String?): String {
  *
  * 单位原样缀在数值后面（**不翻译**，它是点表里的数据）；`=` 比状态时不缀单位（状态是取值表的描述、
  * 与单位无关）。`compare` 缺失（老数据）时只给阈值，不硬编一个比较方式上去。
+ *
+ * 阈值走 [configNumberText]（**不是** [numberText]）：它是用户配的数，页面上得说得出「我配的
+ * 是多少」—— 与 web 的裸 `${threshold}` 对齐，不收 2 位。
  */
 fun alarmCondition(
     compare: String?,
@@ -104,7 +107,7 @@ fun alarmCondition(
 ): String {
     val operator = alarmOperatorLabel(compare)
     val target = if (threshold != null) {
-        "${numberText(threshold)}${unit ?: ""}"
+        "${configNumberText(threshold)}${unit ?: ""}"
     } else {
         state ?: ""
     }

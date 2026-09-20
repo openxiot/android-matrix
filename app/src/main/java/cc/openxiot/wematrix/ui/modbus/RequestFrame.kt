@@ -463,8 +463,9 @@ private fun readDataLines(command: ModbusCommand, data: List<Int>): List<String>
     val names = readFieldNames(command)
     val order = command.byteOrder ?: "ABCD"
     val suffix = listOfNotNull(
-        // scale 走 numberText：Gson 把 JSON 数字都解成 Double，1 会显示成 ×1.0，而 web 是 ×1
-        command.scale?.let { "×${numberText(it)}" },
+        // scale 走 configNumberText（配置值口径，不收 2 位）：Gson 把 JSON 数字都解成 Double，
+        // 1 会显示成 ×1.0，而 web 是 ×1；web 那边 scale 是裸的 `String(scale)`，0.125 得原样看到
+        command.scale?.let { "×${configNumberText(it)}" },
         command.unit?.takeIf { it.isNotEmpty() }
     ).joinToString(" ")
 

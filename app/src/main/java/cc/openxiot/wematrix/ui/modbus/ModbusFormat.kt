@@ -1,6 +1,8 @@
 package cc.openxiot.wematrix.ui.modbus
 
 import cc.openxiot.wematrix.data.api.ModbusCommand
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -12,9 +14,10 @@ import java.util.Locale
  *
  * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
  *
- * 文件末尾两个**值文案**函数（[valueText] / [numberText]）是采集值与告警样本共用的口径，
- * 对齐 web 的 `typedef/utils/ValueUtils.ts`：同一个 `0.30000000000000004` 在告警页与两个
- * 历史页上必须长得一样，各写一份迟早会走样 —— 故与点表口径放在同一处。
+ * 文件末尾三个**数值文案**函数（[valueText] / [numberText] / [configNumberText]）是所有
+ * 读数与配置值共用的口径，对齐 web 的 `typedef/utils/ValueUtils.ts`：同一个
+ * `0.30000000000000004` 在告警页、两个历史页与看板卡片上必须长得一样，各写一份迟早会走样
+ * —— 故与点表口径放在同一处。
  */
 
 /** 功能码 → 中文名（point.options.ts 的 FC_OPTIONS） */
@@ -140,7 +143,7 @@ fun formatEpochMillis(timestamp: Long?): String {
 }
 
 /**
- * 采样值的展示文案：数值收一收浮点误差，null 显示 `-`。
+ * 采样值的展示文案：数值走 [numberText]（最多 2 位小数），null 显示 `-`。
  *
  * 「值」在协议里可以是数值（含缩放后的浮点）、取值表的描述字符串、位区的 0/1，
  * 故按运行时类型分支，而不是假定是数字。**数据、原样显示、不翻译。**
@@ -154,12 +157,40 @@ fun valueText(value: Any?): String = when (value) {
 }
 
 /**
- * 数值文案：整数不带小数点，浮点收到 4 位（0.30000000000000004 → 0.3）。
+ * 数值文案（**读数**口径）：整数不带小数点，浮点**最多留 2 位小数**
+ * （`0.30000000000000004` → `0.3`，`23.4567890` → `23.46`）。
  *
- * 与 web 的 `Number(value.toFixed(4))` 同口径。`1e15` 以上不再收尾数（乘以 10000 会溢出 Long），
- * 直接交给 Kotlin 自己的格式化 —— Modbus 寄存器解出来的值到不了那个量级。
+ * 与 web 的 `Number(value.toFixed(2))` 同口径 —— 那边是先判整数再 `toFixed`、这边先收再判，
+ * 边界上落点一致（`1.005` 两边都是 `1`）。**「最多」是字面意思**：`23.5` 还是 `23.5`，
+ * 不补成 `23.50`；代价是小于 `0.005` 的读数会显示成 `0`，那是「留 2 位」的题中之义。
+ *
+ * **配置值不走这里**：告警阈值、缩放倍数是用户敲进去的定义，收成 2 位就会把 20.125 显示成
+ * 20.13，而 web 那边原样显示 20.125 —— 两边对不上。那些走 [configNumberText]。
+ *
+ * `1e15` 以上不再收尾数（乘以 100 会溢出 Long），直接交给 Kotlin 自己的格式化 ——
+ * Modbus 寄存器解出来的值到不了那个量级。
  */
 fun numberText(value: Double): String {
+    if (value.isNaN() || value.isInfinite()) return value.toString()
+    if (value == Math.floor(value) && Math.abs(value) < 1e15) return value.toLong().toString()
+    if (Math.abs(value) >= 1e15) return value.toString()
+    // `BigDecimal(value)` 是**二进制原值**（不是 `valueOf` 那条最短十进制串），这一条就是要害：
+    // `2.675` 的双精度其实是 `2.67499999…`，收 2 位得 `2.67` —— **与 web 的 `toFixed(2)` 同落点**。
+    // 换成 `Math.round(value * 100) / 100` 会先乘出个正好等于 `267.5` 的中间值，那里两边就分家了。
+    val rounded = BigDecimal(value).setScale(2, RoundingMode.HALF_UP).stripTrailingZeros()
+    // 归零单独给 `0`：`stripTrailingZeros` 遇上零在旧 JDK 上不生效，会漏出个 `0.00`
+    return if (rounded.compareTo(BigDecimal.ZERO) == 0) "0" else rounded.toPlainString()
+}
+
+/**
+ * 数值文案（**配置值**口径）：整数不带小数点，浮点收到 4 位。
+ *
+ * 只给「用户配的数」用：告警阈值（[alarmRuleBrief] / [alarmCondition]）与缩放倍数
+ * （见 RequestFrame 的 `×…`）。与 web 的裸 `${threshold}` / `×${scale}` 对齐 —— Gson 把 JSON
+ * 数字全解成 Double，1 会显示成 `1.0` 而 web 是 `1`，这里的 4 位只是**压掉浮点噪声**，
+ * 不是「显示到 4 位」的意思。读数一律走 [numberText]。
+ */
+fun configNumberText(value: Double): String {
     if (value.isNaN() || value.isInfinite()) return value.toString()
     if (value == Math.floor(value) && Math.abs(value) < 1e15) return value.toLong().toString()
     if (Math.abs(value) >= 1e15) return value.toString()

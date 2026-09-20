@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.ui.history.HistoryFieldChart
 import cc.openxiot.wematrix.ui.history.buildHistorySeries
+import cc.openxiot.wematrix.ui.modbus.valueText
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -304,10 +305,14 @@ private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean, half: Boole
     }
 }
 
+/**
+ * 一行的值文案：与历史页、告警页、服务详情页的调用应答说同一句话（[valueText]）——
+ * 浮点最多 2 位、取值表的描述原样、没值说 `-`。看板卡不是「另一个页面」，它显示的是同一份读数。
+ */
 private fun rowValue(row: MobileRenderFormat.ServiceRow, showUnit: Boolean): String {
     if (!row.hasValue) return "-"
     if (row.bit) return if (row.value == true) "开" else "关"
-    val text = row.value?.toString() ?: return "-"
+    val text = valueText(row.value)
     return if (showUnit && row.unit.isNotBlank()) "$text ${row.unit}" else text
 }
 
@@ -340,8 +345,9 @@ private fun DeviceView(data: Map<String, Any?>?) {
             modifier = Modifier.weight(1f)
         )
         Text(
+            // 值走 valueText（与 web 的 `deviceLine` 同口径）：看板上的读数不该是别处之外的第二种说法
             text = if (error != null) error else
-                if (data.containsKey("value")) (data["value"]?.toString() ?: "-") else "-",
+                if (data.containsKey("value")) valueText(data["value"]) else "-",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Medium,
             color = if (error != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface

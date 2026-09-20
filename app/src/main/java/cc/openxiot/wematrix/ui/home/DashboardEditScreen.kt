@@ -82,8 +82,15 @@ import kotlin.math.roundToInt
  *   一个中性一个饱和，扫一眼就分得开（口径同 webapp 那个看板：`.cdk-drag-placeholder` 灰、
  *   `.drop-outline` 绿，两个框一起看才读得出「从哪来、往哪去」）；
  * - 两个标注框都和卡片**实际大小一致**（半宽就半宽、高就卡片高）；
- * - 被拖的卡本体尺寸不变，只随手指上下浮动；松手把该卡插到落点行，其余卡重新排（animateItem 平滑让位）。
- * 末尾一张虚线「添加」卡代替原悬浮按钮。
+ * - 落点跟着手指走：先比行，同一行再比**左/右半格**（半宽卡落左边还是右边由手指的横向位置说了算）；
+ *   两个候选一样近时朝手指**移动的方向**走 —— 不会卡在「离上一帧最近」的位置不动；
+ * - **只有松手后不会挪动别的卡的位置才给放**（判据见 [placeable]）：绿框永远等于落点，框在哪就落在
+ *   哪；放不下的地方拖过去不亮框（绿框退回原位那一格）、松手即回原位。半宽卡在密集排列里可落的
+ *   位置因此会变少 —— 布局契约只有「顺序 + 尺寸」，成不成行是按顺序**贪心配**出来的，没有
+ *   「行从哪儿断」这个字段，像 [H1,H2,H3] 把 H2 挪到 H3 后面这种落法本来就表达不出来
+ *   （顺序只写得出 [H1,H3,H2]，渲染时 H1 必须和 H3 并排，H3 会被挤上去）。
+ * 被拖的卡本体尺寸不变，只随手指浮动；原位置那一格留空、谁都不去补（「不要自动布局」），松手只把
+ * 它插进落点、其余卡整体让一格（animateItem 平滑滑动）。末尾一张虚线「添加」卡代替原悬浮按钮。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -264,7 +271,7 @@ private fun EditingContent(
         picked.widget?.id?.let { startDrag(it, row) }
     }
 
-    fun dragBy(amount: Offset, fingerY: Float, boxWidth: Float) {
+    fun dragBy(amount: Offset, finger: Offset, boxWidth: Float) {
         val id = dragId ?: return
         if (displayRows.isEmpty()) return
         dragOffsetPx += amount.y
@@ -283,25 +290,43 @@ private fun EditingContent(
         }
         // 手指压在展示序的哪一行
         val d = listState.layoutInfo.visibleItemsInfo.firstOrNull {
-            it.index < displayRows.size && fingerY >= it.offset && fingerY <= it.offset + it.size
+            it.index < displayRows.size && finger.y >= it.offset && finger.y <= it.offset + it.size
         }?.index ?: return // 落在行间距 / 列表外：保持现落点
-        // 落点 = 手指所在的那一行：在 0..|s| 里选一个插入位 p，使这张卡的**落点框**行号最接近 d。
-        // 行号只由格序列推算（见 [frameRowIndex]，与渲染同一套 [buildEditRows]），不涉及坐标几何，
-        // 所以「落点框画在哪一行」和这里算的永远一致 —— 老写法按卡高累加推算绝对行位、漏算 12dp
-        // 行间距，落点会一直偏一点。
-        // 行号对这张卡不可达时（如原位框占着原格、落点框只能落在它前后）退到最接近的候选，再用
-        // 「离当前插入位最近」打破平手：同一位置平手时保持不动，落点框不抖。
+        // 手指在那一行的左半格还是右半格。只有并排的半宽行分左右（两侧 16dp 对称内边距，行中点就是
+        // 容器中点）；整宽卡、落单半宽卡独占一行，格子只有一个且在左边，列一律算 0。
+        val fingerCol = if (displayRows[d].size > 1 && finger.x > boxWidth / 2f) 1 else 0
+        // 落点 = 手指所在的那**一格**：在 0..|s| 里挑一个**放得下**的插入位 p（[placeable]），使这张卡的
+        // 落点框离手指最近 —— 先比行、再比左/右半格；两样都打平时朝手指移动的方向走；还打平才保持不动。
+        // 行/列都只由格序列推算（[frameCell]，与渲染共用 [buildEditRows]），不涉及坐标几何，所以
+        // 「落点框画在哪一格」和这里算的永远一致。
         val s = draft.filterNot { it.id == id }
+        val downward = amount.y > 0f
         var best = dragPlaceIdx
         var bestRowDist = Int.MAX_VALUE
+        var bestColDist = Int.MAX_VALUE
+        var bestFollow = 1
         var bestMoveDist = Int.MAX_VALUE
         for (p in 0..s.size) {
-            val rowDist = abs(frameRowIndex(draft, id, p, staticMates) - d)
+            // 这个落位**画出来**长什么样：既用来判放不放得下，也用来量落点框在哪一格
+            val rows = buildEditRows(dragCells(draft, id, p, dragSwap), staticMates)
+            if (!placeable(rows, draft, id, p)) continue
+            val (fr, fc) = frameCell(rows)
+            val rowDist = abs(fr - d)
+            val colDist = abs(fc - fingerCol)
+            val follow = if ((p > dragPlaceIdx) == downward) 0 else 1
             val moveDist = abs(p - dragPlaceIdx)
-            if (rowDist < bestRowDist || (rowDist == bestRowDist && moveDist < bestMoveDist)) {
-                bestRowDist = rowDist
-                bestMoveDist = moveDist
+            val better = when {
+                rowDist != bestRowDist -> rowDist < bestRowDist
+                colDist != bestColDist -> colDist < bestColDist
+                follow != bestFollow -> follow < bestFollow
+                else -> moveDist < bestMoveDist
+            }
+            if (better) {
                 best = p
+                bestRowDist = rowDist
+                bestColDist = colDist
+                bestFollow = follow
+                bestMoveDist = moveDist
             }
         }
         dragPlaceIdx = best
@@ -350,7 +375,7 @@ private fun EditingContent(
     // （重排一次后行签名全变、旧表里查不到 → 半宽卡就再也拿不起来）。经 rememberUpdatedState
     // 每次重组刷新引用，手势永远调到最新一次重组的函数。
     val currentStartDrag by rememberUpdatedState<(Offset, Float) -> Unit> { s, w -> startDragAt(s, w) }
-    val currentDragBy by rememberUpdatedState<(Offset, Float, Float) -> Unit> { a, y, w -> dragBy(a, y, w) }
+    val currentDragBy by rememberUpdatedState<(Offset, Offset, Float) -> Unit> { a, f, w -> dragBy(a, f, w) }
     val currentCommitDrag by rememberUpdatedState<() -> Unit> { commitDrag() }
     val currentCancelDrag by rememberUpdatedState<() -> Unit> { cancelDrag() }
 
@@ -375,8 +400,8 @@ private fun EditingContent(
                         onDragCancel = { currentCancelDrag() },
                         onDrag = { change, amount ->
                             change.consume()
-                            // change.position 是本节点（= 视口）坐标，用来判定手指落在哪一行
-                            currentDragBy(amount, change.position.y, size.width.toFloat())
+                            // change.position 是本节点（= 视口）坐标：y 判定落在哪一行，x 判定这一行的哪半格
+                            currentDragBy(amount, change.position, size.width.toFloat())
                         }
                     )
                 }
@@ -742,21 +767,68 @@ private fun canPair(a: EditCell, b: EditCell, mates: Map<String, String?>): Bool
 }
 
 /**
- * 落位 `p` 的**落点框**落在第几行；没有落点框（`p` 就是原索引）时取原位框的行号 ——
- * 两种情况问的都是同一件事：这张卡要落在哪一行。纯格序列推算，和渲染共用 [buildEditRows]。
+ * 落位 `p` 的**落点框**在展示里落在哪一格：`行号 to 行内第几格`。没有落点框（`p` 就是原索引）时取
+ * 原位框那一格 —— 两种情况问的都是同一件事：这张卡要落在哪儿。
  *
- * 不给 [dragCells] 传 `swap`：左右互换只改同一行里两格谁左谁右，**行号不变**，问行号时不必区分。
+ * [rows] 必须是这一落位**实际渲染用的那些行**（[buildEditRows] ← [dragCells]，左右互换的 [swap] 也
+ * 已经传过）：量出来的格子要和用户看到的框严格同一格，自己另算一遍序列迟早会对不上。
  */
-private fun frameRowIndex(
+private fun frameCell(
+    rows: List<List<EditCell>>
+): Pair<Int, Int> {
+    rows.forEachIndexed { r, row ->
+        val c = row.indexOfFirst { it.drop }
+        if (c >= 0) return r to c
+    }
+    rows.forEachIndexed { r, row ->
+        val c = row.indexOfFirst { it.origin }
+        if (c >= 0) return r to c
+    }
+    return 0 to 0
+}
+
+/**
+ * 落位 `p` **放不放得下**：松手后别的卡会不会被挪动。
+ *
+ * 展示里的两个框都不是真卡 —— 原位框是幽灵（松手后**整格消失**），落点框就是被拖的那张卡。判据是
+ * **「真卡之间的对」两侧必须一模一样**：展示侧只认「原本就是一对」和「牵掉落点框」（[canPair]），
+ * 落库侧是顺序贪心配（连续两张半宽并排，[buildRows]）。
+ *
+ * 一样 ⇒ 没人补位、没人被挤走，绿框也一定等于落点；不一样 ⇒ 松手后会有半宽卡重新配对（典型是
+ * `[H1,H2,H3]` 把 H2 挪到 H3 后面：顺序只能写成 `[H1,H3,H2]`，H1 和 H3 必须并排、H3 被挤上去），
+ * 这种位置不给放。含幽灵的行不算：幽灵不是谁的同伴（它那一格松手后就没了）。
+ *
+ * `p == 原索引`（落回原位 / 左右互换）不插落点格、不碰别的卡，恒为放得下。
+ *
+ * [rows] 是 `p` 已经派好的**展示行**（调用处还要用它量落点框在哪一格，别算两遍）。
+ */
+private fun placeable(
+    rows: List<List<EditCell>>,
     draft: List<MobileDashboardWidget>,
     dragId: String,
-    p: Int,
-    mates: Map<String, String?>
-): Int {
-    val rows = buildEditRows(dragCells(draft, dragId, p), mates)
-    val drop = rows.indexOfFirst { row -> row.any { it.drop } }
-    return if (drop >= 0) drop else rows.indexOfFirst { row -> row.any { it.origin } }
+    p: Int
+): Boolean {
+    val originIdx = draft.indexOfFirst { it.id == dragId }
+    if (originIdx < 0 || p == originIdx) return true
+    val card = draft[originIdx]
+    val seq = draft.filterNot { it.id == dragId }.toMutableList()
+        .apply { add(p.coerceIn(0, size), card) }
+    val settled = buildRows(seq).mapNotNull { row ->
+        if (row.size != 2) return@mapNotNull null
+        val a = row[0].id ?: return@mapNotNull null
+        val b = row[1].id ?: return@mapNotNull null
+        a to b
+    }.toSet()
+    return pairSet(rows) == settled
 }
+
+/** 展示行里「真卡之间的对」，忽略含原位框（幽灵）的行。落点框算真卡：那就是被拖的那张。 */
+private fun pairSet(rows: List<List<EditCell>>): Set<Pair<String, String>> = rows.mapNotNull { row ->
+    if (row.size != 2 || row.any { it.origin }) return@mapNotNull null
+    val a = row[0].widget?.id ?: return@mapNotNull null
+    val b = row[1].widget?.id ?: return@mapNotNull null
+    a to b
+}.toSet()
 
 /** 行在 LazyColumn 里的稳定 key（也是拖拽签名）：行内各格的标识拼接。 */
 private fun rowSignature(row: List<EditCell>): String =

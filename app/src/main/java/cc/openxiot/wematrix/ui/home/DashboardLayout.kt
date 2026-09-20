@@ -187,3 +187,51 @@ fun arrange(
 /** 认得出才算写了：`null` 与不认识的值都当「没写」。 */
 private fun explicitSide(side: String?): String? =
     side?.takeIf { it == DashboardTypes.SIDE_LEFT || it == DashboardTypes.SIDE_RIGHT }
+
+// ===== 新卡的 id =====
+
+/**
+ * 新卡的 id：从 [counter] 往上找第一个**草稿里还没用**的 `draft-N`，返回它与新的计数。
+ *
+ * 唯一的基准是**当前草稿**，不是计数器：计数器是每个 VM 实例自己的（重开编辑页从 0 起步），
+ * 而 id 会**跟着布局存进库** —— 保存一次，`draft-1` 就永久留在那份布局里。于是新开编辑页时
+ * 闭着眼 `++` 必然再生成一个 `draft-1`：草稿里两张卡同一个 id，LazyColumn 的 item key 正是
+ * 由 id 拼的，撞 key 当场崩（`Key "draft-1" was already used`）。
+ */
+fun newDraftId(used: Collection<String>, counter: Long): Pair<String, Long> {
+    var n = counter
+    while (true) {
+        n += 1
+        val id = "draft-$n"
+        if (id !in used) {
+            return id to n
+        }
+    }
+}
+
+// ===== 行 key =====
+
+/**
+ * 行在 LazyColumn 里的 key（也是拖拽签名）：行内各卡 id 拼接。
+ *
+ * 前缀 `row:` 是为了与列表里另外那几个 item 的 key（`empty` / `add` / `spacer`）错开 ——
+ * 卡片 id 撞上那三个字面量同样会崩。整屏用请走 [rowKeys]。
+ */
+fun rowKey(row: List<MobileDashboardWidget>): String =
+    "row:" + row.joinToString("~") { it.id.orEmpty() }
+
+/**
+ * 整屏行的 key，**保证两两不同**：同一个 key 在 LazyColumn 里出现两次会直接崩
+ * （`Key "..." was already used. If you are using LazyColumn ...`）。
+ *
+ * 正常布局里每张卡 id 唯一，这里就原样返回 [rowKey]（key 稳定，让位动画与滚动锚点都正常）；
+ * 万一拿到 id 重复的脏数据（库里真存过），给后来那行补一个位置后缀兜底 —— 排布错一格还能用，
+ * 崩了则什么都做不了。
+ */
+fun rowKeys(rows: List<List<MobileDashboardWidget>>): List<String> {
+    val used = HashSet<String>()
+    return rows.mapIndexed { i, row ->
+        val key = rowKey(row)
+        if (used.add(key)) key else "$key#$i"
+    }
+}

@@ -229,10 +229,13 @@ private fun EditingContent(
         if (id == null) draft else arrange(draft, id, dragIndex, dragSide)
     }
     val displayRows = remember(displayList) { pack(displayList) }
+    // 行 key：LazyColumn 的 item key 与拖拽签名共用这一份（[rowKeys] 保证两两不同 —— 撞 key 会崩，
+    // 而 id 重复的脏数据真出现过）
+    val rowKeyList = remember(displayRows) { rowKeys(displayRows) }
     // 行签名 → 行内容：命中 y 后反查是哪个行
-    val rowByKey = displayRows.associate { rowKey(it) to it }
+    val rowByKey = displayRows.mapIndexed { i, row -> rowKeyList[i] to row }.toMap()
 
-    fun startDrag(cardId: String, row: List<MobileDashboardWidget>) {
+    fun startDrag(cardId: String, anchorKey: String) {
         val idx = draft.indexOfFirst { it.id == cardId }
         if (idx < 0) return
         dragId = cardId
@@ -241,9 +244,9 @@ private fun EditingContent(
         dragSide = effectiveSides(draft).getOrNull(idx)
         dragOffsetPx = 0f
         dragOffsetX = 0f
-        // 浮动卡的坐标基准 = 起始行当前在视口里的 y
+        // 浮动卡的坐标基准 = 起始行当前在视口里的 y（起始行就是手指按下那一行）
         dragAnchorPx = listState.layoutInfo.visibleItemsInfo
-            .firstOrNull { it.key == rowKey(row) }?.offset?.toFloat() ?: 0f
+            .firstOrNull { it.key == anchorKey }?.offset?.toFloat() ?: 0f
     }
 
     /**
@@ -260,7 +263,7 @@ private fun EditingContent(
         val key = info.key as? String ?: return
         val row = rowByKey[key] ?: return
         val picked = if (row.size > 1 && start.x > boxWidth / 2f) row[1] else row[0]
-        picked.id?.let { startDrag(it, row) }
+        picked.id?.let { startDrag(it, key) }
     }
 
     /** 候选框**所在行中心**的 y（视口坐标）：行号就是 LazyColumn 的 item 下标（行在最前）。 */
@@ -393,7 +396,7 @@ private fun EditingContent(
                 if (displayRows.isEmpty()) {
                     item(key = "empty") { EmptyState("还没有卡片，点下方「添加」加一张") }
                 }
-                itemsIndexed(displayRows, key = { _, row -> rowKey(row) }) { _, row ->
+                itemsIndexed(displayRows, key = { i, _ -> rowKeyList[i] }) { _, row ->
                     // animateItem：让位时行按新 key 平滑滑开/合拢；拖拽手势在最外层，不因这些行的 key 变化而中断
                     Box(Modifier.animateItem()) {
                         RowContent(
@@ -625,10 +628,6 @@ private fun cellCenterPx(row: List<MobileDashboardWidget>, cell: Int, boxWidth: 
     row[0].side == DashboardTypes.SIDE_RIGHT -> boxWidth * 0.75f
     else -> boxWidth * 0.25f
 }
-
-/** 行在 LazyColumn 里的稳定 key（也是拖拽签名）：行内各卡 id 拼接。 */
-private fun rowKey(row: List<MobileDashboardWidget>): String =
-    row.joinToString("~") { it.id.orEmpty() }
 
 /** 落点打分的两个常数：行是主要判据，横向只在同一行内分左右；ε 只在几何完全打平时决胜。 */
 private const val HORIZONTAL_WEIGHT = 4f

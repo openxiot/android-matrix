@@ -218,15 +218,20 @@ class MobileDashboardViewModel : ViewModel() {
      */
     fun addWidget(type: String) {
         val size = DashboardTypes.defaultSize(type)
+        val draft = _uiState.value.draft
+        // id 要避开**草稿里已有的**：库里那份布局可能就带着上一轮存下的 `draft-N`，而计数器是
+        // 本 VM 实例自己的（重开编辑页从 0 起步），照 `++` 加会造出重复 id（见 [newDraftId]）
+        val (id, next) = newDraftId(draft.mapNotNull { it.id }, idCounter)
+        idCounter = next
         val widget = MobileDashboardWidget(
-            id = "draft-" + (++idCounter),
+            id = id,
             type = type,
             size = size,
-            side = if (size == DashboardTypes.SIZE_HALF) nextHalfSide(_uiState.value.draft) else null,
+            side = if (size == DashboardTypes.SIZE_HALF) nextHalfSide(draft) else null,
             config = DashboardTypes.defaultConfig(type)
         )
         _uiState.value = _uiState.value.copy(
-            draft = _uiState.value.draft + widget,
+            draft = draft + widget,
             pickerVisible = false,
             editingId = widget.id
         )

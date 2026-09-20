@@ -2,6 +2,7 @@ package cc.openxiot.wematrix.ui.home
 
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -322,6 +323,73 @@ class DashboardLayoutTest {
         // 除了 side，卡本身一个字段都不动（顺序、id、type、size 原样）
         assertEquals(original.map { it.id }, derived.map { it.id })
         assertEquals(original.map { it.size }, derived.map { it.size })
+    }
+
+    // ===== 新卡 id =====
+
+    @Test
+    fun newDraftId_startsAtOneWhenNothingIsUsed() {
+        assertEquals("draft-1" to 1L, newDraftId(emptyList(), 0L))
+    }
+
+    /**
+     * **这条就是那次崩溃的复现**：库里那份布局带着上一轮保存下来的 `draft-1`，而计数器是
+     * 每个 VM 实例自己的（重开编辑页从 0 起步）—— 照 `++` 加就会再造一个 `draft-1`。
+     */
+    @Test
+    fun newDraftId_skipsIdsAlreadyInTheDraft() {
+        assertEquals("draft-2" to 2L, newDraftId(listOf("draft-1"), 0L))
+        assertEquals("draft-4" to 4L, newDraftId(listOf("draft-1", "draft-2", "draft-3"), 0L))
+    }
+
+    @Test
+    fun newDraftId_continuesFromTheCounterWhenThatIdIsFree() {
+        assertEquals("draft-3" to 3L, newDraftId(listOf("draft-1", "draft-2"), 2L))
+    }
+
+    @Test
+    fun newDraftId_ignoresOtherKindsOfIds() {
+        assertEquals("draft-1" to 1L, newDraftId(listOf("preset-1", "w_7f3a"), 0L))
+    }
+
+    /** 性质：连加 20 张，每次都拿**当时的草稿**判，生成的 id 两两不同。 */
+    @Test
+    fun newDraftId_neverRepeatsAcrossRepeatedAdds() {
+        val used = mutableListOf<String>()
+        var counter = 0L
+        repeat(20) {
+            val (id, next) = newDraftId(used, counter)
+            counter = next
+            assertFalse("id $id 撞了", id in used)
+            used.add(id)
+        }
+    }
+
+    // ===== 行 key =====
+
+    @Test
+    fun rowKeys_areStableAndPrefixed() {
+        val rows = pack(listOf(half("a"), half("b"), full("f")))
+        assertEquals("a,b|f", shape(rows))
+        assertEquals(listOf("row:a~b", "row:f"), rowKeys(rows))
+    }
+
+    /**
+     * 脏数据兜底：两张卡同 id（老版本真存进去过）也必须两两不同 —— LazyColumn 撞 key 是**崩溃**，
+     * 不是画错。排布错一格还能用，崩了就什么都做不了。
+     */
+    @Test
+    fun rowKeys_stayUniqueEvenWithDuplicateIds() {
+        val dup = listOf(half("draft-1"), full("draft-1"), half("draft-1"))
+        val keys = rowKeys(pack(dup))
+        assertEquals(3, keys.size)
+        assertEquals(3, keys.toSet().size)
+    }
+
+    /** 卡片 id 撞上列表里另外那几个 item 的字面量 key（`add` / `empty` / `spacer`）也不会串。 */
+    @Test
+    fun rowKey_doesNotCollideWithTheListsLiteralKeys() {
+        assertEquals("row:add", rowKey(listOf(half("add"))))
     }
 
     // ===== 夹具 =====

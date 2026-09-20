@@ -228,38 +228,45 @@ private fun EditingContent(
     fun moveBy(dy: Float) {
         if (dragId == null || rows.isEmpty()) return
         dragOffsetPx += dy
-        // 手指所在行（按行「中线」切分：越过上一格的中线 → 落点换行）
+        // 把「手指位移」换算成「卡中心当前落到的行」：基线是**起始行的顶**，
+        // 不是整个列表的顶 —— 否则按在下方行的卡一长按，target 会立刻被算到第 0 行。
+        val base = rowTopPx(dragOriginRow)
+        val cardCenter = base + dragOffsetPx + (dragCardH.takeIf { it > 0 } ?: 160) / 2f
         var t = 0
         for (r in rows.indices) {
-            val center = rowTopPx(r) + rowHeightPx(rows[r]) / 2f
-            if (dragOffsetPx > center) t = r + 1
+            val bottom = rowTopPx(r) + rowHeightPx(rows[r])
+            if (cardCenter < bottom) { t = r; break }
+            t = r + 1
         }
         dragTargetRow = t.coerceIn(0, rows.lastIndex)
     }
 
+    fun resetDrag() {
+        dragId = null
+        dragOriginRow = 0
+        dragTargetRow = 0
+        dragOffsetPx = 0f
+    }
+
     fun commitDrag() {
         val id = dragId ?: return
+        // 依旧停在起始行 = 没移动，直接 no-op（别顺手把卡挪到行首/拆散成对）
+        if (dragTargetRow == dragOriginRow) { resetDrag(); return }
         val originIdx = draft.indexOfFirst { it.id == id }
-        if (originIdx < 0) { dragId = null; return }
+        if (originIdx < 0) { resetDrag(); return }
         val order = draft.toMutableList()
         val card = order.removeAt(originIdx)
         var idx = rows.take(dragTargetRow).sumOf { it.size }
         if (dragOriginRow < dragTargetRow) idx -= 1
         idx = idx.coerceIn(0, order.size)
         order.add(idx, card)
-        // 松手只有同卡时才把顺序塞回去；没移动则无操作
+        // 松手后把最终顺序交还草稿；没移动则不做任何事
         if (order != draft) onReorder(order)
-        dragId = null
-        dragOriginRow = 0
-        dragTargetRow = 0
-        dragOffsetPx = 0f
+        resetDrag()
     }
 
     fun cancelDrag() {
-        dragId = null
-        dragOriginRow = 0
-        dragTargetRow = 0
-        dragOffsetPx = 0f
+        resetDrag()
     }
 
     Column(Modifier.fillMaxSize().padding(contentPadding)) {

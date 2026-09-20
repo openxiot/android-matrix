@@ -39,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
@@ -51,6 +52,7 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -70,9 +72,13 @@ import kotlin.math.roundToInt
  * 置位、自动 `onBack` 回首页（首页在 RESUMED 时重取，能看到新布局）。返回图标在有未保存改动时
  * 会先弹一个「丢弃」确认。
  *
- * 列表 = 草稿每张卡的**实时预览**（虚线框 = 可编辑）：点按卡打开它的编辑器弹层（同 webapp），
- * **长按拖拽排序**：拖到哪个槽，那里就画出虚线框+背景色的落点占位，其它行自动让位（animateItem 滑动），
- * 被拖的行本身保持原尺寸、随手指浮动；松手把最终顺序整体交还草稿。末尾一张虚线「添加」卡代替原悬浮按钮。
+ * 列表 = 草稿每张卡的**实时预览**（虚线框 = 可编辑）：点按卡打开它的编辑器弹层（同 webapp）。
+ *
+ * **长按拖拽排序（单卡级）**：长按哪一张就只有那一张被选中移动（不会连它半宽的行伴一起走）：
+ * - 原位置 → 虚线框 + primary 背景色；落点行 → 虚线框 + tertiary 背景色，两者互不同色；
+ * - 两个标注框都和卡片**实际大小一致**（半宽就半宽、高就卡片高）；
+ * - 被拖的卡本体尺寸不变，只随手指上下浮动；松手把该卡插到落点行，其余卡重新排（animateItem 平滑让位）。
+ * 末尾一张虚线「添加」卡代替原悬浮按钮。
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -189,57 +195,70 @@ private fun EditingContent(
     val density = LocalDensity.current
     val editingWidget = draft.firstOrNull { it.id == state.editingId }
 
-    // 草稿派生的**显示行**：连续两个 HALF 并排成一行、FULL 独占一行。拖拽时在本地 `rows` 上实时让位，
-    // 松手才把最终顺序整体交还 draft（draft 变 → remember(draft) 重建 rows，两处一致）。
-    var rows by remember(draft) { mutableStateOf(buildRows(draft)) }
+    // 草稿派生的**显示行**：连续两个 HALF 并排成一行、FULL 独占一行。拖拽期间行序不变（只挪卡片）。
+    val rows = remember(draft) { buildRows(draft) }
 
-    // ---- 拖拽共享状态（长按某个槽开始，整页一个 dragId，各行按自己的槽接线） ----
-    var dragKey by remember { mutableStateOf<String?>(null) }          // 正在被拖的行签名（id 拼接）
-    var dragStartRows by remember { mutableStateOf<List<List<MobileDashboardWidget>>>(emptyList()) } // 取消时还原
-    var dragInsertIndex by remember { mutableStateOf(0) }              // 当前落点行下标
-    var dragRowHeightPx by remember { mutableStateOf(0f) }             // 被拖行高度（跨过 = 让一格）
-    var dragOffsetPx by remember { mutableStateOf(0f) }                // 手指相对起始的纵向位移
-    var rowHeights by remember { mutableStateOf<Map<String, Int>>(emptyMap()) }
+    // ---- 单卡拖拽状态（长按某张卡开始，整页共享，每行按槽接线） ----
+    var dragId by remember { mutableStateOf<String?>(null) }   // 正在拖的那张一的卡 id
+    var dragOriginRow by remember { mutableStateOf(0) }        // 起始所在行
+    var dragOffsetPx by remember { mutableStateOf(0f) }        // 手指纵向位移
+    var dragTargetRow by remember { mutableStateOf(0) }        // 当前落点行
+    // 每张卡的实测尺寸（px）：标注框 = 卡片实际大小
+    var cardSizes by remember { mutableStateOf<Map<String, IntSize>>(emptyMap()) }
 
-    val startDrag = { signature: String ->
-        dragStartRows = rows
-        dragKey = signature
-        dragInsertIndex = rows.indexOfFirst { rowSignature(it) == signature }.coerceAtLeast(0)
+    val cardHeightPx = { id: String? -> cardSizes[id]?.height ?: 0 }
+    val rowHeightPx = { row: List<MobileDashboardWidget> ->
+        row.mapNotNull { cardSizes[it.id]?.height }.maxOrNull() ?: 160
+    }
+    val rowTopPx = { r: Int ->
+        rows.take(r).sumOf { rowHeightPx(it) }
+    }
+
+    // 长按某张卡开始拖。按压点 x 决定半宽行里拖的是左卡还是右卡。
+    fun startDrag(cardId: String, row: List<MobileDashboardWidget>) {
+        val originRow = rows.indexOfFirst { it.any { c -> c.id == cardId } }
+        if (originRow < 0) return
+        dragId = cardId
+        dragOriginRow = originRow
+        dragTargetRow = originRow
         dragOffsetPx = 0f
-        // 高度从 onSizeChanged 缓存里取：比实时测量稳，跨格子算步长用
-        dragRowHeightPx = (rowHeights[signature] ?: 168).toFloat()
-    }
-    val finishDrag = {
-        dragKey = null
-        dragOffsetPx = 0f
-        dragInsertIndex = 0
-        dragRowHeightPx = 0f
-    }
-    val commitDrag = {
-        onReorder(rows.flatten())
-        finishDrag()
-    }
-    val cancelDrag = {
-        rows = dragStartRows
-        finishDrag()
     }
 
-    // 每跨过一行的高度 → 实时让位：把被拖行整行换到新下标，同时把已消耗的整步高位从 offset 里扣掉，
-    // 让浮动卡片始终贴手指，而不是跟着槽跳。
-    val moveBy = { dy: Float ->
-        if (dragRowHeightPx > 0f && rows.isNotEmpty()) {
-            dragOffsetPx += dy
-            val step = (dragOffsetPx / dragRowHeightPx).roundToInt()
-            val target = (dragInsertIndex + step).coerceIn(0, rows.lastIndex)
-            if (target != dragInsertIndex) {
-                val list = rows.toMutableList()
-                val item = list.removeAt(dragInsertIndex)
-                list.add(target, item)
-                rows = list
-                dragInsertIndex = target
-                dragOffsetPx -= step * dragRowHeightPx
-            }
+    fun moveBy(dy: Float) {
+        if (dragId == null || rows.isEmpty()) return
+        dragOffsetPx += dy
+        // 手指所在行（按行「中线」切分：越过上一格的中线 → 落点换行）
+        var t = 0
+        for (r in rows.indices) {
+            val center = rowTopPx(r) + rowHeightPx(rows[r]) / 2f
+            if (dragOffsetPx > center) t = r + 1
         }
+        dragTargetRow = t.coerceIn(0, rows.lastIndex)
+    }
+
+    fun commitDrag() {
+        val id = dragId ?: return
+        val originIdx = draft.indexOfFirst { it.id == id }
+        if (originIdx < 0) { dragId = null; return }
+        val order = draft.toMutableList()
+        val card = order.removeAt(originIdx)
+        var idx = rows.take(dragTargetRow).sumOf { it.size }
+        if (dragOriginRow < dragTargetRow) idx -= 1
+        idx = idx.coerceIn(0, order.size)
+        order.add(idx, card)
+        // 松手只有同卡时才把顺序塞回去；没移动则无操作
+        if (order != draft) onReorder(order)
+        dragId = null
+        dragOriginRow = 0
+        dragTargetRow = 0
+        dragOffsetPx = 0f
+    }
+
+    fun cancelDrag() {
+        dragId = null
+        dragOriginRow = 0
+        dragTargetRow = 0
+        dragOffsetPx = 0f
     }
 
     Column(Modifier.fillMaxSize().padding(contentPadding)) {
@@ -261,23 +280,28 @@ private fun EditingContent(
             if (rows.isEmpty()) {
                 item(key = "empty") { EmptyState("还没有卡片，点下方「添加」加一张") }
             }
-            itemsIndexed(rows, key = { _, row -> rowSignature(row) }) { _, row ->
+            itemsIndexed(rows, key = { _, row -> rowSignature(row) }) { ri, row ->
                 val signature = rowSignature(row)
-                val isDragged = dragKey == signature
-                val placeholderHeight = with(density) { dragRowHeightPx.coerceAtLeast(1f).dp }
+                val isTargetRow = dragId != null && ri == dragTargetRow
+                val originRowHasDrag = dragId != null && ri == dragOriginRow
+                val heightPx = with(density) { cardHeightPx(dragId).dp }
 
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        // 非被拖行用 animateItem 让位时平滑滑开；被拖行自己的行号变化由浮动位移接管
-                        .then(if (isDragged) Modifier else Modifier.animateItem())
-                        .zIndex(if (isDragged) 1f else 0f)
-                        .onSizeChanged {
-                            if (!isDragged) rowHeights = rowHeights + (signature to it.height)
-                        }
-                        .pointerInput(signature, draft.size) {
+                        .then(if (originRowHasDrag) Modifier.zIndex(1f) else Modifier)
+                        .animateItem()
+                        .pointerInput(row.map { it.id }.joinToString("|"), draft.size) {
                             detectDragGesturesAfterLongPress(
-                                onDragStart = { startDrag(signature) },
+                                onDragStart = { start: Offset ->
+                                    // 半宽行里按 x 选左/右卡
+                                    val picked = when {
+                                        row.size > 1 && start.x > size.width / 2f -> row[1]
+                                        row.size > 1 -> row[0]
+                                        else -> row[0]
+                                    }
+                                    picked.id?.let { startDrag(it, row) }
+                                },
                                 onDragEnd = { commitDrag() },
                                 onDragCancel = { cancelDrag() },
                                 onDrag = { change, amount ->
@@ -287,40 +311,32 @@ private fun EditingContent(
                             )
                         }
                 ) {
-                    if (isDragged) {
-                        // 落点占位：可放置的位置 = 虚线框 + 背景色（也是松手后的归位格）
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(placeholderHeight)
-                                .background(
-                                    MaterialTheme.colorScheme.primary.copy(alpha = 0.10f),
-                                    RoundedCornerShape(16.dp)
-                                )
-                                .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
-                        )
-                        // 被拖的卡片本体：**尺寸不变**（宽度随行、高度即卡片高），只随手指上下浮动
-                        RowCard(
-                            row = row,
-                            state = state,
-                            editable = false,
-                            onOpen = onOpen,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .graphicsLayer {
-                                    translationY = dragOffsetPx
-                                    alpha = 0.95f
-                                    shadowElevation = 8.dp.toPx()
-                                }
-                        )
-                    } else {
-                        RowCard(
-                            row = row,
-                            state = state,
-                            editable = true,
-                            onOpen = onOpen,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                    RowContent(
+                        row = row,
+                        state = state,
+                        onOpen = onOpen,
+                        dragId = dragId,
+                        dragOffsetPx = dragOffsetPx,
+                        onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) }
+                    )
+                    // 落点行 → 标注「可以放置的位置」：虚线框 + tertiary 背景色，尺寸 = 卡片实际大小
+                    if (isTargetRow && !originRowHasDrag && dragId != null) {
+                        val dragged = draft.firstOrNull { it.id == dragId }
+                        if (dragged != null) {
+                            Box(
+                                modifier = Modifier
+                                    .align(Alignment.TopStart)
+                                    .fillMaxWidth(
+                                        if (dragged.size == DashboardTypes.SIZE_HALF) 0.5f else 1f
+                                    )
+                                    .height(heightPx.coerceAtLeast(1.dp))
+                                    .background(
+                                        MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f),
+                                        RoundedCornerShape(16.dp)
+                                    )
+                                    .dashedBorder(color = MaterialTheme.colorScheme.tertiary, strokeWidth = 2.dp)
+                            )
+                        }
                     }
                 }
             }
@@ -350,43 +366,83 @@ private fun EditingContent(
     }
 }
 
-/** 一个显示行：FULL 独占一行整宽；连续两个 HALF 并排（weight 各半）占一行。 */
+/**
+ * 一个显示行：FULL 独占一行整宽；连续两个 HALF 并排（weight 各半）占一行。
+ * 行里的那张「被拖卡」：原位置画 primary 虚线框 + 背景，卡本体照常在此列但随手指上下浮动（改变尺寸）；其余卡原样。
+ */
 @Composable
-private fun RowCard(
+private fun RowContent(
     row: List<MobileDashboardWidget>,
     state: MobileDashboardUiState,
-    editable: Boolean,
     onOpen: (String) -> Unit,
-    modifier: Modifier = Modifier
+    dragId: String?,
+    dragOffsetPx: Float,
+    onSize: (String, IntSize) -> Unit
 ) {
     if (row.size == 2) {
-        Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            CardSlot(row[0], state, editable, onOpen, Modifier.weight(1f))
-            CardSlot(row[1], state, editable, onOpen, Modifier.weight(1f))
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, onSize, Modifier.weight(1f))
+            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, onSize, Modifier.weight(1f))
         }
     } else {
-        CardSlot(row[0], state, editable, onOpen, modifier)
+        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, onSize, Modifier.fillMaxWidth())
     }
 }
 
-/** 行里的一张卡：实时预览 + 虚线框（可编辑）+ 点按开编辑器。被拖时（editable=false）去掉虚线、原样浮动。 */
+/**
+ * 一张卡。isDragged = 这张卡正在被拖：
+ * - 先画 primary 虚线框 + 背景色占位（= 原位置标注，尺寸与卡一致）；
+ * - 再画卡本体（尺寸不变），`graphicsLayer.translationY = dragOffsetPx` 让原卡随手指浮动。
+ */
 @Composable
-private fun CardSlot(
+private fun CardHost(
     widget: MobileDashboardWidget,
     state: MobileDashboardUiState,
-    editable: Boolean,
     onOpen: (String) -> Unit,
+    dragId: String?,
+    dragOffsetPx: Float,
+    onSize: (String, IntSize) -> Unit,
     modifier: Modifier
 ) {
-    DashboardWidgetHost(
-        widget = widget,
-        data = state.previewById[widget.id],
-        error = state.previewMessageById[widget.id],
+    val isDragged = dragId == widget.id
+    Box(
         modifier = modifier
-            .then(if (editable) Modifier.dashedBorder(MaterialTheme.colorScheme.primary, strokeWidth = 1.5.dp) else Modifier)
-            .then(if (editable) Modifier.padding(2.dp) else Modifier)
-            .clickable { widget.id?.let(onOpen) }
-    )
+            .onSizeChanged { if (!isDragged) onSize(widget.id.orEmpty(), it) }
+            .then(if (isDragged) Modifier.zIndex(1f) else Modifier)
+    ) {
+        if (isDragged) {
+            // 原位置标注：primary 虚线 + 背景，跟卡等大
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.10f), RoundedCornerShape(16.dp))
+                    .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
+            )
+            // 卡本体：尺寸不变，只随手指浮动
+            DashboardWidgetHost(
+                widget = widget,
+                data = state.previewById[widget.id],
+                error = state.previewMessageById[widget.id],
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .graphicsLayer {
+                        translationY = dragOffsetPx
+                        alpha = 0.95f
+                        shadowElevation = 8.dp.toPx()
+                    }
+            )
+        } else {
+            DashboardWidgetHost(
+                widget = widget,
+                data = state.previewById[widget.id],
+                error = state.previewMessageById[widget.id],
+                modifier = modifier
+                    .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 1.5.dp)
+                    .padding(2.dp)
+                    .clickable { widget.id?.let(onOpen) }
+            )
+        }
+    }
 }
 
 /** 把草稿按「FULL 一行 / 连续两个 HALF 并排一行」派生成显示行（与首页只读排布同口径）。 */

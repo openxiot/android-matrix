@@ -170,12 +170,20 @@ class MobileDashboardViewModel : ViewModel() {
         viewModelScope.launch {
             val catalog = catalogRepository.catalog(rootId).getOrNull()
             // 布局没取到（用户直接进编辑）就现场补取一次；取不到则编辑空布局
-            val widgets = _uiState.value.widgets.ifEmpty {
-                repository.getLayout(rootId).getOrNull()?.widgets ?: emptyList()
+            val loaded = if (_uiState.value.widgets.isEmpty()) {
+                repository.getLayout(rootId).getOrNull()
+            } else {
+                null
             }
+            val widgets = _uiState.value.widgets.ifEmpty { loaded?.widgets ?: emptyList() }
+            // **版本必须跟着布局一起带进来**：编辑页是**另一个 VM 实例**（首页那份不共享），它的
+            // version 从 0 起步。只搬 widgets 不搬 version 的话，保存会一直提交 0 —— 而库里已有
+            // 文档时（version ≥ 1）服务端 CAS 每次都判「别人改过了」，布局永远存不进去。
+            val version = loaded?.version ?: _uiState.value.version
             committed = widgets
             _uiState.value = _uiState.value.copy(
                 editing = true,
+                version = version,
                 draft = widgets.map(::copyWidget),
                 catalog = catalog,
                 dirty = false,

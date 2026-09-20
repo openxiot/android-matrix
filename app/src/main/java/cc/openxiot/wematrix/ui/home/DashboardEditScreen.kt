@@ -417,27 +417,38 @@ private fun EditingContent(
                 item(key = "spacer") { Spacer(Modifier.height(12.dp)) }
             }
 
-            // 浮动卡本体：叠加在列表之上，坐标 = 起始卡视口 y + 手指相对位移。
-            // 让位只重排列表、不惊动它，卡始终贴着手指且尺寸不变。
+            // 浮动卡本体：叠加在列表之上，纵向 = 起始卡视口 y + 手指相对位移，横向起点 =
+            // 卡**原地**在行里的位置。让位只重排列表、不惊动它，卡始终贴着手指且尺寸不变。
             dragId?.let { id ->
                 val dragged = draft.firstOrNull { it.id == id }
                 if (dragged != null) {
-                    val wide = if (dragged.size == DashboardTypes.SIZE_HALF) 0.5f else 1f
-                    DashboardWidgetHost(
-                        widget = dragged,
-                        data = state.previewById[dragged.id],
-                        error = state.previewMessageById[dragged.id],
+                    val half = dragged.size == DashboardTypes.SIZE_HALF
+                    // 半宽行的右卡：横向起点是右半边（否则长按一按就从左半边飞出来）。
+                    // 判定用 buildRows —— 与渲染同一套配对规则，[半宽,半宽,半宽] 这种也能算对。
+                    val rightHalf = half && buildRows(draft)
+                        .firstOrNull { r -> r.any { it.id == id } }
+                        ?.let { r -> r.size > 1 && r[1].id == id }
+                        ?: false
+                    FloatingCardSlot(
+                        rightHalf = rightHalf,
+                        halfWidth = half,
                         modifier = Modifier
                             .align(Alignment.TopStart)
                             .padding(horizontal = 16.dp)
-                            .fillMaxWidth(wide)
                             .graphicsLayer {
                                 translationY = dragAnchorPx + dragOffsetPx
                                 translationX = dragOffsetX
                                 alpha = 0.95f
                                 shadowElevation = 8.dp.toPx()
                             }
-                    )
+                    ) {
+                        DashboardWidgetHost(
+                            widget = dragged,
+                            data = state.previewById[dragged.id],
+                            error = state.previewMessageById[dragged.id],
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
                 }
             }
         }
@@ -461,6 +472,32 @@ private fun EditingContent(
             onDelete = { onDeleteCard(id) },
             onDismiss = onCloseEditor
         )
+    }
+}
+
+/**
+ * 浮动卡的横向落位（与 [RowContent] 同口径，好让卡一按下去就在原地，不横跳）：
+ * 整宽卡占满整行；落单半宽卡占左半边；半宽行的**右卡**左边留白、占右半边。
+ */
+@Composable
+private fun FloatingCardSlot(
+    rightHalf: Boolean,
+    halfWidth: Boolean,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    when {
+        rightHalf -> Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Spacer(Modifier.weight(1f))
+            Box(Modifier.weight(1f)) { content() }
+        }
+
+        halfWidth -> Box(modifier.fillMaxWidth(0.5f)) { content() }
+
+        else -> Box(modifier.fillMaxWidth()) { content() }
     }
 }
 

@@ -63,6 +63,7 @@ import cc.openxiot.wematrix.data.repository.ProductSpecRepository
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.ui.theme.Green
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -77,7 +78,9 @@ import kotlin.math.roundToInt
  * 列表 = 草稿每张卡的**实时预览**（虚线框 = 可编辑）：点按卡打开它的编辑器弹层（同 webapp）。
  *
  * **长按拖拽排序（单卡级）**：长按哪一张就只有那一张被选中移动（不会连它半宽的行伴一起走）：
- * - 原位置 → 虚线框 + primary 背景色；落点行 → 虚线框 + tertiary 背景色，两者互不同色；
+ * - 原位置 → **灰框**（「它从哪来」），落点 → **绿框**（「它要去哪」）—— 一冷一暖、
+ *   一个中性一个饱和，扫一眼就分得开（口径同 webapp 那个看板：`.cdk-drag-placeholder` 灰、
+ *   `.drop-outline` 绿，两个框一起看才读得出「从哪来、往哪去」）；
  * - 两个标注框都和卡片**实际大小一致**（半宽就半宽、高就卡片高）；
  * - 被拖的卡本体尺寸不变，只随手指上下浮动；松手把该卡插到落点行，其余卡重新排（animateItem 平滑让位）。
  * 末尾一张虚线「添加」卡代替原悬浮按钮。
@@ -438,7 +441,7 @@ private fun EditingContent(
                             error = state.previewMessageById[dragged.id],
                             modifier = Modifier
                                 .fillMaxWidth()
-                                // 手上这张卡整圈画**实线**框（静置卡是细虚线、落点槽位是 tertiary 虚线，
+                                // 手上这张卡整圈画**实线**框（静置卡是细虚线、落点槽位是绿虚线，
                                 // 只有它是实线），移动时一眼认得出。口径同 [SlotHost] 的静置卡：
                                 // 框画在本层、再用 2dp 内边距把卡缩进去，框才不会被 Card 自己的
                                 // 不透明面盖掉一半（链上先画的画在下面）。
@@ -545,19 +548,21 @@ private fun SlotHost(
     val widget = cell.widget
     Box(modifier = modifier) {
         when {
-            // 落点：卡要落进去的那一格（tertiary，跟静置卡的 primary 虚线、原位框的中性色区分开）
+            // 落点：卡要落进去的那一格。**绿**（饱和 + 同色底），跟静置卡的 primary 细虚线、
+            // 原位框的灰区分得开；口径同 webapp 看板的 `.drop-outline`（也是绿框 + 12% 绿底）。
             cell.drop -> MarkerBox(
                 height = markerHeight,
-                background = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f),
-                border = MaterialTheme.colorScheme.tertiary,
+                background = Green.copy(alpha = 0.12f),
+                border = Green,
                 strokeWidth = 2.dp
             )
-            // 原位：卡原来那一格，留一个空框（中性色），谁都不去占它
+            // 原位：卡原来那一格，留一个**灰**框（中性、无彩），谁都不去占它。灰与绿是「从哪来 /
+            // 往哪去」最省事的一对区分（同 webapp 的 `.cdk-drag-placeholder`）。
             cell.origin -> MarkerBox(
                 height = markerHeight,
-                background = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
-                border = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                strokeWidth = 1.5.dp
+                background = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.06f),
+                border = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.55f),
+                strokeWidth = 2.dp
             )
             widget != null -> DashboardWidgetHost(
                 widget = widget,
@@ -576,7 +581,10 @@ private fun SlotHost(
     }
 }
 
-/** 原位框 / 落点框：一格占位框（高 = 被拖卡原高），不含卡内容。 */
+/**
+ * 原位框 / 落点框：一格占位框（高 = 被拖卡原高），不含卡内容。
+ * 两者只靠**颜色**区分（调用处给：原位灰、落点绿），形状与线宽刻意保持同款。
+ */
 @Composable
 private fun MarkerBox(height: Dp, background: Color, border: Color, strokeWidth: Dp) {
     Box(
@@ -803,7 +811,7 @@ private fun Modifier.dashedBorder(
 /**
  * 实线圆角边框（**拖动中的浮动卡**用）。
  *
- * 静置的卡是 primary 细虚线、落点槽位是 tertiary 虚线，都是「虚线」；手上这张改成**实线**，
+ * 静置的卡是 primary 细虚线、落点槽位是绿虚线，都是「虚线」；手上这张改成**实线**，
  * 一眼就能看出"正在移动的是它"，不会和底下的卡、以及那个虚线落点槽位混在一起。
  */
 private fun Modifier.solidBorder(

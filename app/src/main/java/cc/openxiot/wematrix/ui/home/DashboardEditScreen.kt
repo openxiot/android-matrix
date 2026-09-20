@@ -252,8 +252,10 @@ private fun EditingContent(
         if (dragId == null || rows.isEmpty()) return
         dragOffsetPx += dy
         // 卡中心当前落到的行：基线 = 起始行顶（指位是相对位移，不能跟行的绝对坐标比）。
+        // 卡高从 state 现读（拖拽手势闭包是早期捕获，不能信那里的旧值）
+        val h = dragId?.let { cardSizes[it]?.height } ?: 160
         val base = rowTopPx(dragOriginRow)
-        val cardCenter = base + dragOffsetPx + (dragCardH.takeIf { it > 0 } ?: 160) / 2f
+        val cardCenter = base + dragOffsetPx + h / 2f
         var t = 0
         for (r in rows.indices) {
             val bottom = rowTopPx(r) + rowHeightPx(rows[r])
@@ -296,8 +298,12 @@ private fun EditingContent(
             }
             resetDrag(); return
         }
-        // 跨位：让位期间展示序已排好，直接落库
-        val seq = displaySeq
+        // 跨位：用当前 state 里的插入位**现拼**重排序。displaySeq 只是渲染用的瞬时值、
+        // 手势闭包里多半是旧捕获（指针 input 的 key 在拖拽中不变，闭包不刷新），
+        // 从 state 现读插入位落库，卡才不回弹原位。
+        val seq = draft.filterNot { it.id == id }.toMutableList().apply {
+            add(dragPlaceIdx.coerceIn(0, size), draft.first { it.id == id })
+        }
         if (seq != draft) onReorder(seq)
         resetDrag()
     }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  * `/matrix/v1/dashboard/mobile` 与复用的 `/matrix/v1/dashboard/web/catalog`。
  *
  * 布局 = 一张卡的**有序数组**（数组顺序 = 阅读顺序，竖屏自上而下），卡片尺寸只有
- * `FULL` / `HALF` 两档（HALF 仅 stat 卡可用）—— 没有 web 那种 24 列网格的 x/y，
+ * `FULL` / `HALF` 两档（HALF 仅 stat 与 service 卡可用）—— 没有 web 那种 24 列网格的 x/y，
  * 但半宽卡记自己**占哪半格**（`side`），见 [MobileDashboardWidget.side]。
  * **config 语义与 web 逐字同构**（服务端共享渲染核心 + 同一校验器），
  * 所以各类型卡片的 config 键在这里不另造一套。
@@ -34,7 +34,7 @@ data class MobileDashboardWidget(
     @SerializedName("title") val title: String? = null,
     /** 预置标题的 i18n 键（仅服务端预置会填，本端按中文映射表展示） */
     @SerializedName("titleKey") val titleKey: String? = null,
-    /** FULL | HALF；HALF 仅 stat 卡合法 */
+    /** FULL | HALF；HALF 仅 stat / service 卡合法 */
     @SerializedName("size") val size: String? = null,
     /**
      * `LEFT` | `RIGHT`：这张半宽卡占**这一行的哪半格**。**只有 HALF 卡有**（整宽卡带了也被忽略）。

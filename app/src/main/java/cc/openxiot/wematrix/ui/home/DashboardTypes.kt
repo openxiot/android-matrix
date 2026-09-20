@@ -49,12 +49,21 @@ object DashboardTypes {
     fun distributionNeedsWindow(dimension: String?): Boolean = dimension in DIMENSION_NEEDS_WINDOW
     fun lineNeedsWindow(source: String?): Boolean = true // 两种 source 都要 window
 
-    // ---- 默认尺寸：HALF 仅 stat 卡 ----
+    /**
+     * 半宽开放给哪些类型：**与后端逐字同一条口径**
+     * （`MobileDashboardWidgetStructureValidator.HALF_TYPES`）—— 这两处必须一起改，
+     * 客户端松了口而后端不认，用户点「确认」时会收到一条保存失败。
+     *
+     * 统计卡（两块小数字并列）与服务卡（一行「字段名 + 值」）半宽放得下；曲线/分布图半宽画不开。
+     */
+    private val HALF_TYPES = setOf(STAT, SERVICE)
+
+    // ---- 默认尺寸：只有统计卡**默认**半宽（服务卡仍是整宽，半宽是可选档） ----
     fun defaultSize(type: String?): String = if (type == STAT) SIZE_HALF else SIZE_FULL
 
-    /** 是否允许某尺寸档位（HALF 仅 stat）。 */
+    /** 是否允许某尺寸档位（HALF 仅 stat / service）。 */
     fun sizeAllowed(type: String?, size: String?): Boolean =
-        size == SIZE_FULL || (size == SIZE_HALF && type == STAT)
+        size == SIZE_FULL || (size == SIZE_HALF && type in HALF_TYPES)
 
     /** picker 加卡时的默认 config，镜像 web `widget.picker.ts`。 */
     fun defaultConfig(type: String?): Map<String, Any?> = when (type) {

@@ -99,6 +99,33 @@ class DashboardTypesTest {
         assertEquals(config, DashboardTypes.configWith(config, *emptyArray<Pair<String, Any?>>()))
     }
 
+    // ---- 尺寸档位：半宽开放给谁（后端 `MobileDashboardWidgetStructureValidator.HALF_TYPES` 的另一半） ----
+
+    @Test
+    fun sizeAllowed_整宽五类卡都能选() {
+        DashboardTypes.ALL.forEach { type ->
+            assertTrue(type, DashboardTypes.sizeAllowed(type, DashboardTypes.SIZE_FULL))
+        }
+    }
+
+    @Test
+    fun sizeAllowed_半宽只给统计卡与服务卡() {
+        assertTrue(DashboardTypes.sizeAllowed(DashboardTypes.STAT, DashboardTypes.SIZE_HALF))
+        assertTrue(DashboardTypes.sizeAllowed(DashboardTypes.SERVICE, DashboardTypes.SIZE_HALF))
+
+        listOf(DashboardTypes.LINE, DashboardTypes.DISTRIBUTION, DashboardTypes.DEVICE).forEach { type ->
+            assertFalse(type, DashboardTypes.sizeAllowed(type, DashboardTypes.SIZE_HALF))
+        }
+    }
+
+    /** 默认档位与服务卡的关系：服务卡**可以**半宽，但加进来时仍是整宽（半宽是可选档，不是默认）。 */
+    @Test
+    fun defaultSize_只有统计卡默认半宽() {
+        assertEquals(DashboardTypes.SIZE_HALF, DashboardTypes.defaultSize(DashboardTypes.STAT))
+        assertEquals(DashboardTypes.SIZE_FULL, DashboardTypes.defaultSize(DashboardTypes.SERVICE))
+        assertEquals(DashboardTypes.SIZE_FULL, DashboardTypes.defaultSize(DashboardTypes.LINE))
+    }
+
     // ---- configBool：缺键 / 非布尔都走缺省（web `readBoolean` 同口径） ----
 
     @Test

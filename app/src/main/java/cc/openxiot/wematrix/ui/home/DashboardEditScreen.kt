@@ -205,27 +205,30 @@ private fun EditingContent(
     var dragOffsetX by remember { mutableStateOf(0f) }         // 手指横向位移（半宽成对左右互移用）
     var dragSwap by remember { mutableStateOf(false) }         // 半宽成对：越过行中隔线 → 换到同伴位置
     var dragAnchorPx by remember { mutableStateOf(0f) }        // 起始卡在**视口**里的 y（浮动卡叠加的坐标基准）
-    // 每张卡的实测尺寸（px）：插槽高度用
+    // 每张卡的实测尺寸（px）：原位框 / 落点框的高度都用它
     var cardSizes by remember { mutableStateOf<Map<String, IntSize>>(emptyMap()) }
     val dragCardH = dragId?.let { cardSizes[it]?.height } ?: 0
-    // 插槽高度（dp）：cardSizes 存的是 px，要除以 density 才得当 dp（直接 .dp 会呈 3x）。
+    // 框高（dp）：cardSizes 存的是 px，要除以 density 才得当 dp（直接 .dp 会呈 3x）。
     val dragMarkerH = with(density) { if (dragCardH > 0) (dragCardH / density.density).dp else 150.dp }
 
-    // 让位展示序：把被拖卡挪到 dragPlaceIdx —— **只改显示**，草稿/预览不动。
-    // 落点那行就是被拖卡的插槽（tertiary 标记），其余卡随之 animateItem 让位。
-    val displaySeq =
-        if (dragId == null) draft
-        else {
-            val s = draft.filterNot { it.id == dragId }
-            if (s.size != draft.size) s.toMutableList().apply {
-                add(dragPlaceIdx.coerceIn(0, size), draft.first { it.id == dragId })
-            } else draft
-        }
-    val displayRows = remember(draft, dragId, dragPlaceIdx) { buildRows(displaySeq) }
-    // 行签名 → 行内容：命中 y 后反查是哪个行/哪张卡
+    // 静态配对表：谁和谁**原本**并排 —— 拖动期间不许为了补上空出来的半格而重新配对
+    val staticMates = remember(draft) { staticMates(draft) }
+
+    /**
+     * 拖动中的展示格：`draft` 每张卡一格，**被拖卡那一格换成原位框**（其余卡一格都不动）；
+     * 落位不在原索引时，再插一格落点框 —— 落点框是「多出来的那一格」，只有它后面的卡整体挪一格。
+     * 原位置不会被人补上，这就是「不要自动布局」。
+     */
+    val displayRows = remember(draft, dragId, dragPlaceIdx, dragSwap, staticMates) {
+        val id = dragId
+        val cells = if (id == null) draft.map { EditCell.card(it) }
+        else dragCells(draft, id, dragPlaceIdx, swap = dragSwap)
+        buildEditRows(cells, staticMates)
+    }
+    // 行签名 → 行内容：命中 y 后反查是哪个行/哪一格
     val rowByKey = displayRows.associate { rowSignature(it) to it }
 
-    fun startDrag(cardId: String, row: List<MobileDashboardWidget>) {
+    fun startDrag(cardId: String, row: List<EditCell>) {
         val idx = draft.indexOfFirst { it.id == cardId }
         if (idx < 0) return
         dragId = cardId
@@ -255,16 +258,7 @@ private fun EditingContent(
             row.size > 1 -> row[0]
             else -> row[0]
         }
-        picked.id?.let { startDrag(it, row) }
-    }
-
-    /**
-     * 把 [card] 插进「去掉自己」的序列 `s` 的第 `p` 位后，它在展示行里的行号。
-     * 纯序列推算 —— 和渲染用的是同一套 [buildRows]，不涉及任何坐标几何。
-     */
-    fun cardRowIndex(s: List<MobileDashboardWidget>, card: MobileDashboardWidget, p: Int): Int {
-        val seq = s.toMutableList().apply { add(p.coerceIn(0, size), card) }
-        return buildRows(seq).indexOfFirst { row -> row.any { it.id == card.id } }
+        picked.widget?.id?.let { startDrag(it, row) }
     }
 
     fun dragBy(amount: Offset, fingerY: Float, boxWidth: Float) {
@@ -273,36 +267,33 @@ private fun EditingContent(
         dragOffsetPx += amount.y
         if (amount.x != 0f) {
             dragOffsetX += amount.x
-            // 半宽成对：依草稿相邻判定左右卡，卡中心越过行中隔线 → 与同伴互换
+            // 半宽成对：**原本并排**的那张在左/在右（口径同 commitDrag，不是「相邻的半宽卡」——
+            // [H1,H2,H3] 里 H2 的同伴是 H1，不是 H3），卡中心越过行中隔线 → 与它互换。
+            // 起点按**卡自己**所在的那半格算：在左半格就是 0.25、在右半格就是 0.75。
             val oi = draft.indexOfFirst { it.id == id }
-            if (oi >= 0) {
-                val isPair = (oi > 0 && draft[oi - 1].size == DashboardTypes.SIZE_HALF) ||
-                    (oi + 1 < draft.size && draft[oi + 1].size == DashboardTypes.SIZE_HALF)
-                if (isPair) {
-                    val left = oi + 1 < draft.size && draft[oi + 1].size == DashboardTypes.SIZE_HALF
-                    dragSwap = if (left)
-                        (boxWidth * 0.25f + dragOffsetX) > boxWidth / 2f
-                    else
-                        (boxWidth * 0.75f + dragOffsetX) < boxWidth / 2f
-                }
+            val mateIdx = mateIndex(draft, id)
+            dragSwap = when {
+                mateIdx < 0 -> false
+                mateIdx < oi -> (boxWidth * 0.75f + dragOffsetX) < boxWidth / 2f // 我在右半格
+                else -> (boxWidth * 0.25f + dragOffsetX) > boxWidth / 2f        // 我在左半格
             }
         }
         // 手指压在展示序的哪一行
         val d = listState.layoutInfo.visibleItemsInfo.firstOrNull {
             it.index < displayRows.size && fingerY >= it.offset && fingerY <= it.offset + it.size
         }?.index ?: return // 落在行间距 / 列表外：保持现落点
-        // 落点 = 手指所在的那一行：在 0..|s| 里选一个插入位 p，使这张卡的行号最接近 d。
-        // 行号只由序列决定（见 [cardRowIndex]），所以「落点行」永远和实际渲染出来的行一致 ——
-        // 老写法按卡高累加推算绝对行位、漏算 12dp 行间距，落点会一直偏一点。
-        // 行号对这张卡不可达时（如落单半宽卡只能并排或独占一行）退到行号最接近的候选，
-        // 再用「离当前插入位最近」打破平手，插槽始终连续跟手、不卡住也不抖。
+        // 落点 = 手指所在的那一行：在 0..|s| 里选一个插入位 p，使这张卡的**落点框**行号最接近 d。
+        // 行号只由格序列推算（见 [frameRowIndex]，与渲染同一套 [buildEditRows]），不涉及坐标几何，
+        // 所以「落点框画在哪一行」和这里算的永远一致 —— 老写法按卡高累加推算绝对行位、漏算 12dp
+        // 行间距，落点会一直偏一点。
+        // 行号对这张卡不可达时（如原位框占着原格、落点框只能落在它前后）退到最接近的候选，再用
+        // 「离当前插入位最近」打破平手：同一位置平手时保持不动，落点框不抖。
         val s = draft.filterNot { it.id == id }
-        val card = draft.first { it.id == id }
         var best = dragPlaceIdx
         var bestRowDist = Int.MAX_VALUE
         var bestMoveDist = Int.MAX_VALUE
         for (p in 0..s.size) {
-            val rowDist = abs(cardRowIndex(s, card, p) - d)
+            val rowDist = abs(frameRowIndex(draft, id, p, staticMates) - d)
             val moveDist = abs(p - dragPlaceIdx)
             if (rowDist < bestRowDist || (rowDist == bestRowDist && moveDist < bestMoveDist)) {
                 bestRowDist = rowDist
@@ -328,11 +319,7 @@ private fun EditingContent(
         if (originIdx < 0) { resetDrag(); return }
         // 落点仍回原索引位、且已左右越过中隔线 → 与同行半宽同伴互换
         if (dragPlaceIdx == originIdx && dragSwap) {
-            val mate = when {
-                originIdx > 0 && draft[originIdx - 1].size == DashboardTypes.SIZE_HALF -> originIdx - 1
-                originIdx + 1 < draft.size && draft[originIdx + 1].size == DashboardTypes.SIZE_HALF -> originIdx + 1
-                else -> -1
-            }
+            val mate = mateIndex(draft, id)
             if (mate >= 0) {
                 val order = draft.toMutableList()
                 order[originIdx] = draft[mate]
@@ -341,7 +328,7 @@ private fun EditingContent(
             }
             resetDrag(); return
         }
-        // 跨位：用当前 state 里的插入位**现拼**重排序。displaySeq 只是渲染用的瞬时值、
+        // 跨位：用当前 state 里的插入位**现拼**重排序。展示格只是渲染用的瞬时值、
         // 手势闭包里多半是旧捕获（指针 input 的 key 在拖拽中不变，闭包不刷新），
         // 从 state 现读插入位落库，卡才不回弹原位。
         val seq = draft.filterNot { it.id == id }.toMutableList().apply {
@@ -407,7 +394,6 @@ private fun EditingContent(
                             row = row,
                             state = state,
                             onOpen = onOpen,
-                            dragId = dragId,
                             markerHeight = dragMarkerH,
                             onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) }
                         )
@@ -518,62 +504,67 @@ private fun FloatingCardSlot(
 }
 
 /**
- * 一个显示行：FULL 独占一行整宽；连续两个 HALF 并排（weight 各半）占一行。
+ * 一个显示行：FULL 独占一行整宽；半宽格两两并排（weight 各半）占一行。
  * 落单的 HALF **保持半宽**（不「占位补成整宽」），只靠左。
  *
- * 传入的 `row` 已是**展示序**的行：被拖卡不在原位置，而在它的落点行（见 [SlotHost]）。
+ * 传入的 `row` 是[拖动中的展示格][EditCell]：可能是真卡，也可能是原位框 / 落点框。
  */
 @Composable
 private fun RowContent(
-    row: List<MobileDashboardWidget>,
+    row: List<EditCell>,
     state: MobileDashboardUiState,
     onOpen: (String) -> Unit,
-    dragId: String?,
     markerHeight: Dp,
     onSize: (String, IntSize) -> Unit
 ) {
     if (row.size == 2) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            SlotHost(row[0], state, onOpen, dragId, markerHeight, onSize, Modifier.weight(1f))
-            SlotHost(row[1], state, onOpen, dragId, markerHeight, onSize, Modifier.weight(1f))
+            SlotHost(row[0], state, onOpen, markerHeight, onSize, Modifier.weight(1f))
+            SlotHost(row[1], state, onOpen, markerHeight, onSize, Modifier.weight(1f))
         }
     } else {
         val wide = if (row[0].size == DashboardTypes.SIZE_HALF) 0.5f else 1f
-        SlotHost(row[0], state, onOpen, dragId, markerHeight, onSize, Modifier.fillMaxWidth(wide))
+        SlotHost(row[0], state, onOpen, markerHeight, onSize, Modifier.fillMaxWidth(wide))
     }
 }
 
 /**
- * 一个槽位。被拖卡在**展示序**里已是「落点位置」，这里只画它的插槽（tertiary 虚线框 + 背景，
- * 高=卡高、宽=槽位），卡本体由外层叠加的浮动位负责。其余卡照常渲染。
+ * 一格。真卡照常渲染（细虚线框 + 点击进编辑）；**原位框**（被拖卡原来那一格：留空、别的卡不许
+ * 补上来）与**落点框**（它要落进去的那一格）只画背景 + 虚线框，高 = 被拖卡原高、宽 = 本格宽度，
+ * 卡本体由外层叠加的浮动位负责。
  */
 @Composable
 private fun SlotHost(
-    widget: MobileDashboardWidget,
+    cell: EditCell,
     state: MobileDashboardUiState,
     onOpen: (String) -> Unit,
-    dragId: String?,
     markerHeight: Dp,
     onSize: (String, IntSize) -> Unit,
     modifier: Modifier
 ) {
+    val widget = cell.widget
     Box(modifier = modifier) {
-        if (dragId == widget.id) {
-            // 落点插槽：占住卡要落的位置，让旁边的卡实时让位
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(markerHeight)
-                    .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f), RoundedCornerShape(16.dp))
-                    .dashedBorder(color = MaterialTheme.colorScheme.tertiary, strokeWidth = 2.dp)
+        when {
+            // 落点：卡要落进去的那一格（tertiary，跟静置卡的 primary 虚线、原位框的中性色区分开）
+            cell.drop -> MarkerBox(
+                height = markerHeight,
+                background = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f),
+                border = MaterialTheme.colorScheme.tertiary,
+                strokeWidth = 2.dp
             )
-        } else {
-            // 卡始终包一层 fillMaxWidth：DashboardWidgetHost 的 Card 默认包内容宽，
-            // 直接传槽宽 modifier 会让半宽卡缩成内容宽（≈ 1/4），必须让它填满槽位。
-            DashboardWidgetHost(
+            // 原位：卡原来那一格，留一个空框（中性色），谁都不去占它
+            cell.origin -> MarkerBox(
+                height = markerHeight,
+                background = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f),
+                border = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                strokeWidth = 1.5.dp
+            )
+            widget != null -> DashboardWidgetHost(
                 widget = widget,
                 data = state.previewById[widget.id],
                 error = state.previewMessageById[widget.id],
+                // 卡始终包一层 fillMaxWidth：DashboardWidgetHost 的 Card 默认包内容宽，
+                // 直接传槽宽 modifier 会让半宽卡缩成内容宽（≈ 1/4），必须让它填满槽位。
                 modifier = Modifier
                     .fillMaxWidth()
                     .onSizeChanged { onSize(widget.id.orEmpty(), it) }
@@ -583,6 +574,18 @@ private fun SlotHost(
             )
         }
     }
+}
+
+/** 原位框 / 落点框：一格占位框（高 = 被拖卡原高），不含卡内容。 */
+@Composable
+private fun MarkerBox(height: Dp, background: Color, border: Color, strokeWidth: Dp) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height)
+            .background(background, RoundedCornerShape(16.dp))
+            .dashedBorder(color = border, strokeWidth = strokeWidth)
+    )
 }
 
 /** 把草稿按「FULL 一行 / 连续两个 HALF 并排一行」派生成显示行（与首页只读排布同口径）。 */
@@ -605,9 +608,151 @@ private fun buildRows(widgets: List<MobileDashboardWidget>): List<List<MobileDas
     return result
 }
 
-/** 行在 LazyColumn 里的稳定 key（也是拖拽签名）：行内 id 拼接。 */
-private fun rowSignature(row: List<MobileDashboardWidget>): String =
-    row.joinToString("~") { it.id.orEmpty() }
+/**
+ * 拖动中显示的一格。[widget] 是真卡；[origin] / [drop] 是两个框，不是真卡：
+ * **原位框**是被拖卡原来那一格（留空），**落点框**是它要落进去的那一格（多出来的那一格）。
+ * 两个框都按被拖卡的 [size] 占位，高度由外面的 `markerHeight` 定。
+ */
+private data class EditCell(
+    val widget: MobileDashboardWidget?,
+    val size: String,
+    val origin: Boolean = false,
+    val drop: Boolean = false
+) {
+    /** 行签名里的这一格：真卡就是 id，两个框各带前缀（不会和真卡 id 撞）。 */
+    val key: String
+        get() = when {
+            drop -> "drop:" + widget?.id.orEmpty()
+            origin -> "origin:" + widget?.id.orEmpty()
+            else -> widget?.id.orEmpty()
+        }
+
+    companion object {
+        fun card(w: MobileDashboardWidget) = EditCell(w, sizeOf(w))
+        fun origin(w: MobileDashboardWidget) = EditCell(w, sizeOf(w), origin = true)
+        fun drop(w: MobileDashboardWidget) = EditCell(w, sizeOf(w), drop = true)
+
+        private fun sizeOf(w: MobileDashboardWidget) = w.size ?: DashboardTypes.SIZE_FULL
+    }
+}
+
+/** 静态配对表：id → **原本**并排的那张半宽卡 id（没有就是 null）。 */
+private fun staticMates(widgets: List<MobileDashboardWidget>): Map<String, String?> {
+    val mates = HashMap<String, String?>()
+    buildRows(widgets).forEach { row ->
+        if (row.size == 2) {
+            mates[row[0].id.orEmpty()] = row[1].id
+            mates[row[1].id.orEmpty()] = row[0].id
+        }
+    }
+    return mates
+}
+
+/**
+ * 与 [id] **原本并排**的那张半宽卡在草稿里的下标（没有就是 -1）。
+ * 口径是 [buildRows] 的配对结果，不是「草稿里相邻的半宽卡」—— [H1,H2,H3] 里 H2 的同伴是 H1。
+ */
+private fun mateIndex(draft: List<MobileDashboardWidget>, id: String): Int {
+    val idx = draft.indexOfFirst { it.id == id }
+    val mate = draft.getOrNull(idx)?.id?.let { staticMates(draft)[it] } ?: return -1
+    return draft.indexOfFirst { it.id == mate }
+}
+
+/**
+ * 拖动中把被拖卡那一格换成**原位框**，并在落位 `p`（去掉自己后的插入位）插入**落点框**。
+ *
+ * `p == 原索引` 就是「落回原位」：不另插落点框，只把原位框也标成落点色（同一格画两个框没有意义），
+ * 也正是刚开始拖的那一帧，画面不跳。原位框占着原索引，故 `p` 在原索引**之后**时要再挪一格，
+ * 才是落点框在格序列里的位置。
+ *
+ * [swap]（纵向还在原位、只是横向越过了行中隔线）是唯一**不画原位框**的情况：那两格之内的左右互换
+ * 一定要同伴让位，原位框没有立足之地 —— 同伴挪到被拖卡那一格、落点框占同伴那一格，两格互换后
+ * **行数不变**（不会把下面的卡挤下去），也正是松手后 [buildRows] 的排法。
+ */
+private fun dragCells(
+    draft: List<MobileDashboardWidget>,
+    dragId: String,
+    p: Int,
+    swap: Boolean = false
+): List<EditCell> {
+    val originIdx = draft.indexOfFirst { it.id == dragId }
+    if (originIdx < 0) return draft.map { EditCell.card(it) }
+    if (swap && p == originIdx) {
+        val mate = draft.getOrNull(mateIndex(draft, dragId))
+        if (mate != null) {
+            return draft.map { w ->
+                when (w.id) {
+                    dragId -> EditCell.card(mate)
+                    else -> if (w.id == mate.id) EditCell.drop(draft[originIdx]) else EditCell.card(w)
+                }
+            }
+        }
+    }
+    val samePlace = p == originIdx
+    val cells = draft.mapIndexed { i, w ->
+        when {
+            i != originIdx -> EditCell.card(w)
+            samePlace -> EditCell.origin(w).copy(drop = true)
+            else -> EditCell.origin(w)
+        }
+    }.toMutableList()
+    if (!samePlace) {
+        val q = (if (p < originIdx) p else p + 1).coerceIn(0, cells.size)
+        cells.add(q, EditCell.drop(draft[originIdx]))
+    }
+    return cells
+}
+
+/**
+ * 把格序列派生成显示行。FULL 独占一行；两个相邻 HALF 成行的条件**只有**两条：
+ * 它们原本就是一对，或其中一格是落点框 —— 拖动期间谁都不会为了补上空出来的半格而左右挪动
+ * （「不要自动布局」），只有落点框参与重新配对。
+ */
+private fun buildEditRows(cells: List<EditCell>, mates: Map<String, String?>): List<List<EditCell>> {
+    val rows = mutableListOf<List<EditCell>>()
+    var i = 0
+    while (i < cells.size) {
+        val b = cells.getOrNull(i + 1)
+        if (b != null && canPair(cells[i], b, mates)) {
+            rows.add(listOf(cells[i], b))
+            i += 2
+        } else {
+            rows.add(listOf(cells[i]))
+            i += 1
+        }
+    }
+    return rows
+}
+
+/** 相邻两格能不能并成一行：都是半宽，且原本就是一对、或其中一格是落点框。 */
+private fun canPair(a: EditCell, b: EditCell, mates: Map<String, String?>): Boolean {
+    if (a.size != DashboardTypes.SIZE_HALF || b.size != DashboardTypes.SIZE_HALF) return false
+    if (a.drop || b.drop) return true
+    val aId = a.widget?.id ?: return false
+    val aMate = mates[aId] ?: return false
+    return aMate == b.widget?.id
+}
+
+/**
+ * 落位 `p` 的**落点框**落在第几行；没有落点框（`p` 就是原索引）时取原位框的行号 ——
+ * 两种情况问的都是同一件事：这张卡要落在哪一行。纯格序列推算，和渲染共用 [buildEditRows]。
+ *
+ * 不给 [dragCells] 传 `swap`：左右互换只改同一行里两格谁左谁右，**行号不变**，问行号时不必区分。
+ */
+private fun frameRowIndex(
+    draft: List<MobileDashboardWidget>,
+    dragId: String,
+    p: Int,
+    mates: Map<String, String?>
+): Int {
+    val rows = buildEditRows(dragCells(draft, dragId, p), mates)
+    val drop = rows.indexOfFirst { row -> row.any { it.drop } }
+    return if (drop >= 0) drop else rows.indexOfFirst { row -> row.any { it.origin } }
+}
+
+/** 行在 LazyColumn 里的稳定 key（也是拖拽签名）：行内各格的标识拼接。 */
+private fun rowSignature(row: List<EditCell>): String =
+    row.joinToString("~") { it.key }
 
 /** 末尾一张虚线的「添加」卡 —— 代替悬浮按钮。 */
 @Composable

@@ -211,6 +211,8 @@ private fun EditingContent(
     // 卡在这宽度下内容高是稳定的；浮动卡的第一帧未必回填过、跨次拖拽又残留旧值，直接读存量最稳，
     // 保证原/落点标注始终与卡等大。
     val dragCardH = dragId?.let { cardSizes[it]?.height } ?: 0
+    // 标注高度（dp）：cardSizes 存的是 **px**，要除以 density 才得当 dp —— 直接 .dp 会致 3x（px 值再加乘 density）。
+    val dragMarkerH = with(density) { if (dragCardH > 0) (dragCardH / density.density).dp else 150.dp }
 
     val rowHeightPx = { row: List<MobileDashboardWidget> ->
         row.mapNotNull { cardSizes[it.id]?.height }.maxOrNull() ?: 160
@@ -313,7 +315,7 @@ private fun EditingContent(
                 val signature = rowSignature(row)
                 val isTargetRow = dragId != null && ri == dragTargetRow
                 val originRowHasDrag = dragId != null && ri == dragOriginRow
-                val markerH = with(density) { (dragCardH.takeIf { it > 0 } ?: 160).dp }
+                val markerH = dragMarkerH
 
                 Box(
                     modifier = Modifier
@@ -358,7 +360,7 @@ private fun EditingContent(
                         dragId = dragId,
                         dragOffsetPx = dragOffsetPx,
                         dragOffsetX = dragOffsetX,
-                        dragCardH = dragCardH,
+                        markerHeight = dragMarkerH,
                         onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) }
                     )
                     // 落点行 → 标注「可以放置的位置」：虚线框 + tertiary 背景色，尺寸 = 卡片实际大小
@@ -421,17 +423,17 @@ private fun RowContent(
     dragId: String?,
     dragOffsetPx: Float,
     dragOffsetX: Float,
-    dragCardH: Int,
+    markerHeight: Dp,
     onSize: (String, IntSize) -> Unit
 ) {
     if (row.size == 2) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragOffsetX, dragCardH, onSize, Modifier.weight(1f))
-            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, dragOffsetX, dragCardH, onSize, Modifier.weight(1f))
+            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragOffsetX, markerHeight, onSize, Modifier.weight(1f))
+            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, dragOffsetX, markerHeight, onSize, Modifier.weight(1f))
         }
     } else {
         val wide = if (row[0].size == DashboardTypes.SIZE_HALF) 0.5f else 1f
-        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragOffsetX, dragCardH, onSize, Modifier.fillMaxWidth(wide))
+        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragOffsetX, markerHeight, onSize, Modifier.fillMaxWidth(wide))
     }
 }
 
@@ -448,13 +450,12 @@ private fun CardHost(
     dragId: String?,
     dragOffsetPx: Float,
     dragOffsetX: Float,
-    dragCardH: Int,
+    markerHeight: Dp,
     onSize: (String, IntSize) -> Unit,
     modifier: Modifier
 ) {
     val isDragged = dragId == widget.id
-    val density = LocalDensity.current
-    val markerH = with(density) { (dragCardH.takeIf { it > 0 } ?: 160).dp }
+    val markerH = markerHeight
     Box(
         modifier = modifier
             .onSizeChanged { if (!isDragged) onSize(widget.id.orEmpty(), it) }

@@ -202,11 +202,15 @@ private fun EditingContent(
     var dragId by remember { mutableStateOf<String?>(null) }   // 正在拖的那张一的卡 id
     var dragOriginRow by remember { mutableStateOf(0) }        // 起始所在行
     var dragOffsetPx by remember { mutableStateOf(0f) }        // 手指纵向位移
+    var dragOffsetX by remember { mutableStateOf(0f) }         // 手指横向位移（半宽成对在行内左右互移用）
+    var dragSwap by remember { mutableStateOf(false) }         // 半宽成对：手指越过行中隔线 → 该换到同伴位置
     var dragTargetRow by remember { mutableStateOf(0) }        // 当前落点行
-    // 每张卡的实测尺寸（px）：行高/落点映射用
+    // 每张卡的实测尺寸（px）：行高/落点映射/标注高度都用它
     var cardSizes by remember { mutableStateOf<Map<String, IntSize>>(emptyMap()) }
-    // 被拖卡**当前渲染高**（px）：从浮动卡本体实测回填，保证原/落点标注与卡等大
-    var dragCardH by remember { mutableStateOf(0) }
+    // 被拖卡实测高（px）：**取拖前测下来的原高**，不用拖动中重测、更不是上次遗留的。
+    // 卡在这宽度下内容高是稳定的；浮动卡的第一帧未必回填过、跨次拖拽又残留旧值，直接读存量最稳，
+    // 保证原/落点标注始终与卡等大。
+    val dragCardH = dragId?.let { cardSizes[it]?.height } ?: 0
 
     val rowHeightPx = { row: List<MobileDashboardWidget> ->
         row.mapNotNull { cardSizes[it.id]?.height }.maxOrNull() ?: 160
@@ -223,6 +227,8 @@ private fun EditingContent(
         dragOriginRow = originRow
         dragTargetRow = originRow
         dragOffsetPx = 0f
+        dragOffsetX = 0f
+        dragSwap = false
     }
 
     fun moveBy(dy: Float) {
@@ -246,21 +252,36 @@ private fun EditingContent(
         dragOriginRow = 0
         dragTargetRow = 0
         dragOffsetPx = 0f
+        dragOffsetX = 0f
+        dragSwap = false
     }
 
     fun commitDrag() {
         val id = dragId ?: return
-        // 依旧停在起始行 = 没移动，直接 no-op（别顺手把卡挪到行首/拆散成对）
-        if (dragTargetRow == dragOriginRow) { resetDrag(); return }
         val originIdx = draft.indexOfFirst { it.id == id }
         if (originIdx < 0) { resetDrag(); return }
+        // 同行内：半宽成对且已「左右越过行中隔线」→ 与同伴互换位置；否则 no-op（别挪到行首/拆对）
+        if (dragTargetRow == dragOriginRow) {
+            if (dragSwap && rows.getOrNull(dragOriginRow)?.size == 2) {
+                val pair = rows[dragOriginRow]
+                val ia = draft.indexOfFirst { it.id == pair[0].id }
+                val ib = draft.indexOfFirst { it.id == pair[1].id }
+                if (ia >= 0 && ib >= 0 && ia != ib) {
+                    val order = draft.toMutableList()
+                    order[ia] = draft[ib]
+                    order[ib] = draft[ia]
+                    if (order != draft) onReorder(order)
+                }
+            }
+            resetDrag(); return
+        }
         val order = draft.toMutableList()
         val card = order.removeAt(originIdx)
         var idx = rows.take(dragTargetRow).sumOf { it.size }
         if (dragOriginRow < dragTargetRow) idx -= 1
         idx = idx.coerceIn(0, order.size)
         order.add(idx, card)
-        // 松手后把最终顺序交还草稿；没移动则不做任何事
+        // 松手后把最终顺序交还草稿
         if (order != draft) onReorder(order)
         resetDrag()
     }
@@ -315,6 +336,17 @@ private fun EditingContent(
                                 onDrag = { change, amount ->
                                     change.consume()
                                     moveBy(amount.y)
+                                    if (amount.x != 0f) {
+                                        dragOffsetX += amount.x
+                                        // 半宽成对行：卡中心横向越过行中隔线 → 和同伴互换。仅拖入同行相邻位时用。
+                                        if (row.size == 2 && dragId != null) {
+                                            val left = row[0].id == dragId
+                                            dragSwap = if (left)
+                                                (size.width * 0.25f + dragOffsetX) > size.width / 2f
+                                            else
+                                                (size.width * 0.75f + dragOffsetX) < size.width / 2f
+                                        }
+                                    }
                                 }
                             )
                         }
@@ -325,9 +357,9 @@ private fun EditingContent(
                         onOpen = onOpen,
                         dragId = dragId,
                         dragOffsetPx = dragOffsetPx,
+                        dragOffsetX = dragOffsetX,
                         dragCardH = dragCardH,
-                        onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) },
-                        onDragHeight = { dragCardH = it }
+                        onSize = { id, size -> if (dragId != id) cardSizes = cardSizes + (id to size) }
                     )
                     // 落点行 → 标注「可以放置的位置」：虚线框 + tertiary 背景色，尺寸 = 卡片实际大小
                     if (isTargetRow && !originRowHasDrag && dragId != null) {
@@ -388,18 +420,18 @@ private fun RowContent(
     onOpen: (String) -> Unit,
     dragId: String?,
     dragOffsetPx: Float,
+    dragOffsetX: Float,
     dragCardH: Int,
-    onSize: (String, IntSize) -> Unit,
-    onDragHeight: (Int) -> Unit
+    onSize: (String, IntSize) -> Unit
 ) {
     if (row.size == 2) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragCardH, onSize, onDragHeight, Modifier.weight(1f))
-            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, dragCardH, onSize, onDragHeight, Modifier.weight(1f))
+            CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragOffsetX, dragCardH, onSize, Modifier.weight(1f))
+            CardHost(row[1], state, onOpen, dragId, dragOffsetPx, dragOffsetX, dragCardH, onSize, Modifier.weight(1f))
         }
     } else {
         val wide = if (row[0].size == DashboardTypes.SIZE_HALF) 0.5f else 1f
-        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragCardH, onSize, onDragHeight, Modifier.fillMaxWidth(wide))
+        CardHost(row[0], state, onOpen, dragId, dragOffsetPx, dragOffsetX, dragCardH, onSize, Modifier.fillMaxWidth(wide))
     }
 }
 
@@ -415,9 +447,9 @@ private fun CardHost(
     onOpen: (String) -> Unit,
     dragId: String?,
     dragOffsetPx: Float,
+    dragOffsetX: Float,
     dragCardH: Int,
     onSize: (String, IntSize) -> Unit,
-    onDragHeight: (Int) -> Unit,
     modifier: Modifier
 ) {
     val isDragged = dragId == widget.id
@@ -437,7 +469,7 @@ private fun CardHost(
                     .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.10f), RoundedCornerShape(16.dp))
                     .dashedBorder(color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
             )
-            // 卡本体：尺寸不变，只随手指浮动；顺带把实测高回填，让标注和它等大
+            // 卡本体：尺寸不变，只随手指上下/左右浮动（半宽成对左右互移也是这个位移）
             DashboardWidgetHost(
                 widget = widget,
                 data = state.previewById[widget.id],
@@ -446,10 +478,10 @@ private fun CardHost(
                     .fillMaxWidth()
                     .graphicsLayer {
                         translationY = dragOffsetPx
+                        translationX = dragOffsetX
                         alpha = 0.95f
                         shadowElevation = 8.dp.toPx()
                     }
-                    .onSizeChanged { onDragHeight(it.height) }
             )
         } else {
             // 卡始终包一层 fillMaxWidth：DashboardWidgetHost 的 Card 默认包内容宽，

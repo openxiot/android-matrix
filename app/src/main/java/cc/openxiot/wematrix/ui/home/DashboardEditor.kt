@@ -173,7 +173,8 @@ fun DashboardCardEditorSheet(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("卡片标题（留空用默认名）") },
+                label = { Text("卡片标题") },
+                placeholder = { Text("留空则用默认名称") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -201,7 +202,9 @@ fun DashboardCardEditorSheet(
                 ) {
                     Icon(Icons.Outlined.Done, contentDescription = null)
                     Spacer(Modifier.width(6.dp))
-                    Text("保存")
+                    // 「确认」而不是「保存」：保存这张卡 ≠ 保存布局（页顶那颗按钮才是落库的），
+                    // 两个「保存」并排会让人以为点了它就存进去了。web 的编辑器也是「确认」。
+                    Text("确认")
                 }
             }
             Spacer(Modifier.height(8.dp))
@@ -331,8 +334,13 @@ private fun ServiceCascade(
         options = services.map { FilterOption(it.id.orEmpty(), it.name ?: it.id ?: "未命名服务") },
         onSelect = { id ->
             if (id != null) {
+                // 默认选中第一个**可读**方法，少一次点击（写方法 / 无应答的方法不在候选里）。
+                // **不能硬写 1**：方法序号由服务自己定，未必从 1 起 —— 写死 1 时方法框会选不中
+                // 候选项里的任何一项，字段区也就永远不出现。真一个可读方法都没有时删键
+                // （下拉显示「请选择方法」，「确认」按 [DashboardTypes.canCommit] 灰着）。
+                val first = readFunctions(services.firstOrNull { it.id == id }).firstOrNull()?.index
                 set("serviceId", id)
-                set("functionIndex", 1) // 默认第一个方法，减少一次点击
+                set("functionIndex", first)
                 set(activeKey, null) // 下游字段删键（换了服务，旧字段名不再成立）
             }
         },

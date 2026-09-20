@@ -3,10 +3,13 @@ package cc.openxiot.wematrix.ui.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -109,7 +112,7 @@ fun HomeScreen(
  * 只读排布：行由共享的 [pack] 给（**不再自己抄一份贪心配对** —— 那正是「横向补位」的来源）。
  *
  * - `FULL`：独占一行、整宽；
- * - 两张 `HALF`：一行两格；
+ * - 两张 `HALF`：一行两格、**等高**（行高取两张里高的那张，矮的撑上去）；
  * - 落单的 `HALF`：也占一行，另一半是**留白**而不是把卡撑满。靠左还是靠右看它自己的 `side`
  *   —— 落单的 `RIGHT`（同伴被删掉/拖走的那半张）就留在右半格，左边空着，**不往左滑**。
  *
@@ -128,12 +131,15 @@ private fun ReadOnlyContent(state: MobileDashboardUiState, modifier: Modifier = 
     ) {
         rows.forEach { row ->
             when {
+                // 同行两张半宽卡**等高**：`IntrinsicSize.Min` 把行高定成两张里更高的那张，
+                // 矮的那张 `fillMaxHeight` 撑上去（否则两张各自包内容高，一高一矮参差不齐
+                // —— 服务卡少一行「采于」也只是让差距更小，不是没差距）。
                 row.size == 2 -> Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     row.forEach { widget ->
-                        ReadOnlyHost(widget, state, Modifier.weight(1f))
+                        ReadOnlyHost(widget, state, Modifier.weight(1f).fillMaxHeight())
                     }
                 }
                 // 落单的半宽卡：靠哪边看 side，另一边留白（不占位补齐）

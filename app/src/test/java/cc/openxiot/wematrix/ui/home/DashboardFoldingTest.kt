@@ -2,6 +2,8 @@ package cc.openxiot.wematrix.ui.home
 
 import cc.openxiot.wematrix.ui.home.MobileRenderFormat.Slice
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
@@ -61,5 +63,20 @@ class DashboardFoldingTest {
             listOf(slice("a", 7), slice("其他", 3)),
             truncateSlices(slices, 1, "其他")
         )
+    }
+
+    // ---- serviceShowsRecordedAt：半宽服务卡不画「采于 …」（并排两张半宽卡要等高） ----
+
+    @Test
+    fun serviceShowsRecordedAt_整宽画_半宽不画() {
+        assertTrue(serviceShowsRecordedAt(recordedAt = 1_787_000_000_000, half = false))
+        assertFalse(serviceShowsRecordedAt(recordedAt = 1_787_000_000_000, half = true))
+    }
+
+    /** 本来就没采到（没有 recordedAt）时，跟档位无关：都没得画。 */
+    @Test
+    fun serviceShowsRecordedAt_没采过一律不画() {
+        assertFalse(serviceShowsRecordedAt(recordedAt = null, half = false))
+        assertFalse(serviceShowsRecordedAt(recordedAt = null, half = true))
     }
 }

@@ -78,7 +78,10 @@ fun DashboardWidgetHost(
                     )
                     DashboardTypes.SERVICE -> ServiceView(
                         data = data,
-                        showUnit = DashboardTypes.configBool(widget.config, "showUnit", true)
+                        showUnit = DashboardTypes.configBool(widget.config, "showUnit", true),
+                        // 半宽卡不画「采于 …」那一行（[serviceShowsRecordedAt]）：并排两张半宽卡
+                        // 高度要尽量一样，而这一行正是服务卡比统计卡多出来的那点高度
+                        half = widget.size == DashboardTypes.SIZE_HALF
                     )
                     DashboardTypes.DEVICE -> DeviceView(data)
                     else -> EmptyBody("未知卡片类型")
@@ -244,9 +247,11 @@ private fun serviceFieldLine(data: Map<String, Any?>, showFailureShadow: Boolean
 /**
  * 服务卡。`showUnit`（「显示单位」）关掉时**只不缀单位**，值照旧 —— 单位是点表里的用户数据，
  * 不是文案（与 web `service.state.ts` 的 `unit: showUnit ? row.unit : ''` 同口径）。
+ *
+ * `half`（这张卡是半宽档）只影响最后那行角标里**「采于 …」那半句**，见 [serviceShowsRecordedAt]。
  */
 @Composable
-private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean) {
+private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean, half: Boolean) {
     if (data == null) {
         EmptyBody("尚未取到数")
         return
@@ -279,12 +284,16 @@ private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean) {
             }
         }
         // 时间角标 + 失败标识：值是最后一次**成功**的，失败与值可同存（不同设备卡）。
-        if (recordedAt != null || error != null) {
+        // 半宽卡只省掉「采于 …」那半句 —— 失败原因照旧（见 [serviceShowsRecordedAt]）。
+        val caption = buildList {
+            if (serviceShowsRecordedAt(recordedAt, half)) {
+                recordedAt?.let { add("采于 " + friendlyTime(it)) }
+            }
+            error?.let { add("⚠ $it") }
+        }
+        if (caption.isNotEmpty()) {
             Text(
-                text = buildList {
-                    recordedAt?.let { add("采于 " + friendlyTime(it)) }
-                    error?.let { add("⚠ $it") }
-                }.joinToString(" · "),
+                text = caption.joinToString(" · "),
                 style = MaterialTheme.typography.labelSmall,
                 color = if (error != null)
                     MaterialTheme.colorScheme.error

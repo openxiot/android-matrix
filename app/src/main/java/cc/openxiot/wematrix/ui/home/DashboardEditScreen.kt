@@ -6,9 +6,11 @@ import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -526,8 +528,15 @@ private fun RowContent(
     onSize: (String, IntSize) -> Unit
 ) {
     if (row.size == 2) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            row.forEach { w -> CellHost(w, state, dragId, onOpen, markerHeight, onSize, Modifier.weight(1f)) }
+        // 与只读页同一条：同行两张半宽卡**等高**（行高取高的那张）。编辑页也得等高 —— 不然
+        // 排好版保存回去、到首页换一种高度，等于编辑时的预览在骗人。
+        Row(
+            modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            row.forEach { w ->
+                CellHost(w, state, dragId, onOpen, markerHeight, onSize, Modifier.weight(1f).fillMaxHeight())
+            }
         }
         return
     }

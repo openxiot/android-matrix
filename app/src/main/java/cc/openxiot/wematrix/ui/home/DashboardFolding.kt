@@ -27,3 +27,17 @@ fun truncateSlices(slices: List<Slice>, limit: Int?, otherLabel: String): List<S
     val rest = slices.drop(limit).sumOf { it.count }
     return head + Slice(otherLabel, rest)
 }
+
+/**
+ * 服务卡最后那行角标要不要画「采于 <时间>」。
+ *
+ * **半宽卡不画**：并排的两张半宽卡高度要尽量一样，而服务卡比统计卡多出来的正好就是这一行
+ * ——「采于」对一张「一眼看个读数」的半格卡是可有可无的信息。整宽服务卡照旧画（那是张
+ * 正经的信息卡，采集时间有意义）。
+ *
+ * **失败原因（`⚠ …`）不受这条影响**：它在 [cc.openxiot.wematrix.ui.home.DashboardCards] 里
+ * 单独判断，半宽卡上照旧显示 —— 一条错误提示不该因为卡片变窄就消失。两边的截断都落在
+ * 「半宽 = 更少的信息」，而不是「半宽 = 更少的真相」。
+ */
+fun serviceShowsRecordedAt(recordedAt: Long?, half: Boolean): Boolean =
+    recordedAt != null && !half

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,8 +37,9 @@ import kotlinx.coroutines.launch
 /**
  * 首页（可自定义看板）——**只读**渲染。
  *
- * 顺序 = 布局 `widgets[]`（= 阅读顺序）。`FULL` 整宽、**连续两个 HALF 并排**占一行；
- * 落单的 HALF 保持半宽（口径同编辑页，不占位补齐）。数分两处取（见 [MobileDashboardViewModel]）：布局
+ * 顺序 = 布局 `widgets[]`（= 阅读顺序），排布走共享的 [pack]（与编辑页、后端同一套规则）：
+ * `FULL` 整宽独占一行，`HALF` 两张并排，落单的 `HALF` 也占一行 —— 靠左还是靠右由它自己的
+ * `side` 说了算，另一半留白（不占位补齐）。数分两处取（见 [MobileDashboardViewModel]）：布局
  * （未保存时后端返回预置）→ 统一 render 每张卡。**没取到 / 未选项目都是空态**，不放一屏 0。
  *
  * 「编辑」入口在标题行右侧、**仅空间管理员**（[SessionState.canEditById]）可见，点了进二级页
@@ -103,51 +105,64 @@ fun HomeScreen(
     }
 }
 
-/** 只读排布：FULL 整宽、连续两个 HALF 并排占一行；落单的 HALF 保持半宽（不占位补齐）。 */
+/**
+ * 只读排布：行由共享的 [pack] 给（**不再自己抄一份贪心配对** —— 那正是「横向补位」的来源）。
+ *
+ * - `FULL`：独占一行、整宽；
+ * - 两张 `HALF`：一行两格；
+ * - 落单的 `HALF`：也占一行，另一半是**留白**而不是把卡撑满。靠左还是靠右看它自己的 `side`
+ *   —— 落单的 `RIGHT`（同伴被删掉/拖走的那半张）就留在右半格，左边空着，**不往左滑**。
+ *
+ * 落单那一格用「另一个 weight(1f) 的 Spacer」凑成同行两格，而不是 `fillMaxWidth(0.5f)`：
+ * 这样它的宽度与并排时那一格**逐像素一致**（并排那格是 `(行宽 - 12dp) / 2`），
+ * 从并排变成落单（同伴被删）时卡不会悄悄变宽一点。
+ */
 @Composable
 private fun ReadOnlyContent(state: MobileDashboardUiState, modifier: Modifier = Modifier) {
+    val rows = remember(state.widgets) { pack(state.widgets) }
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        val widgets = state.widgets
-        var i = 0
-        while (i < widgets.size) {
-            val widget = widgets[i]
-            val mate = i + 1 < widgets.size && widget.size == DashboardTypes.SIZE_HALF
-                && widgets[i + 1].size == DashboardTypes.SIZE_HALF
-            if (mate) {
-                Row(
+        rows.forEach { row ->
+            when {
+                row.size == 2 -> Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    DashboardWidgetHost(
-                        widget = widget,
-                        data = state.dataById[widget.id],
-                        error = state.messageById[widget.id],
-                        modifier = Modifier.weight(1f)
-                    )
-                    DashboardWidgetHost(
-                        widget = widgets[i + 1],
-                        data = state.dataById[widgets[i + 1].id],
-                        error = state.messageById[widgets[i + 1].id],
-                        modifier = Modifier.weight(1f)
-                    )
+                    row.forEach { widget ->
+                        ReadOnlyHost(widget, state, Modifier.weight(1f))
+                    }
                 }
-                i += 2
-            } else {
-                // 落单 HALF：保持半宽、靠左，和编辑页口径一致（不要把卡「占位补成整宽」）
-                val soloWide = if (widget.size == DashboardTypes.SIZE_HALF) 0.5f else 1f
-                DashboardWidgetHost(
-                    widget = widget,
-                    data = state.dataById[widget.id],
-                    error = state.messageById[widget.id],
-                    modifier = Modifier.fillMaxWidth(soloWide)
-                )
-                i += 1
+                // 落单的半宽卡：靠哪边看 side，另一边留白（不占位补齐）
+                row[0].size == DashboardTypes.SIZE_HALF -> Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    val onRight = row[0].side == DashboardTypes.SIDE_RIGHT
+                    if (onRight) Spacer(Modifier.weight(1f))
+                    ReadOnlyHost(row[0], state, Modifier.weight(1f))
+                    if (!onRight) Spacer(Modifier.weight(1f))
+                }
+                else -> ReadOnlyHost(row[0], state, Modifier.fillMaxWidth())
             }
         }
     }
+}
+
+/** 一张卡（只读）：取数结果与失败原因都按 id 认领，**不按下标**。 */
+@Composable
+private fun ReadOnlyHost(
+    widget: MobileDashboardWidget,
+    state: MobileDashboardUiState,
+    modifier: Modifier = Modifier
+) {
+    DashboardWidgetHost(
+        widget = widget,
+        data = state.dataById[widget.id],
+        error = state.messageById[widget.id],
+        modifier = modifier
+    )
 }

@@ -19,21 +19,26 @@ android {
     }
 
     signingConfigs {
-        create("release") {
-            val props = Properties().apply {
-                val file = rootProject.file("keystore.properties")
-                if (file.exists()) load(FileInputStream(file))
+        // keystore.properties 不入库（见 .gitignore），CI 上不存在。缺了就干脆不建 release 签名，
+        // 否则 file("") 会抛 "Cannot convert '' to File."，配置期就失败，assembleDebug 也跟着挂。
+        val props = Properties().apply {
+            val file = rootProject.file("keystore.properties")
+            if (file.exists()) load(FileInputStream(file))
+        }
+        val storeFilePath = props.getProperty("storeFile")
+        if (!storeFilePath.isNullOrBlank()) {
+            create("release") {
+                storeFile = rootProject.file(storeFilePath)
+                storePassword = props.getProperty("storePassword")
+                keyAlias = props.getProperty("keyAlias")
+                keyPassword = props.getProperty("keyPassword")
             }
-            storeFile = rootProject.file(props.getProperty("storeFile", ""))
-            storePassword = props.getProperty("storePassword")
-            keyAlias = props.getProperty("keyAlias")
-            keyPassword = props.getProperty("keyPassword")
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfigs.findByName("release")?.let { signingConfig = it }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

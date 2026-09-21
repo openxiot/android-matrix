@@ -1,0 +1,277 @@
+name: Build Release APK
+
+# 打 tag 触发发布（与 service-matrix 生产流水线的约定一致）。
+# workflow_dispatch 是干跑用的：不开 tag 也能验证「编译 + 签名 + 校验」这一段，默认不发布。
+# 要重跑发布不必重新打 tag，直接 Rerun 那次 tag 触发的 run 即可——事件仍是 push，会照常发布。
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号，形如 v1.0.4'
+        required: true
+        type: string
+      dry_run:
+        description: '只编译并校验，不发布到站点'
+        required: false
+        type: boolean
+        default: true
+
+# 上传到 Azure 不需要任何 GitHub 写权限
+permissions:
+  contents: read
+
+concurrency:
+  # 同一个 tag 不并发发布
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # tag 推送就发布；手动触发只有显式把 dry_run 关掉才发布
+    env:
+      PUBLISH: ${{ github.event_name == 'push' || !inputs.dry_run }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          # 必须全量：版本号要从 tag 推导，且要按版本序校验单调性
+          fetch-depth: 0
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: 解析并校验版本号
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${GITHUB_EVENT_NAME}" = "push" ]; then
+            TAG="${GITHUB_REF_NAME}"
+          else
+            TAG="${{ inputs.version }}"
+          fi
+
+          if ! printf '%s' "$TAG" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::tag 必须形如 vX.Y.Z，实际是 '$TAG'"
+            exit 1
+          fi
+
+          IFS=. read -r MAJOR MINOR PATCH <<< "${TAG#v}"
+          CODE=$(( MAJOR * 10000 + MINOR * 100 + PATCH ))
+
+          # 防手滑：新 versionCode 必须大于历史 tag 的最大值。否则会发布一个用户装不上的包
+          # —— Android 只按 versionCode 判断是不是升级。触发本次的那个 tag 要排除掉。
+          MAX=0
+          while IFS= read -r t; do
+            [ -z "$t" ] && continue
+            [ "$t" = "$TAG" ] && continue
+            # 必须严格正则，不能靠 glob：glob 会放 v1.1.0-rc1 这类预发布 tag 进来，而
+            # bash 算术里 "4-rc1" 会把 rc1 当变量名（空值=0）静默算成 4，污染 MAX 且无提示。
+            [[ "$t" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || continue
+            IFS=. read -r a b c <<< "${t#v}"
+            n=$(( a * 10000 + b * 100 + c ))
+            [ "$n" -gt "$MAX" ] && MAX=$n
+          done < <(git tag --list 'v*')
+
+          if [ "$CODE" -le "$MAX" ]; then
+            echo "::error::versionCode ${CODE} 未超过已有 tag 的最大值 ${MAX}，发布会产出装不上的包"
+            exit 1
+          fi
+
+          {
+            echo "APP_VERSION_TAG=$TAG"
+            echo "APP_VERSION_NAME=${TAG#v}"
+            echo "APP_VERSION_CODE=$CODE"
+          } >> "$GITHUB_ENV"
+
+          # 变量一律加花括号：紧跟中文全角标点时 bash 会把多字节字符并进变量名
+          echo "版本：${TAG} → versionName=${TAG#v}, versionCode=${CODE}（历史最大 ${MAX}）"
+
+      - name: 还原签名密钥
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${KEYSTORE_BASE64:-}" ]; then
+            echo "::error::缺少 secret ANDROID_KEYSTORE_BASE64，无法产出签名的发布包"
+            exit 1
+          fi
+
+          # 路径要与 app/build.gradle.kts 里 signingConfigs 读的 storeFile 一致
+          mkdir -p app/keystore
+          printf '%s' "$KEYSTORE_BASE64" | base64 -d > app/keystore/wematrix-release.jks
+
+          cat > keystore.properties <<PROPS
+          storeFile=app/keystore/wematrix-release.jks
+          storePassword=${KEYSTORE_PASSWORD}
+          keyAlias=${KEY_ALIAS}
+          keyPassword=${KEY_PASSWORD}
+          PROPS
+
+          chmod 600 keystore.properties app/keystore/wematrix-release.jks
+
+      - name: Build release APK
+        run: |
+          ./gradlew assembleRelease \
+            -PappVersionName="$APP_VERSION_NAME" \
+            -PappVersionCode="$APP_VERSION_CODE"
+
+      # 发布前的硬闸门：版本号对不上或签名 key 不对，宁可中断也不要把坏包发出去。
+      # build.gradle.kts 的签名是「缺配置就静默跳过」（为了让 debug 流水线能跑），
+      # 代价是 release 可能悄悄出未签名包——所以把关放这里。
+      - name: 校验产物（版本号 + 签名指纹）
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          APK=app/build/outputs/apk/release/app-release.apk
+          META=app/build/outputs/apk/release/output-metadata.json
+          [ -f "$APK" ] || { echo "::error::没找到 $APK"; exit 1; }
+
+          META_NAME=$(python3 -c "import json;print(json.load(open('$META'))['elements'][0]['versionName'])")
+          META_CODE=$(python3 -c "import json;print(json.load(open('$META'))['elements'][0]['versionCode'])")
+
+          if [ "$META_NAME" != "$APP_VERSION_NAME" ]; then
+            echo "::error::包内 versionName=${META_NAME}，期望 ${APP_VERSION_NAME}"
+            exit 1
+          fi
+          if [ "$META_CODE" != "$APP_VERSION_CODE" ]; then
+            echo "::error::包内 versionCode=${META_CODE}，期望 ${APP_VERSION_CODE}"
+            exit 1
+          fi
+
+          # set -u 下直接引 $ANDROID_HOME 会以 "unbound variable" 死掉，报错还不如这条清楚；
+          # 两个变量名 GitHub runner 上都可能出现，依次回退。
+          SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          # 末尾的 || true 不能省：默认 set -o pipefail 下，ls 匹配不到会让整条管道非零，
+          # set -e 会抢在下面那行判断之前把脚本杀掉，报错就永远看不到了。
+          APKSIGNER=$(ls -d "${SDK}"/build-tools/*/apksigner 2>/dev/null | sort -V | tail -1 || true)
+          if [ ! -x "$APKSIGNER" ]; then
+            echo "::error::找不到 apksigner（ANDROID_HOME=${SDK:-未设置}）"
+            exit 1
+          fi
+
+          # 显式判失败，好过让 set -e 把 apksigner 的 Java 堆栈原样抛出来。
+          # 定向匹配而不取首行：apksigner 会先打一串 JVM WARNING，首行不是原因。
+          if ! VERIFY_OUT=$("$APKSIGNER" verify --print-certs "$APK" 2>&1); then
+            REASON=$(printf '%s' "$VERIFY_OUT" | grep -m1 -E 'DOES NOT VERIFY|Exception|Error' || true)
+            echo "::error::APK 签名校验未通过（未签名或包已损坏）：${REASON:-见上方 apksigner 输出}"
+            exit 1
+          fi
+          CERT=$(printf '%s' "$VERIFY_OUT" \
+            | sed -n 's/^Signer #1 certificate SHA-256 digest: //p' | head -1 | tr 'A-F' 'a-f')
+          EXPECT=a57300a5dda361741d05e6073164d34b81d9a6e86d48b8913f2bf572227966e6
+          if [ "$CERT" != "$EXPECT" ]; then
+            echo "::error::签名指纹是 ${CERT}，期望 ${EXPECT}（签错 key 会让老用户无法升级）"
+            exit 1
+          fi
+
+          echo "校验通过：versionName=$META_NAME versionCode=$META_CODE 指纹=$CERT"
+
+      # 用连接字符串（共享密钥）而不是 azure/login + 服务主体：账户若不在当前登录的订阅里，
+      # 服务主体路线根本配不了，而共享密钥走数据面，不依赖 ARM。
+      - name: 上传 APK 到 Blob
+        if: env.PUBLISH == 'true'
+        shell: bash
+        env:
+          ACCOUNT: ${{ vars.APK_STORAGE_ACCOUNT }}
+          CONTAINER: ${{ vars.APK_CONTAINER }}
+          CONNECTION_STRING: ${{ secrets.ANDROID_STORAGE_CONNECTION_STRING }}
+        run: |
+          set -euo pipefail
+
+          for v in ACCOUNT CONTAINER; do
+            if [ -z "${!v:-}" ]; then
+              echo "::error::缺少 repo variable APK_STORAGE_ACCOUNT / APK_CONTAINER"
+              exit 1
+            fi
+          done
+          if [ -z "${CONNECTION_STRING:-}" ]; then
+            echo "::error::缺少 secret ANDROID_STORAGE_CONNECTION_STRING"
+            exit 1
+          fi
+
+          # 下面要用 ACCOUNT 拼下载直链，若与连接字符串里的账户不一致，传上去的文件和公布的
+          # 链接就是两个地方——提前拦下，别等到匿名探测才报一个看不懂的 404。
+          IN_CONN=$(printf '%s' "$CONNECTION_STRING" | sed -n 's/.*AccountName=\([^;]*\).*/\1/p')
+          if [ "$IN_CONN" != "$ACCOUNT" ]; then
+            echo "::error::vars.APK_STORAGE_ACCOUNT=${ACCOUNT} 与连接字符串里的 AccountName=${IN_CONN} 不一致"
+            exit 1
+          fi
+
+          APK=app/build/outputs/apk/release/app-release.apk
+
+          # 传两份：带版本号的直链 + 稳定别名（给用户一个不变的链接）
+          # 用 --connection-string 就不必再给 --account-name：账户在连接字符串里
+          for NAME in "wematrix-${APP_VERSION_NAME}.apk" "wematrix-latest.apk"; do
+            az storage blob upload \
+              --connection-string "$CONNECTION_STRING" \
+              --container-name "$CONTAINER" \
+              --name "$NAME" \
+              --file "$APK" \
+              --content-type application/vnd.android.package-archive \
+              --overwrite
+          done
+
+          echo "BLOB_URL=https://${ACCOUNT}.blob.core.windows.net/${CONTAINER}/wematrix-${APP_VERSION_NAME}.apk" >> "$GITHUB_ENV"
+
+      # 直接检验「外部用户能拿到」这个目标本身：容器没开公共读时前面全绿、下载却是 403/404，
+      # 只有这一步能发现。
+      - name: 验证匿名可达
+        if: env.PUBLISH == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "匿名探测 $BLOB_URL"
+          CODE=$(curl -s -o /dev/null -w '%{http_code}' -I "$BLOB_URL")
+          if [ "$CODE" != "200" ]; then
+            echo "::error::${BLOB_URL} 匿名访问返回 ${CODE}（容器是否开了公共读？）"
+            exit 1
+          fi
+          echo "匿名可达，HTTP $CODE"
+
+      # 仅供本 run 排障，不是发布归档：90 天后过期，且仓库私有、外部看不到
+      - name: 暂存本次产物
+        uses: actions/upload-artifact@v7
+        with:
+          name: app-release-${{ env.APP_VERSION_NAME }}
+          path: app/build/outputs/apk/release/*.apk
+          retention-days: 14
+
+      - name: 写 job summary
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "## 微矩阵 ${APP_VERSION_NAME:-未知} （versionCode ${APP_VERSION_CODE:-?}）"
+            echo
+            if [ "${PUBLISH}" = "true" ]; then
+              echo "- 下载（带版本号）：${BLOB_URL:-（上传步骤未完成）}"
+              echo "- 下载（稳定别名）：$(printf '%s' "${BLOB_URL:-}" | sed 's|/[^/]*$|/wematrix-latest.apk|')"
+            else
+              echo "- 干跑：只编译并校验，**未发布**"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 清理 runner 上的密钥
+        if: always()
+        shell: bash
+        run: rm -f keystore.properties app/keystore/wematrix-release.jks

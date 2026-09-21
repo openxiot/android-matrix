@@ -6,6 +6,20 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+// 版本号来源是 git tag（vX.Y.Z），本地构建与 CI 同一套规则，免得包内自报的版本落后于
+// 实际发布的 tag。versionCode 必须单调递增，否则已装用户装不上新版，所以固定用
+// X*10000 + Y*100 + Z（v1.0.4 → 10004）。取不到 tag（无 git、无 tag）时回退到兜底值。
+// 仍可用 -PappVersionName=1.0.5 -PappVersionCode=10005 覆盖。
+val tagVersion: Pair<Int, String>? = runCatching {
+    val tag = providers.exec {
+        commandLine("git", "describe", "--tags", "--abbrev=0", "--match", "v[0-9]*.[0-9]*.[0-9]*")
+    }.standardOutput.asText.get().trim()
+    val parts = Regex("""^v(\d+)\.(\d+)\.(\d+)$""").matchEntire(tag)?.groupValues
+        ?: error("tag 形如 vX.Y.Z 才认，实际是 $tag")
+    val (major, minor, patch) = parts.drop(1).map(String::toInt)
+    (major * 10000 + minor * 100 + patch) to tag.removePrefix("v")
+}.getOrNull()
+
 android {
     namespace = "cc.openxiot.wematrix"
     compileSdk = 37
@@ -14,8 +28,13 @@ android {
         applicationId = "cc.openxiot.wematrix"
         minSdk = 29
         targetSdk = 37
-        versionCode = 2
-        versionName = "1.0.1"
+        // 兜底值必须与上面的公式自洽：1.0.3 → 1*10000 + 0*100 + 3 = 10003，别写成 103
+        versionCode = (findProperty("appVersionCode") as String?)?.toInt()
+            ?: tagVersion?.first
+            ?: 10003
+        versionName = (findProperty("appVersionName") as String?)
+            ?: tagVersion?.second
+            ?: "1.0.3"
     }
 
     signingConfigs {

@@ -168,6 +168,10 @@ jobs:
             exit 1
           fi
 
+          # 打出版本与路径：这个包是 v2-only（没有 META-INF/*.RSA），拿证书只能靠 apksigner
+          # 的文本输出，所以一旦解析失败，先要知道是哪个 apksigner 说的。
+          echo "apksigner: $APKSIGNER (version $("$APKSIGNER" --version 2>/dev/null || echo '?'))"
+
           # 显式判失败，好过让 set -e 把 apksigner 的 Java 堆栈原样抛出来。
           # 定向匹配而不取首行：apksigner 会先打一串 JVM WARNING，首行不是原因。
           if ! VERIFY_OUT=$("$APKSIGNER" verify --print-certs "$APK" 2>&1); then
@@ -175,8 +179,19 @@ jobs:
             echo "::error::APK 签名校验未通过（未签名或包已损坏）：${REASON:-见上方 apksigner 输出}"
             exit 1
           fi
+
+          # 不锚定整行前缀：措辞/缩进随 build-tools 版本变。上一版写死
+          # '^Signer #1 certificate SHA-256 digest: '，结果在某些 apksigner 上取到空值，
+          # 闸门虽然拦住了发布，却白烧一次 run。这里放宽到「含 sha256 的行、冒号可有可无、
+          # 大小写都认」。
           CERT=$(printf '%s' "$VERIFY_OUT" \
-            | sed -n 's/^Signer #1 certificate SHA-256 digest: //p' | head -1 | tr 'A-F' 'a-f')
+            | grep -iE 'sha-?256' | tr -d ':' \
+            | grep -oiE '[0-9a-f]{64}' | head -1 | tr 'A-F' 'a-f')
+          if [ -z "$CERT" ]; then
+            echo "::error::没能从 apksigner 输出里解析出 SHA-256 指纹，原始输出如下"
+            printf '%s\n' "$VERIFY_OUT" | head -20
+            exit 1
+          fi
           EXPECT=a57300a5dda361741d05e6073164d34b81d9a6e86d48b8913f2bf572227966e6
           if [ "$CERT" != "$EXPECT" ]; then
             echo "::error::签名指纹是 ${CERT}，期望 ${EXPECT}（签错 key 会让老用户无法升级）"

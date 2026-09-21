@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  组织（organization）相关。中文侧**逐字照抄改造前的字面量** —— 中文界面必须与改造前
+  逐字节一致，回归时任何中文变化都是 bug。英文在 values/。
+
+  角色词汇（管理员 / 成员 / 普通成员）在 strings.xml 的 common_role_*，两处成员界面共用。
+-->
+<resources>
+    <string name="org_title">当前组织</string>
+    <string name="org_detail_title">组织详情</string>
+
+    <string name="org_empty">还没有组织，点击右下角按钮创建</string>
+
+    <string name="org_create_title">创建组织</string>
+    <string name="org_id_label">组织标识</string>
+    <string name="org_id_placeholder">如: my-company</string>
+    <string name="org_id_hint">以英文开头，只能包含英文、数字和中划线</string>
+    <string name="org_name_label">组织名称</string>
+    <string name="org_name_placeholder">如: 我的公司</string>
+
+    <string name="org_rename_title">重命名组织</string>
+    <string name="org_delete_title">删除组织</string>
+    <string name="org_delete_confirm">确定要删除这个组织吗？</string>
+
+    <string name="org_manage">管理</string>
+    <string name="org_swipe_delete">右滑删除</string>
+
+    <!-- 成员 -->
+    <string name="org_members_empty">暂无成员</string>
+    <string name="org_member_developer_id">开发者ID</string>
+    <string name="org_member_developer_id_placeholder">用户的 developerId</string>
+    <string name="org_member_name_label">显示名称</string>
+    <string name="org_member_name_placeholder">可选</string>
+    <string name="org_change_role">更改角色</string>
+    <string name="org_change_role_title">更改角色 - %1$s</string>
+    <string name="org_remove_confirm">确定要移除「%1$s」吗？</string>
+    <plurals name="org_member_count">
+        <item quantity="other">%1$d 位成员</item>
+    </plurals>
+</resources>

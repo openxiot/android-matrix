@@ -1,9 +1,13 @@
 package cc.openxiot.wematrix.ui.modbus
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusServiceDevice
 import cc.openxiot.wematrix.data.api.ModbusServiceField
 import cc.openxiot.wematrix.data.api.ModbusServiceFieldAlarm
 import cc.openxiot.wematrix.data.api.ModbusServiceFunction
+import cc.openxiot.wematrix.ui.core.UiText
 import com.google.gson.Gson
 
 /**
@@ -13,14 +17,12 @@ import com.google.gson.Gson
  * 与 [ModbusFormat] 分开：那份是「设备点表」的口径（功能码、逻辑地址），这份是「服务」的口径
  * （调用坐标、请求帧、应答字段、调用结果）。
  *
- * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
+ * 这里只放「纯函数」，配色之类 Compose 类型留在各 Screen 里。
+ *
+ * 全文件唯一的例外是 [responseSummary]：它要按语言选分隔符（中英用不同的逗号）并拼一整句提示，
+ * 而 `joinToString` 拼出来的东西没法是一条 `UiText`，故它改 `@Composable`、直接在组合里取资源。
+ * 也正因为这样，那些 `const val` 的提示语全部删掉了 —— 常量取不到 Context。
  */
-
-/** 写方法提示（web 同款文案） */
-const val WRITE_METHOD_HINT = "写方法：应答为请求回显，没有返回字段（设备已收到该帧）"
-
-/** 写方法调用成功后的简短提示 */
-const val WRITE_METHOD_SHORT = "设备已收到该帧"
 
 /**
  * 请求帧里的功能码（两位大写 16 进制）：帧结构 `[slave][fc][...]`，即第二个字节。
@@ -48,8 +50,11 @@ fun isReadFunction(function: ModbusServiceFunction): Boolean =
  * 方法的自动调用周期：没配周期（含全部写方法）= 只手动调用，显示 `-`；
  * 配了就是周期值，**停用（开关关着）时也照常显示** —— 那是留着待用的配置。
  */
-fun scheduleLabel(function: ModbusServiceFunction): String =
-    function.interval?.let { "$it 秒" } ?: "-"
+fun scheduleLabel(function: ModbusServiceFunction): UiText =
+    function.interval?.let {
+        // 数量传两次：一次选档位（英文 1 second / 2 seconds），一次填 %1$d
+        UiText.Quantity(R.plurals.modbus_service_interval_seconds, it, listOf(it))
+    } ?: UiText.Raw("-")
 
 /**
  * 自动轮询状态：启用 / 停用（周期保留）/ `-`（写方法或没配周期）。
@@ -57,9 +62,14 @@ fun scheduleLabel(function: ModbusServiceFunction): String =
  * 定义里没写 `polling` 的按「有周期即启用」算（与后端校验的缺省判定一致）—— 故这里判的是
  * `polling == false` 而不是 `polling == true`：缺省与 true 都算启用。
  */
-fun pollingLabel(function: ModbusServiceFunction): String {
-    if (!isReadFunction(function) || function.interval == null) return "-"
-    return if (function.polling == false) "停用" else "启用"
+fun pollingLabel(function: ModbusServiceFunction): UiText {
+    if (!isReadFunction(function) || function.interval == null) return UiText.Raw("-")
+    val res = if (function.polling == false) {
+        R.string.modbus_service_polling_disabled
+    } else {
+        R.string.modbus_service_polling_enabled
+    }
+    return UiText.Res(res)
 }
 
 /** 轮询处于「停用」态（周期留着、只是暂停）：页面上给它一个弱化的配色 */
@@ -130,12 +140,14 @@ fun bitListRows(function: ModbusServiceFunction): List<Pair<String, String>> =
  *
  * `argument`（入参 piid）是这三个坐标里唯一的「填帧位置」，一并带上更好排障。
  */
-fun coordinateLabel(device: ModbusServiceDevice?): String {
-    if (device == null) return "-"
-    val siid = device.siid?.toString() ?: "-"
-    val aiid = device.aiid?.toString() ?: "-"
-    val argument = device.argument?.toString() ?: "-"
-    return "#$siid · #$aiid（piid $argument）"
+fun coordinateLabel(device: ModbusServiceDevice?): UiText {
+    if (device == null) return UiText.Raw("-")
+    // 坐标是数字与 id，本身不翻译；要翻译的是那对全角括号（英文该是半角）
+    return UiText.Res(
+        R.string.modbus_service_coordinate,
+        listOf(device.siid?.toString() ?: "-", device.aiid?.toString() ?: "-",
+            device.argument?.toString() ?: "-")
+    )
 }
 
 /** 写方法：应答是请求回显、没有读值，response 为空数组 */
@@ -161,10 +173,17 @@ fun fieldSpec(field: ModbusServiceField): String {
     return head + tail
 }
 
-/** 方法的应答字段摘要（一行读完）；写方法给固定文案 */
+/**
+ * 方法的应答字段摘要（一行读完）；写方法给固定文案。
+ *
+ * `@Composable` 而非纯函数：字段之间的分隔符中英不同（`，` / `, `），而 join 的结果没法是
+ * 一条 `UiText` —— 只能在这儿把语言定死。调用点本来就在组合里，故签名之外没有任何改动。
+ */
+@Composable
 fun responseSummary(function: ModbusServiceFunction): String {
-    if (isWriteFunction(function)) return WRITE_METHOD_HINT
-    return function.response.joinToString("，") { field ->
+    if (isWriteFunction(function)) return stringResource(R.string.modbus_service_write_hint)
+    val separator = stringResource(R.string.modbus_service_field_separator)
+    return function.response.joinToString(separator) { field ->
         "${field.field ?: "-"} ${fieldSpec(field)}"
     }
 }

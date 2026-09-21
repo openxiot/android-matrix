@@ -41,16 +41,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.ui.components.CustomRangeDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.FilterRow
 import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.RangePresetChips
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.epochDate
 import cc.openxiot.wematrix.ui.modbus.epochShort
@@ -104,10 +107,10 @@ fun HistoryScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = "历史",
+                        text = stringResource(R.string.history_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
@@ -121,7 +124,7 @@ fun HistoryScreen(
                         )
                     }
                     IconButton(onClick = { viewModel.refresh() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "刷新")
+                        Icon(Icons.Default.Refresh, contentDescription = stringResource(R.string.common_refresh))
                     }
                 }
             }
@@ -137,7 +140,7 @@ fun HistoryScreen(
 
                 // 空间图是这一页的骨架：没有服务清单就无从扇出 /current，故整页报错
                 state.graphError != null && state.services.isEmpty() -> EmptyState(
-                    message = state.graphError!!,
+                    message = state.graphError!!.asString(),
                     modifier = Modifier.clickable { viewModel.load(rootId) }
                 )
 
@@ -163,13 +166,13 @@ fun HistoryScreen(
                     // 某个服务取不到数：那一格显示 -，原因在这里说清，
                     // 免得把「没取到」看成「没有数据」
                     items(state.loadErrors) { message ->
-                        NoticeCard(text = message, danger = true)
+                        NoticeCard(text = message.asString(), danger = true)
                     }
 
-                    item { SectionTitle("服务概览") }
+                    item { SectionTitle(stringResource(R.string.history_section_overview)) }
 
                     if (state.overviewRows.isEmpty()) {
-                        item { EmptyState("这个项目下还没有 Modbus 服务") }
+                        item { EmptyState(stringResource(R.string.history_no_services)) }
                     } else {
                         items(state.overviewRows, key = { it.service.id ?: it.service.hashCode().toString() }) { row ->
                             ServiceCard(
@@ -180,14 +183,17 @@ fun HistoryScreen(
                         }
                     }
 
-                    item { SectionTitle("采集异常") }
+                    item { SectionTitle(stringResource(R.string.history_faults_section)) }
 
                     if (state.failureSummary.isNotEmpty()) {
                         item {
                             // 汇总标签：告警文本那种长串在这里是枚举名的中文标签，一行放得下
                             FilterRow(modifier = Modifier.padding(horizontal = 16.dp)) {
                                 state.failureSummary.forEach { item ->
-                                    InfoChip("${failureLabel(item.type, null)} × ${item.count}", Red)
+                                    InfoChip(
+                                        "${failureLabel(item.type, null).asString()} × ${item.count}",
+                                        Red
+                                    )
                                 }
                             }
                         }
@@ -197,10 +203,10 @@ fun HistoryScreen(
                     if (rows.isEmpty()) {
                         item {
                             EmptyState(
-                                message = if (state.failuresError.isNotEmpty()) {
-                                    state.failuresError
+                                message = if (state.failuresError != null) {
+                                    state.failuresError!!.asString()
                                 } else {
-                                    "这段时间没有采集异常"
+                                    stringResource(R.string.history_no_faults)
                                 }
                             )
                         }
@@ -211,7 +217,7 @@ fun HistoryScreen(
                     }
 
                     if (state.truncated) {
-                        item { NoticeCard(text = TRUNCATED_HINT, danger = false) }
+                        item { NoticeCard(text = stringResource(R.string.common_truncated_hint), danger = false) }
                     }
                 }
             }
@@ -230,9 +236,6 @@ fun HistoryScreen(
         )
     }
 }
-
-/** 窗口内的失败多于上限时只列了最近的那部分 —— 与 web 同一句文案 */
-private const val TRUNCATED_HINT = "异常记录超过上限，只列出最近的部分"
 
 @Composable
 private fun SectionTitle(text: String) {
@@ -261,11 +264,19 @@ private fun OverviewCard(state: HistoryUiState) {
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            OverviewItem("服务数量", state.services.size.toString(), Modifier.weight(1f))
-            OverviewItem("设备数量", state.deviceCount.toString(), Modifier.weight(1f))
+            OverviewItem(
+                stringResource(R.string.history_service_count_label),
+                state.services.size.toString(),
+                Modifier.weight(1f)
+            )
+            OverviewItem(
+                stringResource(R.string.history_device_count_label),
+                state.deviceCount.toString(),
+                Modifier.weight(1f)
+            )
             // 项目里最近一次采集时刻：停在这儿说明整个项目都不采了，比任何一行的异常都严重
             OverviewItem(
-                label = "采集时间",
+                label = stringResource(R.string.history_sampled_at_label),
                 value = state.lastRecordedAt?.let { formatEpochMillis(it) } ?: "-",
                 modifier = Modifier.weight(1.6f)
             )
@@ -319,18 +330,23 @@ private fun FilterCard(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.weight(1f)
                     )
-                    TextButton(onClick = onEditCustomRange) { Text("修改") }
+                    TextButton(onClick = onEditCustomRange) { Text(stringResource(R.string.common_change)) }
                 }
             }
         }
     }
 }
 
-/** 自定义档当前查的是哪一段（还没选过时为空） */
+/**
+ * 自定义档当前查的是哪一段（还没选过时为空）。
+ *
+ * 两个分支都是文案，故整个函数改 `@Composable`；调用它的地方就在同一个组合里。
+ */
+@Composable
 private fun customRangeText(from: Long?, to: Long?): String {
-    if (from == null || to == null) return "尚未选择时间范围"
+    if (from == null || to == null) return stringResource(R.string.common_no_range)
     // 窗口按整天展开，故结束时刻落在次日 00:00:00 前 1ms —— 回显时收成当天
-    return "${epochDate(from)} 至 ${epochDate(to)}"
+    return stringResource(R.string.common_range_text, epochDate(from), epochDate(to))
 }
 
 /**
@@ -397,7 +413,9 @@ private fun ServiceCard(
                 )
                 device?.let {
                     InfoChip(
-                        text = if (it.online == true) "在线" else "离线",
+                        text = stringResource(
+                            if (it.online == true) R.string.common_online else R.string.common_offline
+                        ),
                         color = if (it.online == true) Green else Gray500
                     )
                 }
@@ -405,23 +423,23 @@ private fun ServiceCard(
 
             // 在采方法数：只有采到过的方法才在快照里，故不是服务定义里的方法总数。
             // 取不到数（那一格是 -）与「一个都没采到」（0）必须分得开
-            KeyValue("方法数", state.sampledCount(row) ?: "-")
+            KeyValue(stringResource(R.string.history_function_count_label), state.sampledCount(row) ?: "-")
             KeyValue(
-                label = "采集时间",
+                label = stringResource(R.string.history_sampled_at_label),
                 value = state.recordedAt(row)?.let { formatEpochMillis(it) } ?: "-"
             )
 
             // 窗口内最近的一次异常：这一列才是「要不要点进去」的依据
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    text = "采集异常",
+                    text = stringResource(R.string.history_faults_label),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.width(64.dp)
                 )
                 Spacer(Modifier.width(8.dp))
                 if (failure != null) {
-                    InfoChip(failureLabel(failure.type, failure.remoteCode), Red)
+                    InfoChip(failureLabel(failure.type, failure.remoteCode).asString(), Red)
                     Spacer(Modifier.width(6.dp))
                     Text(
                         text = epochShort(failure.at),
@@ -434,10 +452,10 @@ private fun ServiceCard(
             }
 
             // 某个服务取不到数：那一格显示 -，原因在这里就地补一句
-            if (row.currentError.isNotEmpty()) {
+            if (row.currentError != null) {
                 Spacer(Modifier.height(2.dp))
                 Text(
-                    text = row.currentError,
+                    text = row.currentError!!.asString(),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.error
                 )
@@ -475,7 +493,7 @@ private fun FailureCard(row: FailureRow, onServiceClick: (String) -> Unit) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f)
                 )
-                InfoChip(failureLabel(item.type, item.remoteCode), Red)
+                InfoChip(failureLabel(item.type, item.remoteCode).asString(), Red)
             }
 
             // 服务还在空间图里就给个点得进去的名字；已被挪走/删掉（只剩 id 认得出）时退成纯文本
@@ -498,8 +516,8 @@ private fun FailureCard(row: FailureRow, onServiceClick: (String) -> Unit) {
                 }
             )
 
-            KeyValue("设备", service?.did ?: "-")
-            KeyValue("方法", "#${item.functionIndex}")
+            KeyValue(stringResource(R.string.common_device_label), service?.did ?: "-")
+            KeyValue(stringResource(R.string.common_function_label), "#${item.functionIndex}")
 
             // 失败消息是服务端下发的原文，**原样显示、不翻译**
             Text(

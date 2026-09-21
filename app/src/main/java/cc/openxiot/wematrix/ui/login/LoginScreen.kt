@@ -12,12 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cc.openxiot.wematrix.AppState
+import cc.openxiot.wematrix.R
+import cc.openxiot.wematrix.ui.core.asString
 
 @Composable
 fun LoginScreen(
@@ -77,7 +80,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "矩阵",
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.headlineLarge,
                 color = Color.White,
                 fontWeight = FontWeight.Bold
@@ -99,7 +102,7 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         if (!Weixin.login(context)) {
-                            viewModel.showError("未安装微信或微信版本过低")
+                            viewModel.showError(R.string.login_err_wechat_missing)
                         }
                     },
                     modifier = Modifier
@@ -118,7 +121,7 @@ fun LoginScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "微信登录",
+                        text = stringResource(R.string.login_wechat),
                         color = Color.White,
                         fontWeight = FontWeight.Medium,
                         fontSize = 16.sp
@@ -144,7 +147,7 @@ fun LoginScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "使用测试账号登录",
+                        text = stringResource(R.string.login_test_account),
                         fontWeight = FontWeight.Medium,
                         fontSize = 16.sp
                     )
@@ -154,7 +157,7 @@ fun LoginScreen(
             if (uiState.error != null) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = uiState.error!!,
+                    text = uiState.error!!.asString(),
                     color = MaterialTheme.colorScheme.error,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.bodySmall

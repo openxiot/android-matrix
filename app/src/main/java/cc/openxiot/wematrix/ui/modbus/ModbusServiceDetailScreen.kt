@@ -11,17 +11,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusService
 import cc.openxiot.wematrix.data.api.ModbusServiceFunction
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.ui.core.asString
 
 /**
  * Modbus 服务详情。
@@ -61,10 +64,13 @@ fun ModbusServiceDetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.common_back)
+                        )
                     }
                     Text(
-                        text = "服务详情",
+                        text = stringResource(R.string.modbus_service_detail_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -86,7 +92,8 @@ fun ModbusServiceDetailScreen(
                     onRetry = { viewModel.loadDetail(spaceId, serviceId) }
                 )
 
-                service == null -> EmptyState("服务不存在")
+                // 与仓库层那条「服务不存在」逐字同一句，故复用同一个 key（不另立一条）
+                service == null -> EmptyState(stringResource(R.string.err_modbus_service_missing))
 
                 else -> {
                     // index 是方法的序号，缺省的后排到末尾
@@ -100,7 +107,10 @@ fun ModbusServiceDetailScreen(
 
                         item {
                             Text(
-                                text = "方法（${functions.size}）",
+                                text = stringResource(
+                                    R.string.modbus_service_method_count,
+                                    functions.size
+                                ),
                                 style = MaterialTheme.typography.titleSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
@@ -108,7 +118,12 @@ fun ModbusServiceDetailScreen(
                         }
 
                         if (functions.isEmpty()) {
-                            item { EmptyState("这份服务里还没有方法", modifier = Modifier.height(160.dp)) }
+                            item {
+                                EmptyState(
+                                    stringResource(R.string.modbus_service_method_empty),
+                                    modifier = Modifier.height(160.dp)
+                                )
+                            }
                         } else {
                             items(functions) { function ->
                                 MethodCard(
@@ -127,7 +142,7 @@ fun ModbusServiceDetailScreen(
 
                         // 调用结果：错误与结果都落在方法列表下面，不弹窗（与 web 一致）
                         invokeState.error?.let { message ->
-                            item { InvokeErrorCard(message) }
+                            item { InvokeErrorCard(message.asString()) }
                         }
 
                         invokeState.result?.let { result ->
@@ -161,17 +176,30 @@ private fun ServiceInfoCard(service: ModbusService) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = service.name?.takeIf { it.isNotBlank() } ?: "未命名服务",
+                text = service.name?.takeIf { it.isNotBlank() }
+                    ?: stringResource(R.string.modbus_service_unnamed),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
 
-            DetailRow("依赖设备", service.device?.did ?: "-")
-            DetailRow("调用坐标", coordinateLabel(service.device))
-            DetailRow("源点表", service.configId ?: "-")
-            DetailRow("定义版本", service.version?.toString() ?: "-")
-            DetailRow("更新者", service.updater?.name ?: "-")
-            DetailRow("最后更新", formatEpochMillis(service.updater?.timestamp))
+            DetailRow(stringResource(R.string.modbus_service_label_device), service.device?.did ?: "-")
+            DetailRow(
+                stringResource(R.string.modbus_service_label_coordinate),
+                coordinateLabel(service.device).asString()
+            )
+            DetailRow(stringResource(R.string.modbus_service_label_source), service.configId ?: "-")
+            DetailRow(
+                stringResource(R.string.modbus_service_label_version),
+                service.version?.toString() ?: "-"
+            )
+            DetailRow(
+                stringResource(R.string.modbus_service_label_updater),
+                service.updater?.name ?: "-"
+            )
+            DetailRow(
+                stringResource(R.string.modbus_label_updated_at),
+                formatEpochMillis(service.updater?.timestamp)
+            )
         }
     }
 }
@@ -211,7 +239,9 @@ private fun MethodCard(
                 if (invoking) {
                     CircularProgressIndicator(modifier = Modifier.size(18.dp), strokeWidth = 2.dp)
                 } else {
-                    TextButton(onClick = onInvoke, enabled = enabled) { Text("调用") }
+                    TextButton(onClick = onInvoke, enabled = enabled) {
+                        Text(stringResource(R.string.modbus_service_invoke))
+                    }
                 }
             }
 
@@ -220,7 +250,8 @@ private fun MethodCard(
             // 请求帧：完整 RTU 帧（含 CRC16），原样交给设备发送
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(
-                    text = "请求帧",
+                    // 与「命令」对话框里那张帧的标题同一句，共用一个 key
+                    text = stringResource(R.string.modbus_frame_request),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -234,7 +265,7 @@ private fun MethodCard(
             Spacer(Modifier.height(4.dp))
 
             Text(
-                text = "应答字段",
+                text = stringResource(R.string.modbus_service_response_fields),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -249,7 +280,7 @@ private fun MethodCard(
             bitListRows(function).takeIf { it.isNotEmpty() }?.let { rows ->
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "应答位清单",
+                    text = stringResource(R.string.modbus_service_response_bits),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -267,12 +298,12 @@ private fun MethodCard(
             Spacer(Modifier.height(4.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "自动轮询",
+                    text = stringResource(R.string.modbus_service_polling),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.width(8.dp))
-                val polling = pollingLabel(function)
+                val polling = pollingLabel(function).asString()
                 Text(
                     text = polling,
                     style = MaterialTheme.typography.bodySmall,
@@ -285,14 +316,14 @@ private fun MethodCard(
                 )
                 Spacer(Modifier.width(16.dp))
                 Text(
-                    text = "调用周期",
+                    text = stringResource(R.string.modbus_service_interval),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
                     // 停用时也照常显示周期 —— 那是留着待用的配置
-                    text = scheduleLabel(function),
+                    text = scheduleLabel(function).asString(),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium
                 )
@@ -303,17 +334,29 @@ private fun MethodCard(
             alarmedOutputs(function).takeIf { it.isNotEmpty() }?.let { outputs ->
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "告警配置（${definedAlarmCount(function)}）",
+                    text = stringResource(
+                        R.string.modbus_service_alarm_count,
+                        definedAlarmCount(function)
+                    ),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                // 规则之间的顿号也要跟着语言变（同上：全角标点，漏抽门禁看不见）。
+                // 每条规则先在这儿解析成字符串再 join：joinToString 的 lambda 不是 @Composable，
+                // 在里面取不到资源。
+                val alarmSeparator = stringResource(R.string.modbus_service_alarm_separator)
                 outputs.forEach { output ->
+                    val rules = output.alarms.map { alarm ->
+                        val brief = alarmRuleBrief(alarm)
+                        // 停用的规则也算进条数，但要标出来 —— 否则用户会以为它在生效
+                        if (alarm.enabled == true) {
+                            brief
+                        } else {
+                            stringResource(R.string.modbus_service_alarm_disabled, brief)
+                        }
+                    }
                     Text(
-                        text = "${output.key}  " + output.alarms.joinToString("、") { alarm ->
-                            val brief = alarmRuleBrief(alarm)
-                            // 停用的规则也算进条数，但要标出来 —— 否则用户会以为它在生效
-                            if (alarm.enabled == true) brief else "$brief（已停用）"
-                        },
+                        text = output.key + "  " + rules.joinToString(alarmSeparator),
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Medium
                     )
@@ -337,7 +380,8 @@ private fun InvokeErrorCard(message: String) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "调用失败",
+                // 与仓库层那条调用失败的消息逐字同一句，故复用同一个 key（不另立一条）
+                text = stringResource(R.string.err_modbus_service_invoke),
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onErrorContainer
@@ -373,12 +417,12 @@ private fun InvokeResultCard(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "调用结果",
+                    text = stringResource(R.string.modbus_service_invoke_result),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(1f)
                 )
-                TextButton(onClick = onDismiss) { Text("关闭") }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_close)) }
             }
 
             Text(
@@ -392,7 +436,7 @@ private fun InvokeResultCard(
             if (result.data.isEmpty()) {
                 // 写方法：应答是请求回显，没有读值
                 Text(
-                    text = WRITE_METHOD_SHORT,
+                    text = stringResource(R.string.modbus_service_write_short),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Medium
                 )
@@ -409,7 +453,7 @@ private fun InvokeResultCard(
             }
 
             Text(
-                text = "原始返回",
+                text = stringResource(R.string.modbus_service_raw_response),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

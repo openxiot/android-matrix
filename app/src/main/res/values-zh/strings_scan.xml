@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  扫码页。中文这侧是**逐字搬运**原字面量，一字未改。
+-->
+<resources>
+    <string name="scan_hint">将设备二维码 / IMEI 放入框内</string>
+    <string name="scan_torch">手电筒</string>
+    <string name="scan_torch_on">打开手电筒</string>
+    <string name="scan_torch_off">关闭手电筒</string>
+    <string name="scan_permission_required">需要相机权限才能扫码添加设备</string>
+    <string name="scan_grant">重新授权</string>
+</resources>

@@ -1,5 +1,7 @@
 package cc.openxiot.wematrix.data.api
 
+import cc.openxiot.wematrix.R
+import cc.openxiot.wematrix.data.AppException
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ensureActive
@@ -21,7 +23,8 @@ import kotlin.coroutines.coroutineContext
  * 3. 它的 HttpLoggingInterceptor 固定在 BODY 级别且无条件开启，下载 APK 时会把整个
  *    二进制响应往 logcat 里灌（还有登录请求体，那是另一个既有问题）。
  *
- * 失败一律抛 [Exception]（中文文案），由 UpdateRepository 收进 `Result`。
+ * 失败一律抛 [AppException]（只带资源 id，不带语言），由 UpdateRepository 收进 `Result`，
+ * 到界面上才定语言 —— 这里同样拿不到 Context。
  */
 object UpdateApi {
 
@@ -51,12 +54,12 @@ object UpdateApi {
 
         client.newCall(request).execute().use { response ->
             if (!response.isSuccessful) {
-                throw Exception("获取版本信息失败（HTTP ${response.code}）")
+                throw AppException(R.string.err_update_manifest_http, listOf(response.code))
             }
             // OkHttp 5 起 Response.body 是非空的（4.x 才可空），不必再判一次
             val body = response.body.string()
             if (body.isBlank()) {
-                throw Exception("版本信息为空")
+                throw AppException(R.string.err_update_manifest_empty)
             }
             // Gson 对着一页 HTML 或半个 JSON 会抛，对着字面量 null 会返回 null，两种都算格式不对
             val manifest = try {
@@ -64,7 +67,7 @@ object UpdateApi {
             } catch (_: Exception) {
                 null
             }
-            manifest ?: throw Exception("版本信息格式不正确")
+            manifest ?: throw AppException(R.string.err_update_manifest_format)
         }
     }
 
@@ -80,7 +83,7 @@ object UpdateApi {
             val request = Request.Builder().url(url).build()
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
-                    throw Exception("下载失败（HTTP ${response.code}）")
+                    throw AppException(R.string.err_update_download_http, listOf(response.code))
                 }
                 val body = response.body
                 val total = body.contentLength().takeIf { it > 0 }
@@ -90,7 +93,7 @@ object UpdateApi {
                 if (total != null) {
                     val parent = dest.parentFile
                     if (parent != null && parent.usableSpace < (total * 1.2).toLong()) {
-                        throw Exception("存储空间不足，安装包需要约 ${total / 1024 / 1024} MB")
+                        throw AppException(R.string.err_update_no_space, listOf(total / 1024 / 1024))
                     }
                 }
 

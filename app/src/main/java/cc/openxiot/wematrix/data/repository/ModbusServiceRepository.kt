@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.InvokeModbusServiceRequest
 import cc.openxiot.wematrix.data.api.ModbusService
 import cc.openxiot.wematrix.data.api.RetrofitClient
@@ -19,9 +20,9 @@ class ModbusServiceRepository {
     suspend fun getService(spaceId: String, id: String): Result<ModbusService> = runCatching {
         val response = service.getModbusService(spaceId, id)
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("服务不存在")
+            response.body()!!.data ?: failWith(R.string.err_modbus_service_missing)
         } else {
-            throw Exception(response.body()?.message ?: "获取服务失败")
+            response.failWith(R.string.err_modbus_service_get)
         }
     }
 
@@ -31,7 +32,7 @@ class ModbusServiceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取服务列表失败")
+            response.failWith(R.string.err_modbus_service_list)
         }
     }
 
@@ -53,7 +54,7 @@ class ModbusServiceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyMap()
         } else {
-            throw Exception(response.body()?.message ?: "调用失败")
+            response.failWith(R.string.err_modbus_service_invoke)
         }
     }
 }

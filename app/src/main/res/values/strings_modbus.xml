@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Modbus 点表 / 服务 —— the largest module in the app. This is **English** (the
+  default); Chinese is in values-zh/.
+
+  Why the keys are prefixed per subject rather than per screen: almost all of this
+  vocabulary lives in `ui/modbus/*Format.kt` (pure functions with no Context) and is
+  consumed by screens both inside and outside `ui/modbus` — the failure-type
+  dictionary is read by the two history screens, the alarm level/operator words by
+  the alarm screen. The owning *file* is the stable thing here, not the reading screen,
+  so the keys follow the file.
+
+  Three groups are language-neutral and deliberately have **no** resource:
+    - `coilStateLabel` (ON / OFF / -),
+    - the frame field name `CRC16`,
+    - the `-` stand-ins for "no value".
+  They are protocol constants and dashes; translating them is not a thing that can
+  happen, and a resource that is identical in both languages is noise.
+-->
+<resources>
+    <!-- ===== 功能码 ===== -->
+    <string name="modbus_fc_read_coils">Read coils</string>
+    <string name="modbus_fc_read_discrete">Read discrete inputs</string>
+    <string name="modbus_fc_read_holding">Read holding registers</string>
+    <string name="modbus_fc_read_input">Read input registers</string>
+    <string name="modbus_fc_write_coil">Write single coil</string>
+    <string name="modbus_fc_write_register">Write single register</string>
+    <string name="modbus_fc_write_coils">Write multiple coils</string>
+    <string name="modbus_fc_write_registers">Write multiple registers</string>
+
+    <!-- ===== 可见度 / 生命周期 ===== -->
+    <string name="modbus_visibility_public">Public</string>
+    <string name="modbus_visibility_private">Private</string>
+    <string name="modbus_lifecycle_development">In development</string>
+    <string name="modbus_lifecycle_preview">Preview</string>
+    <string name="modbus_lifecycle_released">Released</string>
+    <string name="modbus_lifecycle_undefined">Undefined</string>
+
+    <!-- ===== 写内容（点表「写内容」列）===== -->
+    <!--
+      The quantity is passed twice: once to pick the bucket, once to fill %1$d —
+      same as every other plural here.
+    -->
+    <plurals name="modbus_write_coils">
+        <item quantity="one">Write %1$d coil</item>
+        <item quantity="other">Write %1$d coils</item>
+    </plurals>
+    <plurals name="modbus_write_registers">
+        <item quantity="one">Write %1$d register</item>
+        <item quantity="other">Write %1$d registers</item>
+    </plurals>
+
+    <!-- ===== 点表字段（详情页每条功能码的 标签 → 值）===== -->
+    <string name="modbus_field_start_address">Start address</string>
+    <string name="modbus_field_logical_address">Logical address</string>
+    <string name="modbus_field_quantity">Quantity</string>
+    <string name="modbus_field_data_type">Data type</string>
+    <string name="modbus_field_byte_order">Byte order</string>
+    <string name="modbus_field_scale">Scale</string>
+    <string name="modbus_field_unit">Unit</string>
+    <string name="modbus_field_write_content">Write content</string>
+
+    <!-- ===== 点表列表页 ===== -->
+    <string name="modbus_list_title">Register maps</string>
+    <string name="modbus_list_empty">No register maps yet</string>
+    <string name="modbus_slave_address_value">Slave address %1$s</string>
+    <string name="modbus_created_by_updated">Created by %1$s · updated %2$s</string>
+    <!-- 显示名兜底：厂家与型号都没有时退回 id，id 也没有才轮到它 -->
+    <string name="modbus_config_unnamed">Unnamed register map</string>
+
+    <!-- ===== 点表详情页 ===== -->
+    <string name="modbus_detail_title">Register map details</string>
+    <string name="modbus_command_count">Function codes (%1$d)</string>
+    <string name="modbus_command_empty">No function codes yet</string>
+    <string name="modbus_label_manufacturer">Manufacturer</string>
+    <string name="modbus_label_model">Model</string>
+    <string name="modbus_label_slave_address">Slave address</string>
+    <string name="modbus_label_description">Description</string>
+    <string name="modbus_label_visibility">Visibility</string>
+    <string name="modbus_label_creator">Created by</string>
+    <string name="modbus_label_created_at">Created</string>
+    <string name="modbus_label_updated_at">Last updated</string>
+    <string name="modbus_bit_name_count">Bit names (%1$d)</string>
+    <string name="modbus_bit_row">Bit %1$d</string>
+    <string name="modbus_field_name_count">Response field names (%1$d)</string>
+    <string name="modbus_field_row">Field %1$d</string>
+    <string name="modbus_command_action">Command</string>
+
+    <!-- ===== 服务（列表行 / 设备详情页的卡片 / 服务详情页）===== -->
+    <string name="modbus_service_unnamed">Unnamed service</string>
+    <string name="modbus_service_count">(%1$d)</string>
+    <string name="modbus_service_empty">No services on this device yet</string>
+    <plurals name="modbus_service_function_count">
+        <item quantity="one">%1$d function</item>
+        <item quantity="other">%1$d functions</item>
+    </plurals>
+
+    <string name="modbus_service_detail_title">Service details</string>
+    <string name="modbus_service_method_count">Functions (%1$d)</string>
+    <string name="modbus_service_method_empty">No functions in this service yet</string>
+    <string name="modbus_service_label_device">Parent device</string>
+    <string name="modbus_service_label_coordinate">Call coordinates</string>
+    <string name="modbus_service_label_source">Source register map</string>
+    <string name="modbus_service_label_version">Definition version</string>
+    <string name="modbus_service_label_updater">Updated by</string>
+    <!-- 调用坐标 `#siid · #aiid（piid argument）` -->
+    <string name="modbus_service_coordinate">#%1$s · #%2$s (piid %3$s)</string>
+
+    <string name="modbus_service_invoke">Call</string>
+    <string name="modbus_service_invoke_result">Call result</string>
+    <string name="modbus_service_raw_response">Raw response</string>
+    <string name="modbus_service_response_fields">Response fields</string>
+    <string name="modbus_service_response_bits">Response bit list</string>
+    <string name="modbus_service_polling">Auto polling</string>
+    <string name="modbus_service_polling_enabled">Enabled</string>
+    <string name="modbus_service_polling_disabled">Disabled</string>
+    <string name="modbus_service_interval">Call interval</string>
+    <plurals name="modbus_service_interval_seconds">
+        <item quantity="one">%1$d second</item>
+        <item quantity="other">%1$d seconds</item>
+    </plurals>
+    <!--
+      Write methods echo the request back, so there is nothing to read out of them.
+      The parenthetical is the reassurance that the frame did land.
+    -->
+    <string name="modbus_service_write_hint">Write method: the response echoes the request and has no returned fields (the device received the frame)</string>
+    <string name="modbus_service_write_short">The device received the frame</string>
+    <string name="modbus_service_alarm_count">Alarm rules (%1$d)</string>
+    <string name="modbus_service_alarm_disabled">%1$s (disabled)</string>
+    <!-- 一个出值配了多条规则时的分隔 -->
+    <string name="modbus_service_alarm_separator">, </string>
+    <!-- 「应答字段」摘要里多个字段之间的分隔 -->
+    <string name="modbus_service_field_separator">, </string>
+
+    <!-- ===== 时间范围预设（三个页面共用）===== -->
+    <string name="modbus_range_hour1">Last hour</string>
+    <string name="modbus_range_hour24">Last 24 hours</string>
+    <string name="modbus_range_day7">Last 7 days</string>
+    <string name="modbus_range_custom">Custom</string>
+
+    <!-- ===== 采集失败类型（后端枚举名 → 界面词）===== -->
+    <string name="modbus_failure_no_response">No response from the device</string>
+    <string name="modbus_failure_slave_exception">Exception response</string>
+    <string name="modbus_failure_device_error">Parent device error</string>
+    <string name="modbus_failure_crc_mismatch">CRC check failed</string>
+    <string name="modbus_failure_frame_mismatch">Frame length mismatch</string>
+    <string name="modbus_failure_invalid_frame">Invalid frame</string>
+    <string name="modbus_failure_field_definition">Field definition error</string>
+    <string name="modbus_failure_config">Service configuration error</string>
+    <string name="modbus_failure_transport">Method call failed</string>
+    <!-- 远端异常码后缀，`设备无应答 (3)`。两侧逐字相同：只有标点与占位符，没有可翻的词 -->
+    <string name="modbus_failure_with_code">%1$s (%2$d)</string>
+    <string name="modbus_failure_unknown">Unknown failure</string>
+
+    <!-- ===== 阈值告警的词汇（告警页读，口径在 ui/modbus）===== -->
+    <string name="modbus_alarm_level_info">Info</string>
+    <string name="modbus_alarm_level_warn">Warning</string>
+    <string name="modbus_alarm_level_critical">Critical</string>
+    <string name="modbus_alarm_op_gt">Above</string>
+    <string name="modbus_alarm_op_gte">At or above</string>
+    <string name="modbus_alarm_op_lt">Below</string>
+    <string name="modbus_alarm_op_lte">At or below</string>
+    <string name="modbus_alarm_op_eq">Equal to</string>
+    <!-- 「比较方式 + 阈值/状态」，如 `Above 80℃`。老数据没存比较方式时只给后面那半 -->
+    <string name="modbus_alarm_condition">%1$s %2$s</string>
+    <string name="modbus_alarm_close_value">Value back to normal</string>
+    <string name="modbus_alarm_close_definition">Definition changed</string>
+    <string name="modbus_alarm_close_superseded">Superseded</string>
+
+    <!-- ===== 帧 ===== -->
+    <string name="modbus_frame_incomplete">Command data is incomplete — can’t build the request frame</string>
+    <string name="modbus_frame_exception_codes">01 Illegal function / 02 Illegal data address / 03 Illegal data value / 04 Slave device failure</string>
+    <!-- 对话框标题与「服务详情」里的小节标题同一句，故共用一个 key -->
+    <string name="modbus_frame_request">Request frame</string>
+    <string name="modbus_frame_response">Response frame</string>
+    <!-- 与失败类型里的「异常应答」区分：这一条是对话框的小节标题，另两条是 Request/Response frame -->
+    <string name="modbus_frame_exception">Exception frame</string>
+    <string name="modbus_frame_function">Function code</string>
+    <string name="modbus_frame_coil_state">Coil state</string>
+    <string name="modbus_frame_register_value">Register value</string>
+    <string name="modbus_frame_byte_count">Byte count</string>
+    <string name="modbus_frame_coil_data">Coil data</string>
+    <string name="modbus_frame_register_data">Register data</string>
+    <string name="modbus_frame_exception_code">Exception code</string>
+    <string name="modbus_frame_awaiting_device">Waiting for the device</string>
+    <string name="modbus_frame_data_area">Data area</string>
+    <string name="modbus_frame_exception_suffix">%1$s + exception</string>
+    <string name="modbus_frame_notes_request">Complete request frame, with slave address and CRC16</string>
+    <string name="modbus_frame_notes_response">Complete response frame, with slave address and CRC16</string>
+    <string name="modbus_frame_notes_sample">The data area holds sample values — the device returns the real ones</string>
+    <string name="modbus_frame_notes_exception">The top bit of the function code marks an exception; the exception code and CRC16 come from the device and are shown as ??</string>
+    <string name="modbus_frame_byte_total">%1$d bytes total</string>
+    <string name="modbus_frame_copy">Copy</string>
+    <string name="modbus_frame_structure">Frame structure</string>
+    <!-- 剪贴板条目名（复制帧时在剪贴板里显示的那一行） -->
+    <string name="modbus_frame_clipboard_label">Modbus frame</string>
+</resources>

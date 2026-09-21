@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusHistoryCurrent
 import cc.openxiot.wematrix.data.api.ModbusHistoryFailures
 import cc.openxiot.wematrix.data.api.ModbusHistoryRange
@@ -21,9 +22,9 @@ class ModbusHistoryRepository {
         runCatching {
             val response = service.getHistoryCurrent(spaceId, serviceId)
             if (response.isSuccessful && response.body()?.success == true) {
-                response.body()!!.data ?: throw Exception("采集状态为空")
+                response.body()!!.data ?: failWith(R.string.err_sampling_status_empty)
             } else {
-                throw Exception(response.body()?.message ?: "获取采集状态失败")
+                response.failWith(R.string.err_sampling_status)
             }
         }
 
@@ -52,9 +53,9 @@ class ModbusHistoryRepository {
             maxPoints = maxPoints
         )
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("采集数据为空")
+            response.body()!!.data ?: failWith(R.string.err_sampling_data_empty)
         } else {
-            throw Exception(response.body()?.message ?: "获取采集数据失败")
+            response.failWith(R.string.err_sampling_data)
         }
     }
 
@@ -83,9 +84,9 @@ class ModbusHistoryRepository {
             limit = limit
         )
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("采集异常为空")
+            response.body()!!.data ?: failWith(R.string.err_sampling_fault_empty)
         } else {
-            throw Exception(response.body()?.message ?: "获取采集异常失败")
+            response.failWith(R.string.err_sampling_fault)
         }
     }
 }

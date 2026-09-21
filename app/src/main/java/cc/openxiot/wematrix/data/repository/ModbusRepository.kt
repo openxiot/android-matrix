@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusConfig
 import cc.openxiot.wematrix.data.api.RetrofitClient
 
@@ -17,7 +18,7 @@ class ModbusRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取设备点表失败")
+            response.failWith(R.string.err_modbus_point_table)
         }
     }
 
@@ -27,7 +28,7 @@ class ModbusRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取公开设备点表失败")
+            response.failWith(R.string.err_modbus_point_table_public)
         }
     }
 
@@ -35,9 +36,9 @@ class ModbusRepository {
     suspend fun getConfig(id: String): Result<ModbusConfig> = runCatching {
         val response = service.getModbusConfig(id)
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("设备点表不存在")
+            response.body()!!.data ?: failWith(R.string.err_modbus_point_table_missing)
         } else {
-            throw Exception(response.body()?.message ?: "获取设备点表失败")
+            response.failWith(R.string.err_modbus_point_table)
         }
     }
 }

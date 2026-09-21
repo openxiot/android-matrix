@@ -2,8 +2,11 @@ package cc.openxiot.wematrix.ui.modbus
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusService
 import cc.openxiot.wematrix.data.repository.ModbusServiceRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,14 +16,14 @@ import kotlinx.coroutines.launch
 data class DeviceServicesUiState(
     val isLoading: Boolean = true,
     val services: List<ModbusService> = emptyList(),
-    val error: String? = null
+    val error: UiText? = null
 )
 
 /** 服务详情页的状态 */
 data class ServiceDetailUiState(
     val isLoading: Boolean = true,
     val service: ModbusService? = null,
-    val error: String? = null
+    val error: UiText? = null
 )
 
 /** 一次调用的结果：哪个方法、方法名、应答解出来的「字段名 → 值」 */
@@ -34,7 +37,7 @@ data class InvokeResult(
 data class InvokeUiState(
     val invokingIndex: Int? = null,
     val result: InvokeResult? = null,
-    val error: String? = null
+    val error: UiText? = null
 )
 
 /**
@@ -71,7 +74,7 @@ class ModbusServiceViewModel : ViewModel() {
                 .onFailure { e ->
                     _deviceServices.value = _deviceServices.value.copy(
                         isLoading = false,
-                        error = e.message ?: "获取服务列表失败"
+                        error = e.toUiText(R.string.err_modbus_service_list)
                     )
                 }
         }
@@ -90,7 +93,7 @@ class ModbusServiceViewModel : ViewModel() {
                 .onFailure { e ->
                     _detail.value = _detail.value.copy(
                         isLoading = false,
-                        error = e.message ?: "获取服务失败"
+                        error = e.toUiText(R.string.err_modbus_service_get)
                     )
                 }
         }
@@ -117,7 +120,7 @@ class ModbusServiceViewModel : ViewModel() {
                 .onFailure { e ->
                     _invoke.value = InvokeUiState(
                         invokingIndex = null,
-                        error = e.message ?: "调用失败"
+                        error = e.toUiText(R.string.err_modbus_service_invoke)
                     )
                 }
         }

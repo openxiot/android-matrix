@@ -31,7 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.rangePresets
 import java.time.Instant
@@ -71,7 +73,10 @@ fun RangePresetChips(
                 selected = preset == item,
                 onClick = { onPresetChange(item) },
                 label = {
-                    Text(item.label, style = MaterialTheme.typography.labelMedium)
+                    Text(
+                        stringResource(item.labelRes),
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
             )
         }
@@ -95,7 +100,7 @@ fun <T> FilterDropdown(
     options: List<FilterOption<T>>,
     onSelect: (T?) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "全部"
+    placeholder: String = stringResource(R.string.common_all)
 ) {
     var expanded by remember { mutableStateOf(false) }
     val active = value != null
@@ -189,10 +194,10 @@ fun CustomRangeDialog(
                     onConfirm(dayStart(start), dayEnd(end))
                 },
                 enabled = state.selectedStartDateMillis != null
-            ) { Text("确定") }
+            ) { Text(stringResource(R.string.common_confirm)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
         }
     ) {
         // 不做模式切换（日历 / 手输）：日期区间在日历上点两下最直接，多一条路径就多一处要验

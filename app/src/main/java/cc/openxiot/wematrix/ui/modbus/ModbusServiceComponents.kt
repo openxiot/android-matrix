@@ -10,10 +10,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusService
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.ui.theme.Blue500
@@ -81,7 +84,8 @@ fun ModbusServiceRow(
             Spacer(Modifier.width(8.dp))
             // 名字占满剩余空间（过长的省略），把「服务」标签顶到 chevron 前面
             Text(
-                text = service.name?.takeIf { it.isNotBlank() } ?: "未命名服务",
+                text = service.name?.takeIf { it.isNotBlank() }
+                    ?: stringResource(R.string.modbus_service_unnamed),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
                 maxLines = 1,
@@ -90,7 +94,7 @@ fun ModbusServiceRow(
             )
             Spacer(Modifier.width(8.dp))
             // 蓝底「服务」标签，配色对齐 web 的 nz-tag nzColor="blue"
-            InfoChip("服务", Blue500)
+            InfoChip(stringResource(R.string.common_service_label), Blue500)
             Spacer(Modifier.width(4.dp))
             Icon(
                 Icons.Default.ChevronRight,
@@ -130,14 +134,16 @@ fun DeviceServicesCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "服务",
+                    text = stringResource(R.string.common_service_label),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(Modifier.width(8.dp))
                 if (!isLoading && error == null && services.isNotEmpty()) {
                     Text(
-                        text = "（${services.size}）",
+                        // 全角括号也是随语言变的 —— 它不在 CJK 区间里，漏抽门禁看不见，
+                        // 故这里是照「英文该用半角」特意补的一条
+                        text = stringResource(R.string.modbus_service_count, services.size),
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -165,11 +171,11 @@ fun DeviceServicesCard(
                         color = MaterialTheme.colorScheme.error
                     )
                     Spacer(Modifier.height(4.dp))
-                    TextButton(onClick = onRetry) { Text("重试") }
+                    TextButton(onClick = onRetry) { Text(stringResource(R.string.common_retry)) }
                 }
 
                 services.isEmpty() -> Text(
-                    text = "该设备下还没有服务",
+                    text = stringResource(R.string.modbus_service_empty),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
@@ -202,14 +208,20 @@ private fun ServiceCardRow(service: ModbusService, onClick: () -> Unit) {
         Spacer(Modifier.width(10.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = service.name?.takeIf { it.isNotBlank() } ?: "未命名服务",
+                text = service.name?.takeIf { it.isNotBlank() }
+                    ?: stringResource(R.string.modbus_service_unnamed),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = "${service.functions.size} 个方法",
+                // 数量传两次：一次选档位（英文 1 function / 2 functions），一次填 %1$d
+                text = pluralStringResource(
+                    R.plurals.modbus_service_function_count,
+                    service.functions.size,
+                    service.functions.size
+                ),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

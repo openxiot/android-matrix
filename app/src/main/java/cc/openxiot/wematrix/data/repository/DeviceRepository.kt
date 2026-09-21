@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.DeviceRegistration
 import cc.openxiot.wematrix.data.api.MoveDeviceRequest
@@ -14,7 +15,7 @@ class DeviceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取设备列表失败")
+            response.failWith(R.string.err_device_list)
         }
     }
 
@@ -23,7 +24,7 @@ class DeviceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "添加设备失败")
+            response.failWith(R.string.err_device_add)
         }
     }
 
@@ -35,7 +36,7 @@ class DeviceRepository {
         )
         val response = service.updateDeviceSpace(body)
         if (!response.isSuccessful || response.body()?.success != true) {
-            throw Exception(response.body()?.message ?: "移动设备失败")
+            response.failWith(R.string.err_device_move)
         }
     }
 
@@ -60,11 +61,13 @@ class DeviceRepository {
 
     /** 根据 IMEI 从 DTU 网关查询 DID */
     suspend fun getDidByImei(orgId: String, imei: String): Result<String> = runCatching {
+        // body() 为空（网关没按约定回 JSON）与 success=false 是同一句文案，这里先接住前者
         val res = dtuService.getDidByImei(orgId, imei).body()
-        if (res?.success == true) {
-            res.data ?: throw Exception("未查询到该 IMEI（$imei）对应的设备")
+            ?: failWith(R.string.err_device_did_lookup)
+        if (res.success == true) {
+            res.data ?: failWith(R.string.err_device_imei_not_found, imei)
         } else {
-            throw Exception(res?.message ?: "根据 IMEI 查询 DID 失败")
+            res.failWith(R.string.err_device_did_lookup)
         }
     }
 
@@ -74,7 +77,7 @@ class DeviceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "添加设备失败")
+            response.failWith(R.string.err_device_add)
         }
     }
 }

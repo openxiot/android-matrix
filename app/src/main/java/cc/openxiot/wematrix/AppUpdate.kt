@@ -1,8 +1,11 @@
 package cc.openxiot.wematrix
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.repository.CheckOutcome
 import cc.openxiot.wematrix.data.repository.UpdateInfo
 import cc.openxiot.wematrix.data.repository.UpdateRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,12 +28,12 @@ sealed interface UpdateState {
     /** 本机已是最新。 */
     data object UpToDate : UpdateState
     data class Available(val info: UpdateInfo) : UpdateState
-    data class CheckFailed(val message: String) : UpdateState
+    data class CheckFailed(val message: UiText) : UpdateState
     /** [progress] 为 null 表示响应没带 Content-Length，进度不可知（UI 该用不确定进度条）。 */
     data class Downloading(val info: UpdateInfo, val progress: Float?) : UpdateState
     /** 已下好并校验通过，可以直接交给系统安装器。 */
     data class Ready(val info: UpdateInfo, val file: File) : UpdateState
-    data class DownloadFailed(val info: UpdateInfo, val message: String) : UpdateState
+    data class DownloadFailed(val info: UpdateInfo, val message: UiText) : UpdateState
 }
 
 /**
@@ -118,7 +121,7 @@ object AppUpdate {
                     _state.value = if (silent) {
                         UpdateState.Idle
                     } else {
-                        UpdateState.CheckFailed(e.message ?: "检查更新失败")
+                        UpdateState.CheckFailed(e.toUiText(R.string.err_update_check))
                     }
                 }
             )
@@ -148,7 +151,7 @@ object AppUpdate {
                 onSuccess = { file -> _state.value = UpdateState.Ready(info, file) },
                 onFailure = { e ->
                     _state.value =
-                        UpdateState.DownloadFailed(info, e.message ?: "下载失败")
+                        UpdateState.DownloadFailed(info, e.toUiText(R.string.err_update_download))
                 }
             )
         }

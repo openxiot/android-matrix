@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  底部导航（BottomTab.labelRes 指到这里）与主壳的空态提示。
+
+  底部 tab 的宽度是固定的四分之一屏，英文标签必须短 —— 「Projects」已经接近上限，
+  再长就会撞上 CardItem 那种 maxLines=1 的截断。
+-->
+<resources>
+    <string name="tab_home">Home</string>
+    <string name="tab_project">Projects</string>
+    <string name="tab_device">Devices</string>
+    <string name="tab_product">Products</string>
+    <string name="tab_profile">Profile</string>
+
+    <string name="main_switch_project">Switch project</string>
+    <string name="main_pick_org_first">Pick an organization first</string>
+    <string name="main_pick_org">Pick organization</string>
+    <string name="main_pick_project_first">Pick a project first</string>
+    <string name="main_pick_project">Pick project</string>
+</resources>

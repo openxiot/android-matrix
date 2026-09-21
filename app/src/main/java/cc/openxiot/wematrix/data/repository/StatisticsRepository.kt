@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.OverviewStatistics
 import cc.openxiot.wematrix.data.api.RetrofitClient
 
@@ -22,9 +23,9 @@ class StatisticsRepository {
         runCatching {
             val response = service.getStatisticsOverview(spaceId, from, to)
             if (response.isSuccessful && response.body()?.success == true) {
-                response.body()!!.data ?: throw Exception("统计数据为空")
+                response.body()!!.data ?: failWith(R.string.err_stats_empty)
             } else {
-                throw Exception(response.body()?.message ?: "获取统计数据失败")
+                response.failWith(R.string.err_stats_get)
             }
         }
 }

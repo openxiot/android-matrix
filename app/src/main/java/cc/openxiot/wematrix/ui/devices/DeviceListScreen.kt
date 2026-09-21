@@ -18,16 +18,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.ErrorMessage
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.main.PageTitle
 import cc.openxiot.wematrix.ui.modbus.ModbusServiceRow
 import cc.openxiot.wematrix.ui.project.ProjectViewModel
@@ -78,7 +82,7 @@ fun DeviceListScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        PageTitle(title = "设备")
+        PageTitle(title = stringResource(R.string.tab_device))
 
         PullToRefreshBox(
             isRefreshing = isRefreshing,
@@ -94,7 +98,7 @@ fun DeviceListScreen(
                         item {
                             Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
                                 Text(
-                                    text = "请先在「我」的页面选择项目",
+                                    text = stringResource(R.string.devices_select_project_first),
                                     style = MaterialTheme.typography.bodyLarge,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -114,13 +118,13 @@ fun DeviceListScreen(
                             Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     Text(
-                                        text = treeState.error!!,
+                                        text = treeState.error!!.asString(),
                                         style = MaterialTheme.typography.bodyLarge,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                     Spacer(modifier = Modifier.height(16.dp))
                                     OutlinedButton(onClick = { projectViewModel.loadSpaceGraph(rootId) }) {
-                                        Text("重试")
+                                        Text(stringResource(R.string.common_retry))
                                     }
                                 }
                             }
@@ -130,7 +134,7 @@ fun DeviceListScreen(
                             item {
                                 Box(modifier = Modifier.fillParentMaxSize().fillMaxWidth(), contentAlignment = Alignment.Center) {
                                     Text(
-                                        text = "暂无设备",
+                                        text = stringResource(R.string.devices_empty),
                                         style = MaterialTheme.typography.bodyLarge,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -139,7 +143,12 @@ fun DeviceListScreen(
                         } else {
                             item {
                                 Text(
-                                    text = "共 ${treeState.devices.size} 个设备",
+                                    // 数量传两次：一次选档位（英文 1 device / 2 devices），一次填 %1$d
+                                    text = pluralStringResource(
+                                        R.plurals.devices_count,
+                                        treeState.devices.size,
+                                        treeState.devices.size
+                                    ),
                                     style = MaterialTheme.typography.titleSmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
@@ -256,7 +265,7 @@ private fun flattenDeviceRows(
 @Composable
 private fun DeviceCard(
     device: DeviceEntity,
-    productNames: Map<String, String>,
+    productNames: Map<String, String?>,
     productIcons: Map<String, String>,
     rootSpace: SpaceEntity?,
     depth: Int = 0,
@@ -301,7 +310,9 @@ private fun DeviceCard(
                 ) {
                     Icon(
                         if (isExpanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
-                        contentDescription = if (isExpanded) "收起" else "展开",
+                        contentDescription = stringResource(
+                            if (isExpanded) R.string.common_collapse else R.string.common_expand
+                        ),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )
@@ -352,7 +363,8 @@ private fun DeviceCard(
                         }
                         Spacer(Modifier.width(6.dp))
                         Text(
-                            text = productName ?: device.type ?: device.did ?: "未知设备",
+                            text = productName ?: device.type ?: device.did
+                                ?: stringResource(R.string.devices_unknown),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Medium,
                             maxLines = 1,
@@ -378,7 +390,7 @@ private fun DeviceCard(
                 ) {
                     Icon(
                         Icons.Default.ChevronRight,
-                        contentDescription = "详情",
+                        contentDescription = stringResource(R.string.common_detail),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )

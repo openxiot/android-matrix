@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.api.PlatformInfo
 import cc.openxiot.wematrix.data.api.OAuthToken
@@ -14,9 +15,9 @@ class AuthRepository {
     suspend fun exchangeWeixinCode(code: String): Result<OAuthToken> = runCatching {
         val response = service.oauthLogin("wechat", code)
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("返回数据为空")
+            response.body()!!.data ?: failWith(R.string.err_response_empty)
         } else {
-            throw Exception(response.body()?.message ?: "登录失败")
+            response.failWith(R.string.err_auth_login)
         }
     }
 
@@ -25,7 +26,7 @@ class AuthRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "获取平台信息失败")
+            response.failWith(R.string.err_auth_platform_info)
         }
     }
 
@@ -34,7 +35,7 @@ class AuthRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "获取平台列表失败")
+            response.failWith(R.string.err_auth_platform_list)
         }
     }
 }

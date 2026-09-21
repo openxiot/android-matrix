@@ -1,7 +1,10 @@
 package cc.openxiot.wematrix.ui.modbus
 
+import androidx.annotation.StringRes
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusHistoryPoint
 import cc.openxiot.wematrix.data.api.ModbusHistoryRange
+import cc.openxiot.wematrix.ui.core.UiText
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -19,19 +22,22 @@ import java.util.Locale
  * 时间窗口与降采样桶的口径由**三个页面共用**（告警页 / 项目级历史 / 单服务历史）：
  * web 侧是三份各写一遍，Android 收在这一处，免得日后改一档要改三遍。
  *
- * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
+ * 这里只放「纯函数」，配色之类 Compose 类型留在各 Screen 里。文案一律返回 [UiText] 或
+ * `@StringRes Int`，语言由调用方注入。
  */
 
 /**
  * 时间范围预设：三档「最近 N」+ 自定义给绝对时刻。
  *
  * 与 web 三个页面同一个口径。`to` 一律取当下（自定义除外），`from` 由 [spanMillis] 往前推。
+ *
+ * 标签给**资源 id**（规则 A：1:1 的固定标签）—— 枚举是纯 Kotlin，没有 Context 也不该有。
  */
-enum class RangePreset(val spanMillis: Long, val label: String) {
-    HOUR_1(3600L * 1000, "最近 1 小时"),
-    HOUR_24(24 * 3600L * 1000, "最近 24 小时"),
-    DAY_7(7 * 24 * 3600L * 1000, "最近 7 天"),
-    CUSTOM(0, "自定义");
+enum class RangePreset(val spanMillis: Long, @StringRes val labelRes: Int) {
+    HOUR_1(3600L * 1000, R.string.modbus_range_hour1),
+    HOUR_24(24 * 3600L * 1000, R.string.modbus_range_hour24),
+    DAY_7(7 * 24 * 3600L * 1000, R.string.modbus_range_day7),
+    CUSTOM(0, R.string.modbus_range_custom);
 
     /** 预设档才推得出窗口；自定义由用户给的两个绝对时刻决定 */
     val isPreset: Boolean get() = this != CUSTOM
@@ -73,17 +79,17 @@ val failureTypes: List<String> = listOf(
  * `remoteCode` 不在这里翻：只有从站异常应答那个码是 Modbus 异常码（1/2/3/4…），
  * 依赖设备报错的远端码是 DTU 厂商自己的状态码，我们并不知道它的含义，猜着翻反而会误导排查。
  */
-private val FAILURE_LABELS: Map<String, String> = mapOf(
-    "NO_RESPONSE" to "设备无应答",
-    "SLAVE_EXCEPTION" to "异常应答",
-    "DEVICE_ERROR" to "依赖设备报错",
-    "CRC_MISMATCH" to "CRC 校验失败",
-    "FRAME_MISMATCH" to "报文长度不符",
-    "INVALID_FRAME" to "报文非法",
-    "FIELD_DEFINITION_ERROR" to "字段定义错误",
-    "CONFIG_ERROR" to "服务配置错误",
-    "TRANSPORT_ERROR" to "方法调用失败",
-    "UNKNOWN" to "未知失败"
+private val FAILURE_LABELS: Map<String, Int> = mapOf(
+    "NO_RESPONSE" to R.string.modbus_failure_no_response,
+    "SLAVE_EXCEPTION" to R.string.modbus_failure_slave_exception,
+    "DEVICE_ERROR" to R.string.modbus_failure_device_error,
+    "CRC_MISMATCH" to R.string.modbus_failure_crc_mismatch,
+    "FRAME_MISMATCH" to R.string.modbus_failure_frame_mismatch,
+    "INVALID_FRAME" to R.string.modbus_failure_invalid_frame,
+    "FIELD_DEFINITION_ERROR" to R.string.modbus_failure_field_definition,
+    "CONFIG_ERROR" to R.string.modbus_failure_config,
+    "TRANSPORT_ERROR" to R.string.modbus_failure_transport,
+    "UNKNOWN" to R.string.modbus_failure_unknown
 )
 
 /**
@@ -92,10 +98,14 @@ private val FAILURE_LABELS: Map<String, String> = mapOf(
  * 枚举名本身不在这里露脸，页面各按各的位置附上 —— 排查时要拿它去搜后端日志，得留在明面上，
  * 但那是版式的事。`type` 缺失（老数据可能没有）给 `-`；没收录的枚举名原样给出。
  */
-fun failureLabel(type: String?, remoteCode: Int?): String {
-    if (type.isNullOrEmpty()) return "-"
-    val label = FAILURE_LABELS[type] ?: type
-    return if (remoteCode != null) "$label ($remoteCode)" else label
+fun failureLabel(type: String?, remoteCode: Int?): UiText {
+    if (type.isNullOrEmpty()) return UiText.Raw("-")
+    // 没收录的枚举名原样给出 —— 那是后端枚举名原文，给不了资源
+    val label = FAILURE_LABELS[type]?.let { UiText.Res(it) } ?: UiText.Raw(type)
+    if (remoteCode == null) return label
+    // 后缀本身不含词（`%1$s (%2$d)` 两侧逐字相同，故 StringsParityTest 按「没东西可翻」放行），
+    // 但它得套在一条还没定语言的 label 外面，故仍是一条资源、label 作为参数嵌进来
+    return UiText.Res(R.string.modbus_failure_with_code, listOf(label, remoteCode))
 }
 
 /**

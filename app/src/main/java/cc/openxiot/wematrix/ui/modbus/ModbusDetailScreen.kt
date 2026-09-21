@@ -10,17 +10,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusCommand
 import cc.openxiot.wematrix.data.api.ModbusConfig
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Red
 
 /**
@@ -62,10 +65,13 @@ fun ModbusDetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.common_back)
+                        )
                     }
                     Text(
-                        text = "设备点表详情",
+                        text = stringResource(R.string.modbus_detail_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -86,7 +92,8 @@ fun ModbusDetailScreen(
                     onRetry = { viewModel.loadDetail(configId) }
                 )
 
-                config == null -> EmptyState("设备点表不存在")
+                // 与仓库层那条「点表不存在」逐字同一句，故复用同一个 key（不另立一条）
+                config == null -> EmptyState(stringResource(R.string.err_modbus_point_table_missing))
 
                 else -> LazyColumn(
                     modifier = Modifier.fillMaxSize(),
@@ -97,7 +104,7 @@ fun ModbusDetailScreen(
 
                     item {
                         Text(
-                            text = "功能码（${config.commands.size}）",
+                            text = stringResource(R.string.modbus_command_count, config.commands.size),
                             style = MaterialTheme.typography.titleSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
@@ -105,7 +112,12 @@ fun ModbusDetailScreen(
                     }
 
                     if (config.commands.isEmpty()) {
-                        item { EmptyState("暂无功能码", modifier = Modifier.height(160.dp)) }
+                        item {
+                            EmptyState(
+                                stringResource(R.string.modbus_command_empty),
+                                modifier = Modifier.height(160.dp)
+                            )
+                        }
                     } else {
                         // index 是点表内的顺序（后端生成虚拟设备实例时 action 的 iid 就是它），
                         // 缺省的后排到末尾
@@ -145,37 +157,46 @@ private fun DeviceInfoCard(config: ModbusConfig) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = config.displayName,
+                text = config.displayName ?: stringResource(R.string.modbus_config_unnamed),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
 
-            DetailRow("厂家", config.slave?.manufacturer ?: "-")
-            DetailRow("型号", config.slave?.model ?: "-")
-            DetailRow("从站地址", config.slave?.slaveId?.toString() ?: "-")
-            DetailRow("描述", config.slave?.description ?: "-")
+            DetailRow(stringResource(R.string.modbus_label_manufacturer), config.slave?.manufacturer ?: "-")
+            DetailRow(stringResource(R.string.modbus_label_model), config.slave?.model ?: "-")
+            DetailRow(
+                stringResource(R.string.modbus_label_slave_address),
+                config.slave?.slaveId?.toString() ?: "-"
+            )
+            DetailRow(stringResource(R.string.modbus_label_description), config.slave?.description ?: "-")
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "可见度",
+                    text = stringResource(R.string.modbus_label_visibility),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Spacer(Modifier.width(12.dp))
                 InfoChip(
-                    visibilityLabel(config.visibility),
+                    visibilityLabel(config.visibility).asString(),
                     visibilityColor(config.visibility)
                 )
                 Spacer(Modifier.width(6.dp))
                 InfoChip(
-                    lifecycleLabel(config.lifecycle),
+                    lifecycleLabel(config.lifecycle).asString(),
                     lifecycleColor(config.lifecycle)
                 )
             }
 
-            DetailRow("创建者", config.creator?.name ?: "-")
-            DetailRow("创建时间", formatEpochMillis(config.creator?.timestamp))
-            DetailRow("最后更新", formatEpochMillis(config.updater?.timestamp))
+            DetailRow(stringResource(R.string.modbus_label_creator), config.creator?.name ?: "-")
+            DetailRow(
+                stringResource(R.string.modbus_label_created_at),
+                formatEpochMillis(config.creator?.timestamp)
+            )
+            DetailRow(
+                stringResource(R.string.modbus_label_updated_at),
+                formatEpochMillis(config.updater?.timestamp)
+            )
         }
     }
 }
@@ -209,7 +230,7 @@ private fun CommandCard(command: ModbusCommand, onShowCommand: () -> Unit) {
                 )
                 Text(
                     // 写功能码（05/06/0F/10）标红，读功能码（01–04）保持常规色，与 web 表格一致
-                    text = "${command.fc ?: "-"} ${fcLabel(command.fc)}",
+                    text = "${command.fc ?: "-"} ${fcLabel(command.fc).asString()}",
                     style = MaterialTheme.typography.labelMedium,
                     color = if (isWriteFc(command.fc)) Red else MaterialTheme.colorScheme.primary
                 )
@@ -217,20 +238,25 @@ private fun CommandCard(command: ModbusCommand, onShowCommand: () -> Unit) {
 
             Spacer(Modifier.height(4.dp))
 
-            commandFields(command).forEach { (label, value) ->
-                DetailRow(label, value, MaterialTheme.typography.bodySmall)
+            // 标签给的是资源 id（规则 A），值是一条还没定语言的 UiText
+            commandFields(command).forEach { (labelRes, value) ->
+                DetailRow(stringResource(labelRes), value.asString(), MaterialTheme.typography.bodySmall)
             }
 
             // 01/02 的逐位命名：位区读回来是一段掩码，用户在这里填的位名决定它拆成哪几个字段
             bitNameRows(command).takeIf { it.isNotEmpty() }?.let { rows ->
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "位名称（${rows.size}）",
+                    text = stringResource(R.string.modbus_bit_name_count, rows.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 rows.forEach { (offset, name) ->
-                    DetailRow("位 $offset", name, MaterialTheme.typography.bodySmall)
+                    DetailRow(
+                        stringResource(R.string.modbus_bit_row, offset),
+                        name,
+                        MaterialTheme.typography.bodySmall
+                    )
                 }
             }
 
@@ -238,12 +264,16 @@ private fun CommandCard(command: ModbusCommand, onShowCommand: () -> Unit) {
             fieldNameRows(command).takeIf { it.isNotEmpty() }?.let { rows ->
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "应答字段名（${rows.size}）",
+                    text = stringResource(R.string.modbus_field_name_count, rows.size),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 rows.forEachIndexed { i, name ->
-                    DetailRow("字段 ${i + 1}", name, MaterialTheme.typography.bodySmall)
+                    DetailRow(
+                        stringResource(R.string.modbus_field_row, i + 1),
+                        name,
+                        MaterialTheme.typography.bodySmall
+                    )
                 }
             }
 
@@ -254,7 +284,10 @@ private fun CommandCard(command: ModbusCommand, onShowCommand: () -> Unit) {
                 onClick = onShowCommand,
                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
             ) {
-                Text("命令", style = MaterialTheme.typography.labelLarge)
+                Text(
+                    stringResource(R.string.modbus_command_action),
+                    style = MaterialTheme.typography.labelLarge
+                )
             }
         }
     }

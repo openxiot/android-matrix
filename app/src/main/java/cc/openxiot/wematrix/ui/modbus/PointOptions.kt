@@ -101,11 +101,16 @@ fun fitFieldNames(names: List<String>, count: Int, baseName: String): List<Strin
  * 应答字段默认名的基名：取命令名称去掉「读」/「写」前缀的主体
  * （如「读开关状态」→「开关状态」）—— 字段名是读回来的那个值的标签，带动作前缀反而不像数据字段。
  *
- * 只认中文的「读 / 写」两个前缀：点表多以中文录入，而本端没有 i18n、命令名就是落库的原文，
- * 不存在 web 那种「当前语言的前缀另算一遍」的问题。
+ * 只认中文的「读 / 写」两个前缀。**这两个字不是界面文案，不能翻**：它们匹配的是
+ * 用户在 web 上敲进点表的命令名（如「读开关状态」），那是落库的数据原文 ——
+ * 改成从资源取，英文界面下 `read_` 之类的前缀就再也匹配不上，字段默认名会当场变样。
+ * 故这里挂一行 `i18n-ignore` 让漏抽门禁放过它（门禁只认这一种标记，且有上限测试卡着）。
+ *
+ * web 侧另有「当前语言的前缀另算一遍」的问题；本端命令名就是落库原文，没有这一层。
  */
 fun fieldBaseName(name: String?): String {
     val text = name.orEmpty()
+    // i18n-ignore: 匹配用户录入的命令名前缀，是数据不是文案
     for (prefix in listOf("读", "写")) {
         if (text.startsWith(prefix)) return text.substring(prefix.length).trim()
     }

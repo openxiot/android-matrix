@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  底部导航（BottomTab.labelRes 指到这里）与主壳的空态提示。
+
+  中文这侧是**逐字搬运**原字面量，一字未改。
+-->
+<resources>
+    <string name="tab_home">首页</string>
+    <string name="tab_project">项目</string>
+    <string name="tab_device">设备</string>
+    <string name="tab_product">产品</string>
+    <string name="tab_profile">我</string>
+
+    <string name="main_switch_project">切换项目</string>
+    <string name="main_pick_org_first">请先选择当前组织</string>
+    <string name="main_pick_org">选择组织</string>
+    <string name="main_pick_project_first">请先选择当前项目</string>
+    <string name="main_pick_project">选择项目</string>
+</resources>

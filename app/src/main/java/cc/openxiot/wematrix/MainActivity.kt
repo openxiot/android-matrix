@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,11 @@ import cc.openxiot.wematrix.navigation.Screen
 import cc.openxiot.wematrix.ui.theme.WeMatrixTheme
 
 class MainActivity : ComponentActivity() {
+    /** 应用语言。⚠️ 每个带界面的 Activity 都要有这一句，漏了就永远跟系统语言走。 */
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(AppLocale.wrap(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,10 +36,14 @@ class MainActivity : ComponentActivity() {
             tokenManager.developerId = tokenManager.extractDeveloperIdFromToken()
         }
 
-        // Handle OAuth callback deep link from cold start
-        intent?.data?.let { uri ->
-            if (uri.scheme == "openxiot" && uri.host == "oauth") {
-                handleOAuthCallback(uri.toString())
+        // Handle OAuth callback deep link from cold start。
+        // savedInstanceState != null 时说明这是重建（旋转屏幕、或切语言触发的 recreate），
+        // 而 recreate 会把原始 intent 一起带进来 —— 不拦的话回调会被重放一次。
+        if (savedInstanceState == null) {
+            intent?.data?.let { uri ->
+                if (uri.scheme == "openxiot" && uri.host == "oauth") {
+                    handleOAuthCallback(uri.toString())
+                }
             }
         }
 

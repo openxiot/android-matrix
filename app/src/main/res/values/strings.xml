@@ -1,4 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  默认（values/）是**英文**：系统语言不是中文时天然落到这里，需求「非中文系统 → 英文」
+  零代码满足。中文在 values-zh/。
+
+  两边必须成对：i18n/StringsParityTest 会比对两个目录的 key 集合、占位符数量，
+  并断言 values/ 里不出现中文。
+-->
 <resources>
-    <string name="app_name">矩阵</string>
+    <string name="app_name">WeMatrix</string>
+
+    <string name="common_back">Back</string>
+    <string name="common_retry">Retry</string>
+    <string name="common_confirm">Confirm</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_close">Close</string>
+    <string name="common_detail">Details</string>
+    <string name="common_collapse">Collapse</string>
+    <string name="common_expand">Expand</string>
+
+    <string name="common_all">All</string>
+
+    <string name="common_add">Add</string>
+    <string name="common_create">Create</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_unnamed">Unnamed</string>
+    <string name="common_unknown">Unknown</string>
+    <!-- 成员卡上标自己那枚小徽标。中文是「我」，英文用「You」比「Me」更贴合读到的语境 -->
+    <string name="common_me">You</string>
+    <!--
+      「修改名称」与「重命名」在中文里是两句话（组织/项目的滑出条幅 vs 管理页的图标按钮），
+      英文都落回 "Rename" 是对的。这一条放 common：组织与项目的滑出条幅都写「修改名称」。
+    -->
+    <string name="common_rename_action">Rename</string>
+    <string name="common_role_label">Role</string>
+
+    <!--
+      角色词汇。徽标与单选行分开是两个 key：中文里徽标写「成员」、单选项写「普通成员」，
+      不是同一句话；英文里两处都落回 "Member"，这是对的。
+    -->
+    <string name="common_role_admin">Admin</string>
+    <string name="common_role_member">Member</string>
+    <string name="common_role_member_option">Member</string>
+
+    <string name="common_member_add">Add member</string>
+    <string name="common_member_remove">Remove member</string>
+
+    <!--
+      帧 4/5/6 三批共用的词汇。放 common 的判据是**同一个词跨了模块**，不是「用得多」：
+      下面每一条都在两个以上模块的界面上说的是同一句话（中文一样、英文也一样）。
+    -->
+    <string name="common_edit">Edit</string>
+    <string name="common_refresh">Refresh</string>
+    <!-- 「修改」：改一个已选的时间档，不是改数据。英文用 Change 而非 Edit -->
+    <string name="common_change">Change</string>
+
+    <!--
+      「处理」在中文里是两件事，故两个 key：这一条是**按钮**（把告警标记为已处理）。
+      筛选框上那个「处理」是 alarm_handled_label，英文是 Handling。
+    -->
+    <string name="common_handle">Handle</string>
+    <string name="common_handled">Handled</string>
+    <string name="common_unhandled">Unhandled</string>
+    <string name="common_recovered">Recovered</string>
+    <string name="common_unrecovered">Not recovered</string>
+
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+
+    <!-- 开关量的读数文案（看板服务卡、点表服务详情共用）—— 是读数，不是开关控件 -->
+    <string name="common_switch_on">On</string>
+    <string name="common_switch_off">Off</string>
+
+    <string name="common_please_select">Select…</string>
+    <string name="common_ok">OK</string>
+
+    <!--
+      Custom time range: the chip row’s echo of which two days it currently covers.
+      Shared with the alarm screen — same sentence in both languages there.
+    -->
+    <string name="common_no_range">No time range selected</string>
+    <string name="common_range_text">%1$s to %2$s</string>
+    <string name="common_unlimited">No limit</string>
+
+    <!-- 字段名：服务 / 方法 / 设备 / 通信协议 -->
+    <string name="common_service_label">Service</string>
+    <string name="common_function_label">Function</string>
+    <string name="common_device_label">Device</string>
+    <string name="common_protocol_label">Protocol</string>
+
+    <!--
+      产品显示名的最后一档兜底。原先叫 err_product_unknown 躺在 strings_errors.xml 里，
+      但它不是错误文案，是**界面上显示的名字**；搬过来顺手改掉那个名不副实的前缀。
+    -->
+    <string name="common_unknown_product">Unknown product</string>
+
+    <!-- 告警页 / 历史页两条清单的截断提示，三处逐字同一句 -->
+    <string name="common_truncated_hint">More records than can be listed — showing the most recent</string>
+
+    <string name="err_network">Network unavailable. Check your connection and try again.</string>
+    <string name="err_unknown">Something went wrong. Please try again.</string>
+
+    <!--
+      空间类型。这里的 key（site / building / …）是服务端下发的小写英文枚举值，
+      见 CommonComponents.SpaceTypeChip —— 认不出来的类型原样显示，不回退成这些标签。
+    -->
+    <string name="space_type_site">Site</string>
+    <string name="space_type_building">Building</string>
+    <string name="space_type_floor">Floor</string>
+    <string name="space_type_room">Room</string>
+    <string name="space_type_zone">Zone</string>
+    <string name="space_type_field">Field</string>
+    <string name="space_type_workshop">Workshop</string>
+    <string name="space_type_parking">Parking lot</string>
 </resources>

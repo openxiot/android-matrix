@@ -1,8 +1,10 @@
 package cc.openxiot.wematrix.ui.modbus
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusCommand
 import cc.openxiot.wematrix.data.api.ModbusCoilItem
 import cc.openxiot.wematrix.data.api.ModbusRegisterItem
+import cc.openxiot.wematrix.ui.core.UiText
 
 /**
  * 生成功能码动作对应的 Modbus RTU 请求帧与应答帧（完整帧：从站地址 + PDU + CRC16），
@@ -61,19 +63,21 @@ data class ResponsePreview(
 /**
  * 解析出的帧字段：[label] 是字段名，[hex] 是该字段的字节；
  * 解读用 [text]（一行）或 [lines]（数据区的逐位 / 逐寄存器多行）。
+ *
+ * [label] 与 [text] 是 [UiText] 而不是 String：字段名要翻（`Slave address` / `从站地址`），
+ * 而本文件的两个 `describe*Frame` 是**纯函数**、拿不到 Context。数据本身（`CRC16`、`0x1F2A`
+ * 这类）走 `UiText.Raw`，它们没有可翻的东西。
+ *
+ * 「命令数据不完整」与「异常码含义」两句原来是这里的 `const val`，已挪进
+ * `strings_modbus.xml`（`modbus_frame_incomplete` / `modbus_frame_exception_codes`）——
+ * 常量取不到 Context。
  */
 data class FramePart(
-    val label: String,
+    val label: UiText,
     val hex: String,
-    val text: String? = null,
+    val text: UiText? = null,
     val lines: List<String> = emptyList()
 )
-
-/** 命令数据不完整（缺从站地址、功能码不认、必要字段没填）时统一给这一句 */
-const val FRAME_INCOMPLETE_MESSAGE = "命令数据不完整，无法生成请求帧"
-
-/** 异常应答里那个异常码的常见含义；设备返回哪个由现场决定，故只列常见的四个 */
-const val FRAME_EXCEPTION_CODES = "01 非法功能码 / 02 非法数据地址 / 03 非法数据值 / 04 从站设备故障"
 
 /** 读功能码（01–04）：应答带数据区；其余为写功能码 */
 private val READ_FC_NUMBERS = setOf(0x01, 0x02, 0x03, 0x04)
@@ -234,7 +238,7 @@ private fun exceptionFrame(slaveId: Int, fc: Int): ResponseFrame {
 
 /**
  * 生成完整 RTU 请求帧。从站地址（0–255）不合法或命令数据不完整时返回 null
- * （页面上给 [FRAME_INCOMPLETE_MESSAGE]）。
+ * （页面上给 `R.string.modbus_frame_incomplete`）。
  *
  * [slaveId] 取自点表的 `slave.slaveId`：**缺省就是生成不了帧**，不是拿 0 兜
  * —— 0 是一个合法的从站地址（广播），猜一个发出去会打到别的设备。
@@ -334,9 +338,10 @@ private fun at(bytes: List<Int?>, index: Int): Int = bytes.getOrNull(index) ?: 0
 private fun crcPart(bytes: List<Int?>): FramePart {
     val lo = bytes.getOrNull(bytes.size - 2)
     val hi = bytes.getOrNull(bytes.size - 1)
-    if (lo == null || hi == null) return FramePart("CRC16", "?? ??")
+    // CRC16 是协议里的字段名，两种语言下都写这个，故走 Raw 而不是资源
+    if (lo == null || hi == null) return FramePart(UiText.Raw("CRC16"), "?? ??")
     val value = ((lo or (hi shl 8)) and 0xFFFF).toString(16).uppercase().padStart(4, '0')
-    return FramePart("CRC16", toHex(listOf(lo, hi)), text = "0x$value")
+    return FramePart(UiText.Raw("CRC16"), toHex(listOf(lo, hi)), text = UiText.Raw("0x$value"))
 }
 
 /**
@@ -494,43 +499,63 @@ fun describeRequestFrame(command: ModbusCommand, frame: RequestFrame): List<Fram
     val bytes = frame.bytes
     val parts = mutableListOf<FramePart>()
 
-    parts += FramePart("从站地址", toHex(listOf(bytes[0])), text = bytes[0].toString())
-    parts += FramePart("功能码", toHex(listOf(bytes[1])), text = fcLabel(command.fc))
+    parts += FramePart(
+        UiText.Res(R.string.modbus_label_slave_address),
+        toHex(listOf(bytes[0])),
+        text = UiText.Raw(bytes[0].toString())
+    )
+    parts += FramePart(
+        UiText.Res(R.string.modbus_frame_function),
+        toHex(listOf(bytes[1])),
+        text = fcLabel(command.fc)
+    )
     // 起始地址（所有功能码都有）
     parts += FramePart(
-        "起始地址",
+        UiText.Res(R.string.modbus_field_start_address),
         toHex(listOf(bytes[2], bytes[3])),
-        text = (((bytes[2] shl 8) or bytes[3]) and 0xFFFF).toString()
+        text = UiText.Raw((((bytes[2] shl 8) or bytes[3]) and 0xFFFF).toString())
     )
 
     when (command.fc) {
         "01", "02", "03", "04" -> {
             val quantity = ((bytes[4] shl 8) or bytes[5]) and 0xFFFF
-            parts += FramePart("数量", toHex(listOf(bytes[4], bytes[5])), text = quantity.toString())
+            parts += FramePart(
+                UiText.Res(R.string.modbus_field_quantity),
+                toHex(listOf(bytes[4], bytes[5])),
+                text = UiText.Raw(quantity.toString())
+            )
         }
 
         "05" -> {
             val on = bytes[4] == 0xFF && bytes[5] == 0x00
             parts += FramePart(
-                "线圈状态",
+                UiText.Res(R.string.modbus_frame_coil_state),
                 toHex(listOf(bytes[4], bytes[5])),
-                text = if (on) "ON" else "OFF"
+                text = UiText.Raw(if (on) "ON" else "OFF")
             )
         }
 
         "06" -> parts += FramePart(
-            "寄存器值",
+            UiText.Res(R.string.modbus_frame_register_value),
             toHex(listOf(bytes[4], bytes[5])),
-            text = (((bytes[4] shl 8) or bytes[5]) and 0xFFFF).toString()
+            text = UiText.Raw((((bytes[4] shl 8) or bytes[5]) and 0xFFFF).toString())
         )
 
         "0F" -> {
             val quantity = ((bytes[4] shl 8) or bytes[5]) and 0xFFFF
-            parts += FramePart("数量", toHex(listOf(bytes[4], bytes[5])), text = quantity.toString())
-            parts += FramePart("字节数", toHex(listOf(bytes[6])), text = bytes[6].toString())
+            parts += FramePart(
+                UiText.Res(R.string.modbus_field_quantity),
+                toHex(listOf(bytes[4], bytes[5])),
+                text = UiText.Raw(quantity.toString())
+            )
+            parts += FramePart(
+                UiText.Res(R.string.modbus_frame_byte_count),
+                toHex(listOf(bytes[6])),
+                text = UiText.Raw(bytes[6].toString())
+            )
             val data = slice(bytes, 7, 7 + bytes[6])
             parts += FramePart(
-                "线圈数据",
+                UiText.Res(R.string.modbus_frame_coil_data),
                 toHex(data),
                 lines = coilDecodeLines(data, quantity).map { "${it.at}=${it.value}" }
             )
@@ -538,11 +563,19 @@ fun describeRequestFrame(command: ModbusCommand, frame: RequestFrame): List<Fram
 
         "10" -> {
             val quantity = ((bytes[4] shl 8) or bytes[5]) and 0xFFFF
-            parts += FramePart("数量", toHex(listOf(bytes[4], bytes[5])), text = quantity.toString())
-            parts += FramePart("字节数", toHex(listOf(bytes[6])), text = bytes[6].toString())
+            parts += FramePart(
+                UiText.Res(R.string.modbus_field_quantity),
+                toHex(listOf(bytes[4], bytes[5])),
+                text = UiText.Raw(quantity.toString())
+            )
+            parts += FramePart(
+                UiText.Res(R.string.modbus_frame_byte_count),
+                toHex(listOf(bytes[6])),
+                text = UiText.Raw(bytes[6].toString())
+            )
             val data = slice(bytes, 7, 7 + bytes[6])
             parts += FramePart(
-                "寄存器数据",
+                UiText.Res(R.string.modbus_frame_register_data),
                 toHex(data),
                 lines = registerDecodeLines(command, data).map { "${it.at}  ${it.kind} = ${it.value}" }
             )
@@ -572,33 +605,50 @@ fun describeResponseFrame(command: ModbusCommand, frame: ResponseFrame): List<Fr
     }
 
     val parts = mutableListOf(
-        FramePart("从站地址", toHex(listOf(at(bytes, 0))), text = at(bytes, 0).toString())
+        FramePart(
+            UiText.Res(R.string.modbus_label_slave_address),
+            toHex(listOf(at(bytes, 0))),
+            text = UiText.Raw(at(bytes, 0).toString())
+        )
     )
 
     if (frame.kind == ResponseKind.EXCEPTION) {
         parts += FramePart(
-            "功能码",
+            UiText.Res(R.string.modbus_frame_function),
             toHex(listOf(at(bytes, 1))),
-            text = "${fcLabel(command.fc)} + 异常"
+            // 功能码名 + 「异常」，后者是词，故整条走资源、名字作为参数嵌进来
+            text = UiText.Res(R.string.modbus_frame_exception_suffix, listOf(fcLabel(command.fc)))
         )
-        parts += FramePart("异常码", "??", text = FRAME_EXCEPTION_CODES)
+        parts += FramePart(
+            UiText.Res(R.string.modbus_frame_exception_code),
+            "??",
+            text = UiText.Res(R.string.modbus_frame_exception_codes)
+        )
         val crc = crcPart(bytes)
-        parts += if (crc.text == null) crc.copy(text = "待设备返回") else crc
+        parts += if (crc.text == null) {
+            crc.copy(text = UiText.Res(R.string.modbus_frame_awaiting_device))
+        } else {
+            crc
+        }
         return parts
     }
 
-    parts += FramePart("功能码", toHex(listOf(at(bytes, 1))), text = fcLabel(command.fc))
+    parts += FramePart(
+        UiText.Res(R.string.modbus_frame_function),
+        toHex(listOf(at(bytes, 1))),
+        text = fcLabel(command.fc)
+    )
 
     if (frame.kind == ResponseKind.ACK) {
         parts += FramePart(
-            "起始地址",
+            UiText.Res(R.string.modbus_field_start_address),
             toHex(listOf(at(bytes, 2), at(bytes, 3))),
-            text = (((at(bytes, 2) shl 8) or at(bytes, 3)) and 0xFFFF).toString()
+            text = UiText.Raw((((at(bytes, 2) shl 8) or at(bytes, 3)) and 0xFFFF).toString())
         )
         parts += FramePart(
-            "数量",
+            UiText.Res(R.string.modbus_field_quantity),
             toHex(listOf(at(bytes, 4), at(bytes, 5))),
-            text = (((at(bytes, 4) shl 8) or at(bytes, 5)) and 0xFFFF).toString()
+            text = UiText.Raw((((at(bytes, 4) shl 8) or at(bytes, 5)) and 0xFFFF).toString())
         )
         parts += crcPart(bytes)
         return parts
@@ -606,9 +656,17 @@ fun describeResponseFrame(command: ModbusCommand, frame: ResponseFrame): List<Fr
 
     // read：字节数 + 数据区 + CRC16
     val byteCount = at(bytes, 2)
-    parts += FramePart("字节数", toHex(listOf(byteCount)), text = byteCount.toString())
+    parts += FramePart(
+        UiText.Res(R.string.modbus_frame_byte_count),
+        toHex(listOf(byteCount)),
+        text = UiText.Raw(byteCount.toString())
+    )
     val data = slice(bytes.map { it ?: 0 }, 3, 3 + byteCount)
-    parts += FramePart("数据区", toHex(data), lines = readDataLines(command, data))
+    parts += FramePart(
+        UiText.Res(R.string.modbus_frame_data_area),
+        toHex(data),
+        lines = readDataLines(command, data)
+    )
     parts += crcPart(bytes)
     return parts
 }

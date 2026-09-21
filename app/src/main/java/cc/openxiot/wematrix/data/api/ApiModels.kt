@@ -151,5 +151,12 @@ data class ProductEntity(
     @SerializedName("organization") val organization: String? = null,
     @SerializedName("template") val template: String? = null
 ) {
-    val displayName: String get() = name?.zhCN ?: model ?: id ?: "未知产品"
+    /**
+     * 显示名：服务端中文名 > 型号 > id。
+     *
+     * 三者都没有时返回 `null`，**由界面层补一句「未知产品」** —— 这个数据类拿不到
+     * Context，把文案钉在这里就等于钉死了语言（[R.string.common_unknown_product]）。
+     * 实际数据里 `id` 是 Mongo 的 `_id`，几乎不可能缺，故 `null` 只是形式上的兜底。
+     */
+    val displayName: String? get() = name?.zhCN ?: model ?: id
 }

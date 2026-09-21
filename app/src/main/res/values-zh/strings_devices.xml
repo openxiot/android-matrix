@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  设备列表。中文这侧是**逐字搬运**原字面量，一字未改。
+-->
+<resources>
+    <string name="devices_select_project_first">请先在「我」的页面选择项目</string>
+    <string name="devices_empty">暂无设备</string>
+    <string name="devices_unknown">未知设备</string>
+
+    <plurals name="devices_count">
+        <item quantity="other">共 %1$d 个设备</item>
+    </plurals>
+</resources>

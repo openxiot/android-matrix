@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Home / dashboard. This is **English** (the default), Chinese is in values-zh/.
+
+  Two families of names live here and must not be collapsed into one another:
+  `home_card_default_*` is what a card **calls itself** when it has no title (it is
+  rendered as the card heading), while `home_metric_*` / `home_dimension_*` /
+  `home_source_*` are what an **item in a dropdown** is called (editor only).
+  Chinese uses 「设备」 for both; so does English, but they are two different things.
+-->
+<resources>
+    <string name="home_no_project">Pick a project from the list first</string>
+
+    <!-- Edit screen top bar -->
+    <string name="home_edit_layout_title">Edit layout</string>
+    <string name="home_reset_layout">Reset to default</string>
+    <string name="home_save_layout">Save layout</string>
+    <string name="home_discard_title">Discard changes?</string>
+    <string name="home_discard_message">You have unsaved changes. Leaving now will lose them.</string>
+    <string name="home_dashboard_empty">No cards yet — tap “Add” below to add one</string>
+    <string name="home_add_card">+ Add</string>
+    <string name="home_default_layout_loaded">Default layout loaded — save it to apply</string>
+
+    <!-- Add-card sheet -->
+    <string name="home_add_card_title">Add a card</string>
+    <string name="home_card_kind_stat">One big number: devices / services / alarms / failures</string>
+    <string name="home_card_kind_line">Hourly alarm counts, or one service field</string>
+    <string name="home_card_kind_distribution">Breakdown by device / service / alarm / failure</string>
+    <string name="home_card_kind_device">One property of one device</string>
+    <string name="home_card_kind_service">A set of fields from one function</string>
+
+    <!-- What an untitled card calls itself -->
+    <string name="home_card_default_stat">Statistic</string>
+    <string name="home_card_default_line">Chart</string>
+    <string name="home_card_default_distribution">Breakdown</string>
+    <string name="home_card_default_device">Device</string>
+    <string name="home_card_default_service">Service</string>
+    <string name="home_card_default_unknown">Card</string>
+
+    <!-- Single-card editor sheet -->
+    <string name="home_edit_card_title">Edit · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Full width</string>
+    <string name="home_size_half">Half width</string>
+
+    <!-- Stat card -->
+    <string name="home_section_metric">Metric</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Total devices</string>
+    <string name="home_metric_devices_online">Devices online</string>
+    <string name="home_metric_services_total">Total services</string>
+    <string name="home_metric_alarms_today">Alarms today</string>
+    <string name="home_metric_alarms_window">Alarms in window</string>
+    <string name="home_metric_failures_total">Sampling failures in window</string>
+
+    <!-- Distribution card -->
+    <string name="home_section_dimension">Breakdown by</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Device type</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Sampling failure type</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+
+    <!-- Line card -->
+    <string name="home_section_source">Data source</string>
+    <string name="home_source_label">Source</string>
+    <string name="home_source_alarm_curve">Hourly alarm counts</string>
+    <string name="home_source_service_field">One service field</string>
+    <string name="home_show_failure_shadow">Mark sampling failures</string>
+    <string name="home_max_points_label">Max points</string>
+
+    <!-- Service → function → field cascade (line and service cards share it) -->
+    <string name="home_section_service_field">Service · Function · Field</string>
+    <string name="home_service_placeholder">Select a service</string>
+    <string name="home_service_unnamed">Unnamed service</string>
+    <string name="home_function_placeholder">Select a function</string>
+    <string name="home_function_fallback">Function %1$d</string>
+    <string name="home_pick_service_first">Select a service first</string>
+    <string name="home_show_unit">Show unit</string>
+
+    <!-- Device card -->
+    <string name="home_section_device_prop">Device · Property</string>
+    <string name="home_device_placeholder">Select a device</string>
+    <string name="home_prop_label">Property</string>
+    <string name="home_pick_device_first">Select a device first</string>
+    <string name="home_prop_none">No properties for this model</string>
+    <string name="home_prop_placeholder">Select a property</string>
+
+    <!-- Number field: the hint shown when the value is out of range -->
+    <string name="home_number_range_hint">%1$d ~ %2$d, leave blank for no limit</string>
+
+    <!-- Time window -->
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Last</string>
+    <string name="home_window_custom">Custom</string>
+    <string name="home_pick_dates">Pick start and end dates</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d hour</item>
+        <item quantity="other">%1$d hours</item>
+    </plurals>
+
+    <!-- Card body -->
+    <string name="home_card_unknown_type">Unknown card type</string>
+    <string name="home_empty_no_data">No data</string>
+    <string name="home_empty_no_reading">No readings yet</string>
+    <string name="home_empty_not_sampled">Nothing sampled yet</string>
+    <string name="home_sampled_at">Sampled %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">devices</string>
+    <string name="home_unit_services">services</string>
+</resources>

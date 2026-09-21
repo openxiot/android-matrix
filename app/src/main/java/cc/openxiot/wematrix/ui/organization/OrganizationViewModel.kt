@@ -6,6 +6,8 @@ import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.Organization
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.repository.OrganizationRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +18,7 @@ data class OrgListUiState(
     val organizations: List<Organization> = emptyList(),
     val currentOrgId: String? = null,
     val currentOrgName: String? = null,
-    val error: String? = null,
+    val error: UiText? = null,
     val showCreateDialog: Boolean = false
 )
 
@@ -51,7 +53,7 @@ class OrganizationViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = e.message
+                        error = e.toUiText()
                     )
                 }
         }
@@ -90,7 +92,7 @@ class OrganizationViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = e.message
+                        error = e.toUiText()
                     )
                 }
         }
@@ -108,7 +110,7 @@ class OrganizationViewModel : ViewModel() {
                     loadOrganizations()
                 }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -127,7 +129,7 @@ class OrganizationViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = e.message
+                        error = e.toUiText()
                     )
                 }
         }

@@ -2,12 +2,15 @@ package cc.openxiot.wematrix.ui.alarm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusAlarm
 import cc.openxiot.wematrix.data.api.ModbusAlarmList
 import cc.openxiot.wematrix.data.api.ModbusAlarmQuery
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.data.repository.ModbusAlarmRepository
 import cc.openxiot.wematrix.data.repository.SpaceRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.applyHandledAlarm
 import cc.openxiot.wematrix.ui.modbus.presetWindow
@@ -37,11 +40,11 @@ data class AlarmUiState(
     val services: List<ModbusServiceBrief> = emptyList(),
     /** 告警清单；取数失败时为 null */
     val alarms: ModbusAlarmList? = null,
-    val error: String? = null,
+    val error: UiText? = null,
     /** 正在处理的那条 id（按钮转圈，避免同一条被点两下） */
     val handlingId: String? = null,
     /** 处理失败的原因（就地显示，不动清单） */
-    val actionError: String? = null,
+    val actionError: UiText? = null,
     /** 刚处理成功的那条 id（用于一次性的提示，看过即清） */
     val handledId: String? = null,
 
@@ -137,7 +140,7 @@ class AlarmViewModel : ViewModel() {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
                         alarms = null,
-                        error = e.message ?: "获取告警清单失败"
+                        error = e.toUiText(R.string.err_alarm_list)
                     )
                 }
         }
@@ -205,7 +208,7 @@ class AlarmViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         handlingId = null,
-                        actionError = e.message ?: "处理告警失败"
+                        actionError = e.toUiText(R.string.err_alarm_action)
                     )
                 }
         }

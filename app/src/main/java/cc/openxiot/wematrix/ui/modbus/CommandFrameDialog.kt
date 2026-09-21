@@ -26,11 +26,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusCommand
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Blue500
 import cc.openxiot.wematrix.ui.theme.Red
 
@@ -82,42 +85,48 @@ fun CommandFrameDialog(
                         color = if (isWriteFc(command.fc)) Red else Blue500
                     )
                     Spacer(Modifier.width(6.dp))
-                    Text(text = fcLabel(command.fc), style = MaterialTheme.typography.labelLarge)
+                    Text(
+                        text = fcLabel(command.fc).asString(),
+                        style = MaterialTheme.typography.labelLarge
+                    )
                 }
 
                 if (request == null || preview == null) {
                     // 数据不完整（缺从站地址、必要字段没填）时不给半张帧 —— 半张帧比没有更容易被抄错
                     Text(
-                        text = FRAME_INCOMPLETE_MESSAGE,
+                        text = stringResource(R.string.modbus_frame_incomplete),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.error
                     )
                 } else {
                     FrameSection(
-                        title = "请求帧",
+                        // 与「服务详情」里那处小节标题同一句，共用一个 key
+                        title = stringResource(R.string.modbus_frame_request),
                         hex = request.hex,
                         count = request.count,
-                        notes = listOf("完整请求帧，含从站地址与 CRC16"),
+                        notes = listOf(stringResource(R.string.modbus_frame_notes_request)),
                         parts = describeRequestFrame(command, request),
                         context = context
                     )
                     FrameSection(
-                        title = "应答帧",
+                        title = stringResource(R.string.modbus_frame_response),
                         hex = preview.frame.hex,
                         count = preview.frame.count,
                         notes = buildList {
-                            add("完整应答帧，含从站地址与 CRC16")
+                            add(stringResource(R.string.modbus_frame_notes_response))
                             // 读应答的数据区由设备返回，帧里按字节数补的是示例值
-                            if (preview.frame.sample) add("数据区为示例值，真实数据由设备返回")
+                            if (preview.frame.sample) {
+                                add(stringResource(R.string.modbus_frame_notes_sample))
+                            }
                         },
                         parts = describeResponseFrame(command, preview.frame),
                         context = context
                     )
                     FrameSection(
-                        title = "异常应答",
+                        title = stringResource(R.string.modbus_frame_exception),
                         hex = preview.exception.hex,
                         count = preview.exception.count,
-                        notes = listOf("功能码最高位置 1 表示异常；异常码与 CRC16 由设备返回，此处以 ?? 占位"),
+                        notes = listOf(stringResource(R.string.modbus_frame_notes_exception)),
                         parts = describeResponseFrame(command, preview.exception),
                         context = context,
                         danger = true
@@ -128,7 +137,7 @@ fun CommandFrameDialog(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    TextButton(onClick = onDismiss) { Text("关闭") }
+                    TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_close)) }
                 }
             }
         }
@@ -181,16 +190,20 @@ private fun FrameSection(
                 )
             }
             Text(
-                text = "共 $count 字节",
+                text = stringResource(R.string.modbus_frame_byte_total, count),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
-        TextButton(onClick = { copyToClipboard(context, hex) }) { Text("复制") }
+        // 剪贴板条目的名字也得跟着语言走，故在组合里取好再传进去
+        val clipboardLabel = stringResource(R.string.modbus_frame_clipboard_label)
+        TextButton(onClick = { copyToClipboard(context, hex, clipboardLabel) }) {
+            Text(stringResource(R.string.modbus_frame_copy))
+        }
     }
 
     Text(
-        text = "帧结构解析",
+        text = stringResource(R.string.modbus_frame_structure),
         style = MaterialTheme.typography.labelMedium,
         fontWeight = FontWeight.Medium,
         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -203,7 +216,7 @@ private fun FrameSection(
 private fun PartRow(part: FramePart) {
     Row(modifier = Modifier.fillMaxWidth()) {
         Text(
-            text = part.label,
+            text = part.label.asString(),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.width(64.dp)
@@ -224,7 +237,7 @@ private fun PartRow(part: FramePart) {
         ) {
             when {
                 part.text != null -> Text(
-                    text = part.text,
+                    text = part.text.asString(),
                     style = MaterialTheme.typography.labelSmall
                 )
                 // 数据区逐位 / 逐寄存器：一行一项
@@ -249,7 +262,7 @@ private fun PartRow(part: FramePart) {
  * （`LocalClipboardManager` → `LocalClipboard`），而这一段只是想往剪贴板里放一串文本，
  * 用平台服务不必跟着 Compose 的 API 迁移走。
  */
-private fun copyToClipboard(context: Context, text: String) {
+private fun copyToClipboard(context: Context, text: String, label: String) {
     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager ?: return
-    clipboard.setPrimaryClip(ClipData.newPlainText("Modbus 帧", text))
+    clipboard.setPrimaryClip(ClipData.newPlainText(label, text))
 }

@@ -44,10 +44,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusHistoryFailure
 import cc.openxiot.wematrix.ui.components.CustomRangeDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
@@ -57,6 +60,7 @@ import cc.openxiot.wematrix.ui.components.FilterRow
 import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.RangePresetChips
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.epochDate
 import cc.openxiot.wematrix.ui.modbus.failureLabel
@@ -111,11 +115,11 @@ fun ServiceHistoryScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
                         // 服务名是服务端数据、原样显示；取不到定义时退回「历史」
-                        text = state.service?.name ?: "历史",
+                        text = state.service?.name ?: stringResource(R.string.history_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1,
@@ -131,7 +135,7 @@ fun ServiceHistoryScreen(
                         )
                     }
                     IconButton(onClick = { viewModel.load() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "刷新")
+                        Icon(Icons.Default.Refresh, contentDescription = stringResource(R.string.common_refresh))
                     }
                 }
             }
@@ -147,7 +151,7 @@ fun ServiceHistoryScreen(
                 state.isLoadingService && state.service == null -> LoadingIndicator()
 
                 serviceError != null && state.service == null -> EmptyState(
-                    message = serviceError,
+                    message = serviceError.asString(),
                     modifier = Modifier.clickable { viewModel.load(rootId, serviceId) }
                 )
 
@@ -175,19 +179,28 @@ fun ServiceHistoryScreen(
                     // 取不到数的字段：表格没有挂错处，统一提示在这；曲线图各自挂在自己那张图上
                     if (state.view == HistoryView.TABLE) {
                         items(state.loadErrors) { message ->
-                            NoticeCard(text = message, danger = true)
+                            NoticeCard(text = message.asString(), danger = true)
                         }
                     }
                     if (state.downsampled) {
-                        item { NoticeCard(text = DOWNSAMPLED_HINT, danger = false) }
+                        item { NoticeCard(text = stringResource(R.string.service_history_downsampled_hint), danger = false) }
                     }
 
                     if (state.view == HistoryView.TABLE) {
                         val rows = state.rows
                         if (rows.isEmpty()) {
-                            item { EmptyState("这段时间没有采集数据") }
+                            item { EmptyState(stringResource(R.string.history_no_data)) }
                         } else {
-                            item { SectionTitle("采集数据（${rows.size} 行）") }
+                            // 数量传两次：一次选档位（英文 1 row / 2 rows），一次填 %1$d
+                            item {
+                                SectionTitle(
+                                    pluralStringResource(
+                                        R.plurals.service_history_rows_title,
+                                        rows.size,
+                                        rows.size
+                                    )
+                                )
+                            }
                             items(rows, key = { it.key }) { row -> HistoryRowCard(row) }
                         }
                     } else {
@@ -196,37 +209,40 @@ fun ServiceHistoryScreen(
                             item {
                                 EmptyState(
                                     message = if (state.numericFields.isEmpty()) {
-                                        "这个服务的字段画不出曲线"
+                                        stringResource(R.string.service_history_no_curve)
                                     } else {
-                                        "没有勾选字段"
+                                        stringResource(R.string.service_history_no_fields_selected)
                                     }
                                 )
                             }
                         } else {
                             if (state.failures?.items?.isNotEmpty() == true) {
-                                item { NoticeCard(text = "竖线为采集失败时刻", danger = false) }
+                                item { NoticeCard(text = stringResource(R.string.service_history_failure_hint), danger = false) }
                             }
                             items(charts, key = { it.ref.key }) { chart -> ChartCard(chart, state) }
                         }
                     }
 
-                    item { SectionTitle("采集异常") }
+                    item { SectionTitle(stringResource(R.string.history_faults_section)) }
                     item { FailureSummary(state) }
 
                     val failures = state.failures
+                    // 提成局部 val 才能智能转换：`state` 自己是委托属性，`state.failuresError`
+                    // 无法被判定为非空
+                    val failuresError = state.failuresError
                     when {
-                        failures == null && state.failuresError.isNotEmpty() ->
-                            item { NoticeCard(text = state.failuresError, danger = true) }
+                        failures == null && failuresError != null ->
+                            item { NoticeCard(text = failuresError.asString(), danger = true) }
 
                         failures == null || failures.items.isEmpty() ->
-                            item { EmptyState("这段时间没有采集异常") }
+                            item { EmptyState(stringResource(R.string.history_no_faults)) }
 
                         else -> {
                             items(failures.items.size) { index ->
                                 FailureCard(failures.items[index])
                             }
                             if (failures.truncated) {
-                                item { NoticeCard(text = TRUNCATED_HINT, danger = false) }
+                                item { NoticeCard(text = stringResource(R.string.common_truncated_hint), danger = false) }
                             }
                         }
                     }
@@ -259,12 +275,6 @@ fun ServiceHistoryScreen(
         )
     }
 }
-
-/** 命中降采样时的说明 —— 与 web 同一句文案 */
-private const val DOWNSAMPLED_HINT = "数据点较多，已按时间区间降采样（值为该段平均值，括号内为最小~最大值）"
-
-/** 窗口内的失败多于上限时只列了最近的那部分 —— 与 web 同一句文案 */
-private const val TRUNCATED_HINT = "异常记录超过上限，只列出最近的部分"
 
 @Composable
 private fun SectionTitle(text: String) {
@@ -303,15 +313,17 @@ private fun HeaderCard(state: ServiceHistoryUiState) {
                 )
                 state.device?.let {
                     InfoChip(
-                        text = if (it.online == true) "在线" else "离线",
+                        text = stringResource(
+                            if (it.online == true) R.string.common_online else R.string.common_offline
+                        ),
                         color = if (it.online == true) Green else Gray500
                     )
                 }
             }
             // 已采到数据的方法数 / 可配轮询的方法数：差得多说明有方法一直没采上
-            KeyValue("方法数", state.methodCountText)
+            KeyValue(stringResource(R.string.history_function_count_label), state.methodCountText)
             KeyValue(
-                label = "采集时间",
+                label = stringResource(R.string.history_sampled_at_label),
                 value = state.lastRecordedAt?.let { formatEpochMillis(it) } ?: "-"
             )
         }
@@ -349,7 +361,7 @@ private fun FilterCard(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.weight(1f)
                     )
-                    TextButton(onClick = onEditCustomRange) { Text("修改") }
+                    TextButton(onClick = onEditCustomRange) { Text(stringResource(R.string.common_change)) }
                 }
             }
 
@@ -357,13 +369,13 @@ private fun FilterCard(
                 // 方法序号 0 = 全部方法：它与「不传」在接口上是同一件事，
                 // 故这里让 null（不限）就代表全部，不必真塞一个 0 进下拉
                 FilterDropdown(
-                    label = "方法",
+                    label = stringResource(R.string.common_function_label),
                     value = state.functionIndex.takeIf { it > 0 },
                     options = state.readFunctions.map { func ->
                         FilterOption(func.index ?: 0, state.functionLabel(func))
                     },
                     onSelect = { onFunctionChange(it ?: 0) },
-                    placeholder = "全部方法"
+                    placeholder = stringResource(R.string.service_history_all_functions)
                 )
             }
 
@@ -374,14 +386,20 @@ private fun FilterCard(
                         selected = state.view == view,
                         onClick = { onViewChange(view) },
                         label = {
-                            Text(view.label, style = MaterialTheme.typography.labelMedium)
+                            Text(stringResource(view.labelRes), style = MaterialTheme.typography.labelMedium)
                         }
                     )
                 }
                 // 字段多选框收进弹窗：手机上一展开就吃掉半屏，而它只是个显示筛选
                 if (state.view == HistoryView.CHART) {
                     TextButton(onClick = onPickFields) {
-                        Text("字段 ${state.chartFields.size} / ${state.numericFields.size}")
+                        Text(
+                            stringResource(
+                                R.string.service_history_field_selection,
+                                state.chartFields.size,
+                                state.numericFields.size
+                            )
+                        )
                     }
                 }
             }
@@ -389,10 +407,15 @@ private fun FilterCard(
     }
 }
 
-/** 自定义档当前查的是哪一段（还没选过时为空） */
+/**
+ * 自定义档当前查的是哪一段（还没选过时为空）。
+ *
+ * 两个分支都是文案，故整个函数改 `@Composable`；调用它的地方就在同一个组合里。
+ */
+@Composable
 private fun customRangeText(from: Long?, to: Long?): String {
-    if (from == null || to == null) return "尚未选择时间范围"
-    return "${epochDate(from)} 至 ${epochDate(to)}"
+    if (from == null || to == null) return stringResource(R.string.common_no_range)
+    return stringResource(R.string.common_range_text, epochDate(from), epochDate(to))
 }
 
 /** 表格里的一行：时间 / 方法 · 字段 / 值 单位 /（保持） */
@@ -418,9 +441,7 @@ private fun HistoryRowCard(row: HistoryRow) {
                     modifier = Modifier.weight(1f)
                 )
                 // 值没变、按 keep-alive 时限补记的一条：与「变了才记」区分开
-                if (row.note.isNotEmpty()) {
-                    InfoChip(row.note, Gray500)
-                }
+                row.note?.let { InfoChip(it.asString(), Gray500) }
             }
             // 值 + 单位：数值收过浮点误差，单位是点表里的数据、原样缀上
             Text(
@@ -480,10 +501,10 @@ private fun ChartCard(chart: HistoryChart, state: ServiceHistoryUiState) {
 
             val range = chart.range
             when {
-                chart.error.isNotEmpty() -> NoticeCard(chart.error, danger = true)
+                chart.error != null -> NoticeCard(chart.error!!.asString(), danger = true)
 
                 range == null || window == null -> EmptyState(
-                    message = "这段时间没有采集数据",
+                    message = stringResource(R.string.history_no_data),
                     modifier = Modifier.height(120.dp)
                 )
 
@@ -514,10 +535,13 @@ private fun FailureSummary(state: ServiceHistoryUiState) {
     if (summary.byType.isEmpty() && summary.byRemoteCode.isEmpty()) return
     FilterRow(modifier = Modifier.padding(horizontal = 16.dp)) {
         summary.byType.forEach { item ->
-            InfoChip("${failureLabel(item.type, null)} × ${item.count}", Red)
+            InfoChip("${failureLabel(item.type, null).asString()} × ${item.count}", Red)
         }
         summary.byRemoteCode.forEach { item ->
-            InfoChip("异常 ${item.remoteCode} × ${item.count}", Gray500)
+            InfoChip(
+                stringResource(R.string.service_history_fault_chip, item.remoteCode, item.count),
+                Gray500
+            )
         }
     }
 }
@@ -549,9 +573,9 @@ private fun FailureCard(item: ModbusHistoryFailure) {
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f)
                 )
-                InfoChip(failureLabel(item.type, item.remoteCode), Red)
+                InfoChip(failureLabel(item.type, item.remoteCode).asString(), Red)
             }
-            KeyValue("方法", "#${item.functionIndex}")
+            KeyValue(stringResource(R.string.common_function_label), "#${item.functionIndex}")
             // 失败消息是服务端下发的原文，**原样显示、不翻译**
             Text(
                 text = item.message,
@@ -638,10 +662,10 @@ private fun FieldPickerDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("字段") },
+        title = { Text(stringResource(R.string.history_field_label)) },
         text = {
             if (options.isEmpty()) {
-                Text("这个方法没有画得出曲线的字段")
+                Text(stringResource(R.string.service_history_no_curve_for_function))
             } else {
                 LazyColumn(modifier = Modifier.heightIn(max = 400.dp)) {
                     items(options, key = { it.key }) { ref ->
@@ -692,11 +716,11 @@ private fun FieldPickerDialog(
         },
         confirmButton = {
             TextButton(onClick = { onConfirm(options.map { it.key }.filter { picked.contains(it) }) }) {
-                Text("确定")
+                Text(stringResource(R.string.common_ok))
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
         }
     )
 }

@@ -13,15 +13,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusConfig
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Blue500
 import cc.openxiot.wematrix.ui.theme.Gray500
 import cc.openxiot.wematrix.ui.theme.Green
@@ -59,10 +62,13 @@ fun ModbusListScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.common_back)
+                        )
                     }
                     Text(
-                        text = "设备点表",
+                        text = stringResource(R.string.modbus_list_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -83,7 +89,7 @@ fun ModbusListScreen(
                     onRetry = { viewModel.loadConfigs() }
                 )
 
-                state.configs.isEmpty() -> EmptyState("暂无设备点表")
+                state.configs.isEmpty() -> EmptyState(stringResource(R.string.modbus_list_empty))
 
                 else -> LazyColumn(
                     modifier = Modifier.fillMaxSize(),
@@ -119,7 +125,7 @@ private fun ModbusConfigCard(config: ModbusConfig, onClick: () -> Unit) {
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = config.displayName,
+                    text = config.displayName ?: stringResource(R.string.modbus_config_unnamed),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Medium,
                     maxLines = 1,
@@ -130,14 +136,23 @@ private fun ModbusConfigCard(config: ModbusConfig, onClick: () -> Unit) {
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "从站地址 ${config.slave?.slaveId ?: "-"}",
+                        text = stringResource(
+                            R.string.modbus_slave_address_value,
+                            config.slave?.slaveId?.toString() ?: "-"
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(Modifier.width(8.dp))
-                    InfoChip(visibilityLabel(config.visibility), visibilityColor(config.visibility))
+                    InfoChip(
+                        visibilityLabel(config.visibility).asString(),
+                        visibilityColor(config.visibility)
+                    )
                     Spacer(Modifier.width(6.dp))
-                    InfoChip(lifecycleLabel(config.lifecycle), lifecycleColor(config.lifecycle))
+                    InfoChip(
+                        lifecycleLabel(config.lifecycle).asString(),
+                        lifecycleColor(config.lifecycle)
+                    )
                 }
 
                 val description = config.slave?.description
@@ -155,9 +170,11 @@ private fun ModbusConfigCard(config: ModbusConfig, onClick: () -> Unit) {
                 Spacer(Modifier.height(6.dp))
 
                 Text(
-                    text = "创建者 ${config.creator?.name ?: "-"} · 更新 ${
+                    text = stringResource(
+                        R.string.modbus_created_by_updated,
+                        config.creator?.name ?: "-",
                         formatEpochMillis(config.updater?.timestamp)
-                    }",
+                    ),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 1,

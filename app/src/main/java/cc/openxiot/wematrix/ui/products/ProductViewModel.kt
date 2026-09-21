@@ -2,8 +2,11 @@ package cc.openxiot.wematrix.ui.products
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ProductEntity
 import cc.openxiot.wematrix.data.api.RetrofitClient
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,9 +15,9 @@ import kotlinx.coroutines.launch
 data class ProductUiState(
     val isLoading: Boolean = true,
     val products: List<ProductEntity> = emptyList(),
-    val error: String? = null,
+    val error: UiText? = null,
     val isDetailLoading: Boolean = false,
-    val detailError: String? = null
+    val detailError: UiText? = null
 )
 
 class ProductViewModel : ViewModel() {
@@ -40,13 +43,14 @@ class ProductViewModel : ViewModel() {
                 } else {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = response.body()?.message ?: "获取产品列表失败"
+                        error = response.body()?.message?.takeIf { it.isNotBlank() }?.let { UiText.Raw(it) }
+                            ?: UiText.Res(R.string.err_product_list)
                     )
                 }
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    error = e.message ?: "网络错误"
+                    error = e.toUiText()
                 )
             }
         }
@@ -71,19 +75,20 @@ class ProductViewModel : ViewModel() {
                     } else {
                         _uiState.value = _uiState.value.copy(
                             isDetailLoading = false,
-                            detailError = "产品数据为空"
+                            detailError = UiText.Res(R.string.product_empty_data)
                         )
                     }
                 } else {
                     _uiState.value = _uiState.value.copy(
                         isDetailLoading = false,
-                        detailError = response.body()?.message ?: "获取产品详情失败"
+                        detailError = response.body()?.message?.takeIf { it.isNotBlank() }?.let { UiText.Raw(it) }
+                            ?: UiText.Res(R.string.err_product_detail)
                     )
                 }
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isDetailLoading = false,
-                    detailError = e.message ?: "网络错误"
+                    detailError = e.toUiText()
                 )
             }
         }

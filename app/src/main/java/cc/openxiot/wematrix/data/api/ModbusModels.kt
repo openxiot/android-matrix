@@ -134,10 +134,20 @@ data class ModbusConfig(
     @SerializedName("creator") val creator: ModbusPerson? = null,
     @SerializedName("updater") val updater: ModbusPerson? = null
 ) {
-    /** 列表标题：`厂家 型号`，两者都缺时退回 id（口径同 web 表格的两列合并显示） */
-    val displayName: String
-        get() = listOfNotNull(slave?.manufacturer, slave?.model)
-            .filter { it.isNotBlank() }
-            .joinToString(" ")
-            .ifBlank { id ?: "未命名点表" }
+    /**
+     * 列表标题：`厂家 型号`，两者都缺时退回 id，id 也没有则给 null
+     * （口径同 web 表格的两列合并显示）。
+     *
+     * 兜底那半句「未命名点表」是**要翻译的文案**，而这一层既拿不到 Context、
+     * 也不该引 ui/core/UiText（分层），故留成 null 由界面补
+     * —— 与 [Product.displayName] 同一处理。
+     */
+    val displayName: String?
+        get() {
+            val title = listOfNotNull(slave?.manufacturer, slave?.model)
+                .filter { it.isNotBlank() }
+                .joinToString(" ")
+            if (title.isNotBlank()) return title
+            return id?.takeIf { it.isNotBlank() }
+        }
 }

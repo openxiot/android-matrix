@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  仓库层与更新通道的错误文案（英文）。
+
+  这些串**不是随便哪一层都能拼出来的**：data/repository 拿不到 Context，所以它们经由
+  AppException(@StringRes) 从仓库层传到界面，渲染时才定语言（见 ui/core/UiText.kt）。
+  直接把中文写进 throw 的后果是：错误信息在切语言后仍停在旧语言 —— 而且只在恰好报错
+  的那一屏看得见，非常隐蔽。
+
+  服务端下发的 message 优先级更高，会盖过这里的兜底（沿用改造前 `?.message ?: "中文"`
+  的语义）。
+
+  英文用 ’ (U+2019) 而不是 '：Android XML 里裸的 ' 需要转义成 \'，用中文引号能少一类
+  只在运行时才炸的错。占位符一律带序号（%1$s），中英语序不同，裸 %s 必然出问题。
+-->
+<resources>
+    <!-- 空间 -->
+    <string name="err_space_list">Couldn’t load spaces</string>
+    <string name="err_space_info">Couldn’t load the space details</string>
+    <string name="err_space_tree">Couldn’t load the space tree</string>
+    <string name="err_space_graph">Couldn’t load the space graph</string>
+    <string name="err_space_create">Couldn’t create the space</string>
+    <string name="err_space_update">Couldn’t update the space</string>
+    <string name="err_space_delete">Couldn’t delete the space</string>
+    <string name="err_space_member_list">Couldn’t load the members</string>
+    <string name="err_space_member_add">Couldn’t add the member</string>
+    <string name="err_space_member_role">Couldn’t change the role</string>
+    <string name="err_space_member_note">Couldn’t update the note</string>
+    <string name="err_space_member_remove">Couldn’t remove the member</string>
+
+    <!-- 设备 -->
+    <string name="err_device_list">Couldn’t load devices</string>
+    <string name="err_device_add">Couldn’t add the device</string>
+    <string name="err_device_move">Couldn’t move the device</string>
+    <string name="err_device_imei_not_found">No device found for IMEI %1$s</string>
+    <string name="err_device_did_lookup">Couldn’t look up the DID for that IMEI</string>
+    <string name="err_project_device_add">Couldn’t add the device: %1$s</string>
+    <string name="err_project_device_move">Couldn’t move the device: %1$s</string>
+
+    <!-- 组织 -->
+    <string name="err_org_list">Couldn’t load organizations</string>
+    <string name="err_org_info">Couldn’t load the organization details</string>
+    <string name="err_org_create">Couldn’t create the organization</string>
+    <string name="err_org_update">Couldn’t update the organization</string>
+    <string name="err_org_delete">Couldn’t delete the organization</string>
+    <string name="err_org_member_add">Couldn’t add the member</string>
+    <string name="err_org_member_remove">Couldn’t remove the member</string>
+    <string name="err_org_member_update">Couldn’t update the member</string>
+
+    <!-- 登录与平台 -->
+    <string name="err_auth_login">Sign-in failed</string>
+    <string name="err_auth_platform_info">Couldn’t load the platform details</string>
+    <string name="err_auth_platform_list">Couldn’t load the platform list</string>
+
+    <!-- 点表 / 设备点表服务 -->
+    <string name="err_modbus_point_table">Couldn’t load the register map</string>
+    <string name="err_modbus_point_table_public">Couldn’t load the public register map</string>
+    <string name="err_modbus_point_table_missing">That register map doesn’t exist</string>
+    <string name="err_modbus_service_get">Couldn’t load the service</string>
+    <string name="err_modbus_service_list">Couldn’t load the services</string>
+    <string name="err_modbus_service_missing">That service doesn’t exist</string>
+    <string name="err_modbus_service_invoke">The call failed</string>
+
+    <!-- 采集历史 -->
+    <string name="err_sampling_status">Couldn’t load the sampling status</string>
+    <string name="err_sampling_data">Couldn’t load the sampled data</string>
+    <string name="err_sampling_fault">Couldn’t load the sampling faults</string>
+    <string name="err_sampling_status_empty">The sampling status is empty</string>
+    <string name="err_sampling_data_empty">The sampled data is empty</string>
+    <string name="err_sampling_fault_empty">The sampling faults are empty</string>
+    <string name="err_history_service_status">%1$s: %2$s</string>
+
+    <!-- 告警 -->
+    <string name="err_alarm_list">Couldn’t load alarms</string>
+    <string name="err_alarm_action">Couldn’t update the alarm</string>
+    <string name="err_alarm_missing">That alarm doesn’t exist</string>
+    <string name="err_alarm_empty">The alarm data is empty</string>
+
+    <!-- 看板 -->
+    <string name="err_dashboard_layout">Couldn’t load the dashboard layout</string>
+    <string name="err_dashboard_layout_empty">The dashboard layout is empty</string>
+    <string name="err_dashboard_preset">Couldn’t load the preset layout</string>
+    <string name="err_dashboard_preset_empty">The preset layout is empty</string>
+    <string name="err_dashboard_data">Couldn’t load the data</string>
+    <string name="err_dashboard_data_empty">No data came back</string>
+    <string name="err_dashboard_save">Couldn’t save the layout</string>
+    <string name="err_dashboard_save_empty">Saving returned nothing</string>
+    <string name="err_dashboard_catalog">Couldn’t load the available widgets</string>
+    <string name="err_dashboard_catalog_empty">No widgets are available</string>
+    <string name="err_config_incomplete">This card isn’t configured</string>
+
+    <string name="err_product_list">Couldn’t load the products</string>
+    <string name="err_product_detail">Couldn’t load the product details</string>
+    <string name="err_dashboard_restore">Couldn’t restore the default layout</string>
+
+    <!-- 设置 / 统计 -->
+    <string name="err_settings_get">Couldn’t load your settings</string>
+    <string name="err_settings_update">Couldn’t save your settings</string>
+    <string name="err_account_update">Couldn’t save your settings</string>
+    <string name="err_stats_get">Couldn’t load the statistics</string>
+    <string name="err_stats_empty">The statistics are empty</string>
+
+    <!-- 通用 -->
+    <string name="err_webview_load">Couldn’t load the page</string>
+    <string name="err_response_empty">The server returned no data</string>
+
+    <!--
+      更新。三条单独写而不是把「空」当成占位符嵌进上一条：嵌进去的话参数本身也得是
+      一条待翻译的 UiText，而这里拆开读起来反而更自然。
+    -->
+    <string name="err_update_check">Couldn’t check for updates</string>
+    <string name="err_update_download">Download failed</string>
+    <string name="err_update_manifest_http">Couldn’t load the release info (HTTP %1$d)</string>
+    <string name="err_update_download_http">Download failed (HTTP %1$d)</string>
+    <string name="err_update_manifest_empty">The release info is empty</string>
+    <string name="err_update_manifest_blank">Couldn’t read the version — the site has none</string>
+    <string name="err_update_manifest_format">The release info is malformed</string>
+    <string name="err_update_manifest_unrecognized">Couldn’t read the version — the site says “%1$s”</string>
+    <string name="err_update_no_url">The release info has no download URL</string>
+    <string name="err_update_latest_alias">The download URL points at the “latest” alias, not the build for %1$s</string>
+    <string name="err_update_not_newer">The build on the site (versionCode %1$d) isn’t newer than this one</string>
+    <string name="err_update_save_failed">Couldn’t save the package</string>
+    <string name="err_update_no_space">Not enough storage — the package needs about %1$d MB</string>
+    <string name="err_update_unparsable">The package can’t be read (incomplete download, or not an APK)</string>
+    <string name="err_update_checksum">The package checksum doesn’t match — the download may be corrupt</string>
+    <string name="err_update_unsigned">The package has no signature</string>
+    <string name="err_update_signature_unexpected">The package signature isn’t what this app expects</string>
+    <string name="err_update_signature_mismatch">The package is signed with a different key, so it can’t replace this app</string>
+    <string name="err_update_cert_unreadable">Couldn’t read this app’s signing certificate</string>
+</resources>

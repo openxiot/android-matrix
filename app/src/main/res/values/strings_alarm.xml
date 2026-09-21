@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Alarms screen. This is **English** (the default), Chinese is in values-zh/.
+
+  The status words (handled / unhandled / recovered / not recovered), the action word
+  (Handle) and the filter labels (Service / Function) live in strings.xml as common_* —
+  they also appear on the history and service-detail screens and are the same sentence.
+
+  Chinese 「处理」 carries two meanings, hence two keys:
+  - `common_handle` (button: mark it handled) → Handle;
+  - `alarm_handled_label` (filter label: filter by handled state) → Handling.
+-->
+<resources>
+    <string name="alarm_title">Alarms</string>
+    <string name="alarm_action_ok">Done</string>
+    <string name="alarm_empty">No alarms in this period</string>
+
+    <string name="alarm_all_services">All services</string>
+    <string name="alarm_level_label">Alarm level</string>
+    <string name="alarm_handled_label">Handling</string>
+    <string name="alarm_status_label">Status</string>
+
+    <string name="alarm_summary_title">Alarms</string>
+    <string name="alarm_text_label">Alarm text</string>
+
+    <!-- Rows of one alarm’s detail -->
+    <string name="alarm_field_label">Field</string>
+    <string name="alarm_trigger_label">Trigger</string>
+    <string name="alarm_current_value_label">Current value</string>
+</resources>

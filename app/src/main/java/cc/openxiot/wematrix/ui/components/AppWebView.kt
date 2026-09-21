@@ -19,6 +19,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
+import cc.openxiot.wematrix.R
+import cc.openxiot.wematrix.ui.core.UiText
 
 private const val TAG = "AppWebView"
 
@@ -46,7 +48,7 @@ fun AppWebView(
     var isLoading by remember(url) { mutableStateOf(true) }
     var hasLoadedOnce by remember(url) { mutableStateOf(false) }
     var canGoBack by remember(url) { mutableStateOf(false) }
-    var error by remember(url) { mutableStateOf<String?>(null) }
+    var error by remember(url) { mutableStateOf<UiText?>(null) }
 
     // 系统返回键先走 WebView 历史；历史走完才算「没拦住」，落到调用方的 onBack（pop 路由）。
     // 顶栏的返回箭头不接这里，它是无条件 pop —— 与其它原生页一致、可预期。
@@ -98,7 +100,9 @@ fun AppWebView(
                         ) {
                             if (request?.isForMainFrame != true) return
                             isLoading = false
-                            error = err?.description?.toString() ?: "页面加载失败"
+                            // WebView 自己的 description 是英文技术串，原样上屏
+                            error = err?.description?.toString()?.let { UiText.Raw(it) }
+                                ?: UiText.Res(R.string.err_webview_load)
                         }
                     }
 

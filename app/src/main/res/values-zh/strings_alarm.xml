@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  告警页。中文侧逐字照抄改造前的字面量，英文在 values/。
+
+  状态词（已处理 / 未处理 / 已恢复 / 未恢复）与动作词（处理）、筛选标签（服务 / 方法）
+  都在 strings.xml 的 common_* —— 它们还出现在历史页与服务详情页，是同一句话。
+
+  「处理」在中文里是两个意思，故拆成两个 key：
+  - `common_handle`（按钮：把它标记为已处理）→ Handle；
+  - `alarm_handled_label`（筛选框的标签：按处理状态筛）→ Handling。
+-->
+<resources>
+    <string name="alarm_title">告警</string>
+    <string name="alarm_action_ok">操作成功</string>
+    <string name="alarm_empty">这段时间没有告警</string>
+
+    <string name="alarm_all_services">所有服务</string>
+    <string name="alarm_level_label">告警级别</string>
+    <string name="alarm_handled_label">处理</string>
+    <string name="alarm_status_label">状态</string>
+
+    <string name="alarm_summary_title">告警清单</string>
+    <string name="alarm_text_label">告警文本</string>
+
+    <!-- 单条告警的详情行 -->
+    <string name="alarm_field_label">字段</string>
+    <string name="alarm_trigger_label">触发条件</string>
+    <string name="alarm_current_value_label">当前值</string>
+</resources>

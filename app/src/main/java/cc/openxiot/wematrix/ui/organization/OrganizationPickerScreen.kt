@@ -25,8 +25,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.Organization
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
@@ -69,10 +72,10 @@ fun OrganizationPickerScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = "当前组织",
+                        text = stringResource(R.string.org_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -84,7 +87,7 @@ fun OrganizationPickerScreen(
                 onClick = { viewModel.showCreateDialog() },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "创建组织")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.org_create_title))
             }
         }
     ) { padding ->
@@ -103,7 +106,7 @@ fun OrganizationPickerScreen(
                     onRetry = { viewModel.loadOrganizations() }
                 )
                 uiState.organizations.isEmpty() -> EmptyState(
-                    message = "还没有组织，点击右下角按钮创建"
+                    message = stringResource(R.string.org_empty)
                 )
                 else -> {
                     LazyColumn(
@@ -138,7 +141,7 @@ fun OrganizationPickerScreen(
         val orgCodeValid = orgId.isBlank() || orgCodeRegex.matches(orgId)
         AlertDialog(
             onDismissRequest = { viewModel.hideCreateDialog() },
-            title = { Text("创建组织") },
+            title = { Text(stringResource(R.string.org_create_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -146,12 +149,12 @@ fun OrganizationPickerScreen(
                     OutlinedTextField(
                         value = orgId,
                         onValueChange = { orgId = it },
-                        label = { Text("组织标识") },
-                        placeholder = { Text("如: my-company") },
+                        label = { Text(stringResource(R.string.org_id_label)) },
+                        placeholder = { Text(stringResource(R.string.org_id_placeholder)) },
                         singleLine = true,
                         isError = orgId.isNotBlank() && !orgCodeValid,
                         supportingText = if (orgId.isNotBlank() && !orgCodeValid) {
-                            { Text("以英文开头，只能包含英文、数字和中划线") }
+                            { Text(stringResource(R.string.org_id_hint)) }
                         } else null,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -159,8 +162,8 @@ fun OrganizationPickerScreen(
                     OutlinedTextField(
                         value = orgName,
                         onValueChange = { orgName = it },
-                        label = { Text("组织名称") },
-                        placeholder = { Text("如: 我的公司") },
+                        label = { Text(stringResource(R.string.org_name_label)) },
+                        placeholder = { Text(stringResource(R.string.org_name_placeholder)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -175,12 +178,12 @@ fun OrganizationPickerScreen(
                     },
                     enabled = orgId.isNotBlank() && orgName.isNotBlank() && orgCodeValid
                 ) {
-                    Text("创建")
+                    Text(stringResource(R.string.common_create))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { viewModel.hideCreateDialog() }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -189,8 +192,8 @@ fun OrganizationPickerScreen(
     // Delete confirm dialog
     showDeleteConfirm?.let { orgId ->
         ConfirmDialog(
-            title = "删除组织",
-            message = "确定要删除这个组织吗？",
+            title = stringResource(R.string.org_delete_title),
+            message = stringResource(R.string.org_delete_confirm),
             onConfirm = {
                 viewModel.deleteOrganization(orgId)
                 showDeleteConfirm = null
@@ -204,14 +207,14 @@ fun OrganizationPickerScreen(
         var newName by remember { mutableStateOf(org.name ?: "") }
         AlertDialog(
             onDismissRequest = { renameTarget = null },
-            title = { Text("重命名组织") },
+            title = { Text(stringResource(R.string.org_rename_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = newName,
                     onValueChange = { newName = it },
-                    label = { Text("组织名称") },
+                    label = { Text(stringResource(R.string.org_name_label)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -224,12 +227,12 @@ fun OrganizationPickerScreen(
                     },
                     enabled = newName.isNotBlank()
                 ) {
-                    Text("确认")
+                    Text(stringResource(R.string.common_confirm))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { renameTarget = null }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -290,7 +293,7 @@ private fun OrgSwipeCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "右滑删除",
+                        stringResource(R.string.org_swipe_delete),
                         color = if (isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -326,7 +329,7 @@ private fun OrgSwipeCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "修改名称",
+                        stringResource(R.string.common_rename_action),
                         color = if (!isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -415,7 +418,11 @@ private fun OrgSwipeCard(
                         val memberCount = organization.members?.size ?: 0
                         if (memberCount > 0) {
                             Text(
-                                text = "${memberCount} 位成员",
+                                // 数量传两次：一次选档位（英文 1 member / 2 members），一次填 %1$d
+                                text = pluralStringResource(
+                                    R.plurals.org_member_count,
+                                    memberCount, memberCount
+                                ),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -431,7 +438,7 @@ private fun OrgSwipeCard(
                 ) {
                     Icon(
                         Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                        contentDescription = "管理",
+                        contentDescription = stringResource(R.string.org_manage),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )

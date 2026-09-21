@@ -38,9 +38,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileCatalog
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.data.api.ModbusService
@@ -82,7 +85,7 @@ fun DashboardPickerSheet(
                 .padding(bottom = 12.dp)
         ) {
             Text(
-                text = "添加卡片",
+                text = stringResource(R.string.home_add_card_title),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
@@ -91,7 +94,7 @@ fun DashboardPickerSheet(
                 Column(Modifier.padding(horizontal = 16.dp)) {
                     PickerRow(
                         icon = iconOf(type),
-                        title = DashboardTypes.defaultTitle(type),
+                        title = stringResource(DashboardTypes.defaultTitleRes(type)),
                         subtitle = subtitleOf(type)
                     ) { onAdd(type) }
                     Spacer(Modifier.height(8.dp))
@@ -109,12 +112,13 @@ private fun iconOf(type: String): ImageVector = when (type) {
     else -> Icons.Outlined.StickyNote2
 }
 
+@Composable
 private fun subtitleOf(type: String): String = when (type) {
-    DashboardTypes.STAT -> "一个主数字：设备 / 服务 / 告警 / 故障"
-    DashboardTypes.LINE -> "整点告警曲线，或一条服务字段曲线"
-    DashboardTypes.DISTRIBUTION -> "按设备 / 服务 / 告警 / 故障分布"
-    DashboardTypes.DEVICE -> "某台设备的某个属性"
-    else -> "某个方法的一组字段"
+    DashboardTypes.STAT -> stringResource(R.string.home_card_kind_stat)
+    DashboardTypes.LINE -> stringResource(R.string.home_card_kind_line)
+    DashboardTypes.DISTRIBUTION -> stringResource(R.string.home_card_kind_distribution)
+    DashboardTypes.DEVICE -> stringResource(R.string.home_card_kind_device)
+    else -> stringResource(R.string.home_card_kind_service)
 }
 
 @Composable
@@ -168,7 +172,10 @@ fun DashboardCardEditorSheet(
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Text(
-                text = "编辑 · ${DashboardTypes.defaultTitle(widget.type)}",
+                text = stringResource(
+                    R.string.home_edit_card_title,
+                    stringResource(DashboardTypes.defaultTitleRes(widget.type))
+                ),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
             )
@@ -176,8 +183,8 @@ fun DashboardCardEditorSheet(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("卡片标题") },
-                placeholder = { Text("留空则用默认名称") },
+                label = { Text(stringResource(R.string.home_card_title_label)) },
+                placeholder = { Text(stringResource(R.string.home_card_title_placeholder)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -196,7 +203,7 @@ fun DashboardCardEditorSheet(
                 OutlinedButton(onClick = onDelete, modifier = Modifier.weight(1f)) {
                     Icon(Icons.Filled.Delete, contentDescription = null)
                     Spacer(Modifier.width(6.dp))
-                    Text("删除")
+                    Text(stringResource(R.string.common_delete))
                 }
                 OutlinedButton(
                     onClick = { onCommit(title.trim(), size, config) },
@@ -207,7 +214,7 @@ fun DashboardCardEditorSheet(
                     Spacer(Modifier.width(6.dp))
                     // 「确认」而不是「保存」：保存这张卡 ≠ 保存布局（页顶那颗按钮才是落库的），
                     // 两个「保存」并排会让人以为点了它就存进去了。web 的编辑器也是「确认」。
-                    Text("确认")
+                    Text(stringResource(R.string.common_confirm))
                 }
             }
             Spacer(Modifier.height(8.dp))
@@ -219,16 +226,16 @@ fun DashboardCardEditorSheet(
 private fun SizeSelector(type: String?, size: String, onSizeChange: (String) -> Unit) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(
-            text = "尺寸",
+            text = stringResource(R.string.home_size_label),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f)
         )
-        FilterChip(selected = size == DashboardTypes.SIZE_FULL, onClick = { onSizeChange(DashboardTypes.SIZE_FULL) }, label = { Text("整宽") })
+        FilterChip(selected = size == DashboardTypes.SIZE_FULL, onClick = { onSizeChange(DashboardTypes.SIZE_FULL) }, label = { Text(stringResource(R.string.home_size_full)) })
         FilterChip(
             selected = size == DashboardTypes.SIZE_HALF,
             onClick = { onSizeChange(DashboardTypes.SIZE_HALF) },
-            label = { Text("半宽") },
+            label = { Text(stringResource(R.string.home_size_half)) },
             enabled = DashboardTypes.sizeAllowed(type, DashboardTypes.SIZE_HALF)
         )
     }
@@ -238,69 +245,73 @@ private fun SizeSelector(type: String?, size: String, onSizeChange: (String) -> 
 
 @Composable
 private fun StatConfig(config: Map<String, Any?>, onChange: (Map<String, Any?>) -> Unit) {
-    SectionLabel("统计指标")
+    SectionLabel(stringResource(R.string.home_section_metric))
     FilterDropdown(
-        label = "指标",
+        label = stringResource(R.string.home_metric_label),
         value = config["metric"] as? String,
         options = DashboardTypes.STAT_METRICS.map { FilterOption(it, metricLabel(it)) },
         onSelect = { m -> if (m != null) onChange(HashMap(config).apply { this["metric"] = m }) },
-        placeholder = "请选择"
+        placeholder = stringResource(R.string.common_please_select)
     )
     if (DashboardTypes.statNeedsWindow(config["metric"] as? String)) {
         WindowEditor(config["window"]) { w -> onChange(HashMap(config).apply { this["window"] = w }) }
     }
 }
 
+/** 指标名。`else -> metric` 是回落成原始键名（见上），故返回 String 而非资源 id。 */
+@Composable
 private fun metricLabel(metric: String): String = when (metric) {
-    "devices.total" -> "设备总数"
-    "devices.online" -> "设备在线数"
-    "services.total" -> "服务总数"
-    "alarms.today" -> "今日告警"
-    "alarms.window" -> "窗口内告警"
-    "failures.total" -> "窗口内采集失败数"
+    "devices.total" -> stringResource(R.string.home_metric_devices_total)
+    "devices.online" -> stringResource(R.string.home_metric_devices_online)
+    "services.total" -> stringResource(R.string.home_metric_services_total)
+    "alarms.today" -> stringResource(R.string.home_metric_alarms_today)
+    "alarms.window" -> stringResource(R.string.home_metric_alarms_window)
+    "failures.total" -> stringResource(R.string.home_metric_failures_total)
     else -> metric
 }
 
 @Composable
 private fun DistributionConfig(config: Map<String, Any?>, onChange: (Map<String, Any?>) -> Unit) {
-    SectionLabel("分布维度")
+    SectionLabel(stringResource(R.string.home_section_dimension))
     FilterDropdown(
-        label = "维度",
+        label = stringResource(R.string.home_dimension_label),
         value = config["dimension"] as? String,
         options = DashboardTypes.DIMENSIONS.map { FilterOption(it, dimensionLabel(it)) },
         onSelect = { d -> if (d != null) onChange(HashMap(config).apply { this["dimension"] = d }) },
-        placeholder = "请选择"
+        placeholder = stringResource(R.string.common_please_select)
     )
     // 显示层折算（[truncateSlices]）：后端全量下发，改这个不必重新取数
     NumberField(
-        label = "显示片数",
+        label = stringResource(R.string.home_slice_limit_label),
         value = DashboardTypes.configInt(config, "limit"),
         range = 1..100,
-        placeholder = "不限制"
+        placeholder = stringResource(R.string.common_unlimited)
     ) { n -> onChange(DashboardTypes.configWith(config, "limit", n)) }
     if (DashboardTypes.distributionNeedsWindow(config["dimension"] as? String)) {
         WindowEditor(config["window"]) { w -> onChange(HashMap(config).apply { this["window"] = w }) }
     }
 }
 
+/** 分布维度名。同 [metricLabel]：`else -> d` 是回落成原始键名。 */
+@Composable
 private fun dimensionLabel(d: String): String = when (d) {
-    "deviceType" -> "设备类型"
-    "serviceType" -> "服务类型"
-    "alarmType" -> "告警类型"
-    "failureType" -> "采集失败类型"
+    "deviceType" -> stringResource(R.string.home_dimension_device_type)
+    "serviceType" -> stringResource(R.string.home_dimension_service_type)
+    "alarmType" -> stringResource(R.string.home_dimension_alarm_type)
+    "failureType" -> stringResource(R.string.home_dimension_failure_type)
     else -> d
 }
 
 @Composable
 private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onChange: (Map<String, Any?>) -> Unit) {
     val source = config["source"] as? String ?: "alarmCount"
-    SectionLabel("数据源")
+    SectionLabel(stringResource(R.string.home_section_source))
     FilterDropdown(
-        label = "源",
+        label = stringResource(R.string.home_source_label),
         value = source,
         options = listOf(
-            FilterOption("alarmCount", "整点告警曲线"),
-            FilterOption("serviceField", "一条服务字段曲线")
+            FilterOption("alarmCount", stringResource(R.string.home_source_alarm_curve)),
+            FilterOption("serviceField", stringResource(R.string.home_source_service_field))
         ),
         // 换源**只改 source**，不清「服务 / 方法 / 字段」那一组 —— 与 web `setLineSource`
         // 同口径（那条注释写了理由：它们只对 serviceField 那一支有意义，换到别处留着不会生效，
@@ -313,7 +324,7 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
         ServiceCascade(config, catalog, single = true, activeKey = "field", onChange = onChange)
         // 竖线说的是「这个方法的采集什么时候失败过」，与读数本身是两件事（web 同款文案）
         SwitchRow(
-            label = "显示采集失败竖线",
+            label = stringResource(R.string.home_show_failure_shadow),
             checked = DashboardTypes.configBool(config, "showFailureShadow", default = true),
             onCheckedChange = { onChange(DashboardTypes.configWith(config, "showFailureShadow", it)) }
         )
@@ -321,22 +332,22 @@ private fun LineConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onCha
         // 每个整点都在数组里，没有「点太多」这回事（取数也不读这个键）。所以它跟竖线一样
         // 只在这一支里出现 —— 摆一个改了没反应的控件比不摆更糟（web 那条注释的原话）。
         NumberField(
-            label = "最大点数",
+            label = stringResource(R.string.home_max_points_label),
             value = DashboardTypes.configInt(config, "maxPoints"),
             range = 1..2000,
-            placeholder = "不限制"
+            placeholder = stringResource(R.string.common_unlimited)
         ) { n -> onChange(DashboardTypes.configWith(config, "maxPoints", n)) }
     }
 }
 
 @Composable
 private fun ServiceConfig(config: Map<String, Any?>, catalog: MobileCatalog?, onChange: (Map<String, Any?>) -> Unit) {
-    SectionLabel("服务 · 方法 · 字段")
+    SectionLabel(stringResource(R.string.home_section_service_field))
     // fields 是**多选**：换服务/方法会清掉旧字段（SIID/字段变了就不该残留旧值）
     ServiceCascade(config, catalog, single = false, activeKey = "fields", onChange = onChange)
     // 单位是点表里的用户数据，不是文案 —— 关掉只是不缀它
     SwitchRow(
-        label = "显示单位",
+        label = stringResource(R.string.home_show_unit),
         checked = DashboardTypes.configBool(config, "showUnit", default = true),
         onCheckedChange = { onChange(DashboardTypes.configWith(config, "showUnit", it)) }
     )
@@ -373,9 +384,9 @@ private fun ServiceCascade(
 
     val services = readServices(catalog)
     FilterDropdown(
-        label = "服务",
+        label = stringResource(R.string.common_service_label),
         value = config["serviceId"] as? String,
-        options = services.map { FilterOption(it.id.orEmpty(), it.name ?: it.id ?: "未命名服务") },
+        options = services.map { FilterOption(it.id.orEmpty(), it.name ?: it.id ?: stringResource(R.string.home_service_unnamed)) },
         onSelect = { id ->
             if (id != null) {
                 // 默认选中第一个**可读**方法，少一次点击（写方法 / 无应答的方法不在候选里）。
@@ -386,22 +397,22 @@ private fun ServiceCascade(
                 edit("serviceId" to id, "functionIndex" to first, activeKey to null)
             }
         },
-        placeholder = "请选择服务"
+        placeholder = stringResource(R.string.home_service_placeholder)
     )
 
     val service = services.firstOrNull { it.id == config["serviceId"] }
     val functions = readFunctions(service)
     val functionIndex = (config["functionIndex"] as? Number)?.toInt()
     FilterDropdown(
-        label = "方法",
+        label = stringResource(R.string.common_function_label),
         value = functionIndex,
-        options = functions.map { FilterOption(it.index ?: -1, it.name ?: "方法 ${it.index}") },
+        options = functions.map { FilterOption(it.index ?: -1, it.name ?: stringResource(R.string.home_function_fallback, it.index ?: -1)) },
         onSelect = { idx ->
             if (idx != null) {
                 edit("functionIndex" to idx, activeKey to null) // 换方法，旧字段名不再成立
             }
         },
-        placeholder = if (service == null) "先选服务" else "请选择方法"
+        placeholder = stringResource(if (service == null) R.string.home_pick_service_first else R.string.home_function_placeholder)
     )
 
     val function = functions.firstOrNull { it.index == functionIndex }
@@ -442,9 +453,9 @@ private fun DeviceConfig(
 ) {
     val devices = catalog?.devices ?: emptyList()
     val scope = rememberCoroutineScope()
-    SectionLabel("设备 · 属性")
+    SectionLabel(stringResource(R.string.home_section_device_prop))
     FilterDropdown(
-        label = "设备",
+        label = stringResource(R.string.common_device_label),
         value = config["did"] as? String,
         options = devices.map { FilterOption(it.did.orEmpty(), deviceLabel(it.did, it.online)) },
         onSelect = { did ->
@@ -454,29 +465,37 @@ private fun DeviceConfig(
                 onChange(HashMap(config).apply { this["did"] = did; remove("pid") })
             }
         },
-        placeholder = "请选择设备"
+        placeholder = stringResource(R.string.home_device_placeholder)
     )
 
     val selectedType = devices.firstOrNull { it.did == config["did"] }?.type
     val props = productSpec.propertiesOf(selectedType)
     FilterDropdown(
-        label = "属性",
+        label = stringResource(R.string.home_prop_label),
         value = config["pid"] as? String,
         options = props.map { p ->
             val pid = "${config["did"]}.${p.siid}.${p.piid}"
             FilterOption(pid, p.name.ifBlank { "SIID ${p.siid}.PIID ${p.piid}" } + propUnit(p.unit))
         },
         onSelect = { pid -> if (pid != null) onChange(HashMap(config).apply { this["pid"] = pid }) },
-        placeholder = when {
-            config["did"] == null -> "先选设备"
-            props.isEmpty() -> "该型号暂无属性"
-            else -> "请选择属性"
-        }
+        placeholder = stringResource(
+            when {
+                config["did"] == null -> R.string.home_pick_device_first
+                props.isEmpty() -> R.string.home_prop_none
+                else -> R.string.home_prop_placeholder
+            }
+        )
     )
 }
 
+/** `型号 在线`。三态里那一态是文案，故整个函数改成 `@Composable`（只在 `map` 里被调一次）。 */
+@Composable
 private fun deviceLabel(did: String?, online: Boolean?): String {
-    val status = if (online == true) "在线" else if (online == false) "离线" else ""
+    val status = when (online) {
+        true -> stringResource(R.string.common_online)
+        false -> stringResource(R.string.common_offline)
+        else -> ""
+    }
     return listOfNotNull(did, status.takeIf { it.isNotBlank() }).joinToString(" ")
 }
 
@@ -539,7 +558,7 @@ private fun NumberField(
         placeholder = { Text(placeholder) },
         isError = invalid,
         supportingText = if (invalid) {
-            { Text("${range.first} ~ ${range.last}，留空不限制") }
+            { Text(stringResource(R.string.home_number_range_hint, range.first, range.last)) }
         } else {
             null
         },
@@ -554,7 +573,7 @@ private fun NumberField(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun WindowEditor(window: Any?, onWindowChange: (Any?) -> Unit) {
-    SectionLabel("时间窗口")
+    SectionLabel(stringResource(R.string.home_section_window))
     val current = window as? Map<*, *>
     val kind = current?.get("kind") as? String ?: "last"
     val hours = (current?.get("hours") as? Number)?.toInt() ?: 24
@@ -564,12 +583,12 @@ private fun WindowEditor(window: Any?, onWindowChange: (Any?) -> Unit) {
         FilterChip(
             selected = kind == "last",
             onClick = { onWindowChange(mapOf("kind" to "last", "hours" to hours)) },
-            label = { Text("最近") }
+            label = { Text(stringResource(R.string.home_window_last)) }
         )
         FilterChip(
             selected = kind == "range",
             onClick = { showRangeDialog = true },
-            label = { Text("自定义") }
+            label = { Text(stringResource(R.string.home_window_custom)) }
         )
     }
 
@@ -587,7 +606,7 @@ private fun WindowEditor(window: Any?, onWindowChange: (Any?) -> Unit) {
         val from = (current?.get("from") as? Number)?.toLong()
         val to = (current?.get("to") as? Number)?.toLong()
         OutlinedButton(onClick = { showRangeDialog = true }) {
-            Text(if (from != null && to != null) dayLabel(from) + " ~ " + dayLabel(to) else "选择起止日期")
+            Text(if (from != null && to != null) dayLabel(from) + " ~ " + dayLabel(to) else stringResource(R.string.home_pick_dates))
         }
     }
 
@@ -604,10 +623,18 @@ private fun WindowEditor(window: Any?, onWindowChange: (Any?) -> Unit) {
     }
 }
 
+/**
+ * 窗口档位的显示名。
+ *
+ * 原先 `h == 168 -> "7 天"` 与 `h % 24 == 0 -> "${h / 24} 天"` 是两个分支，但 168 也是 24 的
+ * 倍数、168/24 正好是 7，两条输出**逐字相同** —— 合掉，行为不变。
+ *
+ * 数量传两次：一次选档位（英文 1 day / 2 days），一次填 `%1$d`。
+ */
+@Composable
 private fun hourLabel(h: Int): String = when {
-    h == 168 -> "7 天"
-    h % 24 == 0 -> "${h / 24} 天"
-    else -> "$h 小时"
+    h % 24 == 0 -> pluralStringResource(R.plurals.home_window_days, h / 24, h / 24)
+    else -> pluralStringResource(R.plurals.home_window_hours, h, h)
 }
 
 private fun dayLabel(ms: Long): String =

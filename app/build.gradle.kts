@@ -115,6 +115,14 @@ android {
     }
 }
 
+// i18n 的两个门禁测试（StringsParityTest / NoHardcodedChineseTest）要直接读源文件与资源。
+// 单元测试的工作目录随 AGP 版本变，注入绝对路径比在测试里向上猜目录可靠 ——
+// 猜不到就会静默跳过，那比失败更糟（测试全绿但其实什么都没测）。
+tasks.withType<Test>().configureEach {
+    systemProperty("app.resDir", layout.projectDirectory.dir("src/main/res").asFile.absolutePath)
+    systemProperty("app.srcDir", layout.projectDirectory.dir("src/main/java").asFile.absolutePath)
+}
+
 dependencies {
     // Compose BOM
     val composeBom = platform("androidx.compose:compose-bom:2026.06.01")

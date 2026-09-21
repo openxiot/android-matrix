@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  采集历史（中文）。中文这侧是逐字搬运原代码里的字面量，一字未改 ——
+  这样改造后中文界面与改造前逐字节一致，回归时任何中文变化都是 bug（见 StringsParityTest）。
+-->
+<resources>
+    <string name="history_title">历史</string>
+
+    <!-- 项目级历史页 -->
+    <string name="history_section_overview">服务概览</string>
+    <string name="history_no_services">这个项目下还没有 Modbus 服务</string>
+    <string name="history_service_count_label">服务数量</string>
+    <string name="history_device_count_label">设备数量</string>
+    <string name="history_sampled_at_label">采集时间</string>
+    <string name="history_function_count_label">方法数</string>
+
+    <!-- 两个页面共用 -->
+    <string name="history_faults_section">采集异常</string>
+    <string name="history_faults_label">采集异常</string>
+    <string name="history_no_faults">这段时间没有采集异常</string>
+    <string name="history_no_data">这段时间没有采集数据</string>
+    <string name="history_field_label">字段</string>
+
+    <!-- 单服务历史页 -->
+    <plurals name="service_history_rows_title">
+        <item quantity="other">采集数据（%1$d 行）</item>
+    </plurals>
+    <string name="service_history_all_functions">全部方法</string>
+    <string name="service_history_field_selection">字段 %1$d / %2$d</string>
+    <string name="service_history_fault_chip">异常 %1$s × %2$d</string>
+    <string name="service_history_no_curve">这个服务的字段画不出曲线</string>
+    <string name="service_history_no_curve_for_function">这个方法没有画得出曲线的字段</string>
+    <string name="service_history_no_fields_selected">没有勾选字段</string>
+    <string name="service_history_failure_hint">竖线为采集失败时刻</string>
+    <string name="service_history_downsampled_hint">数据点较多，已按时间区间降采样（值为该段平均值，括号内为最小~最大值）</string>
+    <string name="service_history_keepalive">保持</string>
+    <string name="service_history_view_table">表格</string>
+    <string name="service_history_view_chart">曲线图</string>
+</resources>

@@ -2,6 +2,7 @@ package cc.openxiot.wematrix.ui.scan
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -46,6 +47,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
@@ -70,12 +72,18 @@ import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.BarcodeView
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
-
+import cc.openxiot.wematrix.AppLocale
+import cc.openxiot.wematrix.R
 /**
  * 添加设备的扫码页（竖屏）。支持扫码二维码，也支持扫码设备标签上的 IMEI（一维/二维码）。
  * 页面为纯 Compose 自绘，提供：左上角关闭、中间取景框、底部手电筒开关。
  */
 class ScanQrActivity : ComponentActivity() {
+
+    /** 应用语言。⚠️ 每个带界面的 Activity 都要有这一句，漏了就永远跟系统语言走。 */
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(AppLocale.wrap(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -254,7 +262,7 @@ private fun ScanOverlay(
                 IconButton(onClick = onClose) {
                     Icon(
                         Icons.Filled.Close,
-                        contentDescription = "关闭",
+                        contentDescription = stringResource(R.string.common_close),
                         tint = Color.White
                     )
                 }
@@ -268,7 +276,7 @@ private fun ScanOverlay(
             Spacer(Modifier.height(28.dp))
 
             Text(
-                text = "将设备二维码 / IMEI 放入框内",
+                text = stringResource(R.string.scan_hint),
                 color = Color.White.copy(alpha = 0.85f),
                 fontSize = 15.sp,
                 textAlign = TextAlign.Center
@@ -371,13 +379,15 @@ private fun TorchButton(
         ) {
             Icon(
                 if (torchOn) Icons.Filled.FlashOff else Icons.Filled.FlashOn,
-                contentDescription = if (torchOn) "关闭手电筒" else "打开手电筒",
+                contentDescription = stringResource(
+                    if (torchOn) R.string.scan_torch_off else R.string.scan_torch_on
+                ),
                 tint = Color.White
             )
         }
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "手电筒",
+            text = stringResource(R.string.scan_torch),
             color = Color.White.copy(alpha = 0.9f),
             fontSize = 13.sp
         )
@@ -402,18 +412,22 @@ private fun CameraPermissionPlaceholder(
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onClose) {
-                Icon(Icons.Filled.Close, contentDescription = "关闭", tint = Color.White)
+                Icon(
+                    Icons.Filled.Close,
+                    contentDescription = stringResource(R.string.common_close),
+                    tint = Color.White
+                )
             }
         }
         Spacer(Modifier.weight(1f))
         Text(
-            text = "需要相机权限才能扫码添加设备",
+            text = stringResource(R.string.scan_permission_required),
             color = Color.White,
             fontSize = 16.sp,
             textAlign = TextAlign.Center
         )
         Spacer(Modifier.height(24.dp))
-        ScanTextButton(text = "重新授权", onClick = onRetry)
+        ScanTextButton(text = stringResource(R.string.scan_grant), onClick = onRetry)
         Spacer(Modifier.weight(1f))
     }
 }

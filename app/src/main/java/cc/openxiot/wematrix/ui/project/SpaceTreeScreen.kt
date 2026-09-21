@@ -24,8 +24,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.data.api.SpaceEntity
@@ -41,6 +44,7 @@ import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.SpaceTypeChip
+import cc.openxiot.wematrix.ui.core.asString
 import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
 import kotlin.collections.get
@@ -78,10 +82,11 @@ fun SpaceTreeScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = treeState.rootSpace?.name ?: projectState.currentRootName ?: "空间管理",
+                        text = treeState.rootSpace?.name ?: projectState.currentRootName
+                        ?: stringResource(R.string.space_manage_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -113,7 +118,7 @@ fun SpaceTreeScreen(
                         }
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            "添加设备",
+                            stringResource(R.string.space_add_device),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -133,7 +138,7 @@ fun SpaceTreeScreen(
                         }
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            "添加空间",
+                            stringResource(R.string.space_add),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -146,7 +151,7 @@ fun SpaceTreeScreen(
                 ) {
                     Icon(
                         if (expanded) Icons.Default.Close else Icons.Default.Add,
-                        contentDescription = "添加"
+                        contentDescription = stringResource(R.string.common_add)
                     )
                 }
             }
@@ -195,11 +200,12 @@ fun SpaceTreeContent(
                 message = treeState.error!!,
                 onRetry = { viewModel.loadSpaceGraph(rootId) }
             )
-            treeState.rootSpace == null -> EmptyState(message = "空间数据为空")
+            treeState.rootSpace == null -> EmptyState(message = stringResource(R.string.space_empty))
             // 根空间自己不出行（它的名字在页面标题上）。所以「树是空的」= 没有任何空间和设备，
             // 这时两个入口给的提示不一样：编辑页能加空间，项目页（Tab）是只读的。
             treeState.rootSpace?.children.isNullOrEmpty() && treeState.devices.isEmpty() -> EmptyState(
-                if (showActions) "请添加空间" else "该项目下还没有空间或设备"
+                if (showActions) stringResource(R.string.space_empty_editable)
+                else stringResource(R.string.space_empty_readonly)
             )
             else -> {
                 LazyColumn(
@@ -279,14 +285,14 @@ fun SpaceTreeContent(
         }
         var spaceType by remember(treeState.showCreateDialog) { mutableStateOf(defaultType) }
         val types = listOf(
-            "building" to "楼栋",
-            "floor" to "楼层",
-            "room" to "房间",
-            "zone" to "区域"
+            "building" to R.string.space_type_building,
+            "floor" to R.string.space_type_floor,
+            "room" to R.string.space_type_room,
+            "zone" to R.string.space_type_zone
         )
         AlertDialog(
             onDismissRequest = { viewModel.hideCreateDialog() },
-            title = { Text("添加空间") },
+            title = { Text(stringResource(R.string.space_add)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.background,
             text = {
@@ -294,13 +300,13 @@ fun SpaceTreeContent(
                     OutlinedTextField(
                         value = spaceName,
                         onValueChange = { spaceName = it },
-                        label = { Text("空间名称") },
-                        placeholder = { Text("请输入名称") },
+                        label = { Text(stringResource(R.string.space_name_label)) },
+                        placeholder = { Text(stringResource(R.string.space_name_placeholder)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(12.dp))
-                    Text("空间类型", style = MaterialTheme.typography.labelLarge)
+                    Text(stringResource(R.string.space_type_label), style = MaterialTheme.typography.labelLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                     types.forEach { (type, label) ->
                         Row(
@@ -315,7 +321,7 @@ fun SpaceTreeContent(
                                 onClick = { spaceType = type }
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text(label)
+                            Text(stringResource(label))
                         }
                     }
                 }
@@ -332,12 +338,12 @@ fun SpaceTreeContent(
                     },
                     enabled = spaceName.isNotBlank()
                 ) {
-                    Text("添加")
+                    Text(stringResource(R.string.common_add))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { viewModel.hideCreateDialog() }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -346,8 +352,8 @@ fun SpaceTreeContent(
     // Delete confirm
     treeState.showDeleteConfirm?.let { spaceId ->
         ConfirmDialog(
-            title = "删除空间",
-            message = "确定要删除这个空间吗？如果空间下有子空间，将无法删除。",
+            title = stringResource(R.string.space_delete_title),
+            message = stringResource(R.string.space_delete_confirm),
             onConfirm = { viewModel.deleteSpace(spaceId, rootId) },
             onDismiss = { viewModel.hideDeleteConfirm() }
         )
@@ -374,7 +380,7 @@ fun SpaceTreeContent(
     // Show operation feedback messages
     LaunchedEffect(treeState.message) {
         treeState.message?.let { msg ->
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, msg.asString(context), Toast.LENGTH_SHORT).show()
             viewModel.clearTreeMessage()
         }
     }
@@ -390,8 +396,8 @@ fun SpaceTreeContent(
         }
         AlertDialog(
             onDismissRequest = {},
-            title = { Text("添加设备中...") },
-            text = { Text("等待中... ${seconds}s") },
+            title = { Text(stringResource(R.string.space_device_adding)) },
+            text = { Text(stringResource(R.string.space_device_waiting, seconds)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             confirmButton = {}
@@ -403,7 +409,7 @@ fun SpaceTreeContent(
         var selectedSpaceId by remember { mutableStateOf<String?>(null) }
         AlertDialog(
             onDismissRequest = { viewModel.hideMoveDevice() },
-            title = { Text("移动到空间") },
+            title = { Text(stringResource(R.string.space_move_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -424,10 +430,10 @@ fun SpaceTreeContent(
                 TextButton(
                     onClick = { selectedSpaceId?.let { viewModel.moveDeviceTo(it, did) } },
                     enabled = selectedSpaceId != null
-                ) { Text("移动") }
+                ) { Text(stringResource(R.string.space_move_action)) }
             },
             dismissButton = {
-                TextButton(onClick = { viewModel.hideMoveDevice() }) { Text("取消") }
+                TextButton(onClick = { viewModel.hideMoveDevice() }) { Text(stringResource(R.string.common_cancel)) }
             }
         )
     }
@@ -467,7 +473,7 @@ private fun SpacePickerItem(
         }
         Spacer(Modifier.width(4.dp))
         Text(
-            text = space.name ?: space.id ?: "未知",
+            text = space.name ?: space.id ?: stringResource(R.string.common_unknown),
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.weight(1f)
         )
@@ -513,7 +519,7 @@ private fun RecursiveSpaceTree(
     onDeviceDetail: ((String) -> Unit)? = null,
     onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)? = null,
     onServiceClick: ((spaceId: String, serviceId: String) -> Unit)? = null,
-    productNames: Map<String, String> = emptyMap(),
+    productNames: Map<String, String?> = emptyMap(),
     productIcons: Map<String, String> = emptyMap()
 ) {
     SpaceTreeNode(
@@ -594,7 +600,7 @@ private fun DeviceSubtree(
     expandedDeviceIds: Set<String>,
     onToggleDevice: (String) -> Unit,
     rootId: String,
-    productNames: Map<String, String>,
+    productNames: Map<String, String?>,
     productIcons: Map<String, String>,
     onDeviceDetail: ((String) -> Unit)?,
     onDeviceOperation: ((did: String, type: String, spaceId: String) -> Unit)?,
@@ -720,7 +726,7 @@ private fun SpaceTreeNode(
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = space.name ?: "未命名",
+                    text = space.name ?: stringResource(R.string.common_unnamed),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Medium
                 )
@@ -729,7 +735,11 @@ private fun SpaceTreeNode(
                     if (spaceDevices.isNotEmpty()) {
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "${spaceDevices.size} 设备",
+                            // 数量传两次：一次选档位（英文 1 device / 2 devices），一次填 %1$d
+                            text = pluralStringResource(
+                                R.plurals.space_device_count,
+                                spaceDevices.size, spaceDevices.size
+                            ),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -743,7 +753,7 @@ private fun SpaceTreeNode(
                     onClick = onAddChild,
                     modifier = Modifier.size(32.dp)
                 ) {
-                    Icon(Icons.Default.Add, contentDescription = "添加子空间", modifier = Modifier.size(18.dp))
+                    Icon(Icons.Default.Add, contentDescription = stringResource(R.string.space_add_child), modifier = Modifier.size(18.dp))
                 }
                 if (depth > 0) {
                     IconButton(
@@ -752,7 +762,7 @@ private fun SpaceTreeNode(
                 ) {
                     Icon(
                         Icons.Default.DeleteOutline,
-                        contentDescription = "删除",
+                        contentDescription = stringResource(R.string.common_delete),
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(18.dp)
                     )
@@ -773,7 +783,7 @@ private fun DeviceItem(
     hasNested: Boolean = false,
     isExpanded: Boolean = false,
     onToggle: (() -> Unit)? = null,
-    productNames: Map<String, String> = emptyMap(),
+    productNames: Map<String, String?> = emptyMap(),
     productIcons: Map<String, String> = emptyMap()
 ) {
     val model = extractModelFromUrn(device.type)
@@ -803,7 +813,8 @@ private fun DeviceItem(
                 ) {
                     Icon(
                         if (isExpanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
-                        contentDescription = if (isExpanded) "收起" else "展开",
+                        contentDescription = if (isExpanded) stringResource(R.string.common_collapse)
+                            else stringResource(R.string.common_expand),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )
@@ -854,7 +865,7 @@ private fun DeviceItem(
                 Text(
                     text = productNames[extractModelFromUrn(device.type)]
                         ?: extractTypeName(device.type)
-                        ?: device.type ?: device.did ?: "未知设备",
+                        ?: device.type ?: device.did ?: stringResource(R.string.devices_unknown),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium,
                     maxLines = 1,
@@ -871,7 +882,7 @@ private fun DeviceItem(
                 ) {
                     Icon(
                         Icons.Default.ChevronRight,
-                        contentDescription = "详情",
+                        contentDescription = stringResource(R.string.common_detail),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )

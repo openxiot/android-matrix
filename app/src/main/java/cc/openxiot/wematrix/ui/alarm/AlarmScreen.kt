@@ -42,10 +42,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusAlarm
 import cc.openxiot.wematrix.data.api.ModbusAlarmLevelCount
 import cc.openxiot.wematrix.data.api.ModbusAlarmList
@@ -59,6 +61,7 @@ import cc.openxiot.wematrix.ui.components.FilterRow
 import cc.openxiot.wematrix.ui.components.InfoChip
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.RangePresetChips
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.alarmCloseLabel
 import cc.openxiot.wematrix.ui.modbus.alarmCondition
@@ -117,10 +120,10 @@ fun AlarmScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = "告警",
+                        text = stringResource(R.string.alarm_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
@@ -134,7 +137,7 @@ fun AlarmScreen(
                         )
                     }
                     IconButton(onClick = { viewModel.loadAlarms() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "刷新")
+                        Icon(Icons.Default.Refresh, contentDescription = stringResource(R.string.common_refresh))
                     }
                 }
             }
@@ -175,7 +178,7 @@ fun AlarmScreen(
                     state.error?.let { message ->
                         item {
                             ErrorCard(
-                                message = message,
+                                message = message.asString(),
                                 onRetry = { viewModel.loadAlarms() }
                             )
                         }
@@ -183,10 +186,10 @@ fun AlarmScreen(
 
                     // 处理失败的反馈：就地一条，不动清单
                     state.actionError?.let { message ->
-                        item { NoticeCard(text = message, danger = true) }
+                        item { NoticeCard(text = message.asString(), danger = true) }
                     }
                     state.handledId?.let {
-                        item { NoticeCard(text = "操作成功", danger = false) }
+                        item { NoticeCard(text = stringResource(R.string.alarm_action_ok), danger = false) }
                     }
 
                     state.alarms?.let { list ->
@@ -195,7 +198,7 @@ fun AlarmScreen(
                         if (list.items.isEmpty()) {
                             item {
                                 EmptyState(
-                                    "这段时间没有告警",
+                                    stringResource(R.string.alarm_empty),
                                     modifier = Modifier.height(200.dp)
                                 )
                             }
@@ -218,7 +221,7 @@ fun AlarmScreen(
                         }
 
                         if (list.truncated) {
-                            item { NoticeCard(text = TRUNCATED_HINT, danger = false) }
+                            item { NoticeCard(text = stringResource(R.string.common_truncated_hint), danger = false) }
                         }
                     }
                 }
@@ -238,9 +241,6 @@ fun AlarmScreen(
         )
     }
 }
-
-/** 窗口内的告警多于上限时只列了最近的那部分 —— 与 web 同一句文案 */
-private const val TRUNCATED_HINT = "异常记录超过上限，只列出最近的部分"
 
 /**
  * 级别标签的配色（INFO 蓝 / WARN 橙 / CRITICAL 红）。
@@ -288,43 +288,43 @@ private fun FilterCard(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.weight(1f)
                     )
-                    TextButton(onClick = onEditCustomRange) { Text("修改") }
+                    TextButton(onClick = onEditCustomRange) { Text(stringResource(R.string.common_change)) }
                 }
             }
 
             FilterRow {
                 // 不做「所有服务」那一项：不选就是全部，占位符说的正是这件事
                 FilterDropdown(
-                    label = "服务",
+                    label = stringResource(R.string.common_service_label),
                     value = state.serviceId,
                     options = state.services.mapNotNull { service ->
                         service.id?.let { FilterOption(it, service.name ?: it) }
                     },
                     onSelect = onServiceChange,
-                    placeholder = "所有服务"
+                    placeholder = stringResource(R.string.alarm_all_services)
                 )
                 FilterDropdown(
-                    label = "告警级别",
+                    label = stringResource(R.string.alarm_level_label),
                     value = state.level,
-                    options = alarmLevels.map { FilterOption(it, alarmLevelLabel(it)) },
+                    options = alarmLevels.map { FilterOption(it, alarmLevelLabel(it).asString()) },
                     onSelect = onLevelChange
                 )
                 // 两个三态筛选：「不限」是菜单里单独的一项，与明确的 false 完全不是一回事
                 FilterDropdown(
-                    label = "处理",
+                    label = stringResource(R.string.alarm_handled_label),
                     value = state.handled,
                     options = listOf(
-                        FilterOption(false, "未处理"),
-                        FilterOption(true, "已处理")
+                        FilterOption(false, stringResource(R.string.common_unhandled)),
+                        FilterOption(true, stringResource(R.string.common_handled))
                     ),
                     onSelect = onHandledChange
                 )
                 FilterDropdown(
-                    label = "状态",
+                    label = stringResource(R.string.alarm_status_label),
                     value = state.open,
                     options = listOf(
-                        FilterOption(false, "未恢复"),
-                        FilterOption(true, "已恢复")
+                        FilterOption(false, stringResource(R.string.common_unrecovered)),
+                        FilterOption(true, stringResource(R.string.common_recovered))
                     ),
                     onSelect = onOpenChange
                 )
@@ -333,11 +333,17 @@ private fun FilterCard(
     }
 }
 
-/** 自定义档当前查的是哪一段（还没选过时为空） */
+/**
+ * 自定义档当前查的是哪一段（还没选过时为空）。
+ *
+ * 两个分支都是文案，所以整个函数改成 `@Composable`：它只被上面筛选栏里那一个
+ * `Text` 调用，返回资源 id 再让调用方 `stringResource` 反而绕一圈。
+ */
+@Composable
 private fun customRangeText(from: Long?, to: Long?): String {
-    if (from == null || to == null) return "尚未选择时间范围"
+    if (from == null || to == null) return stringResource(R.string.common_no_range)
     // 按整天展开，故结束时刻落在次日 00:00:00 前 1ms —— 回显时收成当天，别显示成 23:59:59
-    return "${epochDate(from)} 至 ${epochDate(to)}"
+    return stringResource(R.string.common_range_text, epochDate(from), epochDate(to))
 }
 
 /**
@@ -362,22 +368,26 @@ private fun SummaryCard(list: ModbusAlarmList) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
-                SummaryCount("告警清单", "${summary.total}", Modifier.weight(1f))
-                SummaryCount("未处理", "${summary.unhandled}", Modifier.weight(1f))
-                SummaryCount("未恢复", "${summary.open}", Modifier.weight(1f))
+                SummaryCount(stringResource(R.string.alarm_summary_title), "${summary.total}", Modifier.weight(1f))
+                SummaryCount(stringResource(R.string.common_unhandled), "${summary.unhandled}", Modifier.weight(1f))
+                SummaryCount(stringResource(R.string.common_unrecovered), "${summary.open}", Modifier.weight(1f))
             }
 
             if (summary.byLevel.isNotEmpty()) {
                 TagRow(
-                    label = "告警级别",
+                    label = stringResource(R.string.alarm_level_label),
                     tags = summary.byLevel.map { item: ModbusAlarmLevelCount ->
-                        TagItem(alarmLevelLabel(item.level), levelColor(item.level), "× ${item.count}")
+                        TagItem(
+                            alarmLevelLabel(item.level).asString(),
+                            levelColor(item.level),
+                            "× ${item.count}"
+                        )
                     }
                 )
             }
             if (summary.byText.isNotEmpty()) {
                 TagRow(
-                    label = "告警文本",
+                    label = stringResource(R.string.alarm_text_label),
                     // 告警文本是用户自己填的：原样显示、永不翻译（翻译它等于改用户的数据）。
                     // 兜底桶 UNKNOWN（后端给既没有级别/文本的脏数据归的桶）也照原样走
                     tags = summary.byText.map { item: ModbusAlarmTextCount ->
@@ -464,7 +474,7 @@ private fun AlarmCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f)
                 )
-                InfoChip(alarmLevelLabel(alarm.level), levelColor(alarm.level))
+                InfoChip(alarmLevelLabel(alarm.level).asString(), levelColor(alarm.level))
             }
 
             // 服务名：服务还在空间图里就可点（去它的采集历史），已被挪走/删掉时退回 serviceId
@@ -488,19 +498,22 @@ private fun AlarmCard(
             )
 
             // 方法序号 + 出值名（**数据、不翻译**：与点表里的字段名逐字相同，翻了就对不上）
-            KeyValueRow("方法", "#${alarm.functionIndex}")
-            KeyValueRow("字段", alarm.field.ifEmpty { "-" })
+            KeyValueRow(stringResource(R.string.common_function_label), "#${alarm.functionIndex}")
+            KeyValueRow(stringResource(R.string.alarm_field_label), alarm.field.ifEmpty { "-" })
             // 触发条件是**行内快照**：定义改了不该改写历史告警的含义
-            KeyValueRow("触发条件", alarmCondition(alarm))
-            KeyValueRow("告警文本", alarm.text?.ifEmpty { null } ?: "-")
-            KeyValueRow("当前值", alarmSampleText(alarm))
+            KeyValueRow(
+                stringResource(R.string.alarm_trigger_label),
+                alarmCondition(alarm).asString()
+            )
+            KeyValueRow(stringResource(R.string.alarm_text_label), alarm.text?.ifEmpty { null } ?: "-")
+            KeyValueRow(stringResource(R.string.alarm_current_value_label), alarmSampleText(alarm))
 
             Spacer(Modifier.height(4.dp))
 
             // 状态：恢复与否 + 怎么关掉的。三条关闭路径都得露脸 —— 一条没有恢复样本的关闭
             // （定义不再覆盖这个键、或被同出值的另一条规则接管）看起来与「值回来了」一模一样
             Row(verticalAlignment = Alignment.CenterVertically) {
-                InfoChip(if (recovered) "已恢复" else "未恢复", if (recovered) Gray500 else Red)
+                InfoChip(stringResource(if (recovered) R.string.common_recovered else R.string.common_unrecovered), if (recovered) Gray500 else Red)
                 if (alarm.recoveredAt != null) {
                     Spacer(Modifier.width(6.dp))
                     Text(
@@ -514,7 +527,7 @@ private fun AlarmCard(
                     Spacer(Modifier.width(6.dp))
                     // 正文走标签、原始枚举名不露脸（web 放在 title 上，手机上没地方挂 —— 见下方说明）
                     Text(
-                        text = alarmCloseLabel(closeType),
+                        text = alarmCloseLabel(closeType).asString(),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -522,7 +535,7 @@ private fun AlarmCard(
             }
 
             Row(verticalAlignment = Alignment.CenterVertically) {
-                InfoChip(if (handled) "已处理" else "未处理", if (handled) Green else Orange)
+                InfoChip(stringResource(if (handled) R.string.common_handled else R.string.common_unhandled), if (handled) Green else Orange)
                 if (handled) {
                     val name = alarm.handledBy?.name
                     val at = alarm.handledBy?.timestamp
@@ -552,7 +565,7 @@ private fun AlarmCard(
                         TextButton(
                             onClick = onHandle,
                             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
-                        ) { Text("处理") }
+                        ) { Text(stringResource(R.string.common_handle)) }
                     }
                 }
             }
@@ -601,7 +614,7 @@ private fun ErrorCard(message: String, onRetry: () -> Unit) {
             TextButton(
                 onClick = onRetry,
                 contentPadding = PaddingValues(horizontal = 8.dp, vertical = 0.dp)
-            ) { Text("重试") }
+            ) { Text(stringResource(R.string.common_retry)) }
         }
     }
 }

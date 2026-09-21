@@ -29,8 +29,23 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
+      # 放在打包之前：单元测试跑得快、失败得早，而且这里的 i18n 门禁
+      # （中英资源对账、有没有漏抽的硬编码中文）不看的话就是形同虚设 ——
+      # 漏翻的表现是英文界面上冒出一句中文，只有跑到那一屏才看得见。
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
+
       - name: Build with Gradle
         run: ./gradlew assembleDebug
+
+      - name: Upload test report
+        # 失败时也要能看到是哪个 key 漏了、哪个文件漏抽了
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: unit-test-report
+          path: app/build/reports/tests/testDebugUnitTest/
+
 
       - name: Upload APK
         uses: actions/upload-artifact@v7

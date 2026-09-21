@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  登录页。中文这侧是**逐字搬运**原字面量，一字未改 —— 改造后中文界面与改造前逐字节
+  一致，回归时任何中文变化都是 bug（见 StringsParityTest）。
+-->
+<resources>
+    <string name="login_wechat">微信登录</string>
+    <string name="login_test_account">使用测试账号登录</string>
+    <string name="login_err_wechat_missing">未安装微信或微信版本过低</string>
+    <string name="login_err_no_code">未获取到授权码</string>
+    <string name="login_err_cancelled">已取消微信授权</string>
+    <string name="login_err_wechat">微信授权失败(%1$d)</string>
+    <string name="login_err_no_token">登录失败:未返回 token</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_language_title">语言</string>
+    <string name="profile_language_system">跟随系统</string>
+    <string name="about_update_notes_empty">本次更新没有提供说明。</string>
+
+    <!-- 「我」页 -->
+    <string name="profile_not_logged_in">未登录</string>
+    <string name="profile_current_org">当前组织</string>
+    <string name="profile_current_project">当前项目</string>
+    <string name="profile_no_org_selected">未选择组织</string>
+    <string name="profile_no_project_selected">未选择项目</string>
+    <string name="profile_org_subtitle">选择组织后方可选择项目</string>
+    <string name="profile_project_subtitle_pick">请选择项目</string>
+    <string name="profile_project_subtitle_switch">点击切换项目</string>
+    <string name="profile_project_subtitle_org_first">请先选择组织</string>
+    <string name="profile_section_settings">设置</string>
+    <string name="profile_dark_mode">深色模式</string>
+    <string name="profile_light_mode">浅色模式</string>
+    <string name="profile_theme_subtitle">点击切换主题</string>
+    <string name="profile_section_other">其他</string>
+    <string name="profile_modbus_title">设备点表</string>
+    <string name="profile_modbus_subtitle">Modbus 点表配置（只读）</string>
+    <string name="profile_alarm_title">告警</string>
+    <string name="profile_alarm_subtitle">Modbus 告警记录与处理</string>
+    <string name="profile_history_title">历史</string>
+    <string name="profile_history_subtitle">采集历史与曲线</string>
+    <string name="profile_about_subtitle">应用信息与版本</string>
+
+    <!-- 账号详情 -->
+    <string name="account_title">账号详情</string>
+    <string name="account_username">用户名</string>
+    <string name="account_platform">平台</string>
+    <string name="account_not_selected">未选择</string>
+    <string name="account_org_toggle">组织</string>
+    <string name="account_org_toggle_subtitle">启用后可管理组织</string>
+    <string name="account_logout">退出登录</string>
+
+    <!-- 关于 -->
+    <string name="about_title">关于</string>
+    <string name="about_tagline">物联网设备管理与监控平台</string>
+    <string name="about_version">版本 %1$s</string>
+    <string name="about_check_update">检查更新</string>
+    <string name="about_checking">正在检查…</string>
+    <string name="about_up_to_date">已是最新版本</string>
+    <string name="about_update_now">立即更新</string>
+    <string name="about_downloading">正在下载…</string>
+    <string name="about_downloading_percent">正在下载 %1$d%%</string>
+    <string name="about_install_now">立即安装</string>
+    <string name="about_install">安装</string>
+    <string name="about_retry_download">重试下载</string>
+    <string name="about_later">稍后</string>
+    <string name="about_install_dialog_title">安装更新</string>
+    <string name="about_new_version_found">发现新版本 %1$s</string>
+    <string name="about_ready_hint">安装包已下载完成，点「安装」后交给系统安装器继续。</string>
+    <string name="about_need_install_permission">需要先允许本应用安装未知来源的应用</string>
+    <string name="about_keep_app_alive">可切换页面，请勿结束应用</string>
+    <string name="about_metered">当前是移动网络，下载会消耗较多流量</string>
+    <string name="about_metered_size">当前是移动网络，安装包约 %1$s</string>
+    <string name="about_install_settings_failed">打不开系统的「安装未知应用」设置，请在系统设置里手动允许</string>
+    <string name="about_no_installer">没有找到可用的安装程序，安装包已保存在应用目录中</string>
+</resources>

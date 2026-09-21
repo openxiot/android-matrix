@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  登录页。品牌名走 R.string.app_name（中文「矩阵」/英文 WeMatrix），这里不重复。
+  「Matrix」那行副标题是品牌字样，两种语言下都显示原文，故不进资源。
+-->
+<resources>
+    <string name="login_wechat">Sign in with WeChat</string>
+    <string name="login_test_account">Sign in with a test account</string>
+    <string name="login_err_wechat_missing">WeChat isn’t installed, or the version is too old</string>
+    <string name="login_err_no_code">No authorization code came back</string>
+    <string name="login_err_cancelled">WeChat sign-in was cancelled</string>
+    <string name="login_err_wechat">WeChat authorization failed (%1$d)</string>
+    <string name="login_err_no_token">Sign-in failed: no token was returned</string>
+</resources>

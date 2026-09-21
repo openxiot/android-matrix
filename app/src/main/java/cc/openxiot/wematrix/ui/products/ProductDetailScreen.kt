@@ -19,9 +19,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import coil.compose.AsyncImage
 import cc.openxiot.wematrix.data.api.ProductEntity
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
@@ -57,10 +59,13 @@ fun ProductDetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = product?.displayName ?: "产品详情",
+                        text = product?.displayName ?: stringResource(
+                            if (product == null) R.string.product_detail_title
+                            else R.string.common_unknown_product
+                        ),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -77,7 +82,7 @@ fun ProductDetailScreen(
             )
             product == null -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("产品未找到", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.product_not_found), style = MaterialTheme.typography.bodyLarge)
                 }
             }
             else -> {
@@ -111,7 +116,7 @@ fun ProductDetailScreen(
                                 modifier = Modifier.size(20.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("去京东购买", style = MaterialTheme.typography.titleSmall)
+                            Text(stringResource(R.string.product_buy_jd), style = MaterialTheme.typography.titleSmall)
                         }
                         Button(
                             onClick = { openTaobaoApp(context) },
@@ -129,7 +134,7 @@ fun ProductDetailScreen(
                                 modifier = Modifier.size(20.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("去淘宝购买", style = MaterialTheme.typography.titleSmall)
+                            Text(stringResource(R.string.product_buy_taobao), style = MaterialTheme.typography.titleSmall)
                         }
                     }
                     Spacer(modifier = Modifier.height(24.dp))
@@ -184,7 +189,7 @@ private fun HeaderCard(product: ProductEntity) {
                 if (product.icon != null) {
                     AsyncImage(
                         model = product.icon,
-                        contentDescription = product.displayName,
+                        contentDescription = product.displayName ?: stringResource(R.string.common_unknown_product),
                         modifier = Modifier
                             .fillMaxSize()
                             .clip(RoundedCornerShape(12.dp)),
@@ -204,7 +209,7 @@ private fun HeaderCard(product: ProductEntity) {
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 Text(
-                    text = product.displayName,
+                    text = product.displayName ?: stringResource(R.string.common_unknown_product),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -222,14 +227,14 @@ private fun DetailCard(product: ProductEntity) {
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            DetailRow(label = "产品 ID", value = product.id ?: "-")
+            DetailRow(label = stringResource(R.string.product_id_label), value = product.id ?: "-")
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            DetailRow(label = "产品型号", value = product.model ?: "-")
+            DetailRow(label = stringResource(R.string.product_model_label), value = product.model ?: "-")
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-            DetailRow(label = "通信协议", value = product.protocol ?: "-")
+            DetailRow(label = stringResource(R.string.common_protocol_label), value = product.protocol ?: "-")
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
             if (product.organization != null) {
-                DetailRow(label = "所属组织", value = product.organization)
+                DetailRow(label = stringResource(R.string.product_org_label), value = product.organization)
                 HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
             }
         }
@@ -260,9 +265,9 @@ private fun DetailRow(label: String, value: String) {
 private fun LifecycleBadge(lifecycle: String?) {
     if (lifecycle == null) return
     val (label, color) = when (lifecycle) {
-        "released" -> "已发布" to MaterialTheme.colorScheme.primary
-        "preview" -> "预览版" to MaterialTheme.colorScheme.tertiary
-        "development" -> "开发中" to MaterialTheme.colorScheme.error
+        "released" -> stringResource(R.string.product_status_released) to MaterialTheme.colorScheme.primary
+        "preview" -> stringResource(R.string.product_status_preview) to MaterialTheme.colorScheme.tertiary
+        "development" -> stringResource(R.string.product_status_development) to MaterialTheme.colorScheme.error
         else -> lifecycle to MaterialTheme.colorScheme.onSurfaceVariant
     }
     Spacer(modifier = Modifier.height(2.dp))

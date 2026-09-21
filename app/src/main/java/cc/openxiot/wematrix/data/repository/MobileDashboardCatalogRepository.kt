@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileCatalog
 import cc.openxiot.wematrix.data.api.RetrofitClient
 
@@ -19,9 +20,9 @@ class MobileDashboardCatalogRepository {
     suspend fun catalog(spaceId: String): Result<MobileCatalog> = runCatching {
         val r = service.getDashboardCatalog(spaceId)
         if (r.isSuccessful && r.body()?.success == true) {
-            r.body()!!.data ?: throw Exception("候选清单为空")
+            r.body()!!.data ?: failWith(R.string.err_dashboard_catalog_empty)
         } else {
-            throw Exception(r.body()?.message ?: "获取候选清单失败")
+            r.failWith(R.string.err_dashboard_catalog)
         }
     }
 }

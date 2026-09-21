@@ -1,7 +1,9 @@
 package cc.openxiot.wematrix.ui.modbus
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusAlarm
 import cc.openxiot.wematrix.data.api.ModbusAlarmList
+import cc.openxiot.wematrix.ui.core.UiText
 
 /**
  * 阈值告警的展示口径，逐条对齐 webapp-matrix 的
@@ -12,7 +14,8 @@ import cc.openxiot.wematrix.data.api.ModbusAlarmList
  * 本文件只把**后端枚举名**换成页面自己的词（级别 / 比较方式 / 关闭原因），
  * 且**未收录的枚举名一律原样给出**：后端加了新枚举时不至于空白。
  *
- * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
+ * 这里只放「纯函数」，配色之类 Compose 类型留在各 Screen 里。文案一律返回 [UiText]：三个
+ * 词典都有「没收录的枚举名原样给出」这一档，那不是能塞进资源的固定标签。
  */
 
 /**
@@ -29,16 +32,16 @@ val alarmLevels: List<String> = listOf("INFO", "WARN", "CRITICAL")
  * 用的是「提示 / 警告 / 严重」而不是「信息 / 警告 / 错误」：这三个词描述的是**要不要人管**，
  * 而不是技术上的严重度分级 —— 看告警页的人要的正是这个判断。
  */
-private val LEVEL_LABELS: Map<String, String> = mapOf(
-    "INFO" to "提示",
-    "WARN" to "警告",
-    "CRITICAL" to "严重"
+private val LEVEL_LABELS: Map<String, Int> = mapOf(
+    "INFO" to R.string.modbus_alarm_level_info,
+    "WARN" to R.string.modbus_alarm_level_warn,
+    "CRITICAL" to R.string.modbus_alarm_level_critical
 )
 
 /** 级别标签：没收录的枚举名原样给出（老数据 / 后端加了新级别时不至于空白） */
-fun alarmLevelLabel(level: String?): String {
-    if (level.isNullOrEmpty()) return ""
-    return LEVEL_LABELS[level] ?: level
+fun alarmLevelLabel(level: String?): UiText {
+    if (level.isNullOrEmpty()) return UiText.Raw("")
+    return LEVEL_LABELS[level]?.let { UiText.Res(it) } ?: UiText.Raw(level)
 }
 
 /**
@@ -47,12 +50,12 @@ fun alarmLevelLabel(level: String?): String {
  * 白名单用符号而不是 `GT`/`GTE` 之类的名字：符号语言中立、与需求原话一致、日志与响应里回显无歧义；
  * 「超过 / 达到」那些**词**是页面自己的文案，符号本身不翻译。
  */
-private val OPERATOR_LABELS: Map<String, String> = mapOf(
-    ">" to "超过",
-    ">=" to "达到",
-    "<" to "低于",
-    "<=" to "低于等于",
-    "=" to "等于"
+private val OPERATOR_LABELS: Map<String, Int> = mapOf(
+    ">" to R.string.modbus_alarm_op_gt,
+    ">=" to R.string.modbus_alarm_op_gte,
+    "<" to R.string.modbus_alarm_op_lt,
+    "<=" to R.string.modbus_alarm_op_lte,
+    "=" to R.string.modbus_alarm_op_eq
 )
 
 /**
@@ -61,9 +64,9 @@ private val OPERATOR_LABELS: Map<String, String> = mapOf(
  * 五种比较方式里 `=` 单独说一句：它是给「取值表命名的状态」与「位 0/1」用的，
  * 数值字段也能配（比一个确定的数），只是那种用法少见。
  */
-fun alarmOperatorLabel(compare: String?): String {
-    if (compare.isNullOrEmpty()) return ""
-    return OPERATOR_LABELS[compare] ?: compare
+fun alarmOperatorLabel(compare: String?): UiText {
+    if (compare.isNullOrEmpty()) return UiText.Raw("")
+    return OPERATOR_LABELS[compare]?.let { UiText.Res(it) } ?: UiText.Raw(compare)
 }
 
 /**
@@ -75,16 +78,16 @@ fun alarmOperatorLabel(compare: String?): String {
  * - `SUPERSEDED` 同一个出值上换了一条规则生效 —— **升级与降级都算**。
  *   降级（严重那条关了、警告那条接管）尤其不能用 `VALUE` 表达：值仍然越限，记「值恢复」是谎话。
  */
-private val CLOSE_LABELS: Map<String, String> = mapOf(
-    "VALUE" to "值恢复",
-    "DEFINITION" to "定义变更",
-    "SUPERSEDED" to "被取代"
+private val CLOSE_LABELS: Map<String, Int> = mapOf(
+    "VALUE" to R.string.modbus_alarm_close_value,
+    "DEFINITION" to R.string.modbus_alarm_close_definition,
+    "SUPERSEDED" to R.string.modbus_alarm_close_superseded
 )
 
 /** 关闭原因标签：没收录的枚举名原样给出（老数据 / 后端加了新原因时不至于空白） */
-fun alarmCloseLabel(closeType: String?): String {
-    if (closeType.isNullOrEmpty()) return ""
-    return CLOSE_LABELS[closeType] ?: closeType
+fun alarmCloseLabel(closeType: String?): UiText {
+    if (closeType.isNullOrEmpty()) return UiText.Raw("")
+    return CLOSE_LABELS[closeType]?.let { UiText.Res(it) } ?: UiText.Raw(closeType)
 }
 
 /**
@@ -104,18 +107,25 @@ fun alarmCondition(
     threshold: Double?,
     state: String?,
     unit: String? = null
-): String {
-    val operator = alarmOperatorLabel(compare)
+): UiText {
+    // 单位原样缀在数值后面（它是点表里的数据，不翻译）
     val target = if (threshold != null) {
         "${configNumberText(threshold)}${unit ?: ""}"
     } else {
         state ?: ""
     }
-    return listOf(operator, target).filter { it.isNotEmpty() }.joinToString(" ")
+    return when {
+        // compare 缺失（老数据）时只给阈值，不硬编一个比较方式上去
+        compare.isNullOrEmpty() -> UiText.Raw(target)
+        // 阈值与状态都空：原口径是只给比较方式、不留尾随空格（`filter { isNotEmpty }` 那一条）
+        target.isEmpty() -> alarmOperatorLabel(compare)
+        // 两者之间那个空格中英都成立，故这层壳没有词可翻，只是一个拼装格式
+        else -> UiText.Res(R.string.modbus_alarm_condition, listOf(alarmOperatorLabel(compare), target))
+    }
 }
 
 /** [alarmCondition] 的告警行重载：定义快照摊在行上 */
-fun alarmCondition(alarm: ModbusAlarm): String =
+fun alarmCondition(alarm: ModbusAlarm): UiText =
     alarmCondition(alarm.compare, alarm.threshold, alarm.state, alarm.unit)
 
 /**

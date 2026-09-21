@@ -2,6 +2,7 @@ package cc.openxiot.wematrix.ui.project
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.DeviceRegistration
@@ -11,6 +12,8 @@ import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.data.repository.DeviceRepository
 import cc.openxiot.wematrix.data.repository.SpaceRepository
 import cc.openxiot.wematrix.ui.core.SessionState
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import cc.openxiot.wematrix.util.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +25,7 @@ data class ProjectUiState(
     val rootSpaces: List<SpaceEntity> = emptyList(),
     val currentRootId: String? = null,
     val currentRootName: String? = null,
-    val error: String? = null
+    val error: UiText? = null
 )
 
 /** 标准 IMEI 为 15 位纯数字（如 864317084946840） */
@@ -37,7 +40,7 @@ data class SpaceTreeUiState(
      * 混在一个 Set 里存在空间 id 和设备 did 撞键的风险（web 靠 `space:` / `device:` 前缀规避）。
      */
     val expandedDeviceIds: Set<String> = emptySet(),
-    val error: String? = null,
+    val error: UiText? = null,
     val showCreateDialog: Boolean = false,
     val createParentId: String? = null,
     val showDeleteConfirm: String? = null,
@@ -45,10 +48,10 @@ data class SpaceTreeUiState(
     /** 空间图里带回来的 Modbus 服务（精简视图）：按 did 挂到设备节点下 */
     val services: List<ModbusServiceBrief> = emptyList(),
     val showAddDeviceDialog: Boolean = false,
-    val message: String? = null,
+    val message: UiText? = null,
     val isAddingDevice: Boolean = false,
     val showMoveDeviceDialog: String? = null,
-    val productNames: Map<String, String> = emptyMap(),
+    val productNames: Map<String, String?> = emptyMap(),
     val productIcons: Map<String, String> = emptyMap()
 )
 
@@ -83,7 +86,7 @@ class ProjectViewModel : ViewModel() {
                 .onFailure { e ->
                     _projectState.value = _projectState.value.copy(
                         isLoading = false,
-                        error = e.message
+                        error = e.toUiText()
                     )
                 }
         }
@@ -100,7 +103,7 @@ class ProjectViewModel : ViewModel() {
                     }
                 }
                 .onFailure { e ->
-                    _projectState.value = _projectState.value.copy(error = e.message)
+                    _projectState.value = _projectState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -130,7 +133,7 @@ class ProjectViewModel : ViewModel() {
                 .onFailure { e ->
                     _treeState.value = _treeState.value.copy(
                         isLoading = false,
-                        error = e.message
+                        error = e.toUiText()
                     )
                 }
         }
@@ -142,7 +145,7 @@ class ProjectViewModel : ViewModel() {
         }
     }
 
-    private val productNameCache = mutableMapOf<String, String>()
+    private val productNameCache = mutableMapOf<String, String?>()
     private val productIconCache = mutableMapOf<String, String>()
     private val productService = RetrofitClient.productService
 
@@ -165,7 +168,7 @@ class ProjectViewModel : ViewModel() {
                     services = graph.services ?: emptyList()
                 )
                 if (_projectState.value.currentRootName == null) {
-                    val name = root?.name ?: "项目"
+                    val name = root?.name ?: WeMatrixApp.instance.getString(R.string.tab_project)
                     _projectState.value = _projectState.value.copy(currentRootName = name)
                     tokenManager.currentRootSpaceName = name
                 }
@@ -182,7 +185,7 @@ class ProjectViewModel : ViewModel() {
             .onFailure { e ->
                 _treeState.value = _treeState.value.copy(
                     isLoading = false,
-                    error = e.message
+                    error = e.toUiText()
                 )
             }
     }
@@ -282,7 +285,7 @@ class ProjectViewModel : ViewModel() {
                     else loadRootSpaces()
                 }
                 .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(error = e.message)
+                    _treeState.value = _treeState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -304,7 +307,7 @@ class ProjectViewModel : ViewModel() {
                     else loadRootSpaces()
                 }
                 .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(error = e.message)
+                    _treeState.value = _treeState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -325,7 +328,7 @@ class ProjectViewModel : ViewModel() {
                     _projectState.value.currentRootId?.let { loadSpaceGraph(it) }
                 }
                 .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(error = e.message)
+                    _treeState.value = _treeState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -346,10 +349,16 @@ class ProjectViewModel : ViewModel() {
             result
                 .onSuccess {
                     _projectState.value.currentRootId?.let { loadSpaceGraph(it) }
-                    _treeState.value = _treeState.value.copy(isAddingDevice = false, message = "设备添加成功")
+                    _treeState.value = _treeState.value.copy(
+                        isAddingDevice = false,
+                        message = UiText.Res(R.string.project_device_added)
+                    )
                 }
                 .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(isAddingDevice = false, message = "添加设备失败: ${e.message}")
+                    _treeState.value = _treeState.value.copy(
+                        isAddingDevice = false,
+                        message = UiText.Res(R.string.err_project_device_add, listOf(e.toUiText()))
+                    )
                 }
         }
     }
@@ -369,10 +378,12 @@ class ProjectViewModel : ViewModel() {
             deviceRepository.moveDevice(spaceId, rootId, did)
                 .onSuccess {
                     loadSpaceGraph(rootId)
-                    _treeState.value = _treeState.value.copy(message = "设备已移动")
+                    _treeState.value = _treeState.value.copy(message = UiText.Res(R.string.project_device_moved))
                 }
                 .onFailure { e ->
-                    _treeState.value = _treeState.value.copy(message = "移动设备失败: ${e.message}")
+                    _treeState.value = _treeState.value.copy(
+                        message = UiText.Res(R.string.err_project_device_move, listOf(e.toUiText()))
+                    )
                 }
         }
     }

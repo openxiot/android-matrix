@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  产品页。中文侧逐字照抄改造前的字面量，英文在 values/。
+
+  「通信协议」是产品与设备两页共用的字段名，在 strings.xml 的 common_protocol_label。
+
+  产品名（`Product.displayName`）是**服务端数据**：只有 zh-CN 一个字段，英文环境下
+  回落到型号 / id，三者都没有时用 common_unknown_product。这是已知局限，见 notes/。
+-->
+<resources>
+    <string name="product_title">产品</string>
+    <string name="product_detail_title">产品详情</string>
+    <string name="product_not_found">产品未找到</string>
+    <string name="product_empty">暂无产品</string>
+    <plurals name="product_count">
+        <item quantity="other">共 %1$d 个产品</item>
+    </plurals>
+    <string name="product_model_inline">型号: %1$s</string>
+
+    <string name="product_id_label">产品 ID</string>
+    <string name="product_model_label">产品型号</string>
+    <string name="product_org_label">所属组织</string>
+
+    <string name="product_buy_jd">去京东购买</string>
+    <string name="product_buy_taobao">去淘宝购买</string>
+
+    <!-- 生命周期徽标（服务端枚举 released / preview / development） -->
+    <string name="product_status_released">已发布</string>
+    <string name="product_status_preview">预览版</string>
+    <string name="product_status_development">开发中</string>
+
+    <string name="product_empty_data">产品数据为空</string>
+</resources>

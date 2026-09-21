@@ -5,6 +5,8 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import cc.openxiot.wematrix.BuildConfig
+import cc.openxiot.wematrix.R
+import cc.openxiot.wematrix.data.AppException
 import cc.openxiot.wematrix.data.api.UpdateApi
 import cc.openxiot.wematrix.util.Constants
 import cc.openxiot.wematrix.util.VersionCompare
@@ -22,8 +24,15 @@ data class UpdateInfo(
     val url: String,
     /** 清单里写的整包 SHA-256（小写）；老清单没有这个字段时为 null。 */
     val sha256: String?,
-    /** 更新说明，已按语言挑过（zh 优先，缺失回退 en）。可能是空的。 */
-    val notes: List<String>
+    /**
+     * 更新说明，两种语言各留一份，**渲染时才挑**。可能是空的。
+     *
+     * 为什么要留两份而不是像改造前那样在这里就挑好：`AppUpdate` 是个 object，跨 `recreate()`
+     * 存活。在这里挑，等于把语言钉在「查清单那一刻」的语言上 —— 用户切完语言回到关于页，
+     * 更新说明还是旧语言，而其余界面都变了。挑语言是界面层的事（见 `AboutScreen.notesFor`）。
+     */
+    val notesZh: List<String>,
+    val notesEn: List<String>,
 )
 
 /** 检查的结果。 */
@@ -55,7 +64,11 @@ class UpdateRepository(private val context: Context) {
         val diff = VersionCompare.compare(remote, BuildConfig.VERSION_NAME)
             // 「不知道」必须报出来。顺着当成「不更新」会静默吃掉一次发版，而界面上
             // 只显示「已是最新版本」，从症状根本看不出是清单写歪了。
-            ?: throw Exception("无法识别版本信息（官网写的是「${remote.ifEmpty { "空" }}」）")
+            ?: failWith(
+                if (remote.isEmpty()) R.string.err_update_manifest_blank
+                else R.string.err_update_manifest_unrecognized,
+                remote
+            )
         if (diff <= 0) {
             // 已经是最新：私有目录里任何安装包都没用了（正在跑的这一版装不了，
             // 更旧的更装不了），全部清掉
@@ -64,7 +77,7 @@ class UpdateRepository(private val context: Context) {
         }
 
         val url = manifest.url?.takeIf { it.isNotBlank() }
-            ?: throw Exception("版本信息里没有下载地址")
+            ?: failWith(R.string.err_update_no_url)
 
         // 清单必须指向**带版本号**的那个文件。指向 wematrix-latest.apk 会让「清单说是哪一版」
         // 和「实际下到哪一版」脱钩：等 latest 再往前走一步，用户就会在被告知是 1.0.6 的情况下
@@ -72,7 +85,7 @@ class UpdateRepository(private val context: Context) {
         // —— 那会误伤将来换成 CDN 路径或带内容哈希的文件名。
         val fileName = url.substringBefore('?').substringAfterLast('/')
         if (fileName.equals(LATEST_ALIAS, ignoreCase = true)) {
-            throw Exception("下载地址指向 latest 别名，不是 $remote 对应的安装包")
+            failWith(R.string.err_update_latest_alias, remote)
         }
 
         val info = UpdateInfo(
@@ -81,9 +94,8 @@ class UpdateRepository(private val context: Context) {
             size = manifest.size,
             url = url,
             sha256 = manifest.sha256?.trim()?.lowercase()?.takeIf { it.isNotEmpty() },
-            // 只用中文：App 没有 i18n 层，其余文案全是硬编码中文。回退到 en 只是因为
-            // 「有英文没中文」比「什么都看不到」强。
-            notes = (manifest.notes?.zh ?: manifest.notes?.en).orEmpty()
+            notesZh = manifest.notes?.zh.orEmpty(),
+            notesEn = manifest.notes?.en.orEmpty(),
         )
 
         // 只留这一版。放在这里而不是只在下载之后清，是因为「装完新版、旧包还躺着」这条
@@ -145,7 +157,7 @@ class UpdateRepository(private val context: Context) {
                 UpdateApi.download(info.url, part, onProgress)
                 // 这里 checkHash 用默认的 true：刚下完的那一份还从没验过哈希
                 verify(part, info)?.let { throw Exception(it) }
-                if (!part.renameTo(target)) throw Exception("安装包保存失败")
+                if (!part.renameTo(target)) failWith(R.string.err_update_save_failed)
             } catch (t: Throwable) {
                 part.delete()
                 throw t
@@ -157,7 +169,8 @@ class UpdateRepository(private val context: Context) {
     }
 
     /**
-     * 校验一个候选安装包：通过返回 null，不通过返回中文原因。
+     * 校验一个候选安装包：通过返回 null，不通过返回一条**还没定语言**的
+     * [AppException]。仍是纯函数、仍然可测 —— 只是把「用哪种语言说」推迟到了界面层。
      *
      * 这是**设备端**的闸门，前两道不依赖清单里有没有哈希：
      * 1. 包内 versionCode 必须高于本机。低了安装器必然拒（INSTALL_FAILED_VERSION_DOWNGRADE），
@@ -172,21 +185,24 @@ class UpdateRepository(private val context: Context) {
      * 就一定是验过的。每次进「关于」页重算 54MB 是纯浪费（用户会看着按钮卡在那里），而真正
      * 拦得住伪造的是上面那道签名闸门，它照常执行。
      */
-    private fun verify(file: File, info: UpdateInfo, checkHash: Boolean = true): String? {
-        val archive = archiveInfo(file) ?: return "安装包无法解析（下载不完整或不是 APK）"
+    private fun verify(file: File, info: UpdateInfo, checkHash: Boolean = true): AppException? {
+        val archive = archiveInfo(file) ?: return AppException(R.string.err_update_unparsable)
 
         if (archive.longVersionCode <= BuildConfig.VERSION_CODE.toLong()) {
-            return "官网上的包（versionCode ${archive.longVersionCode}）不比本机新"
+            return AppException(
+                R.string.err_update_not_newer,
+                listOf(archive.longVersionCode),
+            )
         }
 
         val signers = archive.signingInfo?.apkContentsSigners
-        if (signers.isNullOrEmpty()) return "安装包没有签名信息"
+        if (signers.isNullOrEmpty()) return AppException(R.string.err_update_unsigned)
         // 要求**恰好一个**签名且与本机一致。本项目的发布包就是单签名；多签名一律拒绝
         // —— 宽松的「任意一个签名匹配」会给「我们的证书 + 攻击者的证书」开口子。
-        if (signers.size != 1) return "安装包的签名不符合预期"
-        val own = ownCertDigest() ?: return "读不到本机的签名证书"
+        if (signers.size != 1) return AppException(R.string.err_update_signature_unexpected)
+        val own = ownCertDigest() ?: return AppException(R.string.err_update_cert_unreadable)
         if (!signers[0].toByteArray().contentEquals(own)) {
-            return "安装包签名与本机不一致，装了也覆盖不了"
+            return AppException(R.string.err_update_signature_mismatch)
         }
 
         // 清单里的 sha256 是**双向可选**的：字段缺失就跳过（早于本次改造的清单里没有它，
@@ -195,7 +211,7 @@ class UpdateRepository(private val context: Context) {
         if (!checkHash) return null
         val expected = info.sha256 ?: return null
         if (!sha256(file).equals(expected, ignoreCase = true)) {
-            return "安装包校验值不匹配，可能下载损坏"
+            return AppException(R.string.err_update_checksum)
         }
         return null
     }

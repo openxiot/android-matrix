@@ -1,6 +1,8 @@
 package cc.openxiot.wematrix.ui.modbus
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusCommand
+import cc.openxiot.wematrix.ui.core.UiText
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
@@ -12,7 +14,8 @@ import java.util.Locale
  * `pages/main/modbus/command/point.options.ts` 与 `modbus.lifecycle.ts`。
  * 列表页与详情页共用，免得两处说法不一致。
  *
- * 这里只放「纯函数 → 字符串」，配色之类 Compose 类型留在各 Screen 里。
+ * 这里只放「纯函数」，配色之类 Compose 类型留在各 Screen 里。文案一律返回 [UiText] 或
+ * `@StringRes Int`（从不让 Context 进来，否则 [ModbusFormatTest] 就跑不了了）。
  *
  * 文件末尾三个**数值文案**函数（[valueText] / [numberText] / [configNumberText]）是所有
  * 读数与配置值共用的口径，对齐 web 的 `typedef/utils/ValueUtils.ts`：同一个
@@ -20,17 +23,26 @@ import java.util.Locale
  * —— 故与点表口径放在同一处。
  */
 
-/** 功能码 → 中文名（point.options.ts 的 FC_OPTIONS） */
-fun fcLabel(fc: String?): String = when (fc) {
-    "01" -> "读线圈"
-    "02" -> "读离散输入"
-    "03" -> "读保持寄存器"
-    "04" -> "读输入寄存器"
-    "05" -> "写单个线圈"
-    "06" -> "写单个寄存器"
-    "0F" -> "写多个线圈"
-    "10" -> "写多个寄存器"
-    else -> "-"
+/**
+ * 功能码 → 名称（point.options.ts 的 FC_OPTIONS）。
+ *
+ * 返回 [UiText] 而不是 `@StringRes Int`：它有一档 `-` 兜底、不是 1:1 的固定标签；
+ * 更要紧的是它被**纯函数** [describeRequestFrame] 调用 —— 那里既没有 Context 也没有组合，
+ * 语言只能留到渲染时再定。
+ */
+fun fcLabel(fc: String?): UiText {
+    val res = when (fc) {
+        "01" -> R.string.modbus_fc_read_coils
+        "02" -> R.string.modbus_fc_read_discrete
+        "03" -> R.string.modbus_fc_read_holding
+        "04" -> R.string.modbus_fc_read_input
+        "05" -> R.string.modbus_fc_write_coil
+        "06" -> R.string.modbus_fc_write_register
+        "0F" -> R.string.modbus_fc_write_coils
+        "10" -> R.string.modbus_fc_write_registers
+        else -> null
+    }
+    return res?.let { UiText.Res(it) } ?: UiText.Raw("-")
 }
 
 /** 写功能码（05/06/0F/10）：读功能码为 01–04，写动作在 web 列表里标红 */
@@ -51,19 +63,19 @@ fun logicalAddressOf(fc: String?, start: Int?): Int? {
     return start?.let { base + it }
 }
 
-/** 可见度：private 私有 / public 公开 */
-fun visibilityLabel(visibility: String?): String = when (visibility) {
-    "public" -> "公开"
-    "private" -> "私有"
-    else -> "-"
+/** 可见度：private 私有 / public 公开；别的值（含缺省）给 `-` */
+fun visibilityLabel(visibility: String?): UiText = when (visibility) {
+    "public" -> UiText.Res(R.string.modbus_visibility_public)
+    "private" -> UiText.Res(R.string.modbus_visibility_private)
+    else -> UiText.Raw("-")
 }
 
 /** 生命周期文案；缺省按「开发中」展示（与 web 列表 `config.lifecycle ?? 'development'` 同口径） */
-fun lifecycleLabel(lifecycle: String?): String = when (lifecycle ?: "development") {
-    "development" -> "开发中"
-    "preview" -> "预览"
-    "released" -> "已发布"
-    else -> "未定义"
+fun lifecycleLabel(lifecycle: String?): UiText = when (lifecycle ?: "development") {
+    "development" -> UiText.Res(R.string.modbus_lifecycle_development)
+    "preview" -> UiText.Res(R.string.modbus_lifecycle_preview)
+    "released" -> UiText.Res(R.string.modbus_lifecycle_released)
+    else -> UiText.Res(R.string.modbus_lifecycle_undefined)
 }
 
 /** 线圈状态：on/off → ON/OFF */
@@ -77,12 +89,22 @@ fun coilStateLabel(state: String?): String = when (state) {
  * 「写内容」列：同一列按功能码显示不同的东西（照 web 编辑器表格）。
  * 读功能码（01–04）没有写内容，恒为 `-`。
  */
-fun writeContentLabel(command: ModbusCommand): String = when (command.fc) {
-    "05" -> coilStateLabel(command.coilState)
-    "06" -> command.registerValue?.toString() ?: "-"
-    "0F" -> "${command.coils.size} 个线圈"
-    "10" -> "${command.registers.size} 个寄存器"
-    else -> "-"
+fun writeContentLabel(command: ModbusCommand): UiText = when (command.fc) {
+    // ON/OFF 与数值是协议里的东西，不是文案，故走 Raw
+    "05" -> UiText.Raw(coilStateLabel(command.coilState))
+    "06" -> UiText.Raw(command.registerValue?.toString() ?: "-")
+    // 数量传两次：一次选档位（英文 1 coil / 2 coils），一次填 %1$d
+    "0F" -> UiText.Quantity(
+        R.plurals.modbus_write_coils,
+        command.coils.size,
+        listOf(command.coils.size)
+    )
+    "10" -> UiText.Quantity(
+        R.plurals.modbus_write_registers,
+        command.registers.size,
+        listOf(command.registers.size)
+    )
+    else -> UiText.Raw("-")
 }
 
 /**
@@ -111,23 +133,30 @@ fun fieldNameRows(command: ModbusCommand): List<String> = fitFieldNames(
  * 按功能码分组出现，用不到的字段**不显示**（而不是显示成 `-`）—— 这是 Modbus 的固有形状，
  * 与 web 编辑器表格里那一堆 `-` 相比，手机上这样更省地方也更好读。
  */
-fun commandFields(command: ModbusCommand): List<Pair<String, String>> {
-    val fields = mutableListOf(
-        "起始地址" to (command.start?.toString() ?: "-"),
-        "逻辑地址" to (logicalAddressOf(command.fc, command.start)?.toString() ?: "-")
+fun commandFields(command: ModbusCommand): List<Pair<Int, UiText>> {
+    // 标签是 1:1 的固定词，给资源 id（规则 A）；值是数据，走 Raw。
+    // 类型参数显式写出来：下面「写内容」那一列是 UiText（含 Quantity），
+    // 光看这两个初值会被推成 MutableList<Pair<Int, UiText.Raw>>，加不进别的档。
+    val fields = mutableListOf<Pair<Int, UiText>>(
+        R.string.modbus_field_start_address to UiText.Raw(command.start?.toString() ?: "-"),
+        R.string.modbus_field_logical_address to
+            UiText.Raw(logicalAddressOf(command.fc, command.start)?.toString() ?: "-")
     )
     when (command.fc) {
         // 读位 / 读寄存器：数量 = 该参数占用的寄存器或位个数
-        "01", "02", "03", "04" -> fields += "数量" to (command.quantity?.toString() ?: "-")
+        "01", "02", "03", "04" ->
+            fields += R.string.modbus_field_quantity to
+                UiText.Raw(command.quantity?.toString() ?: "-")
     }
     when (command.fc) {
         "03", "04" -> {
-            fields += "数据格式" to (command.dataType ?: "-")
-            fields += "字节序" to (command.byteOrder ?: "-")
-            fields += "缩放" to (command.scale?.toString() ?: "-")
-            fields += "单位" to (command.unit ?: "-")
+            fields += R.string.modbus_field_data_type to UiText.Raw(command.dataType ?: "-")
+            fields += R.string.modbus_field_byte_order to UiText.Raw(command.byteOrder ?: "-")
+            fields += R.string.modbus_field_scale to UiText.Raw(command.scale?.toString() ?: "-")
+            fields += R.string.modbus_field_unit to UiText.Raw(command.unit ?: "-")
         }
-        "05", "06", "0F", "10" -> fields += "写内容" to writeContentLabel(command)
+        "05", "06", "0F", "10" ->
+            fields += R.string.modbus_field_write_content to writeContentLabel(command)
     }
     return fields
 }

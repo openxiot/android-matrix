@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Products screens. This is **English** (the default), Chinese is in values-zh/.
+
+  「通信协议」 (Protocol) is a field name shared by the product and device screens —
+  it lives in strings.xml as common_protocol_label.
+
+  The product name (`Product.displayName`) is **server data**: it only carries a zh-CN
+  field, so in English it falls back to the model, then the id, then
+  common_unknown_product. That is a known limitation — see notes/.
+-->
+<resources>
+    <string name="product_title">Products</string>
+    <string name="product_detail_title">Product</string>
+    <string name="product_not_found">Product not found</string>
+    <string name="product_empty">No products yet</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d product</item>
+        <item quantity="other">%1$d products</item>
+    </plurals>
+    <string name="product_model_inline">Model: %1$s</string>
+
+    <string name="product_id_label">Product ID</string>
+    <string name="product_model_label">Model</string>
+    <string name="product_org_label">Organization</string>
+
+    <string name="product_buy_jd">Buy on JD.com</string>
+    <string name="product_buy_taobao">Buy on Taobao</string>
+
+    <!-- Lifecycle badge (server enum: released / preview / development) -->
+    <string name="product_status_released">Released</string>
+    <string name="product_status_preview">Preview</string>
+    <string name="product_status_development">In development</string>
+
+    <string name="product_empty_data">No product data</string>
+</resources>

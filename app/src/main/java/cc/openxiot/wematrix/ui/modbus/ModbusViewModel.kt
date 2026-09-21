@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cc.openxiot.wematrix.data.api.ModbusConfig
 import cc.openxiot.wematrix.data.repository.ModbusRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,10 +14,10 @@ import kotlinx.coroutines.launch
 data class ModbusUiState(
     val isLoading: Boolean = true,
     val configs: List<ModbusConfig> = emptyList(),
-    val error: String? = null,
+    val error: UiText? = null,
     val isDetailLoading: Boolean = false,
     val detail: ModbusConfig? = null,
-    val detailError: String? = null
+    val detailError: UiText? = null
 )
 
 class ModbusViewModel : ViewModel() {
@@ -48,7 +50,7 @@ class ModbusViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = e.message ?: "网络错误"
+                        error = e.toUiText()
                     )
                 }
         }
@@ -64,7 +66,7 @@ class ModbusViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isDetailLoading = false,
-                        detailError = e.message ?: "网络错误"
+                        detailError = e.toUiText()
                     )
                 }
         }

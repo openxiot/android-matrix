@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ModbusAlarm
 import cc.openxiot.wematrix.data.api.ModbusAlarmList
 import cc.openxiot.wematrix.data.api.ModbusAlarmQuery
@@ -44,9 +45,9 @@ class ModbusAlarmRepository {
             limit = query.limit
         )
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("告警数据为空")
+            response.body()!!.data ?: failWith(R.string.err_alarm_empty)
         } else {
-            throw Exception(response.body()?.message ?: "获取告警清单失败")
+            response.failWith(R.string.err_alarm_list)
         }
     }
 
@@ -55,9 +56,9 @@ class ModbusAlarmRepository {
         // 空对象：后端这个接口不看 body（照 web 传 `{}`；类型上的 @JvmSuppressWildcards 见 ApiService 的文件头）
         val response = service.handleModbusAlarm(spaceId, id, emptyMap())
         if (response.isSuccessful && response.body()?.success == true) {
-            response.body()!!.data ?: throw Exception("告警不存在")
+            response.body()!!.data ?: failWith(R.string.err_alarm_missing)
         } else {
-            throw Exception(response.body()?.message ?: "处理告警失败")
+            response.failWith(R.string.err_alarm_action)
         }
     }
 }

@@ -6,6 +6,8 @@ import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.ProjectMember
 import cc.openxiot.wematrix.data.repository.OrganizationRepository
 import cc.openxiot.wematrix.data.repository.SpaceRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +22,7 @@ data class ProjectMemberUiState(
     val currentUserId: String? = null,
     val isAdmin: Boolean = false,
     val isLastAdmin: Boolean = false,
-    val error: String? = null,
+    val error: UiText? = null,
     val showAddDialog: Boolean = false,
     val changeRoleTarget: ProjectMember? = null,
     val editRemarkTarget: ProjectMember? = null,
@@ -96,7 +98,7 @@ class ProjectMemberViewModel : ViewModel() {
                     .onFailure { e ->
                         _uiState.value = _uiState.value.copy(
                             isLoading = false,
-                            error = e.message
+                            error = e.toUiText()
                         )
                     }
             }
@@ -119,7 +121,7 @@ class ProjectMemberViewModel : ViewModel() {
             spaceRepository.addAccess(rootId, memberId, role)
                 .onSuccess { load(rootId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -141,7 +143,7 @@ class ProjectMemberViewModel : ViewModel() {
             spaceRepository.updateAccessRole(rootId, memberId, newRole)
                 .onSuccess { load(rootId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -163,7 +165,7 @@ class ProjectMemberViewModel : ViewModel() {
             spaceRepository.updateAccessRemark(rootId, memberId, remark)
                 .onSuccess { load(rootId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -184,7 +186,7 @@ class ProjectMemberViewModel : ViewModel() {
             spaceRepository.removeAccess(rootId, memberId)
                 .onSuccess { load(rootId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -208,7 +210,7 @@ class ProjectMemberViewModel : ViewModel() {
                     _uiState.value = _uiState.value.copy(hasLeft = true)
                 }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }

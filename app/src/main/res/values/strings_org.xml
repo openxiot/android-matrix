@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  组织（organization）相关。这里是**英文**（默认语言），中文在 values-zh/。
+
+  术语（见 notes/ 术语表）：organization = 组织，member = 成员，role = 角色。
+  「普通成员」是单选项、徽标是「成员」，两处在中文里就是两句话，故英文也分两个 key。
+-->
+<resources>
+    <string name="org_title">Current organization</string>
+    <string name="org_detail_title">Organization</string>
+
+    <string name="org_empty">No organizations yet — tap + to create one</string>
+
+    <string name="org_create_title">Create organization</string>
+    <string name="org_id_label">Organization ID</string>
+    <string name="org_id_placeholder">e.g. my-company</string>
+    <string name="org_id_hint">Start with a letter — letters, digits and hyphens only</string>
+    <string name="org_name_label">Organization name</string>
+    <string name="org_name_placeholder">e.g. My Company</string>
+
+    <string name="org_rename_title">Rename organization</string>
+    <string name="org_delete_title">Delete organization</string>
+    <string name="org_delete_confirm">Delete this organization?</string>
+
+    <string name="org_manage">Manage</string>
+    <!--
+      滑出条幅只有 180dp 宽（MemberCard/OrgSwipeCard 的 maxOffset），「Swipe right to
+      delete」在中文字号下会顶出去 —— 这里按英文重写而不是逐字直译。
+    -->
+    <string name="org_swipe_delete">Swipe to delete</string>
+
+    <!-- Members -->
+    <string name="org_members_empty">No members yet</string>
+    <string name="org_member_developer_id">Developer ID</string>
+    <string name="org_member_developer_id_placeholder">The user’s developerId</string>
+    <string name="org_member_name_label">Display name</string>
+    <string name="org_member_name_placeholder">Optional</string>
+    <string name="org_change_role">Change role</string>
+    <string name="org_change_role_title">Change role — %1$s</string>
+    <string name="org_remove_confirm">Remove “%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d member</item>
+        <item quantity="other">%1$d members</item>
+    </plurals>
+</resources>

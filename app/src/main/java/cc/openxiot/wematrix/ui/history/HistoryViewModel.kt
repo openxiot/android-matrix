@@ -2,6 +2,7 @@ package cc.openxiot.wematrix.ui.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.ModbusHistoryCurrent
 import cc.openxiot.wematrix.data.api.ModbusHistoryFailure
@@ -9,6 +10,8 @@ import cc.openxiot.wematrix.data.api.ModbusHistoryFailures
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.data.repository.ModbusHistoryRepository
 import cc.openxiot.wematrix.data.repository.SpaceRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.presetWindow
 import kotlinx.coroutines.async
@@ -30,8 +33,8 @@ data class ServiceOverview(
     val service: ModbusServiceBrief,
     /** 当前值快照（与时间范围无关，只在进页面 / 刷新时取）；取不到时为 null */
     val current: ModbusHistoryCurrent?,
-    /** `/current` 取数失败的原因；空串 = 取到了 */
-    val currentError: String
+    /** `/current` 取数失败的原因；null = 取到了 */
+    val currentError: UiText?
 )
 
 /** 项目级失败清单的一行：一条失败属于哪个服务 */
@@ -63,13 +66,13 @@ data class HistoryUiState(
     /** did → 设备：概览卡里显示依赖设备的在线态（空间图里的设备，含没挂服务的那些） */
     val devices: Map<String, DeviceEntity> = emptyMap(),
     /** 空间图取数失败的原因：它取不到就没什么可看的，整页报错 */
-    val graphError: String? = null,
+    val graphError: UiText? = null,
     /** 逐服务的当前值快照 */
     val overview: List<ServiceOverview> = emptyList(),
     /** 空间级失败清单（一次取回整个项目）；取不到时为 null */
     val failures: ModbusHistoryFailures? = null,
-    /** `/failures` 取数失败的原因；空串 = 取到了 */
-    val failuresError: String = "",
+    /** `/failures` 取数失败的原因；null = 取到了 */
+    val failuresError: UiText? = null,
 
     // —— 查询条件 ——
     /** 默认最近 24 小时：项目级看「昨天到今天」的多，实时看 1 小时就够，翻旧账才切 7 天 */
@@ -87,9 +90,8 @@ data class HistoryUiState(
             ?: customFrom?.let { from -> customTo?.let { to -> from to to } }
 
     /** 某几格取不到数的原因（「服务名: 消息」），去重后列在页面顶部 */
-    val loadErrors: List<String>
-        get() = (overview.map { it.currentError } + failuresError)
-            .filter { it.isNotEmpty() }
+    val loadErrors: List<UiText>
+        get() = (overview.mapNotNull { it.currentError } + listOfNotNull(failuresError))
             .distinct()
 
     /**
@@ -240,7 +242,7 @@ class HistoryViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoadingGraph = false,
-                        graphError = e.message ?: "获取空间图失败"
+                        graphError = e.toUiText(R.string.err_space_graph)
                     )
                 }
         }
@@ -264,9 +266,19 @@ class HistoryViewModel : ViewModel() {
                     async {
                         val id = service.id.orEmpty()
                         historyRepository.current(spaceId, id).fold(
-                            onSuccess = { ServiceOverview(service, it, "") },
+                            onSuccess = { ServiceOverview(service, it, null) },
                             onFailure = { e ->
-                                ServiceOverview(service, null, "${service.name ?: id}: ${e.message ?: "获取采集状态失败"}")
+                                ServiceOverview(
+                                    service,
+                                    null,
+                                    UiText.Res(
+                                        R.string.err_history_service_status,
+                                        listOf(
+                                            service.name ?: id,
+                                            e.toUiText(R.string.err_sampling_status)
+                                        )
+                                    )
+                                )
                             }
                         )
                     }
@@ -284,7 +296,7 @@ class HistoryViewModel : ViewModel() {
                 isLoading = false,
                 overview = overview,
                 failures = failures.getOrNull(),
-                failuresError = failures.exceptionOrNull()?.message.orEmpty()
+                failuresError = failures.exceptionOrNull()?.toUiText()
             )
         }
     }
@@ -310,7 +322,7 @@ class HistoryViewModel : ViewModel() {
             _uiState.value = _uiState.value.copy(
                 isLoading = false,
                 failures = result.getOrNull(),
-                failuresError = result.exceptionOrNull()?.message.orEmpty()
+                failuresError = result.exceptionOrNull()?.toUiText()
             )
         }
     }

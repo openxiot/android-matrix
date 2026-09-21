@@ -11,10 +11,12 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.ui.devices.DeviceListScreen
 import cc.openxiot.wematrix.ui.home.HomeScreen
 import cc.openxiot.wematrix.ui.products.ProductListScreen
@@ -34,6 +36,7 @@ fun MainScreen(
     onNavigateToProjectPicker: () -> Unit = {},
     onNavigateToAccount: () -> Unit = {},
     onNavigateToAbout: () -> Unit = {},
+    onNavigateToLanguage: () -> Unit = {},
     onNavigateToModbus: () -> Unit = {},
     // 告警与历史都以**当前项目根空间**为鉴权作用域（口径同设备页/首页看板），
     // 故这两个回调要带上 rootId —— 由 MainScreen 自己从 mainViewModel 取，调用方不必操心
@@ -64,7 +67,7 @@ fun MainScreen(
                         icon = {
                             Icon(
                                 tab.icon,
-                                contentDescription = tab.label,
+                                contentDescription = stringResource(tab.labelRes),
                                 modifier = Modifier.size(22.dp),
                                 tint = if (selected)
                                     MaterialTheme.colorScheme.primary
@@ -74,7 +77,7 @@ fun MainScreen(
                         },
                         label = {
                             Text(
-                                tab.label,
+                                stringResource(tab.labelRes),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = if (selected)
                                     MaterialTheme.colorScheme.primary
@@ -143,7 +146,8 @@ fun MainScreen(
                                 // 名字优先取空间图里的（最新），图还没回来时退回登录态存的那个。
                                 // 右边那颗「>」进项目选择页 —— 原来这是树下那张「当前项目」卡片上的按钮。
                                 PageTitle(
-                                    title = treeState.rootSpace?.name ?: currentProjectName ?: "项目",
+                                    title = treeState.rootSpace?.name ?: currentProjectName
+                                        ?: stringResource(R.string.tab_project),
                                     actions = {
                                         Box(
                                             modifier = Modifier
@@ -154,7 +158,7 @@ fun MainScreen(
                                         ) {
                                             Icon(
                                                 Icons.Default.ChevronRight,
-                                                contentDescription = "切换项目",
+                                                contentDescription = stringResource(R.string.main_switch_project),
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 modifier = Modifier.size(20.dp)
                                             )
@@ -186,14 +190,14 @@ fun MainScreen(
                             }
                         } else if (organizationEnabled && currentOrgName == null) {
                             EmptyHint(
-                                message = "请先选择当前组织",
-                                buttonText = "选择组织",
+                                message = stringResource(R.string.main_pick_org_first),
+                                buttonText = stringResource(R.string.main_pick_org),
                                 onClick = onNavigateToOrgPicker
                             )
                         } else {
                             EmptyHint(
-                                message = "请先选择当前项目",
-                                buttonText = "选择项目",
+                                message = stringResource(R.string.main_pick_project_first),
+                                buttonText = stringResource(R.string.main_pick_project),
                                 onClick = onNavigateToProjectPicker
                             )
                         }
@@ -215,6 +219,7 @@ fun MainScreen(
                         onNavigateToProjectPicker = onNavigateToProjectPicker,
                         onNavigateToAccount = onNavigateToAccount,
                         onNavigateToAbout = onNavigateToAbout,
+                        onNavigateToLanguage = onNavigateToLanguage,
                         onNavigateToModbus = onNavigateToModbus,
                         onNavigateToAlarm = {
                             mainViewModel.currentRootSpaceId?.let(onNavigateToAlarm)

@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.ui.home
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,8 +22,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.ui.history.HistoryFieldChart
 import cc.openxiot.wematrix.ui.history.buildHistorySeries
@@ -46,7 +49,11 @@ fun DashboardWidgetHost(
     error: String?,
     modifier: Modifier = Modifier
 ) {
-    val title = DashboardTypes.resolveTitle(widget.title, widget.titleKey, widget.type)
+    val title = DashboardTypes.resolveTitle(
+        widget.title,
+        widget.titleKey,
+        stringResource(DashboardTypes.defaultTitleRes(widget.type))
+    )
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
@@ -85,7 +92,7 @@ fun DashboardWidgetHost(
                         half = widget.size == DashboardTypes.SIZE_HALF
                     )
                     DashboardTypes.DEVICE -> DeviceView(data)
-                    else -> EmptyBody("未知卡片类型")
+                    else -> EmptyBody(stringResource(R.string.home_card_unknown_type))
                 }
             }
         }
@@ -129,10 +136,10 @@ private fun StatView(data: Map<String, Any?>?, metric: String?) {
                 color = MaterialTheme.colorScheme.onSurface
             )
             if (value != "-") {
-                StatUnit(metric)?.let { unit ->
+                statUnitRes(metric)?.let { unit ->
                     Spacer(modifier = Modifier.width(2.dp))
                     Text(
-                        text = unit,
+                        text = stringResource(unit),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(bottom = 3.dp)
@@ -157,10 +164,16 @@ private fun statValue(data: Map<String, Any?>): String {
     return MobileRenderFormat.numberOf(data, "value")?.toString() ?: "-"
 }
 
-/** 单位按 metric 口径（对齐 web `DASHBOARD_METRICS`）；告警/故障没有单位。 */
-private fun StatUnit(metric: String?): String? = when (metric) {
-    "devices.total", "devices.online" -> "台"
-    "services.total" -> "个"
+/**
+ * 单位按 metric 口径（对齐 web `DASHBOARD_METRICS`）；告警/故障没有单位。
+ *
+ * 同 [DashboardTypes.defaultTitleRes]：返回资源 id，语言由调用方定。
+ * 英文不用量词（「台」没有对应词），落回名词本身 —— 大数字旁边写 `12 devices`。
+ */
+@StringRes
+private fun statUnitRes(metric: String?): Int? = when (metric) {
+    "devices.total", "devices.online" -> R.string.home_unit_devices
+    "services.total" -> R.string.home_unit_services
     else -> null
 }
 
@@ -174,10 +187,10 @@ private fun StatUnit(metric: String?): String? = when (metric) {
 private fun DistributionView(data: Map<String, Any?>?, limit: Int?) {
     val all = data?.let { MobileRenderFormat.slicesOf(it, "groups") } ?: emptyList()
     if (all.isEmpty()) {
-        EmptyBody("暂无数据")
+        EmptyBody(stringResource(R.string.home_empty_no_data))
         return
     }
-    DonutChart(truncateSlices(all, limit, "其他").map { it.name to it.count })
+    DonutChart(truncateSlices(all, limit, stringResource(R.string.home_donut_other)).map { it.name to it.count })
 }
 
 // ===== 曲线 =====
@@ -191,7 +204,7 @@ private fun DistributionView(data: Map<String, Any?>?, limit: Int?) {
 @Composable
 private fun LineView(data: Map<String, Any?>?, showFailureShadow: Boolean) {
     if (data == null) {
-        EmptyBody("尚未取到数")
+        EmptyBody(stringResource(R.string.home_empty_no_reading))
         return
     }
     if (data.containsKey("serviceId")) {
@@ -200,7 +213,7 @@ private fun LineView(data: Map<String, Any?>?, showFailureShadow: Boolean) {
     }
     val buckets = MobileRenderFormat.bucketsOf(data, "points")
     if (buckets.isEmpty()) {
-        EmptyBody("暂无数据")
+        EmptyBody(stringResource(R.string.home_empty_no_data))
         return
     }
     LineChart(
@@ -218,7 +231,7 @@ private fun hourLabel(at: Long): String =
 private fun serviceFieldLine(data: Map<String, Any?>, showFailureShadow: Boolean) {
     val range = MobileRenderFormat.gsonRange(data)
     if (range.points.isEmpty() && range.carryIn == null) {
-        EmptyBody("暂无数据")
+        EmptyBody(stringResource(R.string.home_empty_no_data))
         return
     }
     // 关掉竖线时：取数层照样把 failures 发下来（后端不看这个开关 —— 「画不画」是展示决策），
@@ -254,7 +267,7 @@ private fun serviceFieldLine(data: Map<String, Any?>, showFailureShadow: Boolean
 @Composable
 private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean, half: Boolean) {
     if (data == null) {
-        EmptyBody("尚未取到数")
+        EmptyBody(stringResource(R.string.home_empty_no_reading))
         return
     }
     val recordedAt = MobileRenderFormat.numberOf(data, "recordedAt")
@@ -263,7 +276,7 @@ private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean, half: Boole
 
     // 完全没有采集痕迹：明说「尚未采集」，别画一堆 `-`（后者看着像「采到了、恰好都空」）
     if (rows.isEmpty() && recordedAt == null) {
-        EmptyBody("尚未采集")
+        EmptyBody(stringResource(R.string.home_empty_not_sampled))
         return
     }
 
@@ -288,7 +301,7 @@ private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean, half: Boole
         // 半宽卡只省掉「采于 …」那半句 —— 失败原因照旧（见 [serviceShowsRecordedAt]）。
         val caption = buildList {
             if (serviceShowsRecordedAt(recordedAt, half)) {
-                recordedAt?.let { add("采于 " + friendlyTime(it)) }
+                recordedAt?.let { add(stringResource(R.string.home_sampled_at, friendlyTime(it))) }
             }
             error?.let { add("⚠ $it") }
         }
@@ -309,9 +322,14 @@ private fun ServiceView(data: Map<String, Any?>?, showUnit: Boolean, half: Boole
  * 一行的值文案：与历史页、告警页、服务详情页的调用应答说同一句话（[valueText]）——
  * 浮点最多 2 位、取值表的描述原样、没值说 `-`。看板卡不是「另一个页面」，它显示的是同一份读数。
  */
+@Composable
 private fun rowValue(row: MobileRenderFormat.ServiceRow, showUnit: Boolean): String {
     if (!row.hasValue) return "-"
-    if (row.bit) return if (row.value == true) "开" else "关"
+    if (row.bit) {
+        return stringResource(
+            if (row.value == true) R.string.common_switch_on else R.string.common_switch_off
+        )
+    }
     val text = valueText(row.value)
     return if (showUnit && row.unit.isNotBlank()) "$text ${row.unit}" else text
 }
@@ -332,7 +350,7 @@ private fun friendlyTime(ms: Long): String =
 @Composable
 private fun DeviceView(data: Map<String, Any?>?) {
     if (data == null) {
-        EmptyBody("尚未取到数")
+        EmptyBody(stringResource(R.string.home_empty_no_reading))
         return
     }
     val pid = MobileRenderFormat.stringOf(data, "pid") ?: ""

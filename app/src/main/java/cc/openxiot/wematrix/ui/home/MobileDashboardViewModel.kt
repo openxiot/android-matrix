@@ -2,10 +2,13 @@ package cc.openxiot.wematrix.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileCatalog
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.data.repository.MobileDashboardCatalogRepository
 import cc.openxiot.wematrix.data.repository.MobileDashboardRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,17 +28,17 @@ import kotlinx.coroutines.launch
 data class MobileDashboardUiState(
     val isLoading: Boolean = false,
     /** 整页级失败（布局/取数全挂）：非空时整页只显示这条告警 */
-    val error: String? = null,
+    val error: UiText? = null,
     val widgets: List<MobileDashboardWidget> = emptyList(),
     /** 已保存布局的乐观锁版本（保存时 CAS 用；缺省 0 = 从没保存过的预置） */
     val version: Long = 0,
     val dataById: Map<String, Map<String, Any?>> = emptyMap(),
-    val messageById: Map<String, String> = emptyMap(),
+    val messageById: Map<String, UiText> = emptyMap(),
 
     // ---- 编辑态 ----
     /** 编辑页的**实时预览**：按草稿 render 出的每张卡取数（按 id 收，同 [dataById]/[messageById]） */
     val previewById: Map<String, Map<String, Any?>> = emptyMap(),
-    val previewMessageById: Map<String, String> = emptyMap(),
+    val previewMessageById: Map<String, UiText> = emptyMap(),
     val editing: Boolean = false,
     val draft: List<MobileDashboardWidget> = emptyList(),
     val dirty: Boolean = false,
@@ -49,7 +52,7 @@ data class MobileDashboardUiState(
     /** 级联候选（进编辑态取一次）；设备/服务/方法/字段的选择都读它 */
     val catalog: MobileCatalog? = null,
     /** 保存 / 恢复的反馈（含服务端冲突原文） */
-    val message: String? = null,
+    val message: UiText? = null,
     /** 刚保存成功（编辑页据此自动返回上一页）；下一次进编辑态 / 退出时清掉 */
     val saved: Boolean = false
 )
@@ -100,25 +103,28 @@ class MobileDashboardViewModel : ViewModel() {
         )
 
         val layout = repository.getLayout(rootId).getOrElse { e ->
-            _uiState.value = MobileDashboardUiState(error = e.message ?: "网络错误")
+            _uiState.value = MobileDashboardUiState(error = e.toUiText())
             return
         }
 
         val result = repository.render(rootId, layout.widgets).getOrElse { e ->
             _uiState.value = MobileDashboardUiState(
                 widgets = layout.widgets,
-                error = e.message ?: "取数失败"
+                error = e.toUiText(R.string.err_dashboard_data)
             )
             return
         }
 
         val dataById = HashMap<String, Map<String, Any?>>()
-        val messageById = HashMap<String, String>()
+        val messageById = HashMap<String, UiText>()
         result.widgets.forEach { item ->
             if (item.success && item.data != null) {
                 dataById[item.id.orEmpty()] = item.data
             } else {
-                item.id?.let { messageById[it] = item.message ?: "取数失败" }
+                item.id?.let {
+                    messageById[it] = item.message?.let { m -> UiText.Raw(m) }
+                        ?: UiText.Res(R.string.err_dashboard_data)
+                }
             }
         }
         committed = layout.widgets
@@ -153,12 +159,15 @@ class MobileDashboardViewModel : ViewModel() {
             if (draft != _uiState.value.draft) return@launch // 防抖期间又被改了，交给下一次调度
             val resp = repository.render(rootId, draft).getOrNull() ?: return@launch // 整页挂了：保留上次预览
             val data = HashMap<String, Map<String, Any?>>()
-            val msg = HashMap<String, String>()
+            val msg = HashMap<String, UiText>()
             resp.widgets.forEach { item ->
                 if (item.success && item.data != null) {
                     data[item.id.orEmpty()] = item.data
                 } else {
-                    item.id?.let { msg[it] = item.message ?: "配置不完整" }
+                    item.id?.let {
+                        msg[it] = item.message?.let { m -> UiText.Raw(m) }
+                            ?: UiText.Res(R.string.err_config_incomplete)
+                    }
                 }
             }
             _uiState.value = _uiState.value.copy(previewById = data, previewMessageById = msg)
@@ -365,7 +374,7 @@ class MobileDashboardViewModel : ViewModel() {
                     // 失败保留草稿（含改动），只把服务端 message 亮出来
                     _uiState.value = _uiState.value.copy(
                         saving = false,
-                        message = e.message ?: "保存失败"
+                        message = e.toUiText(R.string.err_dashboard_save)
                     )
                 }
         }
@@ -383,14 +392,14 @@ class MobileDashboardViewModel : ViewModel() {
                         saving = false,
                         // 预置直接进草稿，仍需手动保存；半格照样物化一遍（服务端已推导，这里不依赖它）
                         draft = deriveSides(preset.widgets),
-                        message = "已载入默认布局，仍需手动保存"
+                        message = UiText.Res(R.string.home_default_layout_loaded)
                     )
                     refreshDirty()
                 }
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         saving = false,
-                        message = e.message ?: "恢复默认失败"
+                        message = e.toUiText(R.string.err_dashboard_restore)
                     )
                 }
         }

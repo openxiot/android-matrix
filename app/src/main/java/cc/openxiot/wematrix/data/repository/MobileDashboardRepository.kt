@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileDashboardLayout
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.data.api.MobileRenderRequest
@@ -26,9 +27,9 @@ class MobileDashboardRepository {
     suspend fun getLayout(spaceId: String): Result<MobileDashboardLayout> = runCatching {
         val r = service.getMobileLayout(spaceId)
         if (r.isSuccessful && r.body()?.success == true) {
-            r.body()!!.data ?: throw Exception("看板布局为空")
+            r.body()!!.data ?: failWith(R.string.err_dashboard_layout_empty)
         } else {
-            throw Exception(r.body()?.message ?: "获取看板布局失败")
+            r.failWith(R.string.err_dashboard_layout)
         }
     }
 
@@ -36,9 +37,9 @@ class MobileDashboardRepository {
     suspend fun getPreset(spaceId: String): Result<MobileDashboardLayout> = runCatching {
         val r = service.getMobileLayoutPreset(spaceId)
         if (r.isSuccessful && r.body()?.success == true) {
-            r.body()!!.data ?: throw Exception("预置布局为空")
+            r.body()!!.data ?: failWith(R.string.err_dashboard_preset_empty)
         } else {
-            throw Exception(r.body()?.message ?: "获取预置布局失败")
+            r.failWith(R.string.err_dashboard_preset)
         }
     }
 
@@ -52,9 +53,9 @@ class MobileDashboardRepository {
         runCatching {
             val r = service.renderMobileDashboard(spaceId, MobileRenderRequest(widgets))
             if (r.isSuccessful && r.body()?.success == true) {
-                r.body()!!.data ?: throw Exception("取数结果为空")
+                r.body()!!.data ?: failWith(R.string.err_dashboard_data_empty)
             } else {
-                throw Exception(r.body()?.message ?: "取数失败")
+                r.failWith(R.string.err_dashboard_data)
             }
         }
 
@@ -70,9 +71,9 @@ class MobileDashboardRepository {
     ): Result<MobileDashboardLayout> = runCatching {
         val r = service.saveMobileLayout(spaceId, MobileDashboardLayout(version = version, widgets = widgets))
         if (r.isSuccessful && r.body()?.success == true) {
-            r.body()!!.data ?: throw Exception("保存布局返回为空")
+            r.body()!!.data ?: failWith(R.string.err_dashboard_save_empty)
         } else {
-            throw Exception(r.body()?.message ?: "保存布局失败")
+            r.failWith(R.string.err_dashboard_save)
         }
     }
 }

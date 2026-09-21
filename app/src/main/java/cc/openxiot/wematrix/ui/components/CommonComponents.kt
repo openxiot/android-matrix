@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.ui.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,11 +16,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
+import cc.openxiot.wematrix.R
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Gray500
+import coil.compose.AsyncImage
 
 @Composable
 fun AvatarImage(
@@ -82,9 +87,16 @@ fun LoadingIndicator(modifier: Modifier = Modifier) {
     }
 }
 
+/**
+ * 收 [UiText] 而不是 `String`：错误文案从仓库层一路传到这里才定语言 —— ViewModel 跨
+ * `recreate()` 存活，在那边定型的话，切完语言屏幕上那条错误还停在旧语言。
+ *
+ * 参数换成 `UiText` 之后，28 个调用点一个都不用改：它们传的本来就是状态里的
+ * `state.error`（`UiText?`，被 `!= null` 判定智能转换过）。
+ */
 @Composable
 fun ErrorMessage(
-    message: String,
+    message: UiText,
     onRetry: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
@@ -96,7 +108,7 @@ fun ErrorMessage(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = message,
+            text = message.asString(),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
@@ -104,7 +116,7 @@ fun ErrorMessage(
         if (onRetry != null) {
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(onClick = onRetry) {
-                Text("重试")
+                Text(stringResource(R.string.common_retry))
             }
         }
     }
@@ -198,19 +210,27 @@ fun OnlineIndicator(isOnline: Boolean, modifier: Modifier = Modifier) {
     )
 }
 
+/**
+ * 空间类型的中文名。**返回资源 id 而不是字符串**：这是个 1:1 的固定映射（规则 A），
+ * 语言由调用处的 `stringResource` 定。认不出的类型原样上屏 —— 那是服务端口径变了，
+ * 显示 `else` 分支比显示一句「未知类型」更容易定位。
+ */
+@StringRes
+private fun spaceTypeLabelRes(type: String): Int? = when (type.lowercase()) {
+    "site" -> R.string.space_type_site
+    "building" -> R.string.space_type_building
+    "floor" -> R.string.space_type_floor
+    "room" -> R.string.space_type_room
+    "zone" -> R.string.space_type_zone
+    "field" -> R.string.space_type_field
+    "workshop" -> R.string.space_type_workshop
+    "parking" -> R.string.space_type_parking
+    else -> null
+}
+
 @Composable
 fun SpaceTypeChip(type: String, modifier: Modifier = Modifier) {
-    val label = when (type.lowercase()) {
-        "site" -> "站点"
-        "building" -> "楼栋"
-        "floor" -> "楼层"
-        "room" -> "房间"
-        "zone" -> "区域"
-        "field" -> "场地"
-        "workshop" -> "车间"
-        "parking" -> "停车场"
-        else -> type
-    }
+    val label = spaceTypeLabelRes(type)?.let { stringResource(it) } ?: type
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(4.dp),
@@ -240,12 +260,12 @@ fun ConfirmDialog(
         containerColor = MaterialTheme.colorScheme.surface,
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text("确认", color = MaterialTheme.colorScheme.error)
+                Text(stringResource(R.string.common_confirm), color = MaterialTheme.colorScheme.error)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text(stringResource(R.string.common_cancel))
             }
         }
     )
@@ -279,12 +299,12 @@ fun InputDialog(
                 onClick = { onConfirm(text) },
                 enabled = text.isNotBlank()
             ) {
-                Text("确认")
+                Text(stringResource(R.string.common_confirm))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("取消")
+                Text(stringResource(R.string.common_cancel))
             }
         }
     )

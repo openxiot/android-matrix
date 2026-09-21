@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.Member
 import cc.openxiot.wematrix.data.api.Organization
 import cc.openxiot.wematrix.data.api.RetrofitClient
@@ -12,7 +13,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取组织列表失败")
+            response.failWith(R.string.err_org_list)
         }
     }
 
@@ -21,7 +22,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "获取组织信息失败")
+            response.failWith(R.string.err_org_info)
         }
     }
 
@@ -30,7 +31,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()?.data ?: Organization(id = id, name = name)
         } else {
-            throw Exception(response.body()?.message ?: "创建组织失败")
+            response.failWith(R.string.err_org_create)
         }
     }
 
@@ -39,7 +40,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()?.data ?: Organization(id = id, name = name)
         } else {
-            throw Exception(response.body()?.message ?: "更新组织失败")
+            response.failWith(R.string.err_org_update)
         }
     }
 
@@ -48,7 +49,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "删除组织失败")
+            response.failWith(R.string.err_org_delete)
         }
     }
 
@@ -57,7 +58,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "添加成员失败")
+            response.failWith(R.string.err_org_member_add)
         }
     }
 
@@ -66,7 +67,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "移除成员失败")
+            response.failWith(R.string.err_org_member_remove)
         }
     }
 
@@ -75,7 +76,7 @@ class OrganizationRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "更新成员失败")
+            response.failWith(R.string.err_org_member_update)
         }
     }
 }

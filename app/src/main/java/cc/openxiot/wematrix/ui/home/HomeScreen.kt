@@ -25,15 +25,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.core.SessionState
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.main.PageTitle
 import kotlinx.coroutines.launch
 
@@ -70,10 +73,10 @@ fun HomeScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         PageTitle(
-            title = "首页",
+            title = stringResource(R.string.tab_home),
             actions = {
                 if (canEdit && rootId != null) {
-                    TextButton(onClick = onEditDashboard) { Text("编辑") }
+                    TextButton(onClick = onEditDashboard) { Text(stringResource(R.string.common_edit)) }
                 }
             }
         )
@@ -83,7 +86,7 @@ fun HomeScreen(
                 onRetry = { dashboardViewModel.load(rootId) }
             )
 
-            rootId.isNullOrEmpty() -> EmptyState("请先在项目列表中选择一个项目")
+            rootId.isNullOrEmpty() -> EmptyState(stringResource(R.string.home_no_project))
 
             state.isLoading -> LoadingIndicator()
 
@@ -168,7 +171,7 @@ private fun ReadOnlyHost(
     DashboardWidgetHost(
         widget = widget,
         data = state.dataById[widget.id],
-        error = state.messageById[widget.id],
+        error = state.messageById[widget.id]?.asString(),
         modifier = modifier
     )
 }

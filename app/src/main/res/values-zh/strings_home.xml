@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  首页 / 看板。中文侧逐字照抄改造前的字面量，英文在 values/。
+
+  这一组里有两类「名字」要分清，别互相顶替：
+  - `home_card_default_*` 是**没有标题时卡片自己叫什么叫**（DashboardTypes.defaultTitleRes），
+    它会作为卡片标题显示在屏幕上；
+  - `home_metric_*` / `home_dimension_*` / `home_source_*` 是**下拉里那一项叫什么**，
+    只在编辑器里出现。
+  中文里「设备」既是默认卡名也是字段标签，英文里也一样，但它们是两件事 —— 故不合并 key。
+-->
+<resources>
+    <string name="home_no_project">请先在项目列表中选择一个项目</string>
+
+    <!-- 编辑页顶栏 -->
+    <string name="home_edit_layout_title">编辑布局</string>
+    <string name="home_reset_layout">恢复默认</string>
+    <string name="home_save_layout">保存布局</string>
+    <string name="home_discard_title">放弃修改？</string>
+    <string name="home_discard_message">还有未保存的改动，退出将丢失。</string>
+    <string name="home_dashboard_empty">还没有卡片，点下方「添加」加一张</string>
+    <string name="home_add_card">＋ 添加</string>
+    <string name="home_default_layout_loaded">已载入默认布局，仍需手动保存</string>
+
+    <!-- 加卡弹层 -->
+    <string name="home_add_card_title">添加卡片</string>
+    <string name="home_card_kind_stat">一个主数字：设备 / 服务 / 告警 / 故障</string>
+    <string name="home_card_kind_line">整点告警曲线，或一条服务字段曲线</string>
+    <string name="home_card_kind_distribution">按设备 / 服务 / 告警 / 故障分布</string>
+    <string name="home_card_kind_device">某台设备的某个属性</string>
+    <string name="home_card_kind_service">某个方法的一组字段</string>
+
+    <!-- 无标题时卡片显示什么名字 -->
+    <string name="home_card_default_stat">统计数字</string>
+    <string name="home_card_default_line">曲线图</string>
+    <string name="home_card_default_distribution">数据分布</string>
+    <string name="home_card_default_device">设备</string>
+    <string name="home_card_default_service">服务</string>
+    <string name="home_card_default_unknown">卡片</string>
+
+    <!-- 单卡编辑弹层 -->
+    <string name="home_edit_card_title">编辑 · %1$s</string>
+    <string name="home_card_title_label">卡片标题</string>
+    <string name="home_card_title_placeholder">留空则用默认名称</string>
+    <string name="home_size_label">尺寸</string>
+    <string name="home_size_full">整宽</string>
+    <string name="home_size_half">半宽</string>
+
+    <!-- 统计卡 -->
+    <string name="home_section_metric">统计指标</string>
+    <string name="home_metric_label">指标</string>
+    <string name="home_metric_devices_total">设备总数</string>
+    <string name="home_metric_devices_online">设备在线数</string>
+    <string name="home_metric_services_total">服务总数</string>
+    <string name="home_metric_alarms_today">今日告警</string>
+    <string name="home_metric_alarms_window">窗口内告警</string>
+    <string name="home_metric_failures_total">窗口内采集失败数</string>
+
+    <!-- 分布卡 -->
+    <string name="home_section_dimension">分布维度</string>
+    <string name="home_dimension_label">维度</string>
+    <string name="home_dimension_device_type">设备类型</string>
+    <string name="home_dimension_service_type">服务类型</string>
+    <string name="home_dimension_alarm_type">告警类型</string>
+    <string name="home_dimension_failure_type">采集失败类型</string>
+    <string name="home_slice_limit_label">显示片数</string>
+
+    <!-- 曲线卡 -->
+    <string name="home_section_source">数据源</string>
+    <string name="home_source_label">源</string>
+    <string name="home_source_alarm_curve">整点告警曲线</string>
+    <string name="home_source_service_field">一条服务字段曲线</string>
+    <string name="home_show_failure_shadow">显示采集失败竖线</string>
+    <string name="home_max_points_label">最大点数</string>
+
+    <!-- 服务 → 方法 → 字段 级联（曲线卡 / 服务卡共用） -->
+    <string name="home_section_service_field">服务 · 方法 · 字段</string>
+    <string name="home_service_placeholder">请选择服务</string>
+    <string name="home_service_unnamed">未命名服务</string>
+    <string name="home_function_placeholder">请选择方法</string>
+    <string name="home_function_fallback">方法 %1$d</string>
+    <string name="home_pick_service_first">先选服务</string>
+    <string name="home_show_unit">显示单位</string>
+
+    <!-- 设备卡 -->
+    <string name="home_section_device_prop">设备 · 属性</string>
+    <string name="home_device_placeholder">请选择设备</string>
+    <string name="home_prop_label">属性</string>
+    <string name="home_pick_device_first">先选设备</string>
+    <string name="home_prop_none">该型号暂无属性</string>
+    <string name="home_prop_placeholder">请选择属性</string>
+
+    <!-- 数字框：范围标红时的那句提示 -->
+    <string name="home_number_range_hint">%1$d ~ %2$d，留空不限制</string>
+
+    <!-- 时间窗口 -->
+    <string name="home_section_window">时间窗口</string>
+    <string name="home_window_last">最近</string>
+    <string name="home_window_custom">自定义</string>
+    <string name="home_pick_dates">选择起止日期</string>
+    <!-- 中文只有 other 一档（CLDR：zh 无 one） -->
+    <plurals name="home_window_days">
+        <item quantity="other">%1$d 天</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="other">%1$d 小时</item>
+    </plurals>
+
+    <!-- 卡片主体 -->
+    <string name="home_card_unknown_type">未知卡片类型</string>
+    <string name="home_empty_no_data">暂无数据</string>
+    <string name="home_empty_no_reading">尚未取到数</string>
+    <string name="home_empty_not_sampled">尚未采集</string>
+    <string name="home_sampled_at">采于 %1$s</string>
+    <string name="home_donut_other">其他</string>
+    <string name="home_unit_devices">台</string>
+    <string name="home_unit_services">个</string>
+</resources>

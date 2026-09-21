@@ -16,6 +16,7 @@ import cc.openxiot.wematrix.ui.organization.OrganizationDetailScreen
 import cc.openxiot.wematrix.ui.organization.OrganizationPickerScreen
 import cc.openxiot.wematrix.ui.profile.AboutScreen
 import cc.openxiot.wematrix.ui.profile.AccountScreen
+import cc.openxiot.wematrix.ui.profile.LanguageScreen
 import cc.openxiot.wematrix.ui.project.ProjectPickerScreen
 import cc.openxiot.wematrix.ui.project.ProjectMemberScreen
 import cc.openxiot.wematrix.ui.device.DeviceDetailScreen
@@ -62,6 +63,9 @@ sealed class Screen(val route: String) {
     data object ServiceHistory : Screen("service_history/{rootId}/{serviceId}")
     data object Account : Screen("account")
     data object About : Screen("about")
+
+    /** 语言设置（跟随系统 / 中文 / English）。切换会 recreate，故用页面而非对话框。 */
+    data object Language : Screen("language")
 
     /** 首页看板的二级编辑页。rootId 是当前项目根空间（鉴权作用域，同首页）。 */
     data object DashboardEdit : Screen("dashboard_edit/{rootId}")
@@ -122,6 +126,9 @@ fun AppNavigation(
                 },
                 onNavigateToAbout = {
                     navController.navigate(Screen.About.route) { launchSingleTop = true }
+                },
+                onNavigateToLanguage = {
+                    navController.navigate(Screen.Language.route) { launchSingleTop = true }
                 },
                 onNavigateToModbus = {
                     navController.navigate(Screen.ModbusList.route) { launchSingleTop = true }
@@ -355,6 +362,12 @@ fun AppNavigation(
 
         composable(Screen.About.route) {
             AboutScreen(
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Language.route) {
+            LanguageScreen(
                 onBack = { navController.popBackStack() }
             )
         }

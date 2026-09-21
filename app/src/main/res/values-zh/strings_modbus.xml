@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Modbus 点表 / 服务（中文）。中文这侧是逐字搬运原代码里的字面量，一字未改 ——
+  这样改造后中文界面与改造前逐字节一致，回归时任何中文变化都是 bug（见 StringsParityTest）。
+  英文那侧与 key 的划分理由见 values/strings_modbus.xml 的注释。
+-->
+<resources>
+    <!-- ===== 功能码 ===== -->
+    <string name="modbus_fc_read_coils">读线圈</string>
+    <string name="modbus_fc_read_discrete">读离散输入</string>
+    <string name="modbus_fc_read_holding">读保持寄存器</string>
+    <string name="modbus_fc_read_input">读输入寄存器</string>
+    <string name="modbus_fc_write_coil">写单个线圈</string>
+    <string name="modbus_fc_write_register">写单个寄存器</string>
+    <string name="modbus_fc_write_coils">写多个线圈</string>
+    <string name="modbus_fc_write_registers">写多个寄存器</string>
+
+    <!-- ===== 可见度 / 生命周期 ===== -->
+    <string name="modbus_visibility_public">公开</string>
+    <string name="modbus_visibility_private">私有</string>
+    <string name="modbus_lifecycle_development">开发中</string>
+    <string name="modbus_lifecycle_preview">预览</string>
+    <string name="modbus_lifecycle_released">已发布</string>
+    <string name="modbus_lifecycle_undefined">未定义</string>
+
+    <!-- ===== 写内容 ===== -->
+    <!-- 中文只有 other 一档（CLDR：zh 无 one） -->
+    <plurals name="modbus_write_coils">
+        <item quantity="other">%1$d 个线圈</item>
+    </plurals>
+    <plurals name="modbus_write_registers">
+        <item quantity="other">%1$d 个寄存器</item>
+    </plurals>
+
+    <!-- ===== 点表字段 ===== -->
+    <string name="modbus_field_start_address">起始地址</string>
+    <string name="modbus_field_logical_address">逻辑地址</string>
+    <string name="modbus_field_quantity">数量</string>
+    <string name="modbus_field_data_type">数据格式</string>
+    <string name="modbus_field_byte_order">字节序</string>
+    <string name="modbus_field_scale">缩放</string>
+    <string name="modbus_field_unit">单位</string>
+    <string name="modbus_field_write_content">写内容</string>
+
+    <!-- ===== 点表列表页 ===== -->
+    <string name="modbus_list_title">设备点表</string>
+    <string name="modbus_list_empty">暂无设备点表</string>
+    <string name="modbus_slave_address_value">从站地址 %1$s</string>
+    <string name="modbus_created_by_updated">创建者 %1$s · 更新 %2$s</string>
+    <string name="modbus_config_unnamed">未命名点表</string>
+
+    <!-- ===== 点表详情页 ===== -->
+    <string name="modbus_detail_title">设备点表详情</string>
+    <string name="modbus_command_count">功能码（%1$d）</string>
+    <string name="modbus_command_empty">暂无功能码</string>
+    <string name="modbus_label_manufacturer">厂家</string>
+    <string name="modbus_label_model">型号</string>
+    <string name="modbus_label_slave_address">从站地址</string>
+    <string name="modbus_label_description">描述</string>
+    <string name="modbus_label_visibility">可见度</string>
+    <string name="modbus_label_creator">创建者</string>
+    <string name="modbus_label_created_at">创建时间</string>
+    <string name="modbus_label_updated_at">最后更新</string>
+    <string name="modbus_bit_name_count">位名称（%1$d）</string>
+    <string name="modbus_bit_row">位 %1$d</string>
+    <string name="modbus_field_name_count">应答字段名（%1$d）</string>
+    <string name="modbus_field_row">字段 %1$d</string>
+    <string name="modbus_command_action">命令</string>
+
+    <!-- ===== 服务 ===== -->
+    <string name="modbus_service_unnamed">未命名服务</string>
+    <!-- 设备详情页服务卡标题后的条数角标「（3）」 -->
+    <string name="modbus_service_count">（%1$d）</string>
+    <string name="modbus_service_empty">该设备下还没有服务</string>
+    <plurals name="modbus_service_function_count">
+        <item quantity="other">%1$d 个方法</item>
+    </plurals>
+
+    <string name="modbus_service_detail_title">服务详情</string>
+    <string name="modbus_service_method_count">方法（%1$d）</string>
+    <string name="modbus_service_method_empty">这份服务里还没有方法</string>
+    <string name="modbus_service_label_device">依赖设备</string>
+    <string name="modbus_service_label_coordinate">调用坐标</string>
+    <string name="modbus_service_label_source">源点表</string>
+    <string name="modbus_service_label_version">定义版本</string>
+    <string name="modbus_service_label_updater">更新者</string>
+    <string name="modbus_service_coordinate">#%1$s · #%2$s（piid %3$s）</string>
+
+    <string name="modbus_service_invoke">调用</string>
+    <string name="modbus_service_invoke_result">调用结果</string>
+    <string name="modbus_service_raw_response">原始返回</string>
+    <string name="modbus_service_response_fields">应答字段</string>
+    <string name="modbus_service_response_bits">应答位清单</string>
+    <string name="modbus_service_polling">自动轮询</string>
+    <string name="modbus_service_polling_enabled">启用</string>
+    <string name="modbus_service_polling_disabled">停用</string>
+    <string name="modbus_service_interval">调用周期</string>
+    <plurals name="modbus_service_interval_seconds">
+        <item quantity="other">%1$d 秒</item>
+    </plurals>
+    <string name="modbus_service_write_hint">写方法：应答为请求回显，没有返回字段（设备已收到该帧）</string>
+    <string name="modbus_service_write_short">设备已收到该帧</string>
+    <string name="modbus_service_alarm_count">告警配置（%1$d）</string>
+    <string name="modbus_service_alarm_disabled">%1$s（已停用）</string>
+    <string name="modbus_service_alarm_separator">、</string>
+    <string name="modbus_service_field_separator">，</string>
+
+    <!-- ===== 时间范围预设 ===== -->
+    <string name="modbus_range_hour1">最近 1 小时</string>
+    <string name="modbus_range_hour24">最近 24 小时</string>
+    <string name="modbus_range_day7">最近 7 天</string>
+    <string name="modbus_range_custom">自定义</string>
+
+    <!-- ===== 采集失败类型 ===== -->
+    <string name="modbus_failure_no_response">设备无应答</string>
+    <string name="modbus_failure_slave_exception">异常应答</string>
+    <string name="modbus_failure_device_error">依赖设备报错</string>
+    <string name="modbus_failure_crc_mismatch">CRC 校验失败</string>
+    <string name="modbus_failure_frame_mismatch">报文长度不符</string>
+    <string name="modbus_failure_invalid_frame">报文非法</string>
+    <string name="modbus_failure_field_definition">字段定义错误</string>
+    <string name="modbus_failure_config">服务配置错误</string>
+    <string name="modbus_failure_transport">方法调用失败</string>
+    <!-- 远端异常码后缀，`设备无应答 (3)`。两侧逐字相同：只有标点与占位符，没有可翻的词 -->
+    <string name="modbus_failure_with_code">%1$s (%2$d)</string>
+    <string name="modbus_failure_unknown">未知失败</string>
+
+    <!-- ===== 阈值告警的词汇 ===== -->
+    <string name="modbus_alarm_level_info">提示</string>
+    <string name="modbus_alarm_level_warn">警告</string>
+    <string name="modbus_alarm_level_critical">严重</string>
+    <string name="modbus_alarm_op_gt">超过</string>
+    <string name="modbus_alarm_op_gte">达到</string>
+    <string name="modbus_alarm_op_lt">低于</string>
+    <string name="modbus_alarm_op_lte">低于等于</string>
+    <string name="modbus_alarm_op_eq">等于</string>
+    <string name="modbus_alarm_condition">%1$s %2$s</string>
+    <string name="modbus_alarm_close_value">值恢复</string>
+    <string name="modbus_alarm_close_definition">定义变更</string>
+    <string name="modbus_alarm_close_superseded">被取代</string>
+
+    <!-- ===== 帧 ===== -->
+    <string name="modbus_frame_incomplete">命令数据不完整，无法生成请求帧</string>
+    <string name="modbus_frame_exception_codes">01 非法功能码 / 02 非法数据地址 / 03 非法数据值 / 04 从站设备故障</string>
+    <string name="modbus_frame_request">请求帧</string>
+    <string name="modbus_frame_response">应答帧</string>
+    <string name="modbus_frame_exception">异常应答</string>
+    <string name="modbus_frame_function">功能码</string>
+    <string name="modbus_frame_coil_state">线圈状态</string>
+    <string name="modbus_frame_register_value">寄存器值</string>
+    <string name="modbus_frame_byte_count">字节数</string>
+    <string name="modbus_frame_coil_data">线圈数据</string>
+    <string name="modbus_frame_register_data">寄存器数据</string>
+    <string name="modbus_frame_exception_code">异常码</string>
+    <string name="modbus_frame_awaiting_device">待设备返回</string>
+    <string name="modbus_frame_data_area">数据区</string>
+    <string name="modbus_frame_exception_suffix">%1$s + 异常</string>
+    <string name="modbus_frame_notes_request">完整请求帧，含从站地址与 CRC16</string>
+    <string name="modbus_frame_notes_response">完整应答帧，含从站地址与 CRC16</string>
+    <string name="modbus_frame_notes_sample">数据区为示例值，真实数据由设备返回</string>
+    <string name="modbus_frame_notes_exception">功能码最高位置 1 表示异常；异常码与 CRC16 由设备返回，此处以 ?? 占位</string>
+    <string name="modbus_frame_byte_total">共 %1$d 字节</string>
+    <string name="modbus_frame_copy">复制</string>
+    <string name="modbus_frame_structure">帧结构解析</string>
+    <string name="modbus_frame_clipboard_label">Modbus 帧</string>
+</resources>

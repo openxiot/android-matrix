@@ -12,9 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import cc.openxiot.wematrix.AppLocale
 import cc.openxiot.wematrix.AppState
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.ui.components.AvatarImage
 import cc.openxiot.wematrix.ui.main.PageTitle
@@ -30,12 +33,13 @@ fun ProfileScreen(
     onNavigateToAbout: () -> Unit = {},
     onNavigateToModbus: () -> Unit = {},
     onNavigateToAlarm: () -> Unit = {},
-    onNavigateToHistory: () -> Unit = {}
+    onNavigateToHistory: () -> Unit = {},
+    onNavigateToLanguage: () -> Unit = {}
 ) {
     val tokenManager = WeMatrixApp.instance.tokenManager
 
     Column(modifier = Modifier.fillMaxSize()) {
-        PageTitle(title = "我")
+        PageTitle(title = stringResource(R.string.tab_profile))
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -68,7 +72,7 @@ fun ProfileScreen(
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = tokenManager.username ?: "未登录",
+                                text = tokenManager.username ?: stringResource(R.string.profile_not_logged_in),
                                 style = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold
                             )
@@ -90,10 +94,10 @@ fun ProfileScreen(
             // Current organization（组织未启用时不显示，对齐 webapp 隐藏"组织"菜单）
             if (organizationEnabled) {
                 item {
-                    SectionHeader("当前组织")
+                    SectionHeader(stringResource(R.string.profile_current_org))
                     SettingsCard(
-                        title = currentOrgName ?: "未选择组织",
-                        subtitle = "选择组织后方可选择项目",
+                        title = currentOrgName ?: stringResource(R.string.profile_no_org_selected),
+                        subtitle = stringResource(R.string.profile_org_subtitle),
                         icon = Icons.Default.Group,
                         onClick = onNavigateToOrgPicker
                     )
@@ -102,13 +106,13 @@ fun ProfileScreen(
 
             // Current project（始终显示；组织禁用时也可直接进入项目选择）
             item {
-                SectionHeader("当前项目")
+                SectionHeader(stringResource(R.string.profile_current_project))
                 SettingsCard(
-                    title = currentProjectName ?: "未选择项目",
+                    title = currentProjectName ?: stringResource(R.string.profile_no_project_selected),
                     subtitle = when {
-                        !organizationEnabled -> "请选择项目"
-                        currentOrgName != null -> "点击切换项目"
-                        else -> "请先选择组织"
+                        !organizationEnabled -> stringResource(R.string.profile_project_subtitle_pick)
+                        currentOrgName != null -> stringResource(R.string.profile_project_subtitle_switch)
+                        else -> stringResource(R.string.profile_project_subtitle_org_first)
                     },
                     icon = Icons.Default.Business,
                     onClick = {
@@ -121,13 +125,22 @@ fun ProfileScreen(
             // Settings
             item {
                 Spacer(Modifier.height(8.dp))
-                SectionHeader("设置")
+                SectionHeader(stringResource(R.string.profile_section_settings))
                 SettingsCard(
-                    title = if (AppState.isDarkMode) "深色模式" else "浅色模式",
-                    subtitle = "点击切换主题",
+                    title = stringResource(
+                        if (AppState.isDarkMode) R.string.profile_dark_mode else R.string.profile_light_mode
+                    ),
+                    subtitle = stringResource(R.string.profile_theme_subtitle),
                     icon = if (AppState.isDarkMode) Icons.Default.DarkMode else Icons.Default.LightMode,
                     showChevron = false,
                     onClick = { AppState.toggleDarkMode(tokenManager) }
+                )
+                // 副标题显示当前选择，与上面深色模式那张卡同一个路子（标题说是什么，副标题说现在是什么）
+                SettingsCard(
+                    title = stringResource(R.string.profile_language_title),
+                    subtitle = stringResource(languageLabelRes(AppLocale.current)),
+                    icon = Icons.Default.Language,
+                    onClick = onNavigateToLanguage
                 )
             }
 
@@ -137,30 +150,30 @@ fun ProfileScreen(
             // 告警与历史在 web 的侧边栏上没有这个门，故照样不设
             item {
                 Spacer(Modifier.height(8.dp))
-                SectionHeader("其他")
+                SectionHeader(stringResource(R.string.profile_section_other))
                 if (organizationEnabled) {
                     SettingsCard(
-                        title = "设备点表",
-                        subtitle = "Modbus 点表配置（只读）",
+                        title = stringResource(R.string.profile_modbus_title),
+                        subtitle = stringResource(R.string.profile_modbus_subtitle),
                         icon = Icons.Default.TableChart,
                         onClick = onNavigateToModbus
                     )
                 }
                 SettingsCard(
-                    title = "告警",
-                    subtitle = "Modbus 告警记录与处理",
+                    title = stringResource(R.string.profile_alarm_title),
+                    subtitle = stringResource(R.string.profile_alarm_subtitle),
                     icon = Icons.Default.Notifications,
                     onClick = onNavigateToAlarm
                 )
                 SettingsCard(
-                    title = "历史",
-                    subtitle = "采集历史与曲线",
+                    title = stringResource(R.string.profile_history_title),
+                    subtitle = stringResource(R.string.profile_history_subtitle),
                     icon = Icons.Default.History,
                     onClick = onNavigateToHistory
                 )
                 SettingsCard(
-                    title = "关于",
-                    subtitle = "应用信息与版本",
+                    title = stringResource(R.string.about_title),
+                    subtitle = stringResource(R.string.profile_about_subtitle),
                     icon = Icons.Default.Info,
                     onClick = onNavigateToAbout
                 )

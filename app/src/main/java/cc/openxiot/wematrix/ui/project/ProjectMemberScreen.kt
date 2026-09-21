@@ -23,8 +23,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ProjectMember
 import cc.openxiot.wematrix.ui.components.AvatarImage
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
@@ -73,10 +75,10 @@ fun ProjectMemberScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = uiState.projectName ?: "项目成员",
+                        text = uiState.projectName ?: stringResource(R.string.project_members_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1,
@@ -92,7 +94,7 @@ fun ProjectMemberScreen(
                     onClick = { viewModel.showAddMemberDialog() },
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    Icon(Icons.Default.PersonAdd, contentDescription = "添加成员")
+                    Icon(Icons.Default.PersonAdd, contentDescription = stringResource(R.string.common_member_add))
                 }
             }
         }
@@ -105,7 +107,7 @@ fun ProjectMemberScreen(
                     onRetry = { viewModel.load(rootId) }
                 )
                 uiState.members.isEmpty() -> EmptyState(
-                    message = "暂无成员，点击右下角按钮添加"
+                    message = stringResource(R.string.project_members_empty)
                 )
                 else -> {
                     LazyColumn(
@@ -138,7 +140,7 @@ fun ProjectMemberScreen(
 
         AlertDialog(
             onDismissRequest = { viewModel.hideAddMemberDialog() },
-            title = { Text("添加成员") },
+            title = { Text(stringResource(R.string.common_member_add)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -146,26 +148,26 @@ fun ProjectMemberScreen(
                     OutlinedTextField(
                         value = memberId,
                         onValueChange = { memberId = it },
-                        label = { Text("用户ID") },
-                        placeholder = { Text("用户的账号 ID") },
+                        label = { Text(stringResource(R.string.project_user_id)) },
+                        placeholder = { Text(stringResource(R.string.project_user_id_placeholder)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("角色", style = MaterialTheme.typography.labelLarge)
+                    Text(stringResource(R.string.common_role_label), style = MaterialTheme.typography.labelLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         RadioButton(
                             selected = role == "member",
                             onClick = { role = "member" }
                         )
-                        Text("普通成员", modifier = Modifier.clickable { role = "member" })
+                        Text(stringResource(R.string.common_role_member_option), modifier = Modifier.clickable { role = "member" })
                         Spacer(modifier = Modifier.width(24.dp))
                         RadioButton(
                             selected = role == "admin",
                             onClick = { role = "admin" }
                         )
-                        Text("管理员", modifier = Modifier.clickable { role = "admin" })
+                        Text(stringResource(R.string.common_role_admin), modifier = Modifier.clickable { role = "admin" })
                     }
                 }
             },
@@ -175,10 +177,10 @@ fun ProjectMemberScreen(
                         viewModel.addMember(rootId, memberId.trim(), role)
                     },
                     enabled = memberId.isNotBlank()
-                ) { Text("添加") }
+                ) { Text(stringResource(R.string.common_add)) }
             },
             dismissButton = {
-                TextButton(onClick = { viewModel.hideAddMemberDialog() }) { Text("取消") }
+                TextButton(onClick = { viewModel.hideAddMemberDialog() }) { Text(stringResource(R.string.common_cancel)) }
             }
         )
     }
@@ -188,7 +190,7 @@ fun ProjectMemberScreen(
         var newRole by remember(member.userId) { mutableStateOf(member.role) }
         AlertDialog(
             onDismissRequest = { viewModel.hideChangeRoleDialog() },
-            title = { Text("调整角色 - ${member.name ?: member.userId}") },
+            title = { Text(stringResource(R.string.project_role_adjust_title, member.name ?: member.userId ?: stringResource(R.string.common_unnamed))) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -198,14 +200,14 @@ fun ProjectMemberScreen(
                             selected = newRole == "member",
                             onClick = { newRole = "member" }
                         )
-                        Text("普通成员", modifier = Modifier.clickable { newRole = "member" })
+                        Text(stringResource(R.string.common_role_member_option), modifier = Modifier.clickable { newRole = "member" })
                     }
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                         RadioButton(
                             selected = newRole == "admin",
                             onClick = { newRole = "admin" }
                         )
-                        Text("管理员", modifier = Modifier.clickable { newRole = "admin" })
+                        Text(stringResource(R.string.common_role_admin), modifier = Modifier.clickable { newRole = "admin" })
                     }
                 }
             },
@@ -213,10 +215,10 @@ fun ProjectMemberScreen(
                 TextButton(
                     onClick = { viewModel.updateRole(rootId, member, newRole ?: "member") },
                     enabled = newRole != member.role
-                ) { Text("确认") }
+                ) { Text(stringResource(R.string.common_confirm)) }
             },
             dismissButton = {
-                TextButton(onClick = { viewModel.hideChangeRoleDialog() }) { Text("取消") }
+                TextButton(onClick = { viewModel.hideChangeRoleDialog() }) { Text(stringResource(R.string.common_cancel)) }
             }
         )
     }
@@ -226,14 +228,14 @@ fun ProjectMemberScreen(
         var remark by remember(member.userId) { mutableStateOf(member.remark.orEmpty()) }
         AlertDialog(
             onDismissRequest = { viewModel.hideEditRemarkDialog() },
-            title = { Text("编辑备注 - ${member.name ?: member.userId}") },
+            title = { Text(stringResource(R.string.project_remark_title, member.name ?: member.userId ?: stringResource(R.string.common_unnamed))) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = remark,
                     onValueChange = { remark = it },
-                    placeholder = { Text("填写备注") },
+                    placeholder = { Text(stringResource(R.string.project_remark_label)) },
                     minLines = 3,
                     maxLines = 5,
                     modifier = Modifier.fillMaxWidth()
@@ -242,10 +244,10 @@ fun ProjectMemberScreen(
             confirmButton = {
                 TextButton(
                     onClick = { viewModel.updateRemark(rootId, member, remark) }
-                ) { Text("确认") }
+                ) { Text(stringResource(R.string.common_confirm)) }
             },
             dismissButton = {
-                TextButton(onClick = { viewModel.hideEditRemarkDialog() }) { Text("取消") }
+                TextButton(onClick = { viewModel.hideEditRemarkDialog() }) { Text(stringResource(R.string.common_cancel)) }
             }
         )
     }
@@ -253,8 +255,8 @@ fun ProjectMemberScreen(
     // 移除成员确认（管理员）
     uiState.removeTarget?.let { member ->
         ConfirmDialog(
-            title = "移除成员",
-            message = "确定要移除「${member.name ?: member.userId}」吗？",
+            title = stringResource(R.string.common_member_remove),
+            message = stringResource(R.string.project_remove_confirm, member.name ?: member.userId ?: stringResource(R.string.common_unnamed)),
             onConfirm = { member.userId?.let { viewModel.removeMember(rootId, it) } },
             onDismiss = { viewModel.hideRemoveConfirm() }
         )
@@ -263,8 +265,8 @@ fun ProjectMemberScreen(
     // 退出项目确认（本人）
     if (uiState.showLeaveConfirm) {
         ConfirmDialog(
-            title = "退出项目",
-            message = "确定要退出这个项目吗？退出后将无法访问该项目。",
+            title = stringResource(R.string.project_exit),
+            message = stringResource(R.string.project_exit_confirm),
             onConfirm = { viewModel.leaveProject(rootId) },
             onDismiss = { viewModel.hideLeaveConfirm() }
         )
@@ -327,7 +329,8 @@ private fun ProjectMemberCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        if (canManage) "移除成员" else "退出项目",
+                        if (canManage) stringResource(R.string.common_member_remove)
+                        else stringResource(R.string.project_exit),
                         color = if (isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -363,7 +366,7 @@ private fun ProjectMemberCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "调整角色",
+                        stringResource(R.string.project_role_adjust),
                         color = if (!isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -444,7 +447,7 @@ private fun ProjectMemberCard(
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = member.name ?: member.userId ?: "未命名",
+                                text = member.name ?: member.userId ?: stringResource(R.string.common_unnamed),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Medium,
                                 maxLines = 1,
@@ -453,7 +456,7 @@ private fun ProjectMemberCard(
                             if (isSelf) {
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "我",
+                                    text = stringResource(R.string.common_me),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -471,7 +474,7 @@ private fun ProjectMemberCard(
                         if (canManage || !member.remark.isNullOrBlank()) {
                             Spacer(modifier = Modifier.height(2.dp))
                             Text(
-                                text = if (member.remark.isNullOrBlank()) "点击添加备注"
+                                text = if (member.remark.isNullOrBlank()) stringResource(R.string.project_remark_hint)
                                        else member.remark,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -496,8 +499,8 @@ private fun ProjectMemberCard(
 @Composable
 private fun ProjectRoleBadge(role: String?) {
     val (label, containerColor, contentColor) = when (role) {
-        "admin" -> Triple("管理员", MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
-        else -> Triple("成员", MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondaryContainer)
+        "admin" -> Triple(stringResource(R.string.common_role_admin), MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
+        else -> Triple(stringResource(R.string.common_role_member), MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondaryContainer)
     }
     Surface(
         shape = RoundedCornerShape(6.dp),

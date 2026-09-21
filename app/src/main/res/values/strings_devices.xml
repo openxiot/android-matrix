@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  设备列表。
+
+  `devices_count` 用 plurals 而不是 string：英文 1 台是 "1 device"，2 台是 "2 devices"，
+  写成一条 string 必然在某一侧出错。中文只有 other 一档（CLDR：zh 无 one）。
+-->
+<resources>
+    <string name="devices_select_project_first">Pick a project under Profile first</string>
+    <string name="devices_empty">No devices yet</string>
+    <string name="devices_unknown">Unknown device</string>
+
+    <plurals name="devices_count">
+        <item quantity="one">%1$d device</item>
+        <item quantity="other">%1$d devices</item>
+    </plurals>
+</resources>

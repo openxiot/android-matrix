@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.ui.main
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.DevicesOther
@@ -12,14 +13,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import cc.openxiot.wematrix.WeMatrixApp
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.ui.core.SessionState
 
-enum class BottomTab(val label: String, val icon: ImageVector) {
-    Home("首页", Icons.Default.Home),
-    Projects("项目", Icons.Default.Business),
-    Devices("设备", Icons.Default.DevicesOther),
-    Products("产品", Icons.Default.Inventory2),
-    Profile("我", Icons.Default.Person)
+/**
+ * 底部 tab。带的是**资源 id 不是字符串**：枚举是 `MainViewModel` 的静态成员，比组合活得久，
+ * 存字符串就等于把语言钉在类加载那一刻 —— 切完语言底部还是一排旧语言。
+ */
+enum class BottomTab(@StringRes val labelRes: Int, val icon: ImageVector) {
+    Home(R.string.tab_home, Icons.Default.Home),
+    Projects(R.string.tab_project, Icons.Default.Business),
+    Devices(R.string.tab_device, Icons.Default.DevicesOther),
+    Products(R.string.tab_product, Icons.Default.Inventory2),
+    Profile(R.string.tab_profile, Icons.Default.Person)
 }
 
 class MainViewModel : ViewModel() {

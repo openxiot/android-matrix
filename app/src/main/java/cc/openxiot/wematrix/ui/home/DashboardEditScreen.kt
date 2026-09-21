@@ -53,17 +53,20 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.MobileDashboardWidget
 import cc.openxiot.wematrix.data.repository.ProductSpecRepository
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Green
 import kotlin.math.abs
 
@@ -141,23 +144,23 @@ fun DashboardEditScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = requestExit) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = "编辑布局",
+                        text = stringResource(R.string.home_edit_layout_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f)
                     )
                     // 恢复默认只改草稿，仍需手动保存
                     TextButton(onClick = { dashboardViewModel.restoreDefault(rootId) }, enabled = !state.saving) {
-                        Text("恢复默认")
+                        Text(stringResource(R.string.home_reset_layout))
                     }
                     TextButton(
                         onClick = { dashboardViewModel.save(rootId) },
                         enabled = state.dirty && !state.saving
                     ) {
-                        Text("保存布局")
+                        Text(stringResource(R.string.home_save_layout))
                     }
                 }
             }
@@ -184,8 +187,8 @@ fun DashboardEditScreen(
 
     if (confirmExit) {
         ConfirmDialog(
-            title = "放弃修改？",
-            message = "还有未保存的改动，退出将丢失。",
+            title = stringResource(R.string.home_discard_title),
+            message = stringResource(R.string.home_discard_message),
             onConfirm = onBack,
             onDismiss = { confirmExit = false }
         )
@@ -365,7 +368,7 @@ private fun EditingContent(
     Column(Modifier.fillMaxSize().padding(contentPadding)) {
         state.message?.let { msg ->
             Text(
-                text = msg,
+                text = msg.asString(),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
@@ -396,7 +399,7 @@ private fun EditingContent(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 if (displayRows.isEmpty()) {
-                    item(key = "empty") { EmptyState("还没有卡片，点下方「添加」加一张") }
+                    item(key = "empty") { EmptyState(stringResource(R.string.home_dashboard_empty)) }
                 }
                 itemsIndexed(displayRows, key = { i, _ -> rowKeyList[i] }) { _, row ->
                     // animateItem：让位时行按新 key 平滑滑开/合拢；拖拽手势在最外层，不因这些行的 key 变化而中断
@@ -443,7 +446,7 @@ private fun EditingContent(
                         DashboardWidgetHost(
                             widget = dragged,
                             data = state.previewById[dragged.id],
-                            error = state.previewMessageById[dragged.id],
+                            error = state.previewMessageById[dragged.id]?.asString(),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 // 手上这张卡整圈画**实线**框（静置卡是细虚线、落点框是绿虚线，
@@ -584,7 +587,7 @@ private fun CellHost(
     DashboardWidgetHost(
         widget = widget,
         data = state.previewById[widget.id],
-        error = state.previewMessageById[widget.id],
+        error = state.previewMessageById[widget.id]?.asString(),
         // 卡始终包一层 fillMaxWidth：DashboardWidgetHost 的 Card 默认包内容宽，
         // 直接传槽宽 modifier 会让半宽卡缩成内容宽（≈ 1/4），必须让它填满槽位。
         modifier = modifier
@@ -659,7 +662,7 @@ private fun AddCardButton(onClick: () -> Unit) {
     ) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Text(
-                text = "＋ 添加",
+                text = stringResource(R.string.home_add_card),
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant

@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -28,6 +29,7 @@ import cc.openxiot.wematrix.BuildConfig
 import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.UpdateState
 import cc.openxiot.wematrix.data.repository.UpdateInfo
+import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Gray500
 import cc.openxiot.wematrix.ui.theme.Orange
 import cc.openxiot.wematrix.util.ApkInstaller
@@ -67,8 +69,10 @@ fun AboutScreen(
         if (state is UpdateState.Ready) dialogVisible = true
     }
 
-    val toast: (String) -> Unit = { message ->
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    // 取 `LocalContext`（= 套过 locale 的 Activity）而不是 `applicationContext`：
+    // 后者是 Application 那份，要它跟 UI 一致得指望 WeMatrixApp 也包了 baseContext
+    val toast: (Int) -> Unit = { resId ->
+        Toast.makeText(context, context.getString(resId), Toast.LENGTH_SHORT).show()
     }
 
     val install: () -> Unit = {
@@ -79,11 +83,11 @@ fun AboutScreen(
             // 用户不必退出页面重进。
             !canInstall -> {
                 if (!ApkInstaller.openInstallPermissionSettings(context)) {
-                    toast("打不开系统的「安装未知应用」设置，请在系统设置里手动允许")
+                    toast(R.string.about_install_settings_failed)
                 }
             }
             !ApkInstaller.install(context, ready.file) ->
-                toast("没有找到可用的安装程序，安装包已保存在应用目录中")
+                toast(R.string.about_no_installer)
             else -> dialogVisible = false
         }
     }
@@ -103,10 +107,13 @@ fun AboutScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.common_back)
+                        )
                     }
                     Text(
-                        text = "关于",
+                        text = stringResource(R.string.about_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -143,7 +150,7 @@ fun AboutScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-                    text = "矩阵",
+                    text = stringResource(R.string.app_name),
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.Bold
                 )
@@ -153,7 +160,7 @@ fun AboutScreen(
                 // 走 BuildConfig 而不是 getPackageInfo：少一次跨进程查询与两个 try/catch，
                 // 值与已安装的包是同一个（都在构建期定下来，-P 覆盖也走同一条路）。
                 Text(
-                    text = "版本 ${BuildConfig.VERSION_NAME}",
+                    text = stringResource(R.string.about_version, BuildConfig.VERSION_NAME),
                     style = MaterialTheme.typography.bodyLarge,
                     color = Gray500
                 )
@@ -169,7 +176,7 @@ fun AboutScreen(
                 Spacer(modifier = Modifier.height(32.dp))
 
                 Text(
-                    text = "物联网设备管理与监控平台",
+                    text = stringResource(R.string.about_tagline),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
@@ -230,15 +237,16 @@ private fun UpdateSection(
     // 下载中不要禁掉按钮却又不给出口 —— 那两个态是「忙」，其余一律可点。
     val busy = state is UpdateState.Checking || state is UpdateState.Downloading
     val label = when (state) {
-        is UpdateState.Idle -> "检查更新"
-        is UpdateState.Checking -> "正在检查…"
-        is UpdateState.UpToDate -> "已是最新版本"
-        is UpdateState.Available -> "立即更新"
-        is UpdateState.CheckFailed -> "重试"
-        is UpdateState.Downloading ->
-            state.progress?.let { "正在下载 ${(it * 100).toInt()}%" } ?: "正在下载…"
-        is UpdateState.Ready -> "立即安装"
-        is UpdateState.DownloadFailed -> "重试下载"
+        is UpdateState.Idle -> stringResource(R.string.about_check_update)
+        is UpdateState.Checking -> stringResource(R.string.about_checking)
+        is UpdateState.UpToDate -> stringResource(R.string.about_up_to_date)
+        is UpdateState.Available -> stringResource(R.string.about_update_now)
+        is UpdateState.CheckFailed -> stringResource(R.string.common_retry)
+        is UpdateState.Downloading -> state.progress
+            ?.let { stringResource(R.string.about_downloading_percent, (it * 100).toInt()) }
+            ?: stringResource(R.string.about_downloading)
+        is UpdateState.Ready -> stringResource(R.string.about_install_now)
+        is UpdateState.DownloadFailed -> stringResource(R.string.about_retry_download)
     }
 
     Column(
@@ -288,14 +296,18 @@ private fun UpdateSection(
         val hint = when {
             // 两个失败态都带原因，直接显示在按钮下面：比 Toast 强，不会被错过，
             // 而且重试之后能自己消失
-            state is UpdateState.CheckFailed -> state.message
-            state is UpdateState.DownloadFailed -> state.message
-            state is UpdateState.Ready && !canInstall -> "需要先允许本应用安装未知来源的应用"
-            state is UpdateState.Downloading -> "可切换页面，请勿结束应用"
+            state is UpdateState.CheckFailed -> state.message.asString()
+            state is UpdateState.DownloadFailed -> state.message.asString()
+            state is UpdateState.Ready && !canInstall ->
+                stringResource(R.string.about_need_install_permission)
+            state is UpdateState.Downloading -> stringResource(R.string.about_keep_app_alive)
             metered && (state is UpdateState.Available || state is UpdateState.Downloading) -> {
                 val size = (state as? UpdateState.Available)?.info?.size
                     ?: (state as? UpdateState.Downloading)?.info?.size
-                "当前是移动网络" + (size?.let { "，安装包约 $it" } ?: "，下载会消耗较多流量")
+                // 拆成**两条**资源而不是「前半句 + 后续片段」拼接：英文里「约 54 MB」
+                // 与「费流量」两块的位置跟中文不一样，按中文语序拼出来是残句。
+                size?.let { stringResource(R.string.about_metered_size, it) }
+                    ?: stringResource(R.string.about_metered)
             }
             else -> null
         }
@@ -317,6 +329,23 @@ private fun UpdateSection(
 }
 
 /**
+ * 按**当前应用语言**挑一份更新说明。
+ *
+ * 挑在这里而不是 `UpdateRepository`：`AppUpdate` 是 object、跨 `recreate()` 存活，
+ * 在那边挑就等于把语言钉在「查清单那一刻」—— 用户切完语言回到关于页，说明还是旧语言，
+ * 而屏幕上别的字都变了。两份说明都留着，挑是界面层的事。
+ *
+ * 判据取 `LocalContext` 的 configuration，也就是 `attachBaseContext` 塞进去的那份；
+ * **不是 `Locale.getDefault()`** —— 后者刻意保持跟随系统（改它会波及小数点分隔符等
+ * 格式化行为，是另一件事）。
+ */
+@Composable
+private fun notesFor(info: UpdateInfo): List<String> {
+    val language = LocalContext.current.resources.configuration.locales.get(0)?.language
+    return if (language == "zh") info.notesZh else info.notesEn
+}
+
+/**
  * 新版本说明 / 安装确认。没有复用 [cc.openxiot.wematrix.ui.components.ConfirmDialog]：
  * 那个把「确认/取消」写死，且确认键染成 error 红 —— 那是给删除类操作用的，
  * 「更新」用红色按钮会把人吓退。
@@ -330,7 +359,12 @@ private fun UpdateDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (ready) "安装更新" else "发现新版本 ${info.version}") },
+        title = {
+            Text(
+                if (ready) stringResource(R.string.about_install_dialog_title)
+                else stringResource(R.string.about_new_version_found, info.version)
+            )
+        },
         shape = MaterialTheme.shapes.medium,
         containerColor = MaterialTheme.colorScheme.surface,
         text = {
@@ -343,7 +377,7 @@ private fun UpdateDialog(
             ) {
                 if (ready) {
                     Text(
-                        text = "安装包已下载完成，点「安装」后交给系统安装器继续。",
+                        text = stringResource(R.string.about_ready_hint),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 } else {
@@ -358,13 +392,15 @@ private fun UpdateDialog(
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                     }
-                    if (info.notes.isEmpty()) {
+                    val notes = notesFor(info)
+                    if (notes.isEmpty()) {
                         Text(
-                            text = "本次更新没有提供说明。",
+                            text = stringResource(R.string.about_update_notes_empty),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     } else {
-                        info.notes.forEach { note ->
+                        notes.forEach { note ->
+                            // 「· 」是排版用的项目符号，不是待翻译文案，故不进资源
                             Text(
                                 text = "· $note",
                                 style = MaterialTheme.typography.bodyMedium,
@@ -377,12 +413,18 @@ private fun UpdateDialog(
         },
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text(if (ready) "安装" else "立即更新")
+                Text(
+                    if (ready) stringResource(R.string.about_install)
+                    else stringResource(R.string.about_update_now)
+                )
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(if (ready) "稍后" else "取消")
+                Text(
+                    if (ready) stringResource(R.string.about_later)
+                    else stringResource(R.string.common_cancel)
+                )
             }
         }
     )

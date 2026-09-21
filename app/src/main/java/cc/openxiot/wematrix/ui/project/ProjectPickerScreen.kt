@@ -25,9 +25,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
@@ -76,10 +78,10 @@ fun ProjectPickerScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = "当前项目",
+                        text = stringResource(R.string.project_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -91,7 +93,7 @@ fun ProjectPickerScreen(
                 onClick = { showCreateDialog = true },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "创建项目")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.project_create_title))
             }
         }
     ) { padding ->
@@ -110,7 +112,7 @@ fun ProjectPickerScreen(
                     onRetry = { viewModel.loadRootSpaces() }
                 )
                 state.rootSpaces.isEmpty() -> EmptyState(
-                    message = "暂无项目，点击右下角按钮创建"
+                    message = stringResource(R.string.project_empty)
                 )
                 else -> {
                     LazyColumn(
@@ -143,15 +145,15 @@ fun ProjectPickerScreen(
         var projectName by remember { mutableStateOf("") }
         AlertDialog(
             onDismissRequest = { showCreateDialog = false },
-            title = { Text("创建项目") },
+            title = { Text(stringResource(R.string.project_create_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = projectName,
                     onValueChange = { projectName = it },
-                    label = { Text("项目名称") },
-                    placeholder = { Text("请输入项目名称") },
+                    label = { Text(stringResource(R.string.project_name_label)) },
+                    placeholder = { Text(stringResource(R.string.project_name_placeholder)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -169,12 +171,12 @@ fun ProjectPickerScreen(
                     },
                     enabled = projectName.isNotBlank()
                 ) {
-                    Text("创建")
+                    Text(stringResource(R.string.common_create))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCreateDialog = false }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -183,8 +185,8 @@ fun ProjectPickerScreen(
     // Delete confirm dialog
     showDeleteConfirm?.let { spaceId ->
         ConfirmDialog(
-            title = "删除项目",
-            message = "确定要删除这个项目吗？如果项目下有空间数据，将无法删除。",
+            title = stringResource(R.string.project_delete_title),
+            message = stringResource(R.string.project_delete_confirm),
             onConfirm = {
                 viewModel.deleteSpace(spaceId, null)
                 showDeleteConfirm = null
@@ -198,14 +200,14 @@ fun ProjectPickerScreen(
         var newName by remember { mutableStateOf(space.name ?: "") }
         AlertDialog(
             onDismissRequest = { renameTarget = null },
-            title = { Text("重命名项目") },
+            title = { Text(stringResource(R.string.project_rename_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = newName,
                     onValueChange = { newName = it },
-                    label = { Text("项目名称") },
+                    label = { Text(stringResource(R.string.project_name_label)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -218,12 +220,12 @@ fun ProjectPickerScreen(
                     },
                     enabled = newName.isNotBlank()
                 ) {
-                    Text("确认")
+                    Text(stringResource(R.string.common_confirm))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { renameTarget = null }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -285,7 +287,7 @@ private fun ProjectSwipeCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "右滑删除",
+                        stringResource(R.string.project_swipe_delete),
                         color = if (isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -321,7 +323,7 @@ private fun ProjectSwipeCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "修改名称",
+                        stringResource(R.string.common_rename_action),
                         color = if (!isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -401,13 +403,13 @@ private fun ProjectSwipeCard(
                     Spacer(modifier = Modifier.width(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = space.name ?: "未命名",
+                            text = space.name ?: stringResource(R.string.common_unnamed),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Medium
                         )
                         if (space.type != null) {
                             Text(
-                                text = "类型: ${space.type}",
+                                text = stringResource(R.string.project_type_label, space.type),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -427,13 +429,13 @@ private fun ProjectSwipeCard(
                     ) {
                         Icon(
                             Icons.Default.Groups,
-                            contentDescription = "成员",
+                            contentDescription = stringResource(R.string.project_members_label),
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(20.dp)
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
-                            text = "成员",
+                            text = stringResource(R.string.project_members_label),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.primary,
                             fontSize = 10.sp
@@ -449,7 +451,7 @@ private fun ProjectSwipeCard(
                 ) {
                     Icon(
                         Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                        contentDescription = "详情",
+                        contentDescription = stringResource(R.string.common_detail),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )

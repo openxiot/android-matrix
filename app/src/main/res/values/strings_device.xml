@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Device detail / device control. This is **English** (the default), Chinese is in values-zh/.
+
+  Online / Offline, Protocol and Unknown product live in strings.xml as common_* — the
+  history screens, the dashboard editor and the products screen each use one of them,
+  and it is the same sentence.
+-->
+<resources>
+    <string name="device_detail_title">Device</string>
+    <string name="device_operation_title">Device control</string>
+    <string name="device_not_found">Device not found</string>
+
+    <string name="device_id_label">Device ID</string>
+    <string name="device_type_label">Device type</string>
+    <string name="device_online_label">Status</string>
+    <string name="device_last_online_label">Last online</string>
+    <string name="device_last_offline_label">Last offline</string>
+    <string name="device_space_label">Space</string>
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  项目（project）与空间（space）相关。这里是**英文**（默认语言），中文在 values-zh/。
+
+  术语：project = 项目，space = 空间，member = 成员，note/remark = 备注。
+  英文按英文重写，不逐字直译（「确定要删除这个项目吗？如果项目下有空间数据，将无法删除。」
+  → "A project that still has spaces can’t be deleted."）。
+-->
+<resources>
+    <string name="project_title">Current project</string>
+    <string name="project_manage_title">Manage projects</string>
+
+    <string name="project_empty">No projects yet — tap + to create one</string>
+
+    <string name="project_create_title">Create project</string>
+    <string name="project_name_label">Project name</string>
+    <string name="project_name_placeholder">Enter a project name</string>
+
+    <string name="project_rename_title">Rename project</string>
+    <string name="project_rename_action">Rename</string>
+    <string name="project_delete_title">Delete project</string>
+    <string name="project_delete_confirm">Delete this project? A project that still has spaces can’t be deleted.</string>
+    <string name="project_swipe_delete">Swipe to delete</string>
+
+    <!-- %1$s 是服务端原样下发的类型值，刻意不翻，只翻前缀 -->
+    <string name="project_type_label">Type: %1$s</string>
+
+    <!-- Project members -->
+    <string name="project_members_title">Project members</string>
+    <string name="project_members_empty">No members yet — tap + to add one</string>
+    <string name="project_members_label">Members</string>
+    <string name="project_user_id">User ID</string>
+    <string name="project_user_id_placeholder">The user’s account ID</string>
+    <string name="project_remark_hint">Tap to add a note</string>
+    <string name="project_remark_title">Edit note — %1$s</string>
+    <string name="project_remark_label">Note</string>
+    <string name="project_role_adjust">Change role</string>
+    <string name="project_role_adjust_title">Change role — %1$s</string>
+    <string name="project_remove_confirm">Remove “%1$s”?</string>
+    <string name="project_exit">Leave project</string>
+    <string name="project_exit_confirm">Leave this project? You’ll lose access to it.</string>
+
+    <string name="project_device_added">Device added</string>
+    <string name="project_device_moved">Device moved</string>
+
+    <!-- Spaces -->
+    <string name="space_manage_title">Manage spaces</string>
+    <string name="space_add">Add space</string>
+    <string name="space_add_child">Add sub-space</string>
+    <string name="space_add_device">Add device</string>
+    <string name="space_name_label">Space name</string>
+    <string name="space_name_placeholder">Enter a name</string>
+    <string name="space_type_label">Space type</string>
+    <string name="space_empty">No space data</string>
+    <string name="space_empty_editable">Add a space to get started</string>
+    <string name="space_empty_readonly">This project has no spaces or devices yet</string>
+    <string name="space_delete_title">Delete space</string>
+    <string name="space_delete_confirm">Delete this space? A space that still has sub-spaces can’t be deleted.</string>
+    <string name="space_move_title">Move to space</string>
+    <string name="space_move_action">Move</string>
+    <string name="space_device_adding">Adding device…</string>
+    <string name="space_device_waiting">Waiting… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d device</item>
+        <item quantity="other">%1$d devices</item>
+    </plurals>
+</resources>

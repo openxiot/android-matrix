@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  仓库层与更新通道的错误文案（中文）。
+
+  中文这侧是**逐字搬运**原 throw 里的文案，一字未改 —— 这样改造后中文界面与改造前
+  逐字节一致，回归时任何中文变化都是 bug（见 StringsParityTest）。
+-->
+<resources>
+    <!-- 空间 -->
+    <string name="err_space_list">获取空间列表失败</string>
+    <string name="err_space_info">获取空间信息失败</string>
+    <string name="err_space_tree">获取空间树失败</string>
+    <string name="err_space_graph">获取空间图失败</string>
+    <string name="err_space_create">创建空间失败</string>
+    <string name="err_space_update">更新空间失败</string>
+    <string name="err_space_delete">删除空间失败</string>
+    <string name="err_space_member_list">获取项目成员失败</string>
+    <string name="err_space_member_add">添加成员失败</string>
+    <string name="err_space_member_role">调整角色失败</string>
+    <string name="err_space_member_note">更新备注失败</string>
+    <string name="err_space_member_remove">移除成员失败</string>
+
+    <!-- 设备 -->
+    <string name="err_device_list">获取设备列表失败</string>
+    <string name="err_device_add">添加设备失败</string>
+    <string name="err_device_move">移动设备失败</string>
+    <string name="err_device_imei_not_found">未查询到该 IMEI（%1$s）对应的设备</string>
+    <string name="err_device_did_lookup">根据 IMEI 查询 DID 失败</string>
+    <string name="err_project_device_add">添加设备失败: %1$s</string>
+    <string name="err_project_device_move">移动设备失败: %1$s</string>
+
+    <!-- 组织 -->
+    <string name="err_org_list">获取组织列表失败</string>
+    <string name="err_org_info">获取组织信息失败</string>
+    <string name="err_org_create">创建组织失败</string>
+    <string name="err_org_update">更新组织失败</string>
+    <string name="err_org_delete">删除组织失败</string>
+    <string name="err_org_member_add">添加成员失败</string>
+    <string name="err_org_member_remove">移除成员失败</string>
+    <string name="err_org_member_update">更新成员失败</string>
+
+    <!-- 登录与平台 -->
+    <string name="err_auth_login">登录失败</string>
+    <string name="err_auth_platform_info">获取平台信息失败</string>
+    <string name="err_auth_platform_list">获取平台列表失败</string>
+
+    <!-- 点表 / 设备点表服务 -->
+    <string name="err_modbus_point_table">获取设备点表失败</string>
+    <string name="err_modbus_point_table_public">获取公开设备点表失败</string>
+    <string name="err_modbus_point_table_missing">设备点表不存在</string>
+    <string name="err_modbus_service_get">获取服务失败</string>
+    <string name="err_modbus_service_list">获取服务列表失败</string>
+    <string name="err_modbus_service_missing">服务不存在</string>
+    <string name="err_modbus_service_invoke">调用失败</string>
+
+    <!-- 采集历史 -->
+    <string name="err_sampling_status">获取采集状态失败</string>
+    <string name="err_sampling_data">获取采集数据失败</string>
+    <string name="err_sampling_fault">获取采集异常失败</string>
+    <string name="err_sampling_status_empty">采集状态为空</string>
+    <string name="err_sampling_data_empty">采集数据为空</string>
+    <string name="err_sampling_fault_empty">采集异常为空</string>
+    <string name="err_history_service_status">%1$s: %2$s</string>
+
+    <!-- 告警 -->
+    <string name="err_alarm_list">获取告警清单失败</string>
+    <string name="err_alarm_action">处理告警失败</string>
+    <string name="err_alarm_missing">告警不存在</string>
+    <string name="err_alarm_empty">告警数据为空</string>
+
+    <!-- 看板 -->
+    <string name="err_dashboard_layout">获取看板布局失败</string>
+    <string name="err_dashboard_layout_empty">看板布局为空</string>
+    <string name="err_dashboard_preset">获取预置布局失败</string>
+    <string name="err_dashboard_preset_empty">预置布局为空</string>
+    <string name="err_dashboard_data">取数失败</string>
+    <string name="err_dashboard_data_empty">取数结果为空</string>
+    <string name="err_dashboard_save">保存布局失败</string>
+    <string name="err_dashboard_save_empty">保存布局返回为空</string>
+    <string name="err_dashboard_catalog">获取候选清单失败</string>
+    <string name="err_dashboard_catalog_empty">候选清单为空</string>
+    <string name="err_config_incomplete">配置不完整</string>
+
+    <string name="err_product_list">获取产品列表失败</string>
+    <string name="err_product_detail">获取产品详情失败</string>
+    <string name="err_dashboard_restore">恢复默认失败</string>
+
+    <!-- 设置 / 统计 -->
+    <string name="err_settings_get">获取用户设置失败</string>
+    <string name="err_settings_update">更新用户设置失败</string>
+    <string name="err_account_update">更新设置失败</string>
+    <string name="err_stats_get">获取统计数据失败</string>
+    <string name="err_stats_empty">统计数据为空</string>
+
+    <!-- 通用 -->
+    <string name="err_webview_load">页面加载失败</string>
+    <string name="err_response_empty">返回数据为空</string>
+
+    <!-- 更新 -->
+    <string name="err_update_check">检查更新失败</string>
+    <string name="err_update_download">下载失败</string>
+    <string name="err_update_manifest_http">获取版本信息失败（HTTP %1$d）</string>
+    <string name="err_update_download_http">下载失败（HTTP %1$d）</string>
+    <string name="err_update_manifest_empty">版本信息为空</string>
+    <string name="err_update_manifest_blank">无法识别版本信息（官网写的是空）</string>
+    <string name="err_update_manifest_format">版本信息格式不正确</string>
+    <string name="err_update_manifest_unrecognized">无法识别版本信息（官网写的是「%1$s」）</string>
+    <string name="err_update_no_url">版本信息里没有下载地址</string>
+    <string name="err_update_latest_alias">下载地址指向 latest 别名，不是 %1$s 对应的安装包</string>
+    <string name="err_update_not_newer">官网上的包（versionCode %1$d）不比本机新</string>
+    <string name="err_update_save_failed">安装包保存失败</string>
+    <string name="err_update_no_space">存储空间不足，安装包需要约 %1$d MB</string>
+    <string name="err_update_unparsable">安装包无法解析（下载不完整或不是 APK）</string>
+    <string name="err_update_checksum">安装包校验值不匹配，可能下载损坏</string>
+    <string name="err_update_unsigned">安装包没有签名信息</string>
+    <string name="err_update_signature_unexpected">安装包的签名不符合预期</string>
+    <string name="err_update_signature_mismatch">安装包签名与本机不一致，装了也覆盖不了</string>
+    <string name="err_update_cert_unreadable">读不到本机的签名证书</string>
+</resources>

@@ -1,11 +1,15 @@
 package cc.openxiot.wematrix.ui.login
 
 import androidx.lifecycle.ViewModel
+import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
 import cc.openxiot.wematrix.AppState
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.repository.AuthRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +20,7 @@ import kotlinx.coroutines.launch
 data class LoginUiState(
     val isLoading: Boolean = false,
     val isLoggedIn: Boolean = false,
-    val error: String? = null
+    val error: UiText? = null
 )
 
 class LoginViewModel : ViewModel() {
@@ -48,17 +52,21 @@ class LoginViewModel : ViewModel() {
             BaseResp.ErrCode.ERR_OK -> {
                 val code = resp.code
                 if (code.isNullOrEmpty()) {
-                    _uiState.value = _uiState.value.copy(error = "未获取到授权码")
+                    _uiState.value = _uiState.value.copy(error = UiText.Res(R.string.login_err_no_code))
                 } else {
                     exchangeWeixinCode(code)
                 }
             }
             BaseResp.ErrCode.ERR_USER_CANCEL -> {
-                _uiState.value = _uiState.value.copy(error = "已取消微信授权")
+                _uiState.value = _uiState.value.copy(error = UiText.Res(R.string.login_err_cancelled))
             }
             else -> {
+                // 微信 SDK 自己的 errStr 是英文技术串，有就原样上屏（对齐服务端 message 的口径）；
+                // 没有才用我们的资源，把错误码嵌进去。
+                val detail = resp.errStr
                 _uiState.value = _uiState.value.copy(
-                    error = resp.errStr ?: "微信授权失败(${resp.errCode})"
+                    error = detail?.let { UiText.Raw(it) }
+                        ?: UiText.Res(R.string.login_err_wechat, listOf(resp.errCode))
                 )
             }
         }
@@ -77,7 +85,7 @@ class LoginViewModel : ViewModel() {
                     if (token.isNullOrEmpty()) {
                         _uiState.value = _uiState.value.copy(
                             isLoading = false,
-                            error = "登录失败:未返回 token"
+                            error = UiText.Res(R.string.login_err_no_token)
                         )
                         return@launch
                     }
@@ -93,7 +101,7 @@ class LoginViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = e.message ?: "登录失败"
+                        error = e.toUiText(R.string.err_auth_login)
                     )
                 }
         }
@@ -112,7 +120,7 @@ class LoginViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(error = null)
     }
 
-    fun showError(message: String) {
-        _uiState.value = _uiState.value.copy(error = message)
+    fun showError(@StringRes resId: Int) {
+        _uiState.value = _uiState.value.copy(error = UiText.Res(resId))
     }
 }

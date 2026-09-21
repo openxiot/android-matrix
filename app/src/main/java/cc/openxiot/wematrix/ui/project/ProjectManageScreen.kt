@@ -13,8 +13,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
@@ -39,10 +41,10 @@ fun ProjectManageScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("项目管理", fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.project_manage_title), fontWeight = FontWeight.Bold) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -55,7 +57,7 @@ fun ProjectManageScreen(
                 onClick = { showCreateDialog = true },
                 containerColor = MaterialTheme.colorScheme.primary
             ) {
-                Icon(Icons.Default.Add, contentDescription = "创建项目")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.project_create_title))
             }
         }
     ) { padding ->
@@ -66,7 +68,7 @@ fun ProjectManageScreen(
                     message = state.error!!,
                     onRetry = { viewModel.loadRootSpaces() }
                 )
-                state.rootSpaces.isEmpty() -> EmptyState(message = "暂无项目，点击右下角按钮创建")
+                state.rootSpaces.isEmpty() -> EmptyState(message = stringResource(R.string.project_empty))
                 else -> {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -74,7 +76,7 @@ fun ProjectManageScreen(
                     ) {
                         items(state.rootSpaces, key = { it.id ?: it.name ?: "" }) { space ->
                             ProjectManageCard(
-                                name = space.name ?: "未命名",
+                                name = space.name ?: stringResource(R.string.common_unnamed),
                                 type = space.type,
                                 isSelected = space.id != null && space.id == state.currentRootId,
                                 onSelect = { space.id?.let { onEditProject(it) } },
@@ -94,15 +96,15 @@ fun ProjectManageScreen(
         var projectName by remember { mutableStateOf("") }
         AlertDialog(
             onDismissRequest = { showCreateDialog = false },
-            title = { Text("创建项目") },
+            title = { Text(stringResource(R.string.project_create_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = projectName,
                     onValueChange = { projectName = it },
-                    label = { Text("项目名称") },
-                    placeholder = { Text("请输入项目名称") },
+                    label = { Text(stringResource(R.string.project_name_label)) },
+                    placeholder = { Text(stringResource(R.string.project_name_placeholder)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -120,12 +122,12 @@ fun ProjectManageScreen(
                     },
                     enabled = projectName.isNotBlank()
                 ) {
-                    Text("创建")
+                    Text(stringResource(R.string.common_create))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showCreateDialog = false }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -136,14 +138,14 @@ fun ProjectManageScreen(
         var newName by remember { mutableStateOf(currentName) }
         AlertDialog(
             onDismissRequest = { renameTarget = null },
-            title = { Text("重命名项目") },
+            title = { Text(stringResource(R.string.project_rename_title)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
                 OutlinedTextField(
                     value = newName,
                     onValueChange = { newName = it },
-                    label = { Text("项目名称") },
+                    label = { Text(stringResource(R.string.project_name_label)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -156,12 +158,12 @@ fun ProjectManageScreen(
                     },
                     enabled = newName.isNotBlank()
                 ) {
-                    Text("确认")
+                    Text(stringResource(R.string.common_confirm))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { renameTarget = null }) {
-                    Text("取消")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -170,8 +172,8 @@ fun ProjectManageScreen(
     // Delete confirm
     showDeleteConfirm?.let { spaceId ->
         ConfirmDialog(
-            title = "删除项目",
-            message = "确定要删除这个项目吗？如果项目下有空间数据，将无法删除。",
+            title = stringResource(R.string.project_delete_title),
+            message = stringResource(R.string.project_delete_confirm),
             onConfirm = {
                 viewModel.deleteSpace(spaceId, null)
                 showDeleteConfirm = null
@@ -233,19 +235,19 @@ private fun ProjectManageCard(
                 )
                 if (type != null) {
                     Text(
-                        text = "类型: ${type}",
+                        text = stringResource(R.string.project_type_label, type),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
             IconButton(onClick = onRename) {
-                Icon(Icons.Default.Edit, contentDescription = "重命名")
+                Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.project_rename_action))
             }
             IconButton(onClick = onDelete) {
                 Icon(
                     Icons.Default.DeleteOutline,
-                    contentDescription = "删除",
+                    contentDescription = stringResource(R.string.common_delete),
                     tint = MaterialTheme.colorScheme.error
                 )
             }

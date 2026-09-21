@@ -1,4 +1,6 @@
 package cc.openxiot.wematrix.ui.home
+import androidx.annotation.StringRes
+import cc.openxiot.wematrix.R
 
 /**
  * 移动端看板的类型常量与默认值，对齐后端 `DashboardWidgetStructureValidator` 与
@@ -77,27 +79,39 @@ object DashboardTypes {
         else -> emptyMap() // device / service：无可默认，进编辑器让用户从 catalog 选
     }
 
-    /** 无标题/无 titleKey 时的类型默认名（中文，对齐 web 词典）。 */
-    fun defaultTitle(type: String?): String = when (type) {
-        STAT -> "统计数字"
-        LINE -> "曲线图"
-        DISTRIBUTION -> "数据分布"
-        DEVICE -> "设备"
-        SERVICE -> "服务"
-        else -> "卡片"
+    /**
+     * 无标题/无 titleKey 时的类型默认名（对齐 web 词典）。
+     *
+     * 返回**资源 id** 而不是 String：这个对象是纯 Kotlin，没有 Context 也不该有 ——
+     * 它有一份逐条钉死行为的单测，塞个 Context 进去那些测试就跑不动了。
+     * 语言由调用方 `stringResource(...)` 注入（规则 A：1:1 的固定标签返回 `@StringRes`）。
+     */
+    @StringRes
+    fun defaultTitleRes(type: String?): Int = when (type) {
+        STAT -> R.string.home_card_default_stat
+        LINE -> R.string.home_card_default_line
+        DISTRIBUTION -> R.string.home_card_default_distribution
+        DEVICE -> R.string.home_card_default_device
+        SERVICE -> R.string.home_card_default_service
+        else -> R.string.home_card_default_unknown
     }
 
     /**
-     * 标题解析：`title`（用户数据，原样显示）→ `titleKey` → 类型默认名。
+     * 标题解析：`title`（用户数据，原样显示）→ `titleKey` → [fallback]。
+     *
+     * 这里**只管优先级，不碰语言**：只有最后一档需要文案，而文案要 Context。拆开的两个理由 ——
+     * 调用方本来就在 composable 里（[DashboardWidgetHost]），三合一的话它得先弄到一个 Context
+     * 才知道自己要显示什么；而且「类型 → 默认名」这件事只有 [defaultTitleRes] 一个出口，
+     * 两个函数各管一段，编辑器那两处也能直接用上第三档。
      *
      * 服务端预置（MobileDashboardPresetLayouts）的 titleKey **就是中文展示文本本身**
      * （如「设备总量」）—— 与 web 那套「key 即原文、按语言表翻译」是同构的，只是本端单语言、
      * 无处翻译，故直接原样返回。
      */
-    fun resolveTitle(widgetTitle: String?, titleKey: String?, type: String?): String {
+    fun resolveTitle(widgetTitle: String?, titleKey: String?, fallback: String): String {
         val user = widgetTitle?.takeIf { it.isNotBlank() }
         val preset = titleKey?.takeIf { it.isNotBlank() }
-        return user ?: preset ?: defaultTitle(type)
+        return user ?: preset ?: fallback
     }
 
     // ---- config 改写 ----

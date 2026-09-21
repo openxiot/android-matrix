@@ -23,8 +23,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.Member
 import cc.openxiot.wematrix.data.api.Organization
 import cc.openxiot.wematrix.ui.components.AvatarImage
@@ -64,10 +66,10 @@ fun OrganizationDetailScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                     Text(
-                        text = uiState.organization?.name ?: "组织详情",
+                        text = uiState.organization?.name ?: stringResource(R.string.org_detail_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         maxLines = 1,
@@ -83,7 +85,7 @@ fun OrganizationDetailScreen(
                     onClick = { viewModel.showAddMemberDialog() },
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    Icon(Icons.Default.PersonAdd, contentDescription = "添加成员")
+                    Icon(Icons.Default.PersonAdd, contentDescription = stringResource(R.string.common_member_add))
                 }
             }
         }
@@ -112,7 +114,7 @@ fun OrganizationDetailScreen(
 
                         if (uiState.members.isEmpty() && !uiState.isLoading) {
                             item {
-                                EmptyState(message = "暂无成员")
+                                EmptyState(message = stringResource(R.string.org_members_empty))
                             }
                         }
                     }
@@ -129,7 +131,7 @@ fun OrganizationDetailScreen(
 
         AlertDialog(
             onDismissRequest = { viewModel.hideAddMemberDialog() },
-            title = { Text("添加成员") },
+            title = { Text(stringResource(R.string.common_member_add)) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -137,8 +139,8 @@ fun OrganizationDetailScreen(
                     OutlinedTextField(
                         value = developerId,
                         onValueChange = { developerId = it },
-                        label = { Text("开发者ID") },
-                        placeholder = { Text("用户的 developerId") },
+                        label = { Text(stringResource(R.string.org_member_developer_id)) },
+                        placeholder = { Text(stringResource(R.string.org_member_developer_id_placeholder)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -146,26 +148,26 @@ fun OrganizationDetailScreen(
                     OutlinedTextField(
                         value = memberName,
                         onValueChange = { memberName = it },
-                        label = { Text("显示名称") },
-                        placeholder = { Text("可选") },
+                        label = { Text(stringResource(R.string.org_member_name_label)) },
+                        placeholder = { Text(stringResource(R.string.org_member_name_placeholder)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text("角色", style = MaterialTheme.typography.labelLarge)
+                    Text(stringResource(R.string.common_role_label), style = MaterialTheme.typography.labelLarge)
                     Spacer(modifier = Modifier.height(8.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         RadioButton(
                             selected = role == "member",
                             onClick = { role = "member" }
                         )
-                        Text("普通成员", modifier = Modifier.clickable { role = "member" })
+                        Text(stringResource(R.string.common_role_member_option), modifier = Modifier.clickable { role = "member" })
                         Spacer(modifier = Modifier.width(24.dp))
                         RadioButton(
                             selected = role == "admin",
                             onClick = { role = "admin" }
                         )
-                        Text("管理员", modifier = Modifier.clickable { role = "admin" })
+                        Text(stringResource(R.string.common_role_admin), modifier = Modifier.clickable { role = "admin" })
                     }
                 }
             },
@@ -180,10 +182,10 @@ fun OrganizationDetailScreen(
                         )
                     },
                     enabled = developerId.isNotBlank()
-                ) { Text("添加") }
+                ) { Text(stringResource(R.string.common_add)) }
             },
             dismissButton = {
-                TextButton(onClick = { viewModel.hideAddMemberDialog() }) { Text("取消") }
+                TextButton(onClick = { viewModel.hideAddMemberDialog() }) { Text(stringResource(R.string.common_cancel)) }
             }
         )
     }
@@ -193,7 +195,7 @@ fun OrganizationDetailScreen(
         var newRole by remember(member.developerId) { mutableStateOf(member.role) }
         AlertDialog(
             onDismissRequest = { viewModel.hideChangeRoleDialog() },
-            title = { Text("更改角色 - ${member.name ?: member.developerId}") },
+            title = { Text(stringResource(R.string.org_change_role_title, member.name ?: member.developerId ?: stringResource(R.string.common_unnamed))) },
             shape = MaterialTheme.shapes.medium,
             containerColor = MaterialTheme.colorScheme.surface,
             text = {
@@ -203,14 +205,14 @@ fun OrganizationDetailScreen(
                             selected = newRole == "member",
                             onClick = { newRole = "member" }
                         )
-                        Text("普通成员", modifier = Modifier.clickable { newRole = "member" })
+                        Text(stringResource(R.string.common_role_member_option), modifier = Modifier.clickable { newRole = "member" })
                     }
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
                         RadioButton(
                             selected = newRole == "admin",
                             onClick = { newRole = "admin" }
                         )
-                        Text("管理员", modifier = Modifier.clickable { newRole = "admin" })
+                        Text(stringResource(R.string.common_role_admin), modifier = Modifier.clickable { newRole = "admin" })
                     }
                 }
             },
@@ -225,10 +227,10 @@ fun OrganizationDetailScreen(
                         )
                     },
                     enabled = newRole != member.role
-                ) { Text("确认") }
+                ) { Text(stringResource(R.string.common_confirm)) }
             },
             dismissButton = {
-                TextButton(onClick = { viewModel.hideChangeRoleDialog() }) { Text("取消") }
+                TextButton(onClick = { viewModel.hideChangeRoleDialog() }) { Text(stringResource(R.string.common_cancel)) }
             }
         )
     }
@@ -236,8 +238,8 @@ fun OrganizationDetailScreen(
     // Remove confirm dialog
     uiState.removeTarget?.let { member ->
         ConfirmDialog(
-            title = "移除成员",
-            message = "确定要移除「${member.name ?: member.developerId}」吗？",
+            title = stringResource(R.string.common_member_remove),
+            message = stringResource(R.string.org_remove_confirm, member.name ?: member.developerId ?: stringResource(R.string.common_unnamed)),
             onConfirm = { viewModel.removeMember(orgId, member.developerId ?: "") },
             onDismiss = { viewModel.hideRemoveConfirm() }
         )
@@ -298,7 +300,7 @@ private fun MemberCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "移除成员",
+                        stringResource(R.string.common_member_remove),
                         color = if (isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -334,7 +336,7 @@ private fun MemberCard(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "更改角色",
+                        stringResource(R.string.org_change_role),
                         color = if (!isRightSwipe && isPastTwoThirds) Color.White
                                 else MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         style = MaterialTheme.typography.labelLarge,
@@ -404,7 +406,7 @@ private fun MemberCard(
                     Column(modifier = Modifier.weight(1f)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                text = member.name ?: member.developerId ?: "未命名",
+                                text = member.name ?: member.developerId ?: stringResource(R.string.common_unnamed),
                                 style = MaterialTheme.typography.titleSmall,
                                 fontWeight = FontWeight.Medium,
                                 maxLines = 1,
@@ -413,7 +415,7 @@ private fun MemberCard(
                             if (isSelf) {
                                 Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = "我",
+                                    text = stringResource(R.string.common_me),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -444,8 +446,8 @@ private fun MemberCard(
 @Composable
 private fun RoleBadge(role: String?) {
     val (label, containerColor, contentColor) = when (role) {
-        "admin" -> Triple("管理员", MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
-        else -> Triple("成员", MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondaryContainer)
+        "admin" -> Triple(stringResource(R.string.common_role_admin), MaterialTheme.colorScheme.tertiaryContainer, MaterialTheme.colorScheme.onTertiaryContainer)
+        else -> Triple(stringResource(R.string.common_role_member), MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondaryContainer)
     }
     Surface(
         shape = RoundedCornerShape(6.dp),

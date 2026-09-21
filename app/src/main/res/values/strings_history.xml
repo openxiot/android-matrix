@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Sampling history — the project-level page and the single-service page. This is
+  **English** (the default), Chinese is in values-zh/.
+
+  `history_*` is shared by both pages (both live in ui/history), `service_history_*`
+  is only the single-service one. They are two files in one module, so nothing here
+  needs to be promoted to common_* — the split is just so a reader can tell which
+  page a string belongs to.
+
+  「采集异常」 is deliberately two keys with the same Chinese: the section heading
+  (history_faults_section) and the 64dp label column inside a service card
+  (history_faults_label). English needs a short word for the second one, and the
+  same Chinese mapping to two English strings is the same call already made for
+  common_handle / alarm_handled_label.
+-->
+<resources>
+    <string name="history_title">History</string>
+
+    <!-- Project-level page -->
+    <string name="history_section_overview">Service overview</string>
+    <string name="history_no_services">No Modbus services in this project yet</string>
+    <string name="history_service_count_label">Services</string>
+    <string name="history_device_count_label">Devices</string>
+    <string name="history_sampled_at_label">Last sampled</string>
+    <string name="history_function_count_label">Functions</string>
+
+    <!-- Both pages -->
+    <string name="history_faults_section">Sampling faults</string>
+    <string name="history_faults_label">Fault</string>
+    <string name="history_no_faults">No sampling faults in this period</string>
+    <string name="history_no_data">No data sampled in this period</string>
+    <string name="history_field_label">Fields</string>
+
+    <!-- Single-service page -->
+    <!--
+      Row count. The quantity is passed twice: once to pick the bucket, once to fill
+      %1$d — same as every other plural here.
+    -->
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Sampled data (%1$d row)</item>
+        <item quantity="other">Sampled data (%1$d rows)</item>
+    </plurals>
+    <string name="service_history_all_functions">All functions</string>
+    <string name="service_history_field_selection">Fields %1$d / %2$d</string>
+    <!-- 「异常」 here is a remote status code we do not know the meaning of (a DTU vendor
+         code), so it stays a bare number rather than being guessed at. -->
+    <string name="service_history_fault_chip">Fault %1$s × %2$d</string>
+    <string name="service_history_no_curve">No field of this service can be charted</string>
+    <string name="service_history_no_curve_for_function">No chartable field in this function</string>
+    <string name="service_history_no_fields_selected">No fields selected</string>
+    <string name="service_history_failure_hint">Vertical lines mark failed reads</string>
+    <string name="service_history_downsampled_hint">Many data points — downsampled by interval (the value is that interval’s average; the parentheses show min–max)</string>
+    <string name="service_history_keepalive">Held</string>
+    <string name="service_history_view_table">Table</string>
+    <string name="service_history_view_chart">Chart</string>
+</resources>

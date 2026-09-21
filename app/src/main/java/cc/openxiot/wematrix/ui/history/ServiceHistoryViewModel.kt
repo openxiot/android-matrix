@@ -1,7 +1,9 @@
 package cc.openxiot.wematrix.ui.history
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.DeviceEntity
 import cc.openxiot.wematrix.data.api.ModbusHistoryCurrent
 import cc.openxiot.wematrix.data.api.ModbusHistoryFailures
@@ -12,6 +14,8 @@ import cc.openxiot.wematrix.data.api.ModbusServiceFunction
 import cc.openxiot.wematrix.data.repository.DeviceRepository
 import cc.openxiot.wematrix.data.repository.ModbusHistoryRepository
 import cc.openxiot.wematrix.data.repository.ModbusServiceRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import cc.openxiot.wematrix.ui.modbus.RangePreset
 import cc.openxiot.wematrix.ui.modbus.historyPointText
 import cc.openxiot.wematrix.ui.modbus.historyTimeText
@@ -43,10 +47,15 @@ private const val FAILURE_LIMIT = 200
  */
 private const val DEFAULT_CHART_FIELDS = 12
 
-/** 展示形式：一行一条采样的长表 / 每个字段一张小图 */
-enum class HistoryView(val label: String) {
-    TABLE("表格"),
-    CHART("曲线图")
+/**
+ * 展示形式：一行一条采样的长表 / 每个字段一张小图。
+ *
+ * 标签给**资源 id**（规则 A：1:1 的固定标签），语言由调用方 `stringResource` 注入 ——
+ * 枚举是纯 Kotlin，没有 Context 也不该有。
+ */
+enum class HistoryView(@StringRes val labelRes: Int) {
+    TABLE(R.string.service_history_view_table),
+    CHART(R.string.service_history_view_chart)
 }
 
 /**
@@ -71,7 +80,7 @@ data class FieldRef(
 data class FieldData(
     val ref: FieldRef,
     val range: ModbusHistoryRange? = null,
-    val error: String = ""
+    val error: UiText? = null
 )
 
 /** 表格里的一行：原始样本一行一条，降采样桶也占一行（一行 = 一段） */
@@ -84,14 +93,15 @@ data class HistoryRow(
     val field: String,
     val value: String,
     val unit: String,
-    val note: String
+    /** 值没变、按 keep-alive 时限补记的一条的角标；普通样本为 null */
+    val note: UiText?
 )
 
 /** 一张曲线图的渲染输入 */
 data class HistoryChart(
     val ref: FieldRef,
     /** 取数失败的原因；非空时这张图位置显示错误，不画图 */
-    val error: String,
+    val error: UiText?,
     /** 取到的序列；没取到（或失败）时为 null */
     val range: ModbusHistoryRange?,
     /** 展示用：`field (unit)` —— 单位是数据、原样缀上 */
@@ -111,7 +121,7 @@ data class ServiceHistoryUiState(
     val isLoading: Boolean = false,
     val service: ModbusService? = null,
     /** 服务定义取不到：整页报错 */
-    val serviceError: String? = null,
+    val serviceError: UiText? = null,
     /** 依赖设备（只用于展示在线态），取不到不影响历史数据本身 */
     val device: DeviceEntity? = null,
     /** 各方法最后一次成功采到的值（只喂页头两格） */
@@ -119,7 +129,7 @@ data class ServiceHistoryUiState(
 
     val data: List<FieldData> = emptyList(),
     val failures: ModbusHistoryFailures? = null,
-    val failuresError: String = "",
+    val failuresError: UiText? = null,
 
     // —— 查询条件 ——
     /** 默认最近 1 小时：这一页看的是「现在怎么样」，翻旧账才切档 */
@@ -207,7 +217,11 @@ data class ServiceHistoryUiState(
                         value = historyPointText(point),
                         unit = item.ref.unit,
                         // 值没变、按 keep-alive 时限补记的一条：与「变了才记」区分开
-                        note = if (!isBucket(point) && point.keepalive == true) "保持" else ""
+                        note = if (!isBucket(point) && point.keepalive == true) {
+                            UiText.Res(R.string.service_history_keepalive)
+                        } else {
+                            null
+                        }
                     )
                 }
             }
@@ -232,7 +246,7 @@ data class ServiceHistoryUiState(
                 val item = byKey[ref.key]
                 HistoryChart(
                     ref = ref,
-                    error = item?.error.orEmpty(),
+                    error = item?.error,
                     range = item?.range,
                     title = if (ref.unit.isNotEmpty()) "${ref.field} (${ref.unit})" else ref.field
                 )
@@ -243,8 +257,8 @@ data class ServiceHistoryUiState(
     val downsampled: Boolean get() = data.any { it.range?.downsampled == true }
 
     /** 取数失败的字段：一个字段失败不影响其余，表格没有挂错处，去重后统一提示在内容上方 */
-    val loadErrors: List<String>
-        get() = data.map { it.error }.filter { it.isNotEmpty() }.distinct()
+    val loadErrors: List<UiText>
+        get() = data.mapNotNull { it.error }.distinct()
 
     /** 页头：最后一次成功采集的时刻（各方法里取最近的那个） */
     val lastRecordedAt: Long?
@@ -306,7 +320,7 @@ class ServiceHistoryViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoadingService = false,
-                        serviceError = e.message ?: "获取服务失败"
+                        serviceError = e.toUiText(R.string.err_modbus_service_get)
                     )
                 }
         }
@@ -367,7 +381,7 @@ class ServiceHistoryViewModel : ViewModel() {
                             maxPoints = maxPoints
                         ).fold(
                             onSuccess = { FieldData(ref, it) },
-                            onFailure = { e -> FieldData(ref, error = e.message ?: "获取采集数据失败") }
+                            onFailure = { e -> FieldData(ref, error = e.toUiText(R.string.err_sampling_data)) }
                         )
                     }
                 }.awaitAll()
@@ -395,7 +409,7 @@ class ServiceHistoryViewModel : ViewModel() {
         )
         _uiState.value = _uiState.value.copy(
             failures = result.getOrNull(),
-            failuresError = result.exceptionOrNull()?.message.orEmpty()
+            failuresError = result.exceptionOrNull()?.toUiText()
         )
     }
 

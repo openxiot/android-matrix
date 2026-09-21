@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.api.UserSettings
 
@@ -11,7 +12,7 @@ class UserSettingsRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()?.data ?: UserSettings()
         } else {
-            throw Exception(response.body()?.message ?: "获取用户设置失败")
+            response.failWith(R.string.err_settings_get)
         }
     }
 
@@ -20,7 +21,7 @@ class UserSettingsRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()?.data ?: UserSettings(organizationEnabled = organizationEnabled)
         } else {
-            throw Exception(response.body()?.message ?: "更新用户设置失败")
+            response.failWith(R.string.err_settings_update)
         }
     }
 }

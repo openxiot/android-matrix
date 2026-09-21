@@ -12,13 +12,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import android.widget.Toast
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.RetrofitClient
 import cc.openxiot.wematrix.data.repository.UserSettingsRepository
 import cc.openxiot.wematrix.ui.components.AvatarImage
+import cc.openxiot.wematrix.ui.core.asString
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -57,7 +61,11 @@ fun AccountScreen(
                 .onFailure { e ->
                     organizationEnabled = previous
                     tokenManager.organizationEnabled = previous
-                    Toast.makeText(context, e.message ?: "更新设置失败", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        e.toUiText(R.string.err_account_update).asString(context),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         }
     }
@@ -77,10 +85,13 @@ fun AccountScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(R.string.common_back)
+                        )
                     }
                     Text(
-                        text = "账号详情",
+                        text = stringResource(R.string.account_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
@@ -117,7 +128,7 @@ fun AccountScreen(
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {
                         Text(
-                            text = tokenManager.username ?: "未登录",
+                            text = tokenManager.username ?: stringResource(R.string.profile_not_logged_in),
                             style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold
                         )
@@ -142,13 +153,25 @@ fun AccountScreen(
                 elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
             ) {
                 Column(modifier = Modifier.padding(4.dp)) {
-                    InfoRow(label = "用户名", value = tokenManager.username ?: "-")
+                    InfoRow(
+                        label = stringResource(R.string.account_username),
+                        value = tokenManager.username ?: "-"
+                    )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                    InfoRow(label = "平台", value = tokenManager.platform ?: "-")
+                    InfoRow(
+                        label = stringResource(R.string.account_platform),
+                        value = tokenManager.platform ?: "-"
+                    )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                    InfoRow(label = "当前组织", value = tokenManager.currentOrgName ?: "未选择")
+                    InfoRow(
+                        label = stringResource(R.string.profile_current_org),
+                        value = tokenManager.currentOrgName ?: stringResource(R.string.account_not_selected)
+                    )
                     HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
-                    InfoRow(label = "当前项目", value = tokenManager.currentRootSpaceName ?: "未选择")
+                    InfoRow(
+                        label = stringResource(R.string.profile_current_project),
+                        value = tokenManager.currentRootSpaceName ?: stringResource(R.string.account_not_selected)
+                    )
                 }
             }
 
@@ -171,12 +194,12 @@ fun AccountScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "组织",
+                            text = stringResource(R.string.account_org_toggle),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "启用后可管理组织",
+                            text = stringResource(R.string.account_org_toggle_subtitle),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -221,7 +244,7 @@ fun AccountScreen(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "退出登录",
+                        text = stringResource(R.string.account_logout),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.error,
                         fontWeight = FontWeight.Medium

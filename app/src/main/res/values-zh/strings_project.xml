@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  项目（project）与空间（space）相关。中文侧**逐字照抄改造前的字面量**，英文在 values/。
+
+  空间类型选项（楼栋/楼层/房间/区域）不在这里 —— 复用 strings.xml 的 space_type_*，
+  与 SpaceTypeChip 同一套词，避免同一个概念两处翻译。
+-->
+<resources>
+    <string name="project_title">当前项目</string>
+    <string name="project_manage_title">项目管理</string>
+
+    <string name="project_empty">暂无项目，点击右下角按钮创建</string>
+
+    <string name="project_create_title">创建项目</string>
+    <string name="project_name_label">项目名称</string>
+    <string name="project_name_placeholder">请输入项目名称</string>
+
+    <string name="project_rename_title">重命名项目</string>
+    <string name="project_rename_action">重命名</string>
+    <string name="project_delete_title">删除项目</string>
+    <string name="project_delete_confirm">确定要删除这个项目吗？如果项目下有空间数据，将无法删除。</string>
+    <string name="project_swipe_delete">右滑删除</string>
+
+    <!-- %1$s 是服务端原样下发的类型值（site / building / …），刻意不翻，只翻前缀 -->
+    <string name="project_type_label">类型: %1$s</string>
+
+    <!-- 项目成员 -->
+    <string name="project_members_title">项目成员</string>
+    <string name="project_members_empty">暂无成员，点击右下角按钮添加</string>
+    <string name="project_members_label">成员</string>
+    <string name="project_user_id">用户ID</string>
+    <string name="project_user_id_placeholder">用户的账号 ID</string>
+    <string name="project_remark_hint">点击添加备注</string>
+    <string name="project_remark_title">编辑备注 - %1$s</string>
+    <string name="project_remark_label">填写备注</string>
+    <string name="project_role_adjust">调整角色</string>
+    <string name="project_role_adjust_title">调整角色 - %1$s</string>
+    <string name="project_remove_confirm">确定要移除「%1$s」吗？</string>
+    <string name="project_exit">退出项目</string>
+    <string name="project_exit_confirm">确定要退出这个项目吗？退出后将无法访问该项目。</string>
+
+    <!-- 设备操作的反馈（ProjectViewModel 发出，Toast 显示） -->
+    <string name="project_device_added">设备添加成功</string>
+    <string name="project_device_moved">设备已移动</string>
+
+    <!-- 空间 -->
+    <string name="space_manage_title">空间管理</string>
+    <string name="space_add">添加空间</string>
+    <string name="space_add_child">添加子空间</string>
+    <string name="space_add_device">添加设备</string>
+    <string name="space_name_label">空间名称</string>
+    <string name="space_name_placeholder">请输入名称</string>
+    <string name="space_type_label">空间类型</string>
+    <string name="space_empty">空间数据为空</string>
+    <!-- 同一棵空树，编辑页与只读的项目 Tab 给的提示不一样（编辑页能加空间） -->
+    <string name="space_empty_editable">请添加空间</string>
+    <string name="space_empty_readonly">该项目下还没有空间或设备</string>
+    <string name="space_delete_title">删除空间</string>
+    <string name="space_delete_confirm">确定要删除这个空间吗？如果空间下有子空间，将无法删除。</string>
+    <string name="space_move_title">移动到空间</string>
+    <string name="space_move_action">移动</string>
+    <string name="space_device_adding">添加设备中...</string>
+    <string name="space_device_waiting">等待中... %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d 设备</item>
+    </plurals>
+</resources>

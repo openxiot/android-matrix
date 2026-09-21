@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  设备详情 / 设备操作。中文侧逐字照抄改造前的字面量，英文在 values/。
+
+  在线 / 离线、通信协议、未知产品都在 strings.xml 的 common_* —— 历史页、看板编辑器
+  与产品页也各用其中一条，是同一句话。
+-->
+<resources>
+    <string name="device_detail_title">设备详情</string>
+    <string name="device_operation_title">设备操作</string>
+    <string name="device_not_found">设备未找到</string>
+
+    <string name="device_id_label">设备 ID</string>
+    <string name="device_type_label">设备类型</string>
+    <string name="device_online_label">在线状态</string>
+    <string name="device_last_online_label">最后上线</string>
+    <string name="device_last_offline_label">最后下线</string>
+    <string name="device_space_label">所属空间</string>
+</resources>

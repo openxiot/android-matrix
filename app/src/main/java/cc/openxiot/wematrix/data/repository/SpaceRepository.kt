@@ -1,5 +1,6 @@
 package cc.openxiot.wematrix.data.repository
 
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ProjectMember
 import cc.openxiot.wematrix.data.api.SpaceEntity
 import cc.openxiot.wematrix.data.api.SpaceGraph
@@ -13,7 +14,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取空间列表失败")
+            response.failWith(R.string.err_space_list)
         }
     }
 
@@ -22,7 +23,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "获取空间信息失败")
+            response.failWith(R.string.err_space_info)
         }
     }
 
@@ -31,7 +32,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "获取空间树失败")
+            response.failWith(R.string.err_space_tree)
         }
     }
 
@@ -40,7 +41,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "获取空间图失败")
+            response.failWith(R.string.err_space_graph)
         }
     }
 
@@ -49,7 +50,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "创建空间失败")
+            response.failWith(R.string.err_space_create)
         }
     }
 
@@ -58,7 +59,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data!!
         } else {
-            throw Exception(response.body()?.message ?: "更新空间失败")
+            response.failWith(R.string.err_space_update)
         }
     }
 
@@ -67,7 +68,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "删除空间失败")
+            response.failWith(R.string.err_space_delete)
         }
     }
 
@@ -76,7 +77,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyList()
         } else {
-            throw Exception(response.body()?.message ?: "获取项目成员失败")
+            response.failWith(R.string.err_space_member_list)
         }
     }
 
@@ -85,7 +86,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "添加成员失败")
+            response.failWith(R.string.err_space_member_add)
         }
     }
 
@@ -94,7 +95,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "调整角色失败")
+            response.failWith(R.string.err_space_member_role)
         }
     }
 
@@ -103,7 +104,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "更新备注失败")
+            response.failWith(R.string.err_space_member_note)
         }
     }
 
@@ -112,7 +113,7 @@ class SpaceRepository {
         if (response.isSuccessful && response.body()?.success == true) {
             Unit
         } else {
-            throw Exception(response.body()?.message ?: "移除成员失败")
+            response.failWith(R.string.err_space_member_remove)
         }
     }
 }

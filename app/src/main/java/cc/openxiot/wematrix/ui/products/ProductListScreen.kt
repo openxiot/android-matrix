@@ -16,9 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.data.api.ProductEntity
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
@@ -42,7 +45,7 @@ fun ProductListScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        PageTitle(title = "产品")
+        PageTitle(title = stringResource(R.string.product_title))
 
         PullToRefreshBox(
             isRefreshing = isRefreshing,
@@ -58,14 +61,14 @@ fun ProductListScreen(
                 message = state.error!!,
                 onRetry = { viewModel.loadProducts() }
             )
-            state.products.isEmpty() -> EmptyState(message = "暂无产品")
+            state.products.isEmpty() -> EmptyState(message = stringResource(R.string.product_empty))
             else -> {
                 LazyColumn(
                     contentPadding = PaddingValues(vertical = 8.dp)
                 ) {
                     item {
                         Text(
-                            text = "共 ${state.products.size} 个产品",
+                            text = pluralStringResource(R.plurals.product_count, state.products.size, state.products.size),
                             style = MaterialTheme.typography.titleSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
@@ -121,7 +124,7 @@ private fun ProductCard(
                     if (product.icon != null) {
                         AsyncImage(
                             model = product.icon,
-                            contentDescription = product.displayName,
+                            contentDescription = product.displayName ?: stringResource(R.string.common_unknown_product),
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(12.dp)),
@@ -141,13 +144,13 @@ private fun ProductCard(
                 Spacer(modifier = Modifier.width(12.dp))
                 Column {
                     Text(
-                        text = product.displayName,
+                        text = product.displayName ?: stringResource(R.string.common_unknown_product),
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.Medium
                     )
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "型号: ${product.model ?: "-"}",
+                            text = stringResource(R.string.product_model_inline, product.model ?: "-"),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -166,9 +169,9 @@ private fun ProductCard(
                 val badgeLabel: String
                 val badgeColor: Color
                 when (product.lifecycle) {
-                    "released" -> { badgeLabel = "已发布"; badgeColor = MaterialTheme.colorScheme.primary }
-                    "preview" -> { badgeLabel = "预览版"; badgeColor = MaterialTheme.colorScheme.tertiary }
-                    "development" -> { badgeLabel = "开发中"; badgeColor = MaterialTheme.colorScheme.error }
+                    "released" -> { badgeLabel = stringResource(R.string.product_status_released); badgeColor = MaterialTheme.colorScheme.primary }
+                    "preview" -> { badgeLabel = stringResource(R.string.product_status_preview); badgeColor = MaterialTheme.colorScheme.tertiary }
+                    "development" -> { badgeLabel = stringResource(R.string.product_status_development); badgeColor = MaterialTheme.colorScheme.error }
                     else -> { badgeLabel = product.lifecycle; badgeColor = MaterialTheme.colorScheme.onSurfaceVariant }
                 }
                 Text(
@@ -186,7 +189,7 @@ private fun ProductCard(
             ) {
                 Icon(
                     Icons.Default.ChevronRight,
-                    contentDescription = "详情",
+                    contentDescription = stringResource(R.string.common_detail),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(20.dp)
                 )

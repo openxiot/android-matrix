@@ -6,6 +6,8 @@ import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.data.api.Member
 import cc.openxiot.wematrix.data.api.Organization
 import cc.openxiot.wematrix.data.repository.OrganizationRepository
+import cc.openxiot.wematrix.ui.core.UiText
+import cc.openxiot.wematrix.ui.core.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +19,7 @@ data class OrgDetailUiState(
     val members: List<Member> = emptyList(),
     val currentUserId: String? = null,
     val isCurrentUserAdmin: Boolean = false,
-    val error: String? = null,
+    val error: UiText? = null,
     val showAddDialog: Boolean = false,
     val changeRoleTarget: Member? = null,
     val removeTarget: Member? = null
@@ -64,7 +66,7 @@ class OrgDetailViewModel : ViewModel() {
                 .onFailure { e ->
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
-                        error = e.message
+                        error = e.toUiText()
                     )
                 }
         }
@@ -84,7 +86,7 @@ class OrgDetailViewModel : ViewModel() {
             repository.addMember(orgId, Member(developerId = developerId, name = name, role = role))
                 .onSuccess { loadOrganization(orgId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -103,7 +105,7 @@ class OrgDetailViewModel : ViewModel() {
             repository.updateMember(orgId, Member(developerId = developerId, name = memberName, role = newRole))
                 .onSuccess { loadOrganization(orgId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }
@@ -122,7 +124,7 @@ class OrgDetailViewModel : ViewModel() {
             repository.removeMember(orgId, memberId)
                 .onSuccess { loadOrganization(orgId) }
                 .onFailure { e ->
-                    _uiState.value = _uiState.value.copy(error = e.message)
+                    _uiState.value = _uiState.value.copy(error = e.toUiText())
                 }
         }
     }

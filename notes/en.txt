@@ -2,3 +2,4 @@ Scan a QR code to bind devices over Modbus, MQTT and more
 Live device properties and states, with remote switches and parameters
 One-tap scenes and rule-based automation
 One-click OAuth sign-in with organization switching
+In-app update check with one-tap download and install

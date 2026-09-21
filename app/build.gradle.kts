@@ -56,9 +56,25 @@ android {
     }
 
     buildTypes {
+        debug {
+            // TODO debug 的更新清单地址还没定，暂与生产同址。定下来后只改这一行。
+            // 若改成 http:// 的内网地址，必须同时往 res/xml/network_security_config.xml
+            // 放行该 host，否则会被明文策略直接拦掉（现有 192.168.5.80 就是这么放行的）。
+            buildConfigField(
+                "String",
+                "UPDATE_MANIFEST_URL",
+                "\"https://www.wematrix.cc/data/apps/android.json\""
+            )
+        }
         release {
             signingConfigs.findByName("release")?.let { signingConfig = it }
             isMinifyEnabled = false
+            // 两个地址写在同一屏里，改的时候能直接对照，不至于只改了一边。
+            buildConfigField(
+                "String",
+                "UPDATE_MANIFEST_URL",
+                "\"https://www.wematrix.cc/data/apps/android.json\""
+            )
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -68,6 +84,8 @@ android {
 
     buildFeatures {
         compose = true
+        // AGP 8 起默认关闭。用来按构建类型注入 UPDATE_MANIFEST_URL（debug 与 release 域名不同）。
+        buildConfig = true
     }
 
     compileOptions {

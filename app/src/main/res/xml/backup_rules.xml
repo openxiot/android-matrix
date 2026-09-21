@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  API 29–30 的备份规则（31+ 走 data_extraction_rules.xml）。两边都排除 updates/，
+  理由见那个文件：54MB 的安装包会把 25MB 配额的整次备份顶掉。
+  path 相对于 domain 的根，domain="file" 即 filesDir。
+-->
+<full-backup-content>
+    <exclude
+        domain="file"
+        path="updates/" />
+</full-backup-content>

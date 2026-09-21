@@ -99,6 +99,27 @@ jobs:
           # 变量一律加花括号：紧跟中文全角标点时 bash 会把多字节字符并进变量名
           echo "版本：${TAG} → versionName=${TAG#v}, versionCode=${CODE}（历史最大 ${MAX}）"
 
+      # 缺 secret 就在编译之前停下。放到后面去查的话，等发现时编译已经花了五分钟、APK
+      # 也已经传上去了 —— 包是公开可下载的，而官网清单没更新（用户看不到更新入口），
+      # 这种半成品状态比一次干脆的失败麻烦得多。
+      #
+      # 只查「配了没有」，**不查权限对不对**：权限要拿真 token 去试才知道，而任何启发式
+      # 判断都可能把一个本来能成功的发版挡下来。权限问题留给真正用到凭据的那一步报。
+      - name: 检查发布所需的 secret
+        if: env.PUBLISH == 'true'
+        shell: bash
+        env:
+          SITE_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SITE_TOKEN:-}" ]; then
+            echo "::error::缺少 secret SITE_REPO_TOKEN（写官网仓库用的细粒度 PAT），发布中止"
+            exit 1
+          fi
+          # 只打长度，够用来确认「存进去的是细粒度 token 而不是那只共用 PAT」：
+          # 细粒度 PAT 约 93 字符，classic PAT 是 40。值本身绝不打印。
+          echo "SITE_REPO_TOKEN 已配置，长度 ${#SITE_TOKEN}"
+
       - name: 还原签名密钥
         shell: bash
         env:
@@ -262,6 +283,154 @@ jobs:
           fi
           echo "匿名可达，HTTP $CODE"
 
+      # 把版本信息写回官网仓库，官网随之自动重建。App 的「版本更新」就是读这个文件，
+      # 所以这一步失败必须让整个 job 失败：APK 发出去了而清单没更新，用户永远看不到更新，
+      # 而且这种失败在界面上完全静默，比构建失败难发现得多。
+      - name: 更新官网版本信息
+        if: env.PUBLISH == 'true'
+        shell: bash
+        env:
+          # SITE_REPO_TOKEN 应是一只**细粒度** PAT：Repository access 只勾
+          # openxiot/webapp-matrix-site，权限只给 Contents: Read and write。这件事的全部
+          # 需求就是改官网仓库里的一个 JSON，不要给它更多 —— 尤其别图省事换成各仓库那只
+          # 共用 PAT：classic PAT 要能推镜像就得带 `repo` 范围，而 `repo` 的含义是
+          # 「该账号能访问的所有仓库的读写」，为写一个文件把整片仓库铺开不值得。
+          #
+          # 它会过期（最长一年）。到期时下面几步会失败并把原因指到这里；轮换只是新建一只
+          # 同样配置的 token 覆盖这个 secret，代码不用动。
+          SITE_TOKEN: ${{ secrets.SITE_REPO_TOKEN }}
+          # 官网仓库与数据文件是固定的一对，写死比再开一个 repo variable 好：
+          # 这里跟下面的 SITE_MANIFEST_URL、以及 App 里的 UPDATE_MANIFEST_URL 是同一个地址，
+          # 拆成可配置项只会让三处更容易对不上。
+          SITE_REPO: openxiot/webapp-matrix-site
+          SITE_BRANCH: main
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SITE_TOKEN:-}" ]; then
+            echo "::error::缺少 secret SITE_REPO_TOKEN（写官网仓库用的细粒度 PAT）"
+            exit 1
+          fi
+          if [ -z "${BLOB_URL:-}" ]; then
+            echo "::error::没有 BLOB_URL（上一步上传没走完？）"
+            exit 1
+          fi
+
+          APK=app/build/outputs/apk/release/app-release.apk
+          [ -f "$APK" ] || { echo "::error::没找到 $APK"; exit 1; }
+
+          # 哈希与大小都从**已签名的最终产物**上取。中间任何一次重新打包都会让
+          # 清单里的 sha256 与用户下到的文件对不上，那时 App 会硬失败。
+          SHA=$(sha256sum "$APK" | cut -d' ' -f1)
+          BYTES=$(wc -c < "$APK" | tr -d ' ')
+          # 与官网现有 "54.4 MB" 同口径：MiB、一位小数（57035418 字节 → 54.4 MB）。
+          # 用 python 而不是 shell 算术：整数除法在 shell 里做不了小数。
+          SIZE=$(python3 -c "print(f'{$BYTES/1048576:.1f} MB')")
+          TODAY=$(date -u +%F)
+
+          WORK=$(mktemp -d)
+          # PAT 放在 URL 里会被 git 写进 .git/config，所以整个克隆目录最后必须删掉，
+          # trap 兜住中途失败的情况（包括上面 exit 1）。
+          trap 'rm -rf "$WORK"' EXIT
+
+          # 克隆放在下面第一道真正用到凭据的地方，token 若无效/过期/没权限，会**在这里**
+          # 就失败。不显式处理的话只会抛一段 git 原文（"Repository not found" 之类），
+          # 而这三种原因在 git 看来长得一样，所以统一给一句能直接照做的提示。
+          # 输出里的 URL 由 git 自己去掉了 userinfo，加上 Actions 对 secret 值的日志打码，
+          # token 不会漏进日志。
+          if ! CLONE_OUT=$(git clone --quiet --depth 1 --branch "$SITE_BRANCH" \
+                "https://x-access-token:${SITE_TOKEN}@github.com/${SITE_REPO}.git" \
+                "$WORK/site" 2>&1); then
+            printf '%s\n' "$CLONE_OUT"
+            echo "::error::拉取 ${SITE_REPO} 失败 —— 检查 secret SITE_REPO_TOKEN：是否有效、是否已过期、是否对该仓库至少有读权限"
+            exit 1
+          fi
+
+          MANIFEST="$WORK/site/static/data/apps/android.json"
+          [ -f "$MANIFEST" ] || { echo "::error::官网仓库里没有 static/data/apps/android.json"; exit 1; }
+
+          # 改写逻辑单独成文件（.github/scripts/update-site-manifest.py）：写进 YAML 的
+          # heredoc 会被块标量整体缩进，Python 直接 IndentationError，而 git blame 里
+          # 也看不出那段脚本在干什么。顺带它还能在本地单独跑。
+          #
+          # 更新说明来自仓库里的 notes/zh.txt、notes/en.txt，一行一条 —— 这两个文件永远
+          # 只描述「下一版发什么」，发完就该为下一版重写（脚本靠跟官网上现有的比来发现
+          # 忘了改的情况）。路径给绝对的：后面有 cd，将来谁把这一步挪到 cd 之后，相对
+          # 路径会静默读不到文件，那就成了「说明没更新也不报错」。
+          #
+          # 读的是**本次检出**里的 notes/。tag 触发时那等于 tag 指向的那份提交，所以
+          # 「发完发现说明写错了，在 main 上改好再 Rerun 那次 run」是没用的 —— Rerun
+          # 用的还是同一个 SHA，检出的还是旧文件。要补说明就走 workflow_dispatch，用同一
+          # 个版本号、关掉 dry_run 重发一次（脚本认定版本号没变，releasedAt 不会被刷新）。
+          #
+          # 提交说明取 HEAD 而不是 github.sha：要记的是 workspace 里真正被编译的那份源码。
+          # 注意它会被写进公网可见的 android.json，别在提交说明里写内部信息。
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+          NOTES_STATE=$(python3 .github/scripts/update-site-manifest.py \
+            "$MANIFEST" "$APP_VERSION_NAME" "$TODAY" "$SIZE" "$BLOB_URL" "$SHA" \
+            "$COMMIT_MSG" "$GITHUB_WORKSPACE/notes")
+          echo "更新说明：$NOTES_STATE"
+          # 传给写 summary 的那一步。那不是这次发版的附加信息，而是唯一能事后看出
+          # 「官网还在展示上一版的更新说明」的地方 —— 脚本只把它打到 stderr，容易被淹掉。
+          echo "NOTES_STATE=$NOTES_STATE" >> "$GITHUB_ENV"
+
+          cd "$WORK/site"
+          if git diff --quiet -- static/data/apps/android.json; then
+            echo "官网清单已经就是 ${APP_VERSION_NAME}，无需提交"
+          else
+            git add static/data/apps/android.json
+            git -c user.name="openxiot-bot" -c user.email="bot@openxiot.cn" \
+              commit --quiet -m "更新 Android 客户端版本信息到 ${APP_VERSION_NAME}"
+            # 远端若在我们克隆之后动了，直接推会被拒。重拉一次再推，比让整个 run
+            # 以一个看不懂的 non-fast-forward 收场好。
+            for attempt in 1 2; do
+              # 不 --quiet：失败原因要留下来判断。成功时这段输出被丢进变量、不打日志，
+              # 下面那行中文回执够说明问题了。
+              if PUSH_OUT=$(git push origin "HEAD:${SITE_BRANCH}" 2>&1); then
+                # 下面那次 rebase 会把「远端已经有同样改动」的提交当成已应用而丢掉，此时
+                # HEAD 就等于远端，push 是空操作。结果没问题（远端确实是这份内容），但别
+                # 说成「推送了」—— 这个 run 到底动没动远端，是事后排障时唯一的线索。
+                if printf '%s' "$PUSH_OUT" | grep -qi 'up-to-date'; then
+                  echo "官网清单已是 ${APP_VERSION_NAME} 的内容，无需推送"
+                else
+                  echo "已提交并推送官网清单（${APP_VERSION_NAME}）"
+                fi
+                break
+              fi
+
+              # 权限/认证问题重试一百次也还是失败，而且下一步的 rebase 会盖上一层更难懂的
+              # 错误（拉取同样被拒）。显式认出来，直接指到 token 上。
+              #
+              # 关键词逐个都对过真实的 git 输出，不是猜的：无效 token 是
+              # `remote: Invalid username or token.` + `fatal: Authentication failed`，
+              # 权限不足是 `remote: Permission to <repo> denied to <user>`（含 403），
+              # 分支保护是 `remote: error: GH006: Protected branch update failed`。
+              # 而正常的 non-fast-forward（`! [rejected] ... (fetch first)`）一个都不含
+              # —— 实测过，否则这里会把本该重试的情况直接判死。
+              if printf '%s' "$PUSH_OUT" | grep -qiE '403|authentication failed|permission|not authorized|denied|could not read Username|GH006|protected branch'; then
+                printf '%s\n' "$PUSH_OUT"
+                echo "::error::没有推送 ${SITE_REPO} 的权限 —— 检查 secret SITE_REPO_TOKEN：是否有效、未过期，且对该仓库有写权限"
+                exit 1
+              fi
+
+              if [ "$attempt" = "2" ]; then
+                printf '%s\n' "$PUSH_OUT"
+                echo "::error::推送官网仓库失败（重试过）"
+                exit 1
+              fi
+
+              echo "推送被拒（远端有新提交），重新拉取后重试"
+              # 两边都改了 android.json 时 rebase 会冲突（同时发两个版本才会撞上）。
+              # 显式报错，别让 set -e 把 git 的冲突输出原样抛出来。
+              if ! git pull --quiet --rebase origin "$SITE_BRANCH"; then
+                echo "::error::重新拉取并 rebase 失败（多半是有并发发版改了同一个文件），重跑本 run 即可"
+                exit 1
+              fi
+            done
+          fi
+
+          echo "SITE_MANIFEST_URL=https://www.wematrix.cc/data/apps/android.json" >> "$GITHUB_ENV"
+
       # 仅供本 run 排障，不是发布归档：90 天后过期，且仓库私有、外部看不到
       - name: 暂存本次产物
         uses: actions/upload-artifact@v7
@@ -281,6 +450,27 @@ jobs:
             if [ "${PUBLISH}" = "true" ]; then
               echo "- 下载（带版本号）：${BLOB_URL:-（上传步骤未完成）}"
               echo "- 下载（稳定别名）：$(printf '%s' "${BLOB_URL:-}" | sed 's|/[^/]*$|/wematrix-latest.apk|')"
+              # 清单没更新成功的话整个 job 已经失败了，这里只是把「App 该去读哪个地址」
+              # 摆在明面上，便于手动核对
+              echo "- 更新清单：${SITE_MANIFEST_URL:-（未写入）}"
+              # 发版成功但说明没跟上，界面上完全看不出来（官网照旧渲染上一版的说明），
+              # 所以在这一步显式说一句。
+              #
+              # 只认脚本确实回话的那几种取值。空值意味着上一步在写下它之前就死了（本 run
+              # 已经红了），此时什么都不说也比断言一句「已随本版更新」强。
+              # 这里不写「重跑本 run 即可」那种操作建议：Rerun 复用同一个 SHA，改了 main
+              # 上的 notes/ 也不会被读到（补发办法见「更新官网版本信息」那步的注释）。
+              case "${NOTES_STATE:-}" in
+                kept)
+                  echo "- ⚠️ 更新说明：notes/zh.txt 是空的或读不到，官网仍显示上一版。"
+                  ;;
+                unchanged)
+                  echo "- ⚠️ 更新说明：notes/*.txt 与官网现有的一字不差 —— 发新版却忘了改它？确认无误可忽略。"
+                  ;;
+                used)
+                  echo "- 更新说明：已随本版更新"
+                  ;;
+              esac
             else
               echo "- 干跑：只编译并校验，**未发布**"
             fi

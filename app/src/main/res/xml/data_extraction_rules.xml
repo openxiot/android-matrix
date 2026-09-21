@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  API 31+ 的备份/迁移规则（31 以下走 backup_rules.xml）。
+  两个都写了，因为 filesDir 默认进自动备份，而里面可能躺着一个 54MB 的安装包。
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!--
+          云备份的总配额是 25MB。把一个 54MB 的 APK 放进去，整次备份会**静默失败**，
+          连带用户设置一起丢 —— 症状是「换了手机什么都没有」，而 logcat 里什么都没有。
+        -->
+        <exclude
+            domain="file"
+            path="updates/" />
+    </cloud-backup>
+    <device-transfer>
+        <!-- 换机迁移同理：安装包在新机上没用，新机自己会去官网下对应版本 -->
+        <exclude
+            domain="file"
+            path="updates/" />
+    </device-transfer>
+</data-extraction-rules>

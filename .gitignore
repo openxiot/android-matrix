@@ -11,6 +11,8 @@
 *.keystore
 *.log
 keystore.properties
+# 明文凭据，只留本机
+key.md
 # Android Profiling
 # Android Studio generated files and folders
 # Google Services (e.g. APIs or Firebase)
@@ -19,7 +21,7 @@ keystore.properties
 # Keystore files
 # Local configuration file (sdk path, etc)
 # Log/OS Files
-app/src/main/.DS_Store
+.DS_Store
 build/
 captures/
 deploymentTargetDropDown.xml

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">ენა</string>
+    <string name="profile_language_system">სისტემის მიხედვით</string>
+    <string name="profile_language_search">ენების ძებნა</string>
+    <string name="profile_language_search_clear">გასუფთავება</string>
+    <string name="profile_language_no_match">შესაბამისი ენა ვერ მოიძებნა</string>
+    <string name="profile_not_logged_in">არ ხართ შესული</string>
+    <string name="profile_current_org">მიმდინარე ორგანიზაცია</string>
+    <string name="profile_current_project">მიმდინარე პროექტი</string>
+    <string name="profile_no_org_selected">ორგანიზაცია არჩეული არ არის</string>
+    <string name="profile_no_project_selected">პროექტი არჩეული არ არის</string>
+    <string name="profile_org_subtitle">აირჩიეთ პროექტის შესარჩევად</string>
+    <string name="profile_project_subtitle_pick">აირჩიეთ პროექტი</string>
+    <string name="profile_project_subtitle_switch">დააჭირეთ პროექტის გადასართავად</string>
+    <string name="profile_project_subtitle_org_first">ჯერ აირჩიეთ ორგანიზაცია</string>
+    <string name="profile_section_settings">პარამეტრები</string>
+    <string name="profile_dark_mode">მუქი რეჟიმი</string>
+    <string name="profile_light_mode">ღია რეჟიმი</string>
+    <string name="profile_theme_subtitle">დააჭირეთ თემის გადასართავად</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">მოწყობილობის წერტილების ცხრილი</string>
+    <string name="profile_modbus_subtitle">Modbus რეგისტრების რუკები (მხოლოდ კითხვა)</string>
+    <string name="profile_alarm_title">განგაშები</string>
+    <string name="profile_alarm_subtitle">Modbus განგაშების ჟურნალი და დამუშავება</string>
+    <string name="profile_history_title">ისტორია</string>
+    <string name="profile_history_subtitle">შეგროვების ისტორია და გრაფიკები</string>
+    <string name="profile_about_subtitle">აპის ინფორმაცია და ვერსია</string>
+    <string name="account_title">ანგარიში</string>
+    <string name="account_username">მომხმარებლის სახელი</string>
+    <string name="account_platform">პლატფორმა</string>
+    <string name="account_not_selected">არჩეული არ არის</string>
+    <string name="account_org_toggle">ორგანიზაცია</string>
+    <string name="account_org_toggle_subtitle">ჩართეთ ორგანიზაციების სამართავად</string>
+    <string name="account_logout">გასვლა</string>
+    <string name="about_title">შესახებ</string>
+    <string name="about_tagline">IoT მოწყობილობების მართვისა და მონიტორინგის პლატფორმა</string>
+    <string name="about_version">ვერსია %1$s</string>
+    <string name="about_check_update">განახლების შემოწმება</string>
+    <string name="about_checking">მიმდინარეობს შემოწმება…</string>
+    <string name="about_up_to_date">უახლესი ვერსია გაქვთ</string>
+    <string name="about_update_now">განახლება ახლა</string>
+    <string name="about_downloading">მიმდინარეობს ჩამოტვირთვა…</string>
+    <string name="about_downloading_percent">ჩამოტვირთვა %1$d%%</string>
+    <string name="about_install_now">დაყენება ახლა</string>
+    <string name="about_install">დაყენება</string>
+    <string name="about_retry_download">ჩამოტვირთვის გამეორება</string>
+    <string name="about_later">მოგვიანებით</string>
+    <string name="about_install_dialog_title">განახლების დაყენება</string>
+    <string name="about_new_version_found">ხელმისაწვდომია ვერსია %1$s</string>
+    <string name="about_ready_hint">ჩამოტვირთვა დასრულდა — დააჭირეთ „დაყენებას“ და გადაეცემა სისტემის ინსტალერს.</string>
+    <string name="about_need_install_permission">ჯერ დაუშვით ამ აპს უცნობი აპების დაყენება</string>
+    <string name="about_keep_app_alive">შეგიძლიათ გვერდების გადართვა — უბრალოდ არ დახუროთ აპი</string>
+    <string name="about_metered">მობილურ ინტერნეტზე ხართ — ჩამოტვირთვამ შეიძლება ბევრი ტრაფიკი დახარჯოს</string>
+    <string name="about_metered_size">მობილურ ინტერნეტზე ხართ — პაკეტი დაახლოებით %1$s-ია</string>
+    <string name="about_install_settings_failed">„უცნობი აპების დაყენების“ პარამეტრი ვერ გაიხსნა — დაუშვით ხელით სისტემის პარამეტრებში</string>
+    <string name="about_no_installer">დასაყენებელი აპი ვერ მოიძებნა — პაკეტი შენახულია აპის საქაღალდეში</string>
+    <string name="about_update_notes_empty">ამ გამოცემას აღწერა არ მოჰყოლია.</string>
+</resources>

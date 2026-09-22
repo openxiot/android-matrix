@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Ziman</string>
+    <string name="profile_language_system">Li gorî pergalê</string>
+    <string name="profile_language_search">Li zimanan bigere</string>
+    <string name="profile_language_search_clear">Paqij bike</string>
+    <string name="profile_language_no_match">Tu zimanek lihev nayê</string>
+    <string name="profile_not_logged_in">Nehatiye têketin</string>
+    <string name="profile_current_org">Rêxistina niha</string>
+    <string name="profile_current_project">Projeya niha</string>
+    <string name="profile_no_org_selected">Tu rêxistin nehatiye hilbijartin</string>
+    <string name="profile_no_project_selected">Tu proje nehatiye hilbijartin</string>
+    <string name="profile_org_subtitle">Ji bo hilbijartina projeyê yekê hilbijêrin</string>
+    <string name="profile_project_subtitle_pick">Projeyekê hilbijêrin</string>
+    <string name="profile_project_subtitle_switch">Ji bo guhertina projeyê bitikînin</string>
+    <string name="profile_project_subtitle_org_first">Ji kerema xwe pêşî rêxistinekê hilbijêre</string>
+    <string name="profile_section_settings">Mîheng</string>
+    <string name="profile_dark_mode">Moda tarî</string>
+    <string name="profile_light_mode">Moda ron</string>
+    <string name="profile_theme_subtitle">Ji bo guhertina temayê bitikînin</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tabloya xalên amûrê</string>
+    <string name="profile_modbus_subtitle">Nexşeyên registeran ên Modbus (tenê xwendin)</string>
+    <string name="profile_alarm_title">Hişyarî</string>
+    <string name="profile_alarm_subtitle">Tomara alarmên Modbus û çareserkirina wan</string>
+    <string name="profile_history_title">Dîrok</string>
+    <string name="profile_history_subtitle">Dîroka berhevkirinê û grafîk</string>
+    <string name="profile_about_subtitle">Agahî û guhertoya sepanê</string>
+    <string name="account_title">Hesab</string>
+    <string name="account_username">Navê bikarhêner</string>
+    <string name="account_platform">Platform</string>
+    <string name="account_not_selected">Nehatiye hilbijartin</string>
+    <string name="account_org_toggle">Rêxistin</string>
+    <string name="account_org_toggle_subtitle">Ji bo birêvebirina rêxistinan vekin</string>
+    <string name="account_logout">Derkeve</string>
+    <string name="about_title">Derbarê</string>
+    <string name="about_tagline">Platforma birêvebirin û şopandina amûrên IoT</string>
+    <string name="about_version">Guherto %1$s</string>
+    <string name="about_check_update">Li nûvekirinan bigere</string>
+    <string name="about_checking">Tê kontrolkirin…</string>
+    <string name="about_up_to_date">Guhertoya we ya herî nû ye</string>
+    <string name="about_update_now">Aniha nûve bike</string>
+    <string name="about_downloading">Tê daxistin…</string>
+    <string name="about_downloading_percent">%1$d%% tê daxistin</string>
+    <string name="about_install_now">Aniha saz bike</string>
+    <string name="about_install">Saz bike</string>
+    <string name="about_retry_download">Daxistinê dîsa biceribîne</string>
+    <string name="about_later">Paşê</string>
+    <string name="about_install_dialog_title">Nûvekirinê saz bike</string>
+    <string name="about_new_version_found">Guhertoya %1$s heye</string>
+    <string name="about_ready_hint">Daxistin qediya — bikevin Saz bike da ku wê teslîmî sazkerê pergalê bikin.</string>
+    <string name="about_need_install_permission">Berê destûrê bidin vê sepanê ku sepanên nenas saz bike</string>
+    <string name="about_keep_app_alive">Hûn dikarin rûpelan biguherînin — tenê sepanê negirin</string>
+    <string name="about_metered">Hûn li ser daneya mobîl in — daxistin dê gelek daneyê bi kar bîne</string>
+    <string name="about_metered_size">Hûn li ser daneya mobîl in — pakêt bi qasî %1$s e</string>
+    <string name="about_install_settings_failed">Mîhenga “Sazkirina sepanên nenas” nehat vekirin — di mîhengên pergalê de destûrê bi destan bidin</string>
+    <string name="about_no_installer">Tu sepana sazkirinê tune — pakêt di peldanka sepanê de hat tomarkirin</string>
+    <string name="about_update_notes_empty">Ji bo vê berdanê tu not nehat dayîn.</string>
+</resources>

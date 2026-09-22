@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Valitse ensin projekti projektiluettelosta</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Hylätäänkö muutokset?</string>
+    <string name="home_discard_message">Sinulla on tallentamattomia muutoksia. Jos poistut nyt, ne menetetään.</string>
+    <string name="home_dashboard_empty">Ei vielä kortteja – napauta alla ”Lisää”</string>
+    <string name="home_add_card">+ Lisää</string>
+    <string name="home_default_layout_loaded">Oletusasettelu ladattu – tallenna se, jotta se otetaan käyttöön</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Yksi iso luku: laitteet / palvelut / hälytykset / viat</string>
+    <string name="home_card_kind_line">Hälytysmäärät tunneittain tai yksi palvelukenttä</string>
+    <string name="home_card_kind_distribution">Jakauma laitteen / palvelun / hälytyksen / vian mukaan</string>
+    <string name="home_card_kind_device">Yhden laitteen yksi ominaisuus</string>
+    <string name="home_card_kind_service">Yhden funktion kenttäjoukko</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Kaavio</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Laite</string>
+    <string name="home_card_default_service">Palvelut</string>
+    <string name="home_card_default_unknown">Kortti</string>
+    <string name="home_edit_card_title">Muokkaa · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Koko leveys</string>
+    <string name="home_size_half">Puoli leveyttä</string>
+    <string name="home_section_metric">Tunnusluku</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Laitteita yhteensä</string>
+    <string name="home_metric_devices_online">Laitteet verkossa</string>
+    <string name="home_metric_services_total">Palveluita yhteensä</string>
+    <string name="home_metric_alarms_today">Tämän päivän hälytykset</string>
+    <string name="home_metric_alarms_window">Hälytykset ajanjaksolla</string>
+    <string name="home_metric_failures_total">Keräysvirheet ajanjaksolla</string>
+    <string name="home_section_dimension">Jakauman peruste</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Laitetyyppi</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Keräysvirheen tyyppi</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Tietolähde</string>
+    <string name="home_source_label">Lähde</string>
+    <string name="home_source_alarm_curve">Hälytysmäärät tunneittain</string>
+    <string name="home_source_service_field">Yksi palvelukenttä</string>
+    <string name="home_show_failure_shadow">Näytä epäonnistuneen keruun viivat</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Palvelu · Funktio · Kenttä</string>
+    <string name="home_service_placeholder">Valitse palvelu</string>
+    <string name="home_service_unnamed">Nimetön palvelu</string>
+    <string name="home_function_placeholder">Valitse funktio</string>
+    <string name="home_function_fallback">Funktio %1$d</string>
+    <string name="home_pick_service_first">Valitse ensin palvelu</string>
+    <string name="home_show_unit">Näytä yksikkö</string>
+    <string name="home_section_device_prop">Laite · Ominaisuus</string>
+    <string name="home_device_placeholder">Valitse laite</string>
+    <string name="home_prop_label">Ominaisuudet</string>
+    <string name="home_pick_device_first">Valitse ensin laite</string>
+    <string name="home_prop_none">Tälle mallille ei ole ominaisuuksia</string>
+    <string name="home_prop_placeholder">Valitse ominaisuus</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, jätä tyhjäksi, jos rajaa ei ole</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Viimeiset</string>
+    <string name="home_window_custom">Mukautettu</string>
+    <string name="home_pick_dates">Valitse alku- ja loppupäivä</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d päivä</item>
+        <item quantity="other">%1$d päivää</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d tunti</item>
+        <item quantity="other">%1$d tuntia</item>
+    </plurals>
+    <string name="home_card_unknown_type">Tuntematon korttityyppi</string>
+    <string name="home_empty_no_data">Ei tietoja</string>
+    <string name="home_empty_no_reading">Ei vielä lukemia</string>
+    <string name="home_empty_not_sampled">Ei vielä kerätty</string>
+    <string name="home_sampled_at">Kerätty %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">laitetta</string>
+    <string name="home_unit_services">palvelua</string>
+</resources>

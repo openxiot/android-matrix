@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Pilih proyek dari daftar proyek terlebih dahulu</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Buang perubahan?</string>
+    <string name="home_discard_message">Ada perubahan yang belum disimpan. Keluar sekarang akan menghilangkannya.</string>
+    <string name="home_dashboard_empty">Belum ada kartu — ketuk \"Tambah\" di bawah untuk menambahkan</string>
+    <string name="home_add_card">+ Tambah</string>
+    <string name="home_default_layout_loaded">Tata letak bawaan dimuat — simpan untuk menerapkan</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Satu angka besar: perangkat / layanan / alarm / kegagalan</string>
+    <string name="home_card_kind_line">Jumlah alarm per jam, atau satu bidang layanan</string>
+    <string name="home_card_kind_distribution">Rincian menurut perangkat / layanan / alarm / kegagalan</string>
+    <string name="home_card_kind_device">Satu properti dari satu perangkat</string>
+    <string name="home_card_kind_service">Sekumpulan bidang dari satu fungsi</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Grafik</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Perangkat</string>
+    <string name="home_card_default_service">Layanan</string>
+    <string name="home_card_default_unknown">Kartu</string>
+    <string name="home_edit_card_title">Edit · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Lebar penuh</string>
+    <string name="home_size_half">Setengah lebar</string>
+    <string name="home_section_metric">Metrik</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Total perangkat</string>
+    <string name="home_metric_devices_online">Perangkat online</string>
+    <string name="home_metric_services_total">Total layanan</string>
+    <string name="home_metric_alarms_today">Alarm Hari Ini</string>
+    <string name="home_metric_alarms_window">Alarm dalam rentang</string>
+    <string name="home_metric_failures_total">Kegagalan sampling dalam rentang</string>
+    <string name="home_section_dimension">Rincian menurut</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Jenis Perangkat</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Jenis kegagalan sampling</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Sumber data</string>
+    <string name="home_source_label">Sumber</string>
+    <string name="home_source_alarm_curve">Jumlah alarm per jam</string>
+    <string name="home_source_service_field">Satu bidang layanan</string>
+    <string name="home_show_failure_shadow">Tampilkan garis pengambilan gagal</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Layanan · Fungsi · Bidang</string>
+    <string name="home_service_placeholder">Pilih layanan</string>
+    <string name="home_service_unnamed">Layanan tanpa nama</string>
+    <string name="home_function_placeholder">Pilih fungsi</string>
+    <string name="home_function_fallback">Fungsi %1$d</string>
+    <string name="home_pick_service_first">Pilih layanan terlebih dahulu</string>
+    <string name="home_show_unit">Tampilkan satuan</string>
+    <string name="home_section_device_prop">Perangkat · Properti</string>
+    <string name="home_device_placeholder">Pilih perangkat</string>
+    <string name="home_prop_label">Properti</string>
+    <string name="home_pick_device_first">Pilih perangkat terlebih dahulu</string>
+    <string name="home_prop_none">Tidak ada properti untuk model ini</string>
+    <string name="home_prop_placeholder">Pilih properti</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, biarkan kosong untuk tanpa batas</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Terakhir</string>
+    <string name="home_window_custom">Kustom</string>
+    <string name="home_pick_dates">Pilih tanggal mulai dan selesai</string>
+    <plurals name="home_window_days">
+        <item quantity="other">%1$d hari</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="other">%1$d jam</item>
+    </plurals>
+    <string name="home_card_unknown_type">Jenis kartu tidak diketahui</string>
+    <string name="home_empty_no_data">Tidak ada data</string>
+    <string name="home_empty_no_reading">Belum ada pembacaan</string>
+    <string name="home_empty_not_sampled">Belum diambil</string>
+    <string name="home_sampled_at">Diambil %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">perangkat</string>
+    <string name="home_unit_services">layanan</string>
+</resources>

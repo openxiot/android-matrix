@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Σύνδεση με WeChat</string>
+    <string name="login_test_account">Σύνδεση με δοκιμαστικό λογαριασμό</string>
+    <string name="login_err_wechat_missing">Το WeChat δεν είναι εγκατεστημένο ή η έκδοση είναι πολύ παλιά</string>
+    <string name="login_err_no_code">Δεν επιστράφηκε κωδικός εξουσιοδότησης</string>
+    <string name="login_err_cancelled">Η σύνδεση με WeChat ακυρώθηκε</string>
+    <string name="login_err_wechat">Η εξουσιοδότηση WeChat απέτυχε (%1$d)</string>
+    <string name="login_err_no_token">Η σύνδεση απέτυχε: δεν επιστράφηκε token</string>
+</resources>

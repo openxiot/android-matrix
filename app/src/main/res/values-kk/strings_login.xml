@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">WeChat арқылы кіру</string>
+    <string name="login_test_account">Тестілік тіркелгімен кіру</string>
+    <string name="login_err_wechat_missing">WeChat орнатылмаған немесе нұсқасы ескі</string>
+    <string name="login_err_no_code">Авторизация коды қайтарылмады</string>
+    <string name="login_err_cancelled">WeChat арқылы кіру болдырылды</string>
+    <string name="login_err_wechat">WeChat авторизациясы сәтсіз аяқталды (%1$d)</string>
+    <string name="login_err_no_token">Кіру сәтсіз аяқталды: токен қайтарылмады</string>
+</resources>

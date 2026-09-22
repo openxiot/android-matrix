@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Сначала выберите проект в списке проектов</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Отказаться от изменений?</string>
+    <string name="home_discard_message">Есть несохранённые изменения. Если выйти сейчас, они будут потеряны.</string>
+    <string name="home_dashboard_empty">Карточек пока нет — нажмите «Добавить» ниже</string>
+    <string name="home_add_card">+ Добавить</string>
+    <string name="home_default_layout_loaded">Макет по умолчанию загружен — сохраните его, чтобы применить</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Одно крупное число: устройства / сервисы / тревоги / сбои</string>
+    <string name="home_card_kind_line">Тревоги по часам или одно поле сервиса</string>
+    <string name="home_card_kind_distribution">Распределение по устройствам / сервисам / тревогам / сбоям</string>
+    <string name="home_card_kind_device">Одно свойство одного устройства</string>
+    <string name="home_card_kind_service">Набор полей одной функции</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">График</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Устройство</string>
+    <string name="home_card_default_service">Сервисы</string>
+    <string name="home_card_default_unknown">Карточка</string>
+    <string name="home_edit_card_title">Изменение · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">На всю ширину</string>
+    <string name="home_size_half">Половина ширины</string>
+    <string name="home_section_metric">Показатель</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Всего устройств</string>
+    <string name="home_metric_devices_online">Устройства онлайн</string>
+    <string name="home_metric_services_total">Всего сервисов</string>
+    <string name="home_metric_alarms_today">Тревоги за сегодня</string>
+    <string name="home_metric_alarms_window">Тревоги за период</string>
+    <string name="home_metric_failures_total">Сбои опроса за период</string>
+    <string name="home_section_dimension">Распределение по</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Тип устройства</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Тип сбоя опроса</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Источник данных</string>
+    <string name="home_source_label">Источник</string>
+    <string name="home_source_alarm_curve">Тревоги по часам</string>
+    <string name="home_source_service_field">Одно поле сервиса</string>
+    <string name="home_show_failure_shadow">Показывать линии ошибок сбора</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Сервис · Функция · Поле</string>
+    <string name="home_service_placeholder">Выберите сервис</string>
+    <string name="home_service_unnamed">Сервис без названия</string>
+    <string name="home_function_placeholder">Выберите функцию</string>
+    <string name="home_function_fallback">Функция %1$d</string>
+    <string name="home_pick_service_first">Сначала выберите сервис</string>
+    <string name="home_show_unit">Показывать ед. изм.</string>
+    <string name="home_section_device_prop">Устройство · Свойство</string>
+    <string name="home_device_placeholder">Выберите устройство</string>
+    <string name="home_prop_label">Свойства</string>
+    <string name="home_pick_device_first">Сначала выберите устройство</string>
+    <string name="home_prop_none">У этой модели нет свойств</string>
+    <string name="home_prop_placeholder">Выберите свойство</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, пусто — без ограничения</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Последние</string>
+    <string name="home_window_custom">Произвольный</string>
+    <string name="home_pick_dates">Выберите даты начала и конца</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d дня</item>
+        <item quantity="many">%1$d дней</item>
+        <item quantity="one">%1$d день</item>
+        <item quantity="other">%1$d дня</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d часа</item>
+        <item quantity="many">%1$d часов</item>
+        <item quantity="one">%1$d час</item>
+        <item quantity="other">%1$d часа</item>
+    </plurals>
+    <string name="home_card_unknown_type">Неизвестный тип карточки</string>
+    <string name="home_empty_no_data">Нет данных</string>
+    <string name="home_empty_no_reading">Показаний пока нет</string>
+    <string name="home_empty_not_sampled">Ещё не собрано</string>
+    <string name="home_sampled_at">Опрошено %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">устройств</string>
+    <string name="home_unit_services">сервисов</string>
+</resources>

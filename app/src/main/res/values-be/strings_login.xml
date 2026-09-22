@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Увайсці праз WeChat</string>
+    <string name="login_test_account">Увайсці з тэставым уліковым запісам</string>
+    <string name="login_err_wechat_missing">WeChat не ўсталяваны або версія занадта старая</string>
+    <string name="login_err_no_code">Код аўтарызацыі не атрыманы</string>
+    <string name="login_err_cancelled">Уваход праз WeChat скасаваны</string>
+    <string name="login_err_wechat">Не атрымалася аўтарызацыя праз WeChat (%1$d)</string>
+    <string name="login_err_no_token">Не атрымалася ўвайсці: токен не вернуты</string>
+</resources>

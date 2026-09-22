@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">زبان</string>
+    <string name="profile_language_system">پیروی از سیستم</string>
+    <string name="profile_language_search">جستجوی زبان‌ها</string>
+    <string name="profile_language_search_clear">پاک‌کردن</string>
+    <string name="profile_language_no_match">زبانی مطابق یافت نشد</string>
+    <string name="profile_not_logged_in">وارد نشده</string>
+    <string name="profile_current_org">سازمان فعلی</string>
+    <string name="profile_current_project">پروژه فعلی</string>
+    <string name="profile_no_org_selected">سازمانی انتخاب نشده</string>
+    <string name="profile_no_project_selected">پروژه‌ای انتخاب نشده</string>
+    <string name="profile_org_subtitle">برای انتخاب پروژه، یکی را برگزینید</string>
+    <string name="profile_project_subtitle_pick">یک پروژه انتخاب کنید</string>
+    <string name="profile_project_subtitle_switch">برای تغییر پروژه بزنید</string>
+    <string name="profile_project_subtitle_org_first">لطفاً ابتدا یک سازمان انتخاب کنید</string>
+    <string name="profile_section_settings">تنظیمات</string>
+    <string name="profile_dark_mode">حالت تیره</string>
+    <string name="profile_light_mode">حالت روشن</string>
+    <string name="profile_theme_subtitle">برای تغییر تم بزنید</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">جدول نقاط دستگاه</string>
+    <string name="profile_modbus_subtitle">جدول نقاط Modbus (فقط خواندنی)</string>
+    <string name="profile_alarm_title">هشدار‌ها</string>
+    <string name="profile_alarm_subtitle">گزارش و رسیدگی به هشدارهای Modbus</string>
+    <string name="profile_history_title">تاریخچه</string>
+    <string name="profile_history_subtitle">تاریخچه نمونه‌برداری و نمودارها</string>
+    <string name="profile_about_subtitle">اطلاعات و نسخه برنامه</string>
+    <string name="account_title">حساب</string>
+    <string name="account_username">نام کاربری</string>
+    <string name="account_platform">پلتفرم</string>
+    <string name="account_not_selected">انتخاب نشده</string>
+    <string name="account_org_toggle">سازمان</string>
+    <string name="account_org_toggle_subtitle">برای مدیریت سازمان‌ها روشن کنید</string>
+    <string name="account_logout">خروج</string>
+    <string name="about_title">درباره</string>
+    <string name="about_tagline">پلتفرم مدیریت و پایش دستگاه‌های IoT</string>
+    <string name="about_version">نسخه %1$s</string>
+    <string name="about_check_update">بررسی برای به‌روزرسانی</string>
+    <string name="about_checking">در حال بررسی…</string>
+    <string name="about_up_to_date">نسخه شما به‌روز است</string>
+    <string name="about_update_now">به‌روزرسانی اکنون</string>
+    <string name="about_downloading">در حال دانلود…</string>
+    <string name="about_downloading_percent">در حال دانلود %1$d%%</string>
+    <string name="about_install_now">نصب اکنون</string>
+    <string name="about_install">نصب</string>
+    <string name="about_retry_download">تلاش مجدد برای دانلود</string>
+    <string name="about_later">بعداً</string>
+    <string name="about_install_dialog_title">نصب به‌روزرسانی</string>
+    <string name="about_new_version_found">نسخه %1$s در دسترس است</string>
+    <string name="about_ready_hint">دانلود کامل شد؛ برای تحویل به نصاب سیستم، روی «نصب» بزنید.</string>
+    <string name="about_need_install_permission">ابتدا نصب برنامه‌های ناشناخته را برای این برنامه مجاز کنید</string>
+    <string name="about_keep_app_alive">می‌توانید بین صفحه‌ها جابه‌جا شوید، فقط برنامه را نبندید</string>
+    <string name="about_metered">در اینترنت همراه هستید؛ دانلود ممکن است حجم زیادی مصرف کند</string>
+    <string name="about_metered_size">در اینترنت همراه هستید؛ حجم بسته حدود %1$s است</string>
+    <string name="about_install_settings_failed">باز شدن تنظیمات «نصب برنامه‌های ناشناس» ممکن نشد؛ آن را به‌صورت دستی در تنظیمات سیستم مجاز کنید</string>
+    <string name="about_no_installer">برنامه‌ای برای نصب یافت نشد؛ بسته در پوشه برنامه ذخیره شده است</string>
+    <string name="about_update_notes_empty">این نسخه توضیحی نداشت.</string>
+</resources>

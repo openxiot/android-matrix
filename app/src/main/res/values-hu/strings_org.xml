@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Jelenlegi szervezet</string>
+    <string name="org_detail_title">Szervezet részletei</string>
+    <string name="org_empty">Még nincs szervezet — koppintson a + gombra az új létrehozásához</string>
+    <string name="org_create_title">Szervezet létrehozása</string>
+    <string name="org_id_label">Szervezetazonosító</string>
+    <string name="org_id_placeholder">pl. my-company</string>
+    <string name="org_id_hint">Betűvel kezdődjön — csak betűk, számok és kötőjelek használhatók</string>
+    <string name="org_name_label">Szervezet neve</string>
+    <string name="org_name_placeholder">pl. Saját cég</string>
+    <string name="org_rename_title">Szervezet átnevezése</string>
+    <string name="org_delete_title">Szervezet törlése</string>
+    <string name="org_delete_confirm">Törli ezt a szervezetet?</string>
+    <string name="org_manage">Kezelés</string>
+    <string name="org_swipe_delete">Törléshez húzza el</string>
+    <string name="org_members_empty">Még nincsenek tagok</string>
+    <string name="org_member_developer_id">Fejlesztői azonosító</string>
+    <string name="org_member_developer_id_placeholder">A felhasználó developerId értéke</string>
+    <string name="org_member_name_label">Megjelenített név</string>
+    <string name="org_member_name_placeholder">Nem kötelező</string>
+    <string name="org_change_role">Szerepkör módosítása</string>
+    <string name="org_change_role_title">Szerepkör módosítása — %1$s</string>
+    <string name="org_remove_confirm">Eltávolítja: „%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d tag</item>
+        <item quantity="other">Összesen %1$d tag</item>
+    </plurals>
+</resources>

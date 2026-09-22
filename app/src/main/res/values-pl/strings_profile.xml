@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Język</string>
+    <string name="profile_language_system">Zgodnie z systemem</string>
+    <string name="profile_language_search">Wyszukaj języki</string>
+    <string name="profile_language_search_clear">Wyczyść</string>
+    <string name="profile_language_no_match">Brak pasującego języka</string>
+    <string name="profile_not_logged_in">Nie zalogowano</string>
+    <string name="profile_current_org">Bieżąca organizacja</string>
+    <string name="profile_current_project">Bieżący projekt</string>
+    <string name="profile_no_org_selected">Nie wybrano organizacji</string>
+    <string name="profile_no_project_selected">Nie wybrano projektu</string>
+    <string name="profile_org_subtitle">Po wybraniu organizacji można wybrać projekt</string>
+    <string name="profile_project_subtitle_pick">Wybierz projekt</string>
+    <string name="profile_project_subtitle_switch">Dotknij, aby przełączyć projekt</string>
+    <string name="profile_project_subtitle_org_first">Najpierw wybierz organizację</string>
+    <string name="profile_section_settings">Ustawienia</string>
+    <string name="profile_dark_mode">Tryb ciemny</string>
+    <string name="profile_light_mode">Tryb jasny</string>
+    <string name="profile_theme_subtitle">Dotknij, aby przełączyć motyw</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tabela punktów urządzenia</string>
+    <string name="profile_modbus_subtitle">Mapy rejestrów Modbus (tylko do odczytu)</string>
+    <string name="profile_alarm_title">Alarmy</string>
+    <string name="profile_alarm_subtitle">Dziennik alarmów Modbus i ich obsługa</string>
+    <string name="profile_history_title">Historia</string>
+    <string name="profile_history_subtitle">Historia pomiarów i wykresy</string>
+    <string name="profile_about_subtitle">Informacje o aplikacji i wersja</string>
+    <string name="account_title">Konto</string>
+    <string name="account_username">Nazwa użytkownika</string>
+    <string name="account_platform">Platforma</string>
+    <string name="account_not_selected">Nie wybrano</string>
+    <string name="account_org_toggle">Organizacja</string>
+    <string name="account_org_toggle_subtitle">Włącz, aby zarządzać organizacjami</string>
+    <string name="account_logout">Wyloguj się</string>
+    <string name="about_title">O aplikacji</string>
+    <string name="about_tagline">Platforma do zarządzania i monitorowania urządzeń IoT</string>
+    <string name="about_version">Wersja %1$s</string>
+    <string name="about_check_update">Sprawdź aktualizacje</string>
+    <string name="about_checking">Sprawdzanie…</string>
+    <string name="about_up_to_date">Aplikacja jest aktualna</string>
+    <string name="about_update_now">Zaktualizuj teraz</string>
+    <string name="about_downloading">Pobieranie…</string>
+    <string name="about_downloading_percent">Pobieranie %1$d%%</string>
+    <string name="about_install_now">Zainstaluj teraz</string>
+    <string name="about_install">Zainstaluj</string>
+    <string name="about_retry_download">Ponów pobieranie</string>
+    <string name="about_later">Później</string>
+    <string name="about_install_dialog_title">Zainstaluj aktualizację</string>
+    <string name="about_new_version_found">Dostępna jest wersja %1$s</string>
+    <string name="about_ready_hint">Pobieranie zakończone — dotknij Zainstaluj, aby przekazać pakiet instalatorowi systemowemu.</string>
+    <string name="about_need_install_permission">Najpierw zezwól tej aplikacji na instalowanie nieznanych aplikacji</string>
+    <string name="about_keep_app_alive">Strony można przełączać — nie należy zamykać aplikacji</string>
+    <string name="about_metered">Połączenie przez sieć komórkową — pobieranie może zużyć dużo danych</string>
+    <string name="about_metered_size">Połączenie przez sieć komórkową — pakiet ma około %1$s</string>
+    <string name="about_install_settings_failed">Nie udało się otworzyć ustawienia „Instalowanie nieznanych aplikacji” — należy zezwolić ręcznie w ustawieniach systemowych</string>
+    <string name="about_no_installer">Brak aplikacji instalatora — pakiet zapisano w katalogu aplikacji</string>
+    <string name="about_update_notes_empty">To wydanie nie zawiera opisu zmian.</string>
+</resources>

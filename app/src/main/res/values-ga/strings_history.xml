@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Stair</string>
+    <string name="history_section_overview">Forbhreathnú ar sheirbhísí</string>
+    <string name="history_no_services">Níl aon seirbhísí Modbus sa tionscadal seo fós</string>
+    <string name="history_service_count_label">Líon Seirbhísí</string>
+    <string name="history_device_count_label">Líon Gléasanna</string>
+    <string name="history_sampled_at_label">Am bailithe</string>
+    <string name="history_function_count_label">Modhanna</string>
+    <string name="history_faults_section">Eisceachtaí bailithe</string>
+    <string name="history_faults_label">Eisceachtaí bailithe</string>
+    <string name="history_no_faults">Níor tharla aon lochtanna samplála sa tréimhse seo</string>
+    <string name="history_no_data">Níor sampláladh aon sonraí sa tréimhse seo</string>
+    <string name="history_field_label">Réimse</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Sonraí samplála (%1$d shraith)</item>
+        <item quantity="many">Sonraí samplála (%1$d sraith)</item>
+        <item quantity="one">Sonraí samplála (%1$d shraith)</item>
+        <item quantity="two">Sonraí samplála (%1$d shraith)</item>
+        <item quantity="other">Sonraí samplála (%1$d sraith)</item>
+    </plurals>
+    <string name="service_history_all_functions">Gach modh</string>
+    <string name="service_history_field_selection">Réimsí %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Locht %1$s × %2$d</string>
+    <string name="service_history_no_curve">Ní féidir aon réimse den tseirbhís seo a ghrafadh</string>
+    <string name="service_history_no_curve_for_function">Níl aon réimse is féidir a ghrafadh san fheidhm seo</string>
+    <string name="service_history_no_fields_selected">Níl aon réimsí roghnaithe</string>
+    <string name="service_history_failure_hint">Léiríonn línte ingearacha amanna teipe an bhailithe</string>
+    <string name="service_history_downsampled_hint">Tá an iomarca pointí sonraí ann; ísl-shampláiltear de réir eatramh ama (is é an luach meán an eatraimh, agus an t-íosluach~uasluach idir lúibíní)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Tábla</string>
+    <string name="service_history_view_chart">Graf</string>
+</resources>

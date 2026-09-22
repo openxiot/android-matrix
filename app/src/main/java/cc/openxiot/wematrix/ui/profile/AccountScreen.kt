@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -23,6 +24,7 @@ import cc.openxiot.wematrix.data.repository.UserSettingsRepository
 import cc.openxiot.wematrix.ui.components.AvatarImage
 import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.core.toUiText
+import cc.openxiot.wematrix.util.mirrorInRtl
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -253,6 +255,7 @@ fun AccountScreen(
                     Icon(
                         Icons.Default.ChevronRight,
                         contentDescription = null,
+                        modifier = Modifier.mirrorInRtl(),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">現在のプロジェクト</string>
+    <string name="project_manage_title">プロジェクト管理</string>
+    <string name="project_empty">プロジェクトがまだありません。「+」をタップして作成してください</string>
+    <string name="project_create_title">プロジェクト作成</string>
+    <string name="project_name_label">プロジェクト名</string>
+    <string name="project_name_placeholder">プロジェクト名を入力</string>
+    <string name="project_rename_title">プロジェクトの名前を変更</string>
+    <string name="project_rename_action">名前を変更</string>
+    <string name="project_delete_title">プロジェクトを削除</string>
+    <string name="project_delete_confirm">このプロジェクトを削除しますか？スペースが残っているプロジェクトは削除できません</string>
+    <string name="project_swipe_delete">スワイプして削除</string>
+    <string name="project_type_label">種類: %1$s</string>
+    <string name="project_members_title">プロジェクトメンバー</string>
+    <string name="project_members_empty">メンバーがまだありません。「+」をタップして追加してください</string>
+    <string name="project_members_label">メンバー</string>
+    <string name="project_user_id">ユーザーID</string>
+    <string name="project_user_id_placeholder">ユーザーのアカウント ID</string>
+    <string name="project_remark_hint">タップしてメモを追加</string>
+    <string name="project_remark_title">メモを編集 — %1$s</string>
+    <string name="project_remark_label">メモ</string>
+    <string name="project_role_adjust">役割変更</string>
+    <string name="project_role_adjust_title">ロールを変更 — %1$s</string>
+    <string name="project_remove_confirm">「%1$s」を削除しますか？</string>
+    <string name="project_exit">プロジェクトから退出</string>
+    <string name="project_exit_confirm">このプロジェクトから退出しますか？アクセスできなくなります</string>
+    <string name="project_device_added">デバイスを追加しました</string>
+    <string name="project_device_moved">デバイスを移動しました</string>
+    <string name="space_manage_title">スペース管理</string>
+    <string name="space_add">スペースを追加</string>
+    <string name="space_add_child">子スペース追加</string>
+    <string name="space_add_device">デバイス追加</string>
+    <string name="space_name_label">スペース名</string>
+    <string name="space_name_placeholder">名前を入力</string>
+    <string name="space_type_label">スペース種別</string>
+    <string name="space_empty">スペースデータがありません</string>
+    <string name="space_empty_editable">スペースを追加して始めましょう</string>
+    <string name="space_empty_readonly">このプロジェクトにはまだスペースもデバイスもありません</string>
+    <string name="space_delete_title">スペースを削除</string>
+    <string name="space_delete_confirm">このスペースを削除しますか？サブスペースが残っているスペースは削除できません</string>
+    <string name="space_move_title">スペースへ移動</string>
+    <string name="space_move_action">移動</string>
+    <string name="space_device_adding">デバイスを追加中…</string>
+    <string name="space_device_waiting">待機中… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d 台のデバイス</item>
+    </plurals>
+</resources>

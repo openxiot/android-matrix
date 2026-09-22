@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">เข้าสู่ระบบด้วย WeChat</string>
+    <string name="login_test_account">เข้าสู่ระบบด้วยบัญชีทดสอบ</string>
+    <string name="login_err_wechat_missing">ยังไม่ได้ติดตั้ง WeChat หรือเวอร์ชันเก่าเกินไป</string>
+    <string name="login_err_no_code">ไม่ได้รับรหัสอนุญาต</string>
+    <string name="login_err_cancelled">ยกเลิกการเข้าสู่ระบบด้วย WeChat แล้ว</string>
+    <string name="login_err_wechat">การอนุญาตของ WeChat ล้มเหลว (%1$d)</string>
+    <string name="login_err_no_token">เข้าสู่ระบบไม่สำเร็จ: ไม่มี token ส่งกลับมา</string>
+</resources>

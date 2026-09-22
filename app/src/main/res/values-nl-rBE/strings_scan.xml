@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Richt de camera op de QR-code of IMEI van het apparaat</string>
+    <string name="scan_torch">Zaklamp</string>
+    <string name="scan_torch_on">Zaklamp aanzetten</string>
+    <string name="scan_torch_off">Zaklamp uitzetten</string>
+    <string name="scan_permission_required">Cameratoegang is nodig om apparaten te scannen en toe te voegen</string>
+    <string name="scan_grant">Toegang verlenen</string>
+</resources>

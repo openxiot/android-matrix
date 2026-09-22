@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Dabartinis projektas</string>
+    <string name="project_manage_title">Projektų valdymas</string>
+    <string name="project_empty">Projektų dar nėra — palieskite +, kad sukurtumėte</string>
+    <string name="project_create_title">Sukurti projektą</string>
+    <string name="project_name_label">Projekto pavadinimas</string>
+    <string name="project_name_placeholder">Įveskite projekto pavadinimą</string>
+    <string name="project_rename_title">Pervadinti projektą</string>
+    <string name="project_rename_action">Pervadinti</string>
+    <string name="project_delete_title">Ištrinti projektą</string>
+    <string name="project_delete_confirm">Ištrinti šį projektą? Projekto, kuriame dar yra erdvių, ištrinti negalima.</string>
+    <string name="project_swipe_delete">Perbraukite, kad ištrintumėte</string>
+    <string name="project_type_label">Tipas: %1$s</string>
+    <string name="project_members_title">Projekto nariai</string>
+    <string name="project_members_empty">Narių dar nėra — palieskite +, kad pridėtumėte</string>
+    <string name="project_members_label">Nariai</string>
+    <string name="project_user_id">Naudotojo ID</string>
+    <string name="project_user_id_placeholder">Vartotojo paskyros ID</string>
+    <string name="project_remark_hint">Palieskite, kad pridėtumėte pastabą</string>
+    <string name="project_remark_title">Redaguoti pastabą — %1$s</string>
+    <string name="project_remark_label">Pastaba</string>
+    <string name="project_role_adjust">Keisti vaidmenį</string>
+    <string name="project_role_adjust_title">Keisti rolę — %1$s</string>
+    <string name="project_remove_confirm">Pašalinti „%1$s“?</string>
+    <string name="project_exit">Išeiti iš projekto</string>
+    <string name="project_exit_confirm">Palikti šį projektą? Neteksite prieigos prie jo.</string>
+    <string name="project_device_added">Įrenginys pridėtas</string>
+    <string name="project_device_moved">Įrenginys perkeltas</string>
+    <string name="space_manage_title">Erdvių valdymas</string>
+    <string name="space_add">Pridėti erdvę</string>
+    <string name="space_add_child">Pridėti antrinę erdvę</string>
+    <string name="space_add_device">Pridėti įrenginį</string>
+    <string name="space_name_label">Erdvės pavadinimas</string>
+    <string name="space_name_placeholder">Įveskite pavadinimą</string>
+    <string name="space_type_label">Erdvės tipas</string>
+    <string name="space_empty">Nėra erdvės duomenų</string>
+    <string name="space_empty_editable">Pridėkite erdvę, kad pradėtumėte</string>
+    <string name="space_empty_readonly">Šiame projekte dar nėra erdvių ar įrenginių</string>
+    <string name="space_delete_title">Ištrinti erdvę</string>
+    <string name="space_delete_confirm">Ištrinti šią erdvę? Erdvės, kuri dar turi vaikinių erdvių, ištrinti negalima.</string>
+    <string name="space_move_title">Perkelti į erdvę</string>
+    <string name="space_move_action">Perkelti</string>
+    <string name="space_device_adding">Pridedamas įrenginys…</string>
+    <string name="space_device_waiting">Laukiama… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d įrenginiai</item>
+        <item quantity="many">%1$d įrenginio</item>
+        <item quantity="one">%1$d įrenginys</item>
+        <item quantity="other">%1$d įrenginių</item>
+    </plurals>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Nykyinen organisaatio</string>
+    <string name="org_detail_title">Organisaation tiedot</string>
+    <string name="org_empty">Ei vielä organisaatioita – luo uusi napauttamalla +</string>
+    <string name="org_create_title">Luo organisaatio</string>
+    <string name="org_id_label">Organisaatiotunnus</string>
+    <string name="org_id_placeholder">esim. my-company</string>
+    <string name="org_id_hint">Aloita kirjaimella – vain kirjaimia, numeroita ja yhdysviivoja</string>
+    <string name="org_name_label">Organisaation nimi</string>
+    <string name="org_name_placeholder">esim. Yritykseni</string>
+    <string name="org_rename_title">Nimeä organisaatio uudelleen</string>
+    <string name="org_delete_title">Poista organisaatio</string>
+    <string name="org_delete_confirm">Poistetaanko tämä organisaatio?</string>
+    <string name="org_manage">Hallitse</string>
+    <string name="org_swipe_delete">Poista pyyhkäisemällä</string>
+    <string name="org_members_empty">Ei vielä jäseniä</string>
+    <string name="org_member_developer_id">Kehittäjätunnus</string>
+    <string name="org_member_developer_id_placeholder">Käyttäjän developerId</string>
+    <string name="org_member_name_label">Näyttönimi</string>
+    <string name="org_member_name_placeholder">Valinnainen</string>
+    <string name="org_change_role">Vaihda roolia</string>
+    <string name="org_change_role_title">Vaihda roolia – %1$s</string>
+    <string name="org_remove_confirm">Poistetaanko ”%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d jäsen</item>
+        <item quantity="other">%1$d jäsentä</item>
+    </plurals>
+</resources>

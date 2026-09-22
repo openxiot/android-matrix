@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">மேட்ரிக்ஸ்</string>
+    <string name="common_back">பின்</string>
+    <string name="common_retry">மீண்டும் முயற்சி</string>
+    <string name="common_confirm">உறுதிப்படுத்து</string>
+    <string name="common_cancel">ரத்துசெய்</string>
+    <string name="common_close">மூடு</string>
+    <string name="common_detail">விவரங்கள்</string>
+    <string name="common_collapse">சுருக்கு</string>
+    <string name="common_expand">விரிவாக்கு</string>
+    <string name="common_all">அனைத்தும்</string>
+    <string name="common_add">சேர்</string>
+    <string name="common_create">உருவாக்கவும்</string>
+    <string name="common_delete">நீக்கவும்</string>
+    <string name="common_unnamed">பெயரிடப்படாதது</string>
+    <string name="common_unknown">தெரியாதது</string>
+    <string name="common_me">நீங்கள்</string>
+    <string name="common_rename_action">பெயர் மாற்று</string>
+    <string name="common_role_label">பங்கு</string>
+    <string name="common_role_admin">நிர்வாகி</string>
+    <string name="common_role_member">உறுப்பினர்கள்</string>
+    <string name="common_role_member_option">சாதாரண உறுப்பினர்</string>
+    <string name="common_member_add">உறுப்பினரைச் சேர்க்கவும்</string>
+    <string name="common_member_remove">உறுப்பினரை அகற்று</string>
+    <string name="common_edit">திருத்தவும்</string>
+    <string name="common_refresh">புதுப்பி</string>
+    <string name="common_change">மாற்று</string>
+    <string name="common_handle">நிவர்த்தி</string>
+    <string name="common_handled">நிவர்த்தி செய்யப்பட்டது</string>
+    <string name="common_unhandled">நிவர்த்தி செய்யப்படவில்லை</string>
+    <string name="common_recovered">மீட்சியடைந்தது</string>
+    <string name="common_unrecovered">மீட்சியடையவில்லை</string>
+    <string name="common_online">ஆன்லைன்</string>
+    <string name="common_offline">ஆஃப்லைன்</string>
+    <string name="common_switch_on">இயக்கு</string>
+    <string name="common_switch_off">நிறுத்து</string>
+    <string name="common_please_select">தேர்ந்தெடுக்கவும்</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">நேர வரம்பு தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="common_range_text">%1$s முதல் %2$s வரை</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">சேவைகள்</string>
+    <string name="common_function_label">முறைகள்</string>
+    <string name="common_device_label">சாதனம்</string>
+    <string name="common_protocol_label">நெறிமுறை</string>
+    <string name="common_unknown_product">அறியப்படாத தயாரிப்பு</string>
+    <string name="common_truncated_hint">விதிவிலக்குப் பதிவுகள் வரம்பை மீறியுள்ளன; சமீபத்தியவை மட்டும் பட்டியலிடப்பட்டுள்ளன</string>
+    <string name="err_network">நெட்வொர்க் கிடைக்கவில்லை. இணைப்பைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.</string>
+    <string name="err_unknown">ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்.</string>
+    <string name="space_type_site">நிலையம்</string>
+    <string name="space_type_building">கட்டிடம்</string>
+    <string name="space_type_floor">தளம்</string>
+    <string name="space_type_room">அறை</string>
+    <string name="space_type_zone">மண்டலம்</string>
+    <string name="space_type_field">வயல்</string>
+    <string name="space_type_workshop">பணிமனை</string>
+    <string name="space_type_parking">வாகனநிறுத்தம்</string>
+</resources>

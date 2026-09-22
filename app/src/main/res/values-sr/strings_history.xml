@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Историја</string>
+    <string name="history_section_overview">Преглед сервиса</string>
+    <string name="history_no_services">Овај пројекат још нема Modbus сервиса</string>
+    <string name="history_service_count_label">Број услуга</string>
+    <string name="history_device_count_label">Број уређаја</string>
+    <string name="history_sampled_at_label">Време прикупљања</string>
+    <string name="history_function_count_label">Методи</string>
+    <string name="history_faults_section">Изузеци прикупљања</string>
+    <string name="history_faults_label">Изузеци прикупљања</string>
+    <string name="history_no_faults">У овом периоду нема грешака прикупљања</string>
+    <string name="history_no_data">У овом периоду нема прикупљених података</string>
+    <string name="history_field_label">Поље</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Прикупљени подаци (%1$d реда)</item>
+        <item quantity="one">Прикупљени подаци (%1$d ред)</item>
+        <item quantity="other">Прикупљени подаци (%1$d редова)</item>
+    </plurals>
+    <string name="service_history_all_functions">Све методе</string>
+    <string name="service_history_field_selection">Поља %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Грешка %1$s × %2$d</string>
+    <string name="service_history_no_curve">Ниједно поље овог сервиса не може се приказати графиконом</string>
+    <string name="service_history_no_curve_for_function">У овој функцији нема поља за графикон</string>
+    <string name="service_history_no_fields_selected">Нема изабраних поља</string>
+    <string name="service_history_failure_hint">Вертикалне линије означавају тренутке неуспешног прикупљања</string>
+    <string name="service_history_downsampled_hint">Превише тачака података, извршено је смањење узорковања по временским интервалима (вредност је просек интервала, у заградама минимум~максимум)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Табела</string>
+    <string name="service_history_view_chart">Графикон</string>
+</resources>

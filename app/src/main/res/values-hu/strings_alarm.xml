@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Riasztások</string>
+    <string name="alarm_action_ok">Sikeresen végrehajtva</string>
+    <string name="alarm_empty">Ebben az időszakban nincs riasztás</string>
+    <string name="alarm_all_services">Minden szolgáltatás</string>
+    <string name="alarm_level_label">Riasztási szint</string>
+    <string name="alarm_handled_label">Kezelés</string>
+    <string name="alarm_status_label">Állapot</string>
+    <string name="alarm_summary_title">Riasztáslista</string>
+    <string name="alarm_text_label">Riasztás szövege</string>
+    <string name="alarm_field_label">Mező</string>
+    <string name="alarm_trigger_label">Kiváltó feltétel</string>
+    <string name="alarm_current_value_label">Aktuális érték</string>
+</resources>

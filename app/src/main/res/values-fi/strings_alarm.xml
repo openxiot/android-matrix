@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Hälytykset</string>
+    <string name="alarm_action_ok">Toimenpide onnistui</string>
+    <string name="alarm_empty">Ei hälytyksiä tällä ajanjaksolla</string>
+    <string name="alarm_all_services">Kaikki palvelut</string>
+    <string name="alarm_level_label">Hälytystaso</string>
+    <string name="alarm_handled_label">Käsittele</string>
+    <string name="alarm_status_label">Tila</string>
+    <string name="alarm_summary_title">Hälytysluettelo</string>
+    <string name="alarm_text_label">Hälytysteksti</string>
+    <string name="alarm_field_label">Kenttä</string>
+    <string name="alarm_trigger_label">Laukaisuehto</string>
+    <string name="alarm_current_value_label">Nykyinen arvo</string>
+</resources>

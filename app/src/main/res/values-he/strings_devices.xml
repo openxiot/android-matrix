@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">בחר תחילה פרויקט תחת פרופיל</string>
+    <string name="devices_empty">אין עדיין מכשירים</string>
+    <string name="devices_unknown">מכשיר לא ידוע</string>
+    <plurals name="devices_count">
+        <item quantity="many">%1$d מכשירים</item>
+        <item quantity="one">%1$d מכשיר</item>
+        <item quantity="two">%1$d מכשירים</item>
+        <item quantity="other">%1$d מכשירים</item>
+    </plurals>
+</resources>

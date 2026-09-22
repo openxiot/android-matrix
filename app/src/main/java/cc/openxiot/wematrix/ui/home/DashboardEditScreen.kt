@@ -53,6 +53,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -68,6 +69,8 @@ import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.core.asString
 import cc.openxiot.wematrix.ui.theme.Green
+import cc.openxiot.wematrix.util.cellComesFirst
+import cc.openxiot.wematrix.util.physicalOrder
 import kotlin.math.abs
 
 /**
@@ -500,12 +503,19 @@ private fun FloatingCardSlot(
     content: @Composable () -> Unit
 ) {
     when {
+        // 浮动的那张卡也按**物理**半格摆：`side` 是持久化的物理左右，
+        // 落点框画在哪、松手后就落在哪，两者必须同一个坐标系。
         rightHalf -> Row(
             modifier = modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Spacer(Modifier.weight(1f))
-            Box(Modifier.weight(1f)) { content() }
+            if (cellComesFirst(true, LocalLayoutDirection.current)) {
+                Box(Modifier.weight(1f)) { content() }
+                Spacer(Modifier.weight(1f))
+            } else {
+                Spacer(Modifier.weight(1f))
+                Box(Modifier.weight(1f)) { content() }
+            }
         }
 
         halfWidth -> Box(modifier.fillMaxWidth(0.5f)) { content() }
@@ -537,7 +547,10 @@ private fun RowContent(
             modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            row.forEach { w ->
+            // 数据序第 0 张 = 物理左半格，RTL 下倒序抵消 Row 的镜像。
+            // 这一步与 `cellCenterPx`（第 0 格 = 左 1/4）和 `startDragAt`（左手点第 0 张）
+            // 是同一个坐标系 —— 三者一旦有一处镜像了，拖动就会选错卡、落点框画错地方。
+            physicalOrder(row, LocalLayoutDirection.current).forEach { w ->
                 CellHost(w, state, dragId, onOpen, markerHeight, onSize, Modifier.weight(1f).fillMaxHeight())
             }
         }
@@ -550,9 +563,13 @@ private fun RowContent(
     }
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         val onRight = w.side == DashboardTypes.SIDE_RIGHT
-        if (onRight) Spacer(Modifier.weight(1f))
-        CellHost(w, state, dragId, onOpen, markerHeight, onSize, Modifier.weight(1f))
-        if (!onRight) Spacer(Modifier.weight(1f))
+        if (cellComesFirst(onRight, LocalLayoutDirection.current)) {
+            CellHost(w, state, dragId, onOpen, markerHeight, onSize, Modifier.weight(1f))
+            Spacer(Modifier.weight(1f))
+        } else {
+            Spacer(Modifier.weight(1f))
+            CellHost(w, state, dragId, onOpen, markerHeight, onSize, Modifier.weight(1f))
+        }
     }
 }
 

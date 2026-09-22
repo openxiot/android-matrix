@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Alarmy</string>
+    <string name="alarm_action_ok">Operácia vykonaná</string>
+    <string name="alarm_empty">V tomto období nie sú žiadne alarmy</string>
+    <string name="alarm_all_services">Všetky služby</string>
+    <string name="alarm_level_label">Úroveň alarmu</string>
+    <string name="alarm_handled_label">Vyriadiť</string>
+    <string name="alarm_status_label">Stav</string>
+    <string name="alarm_summary_title">Zoznam alarmov</string>
+    <string name="alarm_text_label">Text alarmu</string>
+    <string name="alarm_field_label">Pole</string>
+    <string name="alarm_trigger_label">Podmienka spustenia</string>
+    <string name="alarm_current_value_label">Aktuálna hodnota</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">Сначала выберите проект в разделе «Профиль»</string>
+    <string name="devices_empty">Устройств пока нет</string>
+    <string name="devices_unknown">Неизвестное устройство</string>
+    <plurals name="devices_count">
+        <item quantity="few">%1$d устройства</item>
+        <item quantity="many">%1$d устройств</item>
+        <item quantity="one">%1$d устройство</item>
+        <item quantity="other">%1$d устройства</item>
+    </plurals>
+</resources>

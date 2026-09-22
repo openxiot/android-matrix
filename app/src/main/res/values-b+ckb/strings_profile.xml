@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">زمان</string>
+    <string name="profile_language_system">شوێنگەریی سیستەم</string>
+    <string name="profile_language_search">گەڕانی زمانەکان</string>
+    <string name="profile_language_search_clear">پاککردنەوە</string>
+    <string name="profile_language_no_match">هیچ زمانێکی گونجاو نییە</string>
+    <string name="profile_not_logged_in">چوونە ژوورەوە نەکراوە</string>
+    <string name="profile_current_org">ڕێکخراوی ئێستا</string>
+    <string name="profile_current_project">پروژەی ئێستا</string>
+    <string name="profile_no_org_selected">هیچ ڕێکخراوێک هەڵنەبژێراوە</string>
+    <string name="profile_no_project_selected">هیچ پروژەیەک هەڵنەبژێراوە</string>
+    <string name="profile_org_subtitle">یەکێک هەڵبژێرە بۆ هەڵبژاردنی پروژە</string>
+    <string name="profile_project_subtitle_pick">پروژەیەک هەڵبژێرە</string>
+    <string name="profile_project_subtitle_switch">دابکە بۆ گۆڕینی پروژە</string>
+    <string name="profile_project_subtitle_org_first">تکایە سەرەتا ڕێکخراوێک هەڵبژێرە</string>
+    <string name="profile_section_settings">ڕێکخستنەکان</string>
+    <string name="profile_dark_mode">باری تاریک</string>
+    <string name="profile_light_mode">باری ڕووناک</string>
+    <string name="profile_theme_subtitle">دابکە بۆ گۆڕینی تێمەکە</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">خشتەی خاڵی ئامێر</string>
+    <string name="profile_modbus_subtitle">خشتەکانی پۆینتی Modbus (تەنیا خوێندنەوە)</string>
+    <string name="profile_alarm_title">ئاگادارییەکان</string>
+    <string name="profile_alarm_subtitle">تۆماری ئاگاداری Modbus و چارەسەرکردنی</string>
+    <string name="profile_history_title">مێژوو</string>
+    <string name="profile_history_subtitle">مێژووی سامپڵینگ و هێڵکاری</string>
+    <string name="profile_about_subtitle">زانیاری ئەپەکە و وەشان</string>
+    <string name="account_title">هەژمار</string>
+    <string name="account_username">ناوی بەکارهێنەر</string>
+    <string name="account_platform">پلاتفۆرم</string>
+    <string name="account_not_selected">هەڵنەبژێراوە</string>
+    <string name="account_org_toggle">ڕێکخراو</string>
+    <string name="account_org_toggle_subtitle">داگیرسێنە بۆ بەڕێوەبردنی ڕێکخراوەکان</string>
+    <string name="account_logout">چوونە دەرەوە</string>
+    <string name="about_title">دەربارە</string>
+    <string name="about_tagline">پرۆگرامی بەڕێوەبردن و چاودێریکردنی ئامێرەکانی IoT</string>
+    <string name="about_version">وەشانی %1$s</string>
+    <string name="about_check_update">پشکنین بۆ نوێکردنەوە</string>
+    <string name="about_checking">لە پشکنیندایە…</string>
+    <string name="about_up_to_date">ئەوەتا نوێترین وەشانت هەیە</string>
+    <string name="about_update_now">ئێستا نوێی بکەرەوە</string>
+    <string name="about_downloading">لە داگرتندایە…</string>
+    <string name="about_downloading_percent">داگرتن %1$d٪</string>
+    <string name="about_install_now">ئێستا دامەزرێنە</string>
+    <string name="about_install">دامەزراندن</string>
+    <string name="about_retry_download">داگرتنەوە هەوڵبدەرەوە</string>
+    <string name="about_later">دواتر</string>
+    <string name="about_install_dialog_title">دامەزراندنی نوێکردنەوە</string>
+    <string name="about_new_version_found">وەشانی %1$s بەردەستە</string>
+    <string name="about_ready_hint">داگرتنەکە تەواو بوو — دابکە بۆ «دامەزراندن» تا بدەیتە دامەزرێنەری سیستەم.</string>
+    <string name="about_need_install_permission">سەرەتا دەستپێگەیشتنی دامەزراندنی ئەپەرە نەناسراوەکان بدەرە ئەم ئەپە</string>
+    <string name="about_keep_app_alive">دەتوانیت لاپەڕەکان بگۆڕیت — تەنیا ئەپەکە داماخڕە</string>
+    <string name="about_metered">لەسەر داتای مۆبایلیت — لەوانەیە داگرتنەکە زۆری بەکاربهێنێت</string>
+    <string name="about_metered_size">لەسەر داتای مۆبایلیت — پاکێجەکە نزیکەی %1$sە</string>
+    <string name="about_install_settings_failed">نەتوانرا ڕێکخستنی «دامەزراندنی ئەپەرە نەناسراوەکان» بکرێتەوە — لە ڕێکخستنەکانی سیستەمدا خۆت دەستی پێ بکە</string>
+    <string name="about_no_installer">هیچ ئەپەرێکی دامەزرێنەر نییە — پاکێجەکە لە پێگەی ئەپەکە پارێزراوە</string>
+    <string name="about_update_notes_empty">ئەم وەشانە هیچ ڕوونکردنەوەیەکی نییە.</string>
+</resources>

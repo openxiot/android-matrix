@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Valoda</string>
+    <string name="profile_language_system">Tāpat kā sistēmā</string>
+    <string name="profile_language_search">Meklēt valodas</string>
+    <string name="profile_language_search_clear">Notīrīt</string>
+    <string name="profile_language_no_match">Nav atbilstošas valodas</string>
+    <string name="profile_not_logged_in">Nav pierakstīts</string>
+    <string name="profile_current_org">Pašreizējā organizācija</string>
+    <string name="profile_current_project">Pašreizējais projekts</string>
+    <string name="profile_no_org_selected">Nav atlasīta organizācija</string>
+    <string name="profile_no_project_selected">Nav atlasīts projekts</string>
+    <string name="profile_org_subtitle">Izvēlieties organizāciju, lai izvēlētos projektu</string>
+    <string name="profile_project_subtitle_pick">Izvēlieties projektu</string>
+    <string name="profile_project_subtitle_switch">Pieskarieties, lai pārslēgtu projektu</string>
+    <string name="profile_project_subtitle_org_first">Vispirms atlasiet organizāciju</string>
+    <string name="profile_section_settings">Iestatījumi</string>
+    <string name="profile_dark_mode">Tumšais režīms</string>
+    <string name="profile_light_mode">Gaišais režīms</string>
+    <string name="profile_theme_subtitle">Pieskarieties, lai mainītu tēmu</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Ierīces punktu tabula</string>
+    <string name="profile_modbus_subtitle">Modbus reģistru kartes (tikai lasāmas)</string>
+    <string name="profile_alarm_title">Trauksmes</string>
+    <string name="profile_alarm_subtitle">Modbus trauksmju žurnāls un apstrāde</string>
+    <string name="profile_history_title">Vēsture</string>
+    <string name="profile_history_subtitle">Ievākšanas vēsture un diagrammas</string>
+    <string name="profile_about_subtitle">Programmas informācija un versija</string>
+    <string name="account_title">Konts</string>
+    <string name="account_username">Lietotājvārds</string>
+    <string name="account_platform">Platforma</string>
+    <string name="account_not_selected">Nav atlasīts</string>
+    <string name="account_org_toggle">Organizācija</string>
+    <string name="account_org_toggle_subtitle">Ieslēdziet, lai pārvaldītu organizācijas</string>
+    <string name="account_logout">Izrakstīties</string>
+    <string name="about_title">Par programmu</string>
+    <string name="about_tagline">IoT ierīču pārvaldības un uzraudzības platforma</string>
+    <string name="about_version">Versija %1$s</string>
+    <string name="about_check_update">Pārbaudīt atjauninājumus</string>
+    <string name="about_checking">Pārbauda…</string>
+    <string name="about_up_to_date">Jums ir jaunākā versija</string>
+    <string name="about_update_now">Atjaunināt tagad</string>
+    <string name="about_downloading">Lejupielādē…</string>
+    <string name="about_downloading_percent">Lejupielādē %1$d%%</string>
+    <string name="about_install_now">Instalēt tagad</string>
+    <string name="about_install">Instalēt</string>
+    <string name="about_retry_download">Atkārtot lejupielādi</string>
+    <string name="about_later">Vēlāk</string>
+    <string name="about_install_dialog_title">Instalēt atjauninājumu</string>
+    <string name="about_new_version_found">Ir pieejama versija %1$s</string>
+    <string name="about_ready_hint">Lejupielāde pabeigta — pieskarieties „Instalēt”, lai to nodotu sistēmas instalētājam.</string>
+    <string name="about_need_install_permission">Vispirms atļaujiet šai programmai instalēt nezināmas programmas</string>
+    <string name="about_keep_app_alive">Varat pārslēgt lapas — tikai neaizveriet programmu</string>
+    <string name="about_metered">Pašlaik izmantojat mobilos datus — lejupielāde var patērēt daudz datu</string>
+    <string name="about_metered_size">Pašlaik izmantojat mobilos datus — pakotne ir aptuveni %1$s</string>
+    <string name="about_install_settings_failed">Neizdevās atvērt iestatījumu „Instalēt nezināmas programmas” — atļaujiet to manuāli sistēmas iestatījumos</string>
+    <string name="about_no_installer">Nav pieejama instalēšanas programma — pakotne ir saglabāta programmas mapē</string>
+    <string name="about_update_notes_empty">Šim laidienam nav pievienotu piezīmju.</string>
+</resources>

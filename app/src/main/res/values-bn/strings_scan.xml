@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">ডিভাইসের QR কোড বা IMEI-এর দিকে ক্যামেরা রাখুন</string>
+    <string name="scan_torch">টর্চ</string>
+    <string name="scan_torch_on">টর্চ চালু করুন</string>
+    <string name="scan_torch_off">টর্চ বন্ধ করুন</string>
+    <string name="scan_permission_required">স্ক্যান করে ডিভাইস যোগ করতে ক্যামেরা অ্যাক্সেস দরকার</string>
+    <string name="scan_grant">অ্যাক্সেস দিন</string>
+</resources>

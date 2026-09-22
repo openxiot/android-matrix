@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">現在の組織</string>
+    <string name="org_detail_title">組織詳細</string>
+    <string name="org_empty">組織がまだありません。「+」をタップして作成してください</string>
+    <string name="org_create_title">組織作成</string>
+    <string name="org_id_label">組織 ID</string>
+    <string name="org_id_placeholder">例: my-company</string>
+    <string name="org_id_hint">英字で始まり、英字・数字・ハイフンのみ使用できます</string>
+    <string name="org_name_label">組織名</string>
+    <string name="org_name_placeholder">例: 私の会社</string>
+    <string name="org_rename_title">組織の名前を変更</string>
+    <string name="org_delete_title">組織削除</string>
+    <string name="org_delete_confirm">この組織を削除しますか？</string>
+    <string name="org_manage">管理</string>
+    <string name="org_swipe_delete">スワイプして削除</string>
+    <string name="org_members_empty">メンバーがまだありません</string>
+    <string name="org_member_developer_id">開発者 ID</string>
+    <string name="org_member_developer_id_placeholder">ユーザーの developerId</string>
+    <string name="org_member_name_label">表示名</string>
+    <string name="org_member_name_placeholder">任意</string>
+    <string name="org_change_role">ロールを変更</string>
+    <string name="org_change_role_title">ロールを変更 — %1$s</string>
+    <string name="org_remove_confirm">「%1$s」を削除しますか？</string>
+    <plurals name="org_member_count">
+        <item quantity="other">%1$d 名のメンバー</item>
+    </plurals>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">ისტორია</string>
+    <string name="history_section_overview">სერვისების მიმოხილვა</string>
+    <string name="history_no_services">ამ პროექტში Modbus სერვისები ჯერ არ არის</string>
+    <string name="history_service_count_label">სერვისების რაოდენობა</string>
+    <string name="history_device_count_label">მოწყობილობების რაოდენობა</string>
+    <string name="history_sampled_at_label">შეგროვების დრო</string>
+    <string name="history_function_count_label">მეთოდების რაოდენობა</string>
+    <string name="history_faults_section">შეგროვების გამონაკლისები</string>
+    <string name="history_faults_label">შეგროვების გამონაკლისები</string>
+    <string name="history_no_faults">ამ პერიოდში შეგროვების ხარვეზი არ არის</string>
+    <string name="history_no_data">ამ პერიოდში მონაცემები არ შეგროვდა</string>
+    <string name="history_field_label">ველი</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">შეგროვებული მონაცემები (%1$d მწკრივი)</item>
+        <item quantity="other">შეგროვებული მონაცემები (%1$d მწკრივები)</item>
+    </plurals>
+    <string name="service_history_all_functions">ყველა მეთოდი</string>
+    <string name="service_history_field_selection">ველები %1$d / %2$d</string>
+    <string name="service_history_fault_chip">ხარვეზი %1$s × %2$d</string>
+    <string name="service_history_no_curve">ამ სერვისის ვერცერთი ველი ვერ აისახება გრაფიკზე</string>
+    <string name="service_history_no_curve_for_function">ამ ფუნქციაში გრაფიკზე გამოსახვადი ველი არ არის</string>
+    <string name="service_history_no_fields_selected">ველები არჩეული არ არის</string>
+    <string name="service_history_failure_hint">ვერტიკალური ხაზები შეგროვების წარუმატებლობის მომენტებს აღნიშნავს</string>
+    <string name="service_history_downsampled_hint">მონაცემთა წერტილები ბევრია; შემცირდა დისკრეტიზაცია დროის ინტერვალებით (მნიშვნელობა ამ ინტერვალის საშუალოა, ფრჩხილებში მინიმუმი~მაქსიმუმი)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">ცხრილი</string>
+    <string name="service_history_view_chart">გრაფიკი</string>
+</resources>

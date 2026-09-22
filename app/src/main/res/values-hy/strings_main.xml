@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">Գլխավոր էջ</string>
+    <string name="tab_project">Նախագիծ</string>
+    <string name="tab_device">Սարք</string>
+    <string name="tab_product">Ապրանքներ</string>
+    <string name="tab_profile">Պրոֆիլ</string>
+    <string name="main_switch_project">Փոխել նախագիծը</string>
+    <string name="main_pick_org_first">Նախ ընտրեք կազմակերպություն</string>
+    <string name="main_pick_org">Ընտրեք կազմակերպություն</string>
+    <string name="main_pick_project_first">Նախ ընտրեք նախագիծ</string>
+    <string name="main_pick_project">Ընտրեք նախագիծ</string>
+</resources>

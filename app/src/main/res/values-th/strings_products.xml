@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">ผลิตภัณฑ์</string>
+    <string name="product_detail_title">รายละเอียดผลิตภัณฑ์</string>
+    <string name="product_not_found">ไม่พบผลิตภัณฑ์</string>
+    <string name="product_empty">ยังไม่มีผลิตภัณฑ์</string>
+    <plurals name="product_count">
+        <item quantity="other">%1$d ผลิตภัณฑ์</item>
+    </plurals>
+    <string name="product_model_inline">รุ่น: %1$s</string>
+    <string name="product_id_label">ID ผลิตภัณฑ์</string>
+    <string name="product_model_label">รุ่นผลิตภัณฑ์</string>
+    <string name="product_org_label">องค์กรที่สังกัด</string>
+    <string name="product_buy_jd">ซื้อบน JD.com</string>
+    <string name="product_buy_taobao">ซื้อบน Taobao</string>
+    <string name="product_status_released">เผยแพร่แล้ว</string>
+    <string name="product_status_preview">ตัวอย่าง</string>
+    <string name="product_status_development">อยู่ระหว่างพัฒนา</string>
+    <string name="product_empty_data">ไม่มีข้อมูลผลิตภัณฑ์</string>
+</resources>

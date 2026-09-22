@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matriu</string>
+    <string name="common_back">Enrere</string>
+    <string name="common_retry">Torna-ho a provar</string>
+    <string name="common_confirm">Confirmar</string>
+    <string name="common_cancel">Cancel·lar</string>
+    <string name="common_close">Tancar</string>
+    <string name="common_detail">Detalls</string>
+    <string name="common_collapse">Replega</string>
+    <string name="common_expand">Expandeix</string>
+    <string name="common_all">Tots</string>
+    <string name="common_add">Afegir</string>
+    <string name="common_create">Crear</string>
+    <string name="common_delete">Suprimir</string>
+    <string name="common_unnamed">Sense nom</string>
+    <string name="common_unknown">Desconegut</string>
+    <string name="common_me">Jo</string>
+    <string name="common_rename_action">Canvia el nom</string>
+    <string name="common_role_label">Rol</string>
+    <string name="common_role_admin">Administrador</string>
+    <string name="common_role_member">Membres</string>
+    <string name="common_role_member_option">Membre estàndard</string>
+    <string name="common_member_add">Afegir membre</string>
+    <string name="common_member_remove">Eliminar membre</string>
+    <string name="common_edit">Editar</string>
+    <string name="common_refresh">Actualitza</string>
+    <string name="common_change">Canvia</string>
+    <string name="common_handle">Gestionar</string>
+    <string name="common_handled">Gestionat</string>
+    <string name="common_unhandled">Sense gestionar</string>
+    <string name="common_recovered">Restablert</string>
+    <string name="common_unrecovered">Actiu</string>
+    <string name="common_online">En línia</string>
+    <string name="common_offline">Fora de línia</string>
+    <string name="common_switch_on">Activat</string>
+    <string name="common_switch_off">Desactivat</string>
+    <string name="common_please_select">Seleccioneu</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">No s\'ha seleccionat cap interval de temps</string>
+    <string name="common_range_text">de %1$s a %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Serveis</string>
+    <string name="common_function_label">Mètodes</string>
+    <string name="common_device_label">Dispositiu</string>
+    <string name="common_protocol_label">Protocol</string>
+    <string name="common_unknown_product">Producte desconegut</string>
+    <string name="common_truncated_hint">Hi ha més registres d\'excepcions que el límit; només es mostren els més recents</string>
+    <string name="err_network">Xarxa no disponible. Comproveu la connexió i torneu-ho a provar.</string>
+    <string name="err_unknown">Alguna cosa ha anat malament. Torneu-ho a provar.</string>
+    <string name="space_type_site">Emplaçament</string>
+    <string name="space_type_building">Edifici</string>
+    <string name="space_type_floor">Planta</string>
+    <string name="space_type_room">Habitació</string>
+    <string name="space_type_zone">Zona</string>
+    <string name="space_type_field">Terreny</string>
+    <string name="space_type_workshop">Taller</string>
+    <string name="space_type_parking">Pàrquing</string>
+</resources>

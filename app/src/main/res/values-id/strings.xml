@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matriks</string>
+    <string name="common_back">Kembali</string>
+    <string name="common_retry">Coba lagi</string>
+    <string name="common_confirm">Konfirmasi</string>
+    <string name="common_cancel">Batal</string>
+    <string name="common_close">Tutup</string>
+    <string name="common_detail">Detail</string>
+    <string name="common_collapse">Ciutkan</string>
+    <string name="common_expand">Perluas</string>
+    <string name="common_all">Semua</string>
+    <string name="common_add">Tambah</string>
+    <string name="common_create">Buat</string>
+    <string name="common_delete">Hapus</string>
+    <string name="common_unnamed">Tanpa nama</string>
+    <string name="common_unknown">Tidak diketahui</string>
+    <string name="common_me">Anda</string>
+    <string name="common_rename_action">Ubah nama</string>
+    <string name="common_role_label">Peran</string>
+    <string name="common_role_admin">Administrator</string>
+    <string name="common_role_member">Anggota</string>
+    <string name="common_role_member_option">Anggota Biasa</string>
+    <string name="common_member_add">Tambah Anggota</string>
+    <string name="common_member_remove">Keluarkan Anggota</string>
+    <string name="common_edit">Edit</string>
+    <string name="common_refresh">Segarkan</string>
+    <string name="common_change">Ubah</string>
+    <string name="common_handle">Tangani</string>
+    <string name="common_handled">Sudah ditangani</string>
+    <string name="common_unhandled">Belum ditangani</string>
+    <string name="common_recovered">Pulih</string>
+    <string name="common_unrecovered">Aktif</string>
+    <string name="common_online">Daring</string>
+    <string name="common_offline">Luring</string>
+    <string name="common_switch_on">Aktif</string>
+    <string name="common_switch_off">Nonaktif</string>
+    <string name="common_please_select">Harap pilih</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Belum ada rentang waktu yang dipilih</string>
+    <string name="common_range_text">%1$s hingga %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Layanan</string>
+    <string name="common_function_label">Metode</string>
+    <string name="common_device_label">Perangkat</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Produk Tidak Dikenal</string>
+    <string name="common_truncated_hint">Pengecualian melebihi batas; hanya yang terbaru yang ditampilkan</string>
+    <string name="err_network">Jaringan tidak tersedia. Periksa koneksi Anda dan coba lagi.</string>
+    <string name="err_unknown">Terjadi kesalahan. Silakan coba lagi.</string>
+    <string name="space_type_site">Situs</string>
+    <string name="space_type_building">Gedung</string>
+    <string name="space_type_floor">Lantai</string>
+    <string name="space_type_room">Ruangan</string>
+    <string name="space_type_zone">Zona</string>
+    <string name="space_type_field">Lapangan</string>
+    <string name="space_type_workshop">Bengkel</string>
+    <string name="space_type_parking">Tempat parkir</string>
+</resources>

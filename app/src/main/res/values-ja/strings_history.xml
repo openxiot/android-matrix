@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">履歴</string>
+    <string name="history_section_overview">サービス概要</string>
+    <string name="history_no_services">このプロジェクトにはまだ Modbus サービスがありません</string>
+    <string name="history_service_count_label">サービス数</string>
+    <string name="history_device_count_label">デバイス数</string>
+    <string name="history_sampled_at_label">収集日時</string>
+    <string name="history_function_count_label">メソッド数</string>
+    <string name="history_faults_section">収集の例外</string>
+    <string name="history_faults_label">収集の例外</string>
+    <string name="history_no_faults">この期間にサンプリング異常はありません</string>
+    <string name="history_no_data">この期間にサンプリングデータはありません</string>
+    <string name="history_field_label">フィールド</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="other">サンプリングデータ（%1$d 行）</item>
+    </plurals>
+    <string name="service_history_all_functions">すべてのメソッド</string>
+    <string name="service_history_field_selection">フィールド %1$d / %2$d</string>
+    <string name="service_history_fault_chip">異常 %1$s × %2$d</string>
+    <string name="service_history_no_curve">このサービスのフィールドはグラフにできません</string>
+    <string name="service_history_no_curve_for_function">このファンクションにグラフ化できるフィールドがありません</string>
+    <string name="service_history_no_fields_selected">フィールドが選択されていません</string>
+    <string name="service_history_failure_hint">縦線は収集に失敗した時刻を示します</string>
+    <string name="service_history_downsampled_hint">データ点が多いため、時間区間ごとにダウンサンプリングしました（値はその区間の平均値、括弧内は最小~最大）</string>
+    <string name="service_history_keepalive">キープアライブ</string>
+    <string name="service_history_view_table">テーブル</string>
+    <string name="service_history_view_chart">グラフ</string>
+</resources>

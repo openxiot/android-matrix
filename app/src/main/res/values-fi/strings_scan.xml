@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Kohdista kamera laitteen QR-koodiin tai IMEI-tunnukseen</string>
+    <string name="scan_torch">Taskulamppu</string>
+    <string name="scan_torch_on">Sytytä taskulamppu</string>
+    <string name="scan_torch_off">Sammuta taskulamppu</string>
+    <string name="scan_permission_required">Kameran käyttöoikeus tarvitaan laitteiden skannaamiseen ja lisäämiseen</string>
+    <string name="scan_grant">Myönnä käyttöoikeus</string>
+</resources>

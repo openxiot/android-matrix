@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">السجل</string>
+    <string name="history_section_overview">نظرة عامة على الخدمات</string>
+    <string name="history_no_services">لا توجد خدمات Modbus في هذا المشروع بعد</string>
+    <string name="history_service_count_label">عدد الخدمات</string>
+    <string name="history_device_count_label">عدد الأجهزة</string>
+    <string name="history_sampled_at_label">وقت الجمع</string>
+    <string name="history_function_count_label">عدد الطرق</string>
+    <string name="history_faults_section">استثناءات الجمع</string>
+    <string name="history_faults_label">استثناءات الجمع</string>
+    <string name="history_no_faults">لا أعطال استقصاء في هذه الفترة</string>
+    <string name="history_no_data">لم تُستقصَ أي بيانات في هذه الفترة</string>
+    <string name="history_field_label">الحقل</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">بيانات الاستقصاء (%1$d صفوف)</item>
+        <item quantity="many">بيانات الاستقصاء (%1$d صفًا)</item>
+        <item quantity="one">صف واحد في بيانات الاستقصاء (%1$d)</item>
+        <item quantity="two">صفان في بيانات الاستقصاء (%1$d)</item>
+        <item quantity="zero">لا صفوف في بيانات الاستقصاء (%1$d)</item>
+        <item quantity="other">بيانات الاستقصاء (%1$d صف)</item>
+    </plurals>
+    <string name="service_history_all_functions">كل الطرق</string>
+    <string name="service_history_field_selection">الحقول %1$d / %2$d</string>
+    <string name="service_history_fault_chip">عطل %1$s × %2$d</string>
+    <string name="service_history_no_curve">لا يمكن رسم أي حقل من حقول هذه الخدمة</string>
+    <string name="service_history_no_curve_for_function">لا يوجد حقل قابل للرسم في هذه الوظيفة</string>
+    <string name="service_history_no_fields_selected">لم تُحدَّد أي حقول</string>
+    <string name="service_history_failure_hint">الخطوط العمودية تشير إلى لحظات فشل الجمع</string>
+    <string name="service_history_downsampled_hint">نقاط البيانات كثيرة، وتم تخفيض العينات حسب الفواصل الزمنية (القيمة هي المتوسط لهذه الفترة، وما بين القوسين الحد الأدنى~الحد الأقصى)</string>
+    <string name="service_history_keepalive">الإبقاء</string>
+    <string name="service_history_view_table">جدول</string>
+    <string name="service_history_view_chart">مخطط</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">ورود با WeChat</string>
+    <string name="login_test_account">ورود با حساب آزمایشی</string>
+    <string name="login_err_wechat_missing">WeChat نصب نیست یا نسخه آن خیلی قدیمی است</string>
+    <string name="login_err_no_code">کد مجوز برنگشت</string>
+    <string name="login_err_cancelled">ورود با WeChat لغو شد</string>
+    <string name="login_err_wechat">تأیید WeChat ناموفق بود (%1$d)</string>
+    <string name="login_err_no_token">ورود ناموفق بود: توکنی برنگشت</string>
+</resources>

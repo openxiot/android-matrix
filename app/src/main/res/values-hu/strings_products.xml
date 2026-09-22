@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Termékek</string>
+    <string name="product_detail_title">Termék részletei</string>
+    <string name="product_not_found">A termék nem található</string>
+    <string name="product_empty">Még nincsenek termékek</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d termék</item>
+        <item quantity="other">Összesen %1$d termék</item>
+    </plurals>
+    <string name="product_model_inline">Modell: %1$s</string>
+    <string name="product_id_label">Termék ID</string>
+    <string name="product_model_label">Termék modellje</string>
+    <string name="product_org_label">Szervezet</string>
+    <string name="product_buy_jd">Vásárlás a JD.com oldalon</string>
+    <string name="product_buy_taobao">Vásárlás a Taobao oldalon</string>
+    <string name="product_status_released">Közzétéve</string>
+    <string name="product_status_preview">Előzetes</string>
+    <string name="product_status_development">Fejlesztés alatt</string>
+    <string name="product_empty_data">Nincs termékadat</string>
+</resources>

@@ -23,6 +23,7 @@ import cc.openxiot.wematrix.ui.products.ProductListScreen
 import cc.openxiot.wematrix.ui.profile.ProfileScreen
 import cc.openxiot.wematrix.ui.project.ProjectViewModel
 import cc.openxiot.wematrix.ui.project.SpaceTreeContent
+import cc.openxiot.wematrix.util.mirrorInRtl
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -160,7 +161,7 @@ fun MainScreen(
                                                 Icons.Default.ChevronRight,
                                                 contentDescription = stringResource(R.string.main_switch_project),
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                                modifier = Modifier.size(20.dp)
+                                                modifier = Modifier.size(20.dp).mirrorInRtl()
                                             )
                                         }
                                     }
@@ -299,7 +300,7 @@ fun PageTitle(
                         Icons.Default.ChevronRight,
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(18.dp)
+                        modifier = Modifier.size(18.dp).mirrorInRtl()
                     )
                 }
             } else {

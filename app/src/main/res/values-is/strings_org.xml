@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Núverandi samtök</string>
+    <string name="org_detail_title">Upplýsingar um stofnun</string>
+    <string name="org_empty">Engin samtök ennþá — ýttu á + til að búa til</string>
+    <string name="org_create_title">Búa til stofnun</string>
+    <string name="org_id_label">ID samtakanna</string>
+    <string name="org_id_placeholder">t.d. my-company</string>
+    <string name="org_id_hint">Byrjaðu á bókstaf — aðeins bókstafir, tölur og bandstrik</string>
+    <string name="org_name_label">Stofnunarheiti</string>
+    <string name="org_name_placeholder">t.d. Fyrirtækið mitt</string>
+    <string name="org_rename_title">Breyta nafni samtaka</string>
+    <string name="org_delete_title">Eyða stofnun</string>
+    <string name="org_delete_confirm">Eyða þessum samtökum?</string>
+    <string name="org_manage">Stjórna</string>
+    <string name="org_swipe_delete">Strjúktu til að eyða</string>
+    <string name="org_members_empty">Engir meðlimir ennþá</string>
+    <string name="org_member_developer_id">ID þróunaraðila</string>
+    <string name="org_member_developer_id_placeholder">developerId notandans</string>
+    <string name="org_member_name_label">Sýnilegt nafn</string>
+    <string name="org_member_name_placeholder">Valfrjálst</string>
+    <string name="org_change_role">Breyta hlutverki</string>
+    <string name="org_change_role_title">Breyta hlutverki — %1$s</string>
+    <string name="org_remove_confirm">Fjarlægja „%1$s“?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d meðlimur</item>
+        <item quantity="other">%1$d meðlimir</item>
+    </plurals>
+</resources>

@@ -21,6 +21,7 @@ import cc.openxiot.wematrix.R
 import cc.openxiot.wematrix.WeMatrixApp
 import cc.openxiot.wematrix.ui.components.AvatarImage
 import cc.openxiot.wematrix.ui.main.PageTitle
+import cc.openxiot.wematrix.util.mirrorInRtl
 
 @Composable
 fun ProfileScreen(
@@ -85,6 +86,7 @@ fun ProfileScreen(
                         Icon(
                             Icons.Default.ChevronRight,
                             contentDescription = null,
+                            modifier = Modifier.mirrorInRtl(),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
@@ -138,7 +140,7 @@ fun ProfileScreen(
                 // 副标题显示当前选择，与上面深色模式那张卡同一个路子（标题说是什么，副标题说现在是什么）
                 SettingsCard(
                     title = stringResource(R.string.profile_language_title),
-                    subtitle = stringResource(languageLabelRes(AppLocale.current)),
+                    subtitle = languageLabel(AppLocale.current),
                     icon = Icons.Default.Language,
                     onClick = onNavigateToLanguage
                 )
@@ -247,6 +249,7 @@ private fun SettingsCard(
                 Icon(
                     Icons.Default.ChevronRight,
                     contentDescription = null,
+                    modifier = Modifier.mirrorInRtl(),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }

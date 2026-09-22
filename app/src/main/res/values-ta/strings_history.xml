@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">வரலாறு</string>
+    <string name="history_section_overview">சேவை கண்ணோட்டம்</string>
+    <string name="history_no_services">இந்த திட்டத்தில் இன்னும் Modbus சேவைகள் இல்லை</string>
+    <string name="history_service_count_label">சேவை எண்ணிக்கை</string>
+    <string name="history_device_count_label">சாதன எண்ணிக்கை</string>
+    <string name="history_sampled_at_label">சேகரிப்பு நேரம்</string>
+    <string name="history_function_count_label">முறைகள்</string>
+    <string name="history_faults_section">சேகரிப்பு விதிவிலக்குகள்</string>
+    <string name="history_faults_label">சேகரிப்பு விதிவிலக்குகள்</string>
+    <string name="history_no_faults">இந்த காலகட்டத்தில் சேகரிப்பு பிழைகள் இல்லை</string>
+    <string name="history_no_data">இந்த காலகட்டத்தில் எந்த தரவும் சேகரிக்கப்படவில்லை</string>
+    <string name="history_field_label">புலம்</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">சேகரிக்கப்பட்ட தரவு (%1$d வரிசை)</item>
+        <item quantity="other">சேகரிக்கப்பட்ட தரவு (%1$d வரிசைகள்)</item>
+    </plurals>
+    <string name="service_history_all_functions">அனைத்து முறைகள்</string>
+    <string name="service_history_field_selection">புலங்கள் %1$d / %2$d</string>
+    <string name="service_history_fault_chip">பிழை %1$s × %2$d</string>
+    <string name="service_history_no_curve">இந்த சேவையின் எந்த புலமும் வரைபடமாக்க முடியாது</string>
+    <string name="service_history_no_curve_for_function">இந்த செயல்பாட்டில் வரைபடமாக்கக்கூடிய புலம் இல்லை</string>
+    <string name="service_history_no_fields_selected">புலங்கள் தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="service_history_failure_hint">செங்குத்துக் கோடுகள் சேகரிப்பு தோல்வியின் நேரங்களைக் குறிக்கும்</string>
+    <string name="service_history_downsampled_hint">தரவுப் புள்ளிகள் அதிகம், நேர இடைவெளி வாரியாகக் குறைக்கப்பட்டது (மதிப்பு அந்த இடைவெளியின் சராசரி, அடைப்புக்குறிக்குள் குறைந்தபட்சம்~அதிகபட்சம்)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">அட்டவணை</string>
+    <string name="service_history_view_chart">வரைபடம்</string>
+</resources>

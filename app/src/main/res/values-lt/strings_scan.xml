@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Nukreipkite kamerą į įrenginio QR kodą arba IMEI</string>
+    <string name="scan_torch">Žibintuvėlis</string>
+    <string name="scan_torch_on">Įjungti žibintuvėlį</string>
+    <string name="scan_torch_off">Išjungti žibintuvėlį</string>
+    <string name="scan_permission_required">Norint nuskaityti ir pridėti įrenginius, reikia prieigos prie kameros</string>
+    <string name="scan_grant">Suteikti prieigą</string>
+</resources>

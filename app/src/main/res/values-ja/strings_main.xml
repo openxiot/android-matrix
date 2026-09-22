@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">ホーム</string>
+    <string name="tab_project">プロジェクト</string>
+    <string name="tab_device">デバイス</string>
+    <string name="tab_product">製品</string>
+    <string name="tab_profile">プロフィール</string>
+    <string name="main_switch_project">プロジェクトを切り替え</string>
+    <string name="main_pick_org_first">先に組織を選択してください</string>
+    <string name="main_pick_org">組織を選択</string>
+    <string name="main_pick_project_first">先にプロジェクトを選択してください</string>
+    <string name="main_pick_project">プロジェクトを選択</string>
+</resources>

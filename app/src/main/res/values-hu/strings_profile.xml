@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Nyelv</string>
+    <string name="profile_language_system">Rendszer beállítása szerint</string>
+    <string name="profile_language_search">Nyelvkeresés</string>
+    <string name="profile_language_search_clear">Törlés</string>
+    <string name="profile_language_no_match">Nincs egyező nyelv</string>
+    <string name="profile_not_logged_in">Nincs bejelentkezve</string>
+    <string name="profile_current_org">Jelenlegi szervezet</string>
+    <string name="profile_current_project">Jelenlegi projekt</string>
+    <string name="profile_no_org_selected">Nincs kiválasztott szervezet</string>
+    <string name="profile_no_project_selected">Nincs kiválasztott projekt</string>
+    <string name="profile_org_subtitle">Válasszon egyet a projekt kiválasztásához</string>
+    <string name="profile_project_subtitle_pick">Válasszon projektet</string>
+    <string name="profile_project_subtitle_switch">Koppintson a projektváltáshoz</string>
+    <string name="profile_project_subtitle_org_first">Először válasszon szervezetet</string>
+    <string name="profile_section_settings">Beállítások</string>
+    <string name="profile_dark_mode">Sötét mód</string>
+    <string name="profile_light_mode">Világos mód</string>
+    <string name="profile_theme_subtitle">Koppintson a téma váltásához</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Eszköz ponttáblázat</string>
+    <string name="profile_modbus_subtitle">Modbus regisztertérképek (csak olvasható)</string>
+    <string name="profile_alarm_title">Riasztások</string>
+    <string name="profile_alarm_subtitle">Modbus riasztási napló és kezelés</string>
+    <string name="profile_history_title">Előzmények</string>
+    <string name="profile_history_subtitle">Mintavételezési előzmények és diagramok</string>
+    <string name="profile_about_subtitle">Alkalmazásadatok és verzió</string>
+    <string name="account_title">Fiók</string>
+    <string name="account_username">Felhasználónév</string>
+    <string name="account_platform">Platform</string>
+    <string name="account_not_selected">Nincs kiválasztva</string>
+    <string name="account_org_toggle">Szervezet</string>
+    <string name="account_org_toggle_subtitle">Kapcsolja be a szervezetek kezeléséhez</string>
+    <string name="account_logout">Kijelentkezés</string>
+    <string name="about_title">Névjegy</string>
+    <string name="about_tagline">IoT-eszközkezelő és felügyeleti platform</string>
+    <string name="about_version">%1$s verzió</string>
+    <string name="about_check_update">Frissítések keresése</string>
+    <string name="about_checking">Ellenőrzés…</string>
+    <string name="about_up_to_date">Naprakész</string>
+    <string name="about_update_now">Frissítés most</string>
+    <string name="about_downloading">Letöltés…</string>
+    <string name="about_downloading_percent">Letöltés: %1$d%%</string>
+    <string name="about_install_now">Telepítés most</string>
+    <string name="about_install">Telepítés</string>
+    <string name="about_retry_download">Letöltés újrapróbálása</string>
+    <string name="about_later">Később</string>
+    <string name="about_install_dialog_title">Frissítés telepítése</string>
+    <string name="about_new_version_found">Elérhető a %1$s verzió</string>
+    <string name="about_ready_hint">A letöltés kész — koppintson a Telepítés elemre, hogy átadja a rendszer telepítőjének.</string>
+    <string name="about_need_install_permission">Először engedélyezze, hogy az alkalmazás ismeretlen alkalmazásokat telepítsen</string>
+    <string name="about_keep_app_alive">Válthat az oldalak között — csak ne zárja be az alkalmazást</string>
+    <string name="about_metered">Mobilhálózaton van — a letöltés sok adatot fogyaszthat</string>
+    <string name="about_metered_size">Mobilhálózaton van — a csomag mérete körülbelül %1$s</string>
+    <string name="about_install_settings_failed">Nem sikerült megnyitni az „Ismeretlen alkalmazások telepítése” beállítást — kézzel engedélyezze a rendszerbeállításokban</string>
+    <string name="about_no_installer">Nincs elérhető telepítőalkalmazás — a csomag az alkalmazás mappájában van</string>
+    <string name="about_update_notes_empty">Ehhez a kiadáshoz nem tartozik leírás.</string>
+</resources>

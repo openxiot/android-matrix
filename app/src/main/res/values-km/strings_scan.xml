@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">តម្រង់កាមេរ៉ាទៅកូដ QR ឬ IMEI របស់ឧបករណ៍</string>
+    <string name="scan_torch">ពិល</string>
+    <string name="scan_torch_on">បើកពិល</string>
+    <string name="scan_torch_off">បិទពិល</string>
+    <string name="scan_permission_required">ត្រូវការសិទ្ធិកាមេរ៉ាដើម្បីស្កេន និងបន្ថែមឧបករណ៍</string>
+    <string name="scan_grant">ផ្ដល់សិទ្ធិចូលប្រើ</string>
+</resources>

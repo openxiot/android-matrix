@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">சாதனத்தின் QR குறியீடு அல்லது IMEI-ஐ கேமராவில் காட்டவும்</string>
+    <string name="scan_torch">டார்ச்</string>
+    <string name="scan_torch_on">டார்ச்-ஐ இயக்கவும்</string>
+    <string name="scan_torch_off">டார்ச்-ஐ அணைக்கவும்</string>
+    <string name="scan_permission_required">சாதனங்களை ஸ்கேன் செய்து சேர்க்க கேமரா அணுகல் தேவை</string>
+    <string name="scan_grant">அணுகலை வழங்கு</string>
+</resources>

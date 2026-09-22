@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">製品</string>
+    <string name="product_detail_title">製品詳細</string>
+    <string name="product_not_found">製品が見つかりません</string>
+    <string name="product_empty">製品がまだありません</string>
+    <plurals name="product_count">
+        <item quantity="other">%1$d 件の製品</item>
+    </plurals>
+    <string name="product_model_inline">モデル: %1$s</string>
+    <string name="product_id_label">製品 ID</string>
+    <string name="product_model_label">製品型番</string>
+    <string name="product_org_label">所属組織</string>
+    <string name="product_buy_jd">JD.com で購入</string>
+    <string name="product_buy_taobao">タオバオで購入</string>
+    <string name="product_status_released">公開済み</string>
+    <string name="product_status_preview">プレビュー版</string>
+    <string name="product_status_development">開発中</string>
+    <string name="product_empty_data">製品データがありません</string>
+</resources>

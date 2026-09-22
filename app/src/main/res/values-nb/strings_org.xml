@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Gjeldende organisasjon</string>
+    <string name="org_detail_title">Organisasjonsdetaljer</string>
+    <string name="org_empty">Ingen organisasjoner ennå — trykk + for å opprette en</string>
+    <string name="org_create_title">Opprett organisasjon</string>
+    <string name="org_id_label">Organisasjons-ID</string>
+    <string name="org_id_placeholder">f.eks. min-bedrift</string>
+    <string name="org_id_hint">Start med en bokstav — bare bokstaver, tall og bindestreker</string>
+    <string name="org_name_label">Organisasjonsnavn</string>
+    <string name="org_name_placeholder">f.eks. Min bedrift</string>
+    <string name="org_rename_title">Endre navn på organisasjonen</string>
+    <string name="org_delete_title">Slett organisasjon</string>
+    <string name="org_delete_confirm">Slette denne organisasjonen?</string>
+    <string name="org_manage">Administrer</string>
+    <string name="org_swipe_delete">Sveip for å slette</string>
+    <string name="org_members_empty">Ingen medlemmer ennå</string>
+    <string name="org_member_developer_id">Utvikler-ID</string>
+    <string name="org_member_developer_id_placeholder">Brukerens developerId</string>
+    <string name="org_member_name_label">Visningsnavn</string>
+    <string name="org_member_name_placeholder">Valgfritt</string>
+    <string name="org_change_role">Endre rolle</string>
+    <string name="org_change_role_title">Endre rolle — %1$s</string>
+    <string name="org_remove_confirm">Fjerne «%1$s»?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d medlem</item>
+        <item quantity="other">%1$d medlemmer</item>
+    </plurals>
+</resources>

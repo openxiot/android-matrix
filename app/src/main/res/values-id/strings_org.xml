@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Organisasi saat ini</string>
+    <string name="org_detail_title">Detail Organisasi</string>
+    <string name="org_empty">Belum ada organisasi — ketuk + untuk membuat</string>
+    <string name="org_create_title">Buat Organisasi</string>
+    <string name="org_id_label">ID organisasi</string>
+    <string name="org_id_placeholder">mis. my-company</string>
+    <string name="org_id_hint">Awali dengan huruf — hanya huruf, angka, dan tanda hubung</string>
+    <string name="org_name_label">Nama Organisasi</string>
+    <string name="org_name_placeholder">mis. Perusahaan Saya</string>
+    <string name="org_rename_title">Ubah nama organisasi</string>
+    <string name="org_delete_title">Hapus Organisasi</string>
+    <string name="org_delete_confirm">Hapus organisasi ini?</string>
+    <string name="org_manage">Kelola</string>
+    <string name="org_swipe_delete">Geser untuk menghapus</string>
+    <string name="org_members_empty">Belum ada anggota</string>
+    <string name="org_member_developer_id">ID pengembang</string>
+    <string name="org_member_developer_id_placeholder">developerId pengguna</string>
+    <string name="org_member_name_label">Nama tampilan</string>
+    <string name="org_member_name_placeholder">Opsional</string>
+    <string name="org_change_role">Ubah peran</string>
+    <string name="org_change_role_title">Ubah peran — %1$s</string>
+    <string name="org_remove_confirm">Hapus \"%1$s\"?</string>
+    <plurals name="org_member_count">
+        <item quantity="other">%1$d anggota</item>
+    </plurals>
+</resources>

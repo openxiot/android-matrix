@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Продукти</string>
+    <string name="product_detail_title">Детайли на продукт</string>
+    <string name="product_not_found">Продуктът не е намерен</string>
+    <string name="product_empty">Още няма продукти</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d продукт</item>
+        <item quantity="other">%1$d продукта</item>
+    </plurals>
+    <string name="product_model_inline">Модел: %1$s</string>
+    <string name="product_id_label">ID на продукт</string>
+    <string name="product_model_label">Модел на продукт</string>
+    <string name="product_org_label">Организация</string>
+    <string name="product_buy_jd">Купи от JD.com</string>
+    <string name="product_buy_taobao">Купи от Taobao</string>
+    <string name="product_status_released">Публикувано</string>
+    <string name="product_status_preview">Предварителна версия</string>
+    <string name="product_status_development">В разработка</string>
+    <string name="product_empty_data">Няма данни за продукта</string>
+</resources>

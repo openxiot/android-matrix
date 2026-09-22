@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">ആദ്യം പ്രൊഫൈലിന് കീഴിലുള്ള ഒരു പ്രോജക്റ്റ് തിരഞ്ഞെടുക്കുക</string>
+    <string name="devices_empty">ഇതുവരെ ഉപകരണങ്ങളില്ല</string>
+    <string name="devices_unknown">അജ്ഞാത ഉപകരണം</string>
+    <plurals name="devices_count">
+        <item quantity="one">%1$d ഉപകരണം</item>
+        <item quantity="other">%1$d ഉപകരണങ്ങൾ</item>
+    </plurals>
+</resources>

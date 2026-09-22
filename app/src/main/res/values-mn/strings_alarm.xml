@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Сэрэмжлүүлэг</string>
+    <string name="alarm_action_ok">Үйлдэл амжилттай боллоо</string>
+    <string name="alarm_empty">Энэ хугацаанд дохиолол байхгүй</string>
+    <string name="alarm_all_services">Бүх үйлчилгээ</string>
+    <string name="alarm_level_label">Сэрэмжлүүлгийн түвшин</string>
+    <string name="alarm_handled_label">Шийдвэрлэх</string>
+    <string name="alarm_status_label">Төлөв</string>
+    <string name="alarm_summary_title">Сэрэмжлүүлгийн жагсаалт</string>
+    <string name="alarm_text_label">Сэрэмжлүүлгийн текст</string>
+    <string name="alarm_field_label">Талбар</string>
+    <string name="alarm_trigger_label">Үүсэх нөхцөл</string>
+    <string name="alarm_current_value_label">Одоогийн утга</string>
+</resources>

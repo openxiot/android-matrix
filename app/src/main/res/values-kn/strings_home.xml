@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">ದಯವಿಟ್ಟು ಮೊದಲು ಯೋಜನೆ ಪಟ್ಟಿಯಿಂದ ಒಂದು ಯೋಜನೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">ಬದಲಾವಣೆಗಳನ್ನು ತಿರಸ್ಕರಿಸಬೇಕೇ?</string>
+    <string name="home_discard_message">ನಿಮ್ಮಲ್ಲಿ ಉಳಿಸದ ಬದಲಾವಣೆಗಳಿವೆ. ಈಗ ಹೊರಡುವುದು ಅವುಗಳನ್ನು ಕಳೆದುಕೊಳ್ಳುತ್ತದೆ.</string>
+    <string name="home_dashboard_empty">ಇನ್ನೂ ಕಾರ್ಡ್‌ಗಳಿಲ್ಲ — ಒಂದನ್ನು ಸೇರಿಸಲು ಕೆಳಗಿನ “ಸೇರಿಸಿ” ಒತ್ತಿರಿ</string>
+    <string name="home_add_card">+ ಸೇರಿಸಿ</string>
+    <string name="home_default_layout_loaded">ಡೀಫಾಲ್ಟ್ ವಿನ್ಯಾಸ ಲೋಡ್ ಆಗಿದೆ — ಅನ್ವಯಿಸಲು ಅದನ್ನು ಉಳಿಸಿ</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">ಒಂದು ದೊಡ್ಡ ಸಂಖ್ಯೆ: ಸಾಧನಗಳು / ಸೇವೆಗಳು / ಎಚ್ಚರಿಕೆಗಳು / ದೋಷಗಳು</string>
+    <string name="home_card_kind_line">ಗಂಟೆಯ ಎಚ್ಚರಿಕೆ ಎಣಿಕೆಗಳು, ಅಥವಾ ಒಂದು ಸೇವಾ ಕ್ಷೇತ್ರ</string>
+    <string name="home_card_kind_distribution">ಸಾಧನ / ಸೇವೆ / ಎಚ್ಚರಿಕೆ / ದೋಷದಿಂದ ವಿಂಗಡಣೆ</string>
+    <string name="home_card_kind_device">ಒಂದು ಸಾಧನದ ಒಂದು ಗುಣ</string>
+    <string name="home_card_kind_service">ಒಂದು ಕ್ರಿಯೆಯಿಂದ ಫೀಲ್ಡ್‌ಗಳ ಗುಂಪು</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">ಗ್ರಾಫ್</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">ಸಾಧನ</string>
+    <string name="home_card_default_service">ಸೇವೆಗಳು</string>
+    <string name="home_card_default_unknown">ಕಾರ್ಡ್</string>
+    <string name="home_edit_card_title">ಸಂಪಾದಿಸಿ · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">ಪೂರ್ಣ ಅಗಲ</string>
+    <string name="home_size_half">ಅರ್ಧ ಅಗಲ</string>
+    <string name="home_section_metric">ಮೆಟ್ರಿಕ್</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">ಒಟ್ಟು ಸಾಧನಗಳು</string>
+    <string name="home_metric_devices_online">ಆನ್‌ಲೈನ್ ಸಾಧನಗಳು</string>
+    <string name="home_metric_services_total">ಒಟ್ಟು ಸೇವೆಗಳು</string>
+    <string name="home_metric_alarms_today">ಇಂದಿನ ಎಚ್ಚರಿಕೆಗಳು</string>
+    <string name="home_metric_alarms_window">ವಿಂಡೋದಲ್ಲಿನ ಎಚ್ಚರಿಕೆಗಳು</string>
+    <string name="home_metric_failures_total">ವಿಂಡೋದಲ್ಲಿನ ಸ್ಯಾಂಪ್ಲಿಂಗ್ ವೈಫಲ್ಯಗಳು</string>
+    <string name="home_section_dimension">ವಿಂಗಡಣೆ</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">ಸಾಧನ ಪ್ರಕಾರ</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">ಸ್ಯಾಂಪ್ಲಿಂಗ್ ವೈಫಲ್ಯದ ಪ್ರಕಾರ</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">ಡೇಟಾ ಮೂಲ</string>
+    <string name="home_source_label">ಮೂಲ</string>
+    <string name="home_source_alarm_curve">ಗಂಟೆಯ ಎಚ್ಚರಿಕೆ ಎಣಿಕೆಗಳು</string>
+    <string name="home_source_service_field">ಒಂದು ಸೇವಾ ಫೀಲ್ಡ್</string>
+    <string name="home_show_failure_shadow">ಸಂಗ್ರಹ ವಿಫಲತೆಯ ರೇಖೆಗಳನ್ನು ತೋರಿಸಿ</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">ಸೇವೆ · ಕ್ರಿಯೆ · ಫೀಲ್ಡ್</string>
+    <string name="home_service_placeholder">ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_service_unnamed">ಹೆಸರಿಲ್ಲದ ಸೇವೆ</string>
+    <string name="home_function_placeholder">ಕ್ರಿಯೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_function_fallback">ಕ್ರಿಯೆ %1$d</string>
+    <string name="home_pick_service_first">ಮೊದಲು ಸೇವೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_show_unit">ಘಟಕ ತೋರಿಸಿ</string>
+    <string name="home_section_device_prop">ಸಾಧನ · ಗುಣ</string>
+    <string name="home_device_placeholder">ಸಾಧನವನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_prop_label">ಪ್ರಾಪರ್ಟಿಗಳು</string>
+    <string name="home_pick_device_first">ಮೊದಲು ಸಾಧನವನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_prop_none">ಈ ಮಾದರಿಗೆ ಯಾವುದೇ ಗುಣಗಳಿಲ್ಲ</string>
+    <string name="home_prop_placeholder">ಗುಣವನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, ಮಿತಿಯಿಲ್ಲದೆ ಖಾಲಿ ಬಿಡಿ</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">ಕೊನೆಯ</string>
+    <string name="home_window_custom">ಕಸ್ಟಮ್</string>
+    <string name="home_pick_dates">ಪ್ರಾರಂಭ ಮತ್ತು ಅಂತಿಮ ದಿನಾಂಕಗಳನ್ನು ಆರಿಸಿ</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d ದಿನ</item>
+        <item quantity="other">%1$d ದಿನಗಳು</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d ಗಂಟೆ</item>
+        <item quantity="other">%1$d ಗಂಟೆಗಳು</item>
+    </plurals>
+    <string name="home_card_unknown_type">ಅಜ್ಞಾತ ಕಾರ್ಡ್ ಪ್ರಕಾರ</string>
+    <string name="home_empty_no_data">ಡೇಟಾ ಇಲ್ಲ</string>
+    <string name="home_empty_no_reading">ಇನ್ನೂ ರೀಡಿಂಗ್‌ಗಳಿಲ್ಲ</string>
+    <string name="home_empty_not_sampled">ಇನ್ನೂ ಸಂಗ್ರಹಿಸಿಲ್ಲ</string>
+    <string name="home_sampled_at">ಸ್ಯಾಂಪಲ್ ಮಾಡಲಾಗಿದೆ %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">ಸಾಧನಗಳು</string>
+    <string name="home_unit_services">ಸೇವೆಗಳು</string>
+</resources>

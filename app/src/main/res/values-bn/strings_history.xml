@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">ইতিহাস</string>
+    <string name="history_section_overview">পরিষেবার সারসংক্ষেপ</string>
+    <string name="history_no_services">এই প্রজেক্টে এখনও কোনো Modbus পরিষেবা নেই</string>
+    <string name="history_service_count_label">পরিষেবা সংখ্যা</string>
+    <string name="history_device_count_label">ডিভাইস সংখ্যা</string>
+    <string name="history_sampled_at_label">সংগ্রহের সময়</string>
+    <string name="history_function_count_label">পদ্ধতি</string>
+    <string name="history_faults_section">সংগ্রহ ব্যতিক্রম</string>
+    <string name="history_faults_label">সংগ্রহ ব্যতিক্রম</string>
+    <string name="history_no_faults">এই সময়ে কোনো নমুনাকরণ ত্রুটি নেই</string>
+    <string name="history_no_data">এই সময়ে কোনো ডেটা নমুনাকৃত হয়নি</string>
+    <string name="history_field_label">ফিল্ড</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">নমুনাকৃত ডেটা (%1$d সারি)</item>
+        <item quantity="other">নমুনাকৃত ডেটা (%1$d টি সারি)</item>
+    </plurals>
+    <string name="service_history_all_functions">সমস্ত পদ্ধতি</string>
+    <string name="service_history_field_selection">ফিল্ড %1$d / %2$d</string>
+    <string name="service_history_fault_chip">ত্রুটি %1$s × %2$d</string>
+    <string name="service_history_no_curve">এই পরিষেবার কোনো ফিল্ডের চার্ট আঁকা যাবে না</string>
+    <string name="service_history_no_curve_for_function">এই ফাংশনে কোনো চার্টযোগ্য ফিল্ড নেই</string>
+    <string name="service_history_no_fields_selected">কোনো ফিল্ড নির্বাচন করা হয়নি</string>
+    <string name="service_history_failure_hint">খাড়া রেখাগুলো সংগ্রহ ব্যর্থ হওয়ার মুহূর্ত নির্দেশ করে</string>
+    <string name="service_history_downsampled_hint">অনেক ডেটা পয়েন্ট, সময়ের ব্যবধানে ডাউনস্যাম্পল করা হয়েছে (মানটি ওই ব্যবধানের গড়, বন্ধনীতে সর্বনিম্ন~সর্বোচ্চ)</string>
+    <string name="service_history_keepalive">হোল্ডিং</string>
+    <string name="service_history_view_table">টেবিল</string>
+    <string name="service_history_view_chart">চার্ট</string>
+</resources>

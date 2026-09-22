@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrix</string>
+    <string name="common_back">Tilbage</string>
+    <string name="common_retry">Prøv igen</string>
+    <string name="common_confirm">Bekræft</string>
+    <string name="common_cancel">Annuller</string>
+    <string name="common_close">Luk</string>
+    <string name="common_detail">Detaljer</string>
+    <string name="common_collapse">Skjul</string>
+    <string name="common_expand">Udvid</string>
+    <string name="common_all">Alle</string>
+    <string name="common_add">Tilføj</string>
+    <string name="common_create">Opret</string>
+    <string name="common_delete">Slet</string>
+    <string name="common_unnamed">Uden navn</string>
+    <string name="common_unknown">Ukendt</string>
+    <string name="common_me">Mig</string>
+    <string name="common_rename_action">Omdøb</string>
+    <string name="common_role_label">Rolle</string>
+    <string name="common_role_admin">Administrator</string>
+    <string name="common_role_member">Medlemmer</string>
+    <string name="common_role_member_option">Almindeligt medlem</string>
+    <string name="common_member_add">Tilføj medlem</string>
+    <string name="common_member_remove">Fjern medlem</string>
+    <string name="common_edit">Rediger</string>
+    <string name="common_refresh">Opdater</string>
+    <string name="common_change">Skift</string>
+    <string name="common_handle">Håndter</string>
+    <string name="common_handled">Håndteret</string>
+    <string name="common_unhandled">Ikke håndteret</string>
+    <string name="common_recovered">Genoprettet</string>
+    <string name="common_unrecovered">Aktiv</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">Til</string>
+    <string name="common_switch_off">Fra</string>
+    <string name="common_please_select">Vælg</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Intet tidsrum valgt</string>
+    <string name="common_range_text">%1$s til %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Tjenester</string>
+    <string name="common_function_label">Metoder</string>
+    <string name="common_device_label">Enhed</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Ukendt produkt</string>
+    <string name="common_truncated_hint">Der er flere undtagelsesposter end grænsen; kun de nyeste vises</string>
+    <string name="err_network">Netværket er ikke tilgængeligt. Kontrollér forbindelsen, og prøv igen.</string>
+    <string name="err_unknown">Noget gik galt. Prøv igen.</string>
+    <string name="space_type_site">Plads</string>
+    <string name="space_type_building">Bygning</string>
+    <string name="space_type_floor">Etage</string>
+    <string name="space_type_room">Rum</string>
+    <string name="space_type_zone">Zone</string>
+    <string name="space_type_field">Felt</string>
+    <string name="space_type_workshop">Værksted</string>
+    <string name="space_type_parking">Parkeringsplads</string>
+</resources>

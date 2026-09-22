@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Taal</string>
+    <string name="profile_language_system">Systeem volgen</string>
+    <string name="profile_language_search">Talen zoeken</string>
+    <string name="profile_language_search_clear">Wissen</string>
+    <string name="profile_language_no_match">Geen overeenkomende taal</string>
+    <string name="profile_not_logged_in">Niet aangemeld</string>
+    <string name="profile_current_org">Huidige organisatie</string>
+    <string name="profile_current_project">Huidig project</string>
+    <string name="profile_no_org_selected">Geen organisatie geselecteerd</string>
+    <string name="profile_no_project_selected">Geen project geselecteerd</string>
+    <string name="profile_org_subtitle">Kies er een om een project te kiezen</string>
+    <string name="profile_project_subtitle_pick">Kies een project</string>
+    <string name="profile_project_subtitle_switch">Tik om van project te wisselen</string>
+    <string name="profile_project_subtitle_org_first">Selecteer eerst een organisatie</string>
+    <string name="profile_section_settings">Instellingen</string>
+    <string name="profile_dark_mode">Donkere modus</string>
+    <string name="profile_light_mode">Lichte modus</string>
+    <string name="profile_theme_subtitle">Tik om van thema te wisselen</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Apparaatpunttabel</string>
+    <string name="profile_modbus_subtitle">Modbus-registermaps (alleen lezen)</string>
+    <string name="profile_alarm_title">Alarmen</string>
+    <string name="profile_alarm_subtitle">Modbus-alarmlog en -afhandeling</string>
+    <string name="profile_history_title">Geschiedenis</string>
+    <string name="profile_history_subtitle">Meethistorie en grafieken</string>
+    <string name="profile_about_subtitle">App-informatie en versie</string>
+    <string name="account_title">Account</string>
+    <string name="account_username">Gebruikersnaam</string>
+    <string name="account_platform">Platform</string>
+    <string name="account_not_selected">Niet geselecteerd</string>
+    <string name="account_org_toggle">Organisatie</string>
+    <string name="account_org_toggle_subtitle">Inschakelen om organisaties te beheren</string>
+    <string name="account_logout">Afmelden</string>
+    <string name="about_title">Over</string>
+    <string name="about_tagline">Platform voor beheer en monitoring van IoT-apparaten</string>
+    <string name="about_version">Versie %1$s</string>
+    <string name="about_check_update">Controleren op updates</string>
+    <string name="about_checking">Controleren…</string>
+    <string name="about_up_to_date">Nieuwste versie</string>
+    <string name="about_update_now">Nu bijwerken</string>
+    <string name="about_downloading">Downloaden…</string>
+    <string name="about_downloading_percent">Downloaden %1$d%%</string>
+    <string name="about_install_now">Nu installeren</string>
+    <string name="about_install">Installeren</string>
+    <string name="about_retry_download">Download opnieuw proberen</string>
+    <string name="about_later">Later</string>
+    <string name="about_install_dialog_title">Update installeren</string>
+    <string name="about_new_version_found">Versie %1$s is beschikbaar</string>
+    <string name="about_ready_hint">Download voltooid — tik op Installeren om het aan het systeeminstallatieprogramma te geven.</string>
+    <string name="about_need_install_permission">Sta eerst toe dat deze app onbekende apps installeert</string>
+    <string name="about_keep_app_alive">Er kan van pagina worden gewisseld — sluit de app alleen niet af</string>
+    <string name="about_metered">Er wordt mobiele data gebruikt — de download kan veel data kosten</string>
+    <string name="about_metered_size">Er wordt mobiele data gebruikt — het pakket is ongeveer %1$s</string>
+    <string name="about_install_settings_failed">Kan de instelling \"Onbekende apps installeren\" niet openen — sta het handmatig toe in de systeeminstellingen</string>
+    <string name="about_no_installer">Geen installatieprogramma beschikbaar — het pakket is opgeslagen in de map van de app</string>
+    <string name="about_update_notes_empty">Deze versie heeft geen opmerkingen.</string>
+</resources>

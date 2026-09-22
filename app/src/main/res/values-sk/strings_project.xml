@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Aktuálny projekt</string>
+    <string name="project_manage_title">Správa projektov</string>
+    <string name="project_empty">Zatiaľ žiadne projekty — klepnutím na + vytvoríte nový</string>
+    <string name="project_create_title">Vytvoriť projekt</string>
+    <string name="project_name_label">Názov projektu</string>
+    <string name="project_name_placeholder">Zadajte názov projektu</string>
+    <string name="project_rename_title">Premenovať projekt</string>
+    <string name="project_rename_action">Premenovať</string>
+    <string name="project_delete_title">Zmazať projekt</string>
+    <string name="project_delete_confirm">Zmazať tento projekt? Projekt, ktorý má priestory, sa nedá zmazať.</string>
+    <string name="project_swipe_delete">Potiahnutím zmazať</string>
+    <string name="project_type_label">Typ: %1$s</string>
+    <string name="project_members_title">Členovia projektu</string>
+    <string name="project_members_empty">Zatiaľ žiadni členovia — klepnutím na + pridáte nového</string>
+    <string name="project_members_label">Členovia</string>
+    <string name="project_user_id">ID používateľa</string>
+    <string name="project_user_id_placeholder">ID účtu používateľa</string>
+    <string name="project_remark_hint">Klepnutím pridáte poznámku</string>
+    <string name="project_remark_title">Upraviť poznámku — %1$s</string>
+    <string name="project_remark_label">Poznámka</string>
+    <string name="project_role_adjust">Zmeniť rolu</string>
+    <string name="project_role_adjust_title">Zmeniť rolu — %1$s</string>
+    <string name="project_remove_confirm">Odobrať „%1$s“?</string>
+    <string name="project_exit">Opustiť projekt</string>
+    <string name="project_exit_confirm">Opustiť tento projekt? Stratíte k nemu prístup.</string>
+    <string name="project_device_added">Zariadenie bolo pridané</string>
+    <string name="project_device_moved">Zariadenie bolo presunuté</string>
+    <string name="space_manage_title">Správa priestorov</string>
+    <string name="space_add">Pridať priestor</string>
+    <string name="space_add_child">Pridať podpriestor</string>
+    <string name="space_add_device">Pridať zariadenie</string>
+    <string name="space_name_label">Názov priestoru</string>
+    <string name="space_name_placeholder">Zadajte názov</string>
+    <string name="space_type_label">Typ priestoru</string>
+    <string name="space_empty">Žiadne údaje o priestoroch</string>
+    <string name="space_empty_editable">Začnite pridaním priestoru</string>
+    <string name="space_empty_readonly">Tento projekt zatiaľ nemá priestory ani zariadenia</string>
+    <string name="space_delete_title">Zmazať priestor</string>
+    <string name="space_delete_confirm">Zmazať tento priestor? Priestor, ktorý má podriadené priestory, sa nedá zmazať.</string>
+    <string name="space_move_title">Presunúť do priestoru</string>
+    <string name="space_move_action">Presunúť</string>
+    <string name="space_device_adding">Pridáva sa zariadenie…</string>
+    <string name="space_device_waiting">Čaká sa… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d zariadenia</item>
+        <item quantity="many">%1$d zariadenia</item>
+        <item quantity="one">%1$d zariadenie</item>
+        <item quantity="other">%1$d zariadení</item>
+    </plurals>
+</resources>

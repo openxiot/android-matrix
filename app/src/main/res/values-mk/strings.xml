@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Матрица</string>
+    <string name="common_back">Назад</string>
+    <string name="common_retry">Обиди се повторно</string>
+    <string name="common_confirm">Потврди</string>
+    <string name="common_cancel">Откажи</string>
+    <string name="common_close">Затвори</string>
+    <string name="common_detail">Детали</string>
+    <string name="common_collapse">Собери</string>
+    <string name="common_expand">Прошири</string>
+    <string name="common_all">Сите</string>
+    <string name="common_add">Додај</string>
+    <string name="common_create">Креирај</string>
+    <string name="common_delete">Избриши</string>
+    <string name="common_unnamed">Без име</string>
+    <string name="common_unknown">Непознато</string>
+    <string name="common_me">Вие</string>
+    <string name="common_rename_action">Преименувај</string>
+    <string name="common_role_label">Улога</string>
+    <string name="common_role_admin">Администратор</string>
+    <string name="common_role_member">Членови</string>
+    <string name="common_role_member_option">Обичен член</string>
+    <string name="common_member_add">Додај член</string>
+    <string name="common_member_remove">Отстрани член</string>
+    <string name="common_edit">Уреди</string>
+    <string name="common_refresh">Ажурирај</string>
+    <string name="common_change">Измени</string>
+    <string name="common_handle">Обработи</string>
+    <string name="common_handled">Обработено</string>
+    <string name="common_unhandled">Необработено</string>
+    <string name="common_recovered">Нормализирано</string>
+    <string name="common_unrecovered">Активно</string>
+    <string name="common_online">Онлајн</string>
+    <string name="common_offline">Офлајн</string>
+    <string name="common_switch_on">Вклучено</string>
+    <string name="common_switch_off">Исклучено</string>
+    <string name="common_please_select">Изберете</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Не е избран временски период</string>
+    <string name="common_range_text">%1$s до %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Услуги</string>
+    <string name="common_function_label">Методи</string>
+    <string name="common_device_label">Уред</string>
+    <string name="common_protocol_label">Протокол</string>
+    <string name="common_unknown_product">Непознат производ</string>
+    <string name="common_truncated_hint">Записите со исклучок го надминуваат ограничувањето, прикажани се само најновите</string>
+    <string name="err_network">Мрежата е недостапна. Проверете ја врската и обидете се повторно.</string>
+    <string name="err_unknown">Нешто тргна наопаку. Обидете се повторно.</string>
+    <string name="space_type_site">Локација</string>
+    <string name="space_type_building">Зграда</string>
+    <string name="space_type_floor">Кат</string>
+    <string name="space_type_room">Соба</string>
+    <string name="space_type_zone">Зона</string>
+    <string name="space_type_field">Терен</string>
+    <string name="space_type_workshop">Работилница</string>
+    <string name="space_type_parking">Паркинг</string>
+</resources>

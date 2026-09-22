@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">ជ្រើសរើសគម្រោងក្នុង ប្រវត្តិរូប ជាមុន</string>
+    <string name="devices_empty">មិនទាន់មានឧបករណ៍</string>
+    <string name="devices_unknown">ឧបករណ៍មិនស្គាល់</string>
+    <plurals name="devices_count">
+        <item quantity="other">%1$d ឧបករណ៍</item>
+    </plurals>
+</resources>

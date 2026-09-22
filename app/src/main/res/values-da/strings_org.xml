@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Aktuel organisation</string>
+    <string name="org_detail_title">Oplysninger om organisation</string>
+    <string name="org_empty">Ingen organisationer endnu — tryk på + for at oprette en</string>
+    <string name="org_create_title">Opret organisation</string>
+    <string name="org_id_label">Organisations-ID</string>
+    <string name="org_id_placeholder">f.eks. mit-firma</string>
+    <string name="org_id_hint">Skal begynde med et bogstav — kun bogstaver, tal og bindestreger</string>
+    <string name="org_name_label">Organisationsnavn</string>
+    <string name="org_name_placeholder">f.eks. Mit Firma</string>
+    <string name="org_rename_title">Omdøb organisation</string>
+    <string name="org_delete_title">Slet organisation</string>
+    <string name="org_delete_confirm">Slet denne organisation?</string>
+    <string name="org_manage">Administrer</string>
+    <string name="org_swipe_delete">Stryg for at slette</string>
+    <string name="org_members_empty">Ingen medlemmer endnu</string>
+    <string name="org_member_developer_id">Udvikler-ID</string>
+    <string name="org_member_developer_id_placeholder">Brugerens developerId</string>
+    <string name="org_member_name_label">Vist navn</string>
+    <string name="org_member_name_placeholder">Valgfrit</string>
+    <string name="org_change_role">Skift rolle</string>
+    <string name="org_change_role_title">Skift rolle — %1$s</string>
+    <string name="org_remove_confirm">Fjern \"%1$s\"?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d medlem</item>
+        <item quantity="other">%1$d medlemmer</item>
+    </plurals>
+</resources>

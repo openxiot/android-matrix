@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Apunte la cámara al código QR o al IMEI del dispositivo</string>
+    <string name="scan_torch">Linterna</string>
+    <string name="scan_torch_on">Encender la linterna</string>
+    <string name="scan_torch_off">Apagar la linterna</string>
+    <string name="scan_permission_required">Se necesita acceso a la cámara para escanear y añadir dispositivos</string>
+    <string name="scan_grant">Conceder acceso</string>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Dự án hiện tại</string>
+    <string name="project_manage_title">Quản lý dự án</string>
+    <string name="project_empty">Chưa có dự án nào — nhấn + để tạo một dự án</string>
+    <string name="project_create_title">Tạo dự án</string>
+    <string name="project_name_label">Tên dự án</string>
+    <string name="project_name_placeholder">Nhập tên dự án</string>
+    <string name="project_rename_title">Đổi tên dự án</string>
+    <string name="project_rename_action">Đổi tên</string>
+    <string name="project_delete_title">Xóa dự án</string>
+    <string name="project_delete_confirm">Xóa dự án này? Dự án còn không gian thì không thể xóa.</string>
+    <string name="project_swipe_delete">Vuốt để xóa</string>
+    <string name="project_type_label">Loại: %1$s</string>
+    <string name="project_members_title">Thành viên dự án</string>
+    <string name="project_members_empty">Chưa có thành viên nào — nhấn + để thêm</string>
+    <string name="project_members_label">Thành viên</string>
+    <string name="project_user_id">ID người dùng</string>
+    <string name="project_user_id_placeholder">ID tài khoản của người dùng</string>
+    <string name="project_remark_hint">Nhấn để thêm ghi chú</string>
+    <string name="project_remark_title">Sửa ghi chú — %1$s</string>
+    <string name="project_remark_label">Ghi chú</string>
+    <string name="project_role_adjust">Thay đổi vai trò</string>
+    <string name="project_role_adjust_title">Đổi vai trò — %1$s</string>
+    <string name="project_remove_confirm">Xóa “%1$s”?</string>
+    <string name="project_exit">Rời dự án</string>
+    <string name="project_exit_confirm">Rời khỏi dự án này? Bạn sẽ mất quyền truy cập.</string>
+    <string name="project_device_added">Đã thêm thiết bị</string>
+    <string name="project_device_moved">Đã di chuyển thiết bị</string>
+    <string name="space_manage_title">Quản lý không gian</string>
+    <string name="space_add">Thêm không gian</string>
+    <string name="space_add_child">Thêm không gian con</string>
+    <string name="space_add_device">Thêm thiết bị</string>
+    <string name="space_name_label">Tên không gian</string>
+    <string name="space_name_placeholder">Nhập tên</string>
+    <string name="space_type_label">Loại không gian</string>
+    <string name="space_empty">Không có dữ liệu không gian</string>
+    <string name="space_empty_editable">Thêm không gian để bắt đầu</string>
+    <string name="space_empty_readonly">Dự án này chưa có không gian hay thiết bị nào</string>
+    <string name="space_delete_title">Xóa không gian</string>
+    <string name="space_delete_confirm">Xóa không gian này? Không gian còn không gian con thì không thể xóa.</string>
+    <string name="space_move_title">Di chuyển đến không gian</string>
+    <string name="space_move_action">Di chuyển</string>
+    <string name="space_device_adding">Đang thêm thiết bị…</string>
+    <string name="space_device_waiting">Đang chờ… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d thiết bị</item>
+    </plurals>
+</resources>

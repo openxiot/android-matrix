@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Pavērsiet kameru pret ierīces QR kodu vai IMEI</string>
+    <string name="scan_torch">Lukturis</string>
+    <string name="scan_torch_on">Ieslēgt lukturi</string>
+    <string name="scan_torch_off">Izslēgt lukturi</string>
+    <string name="scan_permission_required">Lai skenētu un pievienotu ierīces, nepieciešama piekļuve kamerai</string>
+    <string name="scan_grant">Piešķirt piekļuvi</string>
+</resources>

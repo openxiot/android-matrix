@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">म्याट्रिक्स</string>
+    <string name="common_back">फिर्ता</string>
+    <string name="common_retry">पुन: प्रयास गर्नुहोस्</string>
+    <string name="common_confirm">पुष्टि गर्नुहोस्</string>
+    <string name="common_cancel">रद्द गर्नुहोस्</string>
+    <string name="common_close">बन्द गर्नुहोस्</string>
+    <string name="common_detail">विवरण</string>
+    <string name="common_collapse">संकुचित गर्नुहोस्</string>
+    <string name="common_expand">विस्तार गर्नुहोस्</string>
+    <string name="common_all">सबै</string>
+    <string name="common_add">थप्नुहोस्</string>
+    <string name="common_create">सिर्जना गर्नुहोस्</string>
+    <string name="common_delete">मेटाउनुहोस्</string>
+    <string name="common_unnamed">नाम नभएको</string>
+    <string name="common_unknown">अज्ञात</string>
+    <string name="common_me">तपाईं</string>
+    <string name="common_rename_action">नाम बदल्नुहोस्</string>
+    <string name="common_role_label">भूमिका</string>
+    <string name="common_role_admin">प्रशासक</string>
+    <string name="common_role_member">सदस्यहरू</string>
+    <string name="common_role_member_option">साधारण सदस्य</string>
+    <string name="common_member_add">सदस्य थप्नुहोस्</string>
+    <string name="common_member_remove">सदस्य हटाउनुहोस्</string>
+    <string name="common_edit">सम्पादन गर्नुहोस्</string>
+    <string name="common_refresh">अद्यावधिक गर्नुहोस्</string>
+    <string name="common_change">बदल्नुहोस्</string>
+    <string name="common_handle">कारबाही</string>
+    <string name="common_handled">कारबाही भएको छ</string>
+    <string name="common_unhandled">कारबाही भएको छैन</string>
+    <string name="common_recovered">पुनःस्थापित भयो</string>
+    <string name="common_unrecovered">पुनःस्थापित भएको छैन</string>
+    <string name="common_online">अनलाइन</string>
+    <string name="common_offline">अफलाइन</string>
+    <string name="common_switch_on">सक्रिय</string>
+    <string name="common_switch_off">निष्क्रिय</string>
+    <string name="common_please_select">छान्नुहोस्</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">कुनै समय दायरा चयन गरिएको छैन</string>
+    <string name="common_range_text">%1$s देखि %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">सेवाहरू</string>
+    <string name="common_function_label">विधिहरू</string>
+    <string name="common_device_label">उपकरण</string>
+    <string name="common_protocol_label">प्रोटोकल</string>
+    <string name="common_unknown_product">अज्ञात उत्पादन</string>
+    <string name="common_truncated_hint">अपवाद अभिलेखहरू सीमा नाघेका छन्, पछिल्लो भाग मात्र सूचीबद्ध गरिएको छ</string>
+    <string name="err_network">नेटवर्क उपलब्ध छैन। आफ्नो जडान जाँच गरी फेरि प्रयास गर्नुहोस्।</string>
+    <string name="err_unknown">केही गलत भयो। फेरि प्रयास गर्नुहोस्।</string>
+    <string name="space_type_site">साइट</string>
+    <string name="space_type_building">भवन</string>
+    <string name="space_type_floor">तला</string>
+    <string name="space_type_room">कोठा</string>
+    <string name="space_type_zone">जोन</string>
+    <string name="space_type_field">क्षेत्र</string>
+    <string name="space_type_workshop">कार्यशाला</string>
+    <string name="space_type_parking">पार्किङ</string>
+</resources>

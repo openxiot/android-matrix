@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrica</string>
+    <string name="common_back">Atgal</string>
+    <string name="common_retry">Kartoti</string>
+    <string name="common_confirm">Patvirtinti</string>
+    <string name="common_cancel">Atšaukti</string>
+    <string name="common_close">Uždaryti</string>
+    <string name="common_detail">Informacija</string>
+    <string name="common_collapse">Sutraukti</string>
+    <string name="common_expand">Išskleisti</string>
+    <string name="common_all">Visi</string>
+    <string name="common_add">Pridėti</string>
+    <string name="common_create">Sukurti</string>
+    <string name="common_delete">Ištrinti</string>
+    <string name="common_unnamed">Be pavadinimo</string>
+    <string name="common_unknown">Nežinoma</string>
+    <string name="common_me">Jūs</string>
+    <string name="common_rename_action">Pervadinti</string>
+    <string name="common_role_label">Vaidmuo</string>
+    <string name="common_role_admin">Administratorius</string>
+    <string name="common_role_member">Nariai</string>
+    <string name="common_role_member_option">Paprastas narys</string>
+    <string name="common_member_add">Pridėti narį</string>
+    <string name="common_member_remove">Pašalinti narį</string>
+    <string name="common_edit">Redaguoti</string>
+    <string name="common_refresh">Atnaujinti</string>
+    <string name="common_change">Keisti</string>
+    <string name="common_handle">Apdoroti</string>
+    <string name="common_handled">Apdorotas</string>
+    <string name="common_unhandled">Neapdorotas</string>
+    <string name="common_recovered">Atkurtas</string>
+    <string name="common_unrecovered">Aktyvus</string>
+    <string name="common_online">Prisijungęs</string>
+    <string name="common_offline">Neprisijungęs</string>
+    <string name="common_switch_on">Įjungta</string>
+    <string name="common_switch_off">Išjungta</string>
+    <string name="common_please_select">Pasirinkite</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Nepasirinktas laikotarpis</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Paslaugos</string>
+    <string name="common_function_label">Metodai</string>
+    <string name="common_device_label">Įrenginys</string>
+    <string name="common_protocol_label">Protokolas</string>
+    <string name="common_unknown_product">Nežinomas produktas</string>
+    <string name="common_truncated_hint">Išimčių įrašų daugiau nei riba, rodomi tik naujausi</string>
+    <string name="err_network">Tinklas nepasiekiamas. Patikrinkite ryšį ir bandykite dar kartą.</string>
+    <string name="err_unknown">Kažkas nepavyko. Bandykite dar kartą.</string>
+    <string name="space_type_site">Statybvietė</string>
+    <string name="space_type_building">Pastatas</string>
+    <string name="space_type_floor">Aukštas</string>
+    <string name="space_type_room">Kambarys</string>
+    <string name="space_type_zone">Zona</string>
+    <string name="space_type_field">Laukas</string>
+    <string name="space_type_workshop">Cechas</string>
+    <string name="space_type_parking">Automobilių stovėjimo aikštelė</string>
+</resources>

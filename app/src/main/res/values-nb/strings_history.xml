@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Historikk</string>
+    <string name="history_section_overview">Tjenesteoversikt</string>
+    <string name="history_no_services">Ingen Modbus-tjenester i dette prosjektet ennå</string>
+    <string name="history_service_count_label">Antall tjenester</string>
+    <string name="history_device_count_label">Antall enheter</string>
+    <string name="history_sampled_at_label">Innhentingstid</string>
+    <string name="history_function_count_label">Metoder</string>
+    <string name="history_faults_section">Innhentingsunntak</string>
+    <string name="history_faults_label">Innhentingsunntak</string>
+    <string name="history_no_faults">Ingen innsamlingsavvik i denne perioden</string>
+    <string name="history_no_data">Ingen data innsamlet i denne perioden</string>
+    <string name="history_field_label">Felt</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Innsamlede data (%1$d rad)</item>
+        <item quantity="other">Innsamlede data (%1$d rader)</item>
+    </plurals>
+    <string name="service_history_all_functions">Alle metoder</string>
+    <string name="service_history_field_selection">Felt %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Avvik %1$s × %2$d</string>
+    <string name="service_history_no_curve">Ingen felt i denne tjenesten kan vises i graf</string>
+    <string name="service_history_no_curve_for_function">Ingen felt i denne funksjonen kan vises i graf</string>
+    <string name="service_history_no_fields_selected">Ingen felt valgt</string>
+    <string name="service_history_failure_hint">Loddrette linjer markerer tidspunktet for mislykket innhenting</string>
+    <string name="service_history_downsampled_hint">Det er mange datapunkter, så dataene er nedsamplet per tidsintervall (verdien er gjennomsnittet for intervallet, i parentes minimum~maksimum)</string>
+    <string name="service_history_keepalive">Beholdt</string>
+    <string name="service_history_view_table">Tabell</string>
+    <string name="service_history_view_chart">Kurve</string>
+</resources>

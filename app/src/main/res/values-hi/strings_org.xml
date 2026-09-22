@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">वर्तमान संगठन</string>
+    <string name="org_detail_title">संगठन विवरण</string>
+    <string name="org_empty">अभी कोई संगठन नहीं — बनाने के लिए + टैप करें</string>
+    <string name="org_create_title">संगठन बनाएं</string>
+    <string name="org_id_label">संगठन आईडी</string>
+    <string name="org_id_placeholder">जैसे: my-company</string>
+    <string name="org_id_hint">एक अक्षर से शुरू करें — केवल अक्षर, अंक और हाइफ़न</string>
+    <string name="org_name_label">संगठन नाम</string>
+    <string name="org_name_placeholder">जैसे: मेरी कंपनी</string>
+    <string name="org_rename_title">संगठन का नाम बदलें</string>
+    <string name="org_delete_title">संगठन हटाएं</string>
+    <string name="org_delete_confirm">यह संगठन हटाएँ?</string>
+    <string name="org_manage">प्रबंधित करें</string>
+    <string name="org_swipe_delete">हटाने के लिए स्वाइप करें</string>
+    <string name="org_members_empty">अभी कोई सदस्य नहीं</string>
+    <string name="org_member_developer_id">डेवलपर आईडी</string>
+    <string name="org_member_developer_id_placeholder">उपयोगकर्ता का developerId</string>
+    <string name="org_member_name_label">प्रदर्शित नाम</string>
+    <string name="org_member_name_placeholder">वैकल्पिक</string>
+    <string name="org_change_role">भूमिका बदलें</string>
+    <string name="org_change_role_title">भूमिका बदलें — %1$s</string>
+    <string name="org_remove_confirm">“%1$s” हटाएँ?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d सदस्य</item>
+        <item quantity="other">%1$d सदस्यों</item>
+    </plurals>
+</resources>

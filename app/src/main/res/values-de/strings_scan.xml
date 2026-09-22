@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Kamera auf den QR-Code oder die IMEI des Geräts richten</string>
+    <string name="scan_torch">Taschenlampe</string>
+    <string name="scan_torch_on">Taschenlampe einschalten</string>
+    <string name="scan_torch_off">Taschenlampe ausschalten</string>
+    <string name="scan_permission_required">Kamerazugriff wird zum Scannen und Hinzufügen von Geräten benötigt</string>
+    <string name="scan_grant">Zugriff erlauben</string>
+</resources>

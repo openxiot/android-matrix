@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Språk</string>
+    <string name="profile_language_system">Følg systemet</string>
+    <string name="profile_language_search">Søk etter språk</string>
+    <string name="profile_language_search_clear">Fjern</string>
+    <string name="profile_language_no_match">Fant ingen treff for språket</string>
+    <string name="profile_not_logged_in">Ikke logget inn</string>
+    <string name="profile_current_org">Gjeldende organisasjon</string>
+    <string name="profile_current_project">Gjeldende prosjekt</string>
+    <string name="profile_no_org_selected">Ingen organisasjon valgt</string>
+    <string name="profile_no_project_selected">Ingen prosjekt valgt</string>
+    <string name="profile_org_subtitle">Velg én for å velge prosjekt</string>
+    <string name="profile_project_subtitle_pick">Velg et prosjekt</string>
+    <string name="profile_project_subtitle_switch">Trykk for å bytte prosjekt</string>
+    <string name="profile_project_subtitle_org_first">Velg først en organisasjon</string>
+    <string name="profile_section_settings">Innstillinger</string>
+    <string name="profile_dark_mode">Mørk modus</string>
+    <string name="profile_light_mode">Lys modus</string>
+    <string name="profile_theme_subtitle">Trykk for å bytte tema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Enhetens punktabell</string>
+    <string name="profile_modbus_subtitle">Modbus-registerkart (skrivebeskyttet)</string>
+    <string name="profile_alarm_title">Alarmer</string>
+    <string name="profile_alarm_subtitle">Modbus-alarmlogg og håndtering</string>
+    <string name="profile_history_title">Historikk</string>
+    <string name="profile_history_subtitle">Innsamlingshistorikk og grafer</string>
+    <string name="profile_about_subtitle">Appinformasjon og versjon</string>
+    <string name="account_title">Konto</string>
+    <string name="account_username">Brukernavn</string>
+    <string name="account_platform">Plattform</string>
+    <string name="account_not_selected">Ikke valgt</string>
+    <string name="account_org_toggle">Organisasjon</string>
+    <string name="account_org_toggle_subtitle">Slå på for å administrere organisasjoner</string>
+    <string name="account_logout">Logg ut</string>
+    <string name="about_title">Om</string>
+    <string name="about_tagline">Plattform for administrasjon og overvåking av IoT-enheter</string>
+    <string name="about_version">Versjon %1$s</string>
+    <string name="about_check_update">Se etter oppdateringer</string>
+    <string name="about_checking">Sjekker…</string>
+    <string name="about_up_to_date">Du har nyeste versjon</string>
+    <string name="about_update_now">Oppdater nå</string>
+    <string name="about_downloading">Laster ned…</string>
+    <string name="about_downloading_percent">Laster ned %1$d%%</string>
+    <string name="about_install_now">Installer nå</string>
+    <string name="about_install">Installer</string>
+    <string name="about_retry_download">Prøv nedlastingen igjen</string>
+    <string name="about_later">Senere</string>
+    <string name="about_install_dialog_title">Installer oppdatering</string>
+    <string name="about_new_version_found">Versjon %1$s er tilgjengelig</string>
+    <string name="about_ready_hint">Nedlastingen er fullført — trykk Installer for å overlate pakken til systemets installasjonsprogram.</string>
+    <string name="about_need_install_permission">Du må først tillate at denne appen installerer ukjente apper</string>
+    <string name="about_keep_app_alive">Du kan bytte side — bare ikke lukk appen</string>
+    <string name="about_metered">Du er på mobildata — nedlastingen kan bruke mye</string>
+    <string name="about_metered_size">Du er på mobildata — pakken er omtrent %1$s</string>
+    <string name="about_install_settings_failed">Kunne ikke åpne innstillingen «Installer ukjente apper» — tillat det manuelt i systeminnstillingene</string>
+    <string name="about_no_installer">Ingen installasjonsapp tilgjengelig — pakken er lagret i appens mappe</string>
+    <string name="about_update_notes_empty">Denne utgivelsen kom uten merknader.</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Visez le QR code ou l\'IMEI de l\'appareil avec la caméra</string>
+    <string name="scan_torch">Torche</string>
+    <string name="scan_torch_on">Allumer la torche</string>
+    <string name="scan_torch_off">Éteindre la torche</string>
+    <string name="scan_permission_required">L\'accès à la caméra est requis pour scanner et ajouter des appareils</string>
+    <string name="scan_grant">Autoriser l\'accès</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Đăng nhập bằng WeChat</string>
+    <string name="login_test_account">Đăng nhập bằng tài khoản thử nghiệm</string>
+    <string name="login_err_wechat_missing">Chưa cài WeChat hoặc phiên bản quá cũ</string>
+    <string name="login_err_no_code">Không nhận được mã ủy quyền</string>
+    <string name="login_err_cancelled">Đã hủy đăng nhập WeChat</string>
+    <string name="login_err_wechat">Ủy quyền WeChat thất bại (%1$d)</string>
+    <string name="login_err_no_token">Đăng nhập thất bại: không nhận được token</string>
+</resources>

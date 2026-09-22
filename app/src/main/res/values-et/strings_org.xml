@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Praegune organisatsioon</string>
+    <string name="org_detail_title">Organisatsiooni üksikasjad</string>
+    <string name="org_empty">Organisatsioone veel pole — loo üks, puudutades +</string>
+    <string name="org_create_title">Loo organisatsioon</string>
+    <string name="org_id_label">Organisatsiooni ID</string>
+    <string name="org_id_placeholder">nt my-company</string>
+    <string name="org_id_hint">Alusta tähega — ainult tähed, numbrid ja sidekriipsud</string>
+    <string name="org_name_label">Organisatsiooni nimi</string>
+    <string name="org_name_placeholder">nt Minu Ettevõte</string>
+    <string name="org_rename_title">Nimeta organisatsioon ümber</string>
+    <string name="org_delete_title">Kustuta organisatsioon</string>
+    <string name="org_delete_confirm">Kas kustutada see organisatsioon?</string>
+    <string name="org_manage">Halda</string>
+    <string name="org_swipe_delete">Kustutamiseks libista</string>
+    <string name="org_members_empty">Liikmeid veel pole</string>
+    <string name="org_member_developer_id">Arendaja ID</string>
+    <string name="org_member_developer_id_placeholder">Kasutaja developerId</string>
+    <string name="org_member_name_label">Kuvatav nimi</string>
+    <string name="org_member_name_placeholder">Valikuline</string>
+    <string name="org_change_role">Muuda rolli</string>
+    <string name="org_change_role_title">Muuda rolli — %1$s</string>
+    <string name="org_remove_confirm">Kas eemaldada „%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d liige</item>
+        <item quantity="other">%1$d liiget</item>
+    </plurals>
+</resources>

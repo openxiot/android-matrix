@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">বর্তমান প্রজেক্ট</string>
+    <string name="project_manage_title">প্রজেক্ট ব্যবস্থাপনা</string>
+    <string name="project_empty">এখনও কোনো প্রজেক্ট নেই — একটি তৈরি করতে + চাপুন</string>
+    <string name="project_create_title">প্রকল্প তৈরি করুন</string>
+    <string name="project_name_label">প্রকল্পের নাম</string>
+    <string name="project_name_placeholder">একটি প্রজেক্টের নাম লিখুন</string>
+    <string name="project_rename_title">প্রজেক্টের নাম পরিবর্তন</string>
+    <string name="project_rename_action">নাম পরিবর্তন</string>
+    <string name="project_delete_title">প্রজেক্ট মুছে ফেলুন</string>
+    <string name="project_delete_confirm">এই প্রজেক্টটি মুছে ফেলবেন? যে প্রজেক্টে এখনও স্পেস আছে তা মুছে ফেলা যায় না।</string>
+    <string name="project_swipe_delete">মুছতে সোয়াইপ করুন</string>
+    <string name="project_type_label">ধরন: %1$s</string>
+    <string name="project_members_title">প্রকল্পের সদস্য</string>
+    <string name="project_members_empty">এখনও কোনো সদস্য নেই — একটি যোগ করতে + চাপুন</string>
+    <string name="project_members_label">সদস্য</string>
+    <string name="project_user_id">ব্যবহারকারী ID</string>
+    <string name="project_user_id_placeholder">ব্যবহারকারীর অ্যাকাউন্ট আইডি</string>
+    <string name="project_remark_hint">একটি নোট যোগ করতে চাপুন</string>
+    <string name="project_remark_title">নোট সম্পাদনা — %1$s</string>
+    <string name="project_remark_label">নোট</string>
+    <string name="project_role_adjust">ভূমিকা পরিবর্তন করুন</string>
+    <string name="project_role_adjust_title">ভূমিকা পরিবর্তন — %1$s</string>
+    <string name="project_remove_confirm">«%1$s» সরাবেন?</string>
+    <string name="project_exit">প্রকল্প ছেড়ে দিন</string>
+    <string name="project_exit_confirm">এই প্রজেক্টটি ছেড়ে যাবেন? এর অ্যাক্সেস হারাবে।</string>
+    <string name="project_device_added">ডিভাইস যোগ হয়েছে</string>
+    <string name="project_device_moved">ডিভাইস সরানো হয়েছে</string>
+    <string name="space_manage_title">স্পেস ব্যবস্থাপনা</string>
+    <string name="space_add">স্পেস যোগ করুন</string>
+    <string name="space_add_child">চাইল্ড স্পেস যোগ করুন</string>
+    <string name="space_add_device">ডিভাইস যোগ করুন</string>
+    <string name="space_name_label">স্পেসের নাম</string>
+    <string name="space_name_placeholder">একটি নাম লিখুন</string>
+    <string name="space_type_label">স্পেসের ধরন</string>
+    <string name="space_empty">কোনো স্পেস ডেটা নেই</string>
+    <string name="space_empty_editable">শুরু করতে একটি স্পেস যোগ করুন</string>
+    <string name="space_empty_readonly">এই প্রজেক্টে এখনও কোনো স্পেস বা ডিভাইস নেই</string>
+    <string name="space_delete_title">স্পেস মুছে ফেলুন</string>
+    <string name="space_delete_confirm">এই স্পেসটি মুছে ফেলবেন? যে স্পেসে এখনও উপ-স্পেস আছে তা মুছে ফেলা যায় না।</string>
+    <string name="space_move_title">স্পেসে সরান</string>
+    <string name="space_move_action">সরান</string>
+    <string name="space_device_adding">ডিভাইস যোগ হচ্ছে…</string>
+    <string name="space_device_waiting">অপেক্ষা করা হচ্ছে… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d ডিভাইস</item>
+        <item quantity="other">%1$d টি ডিভাইস</item>
+    </plurals>
+</resources>

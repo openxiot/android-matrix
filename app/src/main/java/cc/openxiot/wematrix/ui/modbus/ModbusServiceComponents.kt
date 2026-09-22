@@ -21,6 +21,7 @@ import cc.openxiot.wematrix.data.api.ModbusService
 import cc.openxiot.wematrix.data.api.ModbusServiceBrief
 import cc.openxiot.wematrix.ui.theme.Blue500
 import cc.openxiot.wematrix.ui.components.InfoChip
+import cc.openxiot.wematrix.util.mirrorInRtl
 
 /**
  * 服务在两处的展示件：
@@ -100,7 +101,7 @@ fun ModbusServiceRow(
                 Icons.Default.ChevronRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(18.dp).mirrorInRtl()
             )
         }
     }
@@ -230,7 +231,7 @@ private fun ServiceCardRow(service: ModbusService, onClick: () -> Unit) {
             Icons.Default.ChevronRight,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.size(18.dp)
+            modifier = Modifier.size(18.dp).mirrorInRtl()
         )
     }
 }

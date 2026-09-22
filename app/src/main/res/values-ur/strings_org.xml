@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">موجودہ تنظیم</string>
+    <string name="org_detail_title">تنظیم کی تفصیلات</string>
+    <string name="org_empty">ابھی کوئی تنظیم نہیں — بنانے کے لیے + پر ٹیپ کریں</string>
+    <string name="org_create_title">تنظیم بنائیں</string>
+    <string name="org_id_label">تنظیم ID</string>
+    <string name="org_id_placeholder">مثلاً my-company</string>
+    <string name="org_id_hint">حرف سے شروع کریں — صرف حروف، ہندسے اور ہائفن</string>
+    <string name="org_name_label">تنظیم کا نام</string>
+    <string name="org_name_placeholder">مثلاً میری کمپنی</string>
+    <string name="org_rename_title">تنظیم کا نام تبدیل کریں</string>
+    <string name="org_delete_title">تنظیم حذف کریں</string>
+    <string name="org_delete_confirm">یہ تنظیم حذف کریں؟</string>
+    <string name="org_manage">انتظام</string>
+    <string name="org_swipe_delete">حذف کرنے کے لیے سوائپ کریں</string>
+    <string name="org_members_empty">ابھی کوئی ممبر نہیں</string>
+    <string name="org_member_developer_id">ڈویلپر ID</string>
+    <string name="org_member_developer_id_placeholder">صارف کا developerId</string>
+    <string name="org_member_name_label">ظاہری نام</string>
+    <string name="org_member_name_placeholder">اختیاری</string>
+    <string name="org_change_role">کردار تبدیل کریں</string>
+    <string name="org_change_role_title">کردار تبدیل کریں — %1$s</string>
+    <string name="org_remove_confirm">“%1$s” ہٹائیں؟</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d ممبر</item>
+        <item quantity="other">%1$d ممبران</item>
+    </plurals>
+</resources>

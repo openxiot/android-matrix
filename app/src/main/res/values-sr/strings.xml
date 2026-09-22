@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Матрица</string>
+    <string name="common_back">Назад</string>
+    <string name="common_retry">Покушај поново</string>
+    <string name="common_confirm">Потврди</string>
+    <string name="common_cancel">Откажи</string>
+    <string name="common_close">Затвори</string>
+    <string name="common_detail">Детаљи</string>
+    <string name="common_collapse">Скупи</string>
+    <string name="common_expand">Прошири</string>
+    <string name="common_all">Све</string>
+    <string name="common_add">Додај</string>
+    <string name="common_create">Креирај</string>
+    <string name="common_delete">Избриши</string>
+    <string name="common_unnamed">Без имена</string>
+    <string name="common_unknown">Непознато</string>
+    <string name="common_me">Ви</string>
+    <string name="common_rename_action">Преименуј</string>
+    <string name="common_role_label">Улога</string>
+    <string name="common_role_admin">Администратор</string>
+    <string name="common_role_member">Чланови</string>
+    <string name="common_role_member_option">Обичан члан</string>
+    <string name="common_member_add">Додај члана</string>
+    <string name="common_member_remove">Уклони члана</string>
+    <string name="common_edit">Уреди</string>
+    <string name="common_refresh">Освежи</string>
+    <string name="common_change">Промени</string>
+    <string name="common_handle">Обради</string>
+    <string name="common_handled">Обрађено</string>
+    <string name="common_unhandled">Није обрађено</string>
+    <string name="common_recovered">Опорављено</string>
+    <string name="common_unrecovered">Активно</string>
+    <string name="common_online">Онлајн</string>
+    <string name="common_offline">Офлајн</string>
+    <string name="common_switch_on">Укључено</string>
+    <string name="common_switch_off">Искључено</string>
+    <string name="common_please_select">Изаберите</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Није изабран временски распон</string>
+    <string name="common_range_text">%1$s до %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Услуге</string>
+    <string name="common_function_label">Методи</string>
+    <string name="common_device_label">Уређај</string>
+    <string name="common_protocol_label">Протокол</string>
+    <string name="common_unknown_product">Непознат производ</string>
+    <string name="common_truncated_hint">Број записа о изузецима премашује ограничење; приказани су само најновији</string>
+    <string name="err_network">Мрежа није доступна. Проверите везу и покушајте поново.</string>
+    <string name="err_unknown">Нешто је пошло наопако. Покушајте поново.</string>
+    <string name="space_type_site">Локација</string>
+    <string name="space_type_building">Зграда</string>
+    <string name="space_type_floor">Спрат</string>
+    <string name="space_type_room">Соба</string>
+    <string name="space_type_zone">Зона</string>
+    <string name="space_type_field">Терен</string>
+    <string name="space_type_workshop">Радионица</string>
+    <string name="space_type_parking">Паркинг</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrika</string>
+    <string name="common_back">Nazaj</string>
+    <string name="common_retry">Poskusi znova</string>
+    <string name="common_confirm">Potrdi</string>
+    <string name="common_cancel">Prekliči</string>
+    <string name="common_close">Zapri</string>
+    <string name="common_detail">Podrobnosti</string>
+    <string name="common_collapse">Strni</string>
+    <string name="common_expand">Razširi</string>
+    <string name="common_all">Vse</string>
+    <string name="common_add">Dodaj</string>
+    <string name="common_create">Ustvari</string>
+    <string name="common_delete">Izbriši</string>
+    <string name="common_unnamed">Neimenovano</string>
+    <string name="common_unknown">Neznano</string>
+    <string name="common_me">Vi</string>
+    <string name="common_rename_action">Preimenuj</string>
+    <string name="common_role_label">Vloga</string>
+    <string name="common_role_admin">Skrbnik</string>
+    <string name="common_role_member">Člani</string>
+    <string name="common_role_member_option">Običajni član</string>
+    <string name="common_member_add">Dodaj člana</string>
+    <string name="common_member_remove">Odstrani člana</string>
+    <string name="common_edit">Uredi</string>
+    <string name="common_refresh">Osveži</string>
+    <string name="common_change">Spremeni</string>
+    <string name="common_handle">Obdelaj</string>
+    <string name="common_handled">Obdelano</string>
+    <string name="common_unhandled">Neobdelano</string>
+    <string name="common_recovered">Obnovljen</string>
+    <string name="common_unrecovered">Aktiven</string>
+    <string name="common_online">Na voljo</string>
+    <string name="common_offline">Ni na voljo</string>
+    <string name="common_switch_on">Vklopljeno</string>
+    <string name="common_switch_off">Izklopljeno</string>
+    <string name="common_please_select">Izberite</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Časovno obdobje ni izbrano</string>
+    <string name="common_range_text">%1$s do %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Storitve</string>
+    <string name="common_function_label">Metode</string>
+    <string name="common_device_label">Naprava</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Neznan izdelek</string>
+    <string name="common_truncated_hint">Zapisov o izjemah je več od omejitve; prikazani so le najnovejši</string>
+    <string name="err_network">Omrežje ni dosegljivo. Preverite povezavo in poskusite znova.</string>
+    <string name="err_unknown">Nekaj je šlo narobe. Poskusite znova.</string>
+    <string name="space_type_site">Lokacija</string>
+    <string name="space_type_building">Stavba</string>
+    <string name="space_type_floor">Nadstropje</string>
+    <string name="space_type_room">Soba</string>
+    <string name="space_type_zone">Območje</string>
+    <string name="space_type_field">Teren</string>
+    <string name="space_type_workshop">Delavnica</string>
+    <string name="space_type_parking">Parkirišče</string>
+</resources>

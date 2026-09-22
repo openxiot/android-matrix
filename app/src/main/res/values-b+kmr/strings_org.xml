@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Rêxistina niha</string>
+    <string name="org_detail_title">Detayên rêxistinê</string>
+    <string name="org_empty">Hîn tu rêxistin tune — ji bo afirandinê + bitikînin</string>
+    <string name="org_create_title">Rêxistinê çêke</string>
+    <string name="org_id_label">ID ya rêxistinê</string>
+    <string name="org_id_placeholder">mînak: my-company</string>
+    <string name="org_id_hint">Bi tîpekê dest pê bikin — tenê tîp, hejmar û xêzik</string>
+    <string name="org_name_label">Navê Rêxistinê</string>
+    <string name="org_name_placeholder">mînak: Pargîdaniya Min</string>
+    <string name="org_rename_title">Navê rêxistinê biguhere</string>
+    <string name="org_delete_title">Rêxistinê jê bike</string>
+    <string name="org_delete_confirm">Vê rêxistinê jê bibin?</string>
+    <string name="org_manage">Birêvebirin</string>
+    <string name="org_swipe_delete">Ji bo jêbirinê bikşînin</string>
+    <string name="org_members_empty">Hîn tu endam tune</string>
+    <string name="org_member_developer_id">ID ya pêşvebir</string>
+    <string name="org_member_developer_id_placeholder">developerId ya bikarhêner</string>
+    <string name="org_member_name_label">Navê xuya</string>
+    <string name="org_member_name_placeholder">Vebijarkî</string>
+    <string name="org_change_role">Rolê biguhere</string>
+    <string name="org_change_role_title">Rolê biguhere — %1$s</string>
+    <string name="org_remove_confirm">“%1$s” bê rakirin?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d endam</item>
+        <item quantity="other">%1$d endaman</item>
+    </plurals>
+</resources>

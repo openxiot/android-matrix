@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Түүх</string>
+    <string name="history_section_overview">Үйлчилгээний тойм</string>
+    <string name="history_no_services">Энэ төслийн доор Modbus үйлчилгээ байхгүй</string>
+    <string name="history_service_count_label">Үйлчилгээний тоо</string>
+    <string name="history_device_count_label">Төхөөрөмжийн тоо</string>
+    <string name="history_sampled_at_label">Цуглуулалтын цаг</string>
+    <string name="history_function_count_label">Аргын тоо</string>
+    <string name="history_faults_section">Цуглуулалтын онцгой байдал</string>
+    <string name="history_faults_label">Цуглуулалтын онцгой байдал</string>
+    <string name="history_no_faults">Энэ хугацаанд түүвэрлэлтийн алдаа байхгүй</string>
+    <string name="history_no_data">Энэ хугацаанд цуглуулсан өгөгдөл байхгүй</string>
+    <string name="history_field_label">Талбар</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Түүвэрлэсэн өгөгдөл (%1$d мөр)</item>
+        <item quantity="other">Түүвэрлэсэн өгөгдөл (%1$d мөрүүд)</item>
+    </plurals>
+    <string name="service_history_all_functions">Бүх арга</string>
+    <string name="service_history_field_selection">Талбарууд %1$d / %2$d</string>
+    <string name="service_history_fault_chip">%1$s алдаа × %2$d</string>
+    <string name="service_history_no_curve">Энэ үйлчилгээний ямар ч талбараас график зурж болохгүй</string>
+    <string name="service_history_no_curve_for_function">Энэ функцад график зурж болох талбар байхгүй</string>
+    <string name="service_history_no_fields_selected">Талбар сонгоогүй</string>
+    <string name="service_history_failure_hint">Босоо зураас нь цуглуулалт амжилтгүй болсон мөчийг заана</string>
+    <string name="service_history_downsampled_hint">Өгөгдлийн цэг олон байгаа тул цаг хугацааны интервалаар бууруулсан (утга нь тухайн интервалын дундаж, хаалтанд хамгийн бага~хамгийн их)</string>
+    <string name="service_history_keepalive">Хадгалсан</string>
+    <string name="service_history_view_table">Хүснэгт</string>
+    <string name="service_history_view_chart">График</string>
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">தற்போதைய திட்டம்</string>
+    <string name="project_manage_title">திட்டங்களை நிர்வகி</string>
+    <string name="project_empty">இன்னும் திட்டங்கள் இல்லை — உருவாக்க +-ஐத் தொடவும்</string>
+    <string name="project_create_title">திட்டத்தை உருவாக்கு</string>
+    <string name="project_name_label">திட்டத்தின் பெயர்</string>
+    <string name="project_name_placeholder">திட்ட பெயரை உள்ளிடவும்</string>
+    <string name="project_rename_title">திட்டத்திற்கு பெயர் மாற்று</string>
+    <string name="project_rename_action">பெயர் மாற்று</string>
+    <string name="project_delete_title">திட்டத்தை நீக்கு</string>
+    <string name="project_delete_confirm">இந்த திட்டத்தை நீக்கவா? இன்னும் இடங்களைக் கொண்ட திட்டத்தை நீக்க முடியாது.</string>
+    <string name="project_swipe_delete">நீக்க ஸ்வைப் செய்யவும்</string>
+    <string name="project_type_label">வகை: %1$s</string>
+    <string name="project_members_title">திட்ட உறுப்பினர்கள்</string>
+    <string name="project_members_empty">இன்னும் உறுப்பினர்கள் இல்லை — சேர்க்க +-ஐத் தொடவும்</string>
+    <string name="project_members_label">உறுப்பினர்கள்</string>
+    <string name="project_user_id">பயனர் ID</string>
+    <string name="project_user_id_placeholder">பயனரின் கணக்கு ID</string>
+    <string name="project_remark_hint">குறிப்பு சேர்க்கத் தொடவும்</string>
+    <string name="project_remark_title">குறிப்பைத் திருத்து — %1$s</string>
+    <string name="project_remark_label">குறிப்பு</string>
+    <string name="project_role_adjust">பங்கை மாற்று</string>
+    <string name="project_role_adjust_title">பாத்திரத்தை மாற்று — %1$s</string>
+    <string name="project_remove_confirm">“%1$s”-ஐ அகற்றவா?</string>
+    <string name="project_exit">திட்டத்தை விட்டு வெளியேறு</string>
+    <string name="project_exit_confirm">இந்த திட்டத்திலிருந்து வெளியேறவா? அதற்கான அணுகலை இழப்பீர்கள்.</string>
+    <string name="project_device_added">சாதனம் சேர்க்கப்பட்டது</string>
+    <string name="project_device_moved">சாதனம் நகர்த்தப்பட்டது</string>
+    <string name="space_manage_title">இடங்களை நிர்வகி</string>
+    <string name="space_add">இடம் சேர்</string>
+    <string name="space_add_child">துணை இடத்தைச் சேர்</string>
+    <string name="space_add_device">சாதனத்தைச் சேர்</string>
+    <string name="space_name_label">இடத்தின் பெயர்</string>
+    <string name="space_name_placeholder">பெயரை உள்ளிடவும்</string>
+    <string name="space_type_label">இடத்தின் வகை</string>
+    <string name="space_empty">இட தரவு இல்லை</string>
+    <string name="space_empty_editable">தொடங்க ஒரு இடத்தைச் சேர்க்கவும்</string>
+    <string name="space_empty_readonly">இந்த திட்டத்தில் இன்னும் இடங்கள் அல்லது சாதனங்கள் இல்லை</string>
+    <string name="space_delete_title">இடத்தை நீக்கு</string>
+    <string name="space_delete_confirm">இந்த இடத்தை நீக்கவா? இன்னும் துணை-இடங்களைக் கொண்ட இடத்தை நீக்க முடியாது.</string>
+    <string name="space_move_title">இடத்திற்கு நகர்த்து</string>
+    <string name="space_move_action">நகர்த்து</string>
+    <string name="space_device_adding">சாதனம் சேர்க்கிறது…</string>
+    <string name="space_device_waiting">காத்திருக்கிறது… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d சாதனம்</item>
+        <item quantity="other">%1$d சாதனங்கள்</item>
+    </plurals>
+</resources>

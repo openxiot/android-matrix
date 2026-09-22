@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">語言</string>
+    <string name="profile_language_system">跟隨系統</string>
+    <string name="profile_language_search">搜尋語言</string>
+    <string name="profile_language_search_clear">清除</string>
+    <string name="profile_language_no_match">沒有符合的語言</string>
+    <string name="profile_not_logged_in">未登入</string>
+    <string name="profile_current_org">目前組織</string>
+    <string name="profile_current_project">目前項目</string>
+    <string name="profile_no_org_selected">未選擇組織</string>
+    <string name="profile_no_project_selected">未選擇項目</string>
+    <string name="profile_org_subtitle">選擇組織後才可選擇項目</string>
+    <string name="profile_project_subtitle_pick">請選擇項目</string>
+    <string name="profile_project_subtitle_switch">點擊切換項目</string>
+    <string name="profile_project_subtitle_org_first">請先選擇組織</string>
+    <string name="profile_section_settings">設定</string>
+    <string name="profile_dark_mode">深色模式</string>
+    <string name="profile_light_mode">淺色模式</string>
+    <string name="profile_theme_subtitle">點擊切換主題</string>
+    <string name="profile_section_other">其他</string>
+    <string name="profile_modbus_title">設備點表</string>
+    <string name="profile_modbus_subtitle">Modbus 點表設定（唯讀）</string>
+    <string name="profile_alarm_title">警報</string>
+    <string name="profile_alarm_subtitle">Modbus 告警記錄與處理</string>
+    <string name="profile_history_title">歷史</string>
+    <string name="profile_history_subtitle">採集歷史與曲線</string>
+    <string name="profile_about_subtitle">應用程式資訊與版本</string>
+    <string name="account_title">帳號詳情</string>
+    <string name="account_username">使用者名稱</string>
+    <string name="account_platform">平台</string>
+    <string name="account_not_selected">未選擇</string>
+    <string name="account_org_toggle">組織</string>
+    <string name="account_org_toggle_subtitle">開啟後可管理組織</string>
+    <string name="account_logout">登出</string>
+    <string name="about_title">關於</string>
+    <string name="about_tagline">物聯網裝置管理與監控平台</string>
+    <string name="about_version">版本 %1$s</string>
+    <string name="about_check_update">檢查更新</string>
+    <string name="about_checking">檢查中…</string>
+    <string name="about_up_to_date">已是最新版本</string>
+    <string name="about_update_now">立即更新</string>
+    <string name="about_downloading">下載中…</string>
+    <string name="about_downloading_percent">下載中 %1$d%%</string>
+    <string name="about_install_now">立即安裝</string>
+    <string name="about_install">安裝</string>
+    <string name="about_retry_download">重試下載</string>
+    <string name="about_later">稍後</string>
+    <string name="about_install_dialog_title">安裝更新</string>
+    <string name="about_new_version_found">發現新版本 %1$s</string>
+    <string name="about_ready_hint">安裝檔已下載完成，點「安裝」後交由系統安裝程式處理。</string>
+    <string name="about_need_install_permission">需先允許本應用程式安裝未知來源的應用程式</string>
+    <string name="about_keep_app_alive">可切換頁面，請勿關閉應用程式</string>
+    <string name="about_metered">目前使用流動網絡，下載會耗用較多流量</string>
+    <string name="about_metered_size">目前使用流動網絡，安裝檔約 %1$s</string>
+    <string name="about_install_settings_failed">無法開啟系統的「安裝未知應用程式」設定，請在系統設定中手動允許</string>
+    <string name="about_no_installer">找不到可用的安裝程式，安裝檔已儲存在應用程式目錄中</string>
+    <string name="about_update_notes_empty">本次更新沒有提供說明。</string>
+</resources>

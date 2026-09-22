@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">Նախ ընտրեք նախագիծ «Պրոֆիլ» բաժնում</string>
+    <string name="devices_empty">Դեռ սարքեր չկան</string>
+    <string name="devices_unknown">Անհայտ սարք</string>
+    <plurals name="devices_count">
+        <item quantity="one">%1$d սարք</item>
+        <item quantity="other">%1$d սարքեր</item>
+    </plurals>
+</resources>

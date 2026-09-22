@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">தற்போதைய நிறுவனம்</string>
+    <string name="org_detail_title">அமைப்பு விவரங்கள்</string>
+    <string name="org_empty">இன்னும் நிறுவனங்கள் இல்லை — உருவாக்க +-ஐத் தொடவும்</string>
+    <string name="org_create_title">அமைப்பை உருவாக்கவும்</string>
+    <string name="org_id_label">நிறுவன ID</string>
+    <string name="org_id_placeholder">எ.கா. my-company</string>
+    <string name="org_id_hint">எழுத்தில் தொடங்கவும் — எழுத்துக்கள், எண்கள் மற்றும் ஹைபன்கள் மட்டும்</string>
+    <string name="org_name_label">அமைப்பின் பெயர்</string>
+    <string name="org_name_placeholder">எ.கா. My Company</string>
+    <string name="org_rename_title">நிறுவனத்திற்கு பெயர் மாற்று</string>
+    <string name="org_delete_title">அமைப்பை நீக்கு</string>
+    <string name="org_delete_confirm">இந்த நிறுவனத்தை நீக்கவா?</string>
+    <string name="org_manage">நிர்வகி</string>
+    <string name="org_swipe_delete">நீக்க ஸ்வைப் செய்யவும்</string>
+    <string name="org_members_empty">இன்னும் உறுப்பினர்கள் இல்லை</string>
+    <string name="org_member_developer_id">Developer ID</string>
+    <string name="org_member_developer_id_placeholder">பயனரின் developerId</string>
+    <string name="org_member_name_label">காட்சி பெயர்</string>
+    <string name="org_member_name_placeholder">விருப்பம்</string>
+    <string name="org_change_role">பாத்திரத்தை மாற்று</string>
+    <string name="org_change_role_title">பாத்திரத்தை மாற்று — %1$s</string>
+    <string name="org_remove_confirm">“%1$s”-ஐ அகற்றவா?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d உறுப்பினர்</item>
+        <item quantity="other">%1$d உறுப்பினர்கள்</item>
+    </plurals>
+</resources>

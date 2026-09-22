@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Geçerli kuruluş</string>
+    <string name="org_detail_title">Kuruluş Detayları</string>
+    <string name="org_empty">Henüz kuruluş yok — oluşturmak için + simgesine dokunun</string>
+    <string name="org_create_title">Kuruluş Oluştur</string>
+    <string name="org_id_label">Kuruluş ID</string>
+    <string name="org_id_placeholder">örn. my-company</string>
+    <string name="org_id_hint">Harfle başlayın — yalnızca harf, rakam ve tire kullanılabilir</string>
+    <string name="org_name_label">Kuruluş Adı</string>
+    <string name="org_name_placeholder">örn. Şirketim</string>
+    <string name="org_rename_title">Kuruluşu yeniden adlandır</string>
+    <string name="org_delete_title">Kuruluşu Sil</string>
+    <string name="org_delete_confirm">Bu kuruluş silinsin mi?</string>
+    <string name="org_manage">Yönet</string>
+    <string name="org_swipe_delete">Silmek için kaydırın</string>
+    <string name="org_members_empty">Henüz üye yok</string>
+    <string name="org_member_developer_id">Geliştirici ID</string>
+    <string name="org_member_developer_id_placeholder">Kullanıcının developerId değeri</string>
+    <string name="org_member_name_label">Görünen ad</string>
+    <string name="org_member_name_placeholder">İsteğe bağlı</string>
+    <string name="org_change_role">Rol değiştir</string>
+    <string name="org_change_role_title">Rol değiştir — %1$s</string>
+    <string name="org_remove_confirm">“%1$s” kaldırılsın mı?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d üye</item>
+        <item quantity="other">%1$d adet üye</item>
+    </plurals>
+</resources>

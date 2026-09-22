@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">முதலில் திட்ட பட்டியலில் இருந்து ஒரு திட்டத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">மாற்றங்களை நிராகரிப்பதா?</string>
+    <string name="home_discard_message">சேமிக்கப்படாத மாற்றங்கள் உள்ளன. இப்போது வெளியேறினால் அவை இழக்கப்படும்.</string>
+    <string name="home_dashboard_empty">இன்னும் அட்டைகள் இல்லை — ஒன்றைச் சேர்க்க கீழே உள்ள “சேர்”-ஐத் தொடவும்</string>
+    <string name="home_add_card">+ சேர்</string>
+    <string name="home_default_layout_loaded">இயல்பான உள்ளமைவு ஏற்றப்பட்டது — செயல்படுத்த சேமிக்கவும்</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">ஒரு பெரிய எண்: சாதனங்கள் / சேவைகள் / எச்சரிக்கைகள் / பிழைகள்</string>
+    <string name="home_card_kind_line">மணிநேர எச்சரிக்கை எண்ணிக்கை, அல்லது ஒரு சேவை புலம்</string>
+    <string name="home_card_kind_distribution">சாதனம் / சேவை / எச்சரிக்கை / பிழை வாரியாக பிரிப்பு</string>
+    <string name="home_card_kind_device">ஒரு சாதனத்தின் ஒரு பண்பு</string>
+    <string name="home_card_kind_service">ஒரு செயல்பாட்டின் புலங்களின் தொகுப்பு</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">வரைபடம்</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">சாதனம்</string>
+    <string name="home_card_default_service">சேவைகள்</string>
+    <string name="home_card_default_unknown">அட்டை</string>
+    <string name="home_edit_card_title">திருத்து · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">முழு அகலம்</string>
+    <string name="home_size_half">அரை அகலம்</string>
+    <string name="home_section_metric">அளவீடு</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">மொத்த சாதனங்கள்</string>
+    <string name="home_metric_devices_online">ஆன்லைனில் உள்ள சாதனங்கள்</string>
+    <string name="home_metric_services_total">மொத்த சேவைகள்</string>
+    <string name="home_metric_alarms_today">இன்றைய எச்சரிக்கைகள்</string>
+    <string name="home_metric_alarms_window">சாளரத்தில் உள்ள எச்சரிக்கைகள்</string>
+    <string name="home_metric_failures_total">சாளரத்தில் சேகரிப்பு தோல்விகள்</string>
+    <string name="home_section_dimension">பிரிப்பு அடிப்படை</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">சாதன வகை</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">சேகரிப்பு தோல்வி வகை</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">தரவு மூலம்</string>
+    <string name="home_source_label">மூலம்</string>
+    <string name="home_source_alarm_curve">மணிநேர எச்சரிக்கை எண்ணிக்கை</string>
+    <string name="home_source_service_field">ஒரு சேவை புலம்</string>
+    <string name="home_show_failure_shadow">சேகரிப்பு தோல்விக் கோடுகளைக் காட்டு</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">சேவை · செயல்பாடு · புலம்</string>
+    <string name="home_service_placeholder">சேவையைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_service_unnamed">பெயரிடப்படாத சேவை</string>
+    <string name="home_function_placeholder">செயல்பாட்டைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_function_fallback">செயல்பாடு %1$d</string>
+    <string name="home_pick_service_first">முதலில் சேவையைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_show_unit">அலகைக் காட்டு</string>
+    <string name="home_section_device_prop">சாதனம் · பண்பு</string>
+    <string name="home_device_placeholder">சாதனத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_prop_label">பண்புகள்</string>
+    <string name="home_pick_device_first">முதலில் சாதனத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_prop_none">இந்த மாதிரிக்கு எந்த பண்புகளும் இல்லை</string>
+    <string name="home_prop_placeholder">பண்பைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, வரம்பு இல்லாமல் காலியாக விடவும்</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">கடைசி</string>
+    <string name="home_window_custom">தனிப்பயன்</string>
+    <string name="home_pick_dates">தொடக்க மற்றும் இறுதி தேதிகளைத் தேர்ந்தெடுக்கவும்</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d நாள்</item>
+        <item quantity="other">%1$d நாட்கள்</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d மணிநேரம்</item>
+        <item quantity="other">%1$d மணிநேரங்கள்</item>
+    </plurals>
+    <string name="home_card_unknown_type">தெரியாத அட்டை வகை</string>
+    <string name="home_empty_no_data">தரவு இல்லை</string>
+    <string name="home_empty_no_reading">இன்னும் வாசிப்புகள் இல்லை</string>
+    <string name="home_empty_not_sampled">இன்னும் சேகரிக்கப்படவில்லை</string>
+    <string name="home_sampled_at">சேகரிக்கப்பட்டது %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">சாதனங்கள்</string>
+    <string name="home_unit_services">சேவைகள்</string>
+</resources>

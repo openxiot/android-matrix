@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">Gerätedetails</string>
+    <string name="device_operation_title">Gerätesteuerung</string>
+    <string name="device_not_found">Gerät nicht gefunden</string>
+    <string name="device_id_label">Geräte-ID</string>
+    <string name="device_type_label">Gerätetyp</string>
+    <string name="device_online_label">Status</string>
+    <string name="device_last_online_label">Zuletzt online</string>
+    <string name="device_last_offline_label">Zuletzt offline</string>
+    <string name="device_space_label">Bereich</string>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">ಎಚ್ಚರಿಕೆಗಳು</string>
+    <string name="alarm_action_ok">ಕ್ರಿಯೆ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ</string>
+    <string name="alarm_empty">ಈ ಅವಧಿಯಲ್ಲಿ ಯಾವುದೇ ಎಚ್ಚರಿಕೆ ಇಲ್ಲ</string>
+    <string name="alarm_all_services">ಎಲ್ಲಾ ಸೇವೆಗಳು</string>
+    <string name="alarm_level_label">ಎಚ್ಚರಿಕೆ ಮಟ್ಟ</string>
+    <string name="alarm_handled_label">ವಿಲೇವಾರಿ</string>
+    <string name="alarm_status_label">ಸ್ಥಿತಿ</string>
+    <string name="alarm_summary_title">ಎಚ್ಚರಿಕೆ ಪಟ್ಟಿ</string>
+    <string name="alarm_text_label">ಎಚ್ಚರಿಕೆ ಪಠ್ಯ</string>
+    <string name="alarm_field_label">ಕ್ಷೇತ್ರ</string>
+    <string name="alarm_trigger_label">ಪ್ರಚೋದನಾ ಷರತ್ತು</string>
+    <string name="alarm_current_value_label">ಪ್ರಸ್ತುತ ಮೌಲ್ಯ</string>
+</resources>

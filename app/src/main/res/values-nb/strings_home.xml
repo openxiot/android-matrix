@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Velg først et prosjekt i prosjektlisten</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Forkaste endringene?</string>
+    <string name="home_discard_message">Du har ulagrede endringer. Forlater du siden nå, går de tapt.</string>
+    <string name="home_dashboard_empty">Ingen kort ennå — trykk «Legg til» nedenfor for å legge til ett</string>
+    <string name="home_add_card">+ Legg til</string>
+    <string name="home_default_layout_loaded">Standardoppsettet er lastet inn — lagre for å ta det i bruk</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Ett stort tall: enheter / tjenester / alarmer / feil</string>
+    <string name="home_card_kind_line">Alarmer per time, eller ett tjenestefelt</string>
+    <string name="home_card_kind_distribution">Fordeling etter enhet / tjeneste / alarm / feil</string>
+    <string name="home_card_kind_device">Én egenskap på én enhet</string>
+    <string name="home_card_kind_service">Et sett med felt fra én funksjon</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Kurve</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Enhet</string>
+    <string name="home_card_default_service">Tjenester</string>
+    <string name="home_card_default_unknown">Kort</string>
+    <string name="home_edit_card_title">Rediger · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Full bredde</string>
+    <string name="home_size_half">Halv bredde</string>
+    <string name="home_section_metric">Måltall</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Enheter totalt</string>
+    <string name="home_metric_devices_online">Enheter tilkoblet</string>
+    <string name="home_metric_services_total">Tjenester totalt</string>
+    <string name="home_metric_alarms_today">Dagens alarmer</string>
+    <string name="home_metric_alarms_window">Alarmer i vinduet</string>
+    <string name="home_metric_failures_total">Innsamlingsfeil i vinduet</string>
+    <string name="home_section_dimension">Fordeling etter</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Enhetstype</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Type innsamlingsfeil</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Datakilde</string>
+    <string name="home_source_label">Kilde</string>
+    <string name="home_source_alarm_curve">Alarmer per time</string>
+    <string name="home_source_service_field">Ett tjenestefelt</string>
+    <string name="home_show_failure_shadow">Vis linjer for mislykket innhenting</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Tjeneste · Funksjon · Felt</string>
+    <string name="home_service_placeholder">Velg en tjeneste</string>
+    <string name="home_service_unnamed">Tjeneste uten navn</string>
+    <string name="home_function_placeholder">Velg en funksjon</string>
+    <string name="home_function_fallback">Funksjon %1$d</string>
+    <string name="home_pick_service_first">Velg en tjeneste først</string>
+    <string name="home_show_unit">Vis enhet</string>
+    <string name="home_section_device_prop">Enhet · Egenskap</string>
+    <string name="home_device_placeholder">Velg en enhet</string>
+    <string name="home_prop_label">Egenskaper</string>
+    <string name="home_pick_device_first">Velg en enhet først</string>
+    <string name="home_prop_none">Ingen egenskaper for denne modellen</string>
+    <string name="home_prop_placeholder">Velg en egenskap</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, la stå tomt for ingen grense</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Siste</string>
+    <string name="home_window_custom">Egendefinert</string>
+    <string name="home_pick_dates">Velg start- og sluttdato</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d dag</item>
+        <item quantity="other">%1$d dager</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d time</item>
+        <item quantity="other">%1$d timer</item>
+    </plurals>
+    <string name="home_card_unknown_type">Ukjent korttype</string>
+    <string name="home_empty_no_data">Ingen data</string>
+    <string name="home_empty_no_reading">Ingen avlesninger ennå</string>
+    <string name="home_empty_not_sampled">Ikke innhentet ennå</string>
+    <string name="home_sampled_at">Innsamlet %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">enheter</string>
+    <string name="home_unit_services">tjenester</string>
+</resources>

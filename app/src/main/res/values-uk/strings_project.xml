@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Поточний проєкт</string>
+    <string name="project_manage_title">Керування проєктами</string>
+    <string name="project_empty">Проєктів ще немає — натисніть +, щоб створити</string>
+    <string name="project_create_title">Створити проєкт</string>
+    <string name="project_name_label">Назва проєкту</string>
+    <string name="project_name_placeholder">Введіть назву проєкту</string>
+    <string name="project_rename_title">Перейменувати проєкт</string>
+    <string name="project_rename_action">Перейменувати</string>
+    <string name="project_delete_title">Видалити проєкт</string>
+    <string name="project_delete_confirm">Видалити цей проєкт? Проєкт, у якому ще є простори, видалити не можна.</string>
+    <string name="project_swipe_delete">Проведіть, щоб видалити</string>
+    <string name="project_type_label">Тип: %1$s</string>
+    <string name="project_members_title">Учасники проєкту</string>
+    <string name="project_members_empty">Учасників ще немає — натисніть +, щоб додати</string>
+    <string name="project_members_label">Учасники</string>
+    <string name="project_user_id">ID користувача</string>
+    <string name="project_user_id_placeholder">ID облікового запису користувача</string>
+    <string name="project_remark_hint">Натисніть, щоб додати примітку</string>
+    <string name="project_remark_title">Редагувати примітку — %1$s</string>
+    <string name="project_remark_label">Примітка</string>
+    <string name="project_role_adjust">Змінити роль</string>
+    <string name="project_role_adjust_title">Змінити роль — %1$s</string>
+    <string name="project_remove_confirm">Вилучити «%1$s»?</string>
+    <string name="project_exit">Вийти з проєкту</string>
+    <string name="project_exit_confirm">Вийти з цього проєкту? Ви втратите до нього доступ.</string>
+    <string name="project_device_added">Пристрій додано</string>
+    <string name="project_device_moved">Пристрій переміщено</string>
+    <string name="space_manage_title">Керування просторами</string>
+    <string name="space_add">Додати простір</string>
+    <string name="space_add_child">Додати підпростір</string>
+    <string name="space_add_device">Додати пристрій</string>
+    <string name="space_name_label">Назва простору</string>
+    <string name="space_name_placeholder">Введіть назву</string>
+    <string name="space_type_label">Тип простору</string>
+    <string name="space_empty">Немає даних про простори</string>
+    <string name="space_empty_editable">Додайте простір, щоб почати</string>
+    <string name="space_empty_readonly">У цьому проєкті ще немає просторів або пристроїв</string>
+    <string name="space_delete_title">Видалити простір</string>
+    <string name="space_delete_confirm">Видалити цей простір? Простір, у якому ще є підпростори, видалити не можна.</string>
+    <string name="space_move_title">Перемістити до простору</string>
+    <string name="space_move_action">Перемістити</string>
+    <string name="space_device_adding">Додавання пристрою…</string>
+    <string name="space_device_waiting">Очікування… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d пристрої</item>
+        <item quantity="many">%1$d пристроїв</item>
+        <item quantity="one">%1$d пристрій</item>
+        <item quantity="other">%1$d пристрою</item>
+    </plurals>
+</resources>

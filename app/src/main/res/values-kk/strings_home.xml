@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Алдымен жобалар тізімінен жоба таңдаңыз</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Өзгерістерді тастау керек пе?</string>
+    <string name="home_discard_message">Сақталмаған өзгерістер бар. Қазір кетсеңіз, олар жоғалады.</string>
+    <string name="home_dashboard_empty">Әзірге карталар жоқ — төмендегі «Қосу» түймесін басып қосыңыз</string>
+    <string name="home_add_card">+ Қосу</string>
+    <string name="home_default_layout_loaded">Әдепкі орналасу жүктелді — қолдану үшін сақтаңыз</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Бір үлкен сан: құрылғылар / қызметтер / дабылдар / ақаулар</string>
+    <string name="home_card_kind_line">Сағаттық дабыл саны немесе бір қызмет өрісі</string>
+    <string name="home_card_kind_distribution">Құрылғы / қызмет / дабыл / ақау бойынша таралу</string>
+    <string name="home_card_kind_device">Бір құрылғының бір қасиеті</string>
+    <string name="home_card_kind_service">Бір функцияның өрістер жиынтығы</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">График</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Құрылғы</string>
+    <string name="home_card_default_service">Қызметтер</string>
+    <string name="home_card_default_unknown">Карта</string>
+    <string name="home_edit_card_title">Өзгерту · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Толық ен</string>
+    <string name="home_size_half">Жарты ен</string>
+    <string name="home_section_metric">Статистикалық көрсеткіш</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Құрылғылар саны</string>
+    <string name="home_metric_devices_online">Онлайн құрылғылар</string>
+    <string name="home_metric_services_total">Қызметтер саны</string>
+    <string name="home_metric_alarms_today">Бүгінгі дабылдар</string>
+    <string name="home_metric_alarms_window">Терезедегі дабылдар</string>
+    <string name="home_metric_failures_total">Терезедегі алу сәтсіздіктері</string>
+    <string name="home_section_dimension">Бойынша таралу</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Құрылғы түрі</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Алу ақауының түрі</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Деректер көзі</string>
+    <string name="home_source_label">Дереккөз</string>
+    <string name="home_source_alarm_curve">Сағаттық дабыл саны</string>
+    <string name="home_source_service_field">Бір қызмет өрісі</string>
+    <string name="home_show_failure_shadow">Сәтсіз жинау сызықтарын көрсету</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Қызмет · Функция · Өріс</string>
+    <string name="home_service_placeholder">Қызметті таңдаңыз</string>
+    <string name="home_service_unnamed">Атауы жоқ қызмет</string>
+    <string name="home_function_placeholder">Функцияны таңдаңыз</string>
+    <string name="home_function_fallback">Функция %1$d</string>
+    <string name="home_pick_service_first">Алдымен қызметті таңдаңыз</string>
+    <string name="home_show_unit">Өлшем бірлігін көрсету</string>
+    <string name="home_section_device_prop">Құрылғы · Қасиет</string>
+    <string name="home_device_placeholder">Құрылғыны таңдаңыз</string>
+    <string name="home_prop_label">Қасиеттер</string>
+    <string name="home_pick_device_first">Алдымен құрылғыны таңдаңыз</string>
+    <string name="home_prop_none">Бұл үлгіде қасиеттер жоқ</string>
+    <string name="home_prop_placeholder">Қасиетті таңдаңыз</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, шексіз үшін бос қалдырыңыз</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Соңғы</string>
+    <string name="home_window_custom">Теңшелім</string>
+    <string name="home_pick_dates">Басталу және аяқталу күндерін таңдаңыз</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d күн</item>
+        <item quantity="other">%1$d күндік</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d сағат</item>
+        <item quantity="other">%1$d сағаттық</item>
+    </plurals>
+    <string name="home_card_unknown_type">Белгісіз карта түрі</string>
+    <string name="home_empty_no_data">Деректер жоқ</string>
+    <string name="home_empty_no_reading">Әзірге көрсеткіш жоқ</string>
+    <string name="home_empty_not_sampled">Әлі жиналмаған</string>
+    <string name="home_sampled_at">Алынды: %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">құрылғы</string>
+    <string name="home_unit_services">қызмет</string>
+</resources>

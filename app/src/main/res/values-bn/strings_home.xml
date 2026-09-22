@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">অনুগ্রহ করে প্রথমে প্রকল্প তালিকা থেকে একটি প্রকল্প নির্বাচন করুন</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">পরিবর্তনগুলি বাতিল করবেন?</string>
+    <string name="home_discard_message">আপনার অপ্রকাশিত পরিবর্তন আছে। এখন চলে গেলে সেগুলো হারিয়ে যাবে।</string>
+    <string name="home_dashboard_empty">এখনও কোনো কার্ড নেই — নিচের «যোগ করুন» চেপে একটি যোগ করুন</string>
+    <string name="home_add_card">+ যোগ করুন</string>
+    <string name="home_default_layout_loaded">ডিফল্ট লেআউট লোড হয়েছে — প্রয়োগ করতে সংরক্ষণ করুন</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">একটি বড় সংখ্যা: ডিভাইস / পরিষেবা / সতর্কতা / ত্রুটি</string>
+    <string name="home_card_kind_line">ঘণ্টাভিত্তিক সতর্কতা সংখ্যা, বা একটি পরিষেবা ফিল্ড</string>
+    <string name="home_card_kind_distribution">ডিভাইস / পরিষেবা / সতর্কতা / ত্রুটি অনুসারে বিভাজন</string>
+    <string name="home_card_kind_device">একটি ডিভাইসের একটি বৈশিষ্ট্য</string>
+    <string name="home_card_kind_service">একটি ফাংশনের একাধিক ফিল্ডের সেট</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">চার্ট</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">ডিভাইস</string>
+    <string name="home_card_default_service">পরিষেবা</string>
+    <string name="home_card_default_unknown">কার্ড</string>
+    <string name="home_edit_card_title">সম্পাদনা · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">পূর্ণ প্রস্থ</string>
+    <string name="home_size_half">অর্ধ প্রস্থ</string>
+    <string name="home_section_metric">মেট্রিক</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">মোট ডিভাইস</string>
+    <string name="home_metric_devices_online">অনলাইন ডিভাইস</string>
+    <string name="home_metric_services_total">মোট পরিষেবা</string>
+    <string name="home_metric_alarms_today">আজকের অ্যালার্ম</string>
+    <string name="home_metric_alarms_window">উইন্ডোর মধ্যে সতর্কতা</string>
+    <string name="home_metric_failures_total">উইন্ডোর মধ্যে নমুনাকরণ ব্যর্থতা</string>
+    <string name="home_section_dimension">বিভাজন অনুযায়ী</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">ডিভাইসের ধরন</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">নমুনাকরণ ব্যর্থতার ধরন</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">ডেটা উৎস</string>
+    <string name="home_source_label">উৎস</string>
+    <string name="home_source_alarm_curve">ঘণ্টাভিত্তিক সতর্কতা সংখ্যা</string>
+    <string name="home_source_service_field">একটি পরিষেবা ফিল্ড</string>
+    <string name="home_show_failure_shadow">সংগ্রহ ব্যর্থতার রেখা দেখান</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">পরিষেবা · ফাংশন · ফিল্ড</string>
+    <string name="home_service_placeholder">একটি পরিষেবা নির্বাচন করুন</string>
+    <string name="home_service_unnamed">নামহীন পরিষেবা</string>
+    <string name="home_function_placeholder">একটি ফাংশন নির্বাচন করুন</string>
+    <string name="home_function_fallback">ফাংশন %1$d</string>
+    <string name="home_pick_service_first">প্রথমে একটি পরিষেবা নির্বাচন করুন</string>
+    <string name="home_show_unit">একক দেখান</string>
+    <string name="home_section_device_prop">ডিভাইস · বৈশিষ্ট্য</string>
+    <string name="home_device_placeholder">একটি ডিভাইস নির্বাচন করুন</string>
+    <string name="home_prop_label">প্রপার্টি</string>
+    <string name="home_pick_device_first">প্রথমে একটি ডিভাইস নির্বাচন করুন</string>
+    <string name="home_prop_none">এই মডেলের জন্য কোনো বৈশিষ্ট্য নেই</string>
+    <string name="home_prop_placeholder">একটি বৈশিষ্ট্য নির্বাচন করুন</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, সীমা ছাড়তে ফাঁকা রাখুন</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">সর্বশেষ</string>
+    <string name="home_window_custom">কাস্টম</string>
+    <string name="home_pick_dates">শুরু ও শেষ তারিখ নির্বাচন করুন</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d দিন</item>
+        <item quantity="other">%1$d টি দিন</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d ঘণ্টা</item>
+        <item quantity="other">%1$d টি ঘণ্টা</item>
+    </plurals>
+    <string name="home_card_unknown_type">অজানা কার্ডের ধরন</string>
+    <string name="home_empty_no_data">কোনো ডেটা নেই</string>
+    <string name="home_empty_no_reading">এখনও কোনো রিডিং নেই</string>
+    <string name="home_empty_not_sampled">এখনও সংগ্রহ হয়নি</string>
+    <string name="home_sampled_at">%1$s-এ নমুনাকৃত</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">ডিভাইস</string>
+    <string name="home_unit_services">পরিষেবা</string>
+</resources>

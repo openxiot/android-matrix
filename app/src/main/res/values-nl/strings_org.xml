@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Huidige organisatie</string>
+    <string name="org_detail_title">Organisatiedetails</string>
+    <string name="org_empty">Nog geen organisaties — tik op + om er een aan te maken</string>
+    <string name="org_create_title">Organisatie aanmaken</string>
+    <string name="org_id_label">Organisatie-ID</string>
+    <string name="org_id_placeholder">bijv. mijn-bedrijf</string>
+    <string name="org_id_hint">Begin met een letter — alleen letters, cijfers en koppeltekens</string>
+    <string name="org_name_label">Naam</string>
+    <string name="org_name_placeholder">bijv. Mijn Bedrijf</string>
+    <string name="org_rename_title">Organisatie hernoemen</string>
+    <string name="org_delete_title">Organisatie verwijderen</string>
+    <string name="org_delete_confirm">Deze organisatie verwijderen?</string>
+    <string name="org_manage">Beheren</string>
+    <string name="org_swipe_delete">Veeg om te verwijderen</string>
+    <string name="org_members_empty">Nog geen leden</string>
+    <string name="org_member_developer_id">Ontwikkelaars-ID</string>
+    <string name="org_member_developer_id_placeholder">De developerId van de gebruiker</string>
+    <string name="org_member_name_label">Weergavenaam</string>
+    <string name="org_member_name_placeholder">Optioneel</string>
+    <string name="org_change_role">Rol wijzigen</string>
+    <string name="org_change_role_title">Rol wijzigen — %1$s</string>
+    <string name="org_remove_confirm">\"%1$s\" verwijderen?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d lid</item>
+        <item quantity="other">%1$d leden</item>
+    </plurals>
+</resources>

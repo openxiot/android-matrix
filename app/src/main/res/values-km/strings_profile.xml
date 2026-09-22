@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">ភាសា</string>
+    <string name="profile_language_system">តាមប្រព័ន្ធ</string>
+    <string name="profile_language_search">ស្វែងរកភាសា</string>
+    <string name="profile_language_search_clear">ជម្រះ</string>
+    <string name="profile_language_no_match">រកមិនឃើញភាសាដែលត្រូវគ្នា</string>
+    <string name="profile_not_logged_in">មិនបានចូល</string>
+    <string name="profile_current_org">អង្គការបច្ចុប្បន្ន</string>
+    <string name="profile_current_project">គម្រោងបច្ចុប្បន្ន</string>
+    <string name="profile_no_org_selected">មិនបានជ្រើសរើសអង្គការ</string>
+    <string name="profile_no_project_selected">មិនបានជ្រើសរើសគម្រោង</string>
+    <string name="profile_org_subtitle">ជ្រើសរើសមួយដើម្បីជ្រើសគម្រោង</string>
+    <string name="profile_project_subtitle_pick">ជ្រើសរើសគម្រោង</string>
+    <string name="profile_project_subtitle_switch">ចុចដើម្បីប្ដូរគម្រោង</string>
+    <string name="profile_project_subtitle_org_first">សូមជ្រើសរើសអង្គការជាមុន</string>
+    <string name="profile_section_settings">ការកំណត់</string>
+    <string name="profile_dark_mode">របៀបងងឹត</string>
+    <string name="profile_light_mode">របៀបភ្លឺ</string>
+    <string name="profile_theme_subtitle">ចុចដើម្បីប្ដូររូបរាង</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">តារាងចំណុចឧបករណ៍</string>
+    <string name="profile_modbus_subtitle">Register Map Modbus (អានបានតែប៉ុណ្ណោះ)</string>
+    <string name="profile_alarm_title">ការជូនដំណឹង</string>
+    <string name="profile_alarm_subtitle">កំណត់ហេតុ និងការដោះស្រាយសំណឹងអាសន្ន Modbus</string>
+    <string name="profile_history_title">ប្រវត្តិ</string>
+    <string name="profile_history_subtitle">ប្រវត្តិប្រមូល និងក្រាហ្វ</string>
+    <string name="profile_about_subtitle">ព័ត៌មានកម្មវិធី និងកំណែ</string>
+    <string name="account_title">គណនី</string>
+    <string name="account_username">ឈ្មោះអ្នកប្រើ</string>
+    <string name="account_platform">វេទិកា</string>
+    <string name="account_not_selected">មិនបានជ្រើសរើស</string>
+    <string name="account_org_toggle">អង្គការ</string>
+    <string name="account_org_toggle_subtitle">បើកដើម្បីគ្រប់គ្រងអង្គការ</string>
+    <string name="account_logout">ចាកចេញ</string>
+    <string name="about_title">អំពី</string>
+    <string name="about_tagline">វេទិកាគ្រប់គ្រង និងត្រួតពិនិត្យឧបករណ៍ IoT</string>
+    <string name="about_version">កំណែ %1$s</string>
+    <string name="about_check_update">ពិនិត្យបច្ចុប្បន្នភាព</string>
+    <string name="about_checking">កំពុងពិនិត្យ…</string>
+    <string name="about_up_to_date">អ្នកកំពុងប្រើកំណែចុងក្រោយ</string>
+    <string name="about_update_now">ធ្វើបច្ចុប្បន្នភាពឥឡូវនេះ</string>
+    <string name="about_downloading">កំពុងទាញយក…</string>
+    <string name="about_downloading_percent">កំពុងទាញយក %1$d%%</string>
+    <string name="about_install_now">ដំឡើងឥឡូវនេះ</string>
+    <string name="about_install">ដំឡើង</string>
+    <string name="about_retry_download">ទាញយកម្ដងទៀត</string>
+    <string name="about_later">ពេលក្រោយ</string>
+    <string name="about_install_dialog_title">ដំឡើងបច្ចុប្បន្នភាព</string>
+    <string name="about_new_version_found">មានកំណែ %1$s</string>
+    <string name="about_ready_hint">ទាញយករួចរាល់ — ចុច ដំឡើង ដើម្បីបញ្ជូនទៅកម្មវិធីដំឡើងរបស់ប្រព័ន្ធ។</string>
+    <string name="about_need_install_permission">ត្រូវអនុញ្ញាតឱ្យកម្មវិធីនេះដំឡើងកម្មវិធីមិនស្គាល់ជាមុន</string>
+    <string name="about_keep_app_alive">អាចប្ដូរទំព័របាន — គ្រាន់តែកុំបិទកម្មវិធី</string>
+    <string name="about_metered">អ្នកកំពុងប្រើទិន្នន័យចល័ត — ការទាញយកអាចប្រើទិន្នន័យច្រើន</string>
+    <string name="about_metered_size">អ្នកកំពុងប្រើទិន្នន័យចល័ត — កញ្ចប់មានទំហំប្រហែល %1$s</string>
+    <string name="about_install_settings_failed">មិនអាចបើកការកំណត់ “ដំឡើងកម្មវិធីមិនស្គាល់” បានទេ — អនុញ្ញាតដោយដៃក្នុងការកំណត់ប្រព័ន្ធ</string>
+    <string name="about_no_installer">រកមិនឃើញកម្មវិធីដំឡើង — កញ្ចប់ត្រូវបានរក្សាទុកក្នុងថតរបស់កម្មវិធី</string>
+    <string name="about_update_notes_empty">កំណែនេះមិនមានកំណត់សម្គាល់ទេ។</string>
+</resources>

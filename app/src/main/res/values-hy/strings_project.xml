@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Ընթացիկ նախագիծը</string>
+    <string name="project_manage_title">Նախագծերի կառավարում</string>
+    <string name="project_empty">Դեռ նախագծեր չկան — սեղմեք +՝ մեկը ստեղծելու համար</string>
+    <string name="project_create_title">Ստեղծել նախագիծ</string>
+    <string name="project_name_label">Նախագծի անուն</string>
+    <string name="project_name_placeholder">Մուտքագրեք նախագծի անունը</string>
+    <string name="project_rename_title">Վերանվանել նախագիծը</string>
+    <string name="project_rename_action">Վերանվանել</string>
+    <string name="project_delete_title">Ջնջել նախագիծը</string>
+    <string name="project_delete_confirm">Ջնջե՞լ այս նախագիծը։ Նախագիծը, որում դեռ տարածքներ կան, հնարավոր չէ ջնջել։</string>
+    <string name="project_swipe_delete">Սահեցրեք՝ ջնջելու համար</string>
+    <string name="project_type_label">Տեսակը՝ %1$s</string>
+    <string name="project_members_title">Նախագծի անդամներ</string>
+    <string name="project_members_empty">Դեռ անդամներ չկան — սեղմեք +՝ մեկին ավելացնելու համար</string>
+    <string name="project_members_label">Անդամներ</string>
+    <string name="project_user_id">Օգտատիրոջ ID</string>
+    <string name="project_user_id_placeholder">Օգտվողի հաշվի ID</string>
+    <string name="project_remark_hint">Սեղմեք՝ նշում ավելացնելու համար</string>
+    <string name="project_remark_title">Խմբագրել նշումը — %1$s</string>
+    <string name="project_remark_label">Նշում</string>
+    <string name="project_role_adjust">Փոխել դերը</string>
+    <string name="project_role_adjust_title">Փոխել դերը — %1$s</string>
+    <string name="project_remove_confirm">Հեռացնե՞լ «%1$s»-ը։</string>
+    <string name="project_exit">Լքել նախագիծը</string>
+    <string name="project_exit_confirm">Դուրս գա՞լ այս նախագծից։ Դուք կկորցնեք դրա հասանելիությունը։</string>
+    <string name="project_device_added">Սարքը ավելացվել է</string>
+    <string name="project_device_moved">Սարքը տեղափոխվել է</string>
+    <string name="space_manage_title">Տարածքների կառավարում</string>
+    <string name="space_add">Ավելացնել տարածք</string>
+    <string name="space_add_child">Ավելացնել ենթատարածք</string>
+    <string name="space_add_device">Ավելացնել սարք</string>
+    <string name="space_name_label">Տարածքի անուն</string>
+    <string name="space_name_placeholder">Մուտքագրեք անուն</string>
+    <string name="space_type_label">Տարածքի տեսակ</string>
+    <string name="space_empty">Տարածքի տվյալներ չկան</string>
+    <string name="space_empty_editable">Ավելացրեք տարածք՝ սկսելու համար</string>
+    <string name="space_empty_readonly">Այս նախագծում դեռ տարածքներ կամ սարքեր չկան</string>
+    <string name="space_delete_title">Ջնջել տարածքը</string>
+    <string name="space_delete_confirm">Ջնջե՞լ այս տարածքը։ Տարածքը, որում դեռ ենթատարածքներ կան, հնարավոր չէ ջնջել։</string>
+    <string name="space_move_title">Տեղափոխել տարածք</string>
+    <string name="space_move_action">Տեղափոխել</string>
+    <string name="space_device_adding">Սարքն ավելացվում է…</string>
+    <string name="space_device_waiting">Սպասում… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d սարք</item>
+        <item quantity="other">%1$d սարքեր</item>
+    </plurals>
+</resources>

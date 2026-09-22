@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">WeChat மூலம் உள்நுழைக</string>
+    <string name="login_test_account">சோதனை கணக்கு மூலம் உள்நுழைக</string>
+    <string name="login_err_wechat_missing">WeChat நிறுவப்படவில்லை, அல்லது பதிப்பு மிகவும் பழையது</string>
+    <string name="login_err_no_code">எந்த அங்கீகார குறியீடும் வரவில்லை</string>
+    <string name="login_err_cancelled">WeChat உள்நுழைவு ரத்து செய்யப்பட்டது</string>
+    <string name="login_err_wechat">WeChat அங்கீகாரம் தோல்வியடைந்தது (%1$d)</string>
+    <string name="login_err_no_token">உள்நுழைவு தோல்வி: எந்த token-ம் திரும்ப வரவில்லை</string>
+</resources>

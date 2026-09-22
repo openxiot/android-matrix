@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">کیمرہ ڈیوائس کے QR کوڈ یا IMEI کی طرف کریں</string>
+    <string name="scan_torch">ٹارچ</string>
+    <string name="scan_torch_on">ٹارچ آن کریں</string>
+    <string name="scan_torch_off">ٹارچ بند کریں</string>
+    <string name="scan_permission_required">اسکین کر کے ڈیوائس شامل کرنے کے لیے کیمرہ کی اجازت درکار ہے</string>
+    <string name="scan_grant">اجازت دیں</string>
+</resources>

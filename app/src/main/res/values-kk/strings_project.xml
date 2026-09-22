@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Ағымдағы жоба</string>
+    <string name="project_manage_title">Жобаларды басқару</string>
+    <string name="project_empty">Әзірге жобалар жоқ — құру үшін + түймесін басыңыз</string>
+    <string name="project_create_title">Жоба жасау</string>
+    <string name="project_name_label">Жоба атауы</string>
+    <string name="project_name_placeholder">Жоба атауын енгізіңіз</string>
+    <string name="project_rename_title">Жобаны қайта атау</string>
+    <string name="project_rename_action">Қайта атау</string>
+    <string name="project_delete_title">Жобаны жою</string>
+    <string name="project_delete_confirm">Бұл жобаны жою керек пе? Құрамында кеңістігі бар жобаны жою мүмкін емес.</string>
+    <string name="project_swipe_delete">Жою үшін сырғытыңыз</string>
+    <string name="project_type_label">Түрі: %1$s</string>
+    <string name="project_members_title">Жоба мүшелері</string>
+    <string name="project_members_empty">Әзірге мүшелер жоқ — қосу үшін + түймесін басыңыз</string>
+    <string name="project_members_label">Мүшелер</string>
+    <string name="project_user_id">Пайдаланушы ID</string>
+    <string name="project_user_id_placeholder">Пайдаланушының тіркелгі ID-сі</string>
+    <string name="project_remark_hint">Ескертпе қосу үшін түртіңіз</string>
+    <string name="project_remark_title">Ескертпені өзгерту — %1$s</string>
+    <string name="project_remark_label">Ескертпе</string>
+    <string name="project_role_adjust">Рөлді өзгерту</string>
+    <string name="project_role_adjust_title">Рөлді өзгерту — %1$s</string>
+    <string name="project_remove_confirm">«%1$s» алып тастау керек пе?</string>
+    <string name="project_exit">Жобадан шығу</string>
+    <string name="project_exit_confirm">Бұл жобадан шығу керек пе? Шықсаңыз, оған қатынай алмайсыз.</string>
+    <string name="project_device_added">Құрылғы қосылды</string>
+    <string name="project_device_moved">Құрылғы жылжытылды</string>
+    <string name="space_manage_title">Кеңістіктерді басқару</string>
+    <string name="space_add">Кеңістік қосу</string>
+    <string name="space_add_child">Ішкі кеңістік қосу</string>
+    <string name="space_add_device">Құрылғы қосу</string>
+    <string name="space_name_label">Кеңістік атауы</string>
+    <string name="space_name_placeholder">Атау енгізіңіз</string>
+    <string name="space_type_label">Кеңістік түрі</string>
+    <string name="space_empty">Кеңістік деректері жоқ</string>
+    <string name="space_empty_editable">Бастау үшін кеңістік қосыңыз</string>
+    <string name="space_empty_readonly">Бұл жобада әзірге кеңістіктер немесе құрылғылар жоқ</string>
+    <string name="space_delete_title">Кеңістікті жою</string>
+    <string name="space_delete_confirm">Бұл кеңістікті жою керек пе? Құрамында ішкі кеңістігі бар кеңістікті жою мүмкін емес.</string>
+    <string name="space_move_title">Кеңістікке жылжыту</string>
+    <string name="space_move_action">Жылжыту</string>
+    <string name="space_device_adding">Құрылғы қосылуда…</string>
+    <string name="space_device_waiting">Күтуде… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d құрылғы</item>
+        <item quantity="other">Барлығы %1$d құрылғы</item>
+    </plurals>
+</resources>

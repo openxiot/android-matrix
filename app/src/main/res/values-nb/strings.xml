@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrise</string>
+    <string name="common_back">Tilbake</string>
+    <string name="common_retry">Prøv igjen</string>
+    <string name="common_confirm">Bekreft</string>
+    <string name="common_cancel">Avbryt</string>
+    <string name="common_close">Lukk</string>
+    <string name="common_detail">Detaljer</string>
+    <string name="common_collapse">Skjul</string>
+    <string name="common_expand">Utvid</string>
+    <string name="common_all">Alle</string>
+    <string name="common_add">Legg til</string>
+    <string name="common_create">Opprett</string>
+    <string name="common_delete">Slett</string>
+    <string name="common_unnamed">Uten navn</string>
+    <string name="common_unknown">Ukjent</string>
+    <string name="common_me">Deg</string>
+    <string name="common_rename_action">Endre navn</string>
+    <string name="common_role_label">Rolle</string>
+    <string name="common_role_admin">Administrator</string>
+    <string name="common_role_member">Medlemmer</string>
+    <string name="common_role_member_option">Vanlig medlem</string>
+    <string name="common_member_add">Legg til medlem</string>
+    <string name="common_member_remove">Fjern medlem</string>
+    <string name="common_edit">Rediger</string>
+    <string name="common_refresh">Oppdater</string>
+    <string name="common_change">Endre</string>
+    <string name="common_handle">Håndter</string>
+    <string name="common_handled">Håndtert</string>
+    <string name="common_unhandled">Ikke håndtert</string>
+    <string name="common_recovered">Gjenopprettet</string>
+    <string name="common_unrecovered">Aktiv</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">På</string>
+    <string name="common_switch_off">Av</string>
+    <string name="common_please_select">Velg</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Ingen tidsperiode valgt</string>
+    <string name="common_range_text">%1$s til %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Tjenester</string>
+    <string name="common_function_label">Metoder</string>
+    <string name="common_device_label">Enhet</string>
+    <string name="common_protocol_label">Protokoll</string>
+    <string name="common_unknown_product">Ukjent produkt</string>
+    <string name="common_truncated_hint">Det er flere unntaksoppføringer enn grensen; bare de nyeste vises</string>
+    <string name="err_network">Nettverket er utilgjengelig. Sjekk tilkoblingen og prøv igjen.</string>
+    <string name="err_unknown">Noe gikk galt. Prøv igjen.</string>
+    <string name="space_type_site">Anlegg</string>
+    <string name="space_type_building">Bygning</string>
+    <string name="space_type_floor">Etasje</string>
+    <string name="space_type_room">Rom</string>
+    <string name="space_type_zone">Sone</string>
+    <string name="space_type_field">Felt</string>
+    <string name="space_type_workshop">Verksted</string>
+    <string name="space_type_parking">Parkeringsplass</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">المنظمة الحالية</string>
+    <string name="org_detail_title">تفاصيل المنظمة</string>
+    <string name="org_empty">لا توجد منظمات بعد — اضغط + لإنشاء واحدة</string>
+    <string name="org_create_title">إنشاء منظمة</string>
+    <string name="org_id_label">معرّف المنظمة</string>
+    <string name="org_id_placeholder">مثال: my-company</string>
+    <string name="org_id_hint">ابدأ بحرف — يُسمح بالحروف والأرقام والشرطات فقط</string>
+    <string name="org_name_label">اسم المنظمة</string>
+    <string name="org_name_placeholder">مثال: شركتي</string>
+    <string name="org_rename_title">إعادة تسمية المنظمة</string>
+    <string name="org_delete_title">حذف المنظمة</string>
+    <string name="org_delete_confirm">هل تريد حذف هذه المنظمة؟</string>
+    <string name="org_manage">إدارة</string>
+    <string name="org_swipe_delete">اسحب للحذف</string>
+    <string name="org_members_empty">لا يوجد أعضاء بعد</string>
+    <string name="org_member_developer_id">معرّف المطوّر</string>
+    <string name="org_member_developer_id_placeholder">developerId الخاص بالمستخدم</string>
+    <string name="org_member_name_label">الاسم المعروض</string>
+    <string name="org_member_name_placeholder">اختياري</string>
+    <string name="org_change_role">تغيير الدور</string>
+    <string name="org_change_role_title">تغيير الدور — %1$s</string>
+    <string name="org_remove_confirm">هل تريد إزالة «%1$s»؟</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d أعضاء</item>
+        <item quantity="many">%1$d عضوًا</item>
+        <item quantity="one">عضو واحد (%1$d)</item>
+        <item quantity="two">عضوان (%1$d)</item>
+        <item quantity="zero">لا أعضاء (%1$d)</item>
+        <item quantity="other">%1$d عضو</item>
+    </plurals>
+</resources>

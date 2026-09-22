@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">சாதன விவரங்கள்</string>
+    <string name="device_operation_title">சாதன கட்டுப்பாடு</string>
+    <string name="device_not_found">சாதனம் கண்டறியப்படவில்லை</string>
+    <string name="device_id_label">சாதன ID</string>
+    <string name="device_type_label">சாதன வகை</string>
+    <string name="device_online_label">நிலை</string>
+    <string name="device_last_online_label">கடைசியாக ஆன்லைன்</string>
+    <string name="device_last_offline_label">கடைசியாக ஆஃப்லைன்</string>
+    <string name="device_space_label">இடம்</string>
+</resources>

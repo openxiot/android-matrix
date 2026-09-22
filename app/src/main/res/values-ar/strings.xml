@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">المصفوفة</string>
+    <string name="common_back">رجوع</string>
+    <string name="common_retry">إعادة المحاولة</string>
+    <string name="common_confirm">تأكيد</string>
+    <string name="common_cancel">إلغاء</string>
+    <string name="common_close">إغلاق</string>
+    <string name="common_detail">التفاصيل</string>
+    <string name="common_collapse">طي</string>
+    <string name="common_expand">توسيع</string>
+    <string name="common_all">الكل</string>
+    <string name="common_add">إضافة</string>
+    <string name="common_create">إنشاء</string>
+    <string name="common_delete">حذف</string>
+    <string name="common_unnamed">بلا اسم</string>
+    <string name="common_unknown">غير معروف</string>
+    <string name="common_me">أنا</string>
+    <string name="common_rename_action">إعادة التسمية</string>
+    <string name="common_role_label">الدور</string>
+    <string name="common_role_admin">مسؤول</string>
+    <string name="common_role_member">الأعضاء</string>
+    <string name="common_role_member_option">عضو عادي</string>
+    <string name="common_member_add">إضافة عضو</string>
+    <string name="common_member_remove">إزالة عضو</string>
+    <string name="common_edit">تحرير</string>
+    <string name="common_refresh">تحديث</string>
+    <string name="common_change">تغيير</string>
+    <string name="common_handle">معالجة</string>
+    <string name="common_handled">تمت المعالجة</string>
+    <string name="common_unhandled">لم تتم المعالجة</string>
+    <string name="common_recovered">تمت الاستعادة</string>
+    <string name="common_unrecovered">نشط</string>
+    <string name="common_online">متصل</string>
+    <string name="common_offline">غير متصل</string>
+    <string name="common_switch_on">تشغيل</string>
+    <string name="common_switch_off">إيقاف</string>
+    <string name="common_please_select">يرجى الاختيار</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">لم يُحدَّد نطاق زمني</string>
+    <string name="common_range_text">%1$s إلى %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">الخدمات</string>
+    <string name="common_function_label">الطرق</string>
+    <string name="common_device_label">الجهاز</string>
+    <string name="common_protocol_label">البروتوكول</string>
+    <string name="common_unknown_product">منتج غير معروف</string>
+    <string name="common_truncated_hint">سجلات الاستثناء تتجاوز الحد، ويُعرض الأحدث فقط</string>
+    <string name="err_network">الشبكة غير متاحة. تحقق من اتصالك وحاول مجددًا.</string>
+    <string name="err_unknown">حدث خطأ ما. حاول مجددًا.</string>
+    <string name="space_type_site">موقع</string>
+    <string name="space_type_building">المبنى</string>
+    <string name="space_type_floor">الطابق</string>
+    <string name="space_type_room">الغرفة</string>
+    <string name="space_type_zone">المنطقة</string>
+    <string name="space_type_field">ساحة</string>
+    <string name="space_type_workshop">ورشة</string>
+    <string name="space_type_parking">موقف سيارات</string>
+</resources>

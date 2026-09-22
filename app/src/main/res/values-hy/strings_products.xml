@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Ապրանքներ</string>
+    <string name="product_detail_title">Ապրանքի մանրամասներ</string>
+    <string name="product_not_found">Արտադրանքը չի գտնվել</string>
+    <string name="product_empty">Դեռ արտադրանքներ չկան</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d արտադրանք</item>
+        <item quantity="other">%1$d արտադրանքներ</item>
+    </plurals>
+    <string name="product_model_inline">Մոդել՝ %1$s</string>
+    <string name="product_id_label">Ապրանքի ID</string>
+    <string name="product_model_label">Ապրանքի մոդել</string>
+    <string name="product_org_label">Կազմակերպություն</string>
+    <string name="product_buy_jd">Գնել JD.com-ում</string>
+    <string name="product_buy_taobao">Գնել Taobao-ում</string>
+    <string name="product_status_released">Հրապարակված</string>
+    <string name="product_status_preview">Նախադիտում</string>
+    <string name="product_status_development">Մշակման ընթացքում</string>
+    <string name="product_empty_data">Արտադրանքի տվյալներ չկան</string>
+</resources>

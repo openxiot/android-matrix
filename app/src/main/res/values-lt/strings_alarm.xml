@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Aliarmai</string>
+    <string name="alarm_action_ok">Veiksmas sėkmingas</string>
+    <string name="alarm_empty">Šiuo laikotarpiu aliarmų nėra</string>
+    <string name="alarm_all_services">Visos paslaugos</string>
+    <string name="alarm_level_label">Aliarmo lygis</string>
+    <string name="alarm_handled_label">Apdoroti</string>
+    <string name="alarm_status_label">Būsena</string>
+    <string name="alarm_summary_title">Aliarmų sąrašas</string>
+    <string name="alarm_text_label">Aliarmo tekstas</string>
+    <string name="alarm_field_label">Laukas</string>
+    <string name="alarm_trigger_label">Suveikimo sąlyga</string>
+    <string name="alarm_current_value_label">Dabartinė reikšmė</string>
+</resources>

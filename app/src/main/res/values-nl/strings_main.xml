@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">Startpagina</string>
+    <string name="tab_project">Project</string>
+    <string name="tab_device">Apparaat</string>
+    <string name="tab_product">Producten</string>
+    <string name="tab_profile">Profiel</string>
+    <string name="main_switch_project">Project wisselen</string>
+    <string name="main_pick_org_first">Kies eerst een organisatie</string>
+    <string name="main_pick_org">Organisatie kiezen</string>
+    <string name="main_pick_project_first">Kies eerst een project</string>
+    <string name="main_pick_project">Project kiezen</string>
+</resources>

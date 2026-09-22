@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Nykyinen projekti</string>
+    <string name="project_manage_title">Projektien hallinta</string>
+    <string name="project_empty">Ei vielä projekteja – luo uusi napauttamalla +</string>
+    <string name="project_create_title">Luo projekti</string>
+    <string name="project_name_label">Projektin nimi</string>
+    <string name="project_name_placeholder">Anna projektin nimi</string>
+    <string name="project_rename_title">Nimeä projekti uudelleen</string>
+    <string name="project_rename_action">Nimeä uudelleen</string>
+    <string name="project_delete_title">Poista projekti</string>
+    <string name="project_delete_confirm">Poistetaanko tämä projekti? Projektia, jossa on vielä tiloja, ei voi poistaa.</string>
+    <string name="project_swipe_delete">Poista pyyhkäisemällä</string>
+    <string name="project_type_label">Tyyppi: %1$s</string>
+    <string name="project_members_title">Projektin jäsenet</string>
+    <string name="project_members_empty">Ei vielä jäseniä – lisää jäsen napauttamalla +</string>
+    <string name="project_members_label">Jäsenet</string>
+    <string name="project_user_id">Käyttäjän ID</string>
+    <string name="project_user_id_placeholder">Käyttäjän tilin tunnus</string>
+    <string name="project_remark_hint">Lisää muistiinpano napauttamalla</string>
+    <string name="project_remark_title">Muokkaa muistiinpanoa – %1$s</string>
+    <string name="project_remark_label">Muistiinpano</string>
+    <string name="project_role_adjust">Vaihda roolia</string>
+    <string name="project_role_adjust_title">Vaihda roolia – %1$s</string>
+    <string name="project_remove_confirm">Poistetaanko ”%1$s”?</string>
+    <string name="project_exit">Poistu projektista</string>
+    <string name="project_exit_confirm">Poistutaanko tästä projektista? Menetät pääsyn siihen.</string>
+    <string name="project_device_added">Laite lisätty</string>
+    <string name="project_device_moved">Laite siirretty</string>
+    <string name="space_manage_title">Tilojen hallinta</string>
+    <string name="space_add">Lisää tila</string>
+    <string name="space_add_child">Lisää alitila</string>
+    <string name="space_add_device">Lisää laite</string>
+    <string name="space_name_label">Tilan nimi</string>
+    <string name="space_name_placeholder">Anna nimi</string>
+    <string name="space_type_label">Tilatyyppi</string>
+    <string name="space_empty">Ei tilatietoja</string>
+    <string name="space_empty_editable">Aloita lisäämällä tila</string>
+    <string name="space_empty_readonly">Tässä projektissa ei ole vielä tiloja tai laitteita</string>
+    <string name="space_delete_title">Poista tila</string>
+    <string name="space_delete_confirm">Poistetaanko tämä tila? Tilaa, jossa on vielä alitiloja, ei voi poistaa.</string>
+    <string name="space_move_title">Siirrä tilaan</string>
+    <string name="space_move_action">Siirrä</string>
+    <string name="space_device_adding">Lisätään laitetta…</string>
+    <string name="space_device_waiting">Odotetaan… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d laite</item>
+        <item quantity="other">%1$d laitetta</item>
+    </plurals>
+</resources>

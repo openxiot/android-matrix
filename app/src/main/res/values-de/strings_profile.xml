@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Sprache</string>
+    <string name="profile_language_system">Systemeinstellung folgen</string>
+    <string name="profile_language_search">Sprachen suchen</string>
+    <string name="profile_language_search_clear">Löschen</string>
+    <string name="profile_language_no_match">Keine passende Sprache</string>
+    <string name="profile_not_logged_in">Nicht angemeldet</string>
+    <string name="profile_current_org">Aktuelle Organisation</string>
+    <string name="profile_current_project">Aktuelles Projekt</string>
+    <string name="profile_no_org_selected">Keine Organisation ausgewählt</string>
+    <string name="profile_no_project_selected">Kein Projekt ausgewählt</string>
+    <string name="profile_org_subtitle">Eine wählen, um ein Projekt auszuwählen</string>
+    <string name="profile_project_subtitle_pick">Projekt wählen</string>
+    <string name="profile_project_subtitle_switch">Zum Wechseln des Projekts tippen</string>
+    <string name="profile_project_subtitle_org_first">Bitte zuerst eine Organisation auswählen</string>
+    <string name="profile_section_settings">Einstellungen</string>
+    <string name="profile_dark_mode">Dunkelmodus</string>
+    <string name="profile_light_mode">Hellmodus</string>
+    <string name="profile_theme_subtitle">Zum Wechseln des Designs tippen</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Gerätepunkttabelle</string>
+    <string name="profile_modbus_subtitle">Modbus-Registerlisten (schreibgeschützt)</string>
+    <string name="profile_alarm_title">Alarme</string>
+    <string name="profile_alarm_subtitle">Modbus-Alarmprotokoll und -bearbeitung</string>
+    <string name="profile_history_title">Verlauf</string>
+    <string name="profile_history_subtitle">Erfassungsverlauf und Diagramme</string>
+    <string name="profile_about_subtitle">App-Infos und Version</string>
+    <string name="account_title">Konto</string>
+    <string name="account_username">Benutzername</string>
+    <string name="account_platform">Plattform</string>
+    <string name="account_not_selected">Nicht ausgewählt</string>
+    <string name="account_org_toggle">Organisation</string>
+    <string name="account_org_toggle_subtitle">Einschalten, um Organisationen zu verwalten</string>
+    <string name="account_logout">Abmelden</string>
+    <string name="about_title">Über</string>
+    <string name="about_tagline">Plattform für IoT-Geräteverwaltung und -überwachung</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_check_update">Nach Updates suchen</string>
+    <string name="about_checking">Wird geprüft…</string>
+    <string name="about_up_to_date">Auf dem neuesten Stand</string>
+    <string name="about_update_now">Jetzt aktualisieren</string>
+    <string name="about_downloading">Wird heruntergeladen…</string>
+    <string name="about_downloading_percent">Wird heruntergeladen: %1$d%%</string>
+    <string name="about_install_now">Jetzt installieren</string>
+    <string name="about_install">Installieren</string>
+    <string name="about_retry_download">Download wiederholen</string>
+    <string name="about_later">Später</string>
+    <string name="about_install_dialog_title">Update installieren</string>
+    <string name="about_new_version_found">Version %1$s ist verfügbar</string>
+    <string name="about_ready_hint">Download abgeschlossen – auf „Installieren“ tippen, um das Paket an den System-Installer zu übergeben.</string>
+    <string name="about_need_install_permission">Zuerst erlauben, dass diese App unbekannte Apps installiert</string>
+    <string name="about_keep_app_alive">Seitenwechsel möglich – die App nur nicht schließen</string>
+    <string name="about_metered">Mobilfunknetz aktiv – der Download kann viel Datenvolumen verbrauchen</string>
+    <string name="about_metered_size">Mobilfunknetz aktiv – das Paket ist etwa %1$s</string>
+    <string name="about_install_settings_failed">Die Einstellung „Unbekannte Apps installieren“ ließ sich nicht öffnen – in den Systemeinstellungen manuell erlauben</string>
+    <string name="about_no_installer">Keine Installer-App verfügbar – das Paket wurde im App-Ordner gespeichert</string>
+    <string name="about_update_notes_empty">Für diese Version gibt es keine Hinweise.</string>
+</resources>

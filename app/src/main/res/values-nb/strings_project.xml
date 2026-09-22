@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Gjeldende prosjekt</string>
+    <string name="project_manage_title">Administrer prosjekter</string>
+    <string name="project_empty">Ingen prosjekter ennå — trykk + for å opprette ett</string>
+    <string name="project_create_title">Opprett prosjekt</string>
+    <string name="project_name_label">Prosjektnavn</string>
+    <string name="project_name_placeholder">Skriv inn et prosjektnavn</string>
+    <string name="project_rename_title">Endre navn på prosjektet</string>
+    <string name="project_rename_action">Endre navn</string>
+    <string name="project_delete_title">Slett prosjekt</string>
+    <string name="project_delete_confirm">Slette dette prosjektet? Et prosjekt som fortsatt har områder, kan ikke slettes.</string>
+    <string name="project_swipe_delete">Sveip for å slette</string>
+    <string name="project_type_label">Type: %1$s</string>
+    <string name="project_members_title">Prosjektmedlemmer</string>
+    <string name="project_members_empty">Ingen medlemmer ennå — trykk + for å legge til ett</string>
+    <string name="project_members_label">Medlemmer</string>
+    <string name="project_user_id">Bruker-ID</string>
+    <string name="project_user_id_placeholder">Brukerens konto-ID</string>
+    <string name="project_remark_hint">Trykk for å legge til et notat</string>
+    <string name="project_remark_title">Rediger notat — %1$s</string>
+    <string name="project_remark_label">Notat</string>
+    <string name="project_role_adjust">Endre rolle</string>
+    <string name="project_role_adjust_title">Endre rolle — %1$s</string>
+    <string name="project_remove_confirm">Fjerne «%1$s»?</string>
+    <string name="project_exit">Forlat prosjekt</string>
+    <string name="project_exit_confirm">Forlate dette prosjektet? Du mister tilgangen til det.</string>
+    <string name="project_device_added">Enheten er lagt til</string>
+    <string name="project_device_moved">Enheten er flyttet</string>
+    <string name="space_manage_title">Administrer områder</string>
+    <string name="space_add">Legg til område</string>
+    <string name="space_add_child">Legg til underlokale</string>
+    <string name="space_add_device">Legg til enhet</string>
+    <string name="space_name_label">Lokalenavn</string>
+    <string name="space_name_placeholder">Skriv inn et navn</string>
+    <string name="space_type_label">Lokaletype</string>
+    <string name="space_empty">Ingen områdedata</string>
+    <string name="space_empty_editable">Legg til et område for å komme i gang</string>
+    <string name="space_empty_readonly">Dette prosjektet har ingen områder eller enheter ennå</string>
+    <string name="space_delete_title">Slett område</string>
+    <string name="space_delete_confirm">Slette dette området? Et område som fortsatt har underområder, kan ikke slettes.</string>
+    <string name="space_move_title">Flytt til område</string>
+    <string name="space_move_action">Flytt</string>
+    <string name="space_device_adding">Legger til enhet…</string>
+    <string name="space_device_waiting">Venter… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d enhet</item>
+        <item quantity="other">%1$d enheter</item>
+    </plurals>
+</resources>

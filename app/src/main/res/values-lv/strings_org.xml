@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Pašreizējā organizācija</string>
+    <string name="org_detail_title">Organizācijas informācija</string>
+    <string name="org_empty">Vēl nav organizāciju — pieskarieties +, lai izveidotu</string>
+    <string name="org_create_title">Izveidot organizāciju</string>
+    <string name="org_id_label">Organizācijas ID</string>
+    <string name="org_id_placeholder">piem., my-company</string>
+    <string name="org_id_hint">Sāciet ar burtu — tikai burti, cipari un defises</string>
+    <string name="org_name_label">Organizācijas nosaukums</string>
+    <string name="org_name_placeholder">piem., Mans uzņēmums</string>
+    <string name="org_rename_title">Pārdēvēt organizāciju</string>
+    <string name="org_delete_title">Dzēst organizāciju</string>
+    <string name="org_delete_confirm">Dzēst šo organizāciju?</string>
+    <string name="org_manage">Pārvaldīt</string>
+    <string name="org_swipe_delete">Velciet, lai dzēstu</string>
+    <string name="org_members_empty">Vēl nav dalībnieku</string>
+    <string name="org_member_developer_id">Izstrādātāja ID</string>
+    <string name="org_member_developer_id_placeholder">Lietotāja developerId</string>
+    <string name="org_member_name_label">Parādāmais vārds</string>
+    <string name="org_member_name_placeholder">Nav obligāts</string>
+    <string name="org_change_role">Mainīt lomu</string>
+    <string name="org_change_role_title">Mainīt lomu — %1$s</string>
+    <string name="org_remove_confirm">Noņemt „%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d dalībnieks</item>
+        <item quantity="zero">%1$d dalībnieku</item>
+        <item quantity="other">%1$d dalībnieki</item>
+    </plurals>
+</resources>

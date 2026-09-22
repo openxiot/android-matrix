@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">Нүүр хуудас</string>
+    <string name="tab_project">Төсөл</string>
+    <string name="tab_device">Төхөөрөмж</string>
+    <string name="tab_product">Бүтээгдэхүүн</string>
+    <string name="tab_profile">Профайл</string>
+    <string name="main_switch_project">Төсөл солих</string>
+    <string name="main_pick_org_first">Эхлээд байгууллагаа сонгоно уу</string>
+    <string name="main_pick_org">Байгууллага сонгох</string>
+    <string name="main_pick_project_first">Эхлээд төслөө сонгоно уу</string>
+    <string name="main_pick_project">Төсөл сонгох</string>
+</resources>

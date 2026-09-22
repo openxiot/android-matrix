@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Maatriks</string>
+    <string name="common_back">Tagasi</string>
+    <string name="common_retry">Proovi uuesti</string>
+    <string name="common_confirm">Kinnita</string>
+    <string name="common_cancel">Tühista</string>
+    <string name="common_close">Sulge</string>
+    <string name="common_detail">Üksikasjad</string>
+    <string name="common_collapse">Ahenda</string>
+    <string name="common_expand">Laienda</string>
+    <string name="common_all">Kõik</string>
+    <string name="common_add">Lisa</string>
+    <string name="common_create">Loo</string>
+    <string name="common_delete">Kustuta</string>
+    <string name="common_unnamed">Nimetu</string>
+    <string name="common_unknown">Teadmata</string>
+    <string name="common_me">Sina</string>
+    <string name="common_rename_action">Nimeta ümber</string>
+    <string name="common_role_label">Roll</string>
+    <string name="common_role_admin">Administraator</string>
+    <string name="common_role_member">Liikmed</string>
+    <string name="common_role_member_option">Tavaline liige</string>
+    <string name="common_member_add">Lisa liige</string>
+    <string name="common_member_remove">Eemalda liige</string>
+    <string name="common_edit">Muuda</string>
+    <string name="common_refresh">Värskenda</string>
+    <string name="common_change">Muuda</string>
+    <string name="common_handle">Töötle</string>
+    <string name="common_handled">Töödeldud</string>
+    <string name="common_unhandled">Töötlemata</string>
+    <string name="common_recovered">Taastunud</string>
+    <string name="common_unrecovered">Aktiivne</string>
+    <string name="common_online">Võrgus</string>
+    <string name="common_offline">Võrgust väljas</string>
+    <string name="common_switch_on">Sees</string>
+    <string name="common_switch_off">Väljas</string>
+    <string name="common_please_select">Valige</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Ajavahemikku pole valitud</string>
+    <string name="common_range_text">%1$s kuni %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Teenused</string>
+    <string name="common_function_label">Meetodid</string>
+    <string name="common_device_label">Seade</string>
+    <string name="common_protocol_label">Protokoll</string>
+    <string name="common_unknown_product">Tundmatu toode</string>
+    <string name="common_truncated_hint">Erandikirjeid on rohkem kui piirang; kuvatakse ainult viimased</string>
+    <string name="err_network">Võrk pole saadaval. Kontrolli ühendust ja proovi uuesti.</string>
+    <string name="err_unknown">Midagi läks valesti. Proovi uuesti.</string>
+    <string name="space_type_site">Objekt</string>
+    <string name="space_type_building">Hoone</string>
+    <string name="space_type_floor">Korrus</string>
+    <string name="space_type_room">Tuba</string>
+    <string name="space_type_zone">Tsoon</string>
+    <string name="space_type_field">Väljak</string>
+    <string name="space_type_workshop">Töökoda</string>
+    <string name="space_type_parking">Parkla</string>
+</resources>

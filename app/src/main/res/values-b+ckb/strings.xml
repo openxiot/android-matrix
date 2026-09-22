@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">ماتریکس</string>
+    <string name="common_back">گەڕانەوە</string>
+    <string name="common_retry">هەوڵدانەوە</string>
+    <string name="common_confirm">پشتدارکردن</string>
+    <string name="common_cancel">پاشگەزبوونەوە</string>
+    <string name="common_close">داخستن</string>
+    <string name="common_detail">وردەکارییەکان</string>
+    <string name="common_collapse">کۆکردنەوە</string>
+    <string name="common_expand">فراوانکردن</string>
+    <string name="common_all">هەموو</string>
+    <string name="common_add">زیادکردن</string>
+    <string name="common_create">دروستکردن</string>
+    <string name="common_delete">سڕینەوە</string>
+    <string name="common_unnamed">بێناو</string>
+    <string name="common_unknown">نەزانراو</string>
+    <string name="common_me">من</string>
+    <string name="common_rename_action">گۆڕینی ناو</string>
+    <string name="common_role_label">ڕۆڵ</string>
+    <string name="common_role_admin">بەڕێوەبەر</string>
+    <string name="common_role_member">ئەندامان</string>
+    <string name="common_role_member_option">ئەندامی ئاسایی</string>
+    <string name="common_member_add">ئەندام زیاد بکە</string>
+    <string name="common_member_remove">لابردنی ئەندام</string>
+    <string name="common_edit">دەستکاری</string>
+    <string name="common_refresh">نوێکردنەوە</string>
+    <string name="common_change">گۆڕین</string>
+    <string name="common_handle">چارەسەرکردن</string>
+    <string name="common_handled">چارەسەر کراوە</string>
+    <string name="common_unhandled">چارەسەر نەکراوە</string>
+    <string name="common_recovered">گەڕاوەتەوە</string>
+    <string name="common_unrecovered">نەگەڕاوەتەوە</string>
+    <string name="common_online">ئۆنلاین</string>
+    <string name="common_offline">ئۆفلاین</string>
+    <string name="common_switch_on">کارا</string>
+    <string name="common_switch_off">ناکارا</string>
+    <string name="common_please_select">تکایە هەڵبژێرە</string>
+    <string name="common_ok">باشە</string>
+    <string name="common_no_range">هیچ ماوەیەکی کاتی هەڵنەبژێراوە</string>
+    <string name="common_range_text">%1$s بۆ %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">خزمەتگوزارییەکان</string>
+    <string name="common_function_label">میتۆدەکان</string>
+    <string name="common_device_label">ئامێر</string>
+    <string name="common_protocol_label">پرۆتۆکۆڵ</string>
+    <string name="common_unknown_product">بەرهەمی نەناسراو</string>
+    <string name="common_truncated_hint">تۆمارەکانی نائاسایی لە سنوور تێپەڕیوە، تەنها دوایین بەش ڕیز کراوە</string>
+    <string name="err_network">تۆڕ بەردەست نییە. پەیوەندییەکەت بپشکنە و هەوڵبدەرەوە.</string>
+    <string name="err_unknown">شتێک هەڵە بوو. تکایە هەوڵبدەرەوە.</string>
+    <string name="space_type_site">پێگە</string>
+    <string name="space_type_building">بینا</string>
+    <string name="space_type_floor">نهۆم</string>
+    <string name="space_type_room">ژوور</string>
+    <string name="space_type_zone">ناوچە</string>
+    <string name="space_type_field">میدان</string>
+    <string name="space_type_workshop">کارگە</string>
+    <string name="space_type_parking">شوێنی وەستانی ئۆتۆمۆبیل</string>
+</resources>

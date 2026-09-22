@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Бягучы праект</string>
+    <string name="project_manage_title">Кіраванне праектамі</string>
+    <string name="project_empty">Праектаў пакуль няма — націсніце +, каб стварыць</string>
+    <string name="project_create_title">Стварыць праект</string>
+    <string name="project_name_label">Назва праекта</string>
+    <string name="project_name_placeholder">Увядзіце назву праекта</string>
+    <string name="project_rename_title">Перайменаваць праект</string>
+    <string name="project_rename_action">Перайменаваць</string>
+    <string name="project_delete_title">Выдаліць праект</string>
+    <string name="project_delete_confirm">Выдаліць гэты праект? Праект, у якім яшчэ ёсць прасторы, выдаліць нельга.</string>
+    <string name="project_swipe_delete">Правядзіце, каб выдаліць</string>
+    <string name="project_type_label">Тып: %1$s</string>
+    <string name="project_members_title">Удзельнікі праекта</string>
+    <string name="project_members_empty">Удзельнікаў пакуль няма — націсніце +, каб дадаць</string>
+    <string name="project_members_label">Удзельнікі</string>
+    <string name="project_user_id">ID карыстальніка</string>
+    <string name="project_user_id_placeholder">ID уліковага запісу карыстальніка</string>
+    <string name="project_remark_hint">Націсніце, каб дадаць нататку</string>
+    <string name="project_remark_title">Рэдагаваць нататку — %1$s</string>
+    <string name="project_remark_label">Нататка</string>
+    <string name="project_role_adjust">Змяніць ролю</string>
+    <string name="project_role_adjust_title">Змяніць ролю — %1$s</string>
+    <string name="project_remove_confirm">Выдаліць «%1$s»?</string>
+    <string name="project_exit">Выйсці з праекта</string>
+    <string name="project_exit_confirm">Выйсці з гэтага праекта? Вы страціце доступ да яго.</string>
+    <string name="project_device_added">Прылада дададзена</string>
+    <string name="project_device_moved">Прылада перамешчана</string>
+    <string name="space_manage_title">Кіраванне прасторамі</string>
+    <string name="space_add">Дадаць прастору</string>
+    <string name="space_add_child">Дадаць падпрастору</string>
+    <string name="space_add_device">Дадаць прыладу</string>
+    <string name="space_name_label">Назва прасторы</string>
+    <string name="space_name_placeholder">Увядзіце назву</string>
+    <string name="space_type_label">Тып прасторы</string>
+    <string name="space_empty">Даных пра прастору няма</string>
+    <string name="space_empty_editable">Дадайце прастору, каб пачаць</string>
+    <string name="space_empty_readonly">У гэтым праекце пакуль няма прастор або прылад</string>
+    <string name="space_delete_title">Выдаліць прастору</string>
+    <string name="space_delete_confirm">Выдаліць гэтую прастору? Прастору, у якой яшчэ ёсць падпрасторы, выдаліць нельга.</string>
+    <string name="space_move_title">Перамясціць у прастору</string>
+    <string name="space_move_action">Перамясціць</string>
+    <string name="space_device_adding">Даданне прылады…</string>
+    <string name="space_device_waiting">Чаканне… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d прылады</item>
+        <item quantity="many">%1$d прылад</item>
+        <item quantity="one">%1$d прылада</item>
+        <item quantity="other">%1$d прылады</item>
+    </plurals>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Vörur</string>
+    <string name="product_detail_title">Upplýsingar um vöru</string>
+    <string name="product_not_found">Vara fannst ekki</string>
+    <string name="product_empty">Engar vörur ennþá</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d vara</item>
+        <item quantity="other">%1$d vörur</item>
+    </plurals>
+    <string name="product_model_inline">Módel: %1$s</string>
+    <string name="product_id_label">Vöruauðkenni</string>
+    <string name="product_model_label">Vörulíkan</string>
+    <string name="product_org_label">Stofnun</string>
+    <string name="product_buy_jd">Kaupa á JD.com</string>
+    <string name="product_buy_taobao">Kaupa á Taobao</string>
+    <string name="product_status_released">Birt</string>
+    <string name="product_status_preview">Forskoðun</string>
+    <string name="product_status_development">Í þróun</string>
+    <string name="product_empty_data">Engin vörugögn</string>
+</resources>

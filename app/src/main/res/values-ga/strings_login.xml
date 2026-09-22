@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Sínigh isteach le WeChat</string>
+    <string name="login_test_account">Sínigh isteach le cuntas tástála</string>
+    <string name="login_err_wechat_missing">Níl WeChat suiteáilte, nó tá an leagan ró-ársa</string>
+    <string name="login_err_no_code">Níor tháinig aon chód údaraithe ar ais</string>
+    <string name="login_err_cancelled">Cealaíodh an síniú isteach le WeChat</string>
+    <string name="login_err_wechat">Theip ar údarú WeChat (%1$d)</string>
+    <string name="login_err_no_token">Theip ar an síniú isteach: níor tugadh aon token ar ais</string>
+</resources>

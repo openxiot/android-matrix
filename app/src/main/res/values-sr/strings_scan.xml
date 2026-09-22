@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Усмерите камеру на QR код или IMEI уређаја</string>
+    <string name="scan_torch">Батеријска лампа</string>
+    <string name="scan_torch_on">Укључи батеријску лампу</string>
+    <string name="scan_torch_off">Искључи батеријску лампу</string>
+    <string name="scan_permission_required">Потребан је приступ камери да бисте скенирали и додали уређаје</string>
+    <string name="scan_grant">Одобри приступ</string>
+</resources>

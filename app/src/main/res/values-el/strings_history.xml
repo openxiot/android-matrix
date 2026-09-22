@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Ιστορικό</string>
+    <string name="history_section_overview">Επισκόπηση υπηρεσιών</string>
+    <string name="history_no_services">Δεν υπάρχουν ακόμη υπηρεσίες Modbus σε αυτό το έργο</string>
+    <string name="history_service_count_label">Αριθμός υπηρεσιών</string>
+    <string name="history_device_count_label">Αριθμός συσκευών</string>
+    <string name="history_sampled_at_label">Ώρα συλλογής</string>
+    <string name="history_function_count_label">Μέθοδοι</string>
+    <string name="history_faults_section">Εξαιρέσεις συλλογής</string>
+    <string name="history_faults_label">Εξαιρέσεις συλλογής</string>
+    <string name="history_no_faults">Δεν υπάρχουν σφάλματα συλλογής σε αυτό το διάστημα</string>
+    <string name="history_no_data">Δεν συλλέχθηκαν δεδομένα σε αυτό το διάστημα</string>
+    <string name="history_field_label">Πεδίο</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Δεδομένα συλλογής (%1$d γραμμή)</item>
+        <item quantity="other">Δεδομένα συλλογής (%1$d γραμμές)</item>
+    </plurals>
+    <string name="service_history_all_functions">Όλες οι μέθοδοι</string>
+    <string name="service_history_field_selection">Πεδία %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Σφάλμα %1$s × %2$d</string>
+    <string name="service_history_no_curve">Κανένα πεδίο αυτής της υπηρεσίας δεν μπορεί να σχεδιαστεί σε γράφημα</string>
+    <string name="service_history_no_curve_for_function">Δεν υπάρχει πεδίο με δυνατότητα γραφήματος σε αυτή τη λειτουργία</string>
+    <string name="service_history_no_fields_selected">Δεν έχουν επιλεγεί πεδία</string>
+    <string name="service_history_failure_hint">Οι κάθετες γραμμές δείχνουν τις στιγμές αποτυχίας της συλλογής</string>
+    <string name="service_history_downsampled_hint">Πολλά σημεία δεδομένων; έγινε υποδειγματοληψία ανά χρονικό διάστημα (η τιμή είναι ο μέσος όρος του διαστήματος, σε παρένθεση ελάχιστο~μέγιστο)</string>
+    <string name="service_history_keepalive">Διατήρηση</string>
+    <string name="service_history_view_table">Πίνακας</string>
+    <string name="service_history_view_chart">Διάγραμμα</string>
+</resources>

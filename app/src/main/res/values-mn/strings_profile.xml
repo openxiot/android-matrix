@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Хэл</string>
+    <string name="profile_language_system">Системийг дагах</string>
+    <string name="profile_language_search">Хэл хайх</string>
+    <string name="profile_language_search_clear">Цэвэрлэх</string>
+    <string name="profile_language_no_match">Таарах хэл олдсонгүй</string>
+    <string name="profile_not_logged_in">Нэвтрээгүй</string>
+    <string name="profile_current_org">Одоогийн байгууллага</string>
+    <string name="profile_current_project">Одоогийн төсөл</string>
+    <string name="profile_no_org_selected">Байгууллага сонгоогүй</string>
+    <string name="profile_no_project_selected">Төсөл сонгоогүй</string>
+    <string name="profile_org_subtitle">Төсөл сонгохын тулд эхлээд байгууллагаа сонгоно уу</string>
+    <string name="profile_project_subtitle_pick">Төсөл сонгоно уу</string>
+    <string name="profile_project_subtitle_switch">Төсөл солихыг дарна уу</string>
+    <string name="profile_project_subtitle_org_first">Эхлээд байгууллага сонгоно уу</string>
+    <string name="profile_section_settings">Тохиргоо</string>
+    <string name="profile_dark_mode">Харанхуй горим</string>
+    <string name="profile_light_mode">Цайвар горим</string>
+    <string name="profile_theme_subtitle">Загварыг солихыг дарна уу</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Төхөөрөмжийн цэгийн хүснэгт</string>
+    <string name="profile_modbus_subtitle">Modbus регистрийн зураглал (зөвхөн унших)</string>
+    <string name="profile_alarm_title">Сэрэмжлүүлэг</string>
+    <string name="profile_alarm_subtitle">Modbus дохиоллын бүртгэл ба шийдвэрлэх</string>
+    <string name="profile_history_title">Түүх</string>
+    <string name="profile_history_subtitle">Түүвэрлэлтийн түүх ба график</string>
+    <string name="profile_about_subtitle">Програмын мэдээлэл ба хувилбар</string>
+    <string name="account_title">Бүртгэл</string>
+    <string name="account_username">Хэрэглэгчийн нэр</string>
+    <string name="account_platform">Платформ</string>
+    <string name="account_not_selected">Сонгогдоогүй</string>
+    <string name="account_org_toggle">Байгууллага</string>
+    <string name="account_org_toggle_subtitle">Байгууллага удирдахын тулд асаана уу</string>
+    <string name="account_logout">Гарах</string>
+    <string name="about_title">Тухай</string>
+    <string name="about_tagline">IoT төхөөрөмж удирдах, хянах платформ</string>
+    <string name="about_version">%1$s хувилбар</string>
+    <string name="about_check_update">Шинэчлэлт шалгах</string>
+    <string name="about_checking">Шалгаж байна…</string>
+    <string name="about_up_to_date">Та аль хэдийн хамгийн сүүлийн хувилбартай</string>
+    <string name="about_update_now">Яг одоо шинэчлэх</string>
+    <string name="about_downloading">Татаж байна…</string>
+    <string name="about_downloading_percent">Татаж байна %1$d%%</string>
+    <string name="about_install_now">Яг одоо суулгах</string>
+    <string name="about_install">Суулгах</string>
+    <string name="about_retry_download">Таталтыг дахин оролдох</string>
+    <string name="about_later">Дараа</string>
+    <string name="about_install_dialog_title">Шинэчлэлт суулгах</string>
+    <string name="about_new_version_found">%1$s хувилбар гарчээ</string>
+    <string name="about_ready_hint">Татаж дууслаа — Суулгах дээр дарж системийн суулгагчид шилжүүлнэ үү.</string>
+    <string name="about_need_install_permission">Эхлээд энэ програмыг танихгүй эх сурвалжаас суулгахыг зөвшөөрөгтүн</string>
+    <string name="about_keep_app_alive">Та хуудсаа сольж болно — зүгээр л програмаа бүү хаа</string>
+    <string name="about_metered">Та гар утасны сүлжээнд байна — татаж авахад их дата зарцуулагдаж болно</string>
+    <string name="about_metered_size">Гар утасны сүлжээ — багц ойролцоогоор %1$s</string>
+    <string name="about_install_settings_failed">«Танихгүй програмыг суулгах» тохиргоог нээж чадсангүй — системийн тохиргоогоор гараар зөвшөөрөгтүн</string>
+    <string name="about_no_installer">Суулгах программ олдсонгүй — багц програмын хавтаст хадгалагдсан</string>
+    <string name="about_update_notes_empty">Энэ хувилбар ямар ч тайлбаргүй ирсэн.</string>
+</resources>

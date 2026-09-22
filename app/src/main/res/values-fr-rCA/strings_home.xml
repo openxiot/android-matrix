@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Veuillez d\'abord sélectionner un projet dans la liste</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Abandonner les modifications ?</string>
+    <string name="home_discard_message">Des modifications ne sont pas enregistrées. Quitter maintenant les perdra.</string>
+    <string name="home_dashboard_empty">Aucune carte — touchez « Ajouter » ci-dessous pour en ajouter une</string>
+    <string name="home_add_card">+ Ajouter</string>
+    <string name="home_default_layout_loaded">Disposition par défaut chargée — enregistrez-la pour l\'appliquer</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Un grand nombre : appareils / services / alarmes / échecs</string>
+    <string name="home_card_kind_line">Nombre d\'alarmes par heure, ou un champ de service</string>
+    <string name="home_card_kind_distribution">Répartition par appareil / service / alarme / échec</string>
+    <string name="home_card_kind_device">Une propriété d\'un appareil</string>
+    <string name="home_card_kind_service">Un ensemble de champs d\'une fonction</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Graphique</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Appareil</string>
+    <string name="home_card_default_service">Services</string>
+    <string name="home_card_default_unknown">Carte</string>
+    <string name="home_edit_card_title">Modifier · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Pleine largeur</string>
+    <string name="home_size_half">Demi-largeur</string>
+    <string name="home_section_metric">Indicateur</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Total appareils</string>
+    <string name="home_metric_devices_online">Appareils en ligne</string>
+    <string name="home_metric_services_total">Total services</string>
+    <string name="home_metric_alarms_today">Alarmes du jour</string>
+    <string name="home_metric_alarms_window">Alarmes sur la période</string>
+    <string name="home_metric_failures_total">Échecs d\'acquisition sur la période</string>
+    <string name="home_section_dimension">Répartition par</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Type d\'appareil</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Type d\'échec d\'acquisition</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Source de données</string>
+    <string name="home_source_label">Source</string>
+    <string name="home_source_alarm_curve">Alarmes par heure</string>
+    <string name="home_source_service_field">Un champ de service</string>
+    <string name="home_show_failure_shadow">Afficher les lignes d\'échec de collecte</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Service · Fonction · Champ</string>
+    <string name="home_service_placeholder">Sélectionner un service</string>
+    <string name="home_service_unnamed">Service sans nom</string>
+    <string name="home_function_placeholder">Sélectionner une fonction</string>
+    <string name="home_function_fallback">Fonction %1$d</string>
+    <string name="home_pick_service_first">Sélectionnez d\'abord un service</string>
+    <string name="home_show_unit">Afficher l\'unité</string>
+    <string name="home_section_device_prop">Appareil · Propriété</string>
+    <string name="home_device_placeholder">Sélectionner un appareil</string>
+    <string name="home_prop_label">Propriétés</string>
+    <string name="home_pick_device_first">Sélectionnez d\'abord un appareil</string>
+    <string name="home_prop_none">Aucune propriété pour ce modèle</string>
+    <string name="home_prop_placeholder">Sélectionner une propriété</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, laissez vide pour ne pas limiter</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Derniers</string>
+    <string name="home_window_custom">Personnalisé</string>
+    <string name="home_pick_dates">Choisir les dates de début et de fin</string>
+    <plurals name="home_window_days">
+        <item quantity="many">%1$d de jours</item>
+        <item quantity="one">%1$d jour</item>
+        <item quantity="other">%1$d jours</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="many">%1$d d\'heures</item>
+        <item quantity="one">%1$d heure</item>
+        <item quantity="other">%1$d heures</item>
+    </plurals>
+    <string name="home_card_unknown_type">Type de carte inconnu</string>
+    <string name="home_empty_no_data">Aucune donnée</string>
+    <string name="home_empty_no_reading">Aucun relevé pour l\'instant</string>
+    <string name="home_empty_not_sampled">Pas encore collecté</string>
+    <string name="home_sampled_at">Acquis le %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">appareils</string>
+    <string name="home_unit_services">services</string>
+</resources>

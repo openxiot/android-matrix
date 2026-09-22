@@ -27,6 +27,7 @@ import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.main.PageTitle
+import cc.openxiot.wematrix.util.mirrorInRtl
 import coil.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -191,7 +192,7 @@ private fun ProductCard(
                     Icons.Default.ChevronRight,
                     contentDescription = stringResource(R.string.common_detail),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(20.dp).mirrorInRtl()
                 )
             }
         }

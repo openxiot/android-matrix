@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Larm</string>
+    <string name="alarm_action_ok">Åtgärden utfördes</string>
+    <string name="alarm_empty">Inga larm under perioden</string>
+    <string name="alarm_all_services">Alla tjänster</string>
+    <string name="alarm_level_label">Larmnivå</string>
+    <string name="alarm_handled_label">Hantera</string>
+    <string name="alarm_status_label">Status</string>
+    <string name="alarm_summary_title">Larmlista</string>
+    <string name="alarm_text_label">Larmtext</string>
+    <string name="alarm_field_label">Fält</string>
+    <string name="alarm_trigger_label">Utlösningsvillkor</string>
+    <string name="alarm_current_value_label">Aktuellt värde</string>
+</resources>

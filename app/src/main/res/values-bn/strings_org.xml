@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">বর্তমান সংগঠন</string>
+    <string name="org_detail_title">সংগঠনের বিবরণ</string>
+    <string name="org_empty">এখনও কোনো সংগঠন নেই — একটি তৈরি করতে + চাপুন</string>
+    <string name="org_create_title">সংগঠন তৈরি করুন</string>
+    <string name="org_id_label">সংগঠন আইডি</string>
+    <string name="org_id_placeholder">যেমন: my-company</string>
+    <string name="org_id_hint">একটি অক্ষর দিয়ে শুরু করুন — শুধু অক্ষর, সংখ্যা ও হাইফেন</string>
+    <string name="org_name_label">সংগঠনের নাম</string>
+    <string name="org_name_placeholder">যেমন: My Company</string>
+    <string name="org_rename_title">সংগঠনের নাম পরিবর্তন</string>
+    <string name="org_delete_title">সংগঠন মুছুন</string>
+    <string name="org_delete_confirm">এই সংগঠনটি মুছে ফেলবেন?</string>
+    <string name="org_manage">ব্যবস্থাপনা</string>
+    <string name="org_swipe_delete">মুছতে সোয়াইপ করুন</string>
+    <string name="org_members_empty">এখনও কোনো সদস্য নেই</string>
+    <string name="org_member_developer_id">ডেভেলপার আইডি</string>
+    <string name="org_member_developer_id_placeholder">ব্যবহারকারীর developerId</string>
+    <string name="org_member_name_label">প্রদর্শনের নাম</string>
+    <string name="org_member_name_placeholder">ঐচ্ছিক</string>
+    <string name="org_change_role">ভূমিকা পরিবর্তন করুন</string>
+    <string name="org_change_role_title">ভূমিকা পরিবর্তন — %1$s</string>
+    <string name="org_remove_confirm">«%1$s» সরাবেন?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d সদস্য</item>
+        <item quantity="other">%1$d জন সদস্য</item>
+    </plurals>
+</resources>

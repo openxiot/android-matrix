@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Эхлээд төслийн жагсаалтаас төсөл сонгоно уу</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Өөрчлөлтүүдийг устгах уу?</string>
+    <string name="home_discard_message">Таны хадгалаагүй өөрчлөлт байна. Гарвал тэдгээр алдагдана.</string>
+    <string name="home_dashboard_empty">Одоогоор карт байхгүй — доорх «Нэмэх»-ийг дарж нэмнэ үү</string>
+    <string name="home_add_card">+ Нэмэх</string>
+    <string name="home_default_layout_loaded">Анхдагч байрлал ачаалагдлаа — шилжүүлэх бол хадгална уу</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Нэг том тоо: төхөөрөмж / үйлчилгээ / дохиолол / алдаа</string>
+    <string name="home_card_kind_line">Цаг тутамд дохиоллын тоо, эсвэл нэг үйлчилгээний талбар</string>
+    <string name="home_card_kind_distribution">Төхөөрөмж / үйлчилгээ / дохиолол / алдаагаар тараалт</string>
+    <string name="home_card_kind_device">Нэг төхөөрөмжийн нэг шинж</string>
+    <string name="home_card_kind_service">Нэг функцын талбаруудын багц</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">График</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Төхөөрөмж</string>
+    <string name="home_card_default_service">Үйлчилгээ</string>
+    <string name="home_card_default_unknown">Карт</string>
+    <string name="home_edit_card_title">Засах · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Бүтэн өргөн</string>
+    <string name="home_size_half">Хагас өргөн</string>
+    <string name="home_section_metric">Үзүүлэлт</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Нийт төхөөрөмж</string>
+    <string name="home_metric_devices_online">Онлайн төхөөрөмж</string>
+    <string name="home_metric_services_total">Нийт үйлчилгээ</string>
+    <string name="home_metric_alarms_today">Өнөөдрийн сэрэмжлүүлэг</string>
+    <string name="home_metric_alarms_window">Цонх дахь дохиолол</string>
+    <string name="home_metric_failures_total">Цонх дахь түүвэрлэлтийн алдаа</string>
+    <string name="home_section_dimension">Тараалтын хэмжээс</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Төхөөрөмжийн төрөл</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Түүвэрлэлтийн алдааны төрөл</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Өгөгдлийн эх сурвалж</string>
+    <string name="home_source_label">Эх сурвалж</string>
+    <string name="home_source_alarm_curve">Цаг тутамд дохиоллын тоо</string>
+    <string name="home_source_service_field">Нэг үйлчилгээний талбар</string>
+    <string name="home_show_failure_shadow">Амжилтгүй цуглуулалтын шугамыг харуулах</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Үйлчилгээ · Функц · Талбар</string>
+    <string name="home_service_placeholder">Үйлчилгээ сонгоно уу</string>
+    <string name="home_service_unnamed">Нэргүй үйлчилгээ</string>
+    <string name="home_function_placeholder">Функц сонгоно уу</string>
+    <string name="home_function_fallback">%1$d функц</string>
+    <string name="home_pick_service_first">Эхлээд үйлчилгээ сонгоно уу</string>
+    <string name="home_show_unit">Нэгжийг харуулах</string>
+    <string name="home_section_device_prop">Төхөөрөмж · Шинж</string>
+    <string name="home_device_placeholder">Төхөөрөмж сонгоно уу</string>
+    <string name="home_prop_label">Шинж чанар</string>
+    <string name="home_pick_device_first">Эхлээд төхөөрөмж сонгоно уу</string>
+    <string name="home_prop_none">Энэ загварт ямар ч шинж байхгүй</string>
+    <string name="home_prop_placeholder">Шинж сонгоно уу</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, хязгааргүй бол хоосон үлдээнэ үү</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Сүүлийн</string>
+    <string name="home_window_custom">Захиалгат</string>
+    <string name="home_pick_dates">Эхлэл ба дуусах огноо сонгоно уу</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d өдөр</item>
+        <item quantity="other">%1$d өдрүүд</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d цаг</item>
+        <item quantity="other">%1$d цагууд</item>
+    </plurals>
+    <string name="home_card_unknown_type">Тодорхойгүй картын төрөл</string>
+    <string name="home_empty_no_data">Өгөгдөл байхгүй</string>
+    <string name="home_empty_no_reading">Хараахан уншилт байхгүй</string>
+    <string name="home_empty_not_sampled">Хараахан цуглуулаагүй</string>
+    <string name="home_sampled_at">Түүвэрлэсэн: %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">төхөөрөмж</string>
+    <string name="home_unit_services">үйлчилгээ</string>
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">โปรดเลือกโครงการจากรายการโครงการก่อน</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">ทิ้งการแก้ไข?</string>
+    <string name="home_discard_message">มีการแก้ไขที่ยังไม่ได้บันทึก ออกตอนนี้จะสูญหาย</string>
+    <string name="home_dashboard_empty">ยังไม่มีการ์ด แตะ “เพิ่ม” ด้านล่างเพื่อเพิ่มการ์ด</string>
+    <string name="home_add_card">+ เพิ่ม</string>
+    <string name="home_default_layout_loaded">โหลดเลย์เอาต์เริ่มต้นแล้ว ยังต้องบันทึกด้วยตนเอง</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">ตัวเลขใหญ่หนึ่งตัว: อุปกรณ์ / บริการ / สัญญาณเตือน / ความล้มเหลว</string>
+    <string name="home_card_kind_line">กราฟสัญญาณเตือนรายชั่วโมง หรือกราฟฟิลด์ของบริการ</string>
+    <string name="home_card_kind_distribution">แยกตามอุปกรณ์ / บริการ / สัญญาณเตือน / ความล้มเหลว</string>
+    <string name="home_card_kind_device">คุณสมบัติหนึ่งอย่างของอุปกรณ์หนึ่งเครื่อง</string>
+    <string name="home_card_kind_service">กลุ่มฟิลด์จากฟังก์ชันหนึ่ง</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">กราฟ</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">อุปกรณ์</string>
+    <string name="home_card_default_service">บริการ</string>
+    <string name="home_card_default_unknown">การ์ด</string>
+    <string name="home_edit_card_title">แก้ไข · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">เต็มความกว้าง</string>
+    <string name="home_size_half">ครึ่งความกว้าง</string>
+    <string name="home_section_metric">ตัวชี้วัด</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">อุปกรณ์ทั้งหมด</string>
+    <string name="home_metric_devices_online">อุปกรณ์ออนไลน์</string>
+    <string name="home_metric_services_total">บริการทั้งหมด</string>
+    <string name="home_metric_alarms_today">การแจ้งเตือนวันนี้</string>
+    <string name="home_metric_alarms_window">สัญญาณเตือนในช่วง</string>
+    <string name="home_metric_failures_total">ความล้มเหลวในการเก็บข้อมูลในช่วง</string>
+    <string name="home_section_dimension">แยกตาม</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">ประเภทอุปกรณ์</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">ประเภทความล้มเหลวในการเก็บข้อมูล</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">แหล่งข้อมูล</string>
+    <string name="home_source_label">แหล่งข้อมูล</string>
+    <string name="home_source_alarm_curve">สัญญาณเตือนรายชั่วโมง</string>
+    <string name="home_source_service_field">ฟิลด์ของบริการหนึ่ง</string>
+    <string name="home_show_failure_shadow">แสดงเส้นการเก็บข้อมูลที่ล้มเหลว</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">บริการ · ฟังก์ชัน · ฟิลด์</string>
+    <string name="home_service_placeholder">เลือกบริการ</string>
+    <string name="home_service_unnamed">บริการที่ไม่ได้ตั้งชื่อ</string>
+    <string name="home_function_placeholder">เลือกฟังก์ชัน</string>
+    <string name="home_function_fallback">ฟังก์ชัน %1$d</string>
+    <string name="home_pick_service_first">เลือกบริการก่อน</string>
+    <string name="home_show_unit">แสดงหน่วย</string>
+    <string name="home_section_device_prop">อุปกรณ์ · คุณสมบัติ</string>
+    <string name="home_device_placeholder">เลือกอุปกรณ์</string>
+    <string name="home_prop_label">พร็อพเพอร์ตี</string>
+    <string name="home_pick_device_first">เลือกอุปกรณ์ก่อน</string>
+    <string name="home_prop_none">รุ่นนี้ไม่มีคุณสมบัติ</string>
+    <string name="home_prop_placeholder">เลือกคุณสมบัติ</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d เว้นว่างไว้หากไม่จำกัด</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">ล่าสุด</string>
+    <string name="home_window_custom">กำหนดเอง</string>
+    <string name="home_pick_dates">เลือกวันที่เริ่มและสิ้นสุด</string>
+    <plurals name="home_window_days">
+        <item quantity="other">%1$d วัน</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="other">%1$d ชั่วโมง</item>
+    </plurals>
+    <string name="home_card_unknown_type">ประเภทการ์ดที่ไม่รู้จัก</string>
+    <string name="home_empty_no_data">ไม่มีข้อมูล</string>
+    <string name="home_empty_no_reading">ยังไม่ได้รับค่า</string>
+    <string name="home_empty_not_sampled">ยังไม่ได้เก็บข้อมูล</string>
+    <string name="home_sampled_at">เก็บค่าเมื่อ %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">เครื่อง</string>
+    <string name="home_unit_services">บริการ</string>
+</resources>

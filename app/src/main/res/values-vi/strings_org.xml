@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Tổ chức hiện tại</string>
+    <string name="org_detail_title">Chi tiết tổ chức</string>
+    <string name="org_empty">Chưa có tổ chức nào — nhấn + để tạo một tổ chức</string>
+    <string name="org_create_title">Tạo Tổ chức</string>
+    <string name="org_id_label">ID tổ chức</string>
+    <string name="org_id_placeholder">ví dụ: my-company</string>
+    <string name="org_id_hint">Bắt đầu bằng chữ cái — chỉ dùng chữ cái, chữ số và dấu gạch ngang</string>
+    <string name="org_name_label">Tên Tổ chức</string>
+    <string name="org_name_placeholder">ví dụ: Công ty của tôi</string>
+    <string name="org_rename_title">Đổi tên tổ chức</string>
+    <string name="org_delete_title">Xóa tổ chức</string>
+    <string name="org_delete_confirm">Xóa tổ chức này?</string>
+    <string name="org_manage">Quản lý</string>
+    <string name="org_swipe_delete">Vuốt để xóa</string>
+    <string name="org_members_empty">Chưa có thành viên</string>
+    <string name="org_member_developer_id">ID nhà phát triển</string>
+    <string name="org_member_developer_id_placeholder">developerId của người dùng</string>
+    <string name="org_member_name_label">Tên hiển thị</string>
+    <string name="org_member_name_placeholder">Không bắt buộc</string>
+    <string name="org_change_role">Đổi vai trò</string>
+    <string name="org_change_role_title">Đổi vai trò — %1$s</string>
+    <string name="org_remove_confirm">Xóa “%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="other">%1$d thành viên</item>
+    </plurals>
+</resources>

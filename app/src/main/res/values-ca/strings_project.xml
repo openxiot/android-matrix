@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Projecte actual</string>
+    <string name="project_manage_title">Gestió de projectes</string>
+    <string name="project_empty">Encara no hi ha projectes; toqueu + per crear-ne un</string>
+    <string name="project_create_title">Crear projecte</string>
+    <string name="project_name_label">Nom del projecte</string>
+    <string name="project_name_placeholder">Introduïu un nom de projecte</string>
+    <string name="project_rename_title">Canvia el nom del projecte</string>
+    <string name="project_rename_action">Canvia el nom</string>
+    <string name="project_delete_title">Elimina el projecte</string>
+    <string name="project_delete_confirm">Voleu eliminar aquest projecte? Un projecte que encara té espais no es pot eliminar.</string>
+    <string name="project_swipe_delete">Llisca per eliminar</string>
+    <string name="project_type_label">Tipus: %1$s</string>
+    <string name="project_members_title">Membres del projecte</string>
+    <string name="project_members_empty">Encara no hi ha membres; toqueu + per afegir-ne un</string>
+    <string name="project_members_label">Membres</string>
+    <string name="project_user_id">ID d\'usuari</string>
+    <string name="project_user_id_placeholder">L\'ID del compte de l\'usuari</string>
+    <string name="project_remark_hint">Toqueu per afegir una nota</string>
+    <string name="project_remark_title">Edita la nota — %1$s</string>
+    <string name="project_remark_label">Nota</string>
+    <string name="project_role_adjust">Canviar de rol</string>
+    <string name="project_role_adjust_title">Canvia el rol — %1$s</string>
+    <string name="project_remove_confirm">Voleu treure «%1$s»?</string>
+    <string name="project_exit">Sortir del projecte</string>
+    <string name="project_exit_confirm">Voleu sortir d\'aquest projecte? Hi perdreu l\'accés.</string>
+    <string name="project_device_added">Dispositiu afegit</string>
+    <string name="project_device_moved">Dispositiu mogut</string>
+    <string name="space_manage_title">Gestió d\'espais</string>
+    <string name="space_add">Afegeix un espai</string>
+    <string name="space_add_child">Afegir subespai</string>
+    <string name="space_add_device">Afegir dispositiu</string>
+    <string name="space_name_label">Nom de l\'espai</string>
+    <string name="space_name_placeholder">Introduïu un nom</string>
+    <string name="space_type_label">Tipus d\'espai</string>
+    <string name="space_empty">No hi ha dades d\'espais</string>
+    <string name="space_empty_editable">Afegiu un espai per començar</string>
+    <string name="space_empty_readonly">Aquest projecte encara no té espais ni dispositius</string>
+    <string name="space_delete_title">Elimina l\'espai</string>
+    <string name="space_delete_confirm">Voleu eliminar aquest espai? Un espai que encara té subespais no es pot eliminar.</string>
+    <string name="space_move_title">Mou a un espai</string>
+    <string name="space_move_action">Mou</string>
+    <string name="space_device_adding">Afegint el dispositiu…</string>
+    <string name="space_device_waiting">Esperant… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="many">%1$d de dispositius</item>
+        <item quantity="one">%1$d dispositiu</item>
+        <item quantity="other">%1$d dispositius</item>
+    </plurals>
+</resources>

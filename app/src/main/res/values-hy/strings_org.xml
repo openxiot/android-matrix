@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Ընթացիկ կազմակերպությունը</string>
+    <string name="org_detail_title">Կազմակերպության մանրամասներ</string>
+    <string name="org_empty">Դեռ կազմակերպություններ չկան — սեղմեք +՝ մեկը ստեղծելու համար</string>
+    <string name="org_create_title">Ստեղծել կազմակերպություն</string>
+    <string name="org_id_label">Կազմակերպության ID</string>
+    <string name="org_id_placeholder">օր.՝ my-company</string>
+    <string name="org_id_hint">Սկսեք տառով — միայն տառեր, թվեր և գծիկներ</string>
+    <string name="org_name_label">Կազմակերպության անուն</string>
+    <string name="org_name_placeholder">օր.՝ Իմ ընկերությունը</string>
+    <string name="org_rename_title">Վերանվանել կազմակերպությունը</string>
+    <string name="org_delete_title">Ջնջել կազմակերպությունը</string>
+    <string name="org_delete_confirm">Ջնջե՞լ այս կազմակերպությունը։</string>
+    <string name="org_manage">Կառավարել</string>
+    <string name="org_swipe_delete">Սահեցրեք՝ ջնջելու համար</string>
+    <string name="org_members_empty">Դեռ անդամներ չկան</string>
+    <string name="org_member_developer_id">Մշակողի ID</string>
+    <string name="org_member_developer_id_placeholder">Օգտվողի developerId</string>
+    <string name="org_member_name_label">Ցուցադրվող անուն</string>
+    <string name="org_member_name_placeholder">Ոչ պարտադիր</string>
+    <string name="org_change_role">Փոխել դերը</string>
+    <string name="org_change_role_title">Փոխել դերը — %1$s</string>
+    <string name="org_remove_confirm">Հեռացնե՞լ «%1$s»-ը։</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d անդամ</item>
+        <item quantity="other">%1$d անդամներ</item>
+    </plurals>
+</resources>

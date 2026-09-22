@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">المشروع الحالي</string>
+    <string name="project_manage_title">إدارة المشاريع</string>
+    <string name="project_empty">لا توجد مشاريع بعد — اضغط + لإنشاء واحد</string>
+    <string name="project_create_title">إنشاء مشروع</string>
+    <string name="project_name_label">اسم المشروع</string>
+    <string name="project_name_placeholder">أدخل اسم المشروع</string>
+    <string name="project_rename_title">إعادة تسمية المشروع</string>
+    <string name="project_rename_action">إعادة التسمية</string>
+    <string name="project_delete_title">حذف المشروع</string>
+    <string name="project_delete_confirm">هل تريد حذف هذا المشروع؟ لا يمكن حذف مشروع لا يزال يحتوي على مساحات.</string>
+    <string name="project_swipe_delete">اسحب للحذف</string>
+    <string name="project_type_label">النوع: %1$s</string>
+    <string name="project_members_title">أعضاء المشروع</string>
+    <string name="project_members_empty">لا يوجد أعضاء بعد — اضغط + لإضافة عضو</string>
+    <string name="project_members_label">الأعضاء</string>
+    <string name="project_user_id">معرّف المستخدم</string>
+    <string name="project_user_id_placeholder">معرّف حساب المستخدم</string>
+    <string name="project_remark_hint">اضغط لإضافة ملاحظة</string>
+    <string name="project_remark_title">تعديل الملاحظة — %1$s</string>
+    <string name="project_remark_label">ملاحظة</string>
+    <string name="project_role_adjust">تغيير الدور</string>
+    <string name="project_role_adjust_title">تغيير الدور — %1$s</string>
+    <string name="project_remove_confirm">هل تريد إزالة «%1$s»؟</string>
+    <string name="project_exit">مغادرة المشروع</string>
+    <string name="project_exit_confirm">هل تريد مغادرة هذا المشروع؟ ستفقد الوصول إليه.</string>
+    <string name="project_device_added">أُضيف الجهاز</string>
+    <string name="project_device_moved">نُقل الجهاز</string>
+    <string name="space_manage_title">إدارة المساحات</string>
+    <string name="space_add">إضافة مساحة</string>
+    <string name="space_add_child">إضافة مساحة فرعية</string>
+    <string name="space_add_device">إضافة جهاز</string>
+    <string name="space_name_label">اسم المساحة</string>
+    <string name="space_name_placeholder">أدخل الاسم</string>
+    <string name="space_type_label">نوع المساحة</string>
+    <string name="space_empty">لا توجد بيانات مساحات</string>
+    <string name="space_empty_editable">أضف مساحة للبدء</string>
+    <string name="space_empty_readonly">لا توجد مساحات أو أجهزة في هذا المشروع بعد</string>
+    <string name="space_delete_title">حذف المساحة</string>
+    <string name="space_delete_confirm">هل تريد حذف هذه المساحة؟ لا يمكن حذف مساحة لا يزال بها مساحات فرعية.</string>
+    <string name="space_move_title">النقل إلى مساحة</string>
+    <string name="space_move_action">نقل</string>
+    <string name="space_device_adding">جارٍ إضافة الجهاز…</string>
+    <string name="space_device_waiting">جارٍ الانتظار… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d أجهزة</item>
+        <item quantity="many">%1$d جهازًا</item>
+        <item quantity="one">جهاز واحد (%1$d)</item>
+        <item quantity="two">جهازان (%1$d)</item>
+        <item quantity="zero">لا أجهزة (%1$d)</item>
+        <item quantity="other">%1$d جهاز</item>
+    </plurals>
+</resources>

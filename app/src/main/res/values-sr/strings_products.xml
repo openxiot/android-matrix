@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Производи</string>
+    <string name="product_detail_title">Детаљи производа</string>
+    <string name="product_not_found">Производ није пронађен</string>
+    <string name="product_empty">Још нема производа</string>
+    <plurals name="product_count">
+        <item quantity="few">%1$d производа</item>
+        <item quantity="one">%1$d производ</item>
+        <item quantity="other">%1$d производа</item>
+    </plurals>
+    <string name="product_model_inline">Модел: %1$s</string>
+    <string name="product_id_label">ID производа</string>
+    <string name="product_model_label">Модел производа</string>
+    <string name="product_org_label">Организација</string>
+    <string name="product_buy_jd">Купите на JD.com</string>
+    <string name="product_buy_taobao">Купите на Taobao</string>
+    <string name="product_status_released">Објављено</string>
+    <string name="product_status_preview">Претпреглед</string>
+    <string name="product_status_development">У развоју</string>
+    <string name="product_empty_data">Нема података о производу</string>
+</resources>

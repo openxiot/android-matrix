@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Pašreizējais projekts</string>
+    <string name="project_manage_title">Projektu pārvaldība</string>
+    <string name="project_empty">Vēl nav projektu — pieskarieties +, lai izveidotu</string>
+    <string name="project_create_title">Izveidot projektu</string>
+    <string name="project_name_label">Projekta nosaukums</string>
+    <string name="project_name_placeholder">Ievadiet projekta nosaukumu</string>
+    <string name="project_rename_title">Pārdēvēt projektu</string>
+    <string name="project_rename_action">Pārdēvēt</string>
+    <string name="project_delete_title">Dzēst projektu</string>
+    <string name="project_delete_confirm">Dzēst šo projektu? Projektu, kurā vēl ir telpas, nevar dzēst.</string>
+    <string name="project_swipe_delete">Velciet, lai dzēstu</string>
+    <string name="project_type_label">Tips: %1$s</string>
+    <string name="project_members_title">Projekta dalībnieki</string>
+    <string name="project_members_empty">Vēl nav dalībnieku — pieskarieties +, lai pievienotu</string>
+    <string name="project_members_label">Dalībnieki</string>
+    <string name="project_user_id">Lietotāja ID</string>
+    <string name="project_user_id_placeholder">Lietotāja konta ID</string>
+    <string name="project_remark_hint">Pieskarieties, lai pievienotu piezīmi</string>
+    <string name="project_remark_title">Rediģēt piezīmi — %1$s</string>
+    <string name="project_remark_label">Piezīme</string>
+    <string name="project_role_adjust">Mainīt lomu</string>
+    <string name="project_role_adjust_title">Mainīt lomu — %1$s</string>
+    <string name="project_remove_confirm">Noņemt „%1$s”?</string>
+    <string name="project_exit">Izstāties no projekta</string>
+    <string name="project_exit_confirm">Pamest šo projektu? Piekļuve tam tiks zaudēta.</string>
+    <string name="project_device_added">Ierīce pievienota</string>
+    <string name="project_device_moved">Ierīce pārvietota</string>
+    <string name="space_manage_title">Telpu pārvaldība</string>
+    <string name="space_add">Pievienot telpu</string>
+    <string name="space_add_child">Pievienot apakštelpu</string>
+    <string name="space_add_device">Pievienot ierīci</string>
+    <string name="space_name_label">Telpas nosaukums</string>
+    <string name="space_name_placeholder">Ievadiet nosaukumu</string>
+    <string name="space_type_label">Telpas tips</string>
+    <string name="space_empty">Nav telpu datu</string>
+    <string name="space_empty_editable">Pievienojiet telpu, lai sāktu</string>
+    <string name="space_empty_readonly">Šajā projektā vēl nav telpu vai ierīču</string>
+    <string name="space_delete_title">Dzēst telpu</string>
+    <string name="space_delete_confirm">Dzēst šo telpu? Telpu, kurā vēl ir apakštelpas, nevar dzēst.</string>
+    <string name="space_move_title">Pārvietot uz telpu</string>
+    <string name="space_move_action">Pārvietot</string>
+    <string name="space_device_adding">Pievieno ierīci…</string>
+    <string name="space_device_waiting">Gaida… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d ierīce</item>
+        <item quantity="zero">%1$d ierīču</item>
+        <item quantity="other">%1$d ierīces</item>
+    </plurals>
+</resources>

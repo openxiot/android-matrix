@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Välj först ett projekt i projektlistan</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Förkasta ändringarna?</string>
+    <string name="home_discard_message">Du har osparade ändringar. Lämnar du nu förloras de.</string>
+    <string name="home_dashboard_empty">Inga kort ännu – tryck på ”Lägg till” nedan för att skapa ett</string>
+    <string name="home_add_card">+ Lägg till</string>
+    <string name="home_default_layout_loaded">Standardlayouten har lästs in – spara den för att tillämpa</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">En stor siffra: enheter / tjänster / larm / fel</string>
+    <string name="home_card_kind_line">Larm per timme, eller ett tjänstefält</string>
+    <string name="home_card_kind_distribution">Fördelning per enhet / tjänst / larm / fel</string>
+    <string name="home_card_kind_device">En egenskap hos en enhet</string>
+    <string name="home_card_kind_service">En uppsättning fält från en funktion</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Diagram</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Enhet</string>
+    <string name="home_card_default_service">Tjänster</string>
+    <string name="home_card_default_unknown">Kort</string>
+    <string name="home_edit_card_title">Redigera · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Full bredd</string>
+    <string name="home_size_half">Halv bredd</string>
+    <string name="home_section_metric">Mått</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Antal enheter</string>
+    <string name="home_metric_devices_online">Enheter online</string>
+    <string name="home_metric_services_total">Antal tjänster</string>
+    <string name="home_metric_alarms_today">Dagens larm</string>
+    <string name="home_metric_alarms_window">Larm i perioden</string>
+    <string name="home_metric_failures_total">Insamlingsfel i perioden</string>
+    <string name="home_section_dimension">Fördelning</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Enhetstyp</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Typ av insamlingsfel</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Datakälla</string>
+    <string name="home_source_label">Källa</string>
+    <string name="home_source_alarm_curve">Larm per timme</string>
+    <string name="home_source_service_field">Ett tjänstefält</string>
+    <string name="home_show_failure_shadow">Visa linjer för misslyckad insamling</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Tjänst · Funktion · Fält</string>
+    <string name="home_service_placeholder">Välj tjänst</string>
+    <string name="home_service_unnamed">Namnlös tjänst</string>
+    <string name="home_function_placeholder">Välj funktion</string>
+    <string name="home_function_fallback">Funktion %1$d</string>
+    <string name="home_pick_service_first">Välj tjänst först</string>
+    <string name="home_show_unit">Visa enhet</string>
+    <string name="home_section_device_prop">Enhet · Egenskap</string>
+    <string name="home_device_placeholder">Välj enhet</string>
+    <string name="home_prop_label">Egenskaper</string>
+    <string name="home_pick_device_first">Välj enhet först</string>
+    <string name="home_prop_none">Inga egenskaper för den här modellen</string>
+    <string name="home_prop_placeholder">Välj egenskap</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, lämna tomt för ingen gräns</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Senaste</string>
+    <string name="home_window_custom">Anpassat</string>
+    <string name="home_pick_dates">Välj start- och slutdatum</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d dag</item>
+        <item quantity="other">%1$d dagar</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d timme</item>
+        <item quantity="other">%1$d timmar</item>
+    </plurals>
+    <string name="home_card_unknown_type">Okänd korttyp</string>
+    <string name="home_empty_no_data">Inga data</string>
+    <string name="home_empty_no_reading">Inga värden ännu</string>
+    <string name="home_empty_not_sampled">Inte insamlat ännu</string>
+    <string name="home_sampled_at">Insamlat %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">enheter</string>
+    <string name="home_unit_services">tjänster</string>
+</resources>

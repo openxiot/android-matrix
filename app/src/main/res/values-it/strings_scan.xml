@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Inquadra il codice QR o l\'IMEI del dispositivo</string>
+    <string name="scan_torch">Torcia</string>
+    <string name="scan_torch_on">Accendi la torcia</string>
+    <string name="scan_torch_off">Spegni la torcia</string>
+    <string name="scan_permission_required">Per scansionare e aggiungere dispositivi serve l\'accesso alla fotocamera</string>
+    <string name="scan_grant">Concedi accesso</string>
+</resources>

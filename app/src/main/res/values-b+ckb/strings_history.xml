@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">مێژوو</string>
+    <string name="history_section_overview">پێشکەشەوەی سەرڤیس</string>
+    <string name="history_no_services">هێشتا لەم پروژەیەدا هیچ سەرڤیسێکی Modbus نییە</string>
+    <string name="history_service_count_label">ژمارەی خزمەتگوزاری</string>
+    <string name="history_device_count_label">ژمارەی ئامێرەکان</string>
+    <string name="history_sampled_at_label">کاتی کۆکردنەوە</string>
+    <string name="history_function_count_label">ژمارەی میتۆدەکان</string>
+    <string name="history_faults_section">نائاساییەکانی کۆکردنەوە</string>
+    <string name="history_faults_label">نائاساییەکانی کۆکردنەوە</string>
+    <string name="history_no_faults">لەم ماوەیەدا هیچ هەڵەیەکی سامپڵینگ نییە</string>
+    <string name="history_no_data">لەم ماوەیەدا هیچ داتایەک بە سامپڵ نەگیراوە</string>
+    <string name="history_field_label">خانە</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">داتای سامپڵکراو (%1$d ڕیز)</item>
+        <item quantity="other">داتای سامپڵکراو (%1$d ڕیزەکان)</item>
+    </plurals>
+    <string name="service_history_all_functions">هەموو میتۆدەکان</string>
+    <string name="service_history_field_selection">کلیددارەکان %1$d / %2$d</string>
+    <string name="service_history_fault_chip">هەڵەی %1$s × %2$d</string>
+    <string name="service_history_no_curve">هیچ کلیددارێکی ئەم سەرڤیسە ناتوانرێت بکێشرێت</string>
+    <string name="service_history_no_curve_for_function">هیچ کلیددارێکی بۆ کێشان نییە لەم فەنکشنە</string>
+    <string name="service_history_no_fields_selected">هیچ کلیددارێک هەڵنەبژێراوە</string>
+    <string name="service_history_failure_hint">هێڵی ستوونی کاتی شکستهێنانی کۆکردنەوە پیشان دەدات</string>
+    <string name="service_history_downsampled_hint">خاڵی داتا زۆرە، بەپێی مەودای کات داونسامپڵ کراوە (بەها ناوەندی ئەو مەودایەیە، لە ناو کەوانەدا کەمترین~زۆرترین)</string>
+    <string name="service_history_keepalive">پارێزراو</string>
+    <string name="service_history_view_table">خشتە</string>
+    <string name="service_history_view_chart">هێڵکاری</string>
+</resources>

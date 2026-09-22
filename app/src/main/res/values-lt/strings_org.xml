@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Dabartinė organizacija</string>
+    <string name="org_detail_title">Organizacijos informacija</string>
+    <string name="org_empty">Organizacijų dar nėra — palieskite +, kad sukurtumėte</string>
+    <string name="org_create_title">Sukurti organizaciją</string>
+    <string name="org_id_label">Organizacijos ID</string>
+    <string name="org_id_placeholder">pvz. my-company</string>
+    <string name="org_id_hint">Pradėkite raide — leidžiamos tik raidės, skaitmenys ir brūkšneliai</string>
+    <string name="org_name_label">Organizacijos pavadinimas</string>
+    <string name="org_name_placeholder">pvz. Mano įmonė</string>
+    <string name="org_rename_title">Pervadinti organizaciją</string>
+    <string name="org_delete_title">Ištrinti organizaciją</string>
+    <string name="org_delete_confirm">Ištrinti šią organizaciją?</string>
+    <string name="org_manage">Valdyti</string>
+    <string name="org_swipe_delete">Perbraukite, kad ištrintumėte</string>
+    <string name="org_members_empty">Narių dar nėra</string>
+    <string name="org_member_developer_id">Kūrėjo ID</string>
+    <string name="org_member_developer_id_placeholder">Vartotojo developerId</string>
+    <string name="org_member_name_label">Rodomas vardas</string>
+    <string name="org_member_name_placeholder">Neprivaloma</string>
+    <string name="org_change_role">Keisti rolę</string>
+    <string name="org_change_role_title">Keisti rolę — %1$s</string>
+    <string name="org_remove_confirm">Pašalinti „%1$s“?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d nariai</item>
+        <item quantity="many">%1$d nario</item>
+        <item quantity="one">%1$d narys</item>
+        <item quantity="other">%1$d narių</item>
+    </plurals>
+</resources>

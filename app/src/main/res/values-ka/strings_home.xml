@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">ჯერ აირჩიეთ პროექტი პროექტების სიიდან</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">გავაუქმო ცვლილებები?</string>
+    <string name="home_discard_message">შეუნახავი ცვლილებები გაქვთ. ახლა გასვლისას დაიკარგება.</string>
+    <string name="home_dashboard_empty">ბარათები ჯერ არ არის — დასამატებლად დააჭირეთ ქვემოთ „დამატებას“</string>
+    <string name="home_add_card">+ დამატება</string>
+    <string name="home_default_layout_loaded">ნაგულისხმევი განლაგება ჩაიტვირთა — გამოსაყენებლად შეინახეთ</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">ერთი დიდი რიცხვი: მოწყობილობები / სერვისები / განგაშები / ხარვეზები</string>
+    <string name="home_card_kind_line">განგაშების საათობრივი მრუდი ან ერთი სერვისის ველი</string>
+    <string name="home_card_kind_distribution">განაწილება მოწყობილობის / სერვისის / განგაშის / ხარვეზის მიხედვით</string>
+    <string name="home_card_kind_device">ერთი მოწყობილობის ერთი თვისება</string>
+    <string name="home_card_kind_service">ერთი ფუნქციის ველების ნაკრები</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">გრაფიკი</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">მოწყობილობა</string>
+    <string name="home_card_default_service">სერვისები</string>
+    <string name="home_card_default_unknown">ბარათი</string>
+    <string name="home_edit_card_title">რედაქტირება · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">სრული სიგანე</string>
+    <string name="home_size_half">ნახევარი სიგანე</string>
+    <string name="home_section_metric">მეტრიკა</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">მოწყობილობები სულ</string>
+    <string name="home_metric_devices_online">ჩართული მოწყობილობები</string>
+    <string name="home_metric_services_total">სერვისები სულ</string>
+    <string name="home_metric_alarms_today">დღევანდელი განგაშები</string>
+    <string name="home_metric_alarms_window">ფანჯარაში არსებული განგაშები</string>
+    <string name="home_metric_failures_total">ფანჯარაში არსებული შეგროვების ხარვეზები</string>
+    <string name="home_section_dimension">განაწილება</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">მოწყობილობის ტიპი</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">შეგროვების ხარვეზის ტიპი</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">მონაცემთა წყარო</string>
+    <string name="home_source_label">წყარო</string>
+    <string name="home_source_alarm_curve">განგაშების საათობრივი მრუდი</string>
+    <string name="home_source_service_field">ერთი სერვისის ველი</string>
+    <string name="home_show_failure_shadow">წარუმატებელი შეგროვების ხაზების ჩვენება</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">სერვისი · ფუნქცია · ველი</string>
+    <string name="home_service_placeholder">აირჩიეთ სერვისი</string>
+    <string name="home_service_unnamed">უსახელო სერვისი</string>
+    <string name="home_function_placeholder">აირჩიეთ ფუნქცია</string>
+    <string name="home_function_fallback">ფუნქცია %1$d</string>
+    <string name="home_pick_service_first">ჯერ აირჩიეთ სერვისი</string>
+    <string name="home_show_unit">ერთეულის ჩვენება</string>
+    <string name="home_section_device_prop">მოწყობილობა · თვისება</string>
+    <string name="home_device_placeholder">აირჩიეთ მოწყობილობა</string>
+    <string name="home_prop_label">თვისებები</string>
+    <string name="home_pick_device_first">ჯერ აირჩიეთ მოწყობილობა</string>
+    <string name="home_prop_none">ამ მოდელს თვისებები არ აქვს</string>
+    <string name="home_prop_placeholder">აირჩიეთ თვისება</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, შეზღუდვის გარეშე დატოვეთ ცარიელი</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">ბოლო</string>
+    <string name="home_window_custom">მორგებული</string>
+    <string name="home_pick_dates">აირჩიეთ დაწყებისა და დასრულების თარიღები</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d დღე</item>
+        <item quantity="other">%1$d დღეები</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d საათი</item>
+        <item quantity="other">%1$d საათები</item>
+    </plurals>
+    <string name="home_card_unknown_type">ბარათის უცნობი ტიპი</string>
+    <string name="home_empty_no_data">მონაცემები არ არის</string>
+    <string name="home_empty_no_reading">მაჩვენებლები ჯერ არ არის</string>
+    <string name="home_empty_not_sampled">ჯერ არ არის შეგროვებული</string>
+    <string name="home_sampled_at">შეგროვდა %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">მოწყობილობა</string>
+    <string name="home_unit_services">სერვისი</string>
+</resources>

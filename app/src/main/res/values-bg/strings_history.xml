@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">История</string>
+    <string name="history_section_overview">Преглед на услугите</string>
+    <string name="history_no_services">В този проект още няма Modbus услуги</string>
+    <string name="history_service_count_label">Брой услуги</string>
+    <string name="history_device_count_label">Брой устройства</string>
+    <string name="history_sampled_at_label">Време на събиране</string>
+    <string name="history_function_count_label">Методи</string>
+    <string name="history_faults_section">Изключения при събиране</string>
+    <string name="history_faults_label">Изключения при събиране</string>
+    <string name="history_no_faults">Няма неизправности при събирането в този период</string>
+    <string name="history_no_data">Няма събрани данни в този период</string>
+    <string name="history_field_label">Поле</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Събрани данни (%1$d ред)</item>
+        <item quantity="other">Събрани данни (%1$d реда)</item>
+    </plurals>
+    <string name="service_history_all_functions">Всички методи</string>
+    <string name="service_history_field_selection">Полета %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Неизправност %1$s × %2$d</string>
+    <string name="service_history_no_curve">Никое поле на тази услуга не може да се покаже на графика</string>
+    <string name="service_history_no_curve_for_function">Няма поле за графика в тази функция</string>
+    <string name="service_history_no_fields_selected">Не са избрани полета</string>
+    <string name="service_history_failure_hint">Вертикалните линии отбелязват моментите на неуспешно събиране</string>
+    <string name="service_history_downsampled_hint">Много точки от данни; извадката е разредена по времеви интервали (стойността е средната за интервала, в скоби минимум~максимум)</string>
+    <string name="service_history_keepalive">Задържане</string>
+    <string name="service_history_view_table">Таблица</string>
+    <string name="service_history_view_chart">Графика</string>
+</resources>

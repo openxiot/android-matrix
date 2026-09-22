@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">الرئيسية</string>
+    <string name="tab_project">المشروع</string>
+    <string name="tab_device">الجهاز</string>
+    <string name="tab_product">المنتجات</string>
+    <string name="tab_profile">حسابي</string>
+    <string name="main_switch_project">تبديل المشروع</string>
+    <string name="main_pick_org_first">اختر منظمة أولًا</string>
+    <string name="main_pick_org">اختر المنظمة</string>
+    <string name="main_pick_project_first">اختر مشروعًا أولًا</string>
+    <string name="main_pick_project">اختر المشروع</string>
+</resources>

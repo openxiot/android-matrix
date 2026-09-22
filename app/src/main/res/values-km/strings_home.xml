@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">សូមជ្រើសរើសគម្រោងពីបញ្ជីគម្រោងជាមុន</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">បោះបង់ការផ្លាស់ប្ដូរ?</string>
+    <string name="home_discard_message">អ្នកមានការផ្លាស់ប្ដូរដែលមិនទាន់រក្សាទុក។ ចាកចេញឥឡូវនេះនឹងបាត់បង់វា។</string>
+    <string name="home_dashboard_empty">មិនទាន់មានកាត — ចុច “បន្ថែម” ខាងក្រោមដើម្បីបន្ថែមមួយ</string>
+    <string name="home_add_card">+ បន្ថែម</string>
+    <string name="home_default_layout_loaded">បានផ្ទុកប្លង់លំនាំដើម — រក្សាទុកដើម្បីអនុវត្ត</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">លេខធំមួយ៖ ឧបករណ៍ / សេវា / សំណឹងអាសន្ន / កំហុស</string>
+    <string name="home_card_kind_line">ចំនួនសំណឹងអាសន្នតាមម៉ោង ឬវាលសេវាមួយ</string>
+    <string name="home_card_kind_distribution">បែងចែកតាមឧបករណ៍ / សេវា / សំណឹងអាសន្ន / កំហុស</string>
+    <string name="home_card_kind_device">លក្ខណៈសម្បត្តិមួយរបស់ឧបករណ៍មួយ</string>
+    <string name="home_card_kind_service">សំណុំវាលពី Function មួយ</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">ក្រាហ្វ</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">ឧបករណ៍</string>
+    <string name="home_card_default_service">សេវា</string>
+    <string name="home_card_default_unknown">កាត</string>
+    <string name="home_edit_card_title">កែសម្រួល · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">ទទឹងពេញ</string>
+    <string name="home_size_half">ទទឹងពាក់កណ្ដាល</string>
+    <string name="home_section_metric">ស្ថិតិ</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">ឧបករណ៍សរុប</string>
+    <string name="home_metric_devices_online">ឧបករណ៍អនឡាញ</string>
+    <string name="home_metric_services_total">សេវាសរុប</string>
+    <string name="home_metric_alarms_today">ការជូនដំណឹងថ្ងៃនេះ</string>
+    <string name="home_metric_alarms_window">សំណឹងអាសន្នក្នុងចន្លោះពេល</string>
+    <string name="home_metric_failures_total">កំហុសប្រមូលក្នុងចន្លោះពេល</string>
+    <string name="home_section_dimension">បែងចែកតាម</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">ប្រភេទឧបករណ៍</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">ប្រភេទកំហុសប្រមូល</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">ប្រភពទិន្នន័យ</string>
+    <string name="home_source_label">ប្រភព</string>
+    <string name="home_source_alarm_curve">ចំនួនសំណឹងអាសន្នតាមម៉ោង</string>
+    <string name="home_source_service_field">វាលសេវាមួយ</string>
+    <string name="home_show_failure_shadow">បង្ហាញបន្ទាត់ប្រមូលបរាជ័យ</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">សេវា · Function · វាល</string>
+    <string name="home_service_placeholder">ជ្រើសរើសសេវា</string>
+    <string name="home_service_unnamed">សេវាគ្មានឈ្មោះ</string>
+    <string name="home_function_placeholder">ជ្រើសរើស Function</string>
+    <string name="home_function_fallback">Function %1$d</string>
+    <string name="home_pick_service_first">ជ្រើសរើសសេវាជាមុន</string>
+    <string name="home_show_unit">បង្ហាញឯកតា</string>
+    <string name="home_section_device_prop">ឧបករណ៍ · លក្ខណៈសម្បត្តិ</string>
+    <string name="home_device_placeholder">ជ្រើសរើសឧបករណ៍</string>
+    <string name="home_prop_label">លក្ខណសម្បត្តិ</string>
+    <string name="home_pick_device_first">ជ្រើសរើសឧបករណ៍ជាមុន</string>
+    <string name="home_prop_none">ម៉ូដែលនេះគ្មានលក្ខណៈសម្បត្តិទេ</string>
+    <string name="home_prop_placeholder">ជ្រើសរើសលក្ខណៈសម្បត្តិ</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d ទុកទទេសម្រាប់គ្មានកំណត់</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">ចុងក្រោយ</string>
+    <string name="home_window_custom">ផ្ទាល់ខ្លួន</string>
+    <string name="home_pick_dates">ជ្រើសរើសកាលបរិច្ឆេទចាប់ផ្ដើម និងបញ្ចប់</string>
+    <plurals name="home_window_days">
+        <item quantity="other">%1$d ថ្ងៃ</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="other">%1$d ម៉ោង</item>
+    </plurals>
+    <string name="home_card_unknown_type">ប្រភេទកាតមិនស្គាល់</string>
+    <string name="home_empty_no_data">គ្មានទិន្នន័យ</string>
+    <string name="home_empty_no_reading">មិនទាន់មានតម្លៃអាន</string>
+    <string name="home_empty_not_sampled">មិនទាន់ប្រមូល</string>
+    <string name="home_sampled_at">ប្រមូល %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">គ្រឿង</string>
+    <string name="home_unit_services">សេវា</string>
+</resources>

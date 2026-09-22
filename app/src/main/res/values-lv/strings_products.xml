@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Produkti</string>
+    <string name="product_detail_title">Produkta informācija</string>
+    <string name="product_not_found">Produkts nav atrasts</string>
+    <string name="product_empty">Vēl nav produktu</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d produkts</item>
+        <item quantity="zero">%1$d produktu</item>
+        <item quantity="other">%1$d produkti</item>
+    </plurals>
+    <string name="product_model_inline">Modelis: %1$s</string>
+    <string name="product_id_label">Produkta ID</string>
+    <string name="product_model_label">Produkta modelis</string>
+    <string name="product_org_label">Organizācija</string>
+    <string name="product_buy_jd">Pirkt JD.com</string>
+    <string name="product_buy_taobao">Pirkt Taobao</string>
+    <string name="product_status_released">Publicēts</string>
+    <string name="product_status_preview">Priekšskatījums</string>
+    <string name="product_status_development">Izstrādē</string>
+    <string name="product_empty_data">Nav produkta datu</string>
+</resources>

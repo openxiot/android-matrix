@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">設備詳細</string>
+    <string name="device_operation_title">裝置操作</string>
+    <string name="device_not_found">找不到裝置</string>
+    <string name="device_id_label">裝置 ID</string>
+    <string name="device_type_label">設備類型</string>
+    <string name="device_online_label">線上狀態</string>
+    <string name="device_last_online_label">最後上線</string>
+    <string name="device_last_offline_label">最後離線</string>
+    <string name="device_space_label">所屬空間</string>
+</resources>

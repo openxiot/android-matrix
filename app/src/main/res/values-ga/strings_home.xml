@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Roghnaigh tionscadal ón liosta tionscadal ar dtús</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Tréig na hathruithe?</string>
+    <string name="home_discard_message">Tá athruithe neamhshábháilte agat. Má fhágann tú anois, caillfear iad.</string>
+    <string name="home_dashboard_empty">Níl aon chártaí ann fós — tapáil “Cuir leis” thíos chun ceann a chur leis</string>
+    <string name="home_add_card">+ Cuir leis</string>
+    <string name="home_default_layout_loaded">Lódáladh an leagan amach caighdeánach — sábháil é le cur i bhfeidhm</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Uimhir mhór amháin: gléasanna / seirbhísí / aláraim / lochtanna</string>
+    <string name="home_card_kind_line">Líon na n-aláram in aghaidh na huaire, nó réimse amháin seirbhíse</string>
+    <string name="home_card_kind_distribution">Miondealú de réir gléis / seirbhíse / aláraim / lochta</string>
+    <string name="home_card_kind_device">Airí amháin de ghléas amháin</string>
+    <string name="home_card_kind_service">Sraith réimsí ó fheidhm amháin</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Graf</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Gléas</string>
+    <string name="home_card_default_service">Seirbhísí</string>
+    <string name="home_card_default_unknown">Cárta</string>
+    <string name="home_edit_card_title">Cuir in eagar · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Leithid iomlán</string>
+    <string name="home_size_half">Leathleithid</string>
+    <string name="home_section_metric">Táscaire</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Gléasanna san iomlán</string>
+    <string name="home_metric_devices_online">Gléasanna ar líne</string>
+    <string name="home_metric_services_total">Seirbhísí san iomlán</string>
+    <string name="home_metric_alarms_today">Alaraim Inniu</string>
+    <string name="home_metric_alarms_window">Aláraim sa fhuinneog</string>
+    <string name="home_metric_failures_total">Teipeanna samplála sa fhuinneog</string>
+    <string name="home_section_dimension">Miondealú de réir</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Cineál Gléis</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Cineál teipe samplála</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Foinse sonraí</string>
+    <string name="home_source_label">Foinse</string>
+    <string name="home_source_alarm_curve">Líon na n-aláram in aghaidh na huaire</string>
+    <string name="home_source_service_field">Réimse amháin seirbhíse</string>
+    <string name="home_show_failure_shadow">Taispeáin línte bailithe ar theip orthu</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Seirbhís · Feidhm · Réimse</string>
+    <string name="home_service_placeholder">Roghnaigh seirbhís</string>
+    <string name="home_service_unnamed">Seirbhís gan ainm</string>
+    <string name="home_function_placeholder">Roghnaigh feidhm</string>
+    <string name="home_function_fallback">Feidhm %1$d</string>
+    <string name="home_pick_service_first">Roghnaigh seirbhís ar dtús</string>
+    <string name="home_show_unit">Taispeáin an t-aonad</string>
+    <string name="home_section_device_prop">Gléas · Airí</string>
+    <string name="home_device_placeholder">Roghnaigh gléas</string>
+    <string name="home_prop_label">Airíonna</string>
+    <string name="home_pick_device_first">Roghnaigh gléas ar dtús</string>
+    <string name="home_prop_none">Níl aon airíonna ag an múnla seo</string>
+    <string name="home_prop_placeholder">Roghnaigh airí</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, fág folamh le haghaidh gan teorainn</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Deireanach</string>
+    <string name="home_window_custom">Saincheaptha</string>
+    <string name="home_pick_dates">Roghnaigh dátaí tosaigh agus deiridh</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d lá</item>
+        <item quantity="many">%1$d lá</item>
+        <item quantity="one">%1$d lá amháin</item>
+        <item quantity="two">%1$d lá</item>
+        <item quantity="other">%1$d lá</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d huaire</item>
+        <item quantity="many">%1$d n-uaire</item>
+        <item quantity="one">%1$d uair</item>
+        <item quantity="two">%1$d uair</item>
+        <item quantity="other">%1$d uair</item>
+    </plurals>
+    <string name="home_card_unknown_type">Cineál cárta anaithnid</string>
+    <string name="home_empty_no_data">Gan sonraí</string>
+    <string name="home_empty_no_reading">Níl aon léamh ann fós</string>
+    <string name="home_empty_not_sampled">Níl sé bailithe fós</string>
+    <string name="home_sampled_at">Sampláladh %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">gléasanna</string>
+    <string name="home_unit_services">seirbhísí</string>
+</resources>

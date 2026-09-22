@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Mátrix</string>
+    <string name="common_back">Vissza</string>
+    <string name="common_retry">Újrapróbálás</string>
+    <string name="common_confirm">Megerősít</string>
+    <string name="common_cancel">Mégse</string>
+    <string name="common_close">Bezárás</string>
+    <string name="common_detail">Részletek</string>
+    <string name="common_collapse">Összecsukás</string>
+    <string name="common_expand">Kibontás</string>
+    <string name="common_all">Mind</string>
+    <string name="common_add">Hozzáadás</string>
+    <string name="common_create">Létrehozás</string>
+    <string name="common_delete">Törlés</string>
+    <string name="common_unnamed">Névtelen</string>
+    <string name="common_unknown">Ismeretlen</string>
+    <string name="common_me">Én</string>
+    <string name="common_rename_action">Átnevezés</string>
+    <string name="common_role_label">Szerep</string>
+    <string name="common_role_admin">Rendszergazda</string>
+    <string name="common_role_member">Tagok</string>
+    <string name="common_role_member_option">Normál tag</string>
+    <string name="common_member_add">Tag hozzáadása</string>
+    <string name="common_member_remove">Tag eltávolítása</string>
+    <string name="common_edit">Szerkesztés</string>
+    <string name="common_refresh">Frissítés</string>
+    <string name="common_change">Módosítás</string>
+    <string name="common_handle">Kezelés</string>
+    <string name="common_handled">Kezelt</string>
+    <string name="common_unhandled">Nem kezelt</string>
+    <string name="common_recovered">Helyreállt</string>
+    <string name="common_unrecovered">Aktív</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">Be</string>
+    <string name="common_switch_off">Ki</string>
+    <string name="common_please_select">Válasszon</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Nincs kiválasztva időtartam</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Szolgáltatások</string>
+    <string name="common_function_label">Metódusok</string>
+    <string name="common_device_label">Eszköz</string>
+    <string name="common_protocol_label">Protokoll</string>
+    <string name="common_unknown_product">Ismeretlen termék</string>
+    <string name="common_truncated_hint">A kivételek száma meghaladja a korlátot; csak a legutóbbiak vannak felsorolva</string>
+    <string name="err_network">A hálózat nem elérhető. Ellenőrizze a kapcsolatot, és próbálja újra.</string>
+    <string name="err_unknown">Hiba történt. Próbálja újra.</string>
+    <string name="space_type_site">Telephely</string>
+    <string name="space_type_building">Épület</string>
+    <string name="space_type_floor">Emelet</string>
+    <string name="space_type_room">Szoba</string>
+    <string name="space_type_zone">Zóna</string>
+    <string name="space_type_field">Terület</string>
+    <string name="space_type_workshop">Műhely</string>
+    <string name="space_type_parking">Parkoló</string>
+</resources>

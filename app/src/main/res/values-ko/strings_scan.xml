@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">장치의 QR 코드 또는 IMEI에 카메라를 맞추십시오</string>
+    <string name="scan_torch">손전등</string>
+    <string name="scan_torch_on">손전등 켜기</string>
+    <string name="scan_torch_off">손전등 끄기</string>
+    <string name="scan_permission_required">장치를 스캔하여 추가하려면 카메라 권한이 필요합니다</string>
+    <string name="scan_grant">권한 부여</string>
+</resources>

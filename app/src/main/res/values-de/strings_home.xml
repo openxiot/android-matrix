@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Bitte wählen Sie zuerst ein Projekt aus der Projektliste</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Änderungen verwerfen?</string>
+    <string name="home_discard_message">Es gibt ungespeicherte Änderungen. Beim Verlassen gehen sie verloren.</string>
+    <string name="home_dashboard_empty">Noch keine Karten – unten auf „Hinzufügen“ tippen</string>
+    <string name="home_add_card">+ Hinzufügen</string>
+    <string name="home_default_layout_loaded">Standardlayout geladen – zum Übernehmen speichern</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Eine große Zahl: Geräte / Dienste / Alarme / Fehler</string>
+    <string name="home_card_kind_line">Stündliche Alarmzahlen oder ein Dienstfeld</string>
+    <string name="home_card_kind_distribution">Aufteilung nach Gerät / Dienst / Alarm / Fehler</string>
+    <string name="home_card_kind_device">Eine Eigenschaft eines Geräts</string>
+    <string name="home_card_kind_service">Eine Gruppe von Feldern einer Funktion</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Diagramm</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Gerät</string>
+    <string name="home_card_default_service">Dienste</string>
+    <string name="home_card_default_unknown">Karte</string>
+    <string name="home_edit_card_title">Bearbeiten · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Volle Breite</string>
+    <string name="home_size_half">Halbe Breite</string>
+    <string name="home_section_metric">Kennzahl</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Geräte gesamt</string>
+    <string name="home_metric_devices_online">Geräte online</string>
+    <string name="home_metric_services_total">Dienste gesamt</string>
+    <string name="home_metric_alarms_today">Heutige Alarme</string>
+    <string name="home_metric_alarms_window">Alarme im Zeitraum</string>
+    <string name="home_metric_failures_total">Erfassungsfehler im Zeitraum</string>
+    <string name="home_section_dimension">Aufteilung nach</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Gerätetyp</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Erfassungsfehlertyp</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Datenquelle</string>
+    <string name="home_source_label">Quelle</string>
+    <string name="home_source_alarm_curve">Stündliche Alarmzahlen</string>
+    <string name="home_source_service_field">Ein Dienstfeld</string>
+    <string name="home_show_failure_shadow">Linien fehlgeschlagener Erfassungen anzeigen</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Dienst · Funktion · Feld</string>
+    <string name="home_service_placeholder">Dienst auswählen</string>
+    <string name="home_service_unnamed">Unbenannter Dienst</string>
+    <string name="home_function_placeholder">Funktion auswählen</string>
+    <string name="home_function_fallback">Funktion %1$d</string>
+    <string name="home_pick_service_first">Zuerst einen Dienst auswählen</string>
+    <string name="home_show_unit">Einheit anzeigen</string>
+    <string name="home_section_device_prop">Gerät · Eigenschaft</string>
+    <string name="home_device_placeholder">Gerät auswählen</string>
+    <string name="home_prop_label">Eigenschaften</string>
+    <string name="home_pick_device_first">Zuerst ein Gerät auswählen</string>
+    <string name="home_prop_none">Keine Eigenschaften für dieses Modell</string>
+    <string name="home_prop_placeholder">Eigenschaft auswählen</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, leer lassen für unbegrenzt</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Letzte</string>
+    <string name="home_window_custom">Benutzerdefiniert</string>
+    <string name="home_pick_dates">Start- und Enddatum wählen</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d Tag</item>
+        <item quantity="other">%1$d Tage</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d Stunde</item>
+        <item quantity="other">%1$d Stunden</item>
+    </plurals>
+    <string name="home_card_unknown_type">Unbekannter Kartentyp</string>
+    <string name="home_empty_no_data">Keine Daten</string>
+    <string name="home_empty_no_reading">Noch keine Messwerte</string>
+    <string name="home_empty_not_sampled">Noch nicht erfasst</string>
+    <string name="home_sampled_at">Erfasst %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">Geräte</string>
+    <string name="home_unit_services">Dienste</string>
+</resources>

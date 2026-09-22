@@ -2,7 +2,9 @@
 <resources>
     <string name="profile_language_title">Language</string>
     <string name="profile_language_system">Follow system</string>
-
+    <string name="profile_language_search">Search languages</string>
+    <string name="profile_language_search_clear">Clear</string>
+    <string name="profile_language_no_match">No matching language</string>
 
     <!-- 「我」页 -->
     <string name="profile_not_logged_in">Not signed in</string>
@@ -60,11 +62,5 @@
     <string name="about_install_settings_failed">Couldn’t open the “Install unknown apps” setting — allow it manually in system settings</string>
     <string name="about_no_installer">No installer app available — the package is saved in the app’s folder</string>
 
-    <!--
-      语言自称：两种语言下都显示原文，故 translatable="false" 且只放 values/。
-      StringsParityTest 会跳过这类条目，不要求 values-zh/ 里有对应的 key。
-    -->
-    <string name="profile_language_zh" translatable="false">中文</string>
-    <string name="profile_language_en" translatable="false">English</string>
     <string name="about_update_notes_empty">This release came with no notes.</string>
 </resources>

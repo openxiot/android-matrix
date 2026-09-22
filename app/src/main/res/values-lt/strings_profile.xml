@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Kalba</string>
+    <string name="profile_language_system">Kaip sistemoje</string>
+    <string name="profile_language_search">Ieškoti kalbų</string>
+    <string name="profile_language_search_clear">Išvalyti</string>
+    <string name="profile_language_no_match">Atitinkančios kalbos nėra</string>
+    <string name="profile_not_logged_in">Neprisijungta</string>
+    <string name="profile_current_org">Dabartinė organizacija</string>
+    <string name="profile_current_project">Dabartinis projektas</string>
+    <string name="profile_no_org_selected">Organizacija nepasirinkta</string>
+    <string name="profile_no_project_selected">Projektas nepasirinktas</string>
+    <string name="profile_org_subtitle">Pasirinkite organizaciją, kad galėtumėte rinktis projektą</string>
+    <string name="profile_project_subtitle_pick">Pasirinkite projektą</string>
+    <string name="profile_project_subtitle_switch">Palieskite, kad perjungtumėte projektą</string>
+    <string name="profile_project_subtitle_org_first">Pirmiausia pasirinkite organizaciją</string>
+    <string name="profile_section_settings">Nustatymai</string>
+    <string name="profile_dark_mode">Tamsusis režimas</string>
+    <string name="profile_light_mode">Šviesusis režimas</string>
+    <string name="profile_theme_subtitle">Palieskite, kad pakeistumėte temą</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Įrenginio taškų lentelė</string>
+    <string name="profile_modbus_subtitle">Modbus registrų žemėlapiai (tik skaitymui)</string>
+    <string name="profile_alarm_title">Aliarmai</string>
+    <string name="profile_alarm_subtitle">Modbus aliarmų žurnalas ir apdorojimas</string>
+    <string name="profile_history_title">Istorija</string>
+    <string name="profile_history_subtitle">Rinkimo istorija ir grafikai</string>
+    <string name="profile_about_subtitle">Programos informacija ir versija</string>
+    <string name="account_title">Paskyra</string>
+    <string name="account_username">Vartotojo vardas</string>
+    <string name="account_platform">Platforma</string>
+    <string name="account_not_selected">Nepasirinkta</string>
+    <string name="account_org_toggle">Organizacija</string>
+    <string name="account_org_toggle_subtitle">Įjunkite, kad galėtumėte valdyti organizacijas</string>
+    <string name="account_logout">Atsijungti</string>
+    <string name="about_title">Apie</string>
+    <string name="about_tagline">IoT įrenginių valdymo ir stebėjimo platforma</string>
+    <string name="about_version">Versija %1$s</string>
+    <string name="about_check_update">Tikrinti atnaujinimus</string>
+    <string name="about_checking">Tikrinama…</string>
+    <string name="about_up_to_date">Naudojate naujausią versiją</string>
+    <string name="about_update_now">Atnaujinti dabar</string>
+    <string name="about_downloading">Atsisiunčiama…</string>
+    <string name="about_downloading_percent">Atsisiunčiama %1$d%%</string>
+    <string name="about_install_now">Įdiegti dabar</string>
+    <string name="about_install">Įdiegti</string>
+    <string name="about_retry_download">Kartoti atsisiuntimą</string>
+    <string name="about_later">Vėliau</string>
+    <string name="about_install_dialog_title">Įdiegti atnaujinimą</string>
+    <string name="about_new_version_found">Galima versija %1$s</string>
+    <string name="about_ready_hint">Atsisiuntimas baigtas — palieskite „Įdiegti“, kad paketas būtų perduotas sistemos diegimo programai.</string>
+    <string name="about_need_install_permission">Pirmiausia leiskite šiai programai diegti nežinomas programas</string>
+    <string name="about_keep_app_alive">Galite perjungti puslapius — tik neuždarykite programos</string>
+    <string name="about_metered">Naudojate mobilųjį internetą — atsisiuntimas gali sunaudoti daug duomenų</string>
+    <string name="about_metered_size">Naudojate mobilųjį internetą — paketo dydis apie %1$s</string>
+    <string name="about_install_settings_failed">Nepavyko atidaryti nustatymo „Įdiegti nežinomas programas“ — leiskite tai rankiniu būdu sistemos nustatymuose</string>
+    <string name="about_no_installer">Nėra diegimo programos — paketas išsaugotas programos kataloge</string>
+    <string name="about_update_notes_empty">Šis leidimas pateiktas be aprašo.</string>
+</resources>

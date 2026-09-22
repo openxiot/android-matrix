@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">يرجى اختيار مشروع من قائمة المشاريع أولاً</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">هل تريد تجاهل التغييرات؟</string>
+    <string name="home_discard_message">لديك تغييرات غير محفوظة. الخروج الآن سيفقدها.</string>
+    <string name="home_dashboard_empty">لا توجد بطاقات بعد — اضغط «إضافة» أدناه لإضافة بطاقة</string>
+    <string name="home_add_card">+ إضافة</string>
+    <string name="home_default_layout_loaded">حُمّل التخطيط الافتراضي — احفظه ليطبَّق</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">رقم كبير واحد: الأجهزة / الخدمات / الإنذارات / الأعطال</string>
+    <string name="home_card_kind_line">عدد الإنذارات كل ساعة، أو حقل خدمة واحد</string>
+    <string name="home_card_kind_distribution">توزيع حسب الجهاز / الخدمة / الإنذار / العطل</string>
+    <string name="home_card_kind_device">خاصية واحدة لجهاز واحد</string>
+    <string name="home_card_kind_service">مجموعة حقول من وظيفة واحدة</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">مخطط</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">الجهاز</string>
+    <string name="home_card_default_service">الخدمات</string>
+    <string name="home_card_default_unknown">بطاقة</string>
+    <string name="home_edit_card_title">تعديل · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">عرض كامل</string>
+    <string name="home_size_half">نصف العرض</string>
+    <string name="home_section_metric">المؤشر</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">إجمالي الأجهزة</string>
+    <string name="home_metric_devices_online">الأجهزة المتصلة</string>
+    <string name="home_metric_services_total">إجمالي الخدمات</string>
+    <string name="home_metric_alarms_today">تنبيهات اليوم</string>
+    <string name="home_metric_alarms_window">الإنذارات في النطاق</string>
+    <string name="home_metric_failures_total">أعطال الاستقصاء في النطاق</string>
+    <string name="home_section_dimension">التوزيع حسب</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">نوع الجهاز</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">نوع عطل الاستقصاء</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">مصدر البيانات</string>
+    <string name="home_source_label">المصدر</string>
+    <string name="home_source_alarm_curve">عدد الإنذارات كل ساعة</string>
+    <string name="home_source_service_field">حقل خدمة واحد</string>
+    <string name="home_show_failure_shadow">إظهار خطوط فشل الجمع</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">الخدمة · الوظيفة · الحقل</string>
+    <string name="home_service_placeholder">اختر خدمة</string>
+    <string name="home_service_unnamed">خدمة بلا اسم</string>
+    <string name="home_function_placeholder">اختر وظيفة</string>
+    <string name="home_function_fallback">الوظيفة %1$d</string>
+    <string name="home_pick_service_first">اختر خدمة أولًا</string>
+    <string name="home_show_unit">إظهار الوحدة</string>
+    <string name="home_section_device_prop">الجهاز · الخاصية</string>
+    <string name="home_device_placeholder">اختر جهازًا</string>
+    <string name="home_prop_label">الخصائص</string>
+    <string name="home_pick_device_first">اختر جهازًا أولًا</string>
+    <string name="home_prop_none">لا توجد خصائص لهذا الطراز</string>
+    <string name="home_prop_placeholder">اختر خاصية</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d، اتركه فارغًا لعدم وضع حد</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">آخر</string>
+    <string name="home_window_custom">مخصص</string>
+    <string name="home_pick_dates">اختر تاريخي البداية والنهاية</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d أيام</item>
+        <item quantity="many">%1$d يومًا</item>
+        <item quantity="one">يوم واحد (%1$d)</item>
+        <item quantity="two">يومان (%1$d)</item>
+        <item quantity="zero">لا أيام (%1$d)</item>
+        <item quantity="other">%1$d يوم</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d ساعات</item>
+        <item quantity="many">%1$d ساعةً</item>
+        <item quantity="one">ساعة واحدة (%1$d)</item>
+        <item quantity="two">ساعتان (%1$d)</item>
+        <item quantity="zero">لا ساعات (%1$d)</item>
+        <item quantity="other">%1$d ساعة</item>
+    </plurals>
+    <string name="home_card_unknown_type">نوع بطاقة غير معروف</string>
+    <string name="home_empty_no_data">لا توجد بيانات</string>
+    <string name="home_empty_no_reading">لا توجد قراءات بعد</string>
+    <string name="home_empty_not_sampled">لم تُجمع بعد</string>
+    <string name="home_sampled_at">استُقصي في %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">جهاز</string>
+    <string name="home_unit_services">خدمة</string>
+</resources>

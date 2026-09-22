@@ -1,0 +1,12 @@
+# 派生物：都能由 tools/i18n/ 的脚本从仓库内已有内容重跑出来，不入库。
+# 重跑顺序见 tools/i18n/README.md。
+skeleton.json
+source.json
+todo.json
+reused/
+bundle/
+
+# translated/ **要入库** —— 那 2 万条译文没有第二个来源，
+# 丢了就得把 62 个语言的翻译代理全部重跑一遍。
+# 入库还有个好处：以后加一条新文案，只需补译这一条，不必重来。
+!translated/

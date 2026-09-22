@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Najprv vyberte projekt zo zoznamu projektov</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Zahodiť zmeny?</string>
+    <string name="home_discard_message">Máte neuložené zmeny. Ak teraz odídete, stratia sa.</string>
+    <string name="home_dashboard_empty">Zatiaľ žiadne karty — klepnutím na „Pridať“ nižšie pridáte kartu</string>
+    <string name="home_add_card">+ Pridať</string>
+    <string name="home_default_layout_loaded">Predvolené rozloženie je načítané — uložte ho, aby sa použilo</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Jedno veľké číslo: zariadenia / služby / alarmy / zlyhania</string>
+    <string name="home_card_kind_line">Hodinové počty alarmov alebo jedno pole služby</string>
+    <string name="home_card_kind_distribution">Rozdelenie podľa zariadenia / služby / alarmu / zlyhania</string>
+    <string name="home_card_kind_device">Jedna vlastnosť jedného zariadenia</string>
+    <string name="home_card_kind_service">Sada polí z jednej funkcie</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Graf</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Zariadenie</string>
+    <string name="home_card_default_service">Služby</string>
+    <string name="home_card_default_unknown">Karta</string>
+    <string name="home_edit_card_title">Upraviť · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Celá šírka</string>
+    <string name="home_size_half">Polovičná šírka</string>
+    <string name="home_section_metric">Ukazovateľ</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Zariadenia celkom</string>
+    <string name="home_metric_devices_online">Zariadenia online</string>
+    <string name="home_metric_services_total">Služby celkom</string>
+    <string name="home_metric_alarms_today">Dnešné alarmy</string>
+    <string name="home_metric_alarms_window">Alarmy v okne</string>
+    <string name="home_metric_failures_total">Zlyhania vzorkovania v okne</string>
+    <string name="home_section_dimension">Rozdelenie podľa</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Typ zariadenia</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Typ zlyhania vzorkovania</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Zdroj údajov</string>
+    <string name="home_source_label">Zdroj</string>
+    <string name="home_source_alarm_curve">Hodinové počty alarmov</string>
+    <string name="home_source_service_field">Jedno pole služby</string>
+    <string name="home_show_failure_shadow">Zobraziť čiary neúspešného zberu</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Služba · Funkcia · Pole</string>
+    <string name="home_service_placeholder">Vyberte službu</string>
+    <string name="home_service_unnamed">Služba bez názvu</string>
+    <string name="home_function_placeholder">Vyberte funkciu</string>
+    <string name="home_function_fallback">Funkcia %1$d</string>
+    <string name="home_pick_service_first">Najprv vyberte službu</string>
+    <string name="home_show_unit">Zobraziť jednotku</string>
+    <string name="home_section_device_prop">Zariadenie · Vlastnosť</string>
+    <string name="home_device_placeholder">Vyberte zariadenie</string>
+    <string name="home_prop_label">Vlastnosti</string>
+    <string name="home_pick_device_first">Najprv vyberte zariadenie</string>
+    <string name="home_prop_none">Tento model nemá žiadne vlastnosti</string>
+    <string name="home_prop_placeholder">Vyberte vlastnosť</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, prázdne pole bez obmedzenia</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Posledné</string>
+    <string name="home_window_custom">Vlastné</string>
+    <string name="home_pick_dates">Vyberte dátum začiatku a konca</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d dni</item>
+        <item quantity="many">%1$d dňa</item>
+        <item quantity="one">%1$d deň</item>
+        <item quantity="other">%1$d dní</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d hodiny</item>
+        <item quantity="many">%1$d hodiny</item>
+        <item quantity="one">%1$d hodina</item>
+        <item quantity="other">%1$d hodín</item>
+    </plurals>
+    <string name="home_card_unknown_type">Neznámy typ karty</string>
+    <string name="home_empty_no_data">Žiadne údaje</string>
+    <string name="home_empty_no_reading">Zatiaľ žiadne hodnoty</string>
+    <string name="home_empty_not_sampled">Zatiaľ nezberané</string>
+    <string name="home_sampled_at">Vzorkované %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">zariadenia</string>
+    <string name="home_unit_services">služby</string>
+</resources>

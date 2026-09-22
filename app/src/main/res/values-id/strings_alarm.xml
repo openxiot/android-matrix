@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Alarm</string>
+    <string name="alarm_action_ok">Operasi berhasil</string>
+    <string name="alarm_empty">Tidak ada alarm pada periode ini</string>
+    <string name="alarm_all_services">Semua Layanan</string>
+    <string name="alarm_level_label">Tingkat Alarm</string>
+    <string name="alarm_handled_label">Tangani</string>
+    <string name="alarm_status_label">Status</string>
+    <string name="alarm_summary_title">Daftar Alarm</string>
+    <string name="alarm_text_label">Teks Alarm</string>
+    <string name="alarm_field_label">Bidang</string>
+    <string name="alarm_trigger_label">Kondisi Pemicu</string>
+    <string name="alarm_current_value_label">Nilai Saat Ini</string>
+</resources>

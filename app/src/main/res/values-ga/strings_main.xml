@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">Baile</string>
+    <string name="tab_project">Tionscadal</string>
+    <string name="tab_device">Gléas</string>
+    <string name="tab_product">Táirgí</string>
+    <string name="tab_profile">Próifíl</string>
+    <string name="main_switch_project">Athraigh tionscadal</string>
+    <string name="main_pick_org_first">Roghnaigh eagraíocht ar dtús</string>
+    <string name="main_pick_org">Roghnaigh eagraíocht</string>
+    <string name="main_pick_project_first">Roghnaigh tionscadal ar dtús</string>
+    <string name="main_pick_project">Roghnaigh tionscadal</string>
+</resources>

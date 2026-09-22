@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matriisi</string>
+    <string name="common_back">Takaisin</string>
+    <string name="common_retry">Yritä uudelleen</string>
+    <string name="common_confirm">Vahvista</string>
+    <string name="common_cancel">Peruuta</string>
+    <string name="common_close">Sulje</string>
+    <string name="common_detail">Yksityiskohdat</string>
+    <string name="common_collapse">Kutista</string>
+    <string name="common_expand">Laajenna</string>
+    <string name="common_all">Kaikki</string>
+    <string name="common_add">Lisää</string>
+    <string name="common_create">Luo</string>
+    <string name="common_delete">Poista</string>
+    <string name="common_unnamed">Nimetön</string>
+    <string name="common_unknown">Tuntematon</string>
+    <string name="common_me">Minä</string>
+    <string name="common_rename_action">Nimeä uudelleen</string>
+    <string name="common_role_label">Rooli</string>
+    <string name="common_role_admin">Järjestelmänvalvoja</string>
+    <string name="common_role_member">Jäsenet</string>
+    <string name="common_role_member_option">Tavallinen jäsen</string>
+    <string name="common_member_add">Lisää jäsen</string>
+    <string name="common_member_remove">Poista jäsen</string>
+    <string name="common_edit">Muokkaa</string>
+    <string name="common_refresh">Päivitä</string>
+    <string name="common_change">Vaihda</string>
+    <string name="common_handle">Käsittele</string>
+    <string name="common_handled">Käsitelty</string>
+    <string name="common_unhandled">Käsittelemätön</string>
+    <string name="common_recovered">Palautunut</string>
+    <string name="common_unrecovered">Aktiivinen</string>
+    <string name="common_online">Verkossa</string>
+    <string name="common_offline">Ei verkossa</string>
+    <string name="common_switch_on">Päällä</string>
+    <string name="common_switch_off">Pois</string>
+    <string name="common_please_select">Valitse</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Aikaväliä ei ole valittu</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Palvelut</string>
+    <string name="common_function_label">Metodit</string>
+    <string name="common_device_label">Laite</string>
+    <string name="common_protocol_label">Protokolla</string>
+    <string name="common_unknown_product">Tuntematon tuote</string>
+    <string name="common_truncated_hint">Poikkeustietueita on enemmän kuin raja; vain viimeisimmät näytetään</string>
+    <string name="err_network">Verkkoyhteyttä ei ole. Tarkista yhteys ja yritä uudelleen.</string>
+    <string name="err_unknown">Jokin meni pieleen. Yritä uudelleen.</string>
+    <string name="space_type_site">Toimipiste</string>
+    <string name="space_type_building">Rakennus</string>
+    <string name="space_type_floor">Kerros</string>
+    <string name="space_type_room">Huone</string>
+    <string name="space_type_zone">Alue</string>
+    <string name="space_type_field">Kenttä</string>
+    <string name="space_type_workshop">Työpaja</string>
+    <string name="space_type_parking">Pysäköintialue</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Aktuálna organizácia</string>
+    <string name="org_detail_title">Podrobnosti organizácie</string>
+    <string name="org_empty">Zatiaľ žiadne organizácie — klepnutím na + vytvoríte novú</string>
+    <string name="org_create_title">Vytvoriť organizáciu</string>
+    <string name="org_id_label">ID organizácie</string>
+    <string name="org_id_placeholder">napr. moja-firma</string>
+    <string name="org_id_hint">Začnite písmenom — len písmená, číslice a pomlčky</string>
+    <string name="org_name_label">Názov organizácie</string>
+    <string name="org_name_placeholder">napr. Moja firma</string>
+    <string name="org_rename_title">Premenovať organizáciu</string>
+    <string name="org_delete_title">Odstrániť organizáciu</string>
+    <string name="org_delete_confirm">Zmazať túto organizáciu?</string>
+    <string name="org_manage">Spravovať</string>
+    <string name="org_swipe_delete">Potiahnutím zmazať</string>
+    <string name="org_members_empty">Zatiaľ žiadni členovia</string>
+    <string name="org_member_developer_id">ID vývojára</string>
+    <string name="org_member_developer_id_placeholder">developerId používateľa</string>
+    <string name="org_member_name_label">Zobrazované meno</string>
+    <string name="org_member_name_placeholder">Nepovinné</string>
+    <string name="org_change_role">Zmeniť rolu</string>
+    <string name="org_change_role_title">Zmeniť rolu — %1$s</string>
+    <string name="org_remove_confirm">Odobrať „%1$s“?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d členovia</item>
+        <item quantity="many">%1$d člena</item>
+        <item quantity="one">%1$d člen</item>
+        <item quantity="other">%1$d členov</item>
+    </plurals>
+</resources>

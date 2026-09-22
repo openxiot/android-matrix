@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Idioma</string>
+    <string name="profile_language_system">Segueix el sistema</string>
+    <string name="profile_language_search">Cerca idiomes</string>
+    <string name="profile_language_search_clear">Neteja</string>
+    <string name="profile_language_no_match">No hi ha cap idioma que coincideixi</string>
+    <string name="profile_not_logged_in">Sessió no iniciada</string>
+    <string name="profile_current_org">Organització actual</string>
+    <string name="profile_current_project">Projecte actual</string>
+    <string name="profile_no_org_selected">No s\'ha seleccionat cap organització</string>
+    <string name="profile_no_project_selected">No s\'ha seleccionat cap projecte</string>
+    <string name="profile_org_subtitle">Trieu-ne una per poder triar un projecte</string>
+    <string name="profile_project_subtitle_pick">Trieu un projecte</string>
+    <string name="profile_project_subtitle_switch">Toqueu per canviar de projecte</string>
+    <string name="profile_project_subtitle_org_first">Seleccioneu primer una organització</string>
+    <string name="profile_section_settings">Configuració</string>
+    <string name="profile_dark_mode">Mode fosc</string>
+    <string name="profile_light_mode">Mode clar</string>
+    <string name="profile_theme_subtitle">Toqueu per canviar el tema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Taula de punts del dispositiu</string>
+    <string name="profile_modbus_subtitle">Mapes de registres Modbus (només lectura)</string>
+    <string name="profile_alarm_title">Alarmes</string>
+    <string name="profile_alarm_subtitle">Registre i gestió d\'alarmes Modbus</string>
+    <string name="profile_history_title">Historial</string>
+    <string name="profile_history_subtitle">Historial de mostreig i gràfics</string>
+    <string name="profile_about_subtitle">Informació i versió de l\'aplicació</string>
+    <string name="account_title">Compte</string>
+    <string name="account_username">Nom d\'usuari</string>
+    <string name="account_platform">Plataforma</string>
+    <string name="account_not_selected">No seleccionat</string>
+    <string name="account_org_toggle">Organització</string>
+    <string name="account_org_toggle_subtitle">Activeu-ho per gestionar organitzacions</string>
+    <string name="account_logout">Tanca la sessió</string>
+    <string name="about_title">Quant a</string>
+    <string name="about_tagline">Plataforma de gestió i monitoratge de dispositius IoT</string>
+    <string name="about_version">Versió %1$s</string>
+    <string name="about_check_update">Comprova actualitzacions</string>
+    <string name="about_checking">Comprovant…</string>
+    <string name="about_up_to_date">Teniu la versió més recent</string>
+    <string name="about_update_now">Actualitza ara</string>
+    <string name="about_downloading">Descarregant…</string>
+    <string name="about_downloading_percent">Descarregant %1$d%%</string>
+    <string name="about_install_now">Instal·la ara</string>
+    <string name="about_install">Instal·la</string>
+    <string name="about_retry_download">Torna a descarregar</string>
+    <string name="about_later">Més tard</string>
+    <string name="about_install_dialog_title">Instal·la l\'actualització</string>
+    <string name="about_new_version_found">Hi ha la versió %1$s disponible</string>
+    <string name="about_ready_hint">Descàrrega completada; toqueu Instal·la per passar-la a l\'instal·lador del sistema.</string>
+    <string name="about_need_install_permission">Primer permeteu que aquesta aplicació instal·li aplicacions desconegudes</string>
+    <string name="about_keep_app_alive">Podeu canviar de pàgina, però no tanqueu l\'aplicació</string>
+    <string name="about_metered">Esteu amb dades mòbils; la descàrrega en pot consumir moltes</string>
+    <string name="about_metered_size">Esteu amb dades mòbils; el paquet fa uns %1$s</string>
+    <string name="about_install_settings_failed">No s\'ha pogut obrir l\'opció «Instal·la aplicacions desconegudes»; permeteu-ho manualment a la configuració del sistema</string>
+    <string name="about_no_installer">No hi ha cap aplicació d\'instal·lació disponible; el paquet s\'ha desat a la carpeta de l\'aplicació</string>
+    <string name="about_update_notes_empty">Aquesta versió no inclou cap nota.</string>
+</resources>

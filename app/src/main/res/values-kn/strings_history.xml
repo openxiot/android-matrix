@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">ಇತಿಹಾಸ</string>
+    <string name="history_section_overview">ಸೇವಾ ಅವಲೋಕನ</string>
+    <string name="history_no_services">ಈ ಯೋಜನೆಯಲ್ಲಿ ಇನ್ನೂ Modbus ಸೇವೆಗಳಿಲ್ಲ</string>
+    <string name="history_service_count_label">ಸೇವೆ ಸಂಖ್ಯೆ</string>
+    <string name="history_device_count_label">ಸಾಧನ ಸಂಖ್ಯೆ</string>
+    <string name="history_sampled_at_label">ಸಂಗ್ರಹ ಸಮಯ</string>
+    <string name="history_function_count_label">ವಿಧಾನಗಳು</string>
+    <string name="history_faults_section">ಸಂಗ್ರಹ ಅಪವಾದಗಳು</string>
+    <string name="history_faults_label">ಸಂಗ್ರಹ ಅಪವಾದಗಳು</string>
+    <string name="history_no_faults">ಈ ಅವಧಿಯಲ್ಲಿ ಯಾವುದೇ ಸ್ಯಾಂಪ್ಲಿಂಗ್ ದೋಷವಿಲ್ಲ</string>
+    <string name="history_no_data">ಈ ಅವಧಿಯಲ್ಲಿ ಯಾವುದೇ ಡೇಟಾ ಸ್ಯಾಂಪಲ್ ಆಗಿಲ್ಲ</string>
+    <string name="history_field_label">ಕ್ಷೇತ್ರ</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">ಸ್ಯಾಂಪಲ್ ಡೇಟಾ (%1$d ಸಾಲು)</item>
+        <item quantity="other">ಸ್ಯಾಂಪಲ್ ಡೇಟಾ (%1$d ಸಾಲುಗಳು)</item>
+    </plurals>
+    <string name="service_history_all_functions">ಎಲ್ಲಾ ವಿಧಾನಗಳು</string>
+    <string name="service_history_field_selection">ಫೀಲ್ಡ್‌ಗಳು %1$d / %2$d</string>
+    <string name="service_history_fault_chip">ದೋಷ %1$s × %2$d</string>
+    <string name="service_history_no_curve">ಈ ಸೇವೆಯ ಯಾವುದೇ ಫೀಲ್ಡ್ ಅನ್ನು ಚಾರ್ಟ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
+    <string name="service_history_no_curve_for_function">ಈ ಕ್ರಿಯೆಯಲ್ಲಿ ಚಾರ್ಟ್ ಮಾಡಬಹುದಾದ ಫೀಲ್ಡ್ ಇಲ್ಲ</string>
+    <string name="service_history_no_fields_selected">ಯಾವುದೇ ಫೀಲ್ಡ್ ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ</string>
+    <string name="service_history_failure_hint">ಲಂಬ ರೇಖೆಗಳು ಸಂಗ್ರಹ ವಿಫಲತೆಯ ಕ್ಷಣವನ್ನು ಸೂಚಿಸುತ್ತವೆ</string>
+    <string name="service_history_downsampled_hint">ಡೇಟಾ ಪಾಯಿಂಟ್ಗಳು ಹೆಚ್ಚಿವೆ, ಸಮಯ ಶ್ರೇಣಿಯ ಪ್ರಕಾರ ಡೌನ್ಸ್ಯಾಂಪಲ್ ಮಾಡಲಾಗಿದೆ (ಮೌಲ್ಯವು ಆ ಅವಧಿಯ ಸರಾಸರಿ, ಆವರಣದಲ್ಲಿ ಕನಿಷ್ಠ~ಗರಿಷ್ಠ)</string>
+    <string name="service_history_keepalive">ಉಳಿಸಲಾಗಿದೆ</string>
+    <string name="service_history_view_table">ಟೇಬಲ್</string>
+    <string name="service_history_view_chart">ಗ್ರಾಫ್</string>
+</resources>

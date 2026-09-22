@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrîs</string>
+    <string name="common_back">Vegere</string>
+    <string name="common_retry">Dîsa biceribîne</string>
+    <string name="common_confirm">Piştrast bike</string>
+    <string name="common_cancel">Betal bike</string>
+    <string name="common_close">Bigire</string>
+    <string name="common_detail">Detay</string>
+    <string name="common_collapse">Teng bike</string>
+    <string name="common_expand">Fireh bike</string>
+    <string name="common_all">Hemû</string>
+    <string name="common_add">Zêde bike</string>
+    <string name="common_create">Çêke</string>
+    <string name="common_delete">Jê bike</string>
+    <string name="common_unnamed">Bênav</string>
+    <string name="common_unknown">Nenas</string>
+    <string name="common_me">Hûn</string>
+    <string name="common_rename_action">Nav biguhêre</string>
+    <string name="common_role_label">Rol</string>
+    <string name="common_role_admin">Rêveber</string>
+    <string name="common_role_member">Endam</string>
+    <string name="common_role_member_option">Endamê asayî</string>
+    <string name="common_member_add">Endam zêde bike</string>
+    <string name="common_member_remove">Endam rake</string>
+    <string name="common_edit">Biguherîne</string>
+    <string name="common_refresh">Nûve bike</string>
+    <string name="common_change">Biguhêre</string>
+    <string name="common_handle">Çareserkirin</string>
+    <string name="common_handled">Hatiye çareserkirin</string>
+    <string name="common_unhandled">Nehatiye çareserkirin</string>
+    <string name="common_recovered">Vegeriyaye</string>
+    <string name="common_unrecovered">Venegeriyaye</string>
+    <string name="common_online">Serhêl</string>
+    <string name="common_offline">Neserhêl</string>
+    <string name="common_switch_on">Vekirî</string>
+    <string name="common_switch_off">Girtî</string>
+    <string name="common_please_select">Ji kerema xwe hilbijêre</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Tu navbera demê nehatiye hilbijartin</string>
+    <string name="common_range_text">%1$s heta %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Xizmet</string>
+    <string name="common_function_label">Metod</string>
+    <string name="common_device_label">Amûr</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Berhema nenas</string>
+    <string name="common_truncated_hint">Tomarên îstîsneyê ji sînor derbas bûne, tenê yên herî nû têne nîşandan</string>
+    <string name="err_network">Tor berdest nîne. Girêdana xwe kontrol bikin û dîsa biceribînin.</string>
+    <string name="err_unknown">Tiştek çewt çû. Dîsa biceribînin.</string>
+    <string name="space_type_site">Stasyon</string>
+    <string name="space_type_building">Avahî</string>
+    <string name="space_type_floor">Qat</string>
+    <string name="space_type_room">Jûr</string>
+    <string name="space_type_zone">Herêm</string>
+    <string name="space_type_field">Meydan</string>
+    <string name="space_type_workshop">Kargeh</string>
+    <string name="space_type_parking">Parkkirge</string>
+</resources>

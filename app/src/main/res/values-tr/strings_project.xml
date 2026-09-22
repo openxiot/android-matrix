@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Geçerli proje</string>
+    <string name="project_manage_title">Projeleri yönet</string>
+    <string name="project_empty">Henüz proje yok — oluşturmak için + simgesine dokunun</string>
+    <string name="project_create_title">Proje Oluştur</string>
+    <string name="project_name_label">Proje Adı</string>
+    <string name="project_name_placeholder">Proje adı girin</string>
+    <string name="project_rename_title">Projeyi yeniden adlandır</string>
+    <string name="project_rename_action">Yeniden adlandır</string>
+    <string name="project_delete_title">Projeyi sil</string>
+    <string name="project_delete_confirm">Bu proje silinsin mi? İçinde mekân bulunan bir proje silinemez.</string>
+    <string name="project_swipe_delete">Silmek için kaydırın</string>
+    <string name="project_type_label">Tür: %1$s</string>
+    <string name="project_members_title">Proje Üyeleri</string>
+    <string name="project_members_empty">Henüz üye yok — eklemek için + simgesine dokunun</string>
+    <string name="project_members_label">Üyeler</string>
+    <string name="project_user_id">Kullanıcı ID</string>
+    <string name="project_user_id_placeholder">Kullanıcının hesap ID\'si</string>
+    <string name="project_remark_hint">Not eklemek için dokunun</string>
+    <string name="project_remark_title">Notu düzenle — %1$s</string>
+    <string name="project_remark_label">Not</string>
+    <string name="project_role_adjust">Rolü Değiştir</string>
+    <string name="project_role_adjust_title">Rol değiştir — %1$s</string>
+    <string name="project_remove_confirm">“%1$s” kaldırılsın mı?</string>
+    <string name="project_exit">Projeden Ayrıl</string>
+    <string name="project_exit_confirm">Bu projeden çıkılsın mı? Projeye erişiminizi kaybedersiniz.</string>
+    <string name="project_device_added">Cihaz eklendi</string>
+    <string name="project_device_moved">Cihaz taşındı</string>
+    <string name="space_manage_title">Mekânları yönet</string>
+    <string name="space_add">Mekân ekle</string>
+    <string name="space_add_child">Alt Mekan Ekle</string>
+    <string name="space_add_device">Cihaz Ekle</string>
+    <string name="space_name_label">Mekan Adı</string>
+    <string name="space_name_placeholder">Ad girin</string>
+    <string name="space_type_label">Mekan Türü</string>
+    <string name="space_empty">Mekân verisi yok</string>
+    <string name="space_empty_editable">Başlamak için bir mekân ekleyin</string>
+    <string name="space_empty_readonly">Bu projede henüz mekân veya cihaz yok</string>
+    <string name="space_delete_title">Mekânı sil</string>
+    <string name="space_delete_confirm">Bu mekân silinsin mi? Alt mekânı olan bir mekân silinemez.</string>
+    <string name="space_move_title">Mekâna taşı</string>
+    <string name="space_move_action">Taşı</string>
+    <string name="space_device_adding">Cihaz ekleniyor…</string>
+    <string name="space_device_waiting">Bekleniyor… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d cihaz</item>
+        <item quantity="other">%1$d adet cihaz</item>
+    </plurals>
+</resources>

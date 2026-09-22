@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Насочете камерата към QR кода или IMEI на устройството</string>
+    <string name="scan_torch">Фенерче</string>
+    <string name="scan_torch_on">Включи фенерчето</string>
+    <string name="scan_torch_off">Изключи фенерчето</string>
+    <string name="scan_permission_required">Нужен е достъп до камерата, за да сканирате и добавяте устройства</string>
+    <string name="scan_grant">Разреши достъп</string>
+</resources>

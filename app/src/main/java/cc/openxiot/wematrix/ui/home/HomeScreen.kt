@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
@@ -37,6 +38,8 @@ import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.core.SessionState
 import cc.openxiot.wematrix.ui.core.asString
+import cc.openxiot.wematrix.util.cellComesFirst
+import cc.openxiot.wematrix.util.physicalOrder
 import cc.openxiot.wematrix.ui.main.PageTitle
 import kotlinx.coroutines.launch
 
@@ -141,7 +144,9 @@ private fun ReadOnlyContent(state: MobileDashboardUiState, modifier: Modifier = 
                     modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    row.forEach { widget ->
+                    // 数据序第 0 张 = 物理左半格。RTL 下 Row 会镜像，故倒序抵消 ——
+                    // 已保存的排版不该因为换了界面语言而左右翻转（`side` 是物理半格）。
+                    physicalOrder(row, LocalLayoutDirection.current).forEach { widget ->
                         ReadOnlyHost(widget, state, Modifier.weight(1f).fillMaxHeight())
                     }
                 }
@@ -151,9 +156,13 @@ private fun ReadOnlyContent(state: MobileDashboardUiState, modifier: Modifier = 
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     val onRight = row[0].side == DashboardTypes.SIDE_RIGHT
-                    if (onRight) Spacer(Modifier.weight(1f))
-                    ReadOnlyHost(row[0], state, Modifier.weight(1f))
-                    if (!onRight) Spacer(Modifier.weight(1f))
+                    if (cellComesFirst(onRight, LocalLayoutDirection.current)) {
+                        ReadOnlyHost(row[0], state, Modifier.weight(1f))
+                        Spacer(Modifier.weight(1f))
+                    } else {
+                        Spacer(Modifier.weight(1f))
+                        ReadOnlyHost(row[0], state, Modifier.weight(1f))
+                    }
                 }
                 else -> ReadOnlyHost(row[0], state, Modifier.fillMaxWidth())
             }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Първо изберете проект от списъка с проекти</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Да се откажат ли промените?</string>
+    <string name="home_discard_message">Имате незапазени промени. Ако излезете сега, ще ги загубите.</string>
+    <string name="home_dashboard_empty">Още няма карти — натиснете „Добави“ по-долу, за да добавите</string>
+    <string name="home_add_card">+ Добави</string>
+    <string name="home_default_layout_loaded">Заредено е оформлението по подразбиране — запазете го, за да се приложи</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Едно голямо число: устройства / услуги / аларми / неизправности</string>
+    <string name="home_card_kind_line">Брой аларми по часове или едно поле на услуга</string>
+    <string name="home_card_kind_distribution">Разпределение по устройство / услуга / аларма / неизправност</string>
+    <string name="home_card_kind_device">Едно свойство на едно устройство</string>
+    <string name="home_card_kind_service">Набор от полета от една функция</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Графика</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Устройство</string>
+    <string name="home_card_default_service">Услуги</string>
+    <string name="home_card_default_unknown">Карта</string>
+    <string name="home_edit_card_title">Редакция · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Пълна ширина</string>
+    <string name="home_size_half">Половина ширина</string>
+    <string name="home_section_metric">Показател</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Общо устройства</string>
+    <string name="home_metric_devices_online">Устройства онлайн</string>
+    <string name="home_metric_services_total">Общо услуги</string>
+    <string name="home_metric_alarms_today">Аларми за днес</string>
+    <string name="home_metric_alarms_window">Аларми в периода</string>
+    <string name="home_metric_failures_total">Откази при събиране в периода</string>
+    <string name="home_section_dimension">Разпределение по</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Тип устройство</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Тип на отказа при събиране</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Източник на данни</string>
+    <string name="home_source_label">Източник</string>
+    <string name="home_source_alarm_curve">Брой аларми по часове</string>
+    <string name="home_source_service_field">Едно поле на услуга</string>
+    <string name="home_show_failure_shadow">Показване на линиите на неуспешно събиране</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Услуга · Функция · Поле</string>
+    <string name="home_service_placeholder">Изберете услуга</string>
+    <string name="home_service_unnamed">Услуга без име</string>
+    <string name="home_function_placeholder">Изберете функция</string>
+    <string name="home_function_fallback">Функция %1$d</string>
+    <string name="home_pick_service_first">Първо изберете услуга</string>
+    <string name="home_show_unit">Показване на мерната единица</string>
+    <string name="home_section_device_prop">Устройство · Свойство</string>
+    <string name="home_device_placeholder">Изберете устройство</string>
+    <string name="home_prop_label">Свойства</string>
+    <string name="home_pick_device_first">Първо изберете устройство</string>
+    <string name="home_prop_none">Този модел няма свойства</string>
+    <string name="home_prop_placeholder">Изберете свойство</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, оставете празно за без ограничение</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Последни</string>
+    <string name="home_window_custom">Персонализиран</string>
+    <string name="home_pick_dates">Изберете начална и крайна дата</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d ден</item>
+        <item quantity="other">%1$d дни</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d час</item>
+        <item quantity="other">%1$d часа</item>
+    </plurals>
+    <string name="home_card_unknown_type">Неизвестен тип карта</string>
+    <string name="home_empty_no_data">Няма данни</string>
+    <string name="home_empty_no_reading">Още няма стойности</string>
+    <string name="home_empty_not_sampled">Още не е събрано</string>
+    <string name="home_sampled_at">Събрано %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">устройства</string>
+    <string name="home_unit_services">услуги</string>
+</resources>

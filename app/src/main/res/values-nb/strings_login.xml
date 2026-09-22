@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Logg inn med WeChat</string>
+    <string name="login_test_account">Logg inn med en testkonto</string>
+    <string name="login_err_wechat_missing">WeChat er ikke installert, eller versjonen er for gammel</string>
+    <string name="login_err_no_code">Ingen autorisasjonskode kom tilbake</string>
+    <string name="login_err_cancelled">WeChat-innloggingen ble avbrutt</string>
+    <string name="login_err_wechat">WeChat-autorisasjonen mislyktes (%1$d)</string>
+    <string name="login_err_no_token">Innloggingen mislyktes: ingen token ble returnert</string>
+</resources>

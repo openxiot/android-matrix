@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">알람</string>
+    <string name="alarm_action_ok">작업을 완료했습니다</string>
+    <string name="alarm_empty">이 기간에 알람이 없습니다</string>
+    <string name="alarm_all_services">모든 서비스</string>
+    <string name="alarm_level_label">알람 레벨</string>
+    <string name="alarm_handled_label">처리</string>
+    <string name="alarm_status_label">상태</string>
+    <string name="alarm_summary_title">알람 목록</string>
+    <string name="alarm_text_label">알람 텍스트</string>
+    <string name="alarm_field_label">필드</string>
+    <string name="alarm_trigger_label">트리거 조건</string>
+    <string name="alarm_current_value_label">현재 값</string>
+</resources>

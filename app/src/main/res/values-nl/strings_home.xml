@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Selecteer eerst een project in de projectlijst</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Wijzigingen verwerpen?</string>
+    <string name="home_discard_message">Er zijn niet-opgeslagen wijzigingen. Bij weggaan gaan ze verloren.</string>
+    <string name="home_dashboard_empty">Nog geen kaarten — tik hieronder op \"Toevoegen\" om er een toe te voegen</string>
+    <string name="home_add_card">+ Toevoegen</string>
+    <string name="home_default_layout_loaded">Standaardindeling geladen — sla op om toe te passen</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Eén groot getal: apparaten / services / alarmen / fouten</string>
+    <string name="home_card_kind_line">Alarmen per uur, of één serviceveld</string>
+    <string name="home_card_kind_distribution">Verdeling naar apparaat / service / alarm / fout</string>
+    <string name="home_card_kind_device">Eén eigenschap van één apparaat</string>
+    <string name="home_card_kind_service">Een set velden uit één functie</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Grafiek</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Apparaat</string>
+    <string name="home_card_default_service">Diensten</string>
+    <string name="home_card_default_unknown">Kaart</string>
+    <string name="home_edit_card_title">Bewerken · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Volledige breedte</string>
+    <string name="home_size_half">Halve breedte</string>
+    <string name="home_section_metric">Statistiek</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Totaal apparaten</string>
+    <string name="home_metric_devices_online">Apparaten online</string>
+    <string name="home_metric_services_total">Totaal services</string>
+    <string name="home_metric_alarms_today">Alarmen van vandaag</string>
+    <string name="home_metric_alarms_window">Alarmen in periode</string>
+    <string name="home_metric_failures_total">Meetfouten in periode</string>
+    <string name="home_section_dimension">Verdeling naar</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Apparaattype</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Type meetfout</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Databron</string>
+    <string name="home_source_label">Bron</string>
+    <string name="home_source_alarm_curve">Alarmen per uur</string>
+    <string name="home_source_service_field">Eén serviceveld</string>
+    <string name="home_show_failure_shadow">Lijnen van mislukt ophalen tonen</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Service · Functie · Veld</string>
+    <string name="home_service_placeholder">Selecteer een service</string>
+    <string name="home_service_unnamed">Naamloze service</string>
+    <string name="home_function_placeholder">Selecteer een functie</string>
+    <string name="home_function_fallback">Functie %1$d</string>
+    <string name="home_pick_service_first">Selecteer eerst een service</string>
+    <string name="home_show_unit">Eenheid tonen</string>
+    <string name="home_section_device_prop">Apparaat · Eigenschap</string>
+    <string name="home_device_placeholder">Selecteer een apparaat</string>
+    <string name="home_prop_label">Eigenschappen</string>
+    <string name="home_pick_device_first">Selecteer eerst een apparaat</string>
+    <string name="home_prop_none">Geen eigenschappen voor dit model</string>
+    <string name="home_prop_placeholder">Selecteer een eigenschap</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, leeg laten voor onbeperkt</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Laatste</string>
+    <string name="home_window_custom">Aangepast</string>
+    <string name="home_pick_dates">Kies begin- en einddatum</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d dag</item>
+        <item quantity="other">%1$d dagen</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d uur</item>
+        <item quantity="other">%1$d uren</item>
+    </plurals>
+    <string name="home_card_unknown_type">Onbekend kaarttype</string>
+    <string name="home_empty_no_data">Geen gegevens</string>
+    <string name="home_empty_no_reading">Nog geen meetwaarden</string>
+    <string name="home_empty_not_sampled">Nog niet opgehaald</string>
+    <string name="home_sampled_at">Gemeten %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">apparaten</string>
+    <string name="home_unit_services">diensten</string>
+</resources>

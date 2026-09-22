@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Historia</string>
+    <string name="history_section_overview">Przegląd usług</string>
+    <string name="history_no_services">W tym projekcie nie ma jeszcze usług Modbus</string>
+    <string name="history_service_count_label">Liczba usług</string>
+    <string name="history_device_count_label">Liczba urządzeń</string>
+    <string name="history_sampled_at_label">Czas odczytu</string>
+    <string name="history_function_count_label">Metody</string>
+    <string name="history_faults_section">Wyjątki odczytu</string>
+    <string name="history_faults_label">Wyjątki odczytu</string>
+    <string name="history_no_faults">W tym okresie brak usterek pomiaru</string>
+    <string name="history_no_data">W tym okresie nie pobrano danych</string>
+    <string name="history_field_label">Pole</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Dane pomiarowe (%1$d wiersze)</item>
+        <item quantity="many">Dane pomiarowe (%1$d wierszy)</item>
+        <item quantity="one">Dane pomiarowe (%1$d wiersz)</item>
+        <item quantity="other">Dane pomiarowe (%1$d wiersza)</item>
+    </plurals>
+    <string name="service_history_all_functions">Wszystkie metody</string>
+    <string name="service_history_field_selection">Pola %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Usterka %1$s × %2$d</string>
+    <string name="service_history_no_curve">Żadnego pola tej usługi nie można przedstawić na wykresie</string>
+    <string name="service_history_no_curve_for_function">W tej funkcji nie ma pola nadającego się na wykres</string>
+    <string name="service_history_no_fields_selected">Nie wybrano pól</string>
+    <string name="service_history_failure_hint">Pionowe linie oznaczają moment nieudanego odczytu</string>
+    <string name="service_history_downsampled_hint">Jest wiele punktów danych, więc dane zostały zagregowane według przedziałów czasu (wartość to średnia z tego przedziału, w nawiasach minimum~maksimum)</string>
+    <string name="service_history_keepalive">Zachowane</string>
+    <string name="service_history_view_table">Tabela</string>
+    <string name="service_history_view_chart">Wykres</string>
+</resources>

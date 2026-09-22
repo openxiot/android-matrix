@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Projek semasa</string>
+    <string name="project_manage_title">Urus projek</string>
+    <string name="project_empty">Belum ada projek — ketik + untuk mencipta satu</string>
+    <string name="project_create_title">Cipta Projek</string>
+    <string name="project_name_label">Nama Projek</string>
+    <string name="project_name_placeholder">Masukkan nama projek</string>
+    <string name="project_rename_title">Namakan semula projek</string>
+    <string name="project_rename_action">Namakan semula</string>
+    <string name="project_delete_title">Hapuskan projek</string>
+    <string name="project_delete_confirm">Hapuskan projek ini? Projek yang masih ada ruang tidak boleh dihapuskan.</string>
+    <string name="project_swipe_delete">Leret untuk hapus</string>
+    <string name="project_type_label">Jenis: %1$s</string>
+    <string name="project_members_title">Ahli Projek</string>
+    <string name="project_members_empty">Belum ada ahli — ketik + untuk menambah satu</string>
+    <string name="project_members_label">Ahli</string>
+    <string name="project_user_id">ID Pengguna</string>
+    <string name="project_user_id_placeholder">ID akaun pengguna</string>
+    <string name="project_remark_hint">Ketik untuk menambah nota</string>
+    <string name="project_remark_title">Sunting nota — %1$s</string>
+    <string name="project_remark_label">Nota</string>
+    <string name="project_role_adjust">Tukar Peranan</string>
+    <string name="project_role_adjust_title">Tukar peranan — %1$s</string>
+    <string name="project_remove_confirm">Keluarkan “%1$s”?</string>
+    <string name="project_exit">Keluar dari Projek</string>
+    <string name="project_exit_confirm">Tinggalkan projek ini? Anda akan hilang akses kepadanya.</string>
+    <string name="project_device_added">Peranti ditambah</string>
+    <string name="project_device_moved">Peranti dipindahkan</string>
+    <string name="space_manage_title">Urus ruang</string>
+    <string name="space_add">Tambah ruang</string>
+    <string name="space_add_child">Tambah Sub-Ruang</string>
+    <string name="space_add_device">Tambah Peranti</string>
+    <string name="space_name_label">Nama Ruang</string>
+    <string name="space_name_placeholder">Masukkan nama</string>
+    <string name="space_type_label">Jenis Ruang</string>
+    <string name="space_empty">Tiada data ruang</string>
+    <string name="space_empty_editable">Tambah ruang untuk bermula</string>
+    <string name="space_empty_readonly">Projek ini belum ada ruang atau peranti</string>
+    <string name="space_delete_title">Hapuskan ruang</string>
+    <string name="space_delete_confirm">Hapuskan ruang ini? Ruang yang masih ada sub-ruang tidak boleh dihapuskan.</string>
+    <string name="space_move_title">Pindah ke ruang</string>
+    <string name="space_move_action">Pindah</string>
+    <string name="space_device_adding">Menambah peranti…</string>
+    <string name="space_device_waiting">Menunggu… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d peranti</item>
+    </plurals>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">WeChat सँग साइन इन गर्नुहोस्</string>
+    <string name="login_test_account">परीक्षण खातासँग साइन इन गर्नुहोस्</string>
+    <string name="login_err_wechat_missing">WeChat स्थापित छैन, वा संस्करण धेरै पुरानो छ</string>
+    <string name="login_err_no_code">कुनै प्राधिकरण कोड फिर्ता आएन</string>
+    <string name="login_err_cancelled">WeChat साइन-इन रद्द गरियो</string>
+    <string name="login_err_wechat">WeChat प्राधिकरण असफल भयो (%1$d)</string>
+    <string name="login_err_no_token">साइन-इन असफल भयो: कुनै टोकन फर्काइएन</string>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Verlauf</string>
+    <string name="history_section_overview">Dienstübersicht</string>
+    <string name="history_no_services">Noch keine Modbus-Dienste in diesem Projekt</string>
+    <string name="history_service_count_label">Dienstanzahl</string>
+    <string name="history_device_count_label">Geräteanzahl</string>
+    <string name="history_sampled_at_label">Erfassungszeit</string>
+    <string name="history_function_count_label">Methoden</string>
+    <string name="history_faults_section">Erfassungsausnahmen</string>
+    <string name="history_faults_label">Erfassungsausnahmen</string>
+    <string name="history_no_faults">Keine Erfassungsstörungen in diesem Zeitraum</string>
+    <string name="history_no_data">In diesem Zeitraum wurden keine Daten erfasst</string>
+    <string name="history_field_label">Feld</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Erfasste Daten (%1$d Zeile)</item>
+        <item quantity="other">Erfasste Daten (%1$d Zeilen)</item>
+    </plurals>
+    <string name="service_history_all_functions">Alle Methoden</string>
+    <string name="service_history_field_selection">Felder %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Störung %1$s × %2$d</string>
+    <string name="service_history_no_curve">Kein Feld dieses Dienstes ist als Diagramm darstellbar</string>
+    <string name="service_history_no_curve_for_function">Kein darstellbares Feld in dieser Funktion</string>
+    <string name="service_history_no_fields_selected">Keine Felder ausgewählt</string>
+    <string name="service_history_failure_hint">Senkrechte Linien markieren die Zeitpunkte fehlgeschlagener Erfassungen</string>
+    <string name="service_history_downsampled_hint">Viele Datenpunkte; nach Zeitintervallen heruntergerechnet (Wert = Mittelwert des Intervalls, in Klammern Minimum~Maximum)</string>
+    <string name="service_history_keepalive">Beibehalten</string>
+    <string name="service_history_view_table">Tabelle</string>
+    <string name="service_history_view_chart">Diagramm</string>
+</resources>

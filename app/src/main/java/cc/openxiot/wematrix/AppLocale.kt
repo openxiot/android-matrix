@@ -11,7 +11,7 @@ import androidx.core.content.edit
 import java.util.Locale
 
 /**
- * 应用语言：跟随系统 / 中文 / 英文。
+ * 应用语言：跟随系统，或 [APP_LANGUAGES] 里的任意一种（64 种）。
  *
  * 机制是「给 baseContext 套一层 locale」。⚠️ **每个带界面的 Activity 都要在自己的
  * `attachBaseContext` 里调 [wrap]**，漏了那个页面就永远跟系统语言走。目前三处：
@@ -25,8 +25,13 @@ import java.util.Locale
  * 看到英文。不引入反而没有这个矛盾。
  */
 object AppLocale {
+    /** 「跟随系统」的哨兵值。它不是一个 locale，是「别套 wrapper」的意思。 */
     const val SYSTEM = "system"
+
+    /** 简体中文。留存常量是因为它是 `values-zh` 的 tag，注释里反复要提。 */
     const val ZH = "zh"
+
+    /** 英文。[APP_LANGUAGES] 里也有它 —— 英文的资源目录就是默认的 `values/`。 */
     const val EN = "en"
 
     /**
@@ -37,7 +42,14 @@ object AppLocale {
     private const val KEY = "app_language"
     private const val TAG = "AppLocale"
 
-    private val VALID = setOf(SYSTEM, ZH, EN)
+    /**
+     * 落盘白名单 = 跟随系统 + 语言表的全部 tag。
+     *
+     * **从 [APP_LANGUAGES] 派生而不是另抄一份**：抄一份的话，将来加语言时漏改这里，
+     * 表现是「选择了该语言、退出重进又变回跟随系统」—— 每次都被 `read()` 当成非法值
+     * 收敛掉，且没有任何报错。这种静默失效只有真机上手动试才看得见。
+     */
+    internal val VALID: Set<String> = setOf(SYSTEM) + APP_LANGUAGES.map { it.tag }
 
     /** 给 Compose 读的镜像；真源是 prefs（见 [read]）。 */
     var current by mutableStateOf(SYSTEM)
@@ -75,7 +87,7 @@ object AppLocale {
     fun wrap(base: Context): Context {
         val tag = read(base)
         val config = base.resources.configuration
-        val locale = resolveAppLocale(tag, config.locales.toList()) ?: return base
+        val locale = resolveAppLocale(tag) ?: return base
         return try {
             val wrapped = Configuration(config).apply {
                 // 24+ 框架优先看 locales，已废弃的 locale 字段不再作数
@@ -91,30 +103,31 @@ object AppLocale {
             base
         }
     }
-
-    private fun LocaleList.toList(): List<Locale> = (0 until size()).map { this[it] }
 }
 
 /**
  * 决定要不要给 baseContext 套语言：返回 `null` 表示原样用系统 config。
  *
- * **为什么「跟随系统」也要显式判断，而不是直接原样返回交给框架**：`values-zh` 会被 aapt2
- * 隐式标上 `Hans`（简体）脚本，于是它匹配不了 `zh-Hant` 系的系统 —— zh-TW / zh-HK / zh-MO
- * 会径直掉到默认的**英文**去（`aapt2 dump badging` 里 `application-label-zh-TW: WeMatrix`
- * 就是铁证）。而需求是「是中文就是中文」，繁体中文也是中文。所以凡 `zh` 系一律显式套简体。
+ * **每种语言都有自己的资源目录了，所以这里可以退化成「要么不套、要么照 tag 套」。**
  *
- * 代价是繁体系统用户看到简体（已确认按需求口径有意为之）。不按方言拆 `values-zh-rTW`
- * 的另一面：那要再复制一整套中文文案，且和「一次做完」的规模不成比例。
+ * 上一版有一段 `zh → SIMPLIFIED_CHINESE` 的特判，因为当时只有一份 `values-zh`，
+ * 而 aapt2 会把它隐式标成 `Hans`，于是 `zh-Hant` 系的系统（zh-TW / zh-HK / zh-MO）
+ * 匹配不上、径直掉到默认英文 —— 特判是为了「是中文就显示中文」。现在
+ * `values-zh-rTW` / `values-zh-rHK` 是真的繁体译文，**再保留那个特判反而有害**：
+ * 它会让繁体用户永远选不中自己那份译文。让框架照系统 locale 自己解析才是对的。
  *
- * 抽成一个不碰 `android.*`、只吃 `java.util.Locale` 的顶层纯函数，是为了能在纯 JVM 单测里
- * 钉住它（见 `AppLocaleTest`）—— 这段逻辑错了的表现是「某些语言的系统上整个应用语言不对」，
- * 只有恰好用那种系统的人才会发现。
+ * 那条「繁体不掉英文」的保证**没有消失，只是从 Kotlin 挪到了资源层** ——
+ * 由 `values-zh-rTW` / -rHK 两个目录的存在与内容，加上 `StringsParityTest` 的
+ * 繁体守卫来兑现。见该测试。
+ *
+ * 抽成一个不碰 `android.*`、只吃 `java.util.Locale` 的顶层纯函数，是为了能在纯 JVM
+ * 单测里钉住它（见 `AppLocaleTest`）—— 这段逻辑错了的表现是「某些语言整个应用语言不对」，
+ * 只有恰好用那种语言的人才会发现。
  */
-internal fun resolveAppLocale(tag: String, systemLocales: List<Locale>): Locale? = when (tag) {
-    AppLocale.ZH -> Locale.SIMPLIFIED_CHINESE
-    AppLocale.EN -> Locale.ENGLISH
-    // 只有「跟随系统」才看系统语言；显式选了语言就不该被系统影响
-    else -> systemLocales.firstOrNull()
-        ?.takeIf { it.language == "zh" }
-        ?.let { Locale.SIMPLIFIED_CHINESE }
+internal fun resolveAppLocale(tag: String): Locale? {
+    if (tag !in AppLocale.VALID || tag == AppLocale.SYSTEM) return null
+    // 语言表的 tag 都是良构的，但万一有人往表里写错一个，forLanguageTag 会**静默**
+    // 返回 Locale.ROOT（语言为空），表现是整个应用变回英文且不报错。
+    // 这里挡一下，让它退化成「跟随系统」，至少和用户选的语言同一个语系。
+    return Locale.forLanguageTag(tag).takeIf { it.language.isNotEmpty() }
 }

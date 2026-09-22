@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrix</string>
+    <string name="common_back">Terug</string>
+    <string name="common_retry">Opnieuw</string>
+    <string name="common_confirm">Bevestigen</string>
+    <string name="common_cancel">Annuleren</string>
+    <string name="common_close">Sluiten</string>
+    <string name="common_detail">Details</string>
+    <string name="common_collapse">Inklappen</string>
+    <string name="common_expand">Uitvouwen</string>
+    <string name="common_all">Alle</string>
+    <string name="common_add">Toevoegen</string>
+    <string name="common_create">Aanmaken</string>
+    <string name="common_delete">Verwijderen</string>
+    <string name="common_unnamed">Naamloos</string>
+    <string name="common_unknown">Onbekend</string>
+    <string name="common_me">Ik</string>
+    <string name="common_rename_action">Hernoemen</string>
+    <string name="common_role_label">Rol</string>
+    <string name="common_role_admin">Beheerder</string>
+    <string name="common_role_member">Leden</string>
+    <string name="common_role_member_option">Gewoon lid</string>
+    <string name="common_member_add">Lid toevoegen</string>
+    <string name="common_member_remove">Lid verwijderen</string>
+    <string name="common_edit">Bewerken</string>
+    <string name="common_refresh">Vernieuwen</string>
+    <string name="common_change">Wijzigen</string>
+    <string name="common_handle">Afhandelen</string>
+    <string name="common_handled">Afgehandeld</string>
+    <string name="common_unhandled">Niet afgehandeld</string>
+    <string name="common_recovered">Hersteld</string>
+    <string name="common_unrecovered">Actief</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">Aan</string>
+    <string name="common_switch_off">Uit</string>
+    <string name="common_please_select">Maak een keuze</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Geen periode geselecteerd</string>
+    <string name="common_range_text">%1$s tot %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Diensten</string>
+    <string name="common_function_label">Methoden</string>
+    <string name="common_device_label">Apparaat</string>
+    <string name="common_protocol_label">Protocol</string>
+    <string name="common_unknown_product">Onbekend product</string>
+    <string name="common_truncated_hint">Er zijn meer uitzonderingsrecords dan de limiet; alleen de recentste worden weergegeven</string>
+    <string name="err_network">Netwerk niet beschikbaar. Controleer de verbinding en probeer het opnieuw.</string>
+    <string name="err_unknown">Er is iets misgegaan. Probeer het opnieuw.</string>
+    <string name="space_type_site">Locatie</string>
+    <string name="space_type_building">Gebouw</string>
+    <string name="space_type_floor">Verdieping</string>
+    <string name="space_type_room">Kamer</string>
+    <string name="space_type_zone">Zone</string>
+    <string name="space_type_field">Terrein</string>
+    <string name="space_type_workshop">Werkplaats</string>
+    <string name="space_type_parking">Parkeerplaats</string>
+</resources>

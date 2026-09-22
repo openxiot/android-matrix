@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Одоогийн төсөл</string>
+    <string name="project_manage_title">Төслүүд удирдах</string>
+    <string name="project_empty">Одоогоор төсөл байхгүй — нэмэхийн тулд + дарна уу</string>
+    <string name="project_create_title">Төсөл үүсгэх</string>
+    <string name="project_name_label">Төслийн нэр</string>
+    <string name="project_name_placeholder">Төслийн нэр оруулна уу</string>
+    <string name="project_rename_title">Төслийн нэрийг өөрчлөх</string>
+    <string name="project_rename_action">Нэрийг өөрчлөх</string>
+    <string name="project_delete_title">Төсөл устгах</string>
+    <string name="project_delete_confirm">Энэ төслийг устгах уу? Орон зайтай төслийг устгах боломжгүй.</string>
+    <string name="project_swipe_delete">Устгахын тулд шургуулна уу</string>
+    <string name="project_type_label">Төрөл: %1$s</string>
+    <string name="project_members_title">Төслийн гишүүд</string>
+    <string name="project_members_empty">Одоогоор гишүүн байхгүй — нэмэхийн тулд + дарна уу</string>
+    <string name="project_members_label">Гишүүд</string>
+    <string name="project_user_id">Хэрэглэгчийн ID</string>
+    <string name="project_user_id_placeholder">Хэрэглэгчийн бүртгэлийн ID</string>
+    <string name="project_remark_hint">Тэмдэглэл нэмэхийг дарна уу</string>
+    <string name="project_remark_title">Тэмдэглэл засах — %1$s</string>
+    <string name="project_remark_label">Тэмдэглэл</string>
+    <string name="project_role_adjust">Үүрэг өөрчлөх</string>
+    <string name="project_role_adjust_title">Үүргийг өөрчлөх — %1$s</string>
+    <string name="project_remove_confirm">«%1$s»-ийг хасах уу?</string>
+    <string name="project_exit">Төслөөс гарах</string>
+    <string name="project_exit_confirm">Энэ төслөөс гарах уу? Гарвал хандах боломжоо алдана.</string>
+    <string name="project_device_added">Төхөөрөмж нэмэгдлээ</string>
+    <string name="project_device_moved">Төхөөрөмж зөөгдлөө</string>
+    <string name="space_manage_title">Орон зай удирдах</string>
+    <string name="space_add">Орон зай нэмэх</string>
+    <string name="space_add_child">Дэд орон зай нэмэх</string>
+    <string name="space_add_device">Төхөөрөмж нэмэх</string>
+    <string name="space_name_label">Орон зайн нэр</string>
+    <string name="space_name_placeholder">Нэр оруулна уу</string>
+    <string name="space_type_label">Орон зайн төрөл</string>
+    <string name="space_empty">Орон зайн өгөгдөл хоосон</string>
+    <string name="space_empty_editable">Эхлүүлэхийн тулд орон зай нэмнэ үү</string>
+    <string name="space_empty_readonly">Энэ төслийн доор орон зай эсвэл төхөөрөмж байхгүй</string>
+    <string name="space_delete_title">Орон зай устгах</string>
+    <string name="space_delete_confirm">Энэ орон зайг устгах уу? Дэд орон зайтай орон зайг устгах боломжгүй.</string>
+    <string name="space_move_title">Орон зай руу зөөх</string>
+    <string name="space_move_action">Зөөх</string>
+    <string name="space_device_adding">Төхөөрөмж нэмж байна…</string>
+    <string name="space_device_waiting">Хүлээж байна… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d төхөөрөмж</item>
+        <item quantity="other">%1$d төхөөрөмжүүд</item>
+    </plurals>
+</resources>

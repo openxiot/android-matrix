@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Accedi con WeChat</string>
+    <string name="login_test_account">Accedi con un account di test</string>
+    <string name="login_err_wechat_missing">WeChat non è installato o la versione è troppo vecchia</string>
+    <string name="login_err_no_code">Nessun codice di autorizzazione ricevuto</string>
+    <string name="login_err_cancelled">Accesso con WeChat annullato</string>
+    <string name="login_err_wechat">Autorizzazione WeChat non riuscita (%1$d)</string>
+    <string name="login_err_no_token">Accesso non riuscito: nessun token restituito</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">История</string>
+    <string name="history_section_overview">Обзор сервисов</string>
+    <string name="history_no_services">В этом проекте пока нет сервисов Modbus</string>
+    <string name="history_service_count_label">Количество сервисов</string>
+    <string name="history_device_count_label">Количество устройств</string>
+    <string name="history_sampled_at_label">Время сбора</string>
+    <string name="history_function_count_label">Методы</string>
+    <string name="history_faults_section">Исключения сбора</string>
+    <string name="history_faults_label">Исключения сбора</string>
+    <string name="history_no_faults">За этот период сбоев опроса нет</string>
+    <string name="history_no_data">За этот период данных опроса нет</string>
+    <string name="history_field_label">Поле</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Данные опроса (%1$d строки)</item>
+        <item quantity="many">Данные опроса (%1$d строк)</item>
+        <item quantity="one">Данные опроса (%1$d строка)</item>
+        <item quantity="other">Данные опроса (%1$d строки)</item>
+    </plurals>
+    <string name="service_history_all_functions">Все методы</string>
+    <string name="service_history_field_selection">Поля %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Сбой %1$s × %2$d</string>
+    <string name="service_history_no_curve">Ни одно поле этого сервиса не строится на графике</string>
+    <string name="service_history_no_curve_for_function">В этой функции нет полей для графика</string>
+    <string name="service_history_no_fields_selected">Поля не выбраны</string>
+    <string name="service_history_failure_hint">Вертикальные линии обозначают моменты сбоя сбора</string>
+    <string name="service_history_downsampled_hint">Слишком много точек данных, выполнено прореживание по интервалам времени (значение — среднее за интервал, в скобках минимум~максимум)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Таблица</string>
+    <string name="service_history_view_chart">График</string>
+</resources>

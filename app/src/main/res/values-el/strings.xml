@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Μήτρα</string>
+    <string name="common_back">Πίσω</string>
+    <string name="common_retry">Επανάληψη</string>
+    <string name="common_confirm">Επιβεβαίωση</string>
+    <string name="common_cancel">Ακύρωση</string>
+    <string name="common_close">Κλείσιμο</string>
+    <string name="common_detail">Λεπτομέρειες</string>
+    <string name="common_collapse">Σύμπτυξη</string>
+    <string name="common_expand">Ανάπτυξη</string>
+    <string name="common_all">Όλα</string>
+    <string name="common_add">Προσθήκη</string>
+    <string name="common_create">Δημιουργία</string>
+    <string name="common_delete">Διαγραφή</string>
+    <string name="common_unnamed">Χωρίς όνομα</string>
+    <string name="common_unknown">Άγνωστο</string>
+    <string name="common_me">Εσείς</string>
+    <string name="common_rename_action">Μετονομασία</string>
+    <string name="common_role_label">Ρόλος</string>
+    <string name="common_role_admin">Διαχειριστής</string>
+    <string name="common_role_member">Μέλη</string>
+    <string name="common_role_member_option">Απλό μέλος</string>
+    <string name="common_member_add">Προσθήκη μέλους</string>
+    <string name="common_member_remove">Αφαίρεση μέλους</string>
+    <string name="common_edit">Επεξεργασία</string>
+    <string name="common_refresh">Ανανέωση</string>
+    <string name="common_change">Αλλαγή</string>
+    <string name="common_handle">Διαχείριση</string>
+    <string name="common_handled">Διαχειρισμένος</string>
+    <string name="common_unhandled">Μη διαχειρισμένος</string>
+    <string name="common_recovered">Αποκαταστάθηκε</string>
+    <string name="common_unrecovered">Ενεργή</string>
+    <string name="common_online">Σε σύνδεση</string>
+    <string name="common_offline">Εκτός σύνδεσης</string>
+    <string name="common_switch_on">Ενεργό</string>
+    <string name="common_switch_off">Ανενεργό</string>
+    <string name="common_please_select">Παρακαλώ επιλέξτε</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Δεν έχει επιλεγεί χρονικό διάστημα</string>
+    <string name="common_range_text">%1$s έως %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Υπηρεσίες</string>
+    <string name="common_function_label">Μέθοδοι</string>
+    <string name="common_device_label">Συσκευή</string>
+    <string name="common_protocol_label">Πρωτόκολλο</string>
+    <string name="common_unknown_product">Άγνωστο προϊόν</string>
+    <string name="common_truncated_hint">Οι εγγραφές εξαιρέσεων υπερβαίνουν το όριο, εμφανίζονται μόνο οι πιο πρόσφατες</string>
+    <string name="err_network">Το δίκτυο δεν είναι διαθέσιμο. Ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</string>
+    <string name="err_unknown">Κάτι πήγε στραβά. Δοκιμάστε ξανά.</string>
+    <string name="space_type_site">Τοποθεσία</string>
+    <string name="space_type_building">Κτίριο</string>
+    <string name="space_type_floor">Όροφος</string>
+    <string name="space_type_room">Δωμάτιο</string>
+    <string name="space_type_zone">Ζώνη</string>
+    <string name="space_type_field">Πεδίο</string>
+    <string name="space_type_workshop">Εργαστήριο</string>
+    <string name="space_type_parking">Πάρκινγκ</string>
+</resources>

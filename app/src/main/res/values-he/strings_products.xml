@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">מוצרים</string>
+    <string name="product_detail_title">פרטי מוצר</string>
+    <string name="product_not_found">המוצר לא נמצא</string>
+    <string name="product_empty">אין עדיין מוצרים</string>
+    <plurals name="product_count">
+        <item quantity="many">%1$d מוצרים</item>
+        <item quantity="one">%1$d מוצר</item>
+        <item quantity="two">%1$d מוצרים</item>
+        <item quantity="other">%1$d מוצרים</item>
+    </plurals>
+    <string name="product_model_inline">דגם: %1$s</string>
+    <string name="product_id_label">מזהה מוצר</string>
+    <string name="product_model_label">דגם מוצר</string>
+    <string name="product_org_label">ארגון</string>
+    <string name="product_buy_jd">קנה ב-JD.com</string>
+    <string name="product_buy_taobao">קנה ב-Taobao</string>
+    <string name="product_status_released">פורסם</string>
+    <string name="product_status_preview">תצוגה מקדימה</string>
+    <string name="product_status_development">בפיתוח</string>
+    <string name="product_empty_data">אין נתוני מוצר</string>
+</resources>

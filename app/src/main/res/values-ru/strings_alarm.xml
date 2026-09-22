@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Тревоги</string>
+    <string name="alarm_action_ok">Операция выполнена</string>
+    <string name="alarm_empty">За этот период тревог нет</string>
+    <string name="alarm_all_services">Все службы</string>
+    <string name="alarm_level_label">Уровень тревоги</string>
+    <string name="alarm_handled_label">Обработать</string>
+    <string name="alarm_status_label">Статус</string>
+    <string name="alarm_summary_title">Список тревог</string>
+    <string name="alarm_text_label">Текст тревоги</string>
+    <string name="alarm_field_label">Поле</string>
+    <string name="alarm_trigger_label">Условие срабатывания</string>
+    <string name="alarm_current_value_label">Текущее значение</string>
+</resources>

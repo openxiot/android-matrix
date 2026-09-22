@@ -3,4 +3,4 @@ Live device properties and states, with remote switches and parameters
 One-tap scenes and rule-based automation
 One-click OAuth sign-in with organization switching
 In-app update check with one-tap download and install
-Chinese and English UI, following your system language or set manually under Profile → Language
+The UI now supports 66 languages, following your system language or searchable under Profile → Language; right-to-left scripts (Arabic and friends) are fully adapted

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">ಪ್ರಸ್ತುತ ಯೋಜನೆ</string>
+    <string name="project_manage_title">ಯೋಜನೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ</string>
+    <string name="project_empty">ಇನ್ನೂ ಯೋಜನೆಗಳಿಲ್ಲ — ಒಂದನ್ನು ರಚಿಸಲು + ಒತ್ತಿರಿ</string>
+    <string name="project_create_title">ಯೋಜನೆ ರಚಿಸಿ</string>
+    <string name="project_name_label">ಯೋಜನೆಯ ಹೆಸರು</string>
+    <string name="project_name_placeholder">ಯೋಜನೆಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="project_rename_title">ಯೋಜನೆಯನ್ನು ಮರುಹೆಸರಿಸಿ</string>
+    <string name="project_rename_action">ಮರುಹೆಸರಿಸಿ</string>
+    <string name="project_delete_title">ಯೋಜನೆಯನ್ನು ಅಳಿಸಿ</string>
+    <string name="project_delete_confirm">ಈ ಯೋಜನೆಯನ್ನು ಅಳಿಸಬೇಕೇ? ಇನ್ನೂ ಜಾಗಗಳನ್ನು ಹೊಂದಿರುವ ಯೋಜನೆಯನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.</string>
+    <string name="project_swipe_delete">ಅಳಿಸಲು ಸ್ವೈಪ್ ಮಾಡಿ</string>
+    <string name="project_type_label">ಪ್ರಕಾರ: %1$s</string>
+    <string name="project_members_title">ಯೋಜನೆ ಸದಸ್ಯರು</string>
+    <string name="project_members_empty">ಇನ್ನೂ ಸದಸ್ಯರಿಲ್ಲ — ಒಬ್ಬರನ್ನು ಸೇರಿಸಲು + ಒತ್ತಿರಿ</string>
+    <string name="project_members_label">ಸದಸ್ಯರು</string>
+    <string name="project_user_id">ಬಳಕೆದಾರ ID</string>
+    <string name="project_user_id_placeholder">ಬಳಕೆದಾರರ ಖಾತೆ ಐಡಿ</string>
+    <string name="project_remark_hint">ಟಿಪ್ಪಣಿ ಸೇರಿಸಲು ಒತ್ತಿರಿ</string>
+    <string name="project_remark_title">ಟಿಪ್ಪಣಿ ಸಂಪಾದಿಸಿ — %1$s</string>
+    <string name="project_remark_label">ಟಿಪ್ಪಣಿ</string>
+    <string name="project_role_adjust">ಪಾತ್ರವನ್ನು ಬದಲಾಯಿಸಿ</string>
+    <string name="project_role_adjust_title">ಪಾತ್ರವನ್ನು ಬದಲಾಯಿಸಿ — %1$s</string>
+    <string name="project_remove_confirm">“%1$s” ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಕೇ?</string>
+    <string name="project_exit">ಯೋಜನೆಯನ್ನು ತೊರೆಯಿರಿ</string>
+    <string name="project_exit_confirm">ಈ ಯೋಜನೆಯನ್ನು ಬಿಡಬೇಕೇ? ನೀವು ಅದಕ್ಕೆ ಪ್ರವೇಶವನ್ನು ಕಳೆದುಕೊಳ್ಳುತ್ತೀರಿ.</string>
+    <string name="project_device_added">ಸಾಧನ ಸೇರಿಸಲಾಗಿದೆ</string>
+    <string name="project_device_moved">ಸಾಧನ ಸ್ಥಳಾಂತರಿಸಲಾಗಿದೆ</string>
+    <string name="space_manage_title">ಜಾಗಗಳನ್ನು ನಿರ್ವಹಿಸಿ</string>
+    <string name="space_add">ಜಾಗವನ್ನು ಸೇರಿಸಿ</string>
+    <string name="space_add_child">ಉಪ ಸ್ಪೇಸ್ ಸೇರಿಸಿ</string>
+    <string name="space_add_device">ಸಾಧನ ಸೇರಿಸಿ</string>
+    <string name="space_name_label">ಸ್ಪೇಸ್ ಹೆಸರು</string>
+    <string name="space_name_placeholder">ಹೆಸರನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="space_type_label">ಸ್ಪೇಸ್ ಪ್ರಕಾರ</string>
+    <string name="space_empty">ಯಾವುದೇ ಜಾಗದ ಡೇಟಾ ಇಲ್ಲ</string>
+    <string name="space_empty_editable">ಪ್ರಾರಂಭಿಸಲು ಜಾಗವನ್ನು ಸೇರಿಸಿ</string>
+    <string name="space_empty_readonly">ಈ ಯೋಜನೆಯಲ್ಲಿ ಇನ್ನೂ ಜಾಗಗಳು ಅಥವಾ ಸಾಧನಗಳಿಲ್ಲ</string>
+    <string name="space_delete_title">ಜಾಗವನ್ನು ಅಳಿಸಿ</string>
+    <string name="space_delete_confirm">ಈ ಜಾಗವನ್ನು ಅಳಿಸಬೇಕೇ? ಇನ್ನೂ ಉಪ-ಜಾಗಗಳನ್ನು ಹೊಂದಿರುವ ಜಾಗವನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ.</string>
+    <string name="space_move_title">ಜಾಗಕ್ಕೆ ಸ್ಥಳಾಂತರಿಸಿ</string>
+    <string name="space_move_action">ಸ್ಥಳಾಂತರಿಸಿ</string>
+    <string name="space_device_adding">ಸಾಧನ ಸೇರಿಸಲಾಗುತ್ತಿದೆ…</string>
+    <string name="space_device_waiting">ಕಾಯುತ್ತಿದೆ… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d ಸಾಧನ</item>
+        <item quantity="other">%1$d ಸಾಧನಗಳು</item>
+    </plurals>
+</resources>

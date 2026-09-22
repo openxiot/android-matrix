@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">การแจ้งเตือน</string>
+    <string name="alarm_action_ok">ดำเนินการสำเร็จ</string>
+    <string name="alarm_empty">ช่วงนี้ไม่มีสัญญาณเตือน</string>
+    <string name="alarm_all_services">บริการทั้งหมด</string>
+    <string name="alarm_level_label">ระดับการแจ้งเตือน</string>
+    <string name="alarm_handled_label">จัดการ</string>
+    <string name="alarm_status_label">สถานะ</string>
+    <string name="alarm_summary_title">รายการการแจ้งเตือน</string>
+    <string name="alarm_text_label">ข้อความแจ้งเตือน</string>
+    <string name="alarm_field_label">ฟิลด์</string>
+    <string name="alarm_trigger_label">เงื่อนไขที่กระตุ้น</string>
+    <string name="alarm_current_value_label">ค่าปัจจุบัน</string>
+</resources>

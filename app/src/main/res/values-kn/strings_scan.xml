@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">ಸಾಧನದ QR ಕೋಡ್ ಅಥವಾ IMEI ಕಡೆಗೆ ಕ್ಯಾಮೆರಾ ತೋರಿಸಿ</string>
+    <string name="scan_torch">ಟಾರ್ಚ್</string>
+    <string name="scan_torch_on">ಟಾರ್ಚ್ ಆನ್ ಮಾಡಿ</string>
+    <string name="scan_torch_off">ಟಾರ್ಚ್ ಆಫ್ ಮಾಡಿ</string>
+    <string name="scan_permission_required">ಸಾಧನಗಳನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ ಸೇರಿಸಲು ಕ್ಯಾಮೆರಾ ಪ್ರವೇಶ ಬೇಕು</string>
+    <string name="scan_grant">ಅನುಮತಿ ನೀಡಿ</string>
+</resources>

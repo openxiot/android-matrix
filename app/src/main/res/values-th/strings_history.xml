@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">ประวัติ</string>
+    <string name="history_section_overview">ภาพรวมบริการ</string>
+    <string name="history_no_services">โครงการนี้ยังไม่มีบริการ Modbus</string>
+    <string name="history_service_count_label">จำนวนบริการ</string>
+    <string name="history_device_count_label">จำนวนอุปกรณ์</string>
+    <string name="history_sampled_at_label">เวลาเก็บข้อมูล</string>
+    <string name="history_function_count_label">จำนวนเมธอด</string>
+    <string name="history_faults_section">ข้อผิดพลาดในการเก็บข้อมูล</string>
+    <string name="history_faults_label">ข้อผิดพลาดในการเก็บข้อมูล</string>
+    <string name="history_no_faults">ช่วงนี้ไม่มีความผิดพลาดในการเก็บข้อมูล</string>
+    <string name="history_no_data">ช่วงนี้ไม่มีการเก็บข้อมูล</string>
+    <string name="history_field_label">ฟิลด์</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="other">ข้อมูลที่เก็บได้ (%1$d แถว)</item>
+    </plurals>
+    <string name="service_history_all_functions">เมธอดทั้งหมด</string>
+    <string name="service_history_field_selection">ฟิลด์ %1$d / %2$d</string>
+    <string name="service_history_fault_chip">ความผิดพลาด %1$s × %2$d</string>
+    <string name="service_history_no_curve">ไม่มีฟิลด์ของบริการนี้ที่วาดกราฟได้</string>
+    <string name="service_history_no_curve_for_function">ไม่มีฟิลด์ที่วาดกราฟได้ในฟังก์ชันนี้</string>
+    <string name="service_history_no_fields_selected">ยังไม่ได้เลือกฟิลด์</string>
+    <string name="service_history_failure_hint">เส้นแนวตั้งคือเวลาที่เก็บข้อมูลไม่สำเร็จ</string>
+    <string name="service_history_downsampled_hint">มีจุดข้อมูลมากเกินไป จึงลดจำนวนตัวอย่างตามช่วงเวลา (ค่าเป็นค่าเฉลี่ยของช่วงนั้น ในวงเล็บคือค่าต่ำสุด~สูงสุด)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">ตาราง</string>
+    <string name="service_history_view_chart">กราฟ</string>
+</resources>

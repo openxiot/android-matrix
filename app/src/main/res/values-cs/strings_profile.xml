@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Jazyk</string>
+    <string name="profile_language_system">Podle systému</string>
+    <string name="profile_language_search">Vyhledat jazyky</string>
+    <string name="profile_language_search_clear">Vymazat</string>
+    <string name="profile_language_no_match">Žádný odpovídající jazyk</string>
+    <string name="profile_not_logged_in">Nepřihlášeno</string>
+    <string name="profile_current_org">Aktuální organizace</string>
+    <string name="profile_current_project">Aktuální projekt</string>
+    <string name="profile_no_org_selected">Není vybrána organizace</string>
+    <string name="profile_no_project_selected">Není vybrán projekt</string>
+    <string name="profile_org_subtitle">Vyberte organizaci a pak projekt</string>
+    <string name="profile_project_subtitle_pick">Vyberte projekt</string>
+    <string name="profile_project_subtitle_switch">Klepnutím přepnete projekt</string>
+    <string name="profile_project_subtitle_org_first">Nejprve vyberte organizaci</string>
+    <string name="profile_section_settings">Nastavení</string>
+    <string name="profile_dark_mode">Tmavý režim</string>
+    <string name="profile_light_mode">Světlý režim</string>
+    <string name="profile_theme_subtitle">Klepnutím přepnete motiv</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tabulka bodů zařízení</string>
+    <string name="profile_modbus_subtitle">Modbus mapy registrů (jen pro čtení)</string>
+    <string name="profile_alarm_title">Alarmy</string>
+    <string name="profile_alarm_subtitle">Protokol a zpracování Modbus alarmů</string>
+    <string name="profile_history_title">Historie</string>
+    <string name="profile_history_subtitle">Historie sběru dat a grafy</string>
+    <string name="profile_about_subtitle">Informace o aplikaci a verze</string>
+    <string name="account_title">Účet</string>
+    <string name="account_username">Uživatelské jméno</string>
+    <string name="account_platform">Platforma</string>
+    <string name="account_not_selected">Nevybráno</string>
+    <string name="account_org_toggle">Organizace</string>
+    <string name="account_org_toggle_subtitle">Zapněte pro správu organizací</string>
+    <string name="account_logout">Odhlásit se</string>
+    <string name="about_title">O aplikaci</string>
+    <string name="about_tagline">Platforma pro správu a monitorování IoT zařízení</string>
+    <string name="about_version">Verze %1$s</string>
+    <string name="about_check_update">Zkontrolovat aktualizace</string>
+    <string name="about_checking">Kontroluje se…</string>
+    <string name="about_up_to_date">Máte nejnovější verzi</string>
+    <string name="about_update_now">Aktualizovat nyní</string>
+    <string name="about_downloading">Stahuje se…</string>
+    <string name="about_downloading_percent">Stahuje se %1$d %%</string>
+    <string name="about_install_now">Nainstalovat nyní</string>
+    <string name="about_install">Nainstalovat</string>
+    <string name="about_retry_download">Zkusit stáhnout znovu</string>
+    <string name="about_later">Později</string>
+    <string name="about_install_dialog_title">Nainstalovat aktualizaci</string>
+    <string name="about_new_version_found">Je k dispozici verze %1$s</string>
+    <string name="about_ready_hint">Stahování dokončeno – klepnutím na Nainstalovat předáte balíček systémovému instalátoru.</string>
+    <string name="about_need_install_permission">Nejprve povolte této aplikaci instalaci neznámých aplikací</string>
+    <string name="about_keep_app_alive">Můžete přepínat stránky – jen aplikaci nezavírejte</string>
+    <string name="about_metered">Jste na mobilních datech – stažení může spotřebovat hodně dat</string>
+    <string name="about_metered_size">Jste na mobilních datech – balíček má přibližně %1$s</string>
+    <string name="about_install_settings_failed">Nepodařilo se otevřít nastavení „Instalace neznámých aplikací“ – povolte ji ručně v nastavení systému</string>
+    <string name="about_no_installer">Není dostupná žádná aplikace pro instalaci – balíček je uložen ve složce aplikace</string>
+    <string name="about_update_notes_empty">Tato verze neobsahuje žádné poznámky.</string>
+</resources>

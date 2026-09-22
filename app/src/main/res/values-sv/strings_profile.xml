@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Språk</string>
+    <string name="profile_language_system">Följ systemet</string>
+    <string name="profile_language_search">Sök språk</string>
+    <string name="profile_language_search_clear">Rensa</string>
+    <string name="profile_language_no_match">Inget matchande språk</string>
+    <string name="profile_not_logged_in">Inte inloggad</string>
+    <string name="profile_current_org">Aktuell organisation</string>
+    <string name="profile_current_project">Aktuellt projekt</string>
+    <string name="profile_no_org_selected">Ingen organisation vald</string>
+    <string name="profile_no_project_selected">Inget projekt valt</string>
+    <string name="profile_org_subtitle">Välj en för att kunna välja projekt</string>
+    <string name="profile_project_subtitle_pick">Välj projekt</string>
+    <string name="profile_project_subtitle_switch">Tryck för att byta projekt</string>
+    <string name="profile_project_subtitle_org_first">Välj först en organisation</string>
+    <string name="profile_section_settings">Inställningar</string>
+    <string name="profile_dark_mode">Mörkt läge</string>
+    <string name="profile_light_mode">Ljust läge</string>
+    <string name="profile_theme_subtitle">Tryck för att byta tema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Enhetens punktabell</string>
+    <string name="profile_modbus_subtitle">Modbus-registerkartor (skrivskyddade)</string>
+    <string name="profile_alarm_title">Larm</string>
+    <string name="profile_alarm_subtitle">Modbus-larmlogg och hantering</string>
+    <string name="profile_history_title">Historik</string>
+    <string name="profile_history_subtitle">Insamlingshistorik och diagram</string>
+    <string name="profile_about_subtitle">Appinformation och version</string>
+    <string name="account_title">Konto</string>
+    <string name="account_username">Användarnamn</string>
+    <string name="account_platform">Plattform</string>
+    <string name="account_not_selected">Inte valt</string>
+    <string name="account_org_toggle">Organisation</string>
+    <string name="account_org_toggle_subtitle">Slå på för att hantera organisationer</string>
+    <string name="account_logout">Logga ut</string>
+    <string name="about_title">Om</string>
+    <string name="about_tagline">Plattform för hantering och övervakning av IoT-enheter</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_check_update">Sök efter uppdateringar</string>
+    <string name="about_checking">Söker…</string>
+    <string name="about_up_to_date">Du har den senaste versionen</string>
+    <string name="about_update_now">Uppdatera nu</string>
+    <string name="about_downloading">Laddar ner…</string>
+    <string name="about_downloading_percent">Laddar ner %1$d%%</string>
+    <string name="about_install_now">Installera nu</string>
+    <string name="about_install">Installera</string>
+    <string name="about_retry_download">Ladda ner igen</string>
+    <string name="about_later">Senare</string>
+    <string name="about_install_dialog_title">Installera uppdatering</string>
+    <string name="about_new_version_found">Version %1$s finns tillgänglig</string>
+    <string name="about_ready_hint">Nedladdningen är klar – tryck på Installera för att lämna det till systemets installerare.</string>
+    <string name="about_need_install_permission">Tillåt först att appen installerar okända appar</string>
+    <string name="about_keep_app_alive">Du kan byta sida – stäng bara inte appen</string>
+    <string name="about_metered">Du använder mobildata – nedladdningen kan dra mycket data</string>
+    <string name="about_metered_size">Du använder mobildata – paketet är cirka %1$s</string>
+    <string name="about_install_settings_failed">Kunde inte öppna inställningen ”Installera okända appar” – tillåt det manuellt i systeminställningarna</string>
+    <string name="about_no_installer">Ingen installerarapp hittades – paketet har sparats i appens mapp</string>
+    <string name="about_update_notes_empty">Den här versionen har inga versionsanteckningar.</string>
+</resources>

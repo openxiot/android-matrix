@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">اللغة</string>
+    <string name="profile_language_system">حسب النظام</string>
+    <string name="profile_language_search">ابحث عن اللغات</string>
+    <string name="profile_language_search_clear">مسح</string>
+    <string name="profile_language_no_match">لا توجد لغة مطابقة</string>
+    <string name="profile_not_logged_in">لم تسجّل الدخول</string>
+    <string name="profile_current_org">المنظمة الحالية</string>
+    <string name="profile_current_project">المشروع الحالي</string>
+    <string name="profile_no_org_selected">لم تُحدَّد أي منظمة</string>
+    <string name="profile_no_project_selected">لم يُحدَّد أي مشروع</string>
+    <string name="profile_org_subtitle">اختر منظمة لتتمكن من اختيار مشروع</string>
+    <string name="profile_project_subtitle_pick">اختر مشروعًا</string>
+    <string name="profile_project_subtitle_switch">اضغط لتبديل المشروع</string>
+    <string name="profile_project_subtitle_org_first">يرجى اختيار منظمة أولاً</string>
+    <string name="profile_section_settings">الإعدادات</string>
+    <string name="profile_dark_mode">الوضع الداكن</string>
+    <string name="profile_light_mode">الوضع الفاتح</string>
+    <string name="profile_theme_subtitle">اضغط لتبديل المظهر</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">جدول نقاط الجهاز</string>
+    <string name="profile_modbus_subtitle">خرائط سجلات Modbus (للقراءة فقط)</string>
+    <string name="profile_alarm_title">التنبيهات</string>
+    <string name="profile_alarm_subtitle">سجل إنذارات Modbus ومعالجتها</string>
+    <string name="profile_history_title">السجل</string>
+    <string name="profile_history_subtitle">سجل الاستقصاء والرسوم البيانية</string>
+    <string name="profile_about_subtitle">معلومات التطبيق وإصداره</string>
+    <string name="account_title">الحساب</string>
+    <string name="account_username">اسم المستخدم</string>
+    <string name="account_platform">المنصة</string>
+    <string name="account_not_selected">غير محدد</string>
+    <string name="account_org_toggle">المنظمة</string>
+    <string name="account_org_toggle_subtitle">فعّله لإدارة المنظمات</string>
+    <string name="account_logout">تسجيل الخروج</string>
+    <string name="about_title">حول</string>
+    <string name="about_tagline">منصة إدارة ومراقبة أجهزة إنترنت الأشياء</string>
+    <string name="about_version">الإصدار %1$s</string>
+    <string name="about_check_update">التحقق من التحديثات</string>
+    <string name="about_checking">جارٍ التحقق…</string>
+    <string name="about_up_to_date">لديك أحدث إصدار</string>
+    <string name="about_update_now">التحديث الآن</string>
+    <string name="about_downloading">جارٍ التنزيل…</string>
+    <string name="about_downloading_percent">جارٍ التنزيل %1$d%%</string>
+    <string name="about_install_now">التثبيت الآن</string>
+    <string name="about_install">تثبيت</string>
+    <string name="about_retry_download">إعادة التنزيل</string>
+    <string name="about_later">لاحقًا</string>
+    <string name="about_install_dialog_title">تثبيت التحديث</string>
+    <string name="about_new_version_found">الإصدار %1$s متاح</string>
+    <string name="about_ready_hint">اكتمل التنزيل — اضغط «تثبيت» لتسليمه إلى مثبّت النظام.</string>
+    <string name="about_need_install_permission">اسمح لهذا التطبيق بتثبيت تطبيقات غير معروفة أولًا</string>
+    <string name="about_keep_app_alive">يمكنك تبديل الصفحات — فقط لا تغلق التطبيق</string>
+    <string name="about_metered">أنت على بيانات الجوال — قد يستهلك التنزيل قدرًا كبيرًا منها</string>
+    <string name="about_metered_size">أنت على بيانات الجوال — حجم الحزمة نحو %1$s</string>
+    <string name="about_install_settings_failed">تعذّر فتح إعداد «تثبيت تطبيقات غير معروفة» — اسمح به يدويًا من إعدادات النظام</string>
+    <string name="about_no_installer">لا يوجد تطبيق تثبيت متاح — حُفظت الحزمة في مجلد التطبيق</string>
+    <string name="about_update_notes_empty">لم يأتِ هذا الإصدار بأي ملاحظات.</string>
+</resources>

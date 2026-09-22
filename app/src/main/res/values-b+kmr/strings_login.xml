@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Bi WeChat têkeve</string>
+    <string name="login_test_account">Bi hesabek ceribandinê têkeve</string>
+    <string name="login_err_wechat_missing">WeChat nehatiye sazkirin, an guherto pir kevn e</string>
+    <string name="login_err_no_code">Tu koda destûrê venegeriya</string>
+    <string name="login_err_cancelled">Têketina WeChat hat betalkirin</string>
+    <string name="login_err_wechat">Destûra WeChat bi ser neket (%1$d)</string>
+    <string name="login_err_no_token">Têketin bi ser neket: tu token nehat vegerandin</string>
+</resources>

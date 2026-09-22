@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Keel</string>
+    <string name="profile_language_system">Järgi süsteemi</string>
+    <string name="profile_language_search">Otsi keeli</string>
+    <string name="profile_language_search_clear">Tühjenda</string>
+    <string name="profile_language_no_match">Sobivat keelt pole</string>
+    <string name="profile_not_logged_in">Pole sisse logitud</string>
+    <string name="profile_current_org">Praegune organisatsioon</string>
+    <string name="profile_current_project">Praegune projekt</string>
+    <string name="profile_no_org_selected">Organisatsioon pole valitud</string>
+    <string name="profile_no_project_selected">Projekt pole valitud</string>
+    <string name="profile_org_subtitle">Vali üks, et projekt valida</string>
+    <string name="profile_project_subtitle_pick">Vali projekt</string>
+    <string name="profile_project_subtitle_switch">Puuduta projekti vahetamiseks</string>
+    <string name="profile_project_subtitle_org_first">Valige esmalt organisatsioon</string>
+    <string name="profile_section_settings">Seaded</string>
+    <string name="profile_dark_mode">Tume režiim</string>
+    <string name="profile_light_mode">Hele režiim</string>
+    <string name="profile_theme_subtitle">Puuduta teema vahetamiseks</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Seadme punktitabel</string>
+    <string name="profile_modbus_subtitle">Modbus registrikaardid (kirjutuskaitstud)</string>
+    <string name="profile_alarm_title">Alarmid</string>
+    <string name="profile_alarm_subtitle">Modbus alarmide logi ja käsitlemine</string>
+    <string name="profile_history_title">Ajalugu</string>
+    <string name="profile_history_subtitle">Kogumise ajalugu ja graafikud</string>
+    <string name="profile_about_subtitle">Rakenduse info ja versioon</string>
+    <string name="account_title">Konto</string>
+    <string name="account_username">Kasutajanimi</string>
+    <string name="account_platform">Platvorm</string>
+    <string name="account_not_selected">Pole valitud</string>
+    <string name="account_org_toggle">Organisatsioon</string>
+    <string name="account_org_toggle_subtitle">Luba, et organisatsioone hallata</string>
+    <string name="account_logout">Logi välja</string>
+    <string name="about_title">Teave</string>
+    <string name="about_tagline">Asjade interneti seadmete haldamise ja seire platvorm</string>
+    <string name="about_version">Versioon %1$s</string>
+    <string name="about_check_update">Otsi uuendusi</string>
+    <string name="about_checking">Kontrollin…</string>
+    <string name="about_up_to_date">Sul on uusim versioon</string>
+    <string name="about_update_now">Uuenda kohe</string>
+    <string name="about_downloading">Laadin alla…</string>
+    <string name="about_downloading_percent">Laadin alla %1$d%%</string>
+    <string name="about_install_now">Paigalda kohe</string>
+    <string name="about_install">Paigalda</string>
+    <string name="about_retry_download">Proovi allalaadimist uuesti</string>
+    <string name="about_later">Hiljem</string>
+    <string name="about_install_dialog_title">Paigalda uuendus</string>
+    <string name="about_new_version_found">Saadaval on versioon %1$s</string>
+    <string name="about_ready_hint">Allalaadimine on lõpetatud — puuduta „Paigalda”, et anda see süsteemi paigaldajale.</string>
+    <string name="about_need_install_permission">Luba esmalt sellel rakendusel installida tundmatuid rakendusi</string>
+    <string name="about_keep_app_alive">Lehti võib vahetada — lihtsalt ära sulge rakendust</string>
+    <string name="about_metered">Oled mobiilsidevõrgus — allalaadimine võib kulutada palju andmeid</string>
+    <string name="about_metered_size">Oled mobiilsidevõrgus — pakett on umbes %1$s</string>
+    <string name="about_install_settings_failed">Ei õnnestunud avada seadet „Tundmatute rakenduste installimine” — luba see käsitsi süsteemi seadetes</string>
+    <string name="about_no_installer">Paigaldusrakendust pole saadaval — pakett on salvestatud rakenduse kausta</string>
+    <string name="about_update_notes_empty">Sellel väljalaskel pole märkusi.</string>
+</resources>

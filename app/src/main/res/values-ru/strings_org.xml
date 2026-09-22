@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Текущая организация</string>
+    <string name="org_detail_title">Детали организации</string>
+    <string name="org_empty">Организаций пока нет — нажмите +, чтобы создать</string>
+    <string name="org_create_title">Создать орг.</string>
+    <string name="org_id_label">ID организации</string>
+    <string name="org_id_placeholder">напр. my-company</string>
+    <string name="org_id_hint">Начинайте с буквы — только буквы, цифры и дефисы</string>
+    <string name="org_name_label">Название</string>
+    <string name="org_name_placeholder">напр. Моя компания</string>
+    <string name="org_rename_title">Переименовать организацию</string>
+    <string name="org_delete_title">Удалить организацию</string>
+    <string name="org_delete_confirm">Удалить эту организацию?</string>
+    <string name="org_manage">Управление</string>
+    <string name="org_swipe_delete">Смахните для удаления</string>
+    <string name="org_members_empty">Участников пока нет</string>
+    <string name="org_member_developer_id">ID разработчика</string>
+    <string name="org_member_developer_id_placeholder">developerId пользователя</string>
+    <string name="org_member_name_label">Отображаемое имя</string>
+    <string name="org_member_name_placeholder">Необязательно</string>
+    <string name="org_change_role">Изменить роль</string>
+    <string name="org_change_role_title">Изменить роль — %1$s</string>
+    <string name="org_remove_confirm">Удалить «%1$s»?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d участника</item>
+        <item quantity="many">%1$d участников</item>
+        <item quantity="one">%1$d участник</item>
+        <item quantity="other">%1$d участника</item>
+    </plurals>
+</resources>

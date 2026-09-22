@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Гісторыя</string>
+    <string name="history_section_overview">Агляд службаў</string>
+    <string name="history_no_services">У гэтым праекце пакуль няма службаў Modbus</string>
+    <string name="history_service_count_label">Колькасць сэрвісаў</string>
+    <string name="history_device_count_label">Колькасць прылад</string>
+    <string name="history_sampled_at_label">Час збору</string>
+    <string name="history_function_count_label">Метады</string>
+    <string name="history_faults_section">Выключэнні збору</string>
+    <string name="history_faults_label">Выключэнні збору</string>
+    <string name="history_no_faults">За гэты перыяд збояў апытання няма</string>
+    <string name="history_no_data">За гэты перыяд даных не сабрана</string>
+    <string name="history_field_label">Поле</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Даныя апытання (%1$d радкі)</item>
+        <item quantity="many">Даныя апытання (%1$d радкоў)</item>
+        <item quantity="one">Даныя апытання (%1$d радок)</item>
+        <item quantity="other">Даныя апытання (%1$d радка)</item>
+    </plurals>
+    <string name="service_history_all_functions">Усе метады</string>
+    <string name="service_history_field_selection">Палі %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Збой %1$s × %2$d</string>
+    <string name="service_history_no_curve">Ніводнае поле гэтай службы не будуецца ў графік</string>
+    <string name="service_history_no_curve_for_function">У гэтай функцыі няма палёў для графіка</string>
+    <string name="service_history_no_fields_selected">Палі не выбраны</string>
+    <string name="service_history_failure_hint">Вертыкальныя лініі пазначаюць моманты няўдалага збору</string>
+    <string name="service_history_downsampled_hint">Шмат пунктаў даных; выбарка прарэджана па часавых інтэрвалах (значэнне — сярэдняе за інтэрвал, у дужках мінімум~максімум)</string>
+    <string name="service_history_keepalive">Захаванне</string>
+    <string name="service_history_view_table">Табліца</string>
+    <string name="service_history_view_chart">Графік</string>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Először válasszon projektet a projektlistából</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Elveti a módosításokat?</string>
+    <string name="home_discard_message">Nem mentett módosításai vannak. Ha most kilép, elvesznek.</string>
+    <string name="home_dashboard_empty">Még nincs kártya — koppintson lent a „Hozzáadás” elemre</string>
+    <string name="home_add_card">+ Hozzáadás</string>
+    <string name="home_default_layout_loaded">Az alapértelmezett elrendezés betöltve — mentse el az alkalmazáshoz</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Egy nagy szám: eszközök / szolgáltatások / riasztások / hibák</string>
+    <string name="home_card_kind_line">Óránkénti riasztásszám, vagy egy szolgáltatásmező</string>
+    <string name="home_card_kind_distribution">Bontás eszköz / szolgáltatás / riasztás / hiba szerint</string>
+    <string name="home_card_kind_device">Egy eszköz egy tulajdonsága</string>
+    <string name="home_card_kind_service">Egy függvény mezőcsoportja</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Grafikon</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Eszköz</string>
+    <string name="home_card_default_service">Szolgáltatások</string>
+    <string name="home_card_default_unknown">Kártya</string>
+    <string name="home_edit_card_title">Szerkesztés · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Teljes szélesség</string>
+    <string name="home_size_half">Fél szélesség</string>
+    <string name="home_section_metric">Mutató</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Eszközök összesen</string>
+    <string name="home_metric_devices_online">Online eszközök</string>
+    <string name="home_metric_services_total">Szolgáltatások összesen</string>
+    <string name="home_metric_alarms_today">Mai riasztások</string>
+    <string name="home_metric_alarms_window">Riasztások az időszakban</string>
+    <string name="home_metric_failures_total">Mintavételezési hibák az időszakban</string>
+    <string name="home_section_dimension">Bontás</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Eszköz típusa</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Mintavételezési hiba típusa</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Adatforrás</string>
+    <string name="home_source_label">Forrás</string>
+    <string name="home_source_alarm_curve">Óránkénti riasztásszám</string>
+    <string name="home_source_service_field">Egy szolgáltatásmező</string>
+    <string name="home_show_failure_shadow">Sikertelen gyűjtések vonalainak megjelenítése</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Szolgáltatás · Függvény · Mező</string>
+    <string name="home_service_placeholder">Válasszon szolgáltatást</string>
+    <string name="home_service_unnamed">Névtelen szolgáltatás</string>
+    <string name="home_function_placeholder">Válasszon függvényt</string>
+    <string name="home_function_fallback">%1$d. függvény</string>
+    <string name="home_pick_service_first">Először válasszon szolgáltatást</string>
+    <string name="home_show_unit">Mértékegység megjelenítése</string>
+    <string name="home_section_device_prop">Eszköz · Tulajdonság</string>
+    <string name="home_device_placeholder">Válasszon eszközt</string>
+    <string name="home_prop_label">Tulajdonságok</string>
+    <string name="home_pick_device_first">Először válasszon eszközt</string>
+    <string name="home_prop_none">Ehhez a modellhez nincsenek tulajdonságok</string>
+    <string name="home_prop_placeholder">Válasszon tulajdonságot</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, üresen hagyva nincs korlát</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Elmúlt</string>
+    <string name="home_window_custom">Egyéni</string>
+    <string name="home_pick_dates">Válassza ki a kezdő és záró dátumot</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d nap</item>
+        <item quantity="other">%1$d napos</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d óra</item>
+        <item quantity="other">%1$d órás</item>
+    </plurals>
+    <string name="home_card_unknown_type">Ismeretlen kártyatípus</string>
+    <string name="home_empty_no_data">Nincs adat</string>
+    <string name="home_empty_no_reading">Még nincs érték</string>
+    <string name="home_empty_not_sampled">Még nincs gyűjtve</string>
+    <string name="home_sampled_at">Mintavételezve: %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">eszköz</string>
+    <string name="home_unit_services">szolgáltatás</string>
+</resources>

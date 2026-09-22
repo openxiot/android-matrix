@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Logga in med WeChat</string>
+    <string name="login_test_account">Logga in med ett testkonto</string>
+    <string name="login_err_wechat_missing">WeChat är inte installerat, eller så är versionen för gammal</string>
+    <string name="login_err_no_code">Ingen auktoriseringskod returnerades</string>
+    <string name="login_err_cancelled">Inloggningen med WeChat avbröts</string>
+    <string name="login_err_wechat">WeChat-auktoriseringen misslyckades (%1$d)</string>
+    <string name="login_err_no_token">Inloggningen misslyckades: ingen token returnerades</string>
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">הפרויקט הנוכחי</string>
+    <string name="project_manage_title">ניהול פרויקטים</string>
+    <string name="project_empty">אין עדיין פרויקטים — הקש + ליצירת אחד</string>
+    <string name="project_create_title">צור פרויקט</string>
+    <string name="project_name_label">שם פרויקט</string>
+    <string name="project_name_placeholder">הזן שם פרויקט</string>
+    <string name="project_rename_title">שנה שם הפרויקט</string>
+    <string name="project_rename_action">שנה שם</string>
+    <string name="project_delete_title">מחק פרויקט</string>
+    <string name="project_delete_confirm">למחוק פרויקט זה? לא ניתן למחוק פרויקט שעדיין יש בו חללים.</string>
+    <string name="project_swipe_delete">גרור כדי למחוק</string>
+    <string name="project_type_label">סוג: %1$s</string>
+    <string name="project_members_title">חברי הפרויקט</string>
+    <string name="project_members_empty">אין עדיין חברים — הקש + כדי להוסיף אחד</string>
+    <string name="project_members_label">חברים</string>
+    <string name="project_user_id">מזהה משתמש</string>
+    <string name="project_user_id_placeholder">מזהה החשבון של המשתמש</string>
+    <string name="project_remark_hint">הקש להוספת הערה</string>
+    <string name="project_remark_title">עריכת הערה — %1$s</string>
+    <string name="project_remark_label">הערה</string>
+    <string name="project_role_adjust">שנה תפקיד</string>
+    <string name="project_role_adjust_title">שינוי תפקיד — %1$s</string>
+    <string name="project_remove_confirm">להסיר את %1$s?</string>
+    <string name="project_exit">עזוב פרויקט</string>
+    <string name="project_exit_confirm">לעזוב פרויקט זה? תאבד את הגישה אליו.</string>
+    <string name="project_device_added">המכשיר נוסף</string>
+    <string name="project_device_moved">המכשיר הועבר</string>
+    <string name="space_manage_title">ניהול חללים</string>
+    <string name="space_add">הוסף חלל</string>
+    <string name="space_add_child">הוסף מרחב משנה</string>
+    <string name="space_add_device">הוסף התקן</string>
+    <string name="space_name_label">שם מרחב</string>
+    <string name="space_name_placeholder">הזן שם</string>
+    <string name="space_type_label">סוג מרחב</string>
+    <string name="space_empty">אין נתוני חלל</string>
+    <string name="space_empty_editable">הוסף חלל כדי להתחיל</string>
+    <string name="space_empty_readonly">בפרויקט זה אין עדיין חללים או מכשירים</string>
+    <string name="space_delete_title">מחק חלל</string>
+    <string name="space_delete_confirm">למחוק חלל זה? לא ניתן למחוק חלל שעדיין יש בו תתי-חללים.</string>
+    <string name="space_move_title">העבר לחלל</string>
+    <string name="space_move_action">העבר</string>
+    <string name="space_device_adding">מוסיף מכשיר…</string>
+    <string name="space_device_waiting">ממתין… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="many">%1$d מכשירים</item>
+        <item quantity="one">%1$d מכשיר</item>
+        <item quantity="two">%1$d מכשירים</item>
+        <item quantity="other">%1$d מכשירים</item>
+    </plurals>
+</resources>

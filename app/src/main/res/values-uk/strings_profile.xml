@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Мова</string>
+    <string name="profile_language_system">Як у системі</string>
+    <string name="profile_language_search">Пошук мов</string>
+    <string name="profile_language_search_clear">Очистити</string>
+    <string name="profile_language_no_match">Мову не знайдено</string>
+    <string name="profile_not_logged_in">Ви не увійшли</string>
+    <string name="profile_current_org">Поточна організація</string>
+    <string name="profile_current_project">Поточний проєкт</string>
+    <string name="profile_no_org_selected">Організацію не вибрано</string>
+    <string name="profile_no_project_selected">Проєкт не вибрано</string>
+    <string name="profile_org_subtitle">Виберіть одну, щоб обрати проєкт</string>
+    <string name="profile_project_subtitle_pick">Виберіть проєкт</string>
+    <string name="profile_project_subtitle_switch">Натисніть, щоб змінити проєкт</string>
+    <string name="profile_project_subtitle_org_first">Спершу виберіть організацію</string>
+    <string name="profile_section_settings">Налаштування</string>
+    <string name="profile_dark_mode">Темна тема</string>
+    <string name="profile_light_mode">Світла тема</string>
+    <string name="profile_theme_subtitle">Натисніть, щоб змінити тему</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Таблиця точок пристрою</string>
+    <string name="profile_modbus_subtitle">Карти регістрів Modbus (лише читання)</string>
+    <string name="profile_alarm_title">Тривоги</string>
+    <string name="profile_alarm_subtitle">Журнал тривог Modbus та їх обробка</string>
+    <string name="profile_history_title">Історія</string>
+    <string name="profile_history_subtitle">Історія збору та графіки</string>
+    <string name="profile_about_subtitle">Інформація про застосунок і версія</string>
+    <string name="account_title">Обліковий запис</string>
+    <string name="account_username">Ім\'я користувача</string>
+    <string name="account_platform">Платформа</string>
+    <string name="account_not_selected">Не вибрано</string>
+    <string name="account_org_toggle">Організація</string>
+    <string name="account_org_toggle_subtitle">Увімкніть, щоб керувати організаціями</string>
+    <string name="account_logout">Вийти</string>
+    <string name="about_title">Про застосунок</string>
+    <string name="about_tagline">Платформа керування та моніторингу пристроїв IoT</string>
+    <string name="about_version">Версія %1$s</string>
+    <string name="about_check_update">Перевірити оновлення</string>
+    <string name="about_checking">Перевірка…</string>
+    <string name="about_up_to_date">У вас найновіша версія</string>
+    <string name="about_update_now">Оновити зараз</string>
+    <string name="about_downloading">Завантаження…</string>
+    <string name="about_downloading_percent">Завантаження %1$d%%</string>
+    <string name="about_install_now">Встановити зараз</string>
+    <string name="about_install">Встановити</string>
+    <string name="about_retry_download">Повторити завантаження</string>
+    <string name="about_later">Пізніше</string>
+    <string name="about_install_dialog_title">Встановити оновлення</string>
+    <string name="about_new_version_found">Доступна версія %1$s</string>
+    <string name="about_ready_hint">Завантаження завершено — натисніть «Встановити», щоб передати пакет системному інсталятору.</string>
+    <string name="about_need_install_permission">Спочатку дозвольте цьому застосунку встановлювати невідомі застосунки</string>
+    <string name="about_keep_app_alive">Можна перемикати сторінки — головне не закривайте застосунок</string>
+    <string name="about_metered">Ви в мобільній мережі — завантаження може витратити багато трафіку</string>
+    <string name="about_metered_size">Ви в мобільній мережі — пакет займає близько %1$s</string>
+    <string name="about_install_settings_failed">Не вдалося відкрити налаштування «Встановлення невідомих застосунків» — дозвольте це вручну в налаштуваннях системи</string>
+    <string name="about_no_installer">Немає доступного застосунку-інсталятора — пакет збережено в теці застосунку</string>
+    <string name="about_update_notes_empty">До цього випуску немає приміток.</string>
+</resources>

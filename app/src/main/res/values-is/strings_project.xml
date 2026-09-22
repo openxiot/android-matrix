@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Núverandi verkefni</string>
+    <string name="project_manage_title">Stjórna verkefnum</string>
+    <string name="project_empty">Engin verkefni ennþá — ýttu á + til að búa til</string>
+    <string name="project_create_title">Búa til verkefni</string>
+    <string name="project_name_label">Heiti verkefnis</string>
+    <string name="project_name_placeholder">Sláðu inn heiti verkefnis</string>
+    <string name="project_rename_title">Breyta nafni verkefnis</string>
+    <string name="project_rename_action">Breyta nafni</string>
+    <string name="project_delete_title">Eyða verkefni</string>
+    <string name="project_delete_confirm">Eyða þessu verkefni? Ekki er hægt að eyða verkefni sem hefur enn rými.</string>
+    <string name="project_swipe_delete">Strjúktu til að eyða</string>
+    <string name="project_type_label">Tegund: %1$s</string>
+    <string name="project_members_title">Meðlimir verkefnis</string>
+    <string name="project_members_empty">Engir meðlimir ennþá — ýttu á + til að bæta við</string>
+    <string name="project_members_label">Meðlimir</string>
+    <string name="project_user_id">Auðkenni notanda</string>
+    <string name="project_user_id_placeholder">ID reiknings notandans</string>
+    <string name="project_remark_hint">Ýttu til að bæta við athugasemd</string>
+    <string name="project_remark_title">Breyta athugasemd — %1$s</string>
+    <string name="project_remark_label">Athugasemd</string>
+    <string name="project_role_adjust">Breyta hlutverki</string>
+    <string name="project_role_adjust_title">Breyta hlutverki — %1$s</string>
+    <string name="project_remove_confirm">Fjarlægja „%1$s“?</string>
+    <string name="project_exit">Yfirgefa verkefni</string>
+    <string name="project_exit_confirm">Hætta í þessu verkefni? Þú munt missa aðgang að því.</string>
+    <string name="project_device_added">Tæki bætt við</string>
+    <string name="project_device_moved">Tæki flutt</string>
+    <string name="space_manage_title">Stjórna rýmum</string>
+    <string name="space_add">Bæta við rými</string>
+    <string name="space_add_child">Bæta við undirrými</string>
+    <string name="space_add_device">Bæta við tæki</string>
+    <string name="space_name_label">Heiti rýmis</string>
+    <string name="space_name_placeholder">Sláðu inn heiti</string>
+    <string name="space_type_label">Tegund rýmis</string>
+    <string name="space_empty">Engin rýmisgögn</string>
+    <string name="space_empty_editable">Bættu við rými til að byrja</string>
+    <string name="space_empty_readonly">Þetta verkefni hefur engin rými eða tæki ennþá</string>
+    <string name="space_delete_title">Eyða rými</string>
+    <string name="space_delete_confirm">Eyða þessu rými? Ekki er hægt að eyða rými sem hefur enn undirrými.</string>
+    <string name="space_move_title">Færa í rými</string>
+    <string name="space_move_action">Færa</string>
+    <string name="space_device_adding">Bæti við tæki…</string>
+    <string name="space_device_waiting">Bíð… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d tæki</item>
+        <item quantity="other">%1$d tæki alls</item>
+    </plurals>
+</resources>

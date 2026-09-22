@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Alarmes</string>
+    <string name="alarm_action_ok">Operação bem-sucedida</string>
+    <string name="alarm_empty">Nenhum alarme neste período</string>
+    <string name="alarm_all_services">Todos os serviços</string>
+    <string name="alarm_level_label">Nível de alarme</string>
+    <string name="alarm_handled_label">Tratar</string>
+    <string name="alarm_status_label">Estado</string>
+    <string name="alarm_summary_title">Lista de alarmes</string>
+    <string name="alarm_text_label">Texto do alarme</string>
+    <string name="alarm_field_label">Campo</string>
+    <string name="alarm_trigger_label">Condição de acionamento</string>
+    <string name="alarm_current_value_label">Valor atual</string>
+</resources>

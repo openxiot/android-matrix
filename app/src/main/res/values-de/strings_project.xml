@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Aktuelles Projekt</string>
+    <string name="project_manage_title">Projekte verwalten</string>
+    <string name="project_empty">Noch keine Projekte – zum Erstellen auf + tippen</string>
+    <string name="project_create_title">Projekt erstellen</string>
+    <string name="project_name_label">Projektname</string>
+    <string name="project_name_placeholder">Projektnamen eingeben</string>
+    <string name="project_rename_title">Projekt umbenennen</string>
+    <string name="project_rename_action">Umbenennen</string>
+    <string name="project_delete_title">Projekt löschen</string>
+    <string name="project_delete_confirm">Dieses Projekt löschen? Ein Projekt mit Bereichen kann nicht gelöscht werden.</string>
+    <string name="project_swipe_delete">Zum Löschen wischen</string>
+    <string name="project_type_label">Typ: %1$s</string>
+    <string name="project_members_title">Projektmitglieder</string>
+    <string name="project_members_empty">Noch keine Mitglieder – zum Hinzufügen auf + tippen</string>
+    <string name="project_members_label">Mitglieder</string>
+    <string name="project_user_id">Benutzer-ID</string>
+    <string name="project_user_id_placeholder">Die Konto-ID des Benutzers</string>
+    <string name="project_remark_hint">Zum Hinzufügen einer Notiz tippen</string>
+    <string name="project_remark_title">Notiz bearbeiten – %1$s</string>
+    <string name="project_remark_label">Notiz</string>
+    <string name="project_role_adjust">Rolle ändern</string>
+    <string name="project_role_adjust_title">Rolle ändern – %1$s</string>
+    <string name="project_remove_confirm">„%1$s“ entfernen?</string>
+    <string name="project_exit">Projekt verlassen</string>
+    <string name="project_exit_confirm">Dieses Projekt verlassen? Der Zugriff geht verloren.</string>
+    <string name="project_device_added">Gerät hinzugefügt</string>
+    <string name="project_device_moved">Gerät verschoben</string>
+    <string name="space_manage_title">Bereiche verwalten</string>
+    <string name="space_add">Bereich hinzufügen</string>
+    <string name="space_add_child">Unterbereich hinzufügen</string>
+    <string name="space_add_device">Gerät hinzufügen</string>
+    <string name="space_name_label">Bereichsname</string>
+    <string name="space_name_placeholder">Namen eingeben</string>
+    <string name="space_type_label">Bereichstyp</string>
+    <string name="space_empty">Keine Bereichsdaten</string>
+    <string name="space_empty_editable">Bereich hinzufügen, um zu starten</string>
+    <string name="space_empty_readonly">Dieses Projekt hat noch keine Bereiche oder Geräte</string>
+    <string name="space_delete_title">Bereich löschen</string>
+    <string name="space_delete_confirm">Diesen Bereich löschen? Ein Bereich mit Unterbereichen kann nicht gelöscht werden.</string>
+    <string name="space_move_title">In Bereich verschieben</string>
+    <string name="space_move_action">Verschieben</string>
+    <string name="space_device_adding">Gerät wird hinzugefügt…</string>
+    <string name="space_device_waiting">Warten… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d Gerät</item>
+        <item quantity="other">%1$d Geräte</item>
+    </plurals>
+</resources>

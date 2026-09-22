@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Xahiş edirik əvvəlcə layihə siyahısından layihə seçin</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Dəyişikliklər ləğv edilsin?</string>
+    <string name="home_discard_message">Yadda saxlanılmamış dəyişiklikləriniz var. İndi çıxsanız, onlar itiriləcək.</string>
+    <string name="home_dashboard_empty">Hələ kart yoxdur — əlavə etmək üçün aşağıdakı “Əlavə et”ə toxunun</string>
+    <string name="home_add_card">+ Əlavə et</string>
+    <string name="home_default_layout_loaded">Standart düzüm yükləndi — tətbiq etmək üçün yadda saxlayın</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Bir əsas rəqəm: cihaz / xidmət / həyəcan / nasazlıq</string>
+    <string name="home_card_kind_line">Saatlıq həyəcan sayı və ya bir xidmət sahəsi</string>
+    <string name="home_card_kind_distribution">Cihaz / xidmət / həyəcan / nasazlıq üzrə bölgü</string>
+    <string name="home_card_kind_device">Bir cihazın bir xassəsi</string>
+    <string name="home_card_kind_service">Bir funksiyadan götürülmüş sahələr dəsti</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Qrafik</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Cihaz</string>
+    <string name="home_card_default_service">Xidmətlər</string>
+    <string name="home_card_default_unknown">Kart</string>
+    <string name="home_edit_card_title">Redaktə · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Tam en</string>
+    <string name="home_size_half">Yarım en</string>
+    <string name="home_section_metric">Göstərici</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Ümumi cihaz</string>
+    <string name="home_metric_devices_online">Onlayn cihazlar</string>
+    <string name="home_metric_services_total">Ümumi xidmət</string>
+    <string name="home_metric_alarms_today">Bugünkü Alarmlar</string>
+    <string name="home_metric_alarms_window">Pəncərədəki həyəcanlar</string>
+    <string name="home_metric_failures_total">Pəncərədəki toplama xətaları</string>
+    <string name="home_section_dimension">Bölgü üzrə</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Cihaz Növü</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Toplama xətası növü</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Məlumat mənbəyi</string>
+    <string name="home_source_label">Mənbə</string>
+    <string name="home_source_alarm_curve">Saatlıq həyəcan sayı</string>
+    <string name="home_source_service_field">Bir xidmət sahəsi</string>
+    <string name="home_show_failure_shadow">Toplama xətalarının xətlərini göstər</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Xidmət · Funksiya · Sahə</string>
+    <string name="home_service_placeholder">Xidmət seçin</string>
+    <string name="home_service_unnamed">Adsız xidmət</string>
+    <string name="home_function_placeholder">Funksiya seçin</string>
+    <string name="home_function_fallback">Funksiya %1$d</string>
+    <string name="home_pick_service_first">Əvvəlcə xidmət seçin</string>
+    <string name="home_show_unit">Vahidi göstər</string>
+    <string name="home_section_device_prop">Cihaz · Xassə</string>
+    <string name="home_device_placeholder">Cihaz seçin</string>
+    <string name="home_prop_label">Xüsusiyyətlər</string>
+    <string name="home_pick_device_first">Əvvəlcə cihaz seçin</string>
+    <string name="home_prop_none">Bu model üçün xassə yoxdur</string>
+    <string name="home_prop_placeholder">Xassə seçin</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, limitsiz üçün boş buraxın</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Son</string>
+    <string name="home_window_custom">Fərdi</string>
+    <string name="home_pick_dates">Başlanğıc və bitiş tarixini seçin</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d gün</item>
+        <item quantity="other">%1$d günlük</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d saat</item>
+        <item quantity="other">%1$d saatlıq</item>
+    </plurals>
+    <string name="home_card_unknown_type">Naməlum kart növü</string>
+    <string name="home_empty_no_data">Məlumat yoxdur</string>
+    <string name="home_empty_no_reading">Hələ oxunuş yoxdur</string>
+    <string name="home_empty_not_sampled">Hələ toplanmayıb</string>
+    <string name="home_sampled_at">Toplanma: %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">cihaz</string>
+    <string name="home_unit_services">xidmət</string>
+</resources>

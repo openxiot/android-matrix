@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">მიმდინარე ორგანიზაცია</string>
+    <string name="org_detail_title">ორგანიზაციის დეტალები</string>
+    <string name="org_empty">ორგანიზაციები ჯერ არ არის — შესაქმნელად დააჭირეთ +</string>
+    <string name="org_create_title">ორგანიზაციის შექმნა</string>
+    <string name="org_id_label">ორგანიზაციის ID</string>
+    <string name="org_id_placeholder">მაგ.: my-company</string>
+    <string name="org_id_hint">დაიწყეთ ასოთი — მხოლოდ ასოები, ციფრები და დეფისი</string>
+    <string name="org_name_label">ორგანიზაციის სახელი</string>
+    <string name="org_name_placeholder">მაგ.: ჩემი კომპანია</string>
+    <string name="org_rename_title">ორგანიზაციის სახელის შეცვლა</string>
+    <string name="org_delete_title">ორგანიზაციის წაშლა</string>
+    <string name="org_delete_confirm">წავშალო ეს ორგანიზაცია?</string>
+    <string name="org_manage">მართვა</string>
+    <string name="org_swipe_delete">წასაშლელად გადაფურცლეთ</string>
+    <string name="org_members_empty">წევრები ჯერ არ არის</string>
+    <string name="org_member_developer_id">დეველოპერის ID</string>
+    <string name="org_member_developer_id_placeholder">მომხმარებლის developerId</string>
+    <string name="org_member_name_label">საჩვენებელი სახელი</string>
+    <string name="org_member_name_placeholder">არასავალდებულო</string>
+    <string name="org_change_role">როლის შეცვლა</string>
+    <string name="org_change_role_title">როლის შეცვლა — %1$s</string>
+    <string name="org_remove_confirm">წავშალო „%1$s“?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d წევრი</item>
+        <item quantity="other">%1$d წევრები</item>
+    </plurals>
+</resources>

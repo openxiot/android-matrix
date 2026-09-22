@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">ডিভাইসের বিবরণ</string>
+    <string name="device_operation_title">ডিভাইস নিয়ন্ত্রণ</string>
+    <string name="device_not_found">ডিভাইস পাওয়া যায়নি</string>
+    <string name="device_id_label">ডিভাইস আইডি</string>
+    <string name="device_type_label">ডিভাইসের ধরন</string>
+    <string name="device_online_label">অবস্থা</string>
+    <string name="device_last_online_label">সর্বশেষ অনলাইন</string>
+    <string name="device_last_offline_label">সর্বশেষ অফলাইন</string>
+    <string name="device_space_label">স্পেস</string>
+</resources>

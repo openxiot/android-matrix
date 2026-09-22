@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Huidig project</string>
+    <string name="project_manage_title">Projecten beheren</string>
+    <string name="project_empty">Nog geen projecten — tik op + om er een aan te maken</string>
+    <string name="project_create_title">Project aanmaken</string>
+    <string name="project_name_label">Projectnaam</string>
+    <string name="project_name_placeholder">Voer een projectnaam in</string>
+    <string name="project_rename_title">Project hernoemen</string>
+    <string name="project_rename_action">Hernoemen</string>
+    <string name="project_delete_title">Project verwijderen</string>
+    <string name="project_delete_confirm">Dit project verwijderen? Een project met ruimtes kan niet worden verwijderd.</string>
+    <string name="project_swipe_delete">Veeg om te verwijderen</string>
+    <string name="project_type_label">Type: %1$s</string>
+    <string name="project_members_title">Projectleden</string>
+    <string name="project_members_empty">Nog geen leden — tik op + om er een toe te voegen</string>
+    <string name="project_members_label">Leden</string>
+    <string name="project_user_id">Gebruikers-ID</string>
+    <string name="project_user_id_placeholder">De account-ID van de gebruiker</string>
+    <string name="project_remark_hint">Tik om een notitie toe te voegen</string>
+    <string name="project_remark_title">Notitie bewerken — %1$s</string>
+    <string name="project_remark_label">Notitie</string>
+    <string name="project_role_adjust">Rol wijzigen</string>
+    <string name="project_role_adjust_title">Rol wijzigen — %1$s</string>
+    <string name="project_remove_confirm">\"%1$s\" verwijderen?</string>
+    <string name="project_exit">Project verlaten</string>
+    <string name="project_exit_confirm">Dit project verlaten? De toegang ernaartoe gaat verloren.</string>
+    <string name="project_device_added">Apparaat toegevoegd</string>
+    <string name="project_device_moved">Apparaat verplaatst</string>
+    <string name="space_manage_title">Ruimtes beheren</string>
+    <string name="space_add">Ruimte toevoegen</string>
+    <string name="space_add_child">Subruimte toevoegen</string>
+    <string name="space_add_device">Apparaat toevoegen</string>
+    <string name="space_name_label">Ruimtenaam</string>
+    <string name="space_name_placeholder">Voer een naam in</string>
+    <string name="space_type_label">Ruimtetype</string>
+    <string name="space_empty">Geen ruimtegegevens</string>
+    <string name="space_empty_editable">Voeg een ruimte toe om te beginnen</string>
+    <string name="space_empty_readonly">Dit project heeft nog geen ruimtes of apparaten</string>
+    <string name="space_delete_title">Ruimte verwijderen</string>
+    <string name="space_delete_confirm">Deze ruimte verwijderen? Een ruimte met subruimtes kan niet worden verwijderd.</string>
+    <string name="space_move_title">Naar ruimte verplaatsen</string>
+    <string name="space_move_action">Verplaatsen</string>
+    <string name="space_device_adding">Apparaat toevoegen…</string>
+    <string name="space_device_waiting">Wachten… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d apparaat</item>
+        <item quantity="other">%1$d apparaten</item>
+    </plurals>
+</resources>

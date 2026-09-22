@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">Seadme üksikasjad</string>
+    <string name="device_operation_title">Seadme juhtimine</string>
+    <string name="device_not_found">Seadet ei leitud</string>
+    <string name="device_id_label">Seadme ID</string>
+    <string name="device_type_label">Seadme tüüp</string>
+    <string name="device_online_label">Olek</string>
+    <string name="device_last_online_label">Viimati ühenduses</string>
+    <string name="device_last_offline_label">Viimati ühenduseta</string>
+    <string name="device_space_label">Ruum</string>
+</resources>

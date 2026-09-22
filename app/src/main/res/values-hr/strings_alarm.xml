@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Alarmi</string>
+    <string name="alarm_action_ok">Uspješno izvršeno</string>
+    <string name="alarm_empty">U ovom razdoblju nema alarma</string>
+    <string name="alarm_all_services">Sve usluge</string>
+    <string name="alarm_level_label">Razina alarma</string>
+    <string name="alarm_handled_label">Obradi</string>
+    <string name="alarm_status_label">Status</string>
+    <string name="alarm_summary_title">Popis alarma</string>
+    <string name="alarm_text_label">Tekst alarma</string>
+    <string name="alarm_field_label">Polje</string>
+    <string name="alarm_trigger_label">Uvjet aktiviranja</string>
+    <string name="alarm_current_value_label">Trenutna vrijednost</string>
+</resources>

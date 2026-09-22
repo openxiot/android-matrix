@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">WeChat ilə daxil ol</string>
+    <string name="login_test_account">Test hesabı ilə daxil ol</string>
+    <string name="login_err_wechat_missing">WeChat quraşdırılmayıb və ya versiyası çox köhnədir</string>
+    <string name="login_err_no_code">Avtorizasiya kodu alınmadı</string>
+    <string name="login_err_cancelled">WeChat girişi ləğv edildi</string>
+    <string name="login_err_wechat">WeChat avtorizasiyası alınmadı (%1$d)</string>
+    <string name="login_err_no_token">Daxil olma alınmadı: token qaytarılmadı</string>
+</resources>

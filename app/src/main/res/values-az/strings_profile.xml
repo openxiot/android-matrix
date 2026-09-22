@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Dil</string>
+    <string name="profile_language_system">Sistemi izlə</string>
+    <string name="profile_language_search">Dilləri axtar</string>
+    <string name="profile_language_search_clear">Təmizlə</string>
+    <string name="profile_language_no_match">Uyğun dil tapılmadı</string>
+    <string name="profile_not_logged_in">Daxil olunmayıb</string>
+    <string name="profile_current_org">Cari təşkilat</string>
+    <string name="profile_current_project">Cari layihə</string>
+    <string name="profile_no_org_selected">Təşkilat seçilməyib</string>
+    <string name="profile_no_project_selected">Layihə seçilməyib</string>
+    <string name="profile_org_subtitle">Layihə seçmək üçün təşkilat seçin</string>
+    <string name="profile_project_subtitle_pick">Layihə seçin</string>
+    <string name="profile_project_subtitle_switch">Layihəni dəyişmək üçün toxunun</string>
+    <string name="profile_project_subtitle_org_first">Xahiş edirik əvvəlcə təşkilat seçin</string>
+    <string name="profile_section_settings">Parametrlər</string>
+    <string name="profile_dark_mode">Tünd rejim</string>
+    <string name="profile_light_mode">İşıqlı rejim</string>
+    <string name="profile_theme_subtitle">Mövzunu dəyişmək üçün toxunun</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Cihaz Nöqtə Cədvəli</string>
+    <string name="profile_modbus_subtitle">Modbus registr xəritələri (yalnız oxumaq üçün)</string>
+    <string name="profile_alarm_title">Alarmlar</string>
+    <string name="profile_alarm_subtitle">Modbus həyəcan qeydləri və emalı</string>
+    <string name="profile_history_title">Tarixçə</string>
+    <string name="profile_history_subtitle">Toplama tarixçəsi və qrafiklər</string>
+    <string name="profile_about_subtitle">Tətbiq məlumatı və versiya</string>
+    <string name="account_title">Hesab</string>
+    <string name="account_username">İstifadəçi adı</string>
+    <string name="account_platform">Platforma</string>
+    <string name="account_not_selected">Seçilməyib</string>
+    <string name="account_org_toggle">Təşkilat</string>
+    <string name="account_org_toggle_subtitle">Təşkilatları idarə etmək üçün aktivləşdirin</string>
+    <string name="account_logout">Çıxış et</string>
+    <string name="about_title">Haqqında</string>
+    <string name="about_tagline">IoT cihaz idarəetmə və monitorinq platforması</string>
+    <string name="about_version">Versiya %1$s</string>
+    <string name="about_check_update">Yeniləmələri yoxla</string>
+    <string name="about_checking">Yoxlanılır…</string>
+    <string name="about_up_to_date">Ən son versiyadasınız</string>
+    <string name="about_update_now">İndi yenilə</string>
+    <string name="about_downloading">Yüklənir…</string>
+    <string name="about_downloading_percent">Yüklənir %1$d%%</string>
+    <string name="about_install_now">İndi quraşdır</string>
+    <string name="about_install">Quraşdır</string>
+    <string name="about_retry_download">Yükləməni yenidən cəhd et</string>
+    <string name="about_later">Sonra</string>
+    <string name="about_install_dialog_title">Yeniləməni quraşdır</string>
+    <string name="about_new_version_found">%1$s versiyası mövcuddur</string>
+    <string name="about_ready_hint">Yükləmə tamamlandı — sistem quraşdırıcısına ötürmək üçün “Quraşdır”a toxunun.</string>
+    <string name="about_need_install_permission">Əvvəlcə bu tətbiqə naməlum mənbələrdən tətbiq quraşdırmağa icazə verin</string>
+    <string name="about_keep_app_alive">Səhifələri dəyişə bilərsiniz — sadəcə tətbiqi bağlamayın</string>
+    <string name="about_metered">Mobil şəbəkədəsiniz — yükləmə çoxlu trafik istifadə edə bilər</string>
+    <string name="about_metered_size">Mobil şəbəkədəsiniz — paket təxminən %1$s</string>
+    <string name="about_install_settings_failed">“Naməlum tətbiqlərin quraşdırılması” parametri açılmadı — sistem parametrlərində əl ilə icazə verin</string>
+    <string name="about_no_installer">Quraşdırıcı tətbiq tapılmadı — paket tətbiqin qovluğunda saxlanıldı</string>
+    <string name="about_update_notes_empty">Bu buraxılış üçün qeyd verilməyib.</string>
+</resources>

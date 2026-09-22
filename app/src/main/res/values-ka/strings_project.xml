@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">მიმდინარე პროექტი</string>
+    <string name="project_manage_title">პროექტების მართვა</string>
+    <string name="project_empty">პროექტები ჯერ არ არის — შესაქმნელად დააჭირეთ +</string>
+    <string name="project_create_title">პროექტის შექმნა</string>
+    <string name="project_name_label">პროექტის სახელი</string>
+    <string name="project_name_placeholder">შეიყვანეთ პროექტის სახელი</string>
+    <string name="project_rename_title">პროექტის სახელის შეცვლა</string>
+    <string name="project_rename_action">სახელის შეცვლა</string>
+    <string name="project_delete_title">პროექტის წაშლა</string>
+    <string name="project_delete_confirm">წავშალო ეს პროექტი? პროექტი, რომელსაც ჯერ სივრცეები აქვს, ვერ წაიშლება.</string>
+    <string name="project_swipe_delete">წასაშლელად გადაფურცლეთ</string>
+    <string name="project_type_label">ტიპი: %1$s</string>
+    <string name="project_members_title">პროექტის წევრები</string>
+    <string name="project_members_empty">წევრები ჯერ არ არის — დასამატებლად დააჭირეთ +</string>
+    <string name="project_members_label">წევრები</string>
+    <string name="project_user_id">მომხმარებლის ID</string>
+    <string name="project_user_id_placeholder">მომხმარებლის ანგარიშის ID</string>
+    <string name="project_remark_hint">დააჭირეთ შენიშვნის დასამატებლად</string>
+    <string name="project_remark_title">შენიშვნის რედაქტირება — %1$s</string>
+    <string name="project_remark_label">შენიშვნა</string>
+    <string name="project_role_adjust">როლის შეცვლა</string>
+    <string name="project_role_adjust_title">როლის შეცვლა — %1$s</string>
+    <string name="project_remove_confirm">წავშალო „%1$s“?</string>
+    <string name="project_exit">პროექტიდან გასვლა</string>
+    <string name="project_exit_confirm">გავიდე ამ პროექტიდან? წვდომას დაკარგავთ.</string>
+    <string name="project_device_added">მოწყობილობა დაემატა</string>
+    <string name="project_device_moved">მოწყობილობა გადატანილია</string>
+    <string name="space_manage_title">სივრცეების მართვა</string>
+    <string name="space_add">სივრცის დამატება</string>
+    <string name="space_add_child">ქვესივრცის დამატება</string>
+    <string name="space_add_device">მოწყობილობის დამატება</string>
+    <string name="space_name_label">სივრცის სახელი</string>
+    <string name="space_name_placeholder">შეიყვანეთ სახელი</string>
+    <string name="space_type_label">სივრცის ტიპი</string>
+    <string name="space_empty">სივრცის მონაცემები არ არის</string>
+    <string name="space_empty_editable">დასაწყებად დაამატეთ სივრცე</string>
+    <string name="space_empty_readonly">ამ პროექტს სივრცეები ან მოწყობილობები ჯერ არ აქვს</string>
+    <string name="space_delete_title">სივრცის წაშლა</string>
+    <string name="space_delete_confirm">წავშალო ეს სივრცე? სივრცე, რომელსაც ჯერ ქვესივრცეები აქვს, ვერ წაიშლება.</string>
+    <string name="space_move_title">სივრცეში გადატანა</string>
+    <string name="space_move_action">გადატანა</string>
+    <string name="space_device_adding">მიმდინარეობს მოწყობილობის დამატება…</string>
+    <string name="space_device_waiting">ლოდინი… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d მოწყობილობა</item>
+        <item quantity="other">%1$d მოწყობილობები</item>
+    </plurals>
+</resources>

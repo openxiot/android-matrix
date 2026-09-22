@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Спершу виберіть проєкт у списку проєктів</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Скасувати зміни?</string>
+    <string name="home_discard_message">У вас є незбережені зміни. Якщо вийдете зараз, вони зникнуть.</string>
+    <string name="home_dashboard_empty">Карток ще немає — натисніть «Додати» внизу, щоб додати</string>
+    <string name="home_add_card">+ Додати</string>
+    <string name="home_default_layout_loaded">Розкладку за замовчуванням завантажено — збережіть її, щоб застосувати</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Одне велике число: пристрої / сервіси / тривоги / збої</string>
+    <string name="home_card_kind_line">Погодинна кількість тривог або одне поле сервісу</string>
+    <string name="home_card_kind_distribution">Розподіл за пристроєм / сервісом / тривогою / збоєм</string>
+    <string name="home_card_kind_device">Одна властивість одного пристрою</string>
+    <string name="home_card_kind_service">Набір полів однієї функції</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Графік</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Пристрій</string>
+    <string name="home_card_default_service">Сервіси</string>
+    <string name="home_card_default_unknown">Картка</string>
+    <string name="home_edit_card_title">Редагувати · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Повна ширина</string>
+    <string name="home_size_half">Половина ширини</string>
+    <string name="home_section_metric">Метрика</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Усього пристроїв</string>
+    <string name="home_metric_devices_online">Пристрої онлайн</string>
+    <string name="home_metric_services_total">Усього сервісів</string>
+    <string name="home_metric_alarms_today">Тривоги за сьогодні</string>
+    <string name="home_metric_alarms_window">Тривоги за вікно</string>
+    <string name="home_metric_failures_total">Збої збору за вікно</string>
+    <string name="home_section_dimension">Розподіл за</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Тип пристрою</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Тип збою збору</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Джерело даних</string>
+    <string name="home_source_label">Джерело</string>
+    <string name="home_source_alarm_curve">Погодинна кількість тривог</string>
+    <string name="home_source_service_field">Одне поле сервісу</string>
+    <string name="home_show_failure_shadow">Показувати лінії помилок збору</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Сервіс · Функція · Поле</string>
+    <string name="home_service_placeholder">Виберіть сервіс</string>
+    <string name="home_service_unnamed">Сервіс без назви</string>
+    <string name="home_function_placeholder">Виберіть функцію</string>
+    <string name="home_function_fallback">Функція %1$d</string>
+    <string name="home_pick_service_first">Спочатку виберіть сервіс</string>
+    <string name="home_show_unit">Показувати од. вим.</string>
+    <string name="home_section_device_prop">Пристрій · Властивість</string>
+    <string name="home_device_placeholder">Виберіть пристрій</string>
+    <string name="home_prop_label">Властивості</string>
+    <string name="home_pick_device_first">Спочатку виберіть пристрій</string>
+    <string name="home_prop_none">Для цієї моделі немає властивостей</string>
+    <string name="home_prop_placeholder">Виберіть властивість</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, порожнє поле — без обмежень</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Останні</string>
+    <string name="home_window_custom">Довільний</string>
+    <string name="home_pick_dates">Виберіть дати початку та кінця</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d дні</item>
+        <item quantity="many">%1$d днів</item>
+        <item quantity="one">%1$d день</item>
+        <item quantity="other">%1$d дня</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d години</item>
+        <item quantity="many">%1$d годин</item>
+        <item quantity="one">%1$d година</item>
+        <item quantity="other">%1$d години</item>
+    </plurals>
+    <string name="home_card_unknown_type">Невідомий тип картки</string>
+    <string name="home_empty_no_data">Немає даних</string>
+    <string name="home_empty_no_reading">Показників ще немає</string>
+    <string name="home_empty_not_sampled">Ще не зібрано</string>
+    <string name="home_sampled_at">Зібрано %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">пристроїв</string>
+    <string name="home_unit_services">сервісів</string>
+</resources>

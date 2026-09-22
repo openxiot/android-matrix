@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Jezik</string>
+    <string name="profile_language_system">Sistemsko</string>
+    <string name="profile_language_search">Poišči jezik</string>
+    <string name="profile_language_search_clear">Počisti</string>
+    <string name="profile_language_no_match">Ni ustreznega jezika</string>
+    <string name="profile_not_logged_in">Niste prijavljeni</string>
+    <string name="profile_current_org">Trenutna organizacija</string>
+    <string name="profile_current_project">Trenutni projekt</string>
+    <string name="profile_no_org_selected">Organizacija ni izbrana</string>
+    <string name="profile_no_project_selected">Projekt ni izbran</string>
+    <string name="profile_org_subtitle">Izberite organizacijo, da lahko izberete projekt</string>
+    <string name="profile_project_subtitle_pick">Izberite projekt</string>
+    <string name="profile_project_subtitle_switch">Dotaknite se za zamenjavo projekta</string>
+    <string name="profile_project_subtitle_org_first">Najprej izberite organizacijo</string>
+    <string name="profile_section_settings">Nastavitve</string>
+    <string name="profile_dark_mode">Temni način</string>
+    <string name="profile_light_mode">Svetli način</string>
+    <string name="profile_theme_subtitle">Dotaknite se za zamenjavo teme</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tabela točk naprave</string>
+    <string name="profile_modbus_subtitle">Zemljevidi registrov Modbus (samo za branje)</string>
+    <string name="profile_alarm_title">Alarmi</string>
+    <string name="profile_alarm_subtitle">Dnevnik alarmov Modbus in ravnanje z njimi</string>
+    <string name="profile_history_title">Zgodovina</string>
+    <string name="profile_history_subtitle">Zgodovina zajema in grafikoni</string>
+    <string name="profile_about_subtitle">Podatki o aplikaciji in različica</string>
+    <string name="account_title">Račun</string>
+    <string name="account_username">Uporabniško ime</string>
+    <string name="account_platform">Platforma</string>
+    <string name="account_not_selected">Ni izbrano</string>
+    <string name="account_org_toggle">Organizacija</string>
+    <string name="account_org_toggle_subtitle">Vklopite za upravljanje organizacij</string>
+    <string name="account_logout">Odjava</string>
+    <string name="about_title">O aplikaciji</string>
+    <string name="about_tagline">Platforma za upravljanje in spremljanje naprav IoT</string>
+    <string name="about_version">Različica %1$s</string>
+    <string name="about_check_update">Preveri posodobitve</string>
+    <string name="about_checking">Preverjanje…</string>
+    <string name="about_up_to_date">Imate najnovejšo različico</string>
+    <string name="about_update_now">Posodobi zdaj</string>
+    <string name="about_downloading">Prenašanje…</string>
+    <string name="about_downloading_percent">Prenašanje %1$d %%</string>
+    <string name="about_install_now">Namesti zdaj</string>
+    <string name="about_install">Namesti</string>
+    <string name="about_retry_download">Ponovi prenos</string>
+    <string name="about_later">Pozneje</string>
+    <string name="about_install_dialog_title">Namesti posodobitev</string>
+    <string name="about_new_version_found">Na voljo je različica %1$s</string>
+    <string name="about_ready_hint">Prenos je končan — dotaknite se »Namesti«, da paket predate sistemskemu nameščevalniku.</string>
+    <string name="about_need_install_permission">Najprej dovolite tej aplikaciji nameščanje neznanih aplikacij</string>
+    <string name="about_keep_app_alive">Lahko preklapljate med stranmi — le aplikacije ne zaprite</string>
+    <string name="about_metered">Ste v mobilnem omrežju — prenos lahko porabi veliko podatkov</string>
+    <string name="about_metered_size">Ste v mobilnem omrežju — paket je velik približno %1$s</string>
+    <string name="about_install_settings_failed">Ni bilo mogoče odpreti nastavitve »Namestitev neznanih aplikacij« — dovolite jo ročno v sistemskih nastavitvah</string>
+    <string name="about_no_installer">Na voljo ni aplikacije za nameščanje — paket je shranjen v mapi aplikacije</string>
+    <string name="about_update_notes_empty">Ta izdaja nima priloženih opomb.</string>
+</resources>

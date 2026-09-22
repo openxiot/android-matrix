@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">Алдымен «Мен» бетінде жобаны таңдаңыз</string>
+    <string name="devices_empty">Әзірге құрылғылар жоқ</string>
+    <string name="devices_unknown">Белгісіз құрылғы</string>
+    <plurals name="devices_count">
+        <item quantity="one">%1$d құрылғы</item>
+        <item quantity="other">Барлығы %1$d құрылғы</item>
+    </plurals>
+</resources>

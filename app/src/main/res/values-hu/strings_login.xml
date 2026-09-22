@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Bejelentkezés WeChattel</string>
+    <string name="login_test_account">Bejelentkezés tesztfiókkal</string>
+    <string name="login_err_wechat_missing">A WeChat nincs telepítve, vagy túl régi a verziója</string>
+    <string name="login_err_no_code">Nem érkezett engedélyezési kód</string>
+    <string name="login_err_cancelled">A WeChat-bejelentkezést megszakították</string>
+    <string name="login_err_wechat">A WeChat engedélyezése sikertelen (%1$d)</string>
+    <string name="login_err_no_token">Sikertelen bejelentkezés: nem érkezett token</string>
+</resources>

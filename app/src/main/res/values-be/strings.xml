@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Матрыца</string>
+    <string name="common_back">Назад</string>
+    <string name="common_retry">Паўтарыць</string>
+    <string name="common_confirm">Пацвердзіць</string>
+    <string name="common_cancel">Скасаваць</string>
+    <string name="common_close">Закрыць</string>
+    <string name="common_detail">Падрабязнасці</string>
+    <string name="common_collapse">Згарнуць</string>
+    <string name="common_expand">Разгарнуць</string>
+    <string name="common_all">Усе</string>
+    <string name="common_add">Дадаць</string>
+    <string name="common_create">Стварыць</string>
+    <string name="common_delete">Выдаліць</string>
+    <string name="common_unnamed">Без назвы</string>
+    <string name="common_unknown">Невядома</string>
+    <string name="common_me">Вы</string>
+    <string name="common_rename_action">Перайменаваць</string>
+    <string name="common_role_label">Роля</string>
+    <string name="common_role_admin">Адміністратар</string>
+    <string name="common_role_member">Удзельнікі</string>
+    <string name="common_role_member_option">Звычайны ўдзельнік</string>
+    <string name="common_member_add">Дадаць удзельніка</string>
+    <string name="common_member_remove">Выдаліць удзельніка</string>
+    <string name="common_edit">Рэдагаваць</string>
+    <string name="common_refresh">Абнавіць</string>
+    <string name="common_change">Змяніць</string>
+    <string name="common_handle">Апрацаваць</string>
+    <string name="common_handled">Апрацавана</string>
+    <string name="common_unhandled">Не апрацавана</string>
+    <string name="common_recovered">Адноўленая</string>
+    <string name="common_unrecovered">Актыўная</string>
+    <string name="common_online">У сетцы</string>
+    <string name="common_offline">Не ў сетцы</string>
+    <string name="common_switch_on">Укл.</string>
+    <string name="common_switch_off">Выкл.</string>
+    <string name="common_please_select">Выберыце</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Перыяд часу не выбраны</string>
+    <string name="common_range_text">%1$s — %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Сэрвісы</string>
+    <string name="common_function_label">Метады</string>
+    <string name="common_device_label">Прылада</string>
+    <string name="common_protocol_label">Пратакол</string>
+    <string name="common_unknown_product">Невядомы прадукт</string>
+    <string name="common_truncated_hint">Запісаў выключэнняў больш за ліміт; паказаны толькі апошнія</string>
+    <string name="err_network">Сетка недаступная. Праверце злучэнне і паўтарыце спробу.</string>
+    <string name="err_unknown">Нешта пайшло не так. Паўтарыце спробу.</string>
+    <string name="space_type_site">Пляцоўка</string>
+    <string name="space_type_building">Будынак</string>
+    <string name="space_type_floor">Паверх</string>
+    <string name="space_type_room">Пакой</string>
+    <string name="space_type_zone">Зона</string>
+    <string name="space_type_field">Участак</string>
+    <string name="space_type_workshop">Цэх</string>
+    <string name="space_type_parking">Паркоўка</string>
+</resources>

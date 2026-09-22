@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Seleccioneu primer un projecte de la llista de projectes</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Voleu descartar els canvis?</string>
+    <string name="home_discard_message">Teniu canvis sense desar. Si sortiu ara, es perdran.</string>
+    <string name="home_dashboard_empty">Encara no hi ha targetes; toqueu «Afegeix» a sota per afegir-ne una</string>
+    <string name="home_add_card">+ Afegeix</string>
+    <string name="home_default_layout_loaded">S\'ha carregat la disposició per defecte; deseu-la per aplicar-la</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Un número destacat: dispositius / serveis / alarmes / fallades</string>
+    <string name="home_card_kind_line">Recompte horari d\'alarmes o un camp de servei</string>
+    <string name="home_card_kind_distribution">Per dispositiu / servei / alarma / fallada</string>
+    <string name="home_card_kind_device">Una propietat d\'un dispositiu</string>
+    <string name="home_card_kind_service">Un conjunt de camps d\'una funció</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Gràfic</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Dispositiu</string>
+    <string name="home_card_default_service">Serveis</string>
+    <string name="home_card_default_unknown">Targeta</string>
+    <string name="home_edit_card_title">Edita · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Amplada completa</string>
+    <string name="home_size_half">Mitja amplada</string>
+    <string name="home_section_metric">Mètrica</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Total de dispositius</string>
+    <string name="home_metric_devices_online">Dispositius en línia</string>
+    <string name="home_metric_services_total">Total de serveis</string>
+    <string name="home_metric_alarms_today">Alarmes d\'avui</string>
+    <string name="home_metric_alarms_window">Alarmes de la finestra</string>
+    <string name="home_metric_failures_total">Fallades de mostreig a la finestra</string>
+    <string name="home_section_dimension">Desglossament per</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Tipus de dispositiu</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Tipus de fallada de mostreig</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Font de dades</string>
+    <string name="home_source_label">Origen</string>
+    <string name="home_source_alarm_curve">Recompte horari d\'alarmes</string>
+    <string name="home_source_service_field">Un camp de servei</string>
+    <string name="home_show_failure_shadow">Mostra les línies d\'error de recollida</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Servei · Funció · Camp</string>
+    <string name="home_service_placeholder">Seleccioneu un servei</string>
+    <string name="home_service_unnamed">Servei sense nom</string>
+    <string name="home_function_placeholder">Seleccioneu una funció</string>
+    <string name="home_function_fallback">Funció %1$d</string>
+    <string name="home_pick_service_first">Seleccioneu primer un servei</string>
+    <string name="home_show_unit">Mostra la unitat</string>
+    <string name="home_section_device_prop">Dispositiu · Propietat</string>
+    <string name="home_device_placeholder">Seleccioneu un dispositiu</string>
+    <string name="home_prop_label">Propietats</string>
+    <string name="home_pick_device_first">Seleccioneu primer un dispositiu</string>
+    <string name="home_prop_none">Aquest model no té propietats</string>
+    <string name="home_prop_placeholder">Seleccioneu una propietat</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, deixeu-ho en blanc per no limitar</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Darrers</string>
+    <string name="home_window_custom">Personalitzat</string>
+    <string name="home_pick_dates">Trieu les dates d\'inici i de fi</string>
+    <plurals name="home_window_days">
+        <item quantity="many">%1$d de dies</item>
+        <item quantity="one">%1$d dia</item>
+        <item quantity="other">%1$d dies</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="many">%1$d d\'hores</item>
+        <item quantity="one">%1$d hora</item>
+        <item quantity="other">%1$d hores</item>
+    </plurals>
+    <string name="home_card_unknown_type">Tipus de targeta desconegut</string>
+    <string name="home_empty_no_data">Sense dades</string>
+    <string name="home_empty_no_reading">Encara no hi ha lectures</string>
+    <string name="home_empty_not_sampled">Encara no recollit</string>
+    <string name="home_sampled_at">Mostrejat %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">dispositius</string>
+    <string name="home_unit_services">serveis</string>
+</resources>

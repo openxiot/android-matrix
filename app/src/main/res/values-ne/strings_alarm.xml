@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">अलार्महरू</string>
+    <string name="alarm_action_ok">कार्य सफल भयो</string>
+    <string name="alarm_empty">यस अवधिमा कुनै अलार्म छैन</string>
+    <string name="alarm_all_services">सबै सेवाहरू</string>
+    <string name="alarm_level_label">अलार्म स्तर</string>
+    <string name="alarm_handled_label">कारबाही</string>
+    <string name="alarm_status_label">स्थिति</string>
+    <string name="alarm_summary_title">अलार्म सूची</string>
+    <string name="alarm_text_label">अलार्म पाठ</string>
+    <string name="alarm_field_label">फिल्ड</string>
+    <string name="alarm_trigger_label">ट्रिगर सर्त</string>
+    <string name="alarm_current_value_label">हालको मान</string>
+</resources>

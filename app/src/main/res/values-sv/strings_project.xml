@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Aktuellt projekt</string>
+    <string name="project_manage_title">Hantera projekt</string>
+    <string name="project_empty">Inga projekt ännu – tryck på + för att skapa ett</string>
+    <string name="project_create_title">Skapa projekt</string>
+    <string name="project_name_label">Projektnamn</string>
+    <string name="project_name_placeholder">Ange ett projektnamn</string>
+    <string name="project_rename_title">Byt namn på projekt</string>
+    <string name="project_rename_action">Byt namn</string>
+    <string name="project_delete_title">Radera projekt</string>
+    <string name="project_delete_confirm">Radera det här projektet? Ett projekt som fortfarande har utrymmen kan inte raderas.</string>
+    <string name="project_swipe_delete">Svep för att radera</string>
+    <string name="project_type_label">Typ: %1$s</string>
+    <string name="project_members_title">Projektmedlemmar</string>
+    <string name="project_members_empty">Inga medlemmar ännu – tryck på + för att lägga till en</string>
+    <string name="project_members_label">Medlemmar</string>
+    <string name="project_user_id">Användar-ID</string>
+    <string name="project_user_id_placeholder">Användarens konto-ID</string>
+    <string name="project_remark_hint">Tryck för att lägga till en anteckning</string>
+    <string name="project_remark_title">Redigera anteckning – %1$s</string>
+    <string name="project_remark_label">Anteckning</string>
+    <string name="project_role_adjust">Ändra roll</string>
+    <string name="project_role_adjust_title">Ändra roll – %1$s</string>
+    <string name="project_remove_confirm">Ta bort ”%1$s”?</string>
+    <string name="project_exit">Lämna projekt</string>
+    <string name="project_exit_confirm">Lämna det här projektet? Du förlorar åtkomsten till det.</string>
+    <string name="project_device_added">Enhet tillagd</string>
+    <string name="project_device_moved">Enhet flyttad</string>
+    <string name="space_manage_title">Hantera utrymmen</string>
+    <string name="space_add">Lägg till utrymme</string>
+    <string name="space_add_child">Lägg till underlokal</string>
+    <string name="space_add_device">Lägg till enhet</string>
+    <string name="space_name_label">Lokalnamn</string>
+    <string name="space_name_placeholder">Ange ett namn</string>
+    <string name="space_type_label">Lokaltyp</string>
+    <string name="space_empty">Ingen utrymmesdata</string>
+    <string name="space_empty_editable">Lägg till ett utrymme för att komma igång</string>
+    <string name="space_empty_readonly">Projektet har inga utrymmen eller enheter ännu</string>
+    <string name="space_delete_title">Radera utrymme</string>
+    <string name="space_delete_confirm">Radera det här utrymmet? Ett utrymme som fortfarande har underutrymmen kan inte raderas.</string>
+    <string name="space_move_title">Flytta till utrymme</string>
+    <string name="space_move_action">Flytta</string>
+    <string name="space_device_adding">Lägger till enhet…</string>
+    <string name="space_device_waiting">Väntar… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d enhet</item>
+        <item quantity="other">%1$d enheter</item>
+    </plurals>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Язык</string>
+    <string name="profile_language_system">Как в системе</string>
+    <string name="profile_language_search">Поиск языков</string>
+    <string name="profile_language_search_clear">Очистить</string>
+    <string name="profile_language_no_match">Нет подходящего языка</string>
+    <string name="profile_not_logged_in">Вход не выполнен</string>
+    <string name="profile_current_org">Текущая организация</string>
+    <string name="profile_current_project">Текущий проект</string>
+    <string name="profile_no_org_selected">Организация не выбрана</string>
+    <string name="profile_no_project_selected">Проект не выбран</string>
+    <string name="profile_org_subtitle">Выберите организацию, чтобы выбрать проект</string>
+    <string name="profile_project_subtitle_pick">Выберите проект</string>
+    <string name="profile_project_subtitle_switch">Нажмите, чтобы сменить проект</string>
+    <string name="profile_project_subtitle_org_first">Сначала выберите организацию</string>
+    <string name="profile_section_settings">Настройки</string>
+    <string name="profile_dark_mode">Тёмная тема</string>
+    <string name="profile_light_mode">Светлая тема</string>
+    <string name="profile_theme_subtitle">Нажмите, чтобы сменить тему</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Таблица точек устройства</string>
+    <string name="profile_modbus_subtitle">Карты регистров Modbus (только чтение)</string>
+    <string name="profile_alarm_title">Тревоги</string>
+    <string name="profile_alarm_subtitle">Журнал тревог Modbus и их обработка</string>
+    <string name="profile_history_title">История</string>
+    <string name="profile_history_subtitle">История опроса и графики</string>
+    <string name="profile_about_subtitle">Информация о приложении и версия</string>
+    <string name="account_title">Аккаунт</string>
+    <string name="account_username">Имя пользователя</string>
+    <string name="account_platform">Платформа</string>
+    <string name="account_not_selected">Не выбрано</string>
+    <string name="account_org_toggle">Организация</string>
+    <string name="account_org_toggle_subtitle">Включите, чтобы управлять организациями</string>
+    <string name="account_logout">Выйти</string>
+    <string name="about_title">О приложении</string>
+    <string name="about_tagline">Платформа управления и мониторинга IoT-устройств</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_check_update">Проверить обновления</string>
+    <string name="about_checking">Проверка…</string>
+    <string name="about_up_to_date">Обновлений нет</string>
+    <string name="about_update_now">Обновить сейчас</string>
+    <string name="about_downloading">Скачивание…</string>
+    <string name="about_downloading_percent">Скачивание %1$d%%</string>
+    <string name="about_install_now">Установить сейчас</string>
+    <string name="about_install">Установить</string>
+    <string name="about_retry_download">Повторить скачивание</string>
+    <string name="about_later">Позже</string>
+    <string name="about_install_dialog_title">Установка обновления</string>
+    <string name="about_new_version_found">Доступна версия %1$s</string>
+    <string name="about_ready_hint">Скачивание завершено — нажмите «Установить», чтобы передать пакет системному установщику.</string>
+    <string name="about_need_install_permission">Сначала разрешите этому приложению устанавливать неизвестные приложения</string>
+    <string name="about_keep_app_alive">Можно переключать страницы — только не закрывайте приложение</string>
+    <string name="about_metered">Вы в мобильной сети — скачивание может израсходовать много трафика</string>
+    <string name="about_metered_size">Вы в мобильной сети — пакет занимает около %1$s</string>
+    <string name="about_install_settings_failed">Не удалось открыть настройку «Установка неизвестных приложений» — разрешите её вручную в настройках системы</string>
+    <string name="about_no_installer">Нет приложения-установщика — пакет сохранён в папке приложения</string>
+    <string name="about_update_notes_empty">В этом выпуске нет описания.</string>
+</resources>

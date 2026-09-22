@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">言語</string>
+    <string name="profile_language_system">システムに従う</string>
+    <string name="profile_language_search">言語を検索</string>
+    <string name="profile_language_search_clear">クリア</string>
+    <string name="profile_language_no_match">一致する言語がありません</string>
+    <string name="profile_not_logged_in">未ログイン</string>
+    <string name="profile_current_org">現在の組織</string>
+    <string name="profile_current_project">現在のプロジェクト</string>
+    <string name="profile_no_org_selected">組織が未選択</string>
+    <string name="profile_no_project_selected">プロジェクトが未選択</string>
+    <string name="profile_org_subtitle">組織を選ぶとプロジェクトを選択できます</string>
+    <string name="profile_project_subtitle_pick">プロジェクトを選択</string>
+    <string name="profile_project_subtitle_switch">タップしてプロジェクトを切り替え</string>
+    <string name="profile_project_subtitle_org_first">先に組織を選択してください</string>
+    <string name="profile_section_settings">設定</string>
+    <string name="profile_dark_mode">ダークモード</string>
+    <string name="profile_light_mode">ライトモード</string>
+    <string name="profile_theme_subtitle">タップしてテーマを切り替え</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">デバイス点表</string>
+    <string name="profile_modbus_subtitle">Modbus レジスタマップ（読み取り専用）</string>
+    <string name="profile_alarm_title">アラーム</string>
+    <string name="profile_alarm_subtitle">Modbus アラームの記録と処理</string>
+    <string name="profile_history_title">履歴</string>
+    <string name="profile_history_subtitle">サンプリング履歴とグラフ</string>
+    <string name="profile_about_subtitle">アプリ情報とバージョン</string>
+    <string name="account_title">アカウント</string>
+    <string name="account_username">ユーザー名</string>
+    <string name="account_platform">プラットフォーム</string>
+    <string name="account_not_selected">未選択</string>
+    <string name="account_org_toggle">組織</string>
+    <string name="account_org_toggle_subtitle">オンにすると組織を管理できます</string>
+    <string name="account_logout">ログアウト</string>
+    <string name="about_title">アプリについて</string>
+    <string name="about_tagline">IoT デバイスの管理・監視プラットフォーム</string>
+    <string name="about_version">バージョン %1$s</string>
+    <string name="about_check_update">アップデートを確認</string>
+    <string name="about_checking">確認中…</string>
+    <string name="about_up_to_date">最新版です</string>
+    <string name="about_update_now">今すぐ更新</string>
+    <string name="about_downloading">ダウンロード中…</string>
+    <string name="about_downloading_percent">ダウンロード中 %1$d%%</string>
+    <string name="about_install_now">今すぐインストール</string>
+    <string name="about_install">インストール</string>
+    <string name="about_retry_download">ダウンロードを再試行</string>
+    <string name="about_later">あとで</string>
+    <string name="about_install_dialog_title">アップデートをインストール</string>
+    <string name="about_new_version_found">バージョン %1$s が利用可能です</string>
+    <string name="about_ready_hint">ダウンロードが完了しました。インストールをタップするとシステムのインストーラーに渡されます</string>
+    <string name="about_need_install_permission">先にこのアプリに不明なアプリのインストールを許可してください</string>
+    <string name="about_keep_app_alive">ページは切り替えられますが、アプリは終了しないでください</string>
+    <string name="about_metered">モバイル通信中です。ダウンロードで通信量を多く消費します</string>
+    <string name="about_metered_size">モバイル通信中です。パッケージは約 %1$s です</string>
+    <string name="about_install_settings_failed">「不明なアプリのインストール」の設定を開けませんでした。システム設定で手動で許可してください</string>
+    <string name="about_no_installer">インストーラーが見つかりません。パッケージはアプリのフォルダーに保存されます</string>
+    <string name="about_update_notes_empty">このリリースには説明がありません</string>
+</resources>

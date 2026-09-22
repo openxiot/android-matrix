@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">کامێراکە بەرەو QR code یان IMEI ی ئامێرەکە بکە</string>
+    <string name="scan_torch">فانۆس</string>
+    <string name="scan_torch_on">فانۆسەکە بڕۆژینە</string>
+    <string name="scan_torch_off">فانۆسەکە بڕکێنەوە</string>
+    <string name="scan_permission_required">پێویستە دەستپێگەیشتنی کامێرا بۆ سکانکردن و زیادکردنی ئامێر</string>
+    <string name="scan_grant">دەستپێگەیشتن بدەرە</string>
+</resources>

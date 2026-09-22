@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Skrá inn með WeChat</string>
+    <string name="login_test_account">Skrá inn með prófunarreikningi</string>
+    <string name="login_err_wechat_missing">WeChat er ekki uppsett eða útgáfan er of gömul</string>
+    <string name="login_err_no_code">Enginn heimildarkóði barst</string>
+    <string name="login_err_cancelled">Hætt var við innskráningu með WeChat</string>
+    <string name="login_err_wechat">Heimild WeChat mistókst (%1$d)</string>
+    <string name="login_err_no_token">Innskráning mistókst: ekkert token var skilað</string>
+</resources>

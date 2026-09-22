@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">لطفاً ابتدا یک پروژه از فهرست پروژه‌ها انتخاب کنید</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">تغییرات را کنار بگذاریم؟</string>
+    <string name="home_discard_message">تغییرات ذخیره‌نشده‌ای دارید؛ خروج از اینجا آن‌ها را از دست می‌دهد.</string>
+    <string name="home_dashboard_empty">هنوز کارتی نیست؛ برای افزودن، روی «افزودن» پایین بزنید</string>
+    <string name="home_add_card">+ افزودن</string>
+    <string name="home_default_layout_loaded">چیدمان پیش‌فرض بارگیری شد؛ برای اعمال آن را ذخیره کنید</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">یک عدد کلیدی: دستگاه‌ها / سرویس‌ها / هشدارها / خطاها</string>
+    <string name="home_card_kind_line">تعداد هشدارهای ساعتی، یا یک فیلد سرویس</string>
+    <string name="home_card_kind_distribution">توزیع بر اساس دستگاه / سرویس / هشدار / خطا</string>
+    <string name="home_card_kind_device">یک خاصیت از یک دستگاه</string>
+    <string name="home_card_kind_service">مجموعه‌ای از فیلدهای یک تابع</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">نمودار</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">دستگاه</string>
+    <string name="home_card_default_service">سرویس‌ها</string>
+    <string name="home_card_default_unknown">کارت</string>
+    <string name="home_edit_card_title">ویرایش · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">تمام عرض</string>
+    <string name="home_size_half">نیم عرض</string>
+    <string name="home_section_metric">شاخص آماری</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">تعداد کل دستگاه‌ها</string>
+    <string name="home_metric_devices_online">دستگاه‌های آنلاین</string>
+    <string name="home_metric_services_total">تعداد کل سرویس‌ها</string>
+    <string name="home_metric_alarms_today">هشدار‌های امروز</string>
+    <string name="home_metric_alarms_window">هشدارهای بازه</string>
+    <string name="home_metric_failures_total">خطاهای نمونه‌برداری در بازه</string>
+    <string name="home_section_dimension">ابعاد توزیع</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">نوع دستگاه</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">نوع خطای نمونه‌برداری</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">منبع داده</string>
+    <string name="home_source_label">منبع</string>
+    <string name="home_source_alarm_curve">تعداد هشدارهای ساعتی</string>
+    <string name="home_source_service_field">یک فیلد سرویس</string>
+    <string name="home_show_failure_shadow">نمایش خطوط جمع‌آوری ناموفق</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">سرویس · تابع · فیلد</string>
+    <string name="home_service_placeholder">یک سرویس انتخاب کنید</string>
+    <string name="home_service_unnamed">سرویس بی‌نام</string>
+    <string name="home_function_placeholder">یک تابع انتخاب کنید</string>
+    <string name="home_function_fallback">تابع %1$d</string>
+    <string name="home_pick_service_first">ابتدا سرویس را انتخاب کنید</string>
+    <string name="home_show_unit">نمایش واحد</string>
+    <string name="home_section_device_prop">دستگاه · خاصیت</string>
+    <string name="home_device_placeholder">یک دستگاه انتخاب کنید</string>
+    <string name="home_prop_label">ویژگی‌ها</string>
+    <string name="home_pick_device_first">ابتدا دستگاه را انتخاب کنید</string>
+    <string name="home_prop_none">این مدل خاصیتی ندارد</string>
+    <string name="home_prop_placeholder">یک خاصیت انتخاب کنید</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d، برای بدون محدودیت خالی بگذارید</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">اخیراً</string>
+    <string name="home_window_custom">سفارشی</string>
+    <string name="home_pick_dates">تاریخ شروع و پایان را انتخاب کنید</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d روز</item>
+        <item quantity="other">%1$d روز‌ها</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d ساعت</item>
+        <item quantity="other">%1$d ساعت‌ها</item>
+    </plurals>
+    <string name="home_card_unknown_type">نوع کارت ناشناس</string>
+    <string name="home_empty_no_data">داده‌ای وجود ندارد</string>
+    <string name="home_empty_no_reading">هنوز مقداری دریافت نشده</string>
+    <string name="home_empty_not_sampled">هنوز جمع‌آوری نشده</string>
+    <string name="home_sampled_at">نمونه‌برداری در %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">دستگاه</string>
+    <string name="home_unit_services">سرویس</string>
+</resources>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Veldu fyrst verkefni í verkefnalistanum</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Henda breytingunum?</string>
+    <string name="home_discard_message">Þú ert með óvistaðar breytingar. Ef þú ferð núna tapast þær.</string>
+    <string name="home_dashboard_empty">Engin spjöld ennþá — ýttu á „Bæta við“ fyrir neðan</string>
+    <string name="home_add_card">+ Bæta við</string>
+    <string name="home_default_layout_loaded">Sjálfgefið útlit hlaðið — vistaðu það til að nota</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Ein stór tala: tæki / þjónustur / viðvaranir / gallar</string>
+    <string name="home_card_kind_line">Fjöldi viðvarana á klukkustund, eða einn þjónustureitur</string>
+    <string name="home_card_kind_distribution">Sundurliðun eftir tæki / þjónustu / viðvörun / galla</string>
+    <string name="home_card_kind_device">Einn eiginleiki eins tækis</string>
+    <string name="home_card_kind_service">Safn reita úr einni aðgerð</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Graf</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Tæki</string>
+    <string name="home_card_default_service">Þjónustur</string>
+    <string name="home_card_default_unknown">Spjald</string>
+    <string name="home_edit_card_title">Breyta · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Full breidd</string>
+    <string name="home_size_half">Hálf breidd</string>
+    <string name="home_section_metric">Mælikvarði</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Tæki alls</string>
+    <string name="home_metric_devices_online">Tæki á netinu</string>
+    <string name="home_metric_services_total">Þjónustur alls</string>
+    <string name="home_metric_alarms_today">Viðvaranir dagsins</string>
+    <string name="home_metric_alarms_window">Viðvaranir í glugga</string>
+    <string name="home_metric_failures_total">Söfnunargallar í glugga</string>
+    <string name="home_section_dimension">Sundurliðun eftir</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Tegund tækis</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Tegund söfnunargalls</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Gagnaveita</string>
+    <string name="home_source_label">Uppruni</string>
+    <string name="home_source_alarm_curve">Fjöldi viðvarana á klukkustund</string>
+    <string name="home_source_service_field">Einn þjónustureitur</string>
+    <string name="home_show_failure_shadow">Sýna línur misheppnaðrar söfnunar</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Þjónusta · Aðgerð · Reitur</string>
+    <string name="home_service_placeholder">Veldu þjónustu</string>
+    <string name="home_service_unnamed">Ónefnd þjónusta</string>
+    <string name="home_function_placeholder">Veldu aðgerð</string>
+    <string name="home_function_fallback">Aðgerð %1$d</string>
+    <string name="home_pick_service_first">Veldu þjónustu fyrst</string>
+    <string name="home_show_unit">Sýna einingu</string>
+    <string name="home_section_device_prop">Tæki · Eiginleiki</string>
+    <string name="home_device_placeholder">Veldu tæki</string>
+    <string name="home_prop_label">Eiginleikar</string>
+    <string name="home_pick_device_first">Veldu tæki fyrst</string>
+    <string name="home_prop_none">Engir eiginleikar fyrir þetta módel</string>
+    <string name="home_prop_placeholder">Veldu eiginleika</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, hafðu autt fyrir engin mörk</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Síðast</string>
+    <string name="home_window_custom">Sérsniðið</string>
+    <string name="home_pick_dates">Veldu upphafs- og lokadagsetningu</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d dagur</item>
+        <item quantity="other">%1$d dagar</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d klukkustund</item>
+        <item quantity="other">%1$d klukkustundir</item>
+    </plurals>
+    <string name="home_card_unknown_type">Óþekkt spjaldgerð</string>
+    <string name="home_empty_no_data">Engin gögn</string>
+    <string name="home_empty_no_reading">Engar mælingar ennþá</string>
+    <string name="home_empty_not_sampled">Ekki safnað enn</string>
+    <string name="home_sampled_at">Safnað %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">tæki</string>
+    <string name="home_unit_services">þjónustur</string>
+</resources>

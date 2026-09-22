@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Produse</string>
+    <string name="product_detail_title">Detalii produs</string>
+    <string name="product_not_found">Produsul nu a fost găsit</string>
+    <string name="product_empty">Încă nu există produse</string>
+    <plurals name="product_count">
+        <item quantity="few">%1$d produse</item>
+        <item quantity="one">%1$d produs</item>
+        <item quantity="other">%1$d de produse</item>
+    </plurals>
+    <string name="product_model_inline">Model: %1$s</string>
+    <string name="product_id_label">ID produs</string>
+    <string name="product_model_label">Model produs</string>
+    <string name="product_org_label">Organizație</string>
+    <string name="product_buy_jd">Cumpărați de pe JD.com</string>
+    <string name="product_buy_taobao">Cumpărați de pe Taobao</string>
+    <string name="product_status_released">Publicat</string>
+    <string name="product_status_preview">Previzualizare</string>
+    <string name="product_status_development">În dezvoltare</string>
+    <string name="product_empty_data">Fără date despre produs</string>
+</resources>

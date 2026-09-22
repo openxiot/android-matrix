@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">ಮ್ಯಾಟ್ರಿಕ್ಸ್</string>
+    <string name="common_back">ಹಿಂದೆ</string>
+    <string name="common_retry">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="common_confirm">ದೃಢೀಕರಿಸಿ</string>
+    <string name="common_cancel">ರದ್ದುಮಾಡಿ</string>
+    <string name="common_close">ಮುಚ್ಚಿ</string>
+    <string name="common_detail">ವಿವರಗಳು</string>
+    <string name="common_collapse">ಕುಗ್ಗಿಸಿ</string>
+    <string name="common_expand">ವಿಸ್ತರಿಸಿ</string>
+    <string name="common_all">ಎಲ್ಲಾ</string>
+    <string name="common_add">ಸೇರಿಸಿ</string>
+    <string name="common_create">ರಚಿಸಿ</string>
+    <string name="common_delete">ಅಳಿಸಿ</string>
+    <string name="common_unnamed">ಹೆಸರಿಲ್ಲದ</string>
+    <string name="common_unknown">ಅಜ್ಞಾತ</string>
+    <string name="common_me">ನೀವು</string>
+    <string name="common_rename_action">ಮರುಹೆಸರಿಸಿ</string>
+    <string name="common_role_label">ಪಾತ್ರ</string>
+    <string name="common_role_admin">ನಿರ್ವಾಹಕ</string>
+    <string name="common_role_member">ಸದಸ್ಯರು</string>
+    <string name="common_role_member_option">ಸಾಮಾನ್ಯ ಸದಸ್ಯ</string>
+    <string name="common_member_add">ಸದಸ್ಯರನ್ನು ಸೇರಿಸಿ</string>
+    <string name="common_member_remove">ಸದಸ್ಯರನ್ನು ತೆಗೆದುಹಾಕಿ</string>
+    <string name="common_edit">ಸಂಪಾದಿಸಿ</string>
+    <string name="common_refresh">ರಿಫ್ರೆಶ್</string>
+    <string name="common_change">ಬದಲಾಯಿಸಿ</string>
+    <string name="common_handle">ವಿಲೇವಾರಿ</string>
+    <string name="common_handled">ವಿಲೇವಾರಿ ಆಗಿದೆ</string>
+    <string name="common_unhandled">ವಿಲೇವಾರಿ ಆಗಿಲ್ಲ</string>
+    <string name="common_recovered">ಚೇತರಿಸಿಕೊಂಡಿದೆ</string>
+    <string name="common_unrecovered">ಚೇತರಿಸಿಕೊಂಡಿಲ್ಲ</string>
+    <string name="common_online">ಆನ್ಲೈನ್</string>
+    <string name="common_offline">ಆಫ್ಲೈನ್</string>
+    <string name="common_switch_on">ಆನ್</string>
+    <string name="common_switch_off">ಆಫ್</string>
+    <string name="common_please_select">ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="common_ok">ಸರಿ</string>
+    <string name="common_no_range">ಸಮಯದ ವ್ಯಾಪ್ತಿ ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ</string>
+    <string name="common_range_text">%1$s ರಿಂದ %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">ಸೇವೆಗಳು</string>
+    <string name="common_function_label">ವಿಧಾನಗಳು</string>
+    <string name="common_device_label">ಸಾಧನ</string>
+    <string name="common_protocol_label">ಪ್ರೋಟೋಕಾಲ್</string>
+    <string name="common_unknown_product">ಅಪರಿಚಿತ ಉತ್ಪನ್ನ</string>
+    <string name="common_truncated_hint">ಅಪವಾದ ದಾಖಲೆಗಳು ಮಿತಿ ಮೀರಿವೆ, ಇತ್ತೀಚಿನ ಭಾಗವನ್ನು ಮಾತ್ರ ಪಟ್ಟಿ ಮಾಡಲಾಗಿದೆ</string>
+    <string name="err_network">ನೆಟ್ವರ್ಕ್ ಲಭ್ಯವಿಲ್ಲ. ನಿಮ್ಮ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="err_unknown">ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="space_type_site">ತಾಣ</string>
+    <string name="space_type_building">ಕಟ್ಟಡ</string>
+    <string name="space_type_floor">ಮಹಡಿ</string>
+    <string name="space_type_room">ಕೊಠಡಿ</string>
+    <string name="space_type_zone">ವಲಯ</string>
+    <string name="space_type_field">ಮೈದಾನ</string>
+    <string name="space_type_workshop">ಕಾರ್ಯಾಗಾರ</string>
+    <string name="space_type_parking">ಪಾರ್ಕಿಂಗ್ ಸ್ಥಳ</string>
+</resources>

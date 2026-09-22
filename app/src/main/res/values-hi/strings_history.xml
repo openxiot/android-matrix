@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">इतिहास</string>
+    <string name="history_section_overview">सेवा अवलोकन</string>
+    <string name="history_no_services">इस प्रोजेक्ट में अभी कोई Modbus सेवा नहीं</string>
+    <string name="history_service_count_label">सेवा संख्या</string>
+    <string name="history_device_count_label">डिवाइस संख्या</string>
+    <string name="history_sampled_at_label">संग्रह समय</string>
+    <string name="history_function_count_label">विधियाँ</string>
+    <string name="history_faults_section">संग्रह अपवाद</string>
+    <string name="history_faults_label">संग्रह अपवाद</string>
+    <string name="history_no_faults">इस अवधि में कोई सैंपलिंग त्रुटि नहीं</string>
+    <string name="history_no_data">इस अवधि में कोई डेटा सैंपल नहीं किया गया</string>
+    <string name="history_field_label">फ़ील्ड</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">सैंपल डेटा (%1$d पंक्ति)</item>
+        <item quantity="other">सैंपल डेटा (%1$d पंक्तियाँ)</item>
+    </plurals>
+    <string name="service_history_all_functions">सभी विधियाँ</string>
+    <string name="service_history_field_selection">फ़ील्ड %1$d / %2$d</string>
+    <string name="service_history_fault_chip">त्रुटि %1$s × %2$d</string>
+    <string name="service_history_no_curve">इस सेवा का कोई फ़ील्ड चार्ट नहीं किया जा सकता</string>
+    <string name="service_history_no_curve_for_function">इस फ़ंक्शन में कोई चार्ट योग्य फ़ील्ड नहीं</string>
+    <string name="service_history_no_fields_selected">कोई फ़ील्ड चयनित नहीं</string>
+    <string name="service_history_failure_hint">खड़ी रेखाएँ संग्रह विफल होने के क्षण दर्शाती हैं</string>
+    <string name="service_history_downsampled_hint">डेटा बिंदु बहुत अधिक हैं; समय अंतराल के अनुसार डाउनसैंपल किया गया (मान उस अंतराल का औसत है, कोष्ठक में न्यूनतम~अधिकतम)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">तालिका</string>
+    <string name="service_history_view_chart">चार्ट</string>
+</resources>

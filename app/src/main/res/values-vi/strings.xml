@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Ma trận</string>
+    <string name="common_back">Quay lại</string>
+    <string name="common_retry">Thử lại</string>
+    <string name="common_confirm">Xác nhận</string>
+    <string name="common_cancel">Hủy</string>
+    <string name="common_close">Đóng</string>
+    <string name="common_detail">Chi tiết</string>
+    <string name="common_collapse">Thu gọn</string>
+    <string name="common_expand">Mở rộng</string>
+    <string name="common_all">Tất cả</string>
+    <string name="common_add">Thêm</string>
+    <string name="common_create">Tạo</string>
+    <string name="common_delete">Xóa</string>
+    <string name="common_unnamed">Chưa đặt tên</string>
+    <string name="common_unknown">Không xác định</string>
+    <string name="common_me">Bạn</string>
+    <string name="common_rename_action">Đổi tên</string>
+    <string name="common_role_label">Vai trò</string>
+    <string name="common_role_admin">Quản trị viên</string>
+    <string name="common_role_member">Thành viên</string>
+    <string name="common_role_member_option">Thành viên thường</string>
+    <string name="common_member_add">Thêm Thành viên</string>
+    <string name="common_member_remove">Gỡ thành viên</string>
+    <string name="common_edit">Chỉnh sửa</string>
+    <string name="common_refresh">Làm mới</string>
+    <string name="common_change">Thay đổi</string>
+    <string name="common_handle">Xử lý</string>
+    <string name="common_handled">Đã xử lý</string>
+    <string name="common_unhandled">Chưa xử lý</string>
+    <string name="common_recovered">Đã khôi phục</string>
+    <string name="common_unrecovered">Đang hoạt động</string>
+    <string name="common_online">Trực tuyến</string>
+    <string name="common_offline">Ngoại tuyến</string>
+    <string name="common_switch_on">Bật</string>
+    <string name="common_switch_off">Tắt</string>
+    <string name="common_please_select">Vui lòng chọn</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Chưa chọn khoảng thời gian</string>
+    <string name="common_range_text">%1$s đến %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Dịch vụ</string>
+    <string name="common_function_label">Phương thức</string>
+    <string name="common_device_label">Thiết bị</string>
+    <string name="common_protocol_label">Giao thức</string>
+    <string name="common_unknown_product">Sản phẩm không xác định</string>
+    <string name="common_truncated_hint">Số bản ghi ngoại lệ vượt quá giới hạn, chỉ hiển thị những bản ghi gần đây nhất</string>
+    <string name="err_network">Không có mạng. Kiểm tra kết nối rồi thử lại.</string>
+    <string name="err_unknown">Đã xảy ra lỗi. Vui lòng thử lại.</string>
+    <string name="space_type_site">Trạm</string>
+    <string name="space_type_building">Tòa nhà</string>
+    <string name="space_type_floor">Tầng</string>
+    <string name="space_type_room">Phòng</string>
+    <string name="space_type_zone">Khu vực</string>
+    <string name="space_type_field">Sân bãi</string>
+    <string name="space_type_workshop">Xưởng</string>
+    <string name="space_type_parking">Bãi đỗ xe</string>
+</resources>

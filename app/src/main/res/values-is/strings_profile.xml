@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Tungumál</string>
+    <string name="profile_language_system">Fylgja kerfinu</string>
+    <string name="profile_language_search">Leita að tungumálum</string>
+    <string name="profile_language_search_clear">Hreinsa</string>
+    <string name="profile_language_no_match">Ekkert tungumál passar</string>
+    <string name="profile_not_logged_in">Ekki skráður inn</string>
+    <string name="profile_current_org">Núverandi samtök</string>
+    <string name="profile_current_project">Núverandi verkefni</string>
+    <string name="profile_no_org_selected">Engin samtök valin</string>
+    <string name="profile_no_project_selected">Ekkert verkefni valið</string>
+    <string name="profile_org_subtitle">Veldu samtök til að velja verkefni</string>
+    <string name="profile_project_subtitle_pick">Veldu verkefni</string>
+    <string name="profile_project_subtitle_switch">Ýttu til að skipta um verkefni</string>
+    <string name="profile_project_subtitle_org_first">Veldu fyrst stofnun</string>
+    <string name="profile_section_settings">Stillingar</string>
+    <string name="profile_dark_mode">Dökkt þema</string>
+    <string name="profile_light_mode">Ljóst þema</string>
+    <string name="profile_theme_subtitle">Ýttu til að skipta um þema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Punktatafla tækis</string>
+    <string name="profile_modbus_subtitle">Modbus-skráningarkort (aðeins lesanleg)</string>
+    <string name="profile_alarm_title">Viðvaranir</string>
+    <string name="profile_alarm_subtitle">Skrá yfir Modbus-viðvaranir og meðferð</string>
+    <string name="profile_history_title">Saga</string>
+    <string name="profile_history_subtitle">Söfnunarsaga og gröf</string>
+    <string name="profile_about_subtitle">Upplýsingar um forritið og útgáfu</string>
+    <string name="account_title">Reikningur</string>
+    <string name="account_username">Notandanafn</string>
+    <string name="account_platform">Vettvangur</string>
+    <string name="account_not_selected">Ekkert valið</string>
+    <string name="account_org_toggle">Stofnun</string>
+    <string name="account_org_toggle_subtitle">Kveiktu til að stjórna samtökum</string>
+    <string name="account_logout">Skrá út</string>
+    <string name="about_title">Um forritið</string>
+    <string name="about_tagline">Vettvangur fyrir stjórnun og vöktun IoT-tækja</string>
+    <string name="about_version">Útgáfa %1$s</string>
+    <string name="about_check_update">Athuga með uppfærslur</string>
+    <string name="about_checking">Athuga…</string>
+    <string name="about_up_to_date">Þú ert með nýjustu útgáfu</string>
+    <string name="about_update_now">Uppfæra núna</string>
+    <string name="about_downloading">Hleður niður…</string>
+    <string name="about_downloading_percent">Hleður niður %1$d%%</string>
+    <string name="about_install_now">Setja upp núna</string>
+    <string name="about_install">Setja upp</string>
+    <string name="about_retry_download">Reyna niðurhal aftur</string>
+    <string name="about_later">Síðar</string>
+    <string name="about_install_dialog_title">Setja upp uppfærslu</string>
+    <string name="about_new_version_found">Útgáfa %1$s er í boði</string>
+    <string name="about_ready_hint">Niðurhali lokið — ýttu á Setja upp til að afhenda það kerfisuppsetningunni.</string>
+    <string name="about_need_install_permission">Leyfðu þessu forriti fyrst að setja upp óþekkt forrit</string>
+    <string name="about_keep_app_alive">Þú getur skipt um síðu — lokaðu bara ekki forritinu</string>
+    <string name="about_metered">Þú ert á farsímagögnum — niðurhalið getur notað mikið</string>
+    <string name="about_metered_size">Þú ert á farsímagögnum — pakkinn er um %1$s</string>
+    <string name="about_install_settings_failed">Gat ekki opnað stillinguna „Setja upp óþekkt forrit“ — leyfðu það handvirkt í kerfisstillingum</string>
+    <string name="about_no_installer">Ekkert uppsetningarforrit í boði — pakkinn er vistaður í möppu forritsins</string>
+    <string name="about_update_notes_empty">Þessi útgáfa kom án skýringa.</string>
+</resources>

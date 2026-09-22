@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Προϊόντα</string>
+    <string name="product_detail_title">Λεπτομέρειες προϊόντος</string>
+    <string name="product_not_found">Το προϊόν δεν βρέθηκε</string>
+    <string name="product_empty">Δεν υπάρχουν προϊόντα ακόμη</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d προϊόν</item>
+        <item quantity="other">%1$d προϊόντα</item>
+    </plurals>
+    <string name="product_model_inline">Μοντέλο: %1$s</string>
+    <string name="product_id_label">ID προϊόντος</string>
+    <string name="product_model_label">Μοντέλο προϊόντος</string>
+    <string name="product_org_label">Οργανισμός</string>
+    <string name="product_buy_jd">Αγορά από JD.com</string>
+    <string name="product_buy_taobao">Αγορά από Taobao</string>
+    <string name="product_status_released">Δημοσιευμένο</string>
+    <string name="product_status_preview">Προεπισκόπηση</string>
+    <string name="product_status_development">Σε ανάπτυξη</string>
+    <string name="product_empty_data">Δεν υπάρχουν δεδομένα προϊόντος</string>
+</resources>

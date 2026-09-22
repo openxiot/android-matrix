@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Namiřte kameru na QR kód nebo IMEI zařízení</string>
+    <string name="scan_torch">Baterka</string>
+    <string name="scan_torch_on">Zapnout baterku</string>
+    <string name="scan_torch_off">Vypnout baterku</string>
+    <string name="scan_permission_required">Ke skenování a přidávání zařízení je potřeba přístup ke kameře</string>
+    <string name="scan_grant">Udělit přístup</string>
+</resources>

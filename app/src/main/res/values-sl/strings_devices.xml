@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">Najprej izberite projekt v zavihku Profil</string>
+    <string name="devices_empty">Ni še nobene naprave</string>
+    <string name="devices_unknown">Neznana naprava</string>
+    <plurals name="devices_count">
+        <item quantity="few">%1$d naprave</item>
+        <item quantity="one">%1$d naprava</item>
+        <item quantity="two">%1$d napravi</item>
+        <item quantity="other">%1$d naprav</item>
+    </plurals>
+</resources>

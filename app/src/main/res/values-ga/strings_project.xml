@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Tionscadal reatha</string>
+    <string name="project_manage_title">Bainistigh tionscadail</string>
+    <string name="project_empty">Níl aon tionscadail ann fós — tapáil + chun ceann a chruthú</string>
+    <string name="project_create_title">Cruthaigh Tionscadal</string>
+    <string name="project_name_label">Ainm an Tionscadail</string>
+    <string name="project_name_placeholder">Cuir isteach ainm tionscadail</string>
+    <string name="project_rename_title">Athainmnigh tionscadal</string>
+    <string name="project_rename_action">Athainmnigh</string>
+    <string name="project_delete_title">Scrios tionscadal</string>
+    <string name="project_delete_confirm">Scrios an tionscadal seo? Ní féidir tionscadal a bhfuil spásanna ann fós a scriosadh.</string>
+    <string name="project_swipe_delete">Sleamhnaigh chun scriosadh</string>
+    <string name="project_type_label">Cineál: %1$s</string>
+    <string name="project_members_title">Baill an Tionscadail</string>
+    <string name="project_members_empty">Níl aon bhaill ann fós — tapáil + chun ceann a chur leis</string>
+    <string name="project_members_label">Baill</string>
+    <string name="project_user_id">ID Úsáideora</string>
+    <string name="project_user_id_placeholder">ID cuntais an úsáideora</string>
+    <string name="project_remark_hint">Tapáil chun nóta a chur leis</string>
+    <string name="project_remark_title">Cuir nóta in eagar — %1$s</string>
+    <string name="project_remark_label">Nóta</string>
+    <string name="project_role_adjust">Athraigh an Ról</string>
+    <string name="project_role_adjust_title">Athraigh ról — %1$s</string>
+    <string name="project_remove_confirm">Bain “%1$s”?</string>
+    <string name="project_exit">Fág an Tionscadal</string>
+    <string name="project_exit_confirm">Fág an tionscadal seo? Caillfidh tú rochtain air.</string>
+    <string name="project_device_added">Cuireadh an gléas leis</string>
+    <string name="project_device_moved">Bogadh an gléas</string>
+    <string name="space_manage_title">Bainistigh spásanna</string>
+    <string name="space_add">Cuir spás leis</string>
+    <string name="space_add_child">Cuir Spás Linbh Leis</string>
+    <string name="space_add_device">Cuir Gléas Leis</string>
+    <string name="space_name_label">Ainm Spáis</string>
+    <string name="space_name_placeholder">Cuir isteach ainm</string>
+    <string name="space_type_label">Cineál Spáis</string>
+    <string name="space_empty">Níl aon sonraí spáis ann</string>
+    <string name="space_empty_editable">Cuir spás leis chun tosú</string>
+    <string name="space_empty_readonly">Níl aon spásanna ná gléasanna sa tionscadal seo fós</string>
+    <string name="space_delete_title">Scrios spás</string>
+    <string name="space_delete_confirm">Scrios an spás seo? Ní féidir spás a bhfuil fospásanna ann a scriosadh.</string>
+    <string name="space_move_title">Bog go spás</string>
+    <string name="space_move_action">Bog</string>
+    <string name="space_device_adding">Ag cur gléis leis…</string>
+    <string name="space_device_waiting">Ag fanacht… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d ghléas</item>
+        <item quantity="many">%1$d ngléas</item>
+        <item quantity="one">%1$d ghléas</item>
+        <item quantity="two">%1$d ghléas</item>
+        <item quantity="other">%1$d gléas</item>
+    </plurals>
+</resources>

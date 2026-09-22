@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Мова</string>
+    <string name="profile_language_system">Як у сістэме</string>
+    <string name="profile_language_search">Пошук моў</string>
+    <string name="profile_language_search_clear">Ачысціць</string>
+    <string name="profile_language_no_match">Няма адпаведнай мовы</string>
+    <string name="profile_not_logged_in">Вы не ўвайшлі</string>
+    <string name="profile_current_org">Бягучая арганізацыя</string>
+    <string name="profile_current_project">Бягучы праект</string>
+    <string name="profile_no_org_selected">Арганізацыя не выбрана</string>
+    <string name="profile_no_project_selected">Праект не выбраны</string>
+    <string name="profile_org_subtitle">Выберыце арганізацыю, каб выбраць праект</string>
+    <string name="profile_project_subtitle_pick">Выберыце праект</string>
+    <string name="profile_project_subtitle_switch">Націсніце, каб пераключыць праект</string>
+    <string name="profile_project_subtitle_org_first">Спачатку выберыце арганізацыю</string>
+    <string name="profile_section_settings">Настройкі</string>
+    <string name="profile_dark_mode">Цёмная тэма</string>
+    <string name="profile_light_mode">Светлая тэма</string>
+    <string name="profile_theme_subtitle">Націсніце, каб змяніць тэму</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Табліца пунктаў прылады</string>
+    <string name="profile_modbus_subtitle">Карты рэгістраў Modbus (толькі чытанне)</string>
+    <string name="profile_alarm_title">Трывогі</string>
+    <string name="profile_alarm_subtitle">Журнал трывог Modbus і іх апрацоўка</string>
+    <string name="profile_history_title">Гісторыя</string>
+    <string name="profile_history_subtitle">Гісторыя апытанняў і графікі</string>
+    <string name="profile_about_subtitle">Звесткі пра праграму і версію</string>
+    <string name="account_title">Уліковы запіс</string>
+    <string name="account_username">Імя карыстальніка</string>
+    <string name="account_platform">Платформа</string>
+    <string name="account_not_selected">Не выбрана</string>
+    <string name="account_org_toggle">Арганізацыя</string>
+    <string name="account_org_toggle_subtitle">Уключыце, каб кіраваць арганізацыямі</string>
+    <string name="account_logout">Выйсці</string>
+    <string name="about_title">Пра праграму</string>
+    <string name="about_tagline">Платформа кіравання і маніторынгу прылад IoT</string>
+    <string name="about_version">Версія %1$s</string>
+    <string name="about_check_update">Праверыць абнаўленні</string>
+    <string name="about_checking">Праверка…</string>
+    <string name="about_up_to_date">У вас апошняя версія</string>
+    <string name="about_update_now">Абнавіць зараз</string>
+    <string name="about_downloading">Спампоўванне…</string>
+    <string name="about_downloading_percent">Спампоўванне %1$d%%</string>
+    <string name="about_install_now">Устанавіць зараз</string>
+    <string name="about_install">Устанавіць</string>
+    <string name="about_retry_download">Паўтарыць спампоўванне</string>
+    <string name="about_later">Пазней</string>
+    <string name="about_install_dialog_title">Усталяваць абнаўленне</string>
+    <string name="about_new_version_found">Даступная версія %1$s</string>
+    <string name="about_ready_hint">Спампоўванне завершана — націсніце «Устанавіць», каб перадаць пакет сістэмнаму ўсталёўшчыку.</string>
+    <string name="about_need_install_permission">Спачатку дазвольце гэтай праграме ўсталёўваць невядомыя праграмы</string>
+    <string name="about_keep_app_alive">Можна пераключаць старонкі — толькі не закрывайце праграму</string>
+    <string name="about_metered">Вы ў мабільнай сетцы — спампоўванне можа спажыць шмат трафіку</string>
+    <string name="about_metered_size">Вы ў мабільнай сетцы — пакет важыць каля %1$s</string>
+    <string name="about_install_settings_failed">Не атрымалася адкрыць настройку «Усталяванне невядомых праграм» — дазвольце яе ўручную ў сістэмных настройках</string>
+    <string name="about_no_installer">Праграмы-усталёўшчыка няма — пакет захаваны ў тэчцы праграмы</string>
+    <string name="about_update_notes_empty">У гэтым выпуску няма апісання.</string>
+</resources>

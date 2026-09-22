@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Τρέχων οργανισμός</string>
+    <string name="org_detail_title">Λεπτομέρειες οργανισμού</string>
+    <string name="org_empty">Δεν υπάρχουν οργανισμοί — πατήστε + για να δημιουργήσετε έναν</string>
+    <string name="org_create_title">Δημιουργία οργανισμού</string>
+    <string name="org_id_label">ID οργανισμού</string>
+    <string name="org_id_placeholder">π.χ. my-company</string>
+    <string name="org_id_hint">Ξεκινήστε με γράμμα — μόνο γράμματα, ψηφία και παύλες</string>
+    <string name="org_name_label">Όνομα οργανισμού</string>
+    <string name="org_name_placeholder">π.χ. Η Εταιρεία μου</string>
+    <string name="org_rename_title">Μετονομασία οργανισμού</string>
+    <string name="org_delete_title">Διαγραφή οργανισμού</string>
+    <string name="org_delete_confirm">Διαγραφή αυτού του οργανισμού;</string>
+    <string name="org_manage">Διαχείριση</string>
+    <string name="org_swipe_delete">Σύρετε για διαγραφή</string>
+    <string name="org_members_empty">Δεν υπάρχουν μέλη ακόμη</string>
+    <string name="org_member_developer_id">ID προγραμματιστή</string>
+    <string name="org_member_developer_id_placeholder">Το developerId του χρήστη</string>
+    <string name="org_member_name_label">Εμφανιζόμενο όνομα</string>
+    <string name="org_member_name_placeholder">Προαιρετικό</string>
+    <string name="org_change_role">Αλλαγή ρόλου</string>
+    <string name="org_change_role_title">Αλλαγή ρόλου — %1$s</string>
+    <string name="org_remove_confirm">Αφαίρεση του «%1$s»;</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d μέλος</item>
+        <item quantity="other">%1$d μέλη</item>
+    </plurals>
+</resources>

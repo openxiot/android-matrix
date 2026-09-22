@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Progetto attuale</string>
+    <string name="project_manage_title">Gestione progetti</string>
+    <string name="project_empty">Nessun progetto — toccare + per crearne uno</string>
+    <string name="project_create_title">Crea progetto</string>
+    <string name="project_name_label">Nome progetto</string>
+    <string name="project_name_placeholder">Inserisci il nome del progetto</string>
+    <string name="project_rename_title">Rinomina progetto</string>
+    <string name="project_rename_action">Rinomina</string>
+    <string name="project_delete_title">Elimina progetto</string>
+    <string name="project_delete_confirm">Eliminare questo progetto? Un progetto con spazi non può essere eliminato.</string>
+    <string name="project_swipe_delete">Scorri per eliminare</string>
+    <string name="project_type_label">Tipo: %1$s</string>
+    <string name="project_members_title">Membri del progetto</string>
+    <string name="project_members_empty">Nessun membro — toccare + per aggiungerne uno</string>
+    <string name="project_members_label">Membri</string>
+    <string name="project_user_id">ID utente</string>
+    <string name="project_user_id_placeholder">L\'ID account dell\'utente</string>
+    <string name="project_remark_hint">Tocca per aggiungere una nota</string>
+    <string name="project_remark_title">Modifica nota — %1$s</string>
+    <string name="project_remark_label">Nota</string>
+    <string name="project_role_adjust">Cambia ruolo</string>
+    <string name="project_role_adjust_title">Cambia ruolo — %1$s</string>
+    <string name="project_remove_confirm">Rimuovere «%1$s»?</string>
+    <string name="project_exit">Esci dal progetto</string>
+    <string name="project_exit_confirm">Uscire da questo progetto? L\'accesso andrà perso.</string>
+    <string name="project_device_added">Dispositivo aggiunto</string>
+    <string name="project_device_moved">Dispositivo spostato</string>
+    <string name="space_manage_title">Gestione spazi</string>
+    <string name="space_add">Aggiungi spazio</string>
+    <string name="space_add_child">Aggiungi sottospazio</string>
+    <string name="space_add_device">Aggiungi dispositivo</string>
+    <string name="space_name_label">Nome spazio</string>
+    <string name="space_name_placeholder">Inserisci un nome</string>
+    <string name="space_type_label">Tipo di spazio</string>
+    <string name="space_empty">Nessun dato dello spazio</string>
+    <string name="space_empty_editable">Aggiungi uno spazio per iniziare</string>
+    <string name="space_empty_readonly">Questo progetto non ha ancora spazi o dispositivi</string>
+    <string name="space_delete_title">Elimina spazio</string>
+    <string name="space_delete_confirm">Eliminare questo spazio? Uno spazio con sotto-spazi non può essere eliminato.</string>
+    <string name="space_move_title">Sposta nello spazio</string>
+    <string name="space_move_action">Sposta</string>
+    <string name="space_device_adding">Aggiunta dispositivo…</string>
+    <string name="space_device_waiting">Attesa… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="many">%1$d dispositivi</item>
+        <item quantity="one">%1$d dispositivo</item>
+        <item quantity="other">%1$d dispositivi</item>
+    </plurals>
+</resources>

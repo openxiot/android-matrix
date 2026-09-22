@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Riwayat</string>
+    <string name="history_section_overview">Ringkasan layanan</string>
+    <string name="history_no_services">Belum ada layanan Modbus di proyek ini</string>
+    <string name="history_service_count_label">Jumlah Layanan</string>
+    <string name="history_device_count_label">Jumlah Perangkat</string>
+    <string name="history_sampled_at_label">Waktu pengambilan</string>
+    <string name="history_function_count_label">Jumlah Metode</string>
+    <string name="history_faults_section">Pengecualian pengambilan</string>
+    <string name="history_faults_label">Pengecualian pengambilan</string>
+    <string name="history_no_faults">Tidak ada gangguan sampling pada periode ini</string>
+    <string name="history_no_data">Tidak ada data sampling pada periode ini</string>
+    <string name="history_field_label">Bidang</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="other">Data sampling (%1$d baris)</item>
+    </plurals>
+    <string name="service_history_all_functions">Semua Metode</string>
+    <string name="service_history_field_selection">Bidang %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Gangguan %1$s × %2$d</string>
+    <string name="service_history_no_curve">Tidak ada bidang layanan ini yang bisa dibuat grafik</string>
+    <string name="service_history_no_curve_for_function">Tidak ada bidang yang bisa dibuat grafik di fungsi ini</string>
+    <string name="service_history_no_fields_selected">Tidak ada bidang yang dipilih</string>
+    <string name="service_history_failure_hint">Garis vertikal menandai saat pengambilan gagal</string>
+    <string name="service_history_downsampled_hint">Titik data terlalu banyak; data dikurangi sampelnya per interval waktu (nilai adalah rata-rata interval, dalam tanda kurung minimum~maksimum)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Tabel</string>
+    <string name="service_history_view_chart">Grafik</string>
+</resources>

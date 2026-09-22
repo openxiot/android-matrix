@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">موجودہ پروجیکٹ</string>
+    <string name="project_manage_title">پروجیکٹس کا انتظام</string>
+    <string name="project_empty">ابھی کوئی پروجیکٹ نہیں — بنانے کے لیے + پر ٹیپ کریں</string>
+    <string name="project_create_title">پروجیکٹ بنائیں</string>
+    <string name="project_name_label">پروجیکٹ کا نام</string>
+    <string name="project_name_placeholder">پروجیکٹ کا نام درج کریں</string>
+    <string name="project_rename_title">پروجیکٹ کا نام تبدیل کریں</string>
+    <string name="project_rename_action">نام تبدیل کریں</string>
+    <string name="project_delete_title">پروجیکٹ حذف کریں</string>
+    <string name="project_delete_confirm">یہ پروجیکٹ حذف کریں؟ جس پروجیکٹ میں ابھی اسپیسز موجود ہوں وہ حذف نہیں ہو سکتا۔</string>
+    <string name="project_swipe_delete">حذف کرنے کے لیے سوائپ کریں</string>
+    <string name="project_type_label">قسم: %1$s</string>
+    <string name="project_members_title">پروجیکٹ کے اراکین</string>
+    <string name="project_members_empty">ابھی کوئی ممبر نہیں — شامل کرنے کے لیے + پر ٹیپ کریں</string>
+    <string name="project_members_label">اراکین</string>
+    <string name="project_user_id">صارف کی ID</string>
+    <string name="project_user_id_placeholder">صارف کا اکاؤنٹ ID</string>
+    <string name="project_remark_hint">نوٹ شامل کرنے کے لیے ٹیپ کریں</string>
+    <string name="project_remark_title">نوٹ میں ترمیم — %1$s</string>
+    <string name="project_remark_label">نوٹ</string>
+    <string name="project_role_adjust">کردار تبدیل کریں</string>
+    <string name="project_role_adjust_title">کردار تبدیل کریں — %1$s</string>
+    <string name="project_remove_confirm">“%1$s” ہٹائیں؟</string>
+    <string name="project_exit">پروجیکٹ سے باہر آئیں</string>
+    <string name="project_exit_confirm">یہ پروجیکٹ چھوڑ دیں؟ اس تک رسائی ختم ہو جائے گی۔</string>
+    <string name="project_device_added">ڈیوائس شامل ہو گئی</string>
+    <string name="project_device_moved">ڈیوائس منتقل ہو گئی</string>
+    <string name="space_manage_title">اسپیسز کا انتظام</string>
+    <string name="space_add">اسپیس شامل کریں</string>
+    <string name="space_add_child">ذیلی جگہ شامل کریں</string>
+    <string name="space_add_device">آلہ شامل کریں</string>
+    <string name="space_name_label">جگہ کا نام</string>
+    <string name="space_name_placeholder">نام درج کریں</string>
+    <string name="space_type_label">جگہ کی قسم</string>
+    <string name="space_empty">کوئی اسپیس ڈیٹا نہیں</string>
+    <string name="space_empty_editable">شروع کرنے کے لیے ایک اسپیس شامل کریں</string>
+    <string name="space_empty_readonly">اس پروجیکٹ میں ابھی کوئی اسپیس یا ڈیوائس نہیں</string>
+    <string name="space_delete_title">اسپیس حذف کریں</string>
+    <string name="space_delete_confirm">یہ اسپیس حذف کریں؟ جس اسپیس میں ذیلی اسپیسز موجود ہوں وہ حذف نہیں ہو سکتی۔</string>
+    <string name="space_move_title">اسپیس میں منتقل کریں</string>
+    <string name="space_move_action">منتقل کریں</string>
+    <string name="space_device_adding">ڈیوائس شامل کی جا رہی ہے…</string>
+    <string name="space_device_waiting">انتظار… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d ڈیوائس</item>
+        <item quantity="other">%1$d ڈیوائسز</item>
+    </plurals>
+</resources>

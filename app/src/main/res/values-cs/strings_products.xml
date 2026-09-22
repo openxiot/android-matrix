@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Produkty</string>
+    <string name="product_detail_title">Podrobnosti produktu</string>
+    <string name="product_not_found">Produkt nenalezen</string>
+    <string name="product_empty">Zatím žádné produkty</string>
+    <plurals name="product_count">
+        <item quantity="few">%1$d produkty</item>
+        <item quantity="many">%1$d produktu</item>
+        <item quantity="one">%1$d produkt</item>
+        <item quantity="other">%1$d produktů</item>
+    </plurals>
+    <string name="product_model_inline">Model: %1$s</string>
+    <string name="product_id_label">ID produktu</string>
+    <string name="product_model_label">Model produktu</string>
+    <string name="product_org_label">Organizace</string>
+    <string name="product_buy_jd">Koupit na JD.com</string>
+    <string name="product_buy_taobao">Koupit na Taobao</string>
+    <string name="product_status_released">Publikováno</string>
+    <string name="product_status_preview">Náhled</string>
+    <string name="product_status_development">Ve vývoji</string>
+    <string name="product_empty_data">Žádná data o produktu</string>
+</resources>

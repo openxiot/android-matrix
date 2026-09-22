@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Матрица</string>
+    <string name="common_back">Артқа</string>
+    <string name="common_retry">Қайталау</string>
+    <string name="common_confirm">Растау</string>
+    <string name="common_cancel">Болдырмау</string>
+    <string name="common_close">Жабу</string>
+    <string name="common_detail">Мәліметтер</string>
+    <string name="common_collapse">Жию</string>
+    <string name="common_expand">Жаю</string>
+    <string name="common_all">Барлығы</string>
+    <string name="common_add">Қосу</string>
+    <string name="common_create">Жасау</string>
+    <string name="common_delete">Жою</string>
+    <string name="common_unnamed">Атауы жоқ</string>
+    <string name="common_unknown">Белгісіз</string>
+    <string name="common_me">Мен</string>
+    <string name="common_rename_action">Қайта атау</string>
+    <string name="common_role_label">Рөл</string>
+    <string name="common_role_admin">Әкімші</string>
+    <string name="common_role_member">Мүшелер</string>
+    <string name="common_role_member_option">Қарапайым мүше</string>
+    <string name="common_member_add">Мүше қосу</string>
+    <string name="common_member_remove">Мүшені алып тастау</string>
+    <string name="common_edit">Өңдеу</string>
+    <string name="common_refresh">Жаңарту</string>
+    <string name="common_change">Өзгерту</string>
+    <string name="common_handle">Өңдеу</string>
+    <string name="common_handled">Өңделді</string>
+    <string name="common_unhandled">Өңделмеді</string>
+    <string name="common_recovered">Қалпына келді</string>
+    <string name="common_unrecovered">Қалпына келмеді</string>
+    <string name="common_online">Желіде</string>
+    <string name="common_offline">Желіден тыс</string>
+    <string name="common_switch_on">Қосулы</string>
+    <string name="common_switch_off">Өшірулі</string>
+    <string name="common_please_select">Таңдаңыз</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Уақыт аралығы таңдалмаған</string>
+    <string name="common_range_text">%1$s — %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Қызметтер</string>
+    <string name="common_function_label">Әдістер</string>
+    <string name="common_device_label">Құрылғы</string>
+    <string name="common_protocol_label">Хаттама</string>
+    <string name="common_unknown_product">Белгісіз өнім</string>
+    <string name="common_truncated_hint">Ерекше жағдайлар шектен асады; тек соңғылары ғана көрсетілді</string>
+    <string name="err_network">Желі қолжетімсіз. Қосылымды тексеріп, қайта көріңіз.</string>
+    <string name="err_unknown">Бірдеңе дұрыс болмады. Қайта көріңіз.</string>
+    <string name="space_type_site">Нысан</string>
+    <string name="space_type_building">Ғимарат</string>
+    <string name="space_type_floor">Қабат</string>
+    <string name="space_type_room">Бөлме</string>
+    <string name="space_type_zone">Аймақ</string>
+    <string name="space_type_field">Алаң</string>
+    <string name="space_type_workshop">Цех</string>
+    <string name="space_type_parking">Тұрақ</string>
+</resources>

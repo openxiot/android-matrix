@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matriz</string>
+    <string name="common_back">Voltar</string>
+    <string name="common_retry">Tentar novamente</string>
+    <string name="common_confirm">Confirmar</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_close">Fechar</string>
+    <string name="common_detail">Detalhes</string>
+    <string name="common_collapse">Recolher</string>
+    <string name="common_expand">Expandir</string>
+    <string name="common_all">Todos</string>
+    <string name="common_add">Adicionar</string>
+    <string name="common_create">Criar</string>
+    <string name="common_delete">Excluir</string>
+    <string name="common_unnamed">Sem nome</string>
+    <string name="common_unknown">Desconhecido</string>
+    <string name="common_me">Eu</string>
+    <string name="common_rename_action">Renomear</string>
+    <string name="common_role_label">Função</string>
+    <string name="common_role_admin">Administrador</string>
+    <string name="common_role_member">Membros</string>
+    <string name="common_role_member_option">Membro comum</string>
+    <string name="common_member_add">Adicionar membro</string>
+    <string name="common_member_remove">Remover membro</string>
+    <string name="common_edit">Editar</string>
+    <string name="common_refresh">Atualizar</string>
+    <string name="common_change">Alterar</string>
+    <string name="common_handle">Tratar</string>
+    <string name="common_handled">Tratado</string>
+    <string name="common_unhandled">Não tratado</string>
+    <string name="common_recovered">Restabelecido</string>
+    <string name="common_unrecovered">Ativo</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">Ligado</string>
+    <string name="common_switch_off">Desligado</string>
+    <string name="common_please_select">Selecione</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Nenhum intervalo de tempo selecionado</string>
+    <string name="common_range_text">%1$s a %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Serviços</string>
+    <string name="common_function_label">Métodos</string>
+    <string name="common_device_label">Dispositivo</string>
+    <string name="common_protocol_label">Protocolo</string>
+    <string name="common_unknown_product">Produto desconhecido</string>
+    <string name="common_truncated_hint">Os registros de exceção excedem o limite; apenas os mais recentes são listados</string>
+    <string name="err_network">Rede indisponível. Verifique sua conexão e tente novamente.</string>
+    <string name="err_unknown">Algo deu errado. Tente novamente.</string>
+    <string name="space_type_site">Local</string>
+    <string name="space_type_building">Edifício</string>
+    <string name="space_type_floor">Andar</string>
+    <string name="space_type_room">Sala</string>
+    <string name="space_type_zone">Zona</string>
+    <string name="space_type_field">Campo</string>
+    <string name="space_type_workshop">Oficina</string>
+    <string name="space_type_parking">Estacionamento</string>
+</resources>

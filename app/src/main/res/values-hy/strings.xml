@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Մատրիցա</string>
+    <string name="common_back">Հետ</string>
+    <string name="common_retry">Կրկնել</string>
+    <string name="common_confirm">Հաստատել</string>
+    <string name="common_cancel">Չեղարկել</string>
+    <string name="common_close">Փակել</string>
+    <string name="common_detail">Մանրամասներ</string>
+    <string name="common_collapse">Ծալել</string>
+    <string name="common_expand">Ընդարձակել</string>
+    <string name="common_all">Բոլորը</string>
+    <string name="common_add">Ավելացնել</string>
+    <string name="common_create">Ստեղծել</string>
+    <string name="common_delete">Ջնջել</string>
+    <string name="common_unnamed">Անանուն</string>
+    <string name="common_unknown">Անհայտ</string>
+    <string name="common_me">Դուք</string>
+    <string name="common_rename_action">Վերանվանել</string>
+    <string name="common_role_label">Դեր</string>
+    <string name="common_role_admin">Ադմինիստրատոր</string>
+    <string name="common_role_member">Անդամներ</string>
+    <string name="common_role_member_option">Սովորական անդամ</string>
+    <string name="common_member_add">Ավելացնել անդամ</string>
+    <string name="common_member_remove">Հեռացնել անդամին</string>
+    <string name="common_edit">Խմբագրել</string>
+    <string name="common_refresh">Թարմացնել</string>
+    <string name="common_change">Փոխել</string>
+    <string name="common_handle">Մշակել</string>
+    <string name="common_handled">Մշակվել է</string>
+    <string name="common_unhandled">Չի մշակվել</string>
+    <string name="common_recovered">Վերականգնվել է</string>
+    <string name="common_unrecovered">Չի վերականգնվել</string>
+    <string name="common_online">Առցանց</string>
+    <string name="common_offline">Անցանց</string>
+    <string name="common_switch_on">Միացված</string>
+    <string name="common_switch_off">Անջատված</string>
+    <string name="common_please_select">Ընտրեք</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Ժամանակահատված ընտրված չէ</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Ծառայություններ</string>
+    <string name="common_function_label">Մեթոդներ</string>
+    <string name="common_device_label">Սարք</string>
+    <string name="common_protocol_label">Արձանագրություն</string>
+    <string name="common_unknown_product">Անհայտ ապրանք</string>
+    <string name="common_truncated_hint">Բացառությունները գերազանցում են սահմանը. նշված են միայն վերջինները</string>
+    <string name="err_network">Ցանցն անհասանելի է։ Ստուգեք կապը և կրկին փորձեք։</string>
+    <string name="err_unknown">Ինչ-որ բան սխալ գնաց։ Փորձեք կրկին։</string>
+    <string name="space_type_site">Տեղամաս</string>
+    <string name="space_type_building">Շենք</string>
+    <string name="space_type_floor">Հարկ</string>
+    <string name="space_type_room">Սենյակ</string>
+    <string name="space_type_zone">Գոտի</string>
+    <string name="space_type_field">Դաշտ</string>
+    <string name="space_type_workshop">Արտադրամաս</string>
+    <string name="space_type_parking">Ավտոկայանատեղի</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">위챗으로 로그인</string>
+    <string name="login_test_account">테스트 계정으로 로그인</string>
+    <string name="login_err_wechat_missing">위챗이 설치되어 있지 않거나 버전이 너무 낮습니다</string>
+    <string name="login_err_no_code">인증 코드를 받지 못했습니다</string>
+    <string name="login_err_cancelled">위챗 로그인이 취소되었습니다</string>
+    <string name="login_err_wechat">위챗 인증에 실패했습니다(%1$d)</string>
+    <string name="login_err_no_token">로그인에 실패했습니다: 토큰이 반환되지 않았습니다</string>
+</resources>

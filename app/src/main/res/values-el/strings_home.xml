@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Παρακαλώ επιλέξτε πρώτα ένα έργο από τη λίστα έργων</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Απόρριψη αλλαγών;</string>
+    <string name="home_discard_message">Έχετε μη αποθηκευμένες αλλαγές. Αν βγείτε τώρα, θα χαθούν.</string>
+    <string name="home_dashboard_empty">Δεν υπάρχουν κάρτες — πατήστε «Προσθήκη» παρακάτω για να προσθέσετε μία</string>
+    <string name="home_add_card">+ Προσθήκη</string>
+    <string name="home_default_layout_loaded">Φορτώθηκε η προεπιλεγμένη διάταξη — αποθηκεύστε την για να εφαρμοστεί</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Ένας μεγάλος αριθμός: συσκευές / υπηρεσίες / συναγερμοί / σφάλματα</string>
+    <string name="home_card_kind_line">Ωριαίοι αριθμοί συναγερμών ή ένα πεδίο υπηρεσίας</string>
+    <string name="home_card_kind_distribution">Κατανομή ανά συσκευή / υπηρεσία / συναγερμό / σφάλμα</string>
+    <string name="home_card_kind_device">Μία ιδιότητα μιας συσκευής</string>
+    <string name="home_card_kind_service">Ένα σύνολο πεδίων από μία λειτουργία</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Διάγραμμα</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Συσκευή</string>
+    <string name="home_card_default_service">Υπηρεσίες</string>
+    <string name="home_card_default_unknown">Κάρτα</string>
+    <string name="home_edit_card_title">Επεξεργασία · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Πλήρες πλάτος</string>
+    <string name="home_size_half">Μισό πλάτος</string>
+    <string name="home_section_metric">Μετρική</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Σύνολο συσκευών</string>
+    <string name="home_metric_devices_online">Συσκευές σε σύνδεση</string>
+    <string name="home_metric_services_total">Σύνολο υπηρεσιών</string>
+    <string name="home_metric_alarms_today">Σημερινοί συναγερμοί</string>
+    <string name="home_metric_alarms_window">Συναγερμοί στο διάστημα</string>
+    <string name="home_metric_failures_total">Αποτυχίες συλλογής στο διάστημα</string>
+    <string name="home_section_dimension">Κατανομή ανά</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Τύπος συσκευής</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Τύπος αποτυχίας συλλογής</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Πηγή δεδομένων</string>
+    <string name="home_source_label">Πηγή</string>
+    <string name="home_source_alarm_curve">Ωριαίοι αριθμοί συναγερμών</string>
+    <string name="home_source_service_field">Ένα πεδίο υπηρεσίας</string>
+    <string name="home_show_failure_shadow">Εμφάνιση γραμμών αποτυχημένης συλλογής</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Υπηρεσία · Λειτουργία · Πεδίο</string>
+    <string name="home_service_placeholder">Επιλέξτε υπηρεσία</string>
+    <string name="home_service_unnamed">Υπηρεσία χωρίς όνομα</string>
+    <string name="home_function_placeholder">Επιλέξτε λειτουργία</string>
+    <string name="home_function_fallback">Λειτουργία %1$d</string>
+    <string name="home_pick_service_first">Επιλέξτε πρώτα υπηρεσία</string>
+    <string name="home_show_unit">Εμφάνιση μονάδας</string>
+    <string name="home_section_device_prop">Συσκευή · Ιδιότητα</string>
+    <string name="home_device_placeholder">Επιλέξτε συσκευή</string>
+    <string name="home_prop_label">Ιδιότητες</string>
+    <string name="home_pick_device_first">Επιλέξτε πρώτα συσκευή</string>
+    <string name="home_prop_none">Δεν υπάρχουν ιδιότητες για αυτό το μοντέλο</string>
+    <string name="home_prop_placeholder">Επιλέξτε ιδιότητα</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, αφήστε κενό για να μην υπάρχει όριο</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Τελευταίο</string>
+    <string name="home_window_custom">Προσαρμοσμένο</string>
+    <string name="home_pick_dates">Επιλέξτε ημερομηνίες έναρξης και λήξης</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d ημέρα</item>
+        <item quantity="other">%1$d ημέρες</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d ώρα</item>
+        <item quantity="other">%1$d ώρες</item>
+    </plurals>
+    <string name="home_card_unknown_type">Άγνωστος τύπος κάρτας</string>
+    <string name="home_empty_no_data">Δεν υπάρχουν δεδομένα</string>
+    <string name="home_empty_no_reading">Δεν υπάρχουν ενδείξεις ακόμη</string>
+    <string name="home_empty_not_sampled">Δεν έχει συλλεχθεί ακόμη</string>
+    <string name="home_sampled_at">Συλλογή %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">συσκευές</string>
+    <string name="home_unit_services">υπηρεσίες</string>
+</resources>

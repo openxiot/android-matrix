@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Aanmelden met WeChat</string>
+    <string name="login_test_account">Aanmelden met een testaccount</string>
+    <string name="login_err_wechat_missing">WeChat is niet geïnstalleerd of de versie is te oud</string>
+    <string name="login_err_no_code">Geen autorisatiecode ontvangen</string>
+    <string name="login_err_cancelled">WeChat-aanmelding geannuleerd</string>
+    <string name="login_err_wechat">WeChat-autorisatie mislukt (%1$d)</string>
+    <string name="login_err_no_token">Aanmelden mislukt: geen token ontvangen</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Idioma</string>
+    <string name="profile_language_system">Según el sistema</string>
+    <string name="profile_language_search">Buscar idiomas</string>
+    <string name="profile_language_search_clear">Borrar</string>
+    <string name="profile_language_no_match">No se encontró ningún idioma</string>
+    <string name="profile_not_logged_in">Sesión no iniciada</string>
+    <string name="profile_current_org">Organización actual</string>
+    <string name="profile_current_project">Proyecto actual</string>
+    <string name="profile_no_org_selected">Ninguna organización seleccionada</string>
+    <string name="profile_no_project_selected">Ningún proyecto seleccionado</string>
+    <string name="profile_org_subtitle">Elija una para poder elegir un proyecto</string>
+    <string name="profile_project_subtitle_pick">Seleccione un proyecto</string>
+    <string name="profile_project_subtitle_switch">Toque para cambiar de proyecto</string>
+    <string name="profile_project_subtitle_org_first">Seleccione primero una organización</string>
+    <string name="profile_section_settings">Ajustes</string>
+    <string name="profile_dark_mode">Modo oscuro</string>
+    <string name="profile_light_mode">Modo claro</string>
+    <string name="profile_theme_subtitle">Toque para cambiar de tema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tabla de puntos del dispositivo</string>
+    <string name="profile_modbus_subtitle">Mapas de registros Modbus (solo lectura)</string>
+    <string name="profile_alarm_title">Alarmas</string>
+    <string name="profile_alarm_subtitle">Registro y gestión de alarmas Modbus</string>
+    <string name="profile_history_title">Historial</string>
+    <string name="profile_history_subtitle">Historial de muestreo y gráficos</string>
+    <string name="profile_about_subtitle">Información y versión de la app</string>
+    <string name="account_title">Cuenta</string>
+    <string name="account_username">Nombre de usuario</string>
+    <string name="account_platform">Plataforma</string>
+    <string name="account_not_selected">Sin seleccionar</string>
+    <string name="account_org_toggle">Organización</string>
+    <string name="account_org_toggle_subtitle">Actívelo para gestionar organizaciones</string>
+    <string name="account_logout">Cerrar sesión</string>
+    <string name="about_title">Acerca de</string>
+    <string name="about_tagline">Plataforma de gestión y monitorización de dispositivos IoT</string>
+    <string name="about_version">Versión %1$s</string>
+    <string name="about_check_update">Buscar actualizaciones</string>
+    <string name="about_checking">Comprobando…</string>
+    <string name="about_up_to_date">Está actualizado</string>
+    <string name="about_update_now">Actualizar ahora</string>
+    <string name="about_downloading">Descargando…</string>
+    <string name="about_downloading_percent">Descargando %1$d%%</string>
+    <string name="about_install_now">Instalar ahora</string>
+    <string name="about_install">Instalar</string>
+    <string name="about_retry_download">Reintentar descarga</string>
+    <string name="about_later">Más tarde</string>
+    <string name="about_install_dialog_title">Instalar actualización</string>
+    <string name="about_new_version_found">Ya está disponible la versión %1$s</string>
+    <string name="about_ready_hint">Descarga completada — toque Instalar para pasarlo al instalador del sistema.</string>
+    <string name="about_need_install_permission">Permita primero que esta app instale apps desconocidas</string>
+    <string name="about_keep_app_alive">Puede cambiar de página — solo no cierre la app</string>
+    <string name="about_metered">Está con datos móviles — la descarga puede consumir muchos datos</string>
+    <string name="about_metered_size">Está con datos móviles — el paquete ocupa unos %1$s</string>
+    <string name="about_install_settings_failed">No se pudo abrir el ajuste “Instalar apps desconocidas” — permítalo manualmente en los ajustes del sistema</string>
+    <string name="about_no_installer">No hay ninguna app de instalación disponible — el paquete se guardó en la carpeta de la app</string>
+    <string name="about_update_notes_empty">Esta versión no incluye notas.</string>
+</resources>

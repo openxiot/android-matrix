@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Najprej izberite projekt s seznama projektov</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Zavreči spremembe?</string>
+    <string name="home_discard_message">Imate neshranjene spremembe. Če zdaj odidete, bodo izgubljene.</string>
+    <string name="home_dashboard_empty">Ni še nobene kartice — spodaj se dotaknite »Dodaj«</string>
+    <string name="home_add_card">+ Dodaj</string>
+    <string name="home_default_layout_loaded">Privzeta postavitev je naložena — shranite jo, da se uporabi</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Ena velika številka: naprave / storitve / alarmi / napake</string>
+    <string name="home_card_kind_line">Število alarmov po urah ali eno polje storitve</string>
+    <string name="home_card_kind_distribution">Razčlenitev po napravi / storitvi / alarmu / napaki</string>
+    <string name="home_card_kind_device">Ena lastnost ene naprave</string>
+    <string name="home_card_kind_service">Nabor polj ene funkcije</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Graf</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Naprava</string>
+    <string name="home_card_default_service">Storitve</string>
+    <string name="home_card_default_unknown">Kartica</string>
+    <string name="home_edit_card_title">Uredi · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Polna širina</string>
+    <string name="home_size_half">Polovična širina</string>
+    <string name="home_section_metric">Kazalnik</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Vse naprave</string>
+    <string name="home_metric_devices_online">Povezane naprave</string>
+    <string name="home_metric_services_total">Vse storitve</string>
+    <string name="home_metric_alarms_today">Današnji alarmi</string>
+    <string name="home_metric_alarms_window">Alarmi v oknu</string>
+    <string name="home_metric_failures_total">Napake zajema v oknu</string>
+    <string name="home_section_dimension">Razčlenitev po</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Vrsta naprave</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Vrsta napake zajema</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Vir podatkov</string>
+    <string name="home_source_label">Vir</string>
+    <string name="home_source_alarm_curve">Število alarmov po urah</string>
+    <string name="home_source_service_field">Eno polje storitve</string>
+    <string name="home_show_failure_shadow">Prikaži črte neuspešnega zajema</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Storitev · funkcija · polje</string>
+    <string name="home_service_placeholder">Izberite storitev</string>
+    <string name="home_service_unnamed">Neimenovana storitev</string>
+    <string name="home_function_placeholder">Izberite funkcijo</string>
+    <string name="home_function_fallback">Funkcija %1$d</string>
+    <string name="home_pick_service_first">Najprej izberite storitev</string>
+    <string name="home_show_unit">Prikaži enoto</string>
+    <string name="home_section_device_prop">Naprava · lastnost</string>
+    <string name="home_device_placeholder">Izberite napravo</string>
+    <string name="home_prop_label">Lastnosti</string>
+    <string name="home_pick_device_first">Najprej izberite napravo</string>
+    <string name="home_prop_none">Ta model nima lastnosti</string>
+    <string name="home_prop_placeholder">Izberite lastnost</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, pustite prazno brez omejitve</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Zadnjih</string>
+    <string name="home_window_custom">Po meri</string>
+    <string name="home_pick_dates">Izberite začetni in končni datum</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d dnevi</item>
+        <item quantity="one">%1$d dan</item>
+        <item quantity="two">%1$d dneva</item>
+        <item quantity="other">%1$d dni</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d ure</item>
+        <item quantity="one">%1$d ura</item>
+        <item quantity="two">%1$d uri</item>
+        <item quantity="other">%1$d ur</item>
+    </plurals>
+    <string name="home_card_unknown_type">Neznana vrsta kartice</string>
+    <string name="home_empty_no_data">Ni podatkov</string>
+    <string name="home_empty_no_reading">Ni še nobenih odčitkov</string>
+    <string name="home_empty_not_sampled">Še ni zajeto</string>
+    <string name="home_sampled_at">Zajeto %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">naprave</string>
+    <string name="home_unit_services">storitve</string>
+</resources>

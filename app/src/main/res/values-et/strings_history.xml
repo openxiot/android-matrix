@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Ajalugu</string>
+    <string name="history_section_overview">Teenuste ülevaade</string>
+    <string name="history_no_services">Selles projektis pole veel Modbus teenuseid</string>
+    <string name="history_service_count_label">Teenuste arv</string>
+    <string name="history_device_count_label">Seadmete arv</string>
+    <string name="history_sampled_at_label">Kogumisaeg</string>
+    <string name="history_function_count_label">Meetodid</string>
+    <string name="history_faults_section">Kogumiserandid</string>
+    <string name="history_faults_label">Kogumiserandid</string>
+    <string name="history_no_faults">Sellel perioodil kogumise tõrkeid pole</string>
+    <string name="history_no_data">Sellel perioodil ei kogutud andmeid</string>
+    <string name="history_field_label">Väli</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Kogutud andmed (%1$d kirje)</item>
+        <item quantity="other">Kogutud andmed (%1$d kirjet)</item>
+    </plurals>
+    <string name="service_history_all_functions">Kõik meetodid</string>
+    <string name="service_history_field_selection">Väljad %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Tõrge %1$s × %2$d</string>
+    <string name="service_history_no_curve">Selle teenuse ühtegi välja ei saa graafikule kanda</string>
+    <string name="service_history_no_curve_for_function">Selles funktsioonis pole graafikule kantavaid välju</string>
+    <string name="service_history_no_fields_selected">Ühtegi välja pole valitud</string>
+    <string name="service_history_failure_hint">Vertikaalsed jooned tähistavad kogumise ebaõnnestumise hetki</string>
+    <string name="service_history_downsampled_hint">Palju andmepunkte; valimit on ajavahemike kaupa hõrendatud (väärtus on selle vahemiku keskmine, sulgudes miinimum~maksimum)</string>
+    <string name="service_history_keepalive">Hoidmine</string>
+    <string name="service_history_view_table">Tabel</string>
+    <string name="service_history_view_chart">Graafik</string>
+</resources>

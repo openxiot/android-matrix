@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Maitrís</string>
+    <string name="common_back">Ar ais</string>
+    <string name="common_retry">Atriail</string>
+    <string name="common_confirm">Deimhnigh</string>
+    <string name="common_cancel">Cealaigh</string>
+    <string name="common_close">Dún</string>
+    <string name="common_detail">Sonraí</string>
+    <string name="common_collapse">Laghdaigh</string>
+    <string name="common_expand">Leathnaigh</string>
+    <string name="common_all">Gach rud</string>
+    <string name="common_add">Cuir Leis</string>
+    <string name="common_create">Cruthaigh</string>
+    <string name="common_delete">Scrios</string>
+    <string name="common_unnamed">Gan ainm</string>
+    <string name="common_unknown">Anaithnid</string>
+    <string name="common_me">Tusa</string>
+    <string name="common_rename_action">Athainmnigh</string>
+    <string name="common_role_label">Ról</string>
+    <string name="common_role_admin">Riarthóir</string>
+    <string name="common_role_member">Baill</string>
+    <string name="common_role_member_option">Ball Rialta</string>
+    <string name="common_member_add">Cuir Ball Leis</string>
+    <string name="common_member_remove">Bain an Ball</string>
+    <string name="common_edit">Cuir in Eagar</string>
+    <string name="common_refresh">Athnuaigh</string>
+    <string name="common_change">Athraigh</string>
+    <string name="common_handle">Láimhseáil</string>
+    <string name="common_handled">Láimhseáilte</string>
+    <string name="common_unhandled">Neamhláimhseáilte</string>
+    <string name="common_recovered">Aisghafa</string>
+    <string name="common_unrecovered">Gníomhach</string>
+    <string name="common_online">Ar Líne</string>
+    <string name="common_offline">As Líne</string>
+    <string name="common_switch_on">Ar siúl</string>
+    <string name="common_switch_off">As</string>
+    <string name="common_please_select">Roghnaigh</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Níl aon raon ama roghnaithe</string>
+    <string name="common_range_text">%1$s go %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Seirbhísí</string>
+    <string name="common_function_label">Modhanna</string>
+    <string name="common_device_label">Gléas</string>
+    <string name="common_protocol_label">Prótacal</string>
+    <string name="common_unknown_product">Táirge Anaithnid</string>
+    <string name="common_truncated_hint">Sáraíonn na heisceachtaí an teorainn; ní liostaítear ach na cinn is déanaí</string>
+    <string name="err_network">Níl an líonra ar fáil. Seiceáil do nasc agus bain triail eile as.</string>
+    <string name="err_unknown">Tharla rud éigin mícheart. Bain triail eile as.</string>
+    <string name="space_type_site">Suíomh</string>
+    <string name="space_type_building">Foirgneamh</string>
+    <string name="space_type_floor">Urlár</string>
+    <string name="space_type_room">Seomra</string>
+    <string name="space_type_zone">Crios</string>
+    <string name="space_type_field">Páirc</string>
+    <string name="space_type_workshop">Ceardlann</string>
+    <string name="space_type_parking">Carrchlós</string>
+</resources>

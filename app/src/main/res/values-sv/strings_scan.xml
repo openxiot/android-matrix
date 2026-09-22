@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Rikta kameran mot enhetens QR-kod eller IMEI</string>
+    <string name="scan_torch">Ficklampa</string>
+    <string name="scan_torch_on">Sätt på ficklampan</string>
+    <string name="scan_torch_off">Stäng av ficklampan</string>
+    <string name="scan_permission_required">Kameraåtkomst behövs för att skanna och lägga till enheter</string>
+    <string name="scan_grant">Bevilja åtkomst</string>
+</resources>

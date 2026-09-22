@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Матрица</string>
+    <string name="common_back">Назад</string>
+    <string name="common_retry">Повторить</string>
+    <string name="common_confirm">Подтвердить</string>
+    <string name="common_cancel">Отмена</string>
+    <string name="common_close">Закрыть</string>
+    <string name="common_detail">Детали</string>
+    <string name="common_collapse">Свернуть</string>
+    <string name="common_expand">Развернуть</string>
+    <string name="common_all">Все</string>
+    <string name="common_add">Добавить</string>
+    <string name="common_create">Создать</string>
+    <string name="common_delete">Удалить</string>
+    <string name="common_unnamed">Без названия</string>
+    <string name="common_unknown">Неизвестно</string>
+    <string name="common_me">Вы</string>
+    <string name="common_rename_action">Переименовать</string>
+    <string name="common_role_label">Роль</string>
+    <string name="common_role_admin">Администратор</string>
+    <string name="common_role_member">Участники</string>
+    <string name="common_role_member_option">Обычный участник</string>
+    <string name="common_member_add">Добавить</string>
+    <string name="common_member_remove">Удалить участника</string>
+    <string name="common_edit">Ред.</string>
+    <string name="common_refresh">Обновить</string>
+    <string name="common_change">Изменить</string>
+    <string name="common_handle">Обработать</string>
+    <string name="common_handled">Обработано</string>
+    <string name="common_unhandled">Не обработано</string>
+    <string name="common_recovered">Восстановлена</string>
+    <string name="common_unrecovered">Активна</string>
+    <string name="common_online">В сети</string>
+    <string name="common_offline">Не в сети</string>
+    <string name="common_switch_on">Вкл.</string>
+    <string name="common_switch_off">Выкл.</string>
+    <string name="common_please_select">Выберите</string>
+    <string name="common_ok">ОК</string>
+    <string name="common_no_range">Период не выбран</string>
+    <string name="common_range_text">%1$s — %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Сервисы</string>
+    <string name="common_function_label">Методы</string>
+    <string name="common_device_label">Устройство</string>
+    <string name="common_protocol_label">Протокол</string>
+    <string name="common_unknown_product">Неизвестный продукт</string>
+    <string name="common_truncated_hint">Записей об исключениях больше лимита; показаны только последние</string>
+    <string name="err_network">Сеть недоступна. Проверьте подключение и повторите попытку.</string>
+    <string name="err_unknown">Что-то пошло не так. Повторите попытку.</string>
+    <string name="space_type_site">Площадка</string>
+    <string name="space_type_building">Здание</string>
+    <string name="space_type_floor">Этаж</string>
+    <string name="space_type_room">Комната</string>
+    <string name="space_type_zone">Зона</string>
+    <string name="space_type_field">Участок</string>
+    <string name="space_type_workshop">Цех</string>
+    <string name="space_type_parking">Парковка</string>
+</resources>

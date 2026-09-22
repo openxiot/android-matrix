@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Одоогийн байгууллага</string>
+    <string name="org_detail_title">Байгууллагын дэлгэрэнгүй</string>
+    <string name="org_empty">Одоогоор байгууллага байхгүй — нэмэхийн тулд + дарна уу</string>
+    <string name="org_create_title">Байгууллага үүсгэх</string>
+    <string name="org_id_label">Байгууллагын ID</string>
+    <string name="org_id_placeholder">жишээ нь: my-company</string>
+    <string name="org_id_hint">Үсгээр эхэлнэ — зөвхөн үсэг, тоо, зураас</string>
+    <string name="org_name_label">Байгууллагын нэр</string>
+    <string name="org_name_placeholder">жишээ нь: My Company</string>
+    <string name="org_rename_title">Байгууллагын нэрийг өөрчлөх</string>
+    <string name="org_delete_title">Байгууллага устгах</string>
+    <string name="org_delete_confirm">Энэ байгууллагыг устгах уу?</string>
+    <string name="org_manage">Удирдах</string>
+    <string name="org_swipe_delete">Устгахын тулд шургуулна уу</string>
+    <string name="org_members_empty">Одоогоор гишүүн байхгүй</string>
+    <string name="org_member_developer_id">Хөгжүүлэгчийн ID</string>
+    <string name="org_member_developer_id_placeholder">Хэрэглэгчийн developerId</string>
+    <string name="org_member_name_label">Харагдах нэр</string>
+    <string name="org_member_name_placeholder">Сонголттой</string>
+    <string name="org_change_role">Үүргийг өөрчлөх</string>
+    <string name="org_change_role_title">Үүргийг өөрчлөх — %1$s</string>
+    <string name="org_remove_confirm">«%1$s»-ийг хасах уу?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d гишүүн</item>
+        <item quantity="other">%1$d гишүүд</item>
+    </plurals>
+</resources>

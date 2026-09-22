@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">سازمان فعلی</string>
+    <string name="org_detail_title">جزئیات سازمان</string>
+    <string name="org_empty">هنوز سازمانی نیست؛ برای ایجاد، روی + بزنید</string>
+    <string name="org_create_title">ایجاد سازمان</string>
+    <string name="org_id_label">شناسه سازمان</string>
+    <string name="org_id_placeholder">مثلاً my-company</string>
+    <string name="org_id_hint">با یک حرف شروع شود؛ فقط حروف، ارقام و خط تیره</string>
+    <string name="org_name_label">نام سازمان</string>
+    <string name="org_name_placeholder">مثلاً شرکت من</string>
+    <string name="org_rename_title">تغییر نام سازمان</string>
+    <string name="org_delete_title">حذف سازمان</string>
+    <string name="org_delete_confirm">این سازمان حذف شود؟</string>
+    <string name="org_manage">مدیریت</string>
+    <string name="org_swipe_delete">برای حذف بکشید</string>
+    <string name="org_members_empty">هنوز عضوی نیست</string>
+    <string name="org_member_developer_id">شناسه توسعه‌دهنده</string>
+    <string name="org_member_developer_id_placeholder">developerId کاربر</string>
+    <string name="org_member_name_label">نام نمایشی</string>
+    <string name="org_member_name_placeholder">اختیاری</string>
+    <string name="org_change_role">تغییر نقش</string>
+    <string name="org_change_role_title">تغییر نقش - %1$s</string>
+    <string name="org_remove_confirm">«%1$s» حذف شود؟</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d عضو</item>
+        <item quantity="other">%1$d عضو‌ها</item>
+    </plurals>
+</resources>

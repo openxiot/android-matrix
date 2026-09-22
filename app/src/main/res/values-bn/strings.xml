@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">ম্যাট্রিক্স</string>
+    <string name="common_back">পেছন</string>
+    <string name="common_retry">পুনরায় চেষ্টা</string>
+    <string name="common_confirm">নিশ্চিত করুন</string>
+    <string name="common_cancel">বাতিল করুন</string>
+    <string name="common_close">বন্ধ করুন</string>
+    <string name="common_detail">বিবরণ</string>
+    <string name="common_collapse">সঙ্কুচিত করুন</string>
+    <string name="common_expand">প্রসারিত করুন</string>
+    <string name="common_all">সমস্ত</string>
+    <string name="common_add">যোগ করুন</string>
+    <string name="common_create">তৈরি করুন</string>
+    <string name="common_delete">মুছে ফেলুন</string>
+    <string name="common_unnamed">নামহীন</string>
+    <string name="common_unknown">অজানা</string>
+    <string name="common_me">আমি</string>
+    <string name="common_rename_action">নাম পরিবর্তন</string>
+    <string name="common_role_label">ভূমিকা</string>
+    <string name="common_role_admin">প্রশাসক</string>
+    <string name="common_role_member">সদস্য</string>
+    <string name="common_role_member_option">সাধারণ সদস্য</string>
+    <string name="common_member_add">সদস্য যোগ করুন</string>
+    <string name="common_member_remove">সদস্য সরান</string>
+    <string name="common_edit">সম্পাদনা করুন</string>
+    <string name="common_refresh">রিফ্রেশ</string>
+    <string name="common_change">পরিবর্তন</string>
+    <string name="common_handle">নিষ্পত্তি</string>
+    <string name="common_handled">নিষ্পত্তি হয়েছে</string>
+    <string name="common_unhandled">নিষ্পত্তি হয়নি</string>
+    <string name="common_recovered">পুনরুদ্ধার হয়েছে</string>
+    <string name="common_unrecovered">পুনরুদ্ধার হয়নি</string>
+    <string name="common_online">অনলাইন</string>
+    <string name="common_offline">অফলাইন</string>
+    <string name="common_switch_on">চালু</string>
+    <string name="common_switch_off">বন্ধ</string>
+    <string name="common_please_select">অনুগ্রহ করে নির্বাচন করুন</string>
+    <string name="common_ok">ঠিক আছে</string>
+    <string name="common_no_range">কোনো সময়সীমা নির্বাচন করা হয়নি</string>
+    <string name="common_range_text">%1$s থেকে %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">পরিষেবা</string>
+    <string name="common_function_label">পদ্ধতি</string>
+    <string name="common_device_label">ডিভাইস</string>
+    <string name="common_protocol_label">প্রোটোকল</string>
+    <string name="common_unknown_product">অজানা পণ্য</string>
+    <string name="common_truncated_hint">ব্যতিক্রম রেকর্ড সীমা ছাড়িয়ে গেছে, শুধু সাম্প্রতিকগুলো দেখানো হয়েছে</string>
+    <string name="err_network">নেটওয়ার্ক অনুপলব্ধ। আপনার সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন।</string>
+    <string name="err_unknown">কিছু ভুল হয়েছে। আবার চেষ্টা করুন।</string>
+    <string name="space_type_site">সাইট</string>
+    <string name="space_type_building">বিল্ডিং</string>
+    <string name="space_type_floor">ফ্লোর</string>
+    <string name="space_type_room">রুম</string>
+    <string name="space_type_zone">জোন</string>
+    <string name="space_type_field">মাঠ</string>
+    <string name="space_type_workshop">ওয়ার্কশপ</string>
+    <string name="space_type_parking">পার্কিং লট</string>
+</resources>

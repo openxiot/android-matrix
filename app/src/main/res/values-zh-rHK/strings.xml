@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">矩陣</string>
+    <string name="common_back">返回</string>
+    <string name="common_retry">重試</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_close">關閉</string>
+    <string name="common_detail">詳情</string>
+    <string name="common_collapse">收起</string>
+    <string name="common_expand">展開</string>
+    <string name="common_all">全部</string>
+    <string name="common_add">添加</string>
+    <string name="common_create">創建</string>
+    <string name="common_delete">刪除</string>
+    <string name="common_unnamed">未命名</string>
+    <string name="common_unknown">未知</string>
+    <string name="common_me">我</string>
+    <string name="common_rename_action">修改名稱</string>
+    <string name="common_role_label">角色</string>
+    <string name="common_role_admin">管理員</string>
+    <string name="common_role_member">成員</string>
+    <string name="common_role_member_option">普通成員</string>
+    <string name="common_member_add">添加成員</string>
+    <string name="common_member_remove">移除成員</string>
+    <string name="common_edit">編輯</string>
+    <string name="common_refresh">重新整理</string>
+    <string name="common_change">修改</string>
+    <string name="common_handle">處理</string>
+    <string name="common_handled">已處理</string>
+    <string name="common_unhandled">未處理</string>
+    <string name="common_recovered">已恢復</string>
+    <string name="common_unrecovered">未恢復</string>
+    <string name="common_online">線上</string>
+    <string name="common_offline">離線</string>
+    <string name="common_switch_on">開</string>
+    <string name="common_switch_off">關</string>
+    <string name="common_please_select">請選擇</string>
+    <string name="common_ok">確定</string>
+    <string name="common_no_range">尚未選擇時間範圍</string>
+    <string name="common_range_text">%1$s 至 %2$s</string>
+    <string name="common_unlimited">不限制</string>
+    <string name="common_service_label">服務</string>
+    <string name="common_function_label">方法</string>
+    <string name="common_device_label">設備</string>
+    <string name="common_protocol_label">通訊協定</string>
+    <string name="common_unknown_product">未知產品</string>
+    <string name="common_truncated_hint">異常記錄超過上限，只列出最近的部分</string>
+    <string name="err_network">網絡無法使用，請檢查連線後重試</string>
+    <string name="err_unknown">發生錯誤，請重試</string>
+    <string name="space_type_site">站點</string>
+    <string name="space_type_building">座</string>
+    <string name="space_type_floor">樓層</string>
+    <string name="space_type_room">房間</string>
+    <string name="space_type_zone">區域</string>
+    <string name="space_type_field">場地</string>
+    <string name="space_type_workshop">車間</string>
+    <string name="space_type_parking">停車場</string>
+</resources>

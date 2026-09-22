@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Бүтээгдэхүүн</string>
+    <string name="product_detail_title">Бүтээгдэхүүний дэлгэрэнгүй</string>
+    <string name="product_not_found">Бүтээгдэхүүн олдсонгүй</string>
+    <string name="product_empty">Одоогоор бүтээгдэхүүн байхгүй</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d бүтээгдэхүүн</item>
+        <item quantity="other">%1$d бүтээгдэхүүнүүд</item>
+    </plurals>
+    <string name="product_model_inline">Загвар: %1$s</string>
+    <string name="product_id_label">Бүтээгдэхүүний ID</string>
+    <string name="product_model_label">Бүтээгдэхүүний загвар</string>
+    <string name="product_org_label">Байгууллага</string>
+    <string name="product_buy_jd">JD.com дээр авах</string>
+    <string name="product_buy_taobao">Taobao дээр авах</string>
+    <string name="product_status_released">Нийтлэгдсэн</string>
+    <string name="product_status_preview">Урьдчилан харах</string>
+    <string name="product_status_development">Хөгжүүлж байгаа</string>
+    <string name="product_empty_data">Бүтээгдэхүүний өгөгдөл хоосон</string>
+</resources>

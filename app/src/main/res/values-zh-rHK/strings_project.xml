@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">目前項目</string>
+    <string name="project_manage_title">項目管理</string>
+    <string name="project_empty">尚無項目，點右下角按鈕建立</string>
+    <string name="project_create_title">創建項目</string>
+    <string name="project_name_label">項目名稱</string>
+    <string name="project_name_placeholder">請輸入項目名稱</string>
+    <string name="project_rename_title">重新命名項目</string>
+    <string name="project_rename_action">重新命名</string>
+    <string name="project_delete_title">刪除項目</string>
+    <string name="project_delete_confirm">確定要刪除這個項目嗎？項目下還有空間時將無法刪除。</string>
+    <string name="project_swipe_delete">滑動以刪除</string>
+    <string name="project_type_label">類型：%1$s</string>
+    <string name="project_members_title">項目成員</string>
+    <string name="project_members_empty">尚無成員，點右下角按鈕新增</string>
+    <string name="project_members_label">成員</string>
+    <string name="project_user_id">用戶ID</string>
+    <string name="project_user_id_placeholder">使用者的帳號 ID</string>
+    <string name="project_remark_hint">點擊新增備註</string>
+    <string name="project_remark_title">編輯備註 — %1$s</string>
+    <string name="project_remark_label">填寫備註</string>
+    <string name="project_role_adjust">調整角色</string>
+    <string name="project_role_adjust_title">調整角色 — %1$s</string>
+    <string name="project_remove_confirm">確定要移除「%1$s」嗎？</string>
+    <string name="project_exit">退出項目</string>
+    <string name="project_exit_confirm">確定要退出這個項目嗎？退出後將無法存取該項目。</string>
+    <string name="project_device_added">裝置新增成功</string>
+    <string name="project_device_moved">裝置已移動</string>
+    <string name="space_manage_title">空間管理</string>
+    <string name="space_add">新增空間</string>
+    <string name="space_add_child">添加子空間</string>
+    <string name="space_add_device">添加設備</string>
+    <string name="space_name_label">空間名稱</string>
+    <string name="space_name_placeholder">請輸入名稱</string>
+    <string name="space_type_label">空間類型</string>
+    <string name="space_empty">空間資料為空</string>
+    <string name="space_empty_editable">請新增空間</string>
+    <string name="space_empty_readonly">這個項目下還沒有空間或裝置</string>
+    <string name="space_delete_title">刪除空間</string>
+    <string name="space_delete_confirm">確定要刪除這個空間嗎？空間下還有子空間時將無法刪除。</string>
+    <string name="space_move_title">移動到空間</string>
+    <string name="space_move_action">移動</string>
+    <string name="space_device_adding">正在新增裝置…</string>
+    <string name="space_device_waiting">等待中… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d 部裝置</item>
+    </plurals>
+</resources>

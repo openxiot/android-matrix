@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Матриц</string>
+    <string name="common_back">Буцах</string>
+    <string name="common_retry">Дахин оролдох</string>
+    <string name="common_confirm">Баталгаажуулах</string>
+    <string name="common_cancel">Цуцлах</string>
+    <string name="common_close">Хаах</string>
+    <string name="common_detail">Дэлгэрэнгүй</string>
+    <string name="common_collapse">Хураах</string>
+    <string name="common_expand">Дэлгэх</string>
+    <string name="common_all">Бүгд</string>
+    <string name="common_add">Нэмэх</string>
+    <string name="common_create">Үүсгэх</string>
+    <string name="common_delete">Устгах</string>
+    <string name="common_unnamed">Нэргүй</string>
+    <string name="common_unknown">Тодорхойгүй</string>
+    <string name="common_me">Та</string>
+    <string name="common_rename_action">Нэрийг өөрчлөх</string>
+    <string name="common_role_label">Үүрэг</string>
+    <string name="common_role_admin">Администратор</string>
+    <string name="common_role_member">Гишүүд</string>
+    <string name="common_role_member_option">Энгийн гишүүн</string>
+    <string name="common_member_add">Гишүүн нэмэх</string>
+    <string name="common_member_remove">Гишүүн хасах</string>
+    <string name="common_edit">Засварлах</string>
+    <string name="common_refresh">Шинэчлэх</string>
+    <string name="common_change">Өөрчлөх</string>
+    <string name="common_handle">Шийдвэрлэх</string>
+    <string name="common_handled">Шийдвэрлэгдсэн</string>
+    <string name="common_unhandled">Шийдвэрлэгдээгүй</string>
+    <string name="common_recovered">Сэргээгдсэн</string>
+    <string name="common_unrecovered">Сэргээгдээгүй</string>
+    <string name="common_online">Онлайн</string>
+    <string name="common_offline">Офлайн</string>
+    <string name="common_switch_on">Асаалттай</string>
+    <string name="common_switch_off">Унтраалттай</string>
+    <string name="common_please_select">Сонгоно уу</string>
+    <string name="common_ok">Болж байна</string>
+    <string name="common_no_range">Цаг хугацааны хязгаар сонгоогүй</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Үйлчилгээ</string>
+    <string name="common_function_label">Арга</string>
+    <string name="common_device_label">Төхөөрөмж</string>
+    <string name="common_protocol_label">Протокол</string>
+    <string name="common_unknown_product">Тодорхойгүй бүтээгдэхүүн</string>
+    <string name="common_truncated_hint">Онцгой байдлын бичлэг хязгаараас хэтэрсэн тул зөвхөн сүүлийн хэсгийг харуулав</string>
+    <string name="err_network">Сүлжээ боломжгүй. Холболтоо шалгаад дахин оролдоорой.</string>
+    <string name="err_unknown">Яагаад ч үгүй буруу зүйл боллоо. Дахин оролдоорой.</string>
+    <string name="space_type_site">Сайт</string>
+    <string name="space_type_building">Барилга</string>
+    <string name="space_type_floor">Давхар</string>
+    <string name="space_type_room">Өрөө</string>
+    <string name="space_type_zone">Бүс</string>
+    <string name="space_type_field">Талбай</string>
+    <string name="space_type_workshop">Цех</string>
+    <string name="space_type_parking">Зогсоол</string>
+</resources>

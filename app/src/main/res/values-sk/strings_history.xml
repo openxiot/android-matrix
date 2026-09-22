@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">História</string>
+    <string name="history_section_overview">Prehľad služieb</string>
+    <string name="history_no_services">V tomto projekte zatiaľ nie sú žiadne Modbus služby</string>
+    <string name="history_service_count_label">Počet služieb</string>
+    <string name="history_device_count_label">Počet zariadení</string>
+    <string name="history_sampled_at_label">Čas zberu</string>
+    <string name="history_function_count_label">Metódy</string>
+    <string name="history_faults_section">Výnimky zberu</string>
+    <string name="history_faults_label">Výnimky zberu</string>
+    <string name="history_no_faults">V tomto období nie sú žiadne chyby vzorkovania</string>
+    <string name="history_no_data">V tomto období sa nevzorkovali žiadne údaje</string>
+    <string name="history_field_label">Pole</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Vzorkované údaje (%1$d riadky)</item>
+        <item quantity="many">Vzorkované údaje (%1$d riadku)</item>
+        <item quantity="one">Vzorkované údaje (%1$d riadok)</item>
+        <item quantity="other">Vzorkované údaje (%1$d riadkov)</item>
+    </plurals>
+    <string name="service_history_all_functions">Všetky metódy</string>
+    <string name="service_history_field_selection">Polia %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Chyba %1$s × %2$d</string>
+    <string name="service_history_no_curve">Žiadne pole tejto služby sa nedá zobraziť v grafe</string>
+    <string name="service_history_no_curve_for_function">V tejto funkcii nie je žiadne pole zobraziteľné v grafe</string>
+    <string name="service_history_no_fields_selected">Nie sú vybrané žiadne polia</string>
+    <string name="service_history_failure_hint">Zvislé čiary označujú momenty zlyhania zberu</string>
+    <string name="service_history_downsampled_hint">Príliš mnoho dátových bodov, vykonané zníženie vzorkovania podľa časových intervalov (hodnota je priemer intervalu, v zátvorkách min~max)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Tabuľka</string>
+    <string name="service_history_view_chart">Graf</string>
+</resources>

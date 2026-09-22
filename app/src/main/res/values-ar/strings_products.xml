@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">المنتجات</string>
+    <string name="product_detail_title">تفاصيل المنتج</string>
+    <string name="product_not_found">المنتج غير موجود</string>
+    <string name="product_empty">لا توجد منتجات بعد</string>
+    <plurals name="product_count">
+        <item quantity="few">%1$d منتجات</item>
+        <item quantity="many">%1$d منتجًا</item>
+        <item quantity="one">منتج واحد (%1$d)</item>
+        <item quantity="two">منتجان (%1$d)</item>
+        <item quantity="zero">لا منتجات (%1$d)</item>
+        <item quantity="other">%1$d منتج</item>
+    </plurals>
+    <string name="product_model_inline">الطراز: %1$s</string>
+    <string name="product_id_label">معرّف المنتج</string>
+    <string name="product_model_label">طراز المنتج</string>
+    <string name="product_org_label">المنظمة</string>
+    <string name="product_buy_jd">الشراء من JD.com</string>
+    <string name="product_buy_taobao">الشراء من Taobao</string>
+    <string name="product_status_released">منشور</string>
+    <string name="product_status_preview">معاينة</string>
+    <string name="product_status_development">قيد التطوير</string>
+    <string name="product_empty_data">لا توجد بيانات منتج</string>
+</resources>

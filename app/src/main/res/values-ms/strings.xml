@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matriks</string>
+    <string name="common_back">Kembali</string>
+    <string name="common_retry">Cuba lagi</string>
+    <string name="common_confirm">Sahkan</string>
+    <string name="common_cancel">Batal</string>
+    <string name="common_close">Tutup</string>
+    <string name="common_detail">Butiran</string>
+    <string name="common_collapse">Runtuhkan</string>
+    <string name="common_expand">Kembangkan</string>
+    <string name="common_all">Semua</string>
+    <string name="common_add">Tambah</string>
+    <string name="common_create">Cipta</string>
+    <string name="common_delete">Padam</string>
+    <string name="common_unnamed">Tanpa nama</string>
+    <string name="common_unknown">Tidak diketahui</string>
+    <string name="common_me">Anda</string>
+    <string name="common_rename_action">Namakan semula</string>
+    <string name="common_role_label">Peranan</string>
+    <string name="common_role_admin">Pentadbir</string>
+    <string name="common_role_member">Ahli</string>
+    <string name="common_role_member_option">Ahli Biasa</string>
+    <string name="common_member_add">Tambah Ahli</string>
+    <string name="common_member_remove">Keluarkan Ahli</string>
+    <string name="common_edit">Sunting</string>
+    <string name="common_refresh">Segar semula</string>
+    <string name="common_change">Ubah</string>
+    <string name="common_handle">Kendalikan</string>
+    <string name="common_handled">Sudah dikendalikan</string>
+    <string name="common_unhandled">Belum dikendalikan</string>
+    <string name="common_recovered">Pulih</string>
+    <string name="common_unrecovered">Aktif</string>
+    <string name="common_online">Dalam Talian</string>
+    <string name="common_offline">Luar Talian</string>
+    <string name="common_switch_on">Hidup</string>
+    <string name="common_switch_off">Mati</string>
+    <string name="common_please_select">Sila pilih</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Tiada julat masa dipilih</string>
+    <string name="common_range_text">%1$s hingga %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Perkhidmatan</string>
+    <string name="common_function_label">Kaedah</string>
+    <string name="common_device_label">Peranti</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Produk Tidak Dikenali</string>
+    <string name="common_truncated_hint">Rekod pengecualian melebihi had, hanya bahagian terkini disenaraikan</string>
+    <string name="err_network">Rangkaian tidak tersedia. Semak sambungan anda dan cuba lagi.</string>
+    <string name="err_unknown">Ada sesuatu yang tidak kena. Sila cuba lagi.</string>
+    <string name="space_type_site">Tapak</string>
+    <string name="space_type_building">Bangunan</string>
+    <string name="space_type_floor">Tingkat</string>
+    <string name="space_type_room">Bilik</string>
+    <string name="space_type_zone">Zon</string>
+    <string name="space_type_field">Lapangan</string>
+    <string name="space_type_workshop">Bengkel</string>
+    <string name="space_type_parking">Tempat letak kereta</string>
+</resources>

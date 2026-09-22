@@ -39,6 +39,7 @@ import cc.openxiot.wematrix.ui.project.buildDeviceChildren
 import cc.openxiot.wematrix.ui.project.deviceDids
 import cc.openxiot.wematrix.ui.project.groupServicesByDid
 import cc.openxiot.wematrix.ui.project.isDeviceTreeRoot
+import cc.openxiot.wematrix.util.mirrorInRtl
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeviceListScreen(
@@ -314,7 +315,7 @@ private fun DeviceCard(
                             if (isExpanded) R.string.common_collapse else R.string.common_expand
                         ),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp).mirrorInRtl()
                     )
                 }
             } else {
@@ -392,7 +393,7 @@ private fun DeviceCard(
                         Icons.Default.ChevronRight,
                         contentDescription = stringResource(R.string.common_detail),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp).mirrorInRtl()
                     )
                 }
             }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Fylki</string>
+    <string name="common_back">Til baka</string>
+    <string name="common_retry">Reyna aftur</string>
+    <string name="common_confirm">Staðfesta</string>
+    <string name="common_cancel">Hætta við</string>
+    <string name="common_close">Loka</string>
+    <string name="common_detail">Nánar</string>
+    <string name="common_collapse">Minnka</string>
+    <string name="common_expand">Stækka</string>
+    <string name="common_all">Allt</string>
+    <string name="common_add">Bæta við</string>
+    <string name="common_create">Búa til</string>
+    <string name="common_delete">Eyða</string>
+    <string name="common_unnamed">Ónefnt</string>
+    <string name="common_unknown">Óþekkt</string>
+    <string name="common_me">Þú</string>
+    <string name="common_rename_action">Breyta nafni</string>
+    <string name="common_role_label">Hlutverk</string>
+    <string name="common_role_admin">Stjórnandi</string>
+    <string name="common_role_member">Meðlimir</string>
+    <string name="common_role_member_option">Venjulegur meðlimur</string>
+    <string name="common_member_add">Bæta við meðlimi</string>
+    <string name="common_member_remove">Fjarlægja meðlim</string>
+    <string name="common_edit">Breyta</string>
+    <string name="common_refresh">Endurnýja</string>
+    <string name="common_change">Breyta</string>
+    <string name="common_handle">Afgreiða</string>
+    <string name="common_handled">Afgreitt</string>
+    <string name="common_unhandled">Óafgreitt</string>
+    <string name="common_recovered">Endurheimt</string>
+    <string name="common_unrecovered">Óendurheimt</string>
+    <string name="common_online">Tengdur</string>
+    <string name="common_offline">Ótengdur</string>
+    <string name="common_switch_on">Kveikt</string>
+    <string name="common_switch_off">Slökkt</string>
+    <string name="common_please_select">Veldu</string>
+    <string name="common_ok">Í lagi</string>
+    <string name="common_no_range">Ekkert tímabil valið</string>
+    <string name="common_range_text">%1$s til %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Þjónustur</string>
+    <string name="common_function_label">Aðferðir</string>
+    <string name="common_device_label">Tæki</string>
+    <string name="common_protocol_label">Samskiptaregla</string>
+    <string name="common_unknown_product">Óþekkt vara</string>
+    <string name="common_truncated_hint">Undantekningar eru fleiri en hámarkið; aðeins þær nýjustu eru listaðar</string>
+    <string name="err_network">Netið er ekki tiltækt. Athugaðu tenginguna og reyndu aftur.</string>
+    <string name="err_unknown">Eitthvað fór úrskeiðis. Reyndu aftur.</string>
+    <string name="space_type_site">Staður</string>
+    <string name="space_type_building">Bygging</string>
+    <string name="space_type_floor">Hæð</string>
+    <string name="space_type_room">Herbergi</string>
+    <string name="space_type_zone">Svæði</string>
+    <string name="space_type_field">Svæði</string>
+    <string name="space_type_workshop">Verkstæði</string>
+    <string name="space_type_parking">Bílastæði</string>
+</resources>

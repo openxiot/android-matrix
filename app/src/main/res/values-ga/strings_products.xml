@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Táirgí</string>
+    <string name="product_detail_title">Sonraí Táirge</string>
+    <string name="product_not_found">Níor aimsíodh an táirge</string>
+    <string name="product_empty">Níl aon táirgí ann fós</string>
+    <plurals name="product_count">
+        <item quantity="few">%1$d tháirge</item>
+        <item quantity="many">%1$d dtáirge</item>
+        <item quantity="one">%1$d tháirge</item>
+        <item quantity="two">%1$d tháirge</item>
+        <item quantity="other">%1$d táirge</item>
+    </plurals>
+    <string name="product_model_inline">Múnla: %1$s</string>
+    <string name="product_id_label">ID Táirge</string>
+    <string name="product_model_label">Múnla Táirge</string>
+    <string name="product_org_label">Eagraíocht</string>
+    <string name="product_buy_jd">Ceannaigh ar JD.com</string>
+    <string name="product_buy_taobao">Ceannaigh ar Taobao</string>
+    <string name="product_status_released">Foilsithe</string>
+    <string name="product_status_preview">Réamhamharc</string>
+    <string name="product_status_development">Á Fhorbairt</string>
+    <string name="product_empty_data">Níl aon sonraí táirge ann</string>
+</resources>

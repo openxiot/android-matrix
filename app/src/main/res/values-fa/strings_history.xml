@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">تاریخچه</string>
+    <string name="history_section_overview">نمای کلی سرویس</string>
+    <string name="history_no_services">این پروژه هنوز سرویس Modbus ندارد</string>
+    <string name="history_service_count_label">تعداد سرویس</string>
+    <string name="history_device_count_label">تعداد دستگاه‌ها</string>
+    <string name="history_sampled_at_label">زمان جمع‌آوری</string>
+    <string name="history_function_count_label">تعداد متد</string>
+    <string name="history_faults_section">استثناهای جمع‌آوری</string>
+    <string name="history_faults_label">استثناهای جمع‌آوری</string>
+    <string name="history_no_faults">در این بازه خطای نمونه‌برداری وجود ندارد</string>
+    <string name="history_no_data">در این بازه داده‌ای نمونه‌برداری نشده است</string>
+    <string name="history_field_label">فیلد</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">داده نمونه‌برداری شده (%1$d ردیف)</item>
+        <item quantity="other">%1$d ردیف‌ها</item>
+    </plurals>
+    <string name="service_history_all_functions">همه متدها</string>
+    <string name="service_history_field_selection">فیلدها %1$d / %2$d</string>
+    <string name="service_history_fault_chip">خطا %1$s × %2$d</string>
+    <string name="service_history_no_curve">هیچ فیلدی از این سرویس نمودار ندارد</string>
+    <string name="service_history_no_curve_for_function">این تابع فیلد قابل نمودار ندارد</string>
+    <string name="service_history_no_fields_selected">فیلدی انتخاب نشده</string>
+    <string name="service_history_failure_hint">خطوط عمودی لحظه‌های ناموفق بودن جمع‌آوری را نشان می‌دهند</string>
+    <string name="service_history_downsampled_hint">نقاط داده زیاد است؛ نمونه‌برداری بر اساس بازه‌های زمانی کاهش یافته (مقدار میانگین همان بازه است، در پرانتز کمینه~بیشینه)</string>
+    <string name="service_history_keepalive">نگهداشت</string>
+    <string name="service_history_view_table">جدول</string>
+    <string name="service_history_view_chart">نمودار</string>
+</resources>

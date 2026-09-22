@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">Επιλέξτε πρώτα ένα έργο στην καρτέλα «Προφίλ»</string>
+    <string name="devices_empty">Δεν υπάρχουν συσκευές ακόμη</string>
+    <string name="devices_unknown">Άγνωστη συσκευή</string>
+    <plurals name="devices_count">
+        <item quantity="one">%1$d συσκευή</item>
+        <item quantity="other">%1$d συσκευές</item>
+    </plurals>
+</resources>

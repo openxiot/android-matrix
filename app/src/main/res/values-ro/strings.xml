@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrice</string>
+    <string name="common_back">Înapoi</string>
+    <string name="common_retry">Reîncercare</string>
+    <string name="common_confirm">Confirmă</string>
+    <string name="common_cancel">Anulează</string>
+    <string name="common_close">Închide</string>
+    <string name="common_detail">Detalii</string>
+    <string name="common_collapse">Restrânge</string>
+    <string name="common_expand">Extinde</string>
+    <string name="common_all">Toate</string>
+    <string name="common_add">Adaugă</string>
+    <string name="common_create">Creează</string>
+    <string name="common_delete">Șterge</string>
+    <string name="common_unnamed">Fără nume</string>
+    <string name="common_unknown">Necunoscut</string>
+    <string name="common_me">Dvs.</string>
+    <string name="common_rename_action">Redenumire</string>
+    <string name="common_role_label">Rol</string>
+    <string name="common_role_admin">Administrator</string>
+    <string name="common_role_member">Membri</string>
+    <string name="common_role_member_option">Membru standard</string>
+    <string name="common_member_add">Adaugă membru</string>
+    <string name="common_member_remove">Elimină membru</string>
+    <string name="common_edit">Editează</string>
+    <string name="common_refresh">Reîmprospătare</string>
+    <string name="common_change">Modificare</string>
+    <string name="common_handle">Tratează</string>
+    <string name="common_handled">Tratat</string>
+    <string name="common_unhandled">Netratat</string>
+    <string name="common_recovered">Restabilit</string>
+    <string name="common_unrecovered">Activ</string>
+    <string name="common_online">Conectat</string>
+    <string name="common_offline">Deconectat</string>
+    <string name="common_switch_on">Pornit</string>
+    <string name="common_switch_off">Oprit</string>
+    <string name="common_please_select">Selectați</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Niciun interval de timp selectat</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Servicii</string>
+    <string name="common_function_label">Metode</string>
+    <string name="common_device_label">Dispozitiv</string>
+    <string name="common_protocol_label">Protocol</string>
+    <string name="common_unknown_product">Produs necunoscut</string>
+    <string name="common_truncated_hint">Numărul de înregistrări de excepții depășește limita; sunt listate doar cele mai recente</string>
+    <string name="err_network">Rețeaua nu este disponibilă. Verificați conexiunea și încercați din nou.</string>
+    <string name="err_unknown">Ceva nu a mers bine. Încercați din nou.</string>
+    <string name="space_type_site">Amplasament</string>
+    <string name="space_type_building">Clădire</string>
+    <string name="space_type_floor">Etaj</string>
+    <string name="space_type_room">Cameră</string>
+    <string name="space_type_zone">Zonă</string>
+    <string name="space_type_field">Teren</string>
+    <string name="space_type_workshop">Atelier</string>
+    <string name="space_type_parking">Parcare</string>
+</resources>

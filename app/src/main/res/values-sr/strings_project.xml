@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Тренутни пројекат</string>
+    <string name="project_manage_title">Управљање пројектима</string>
+    <string name="project_empty">Још нема пројеката — додирните + да креирате један</string>
+    <string name="project_create_title">Креирај пројекат</string>
+    <string name="project_name_label">Назив пројекта</string>
+    <string name="project_name_placeholder">Унесите назив пројекта</string>
+    <string name="project_rename_title">Преименуј пројекат</string>
+    <string name="project_rename_action">Преименуј</string>
+    <string name="project_delete_title">Избриши пројекат</string>
+    <string name="project_delete_confirm">Избрисати овај пројекат? Пројекат који још има просторе не може се избрисати.</string>
+    <string name="project_swipe_delete">Превуците за брисање</string>
+    <string name="project_type_label">Тип: %1$s</string>
+    <string name="project_members_title">Чланови пројекта</string>
+    <string name="project_members_empty">Још нема чланова — додирните + да додате једног</string>
+    <string name="project_members_label">Чланови</string>
+    <string name="project_user_id">ID корисника</string>
+    <string name="project_user_id_placeholder">ID налога корисника</string>
+    <string name="project_remark_hint">Додирните да додате напомену</string>
+    <string name="project_remark_title">Уреди напомену — %1$s</string>
+    <string name="project_remark_label">Напомена</string>
+    <string name="project_role_adjust">Промени улогу</string>
+    <string name="project_role_adjust_title">Промени улогу — %1$s</string>
+    <string name="project_remove_confirm">Уклонити „%1$s“?</string>
+    <string name="project_exit">Напусти пројекат</string>
+    <string name="project_exit_confirm">Напустити овај пројекат? Изгубићете приступ њему.</string>
+    <string name="project_device_added">Уређај је додат</string>
+    <string name="project_device_moved">Уређај је премештен</string>
+    <string name="space_manage_title">Управљање просторима</string>
+    <string name="space_add">Додај простор</string>
+    <string name="space_add_child">Додај подпростор</string>
+    <string name="space_add_device">Додај уређај</string>
+    <string name="space_name_label">Назив простора</string>
+    <string name="space_name_placeholder">Унесите назив</string>
+    <string name="space_type_label">Тип простора</string>
+    <string name="space_empty">Нема података о просторима</string>
+    <string name="space_empty_editable">Додајте простор да бисте почели</string>
+    <string name="space_empty_readonly">Овај пројекат још нема просторе ни уређаје</string>
+    <string name="space_delete_title">Избриши простор</string>
+    <string name="space_delete_confirm">Избрисати овај простор? Простор који још има подпросторе не може се избрисати.</string>
+    <string name="space_move_title">Премести у простор</string>
+    <string name="space_move_action">Премести</string>
+    <string name="space_device_adding">Додавање уређаја…</string>
+    <string name="space_device_waiting">Чекање… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d уређаја</item>
+        <item quantity="one">%1$d уређај</item>
+        <item quantity="other">%1$d уређаја</item>
+    </plurals>
+</resources>

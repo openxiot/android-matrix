@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Məhsullar</string>
+    <string name="product_detail_title">Məhsul Təfərrüatları</string>
+    <string name="product_not_found">Məhsul tapılmadı</string>
+    <string name="product_empty">Hələ məhsul yoxdur</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d məhsul</item>
+        <item quantity="other">Cəmi %1$d məhsul</item>
+    </plurals>
+    <string name="product_model_inline">Model: %1$s</string>
+    <string name="product_id_label">Məhsul ID</string>
+    <string name="product_model_label">Məhsul Modeli</string>
+    <string name="product_org_label">Təşkilat</string>
+    <string name="product_buy_jd">JD.com-da al</string>
+    <string name="product_buy_taobao">Taobao-da al</string>
+    <string name="product_status_released">Dərc edilib</string>
+    <string name="product_status_preview">Önizləmə</string>
+    <string name="product_status_development">Hazırlanır</string>
+    <string name="product_empty_data">Məhsul məlumatı yoxdur</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Aktuální organizace</string>
+    <string name="org_detail_title">Podrobnosti organizace</string>
+    <string name="org_empty">Zatím žádné organizace – vytvořte ji klepnutím na +</string>
+    <string name="org_create_title">Vytvořit organizaci</string>
+    <string name="org_id_label">ID organizace</string>
+    <string name="org_id_placeholder">např. moje-firma</string>
+    <string name="org_id_hint">Začněte písmenem – pouze písmena, číslice a pomlčky</string>
+    <string name="org_name_label">Název organizace</string>
+    <string name="org_name_placeholder">např. Moje firma</string>
+    <string name="org_rename_title">Přejmenovat organizaci</string>
+    <string name="org_delete_title">Smazat organizaci</string>
+    <string name="org_delete_confirm">Smazat tuto organizaci?</string>
+    <string name="org_manage">Spravovat</string>
+    <string name="org_swipe_delete">Přejetím smazat</string>
+    <string name="org_members_empty">Zatím žádní členové</string>
+    <string name="org_member_developer_id">ID vývojáře</string>
+    <string name="org_member_developer_id_placeholder">developerId uživatele</string>
+    <string name="org_member_name_label">Zobrazované jméno</string>
+    <string name="org_member_name_placeholder">Nepovinné</string>
+    <string name="org_change_role">Změnit roli</string>
+    <string name="org_change_role_title">Změnit roli – %1$s</string>
+    <string name="org_remove_confirm">Odebrat „%1$s“?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d členové</item>
+        <item quantity="many">%1$d člena</item>
+        <item quantity="one">%1$d člen</item>
+        <item quantity="other">%1$d členů</item>
+    </plurals>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Suuna kaamera seadme QR-koodile või IMEI-le</string>
+    <string name="scan_torch">Taskulamp</string>
+    <string name="scan_torch_on">Lülita taskulamp sisse</string>
+    <string name="scan_torch_off">Lülita taskulamp välja</string>
+    <string name="scan_permission_required">Seadmete skannimiseks ja lisamiseks on vaja kaamera luba</string>
+    <string name="scan_grant">Anna luba</string>
+</resources>

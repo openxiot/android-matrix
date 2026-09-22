@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">भाषा</string>
+    <string name="profile_language_system">प्रणाली अनुसरण गर्नुहोस्</string>
+    <string name="profile_language_search">भाषाहरू खोज्नुहोस्</string>
+    <string name="profile_language_search_clear">खाली गर्नुहोस्</string>
+    <string name="profile_language_no_match">मेल खाने भाषा भेटिएन</string>
+    <string name="profile_not_logged_in">साइन इन गरिएको छैन</string>
+    <string name="profile_current_org">वर्तमान संस्था</string>
+    <string name="profile_current_project">वर्तमान परियोजना</string>
+    <string name="profile_no_org_selected">कुनै संस्था चयन गरिएको छैन</string>
+    <string name="profile_no_project_selected">कुनै परियोजना चयन गरिएको छैन</string>
+    <string name="profile_org_subtitle">परियोजना छान्न एउटा छान्नुहोस्</string>
+    <string name="profile_project_subtitle_pick">परियोजना छान्नुहोस्</string>
+    <string name="profile_project_subtitle_switch">परियोजना स्विच गर्न ट्याप गर्नुहोस्</string>
+    <string name="profile_project_subtitle_org_first">कृपया पहिले संस्था छान्नुहोस्</string>
+    <string name="profile_section_settings">सेटिङहरू</string>
+    <string name="profile_dark_mode">गाढा मोड</string>
+    <string name="profile_light_mode">उज्यालो मोड</string>
+    <string name="profile_theme_subtitle">थिम स्विच गर्न ट्याप गर्नुहोस्</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">उपकरण पोइन्ट तालिका</string>
+    <string name="profile_modbus_subtitle">Modbus रजिस्टर नक्साहरू (पढ्न मात्र)</string>
+    <string name="profile_alarm_title">अलार्महरू</string>
+    <string name="profile_alarm_subtitle">Modbus अलार्म लग र व्यवस्थापन</string>
+    <string name="profile_history_title">इतिहास</string>
+    <string name="profile_history_subtitle">नमूना इतिहास र चार्टहरू</string>
+    <string name="profile_about_subtitle">एप जानकारी र संस्करण</string>
+    <string name="account_title">खाता</string>
+    <string name="account_username">प्रयोगकर्ता नाम</string>
+    <string name="account_platform">प्लेटफर्म</string>
+    <string name="account_not_selected">चयन गरिएको छैन</string>
+    <string name="account_org_toggle">संस्था</string>
+    <string name="account_org_toggle_subtitle">संस्थाहरू व्यवस्थापन गर्न खोल्नुहोस्</string>
+    <string name="account_logout">साइन आउट गर्नुहोस्</string>
+    <string name="about_title">बारेमा</string>
+    <string name="about_tagline">IoT यन्त्र व्यवस्थापन र अनुगमन प्लेटफर्म</string>
+    <string name="about_version">संस्करण %1$s</string>
+    <string name="about_check_update">अद्यावधिक जाँच गर्नुहोस्</string>
+    <string name="about_checking">जाँच भइरहेको छ…</string>
+    <string name="about_up_to_date">तपाईं अद्यावधिक हुनुहुन्छ</string>
+    <string name="about_update_now">अहिले अद्यावधिक गर्नुहोस्</string>
+    <string name="about_downloading">डाउनलोड भइरहेको छ…</string>
+    <string name="about_downloading_percent">डाउनलोड भइरहेको छ %1$d%%</string>
+    <string name="about_install_now">अहिले नै स्थापना गर्नुहोस्</string>
+    <string name="about_install">स्थापना गर्नुहोस्</string>
+    <string name="about_retry_download">डाउनलोड पुन: प्रयास गर्नुहोस्</string>
+    <string name="about_later">पछि</string>
+    <string name="about_install_dialog_title">अद्यावधिक स्थापना गर्नुहोस्</string>
+    <string name="about_new_version_found">संस्करण %1$s उपलब्ध छ</string>
+    <string name="about_ready_hint">डाउनलोड पूरा भयो — प्रणाली इन्स्टलरलाई हस्तान्तरण गर्न “स्थापना” ट्याप गर्नुहोस्।</string>
+    <string name="about_need_install_permission">पहिले यो एपलाई अज्ञात एपहरू स्थापना गर्न अनुमति दिनुहोस्</string>
+    <string name="about_keep_app_alive">तपाईं पेजहरू बदल्न सक्नुहुन्छ — बस एप बन्द नगर्नुहोस्</string>
+    <string name="about_metered">तपाईं मोबाइल डेटामा हुनुहुन्छ — डाउनलोडले धेरै डेटा प्रयोग गर्न सक्छ</string>
+    <string name="about_metered_size">तपाईं मोबाइल डेटामा हुनुहुन्छ — प्याकेज लगभग %1$s छ</string>
+    <string name="about_install_settings_failed">“अज्ञात एपहरू स्थापना गर्नुहोस्” सेटिङ खोल्न सकिएन — प्रणाली सेटिङमा म्यानुअल रूपमा अनुमति दिनुहोस्</string>
+    <string name="about_no_installer">कुनै इन्स्टलर एप उपलब्ध छैन — प्याकेज एपको फोल्डरमा सुरक्षित गरिएको छ</string>
+    <string name="about_update_notes_empty">यो रिलिजमा कुनै नोट थिएन।</string>
+</resources>

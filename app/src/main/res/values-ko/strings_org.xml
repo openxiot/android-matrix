@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">현재 조직</string>
+    <string name="org_detail_title">조직 상세</string>
+    <string name="org_empty">아직 조직이 없습니다. +를 눌러 만드십시오</string>
+    <string name="org_create_title">조직 생성</string>
+    <string name="org_id_label">조직 ID</string>
+    <string name="org_id_placeholder">예: my-company</string>
+    <string name="org_id_hint">영문자로 시작해야 하며, 영문자, 숫자, 하이픈만 사용할 수 있습니다</string>
+    <string name="org_name_label">조직 이름</string>
+    <string name="org_name_placeholder">예: 우리 회사</string>
+    <string name="org_rename_title">조직 이름 변경</string>
+    <string name="org_delete_title">조직 삭제</string>
+    <string name="org_delete_confirm">이 조직을 삭제하시겠습니까?</string>
+    <string name="org_manage">관리</string>
+    <string name="org_swipe_delete">밀어서 삭제</string>
+    <string name="org_members_empty">아직 멤버가 없습니다</string>
+    <string name="org_member_developer_id">개발자 ID</string>
+    <string name="org_member_developer_id_placeholder">사용자의 developerId</string>
+    <string name="org_member_name_label">표시 이름</string>
+    <string name="org_member_name_placeholder">선택 사항</string>
+    <string name="org_change_role">역할 변경</string>
+    <string name="org_change_role_title">역할 변경 — %1$s</string>
+    <string name="org_remove_confirm">“%1$s”을(를) 제거하시겠습니까?</string>
+    <plurals name="org_member_count">
+        <item quantity="other">멤버 %1$d명</item>
+    </plurals>
+</resources>

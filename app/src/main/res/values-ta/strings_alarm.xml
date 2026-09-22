@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">எச்சரிக்கைகள்</string>
+    <string name="alarm_action_ok">செயல் வெற்றிகரமாக முடிந்தது</string>
+    <string name="alarm_empty">இந்த காலகட்டத்தில் எச்சரிக்கைகள் இல்லை</string>
+    <string name="alarm_all_services">அனைத்து சேவைகள்</string>
+    <string name="alarm_level_label">எச்சரிக்கை நிலை</string>
+    <string name="alarm_handled_label">நிவர்த்தி</string>
+    <string name="alarm_status_label">நிலை</string>
+    <string name="alarm_summary_title">எச்சரிக்கை பட்டியல்</string>
+    <string name="alarm_text_label">எச்சரிக்கை உரை</string>
+    <string name="alarm_field_label">புலம்</string>
+    <string name="alarm_trigger_label">தூண்டல் நிபந்தனை</string>
+    <string name="alarm_current_value_label">தற்போதைய மதிப்பு</string>
+</resources>

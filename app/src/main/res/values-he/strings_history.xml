@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">היסטוריה</string>
+    <string name="history_section_overview">סקירת שירות</string>
+    <string name="history_no_services">אין עדיין שירותי Modbus בפרויקט זה</string>
+    <string name="history_service_count_label">מספר שירותים</string>
+    <string name="history_device_count_label">מספר התקנים</string>
+    <string name="history_sampled_at_label">זמן איסוף</string>
+    <string name="history_function_count_label">מספר שיטות</string>
+    <string name="history_faults_section">חריגות איסוף</string>
+    <string name="history_faults_label">חריגות איסוף</string>
+    <string name="history_no_faults">אין תקלות איסוף בתקופה זו</string>
+    <string name="history_no_data">לא נאספו נתונים בתקופה זו</string>
+    <string name="history_field_label">שדה</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="many">נתונים שנאספו (%1$d שורות)</item>
+        <item quantity="one">נתונים שנאספו (%1$d שורה)</item>
+        <item quantity="two">נתונים שנאספו (%1$d שורות)</item>
+        <item quantity="other">נתונים שנאספו (%1$d שורות)</item>
+    </plurals>
+    <string name="service_history_all_functions">כל השיטות</string>
+    <string name="service_history_field_selection">שדות %1$d / %2$d</string>
+    <string name="service_history_fault_chip">תקלה %1$s × %2$d</string>
+    <string name="service_history_no_curve">אין שדה בשירות זה שניתן להציג בגרף</string>
+    <string name="service_history_no_curve_for_function">אין שדה שניתן להציג בגרף בפונקציה זו</string>
+    <string name="service_history_no_fields_selected">לא נבחרו שדות</string>
+    <string name="service_history_failure_hint">קווים אנכיים מסמנים את רגעי הכשל באיסוף</string>
+    <string name="service_history_downsampled_hint">נקודות נתונים רבות; בוצעה דגימה מופחתת לפי טווחי זמן (הערך הוא הממוצע של הקטע, בסוגריים מינימום~מקסימום)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">טבלה</string>
+    <string name="service_history_view_chart">גרף</string>
+</resources>

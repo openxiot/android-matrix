@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">Детаљи уређаја</string>
+    <string name="device_operation_title">Управљање уређајем</string>
+    <string name="device_not_found">Уређај није пронађен</string>
+    <string name="device_id_label">ID уређаја</string>
+    <string name="device_type_label">Тип уређаја</string>
+    <string name="device_online_label">Статус</string>
+    <string name="device_last_online_label">Последњи пут онлајн</string>
+    <string name="device_last_offline_label">Последњи пут офлајн</string>
+    <string name="device_space_label">Простор</string>
+</resources>

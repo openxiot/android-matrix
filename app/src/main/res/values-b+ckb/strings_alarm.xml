@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">ئاگادارییەکان</string>
+    <string name="alarm_action_ok">کردار بە سەرکەوتوویی ئەنجام درا</string>
+    <string name="alarm_empty">لەم ماوەیەدا هیچ ئاگادارییەک نییە</string>
+    <string name="alarm_all_services">هەموو خزمەتگوزارییەکان</string>
+    <string name="alarm_level_label">ئاستی ئاگاداری</string>
+    <string name="alarm_handled_label">چارەسەرکردن</string>
+    <string name="alarm_status_label">ڕەوشت</string>
+    <string name="alarm_summary_title">لیستی ئاگادارییەکان</string>
+    <string name="alarm_text_label">دەقی ئاگاداری</string>
+    <string name="alarm_field_label">خانە</string>
+    <string name="alarm_trigger_label">مەرجی دەستپێکەر</string>
+    <string name="alarm_current_value_label">بەهای ئێستا</string>
+</resources>

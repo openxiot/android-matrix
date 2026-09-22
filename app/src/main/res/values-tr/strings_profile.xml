@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Dil</string>
+    <string name="profile_language_system">Sistemle aynı</string>
+    <string name="profile_language_search">Dilleri ara</string>
+    <string name="profile_language_search_clear">Temizle</string>
+    <string name="profile_language_no_match">Eşleşen dil yok</string>
+    <string name="profile_not_logged_in">Giriş yapılmadı</string>
+    <string name="profile_current_org">Geçerli kuruluş</string>
+    <string name="profile_current_project">Geçerli proje</string>
+    <string name="profile_no_org_selected">Kuruluş seçilmedi</string>
+    <string name="profile_no_project_selected">Proje seçilmedi</string>
+    <string name="profile_org_subtitle">Proje seçmek için bir kuruluş seçin</string>
+    <string name="profile_project_subtitle_pick">Proje seçin</string>
+    <string name="profile_project_subtitle_switch">Projeyi değiştirmek için dokunun</string>
+    <string name="profile_project_subtitle_org_first">Lütfen önce bir kuruluş seçin</string>
+    <string name="profile_section_settings">Ayarlar</string>
+    <string name="profile_dark_mode">Koyu mod</string>
+    <string name="profile_light_mode">Açık mod</string>
+    <string name="profile_theme_subtitle">Temayı değiştirmek için dokunun</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Cihaz Nokta Tablosu</string>
+    <string name="profile_modbus_subtitle">Modbus register haritaları (salt okunur)</string>
+    <string name="profile_alarm_title">Alarmlar</string>
+    <string name="profile_alarm_subtitle">Modbus alarm kaydı ve işleme</string>
+    <string name="profile_history_title">Geçmiş</string>
+    <string name="profile_history_subtitle">Toplama geçmişi ve grafikler</string>
+    <string name="profile_about_subtitle">Uygulama bilgileri ve sürüm</string>
+    <string name="account_title">Hesap</string>
+    <string name="account_username">Kullanıcı adı</string>
+    <string name="account_platform">Platform</string>
+    <string name="account_not_selected">Seçilmedi</string>
+    <string name="account_org_toggle">Kuruluş</string>
+    <string name="account_org_toggle_subtitle">Kuruluşları yönetmek için açın</string>
+    <string name="account_logout">Çıkış yap</string>
+    <string name="about_title">Hakkında</string>
+    <string name="about_tagline">IoT cihaz yönetimi ve izleme platformu</string>
+    <string name="about_version">Sürüm %1$s</string>
+    <string name="about_check_update">Güncellemeleri kontrol et</string>
+    <string name="about_checking">Kontrol ediliyor…</string>
+    <string name="about_up_to_date">En son sürümü kullanıyorsunuz</string>
+    <string name="about_update_now">Şimdi güncelle</string>
+    <string name="about_downloading">İndiriliyor…</string>
+    <string name="about_downloading_percent">İndiriliyor %1$d%%</string>
+    <string name="about_install_now">Şimdi yükle</string>
+    <string name="about_install">Yükle</string>
+    <string name="about_retry_download">İndirmeyi yeniden dene</string>
+    <string name="about_later">Daha sonra</string>
+    <string name="about_install_dialog_title">Güncellemeyi yükle</string>
+    <string name="about_new_version_found">%1$s sürümü mevcut</string>
+    <string name="about_ready_hint">İndirme tamamlandı — sistem yükleyicisine devretmek için Yükle\'ye dokunun.</string>
+    <string name="about_need_install_permission">Önce bu uygulamanın bilinmeyen uygulamaları yüklemesine izin verin</string>
+    <string name="about_keep_app_alive">Sayfalar arasında geçiş yapabilirsiniz — yeter ki uygulamayı kapatmayın</string>
+    <string name="about_metered">Mobil veri kullanıyorsunuz — indirme çok fazla veri harcayabilir</string>
+    <string name="about_metered_size">Mobil veri kullanıyorsunuz — paket yaklaşık %1$s</string>
+    <string name="about_install_settings_failed">“Bilinmeyen uygulamaları yükle” ayarı açılamadı — sistem ayarlarından elle izin verin</string>
+    <string name="about_no_installer">Kullanılabilir yükleyici uygulama yok — paket uygulamanın klasörüne kaydedildi</string>
+    <string name="about_update_notes_empty">Bu sürümle birlikte hiç not paylaşılmadı.</string>
+</resources>

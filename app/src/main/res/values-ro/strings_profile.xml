@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Limbă</string>
+    <string name="profile_language_system">Conform sistemului</string>
+    <string name="profile_language_search">Căutați limbi</string>
+    <string name="profile_language_search_clear">Ștergeți</string>
+    <string name="profile_language_no_match">Nicio limbă corespunzătoare</string>
+    <string name="profile_not_logged_in">Neconectat</string>
+    <string name="profile_current_org">Organizația curentă</string>
+    <string name="profile_current_project">Proiectul curent</string>
+    <string name="profile_no_org_selected">Nicio organizație selectată</string>
+    <string name="profile_no_project_selected">Niciun proiect selectat</string>
+    <string name="profile_org_subtitle">Selectați una pentru a alege un proiect</string>
+    <string name="profile_project_subtitle_pick">Selectați un proiect</string>
+    <string name="profile_project_subtitle_switch">Apăsați pentru a schimba proiectul</string>
+    <string name="profile_project_subtitle_org_first">Selectați mai întâi o organizație</string>
+    <string name="profile_section_settings">Setări</string>
+    <string name="profile_dark_mode">Mod întunecat</string>
+    <string name="profile_light_mode">Mod luminos</string>
+    <string name="profile_theme_subtitle">Apăsați pentru a schimba tema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tabel de puncte dispozitiv</string>
+    <string name="profile_modbus_subtitle">Hărți de registri Modbus (doar citire)</string>
+    <string name="profile_alarm_title">Alarme</string>
+    <string name="profile_alarm_subtitle">Jurnal de alarme Modbus și tratare</string>
+    <string name="profile_history_title">Istoric</string>
+    <string name="profile_history_subtitle">Istoric de colectare și grafice</string>
+    <string name="profile_about_subtitle">Informații despre aplicație și versiune</string>
+    <string name="account_title">Cont</string>
+    <string name="account_username">Nume de utilizator</string>
+    <string name="account_platform">Platformă</string>
+    <string name="account_not_selected">Neselectat</string>
+    <string name="account_org_toggle">Organizație</string>
+    <string name="account_org_toggle_subtitle">Activați pentru a administra organizațiile</string>
+    <string name="account_logout">Deconectare</string>
+    <string name="about_title">Despre</string>
+    <string name="about_tagline">Platformă de administrare și monitorizare a dispozitivelor IoT</string>
+    <string name="about_version">Versiunea %1$s</string>
+    <string name="about_check_update">Verificați actualizările</string>
+    <string name="about_checking">Se verifică…</string>
+    <string name="about_up_to_date">Aveți cea mai recentă versiune</string>
+    <string name="about_update_now">Actualizați acum</string>
+    <string name="about_downloading">Se descarcă…</string>
+    <string name="about_downloading_percent">Se descarcă %1$d%%</string>
+    <string name="about_install_now">Instalați acum</string>
+    <string name="about_install">Instalare</string>
+    <string name="about_retry_download">Reîncercați descărcarea</string>
+    <string name="about_later">Mai târziu</string>
+    <string name="about_install_dialog_title">Instalare actualizare</string>
+    <string name="about_new_version_found">Este disponibilă versiunea %1$s</string>
+    <string name="about_ready_hint">Descărcare completă — apăsați Instalare pentru a-l preda programului de instalare al sistemului.</string>
+    <string name="about_need_install_permission">Permiteți mai întâi acestei aplicații să instaleze aplicații din surse necunoscute</string>
+    <string name="about_keep_app_alive">Puteți schimba paginile — nu închideți aplicația</string>
+    <string name="about_metered">Sunteți pe date mobile — descărcarea poate consuma mult</string>
+    <string name="about_metered_size">Sunteți pe date mobile — pachetul are aproximativ %1$s</string>
+    <string name="about_install_settings_failed">Setarea „Instalare aplicații necunoscute” nu a putut fi deschisă — permiteți-o manual în setările sistemului</string>
+    <string name="about_no_installer">Nu există nicio aplicație de instalare — pachetul este salvat în folderul aplicației</string>
+    <string name="about_update_notes_empty">Această versiune nu a venit cu note.</string>
+</resources>

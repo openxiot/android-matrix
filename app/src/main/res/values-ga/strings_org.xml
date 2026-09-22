@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Eagraíocht reatha</string>
+    <string name="org_detail_title">Sonraí na hEagraíochta</string>
+    <string name="org_empty">Níl aon eagraíochtaí ann fós — tapáil + chun ceann a chruthú</string>
+    <string name="org_create_title">Cruthaigh Eagraíocht</string>
+    <string name="org_id_label">ID na heagraíochta</string>
+    <string name="org_id_placeholder">m.sh. my-company</string>
+    <string name="org_id_hint">Tosaigh le litir — litreacha, digití agus fleiscíní amháin</string>
+    <string name="org_name_label">Ainm Eagraíochta</string>
+    <string name="org_name_placeholder">m.sh. Mo Chuideachta</string>
+    <string name="org_rename_title">Athainmnigh eagraíocht</string>
+    <string name="org_delete_title">Scrios an Eagraíocht</string>
+    <string name="org_delete_confirm">Scrios an eagraíocht seo?</string>
+    <string name="org_manage">Bainistigh</string>
+    <string name="org_swipe_delete">Sleamhnaigh chun scriosadh</string>
+    <string name="org_members_empty">Níl aon bhaill ann fós</string>
+    <string name="org_member_developer_id">ID an fhorbróra</string>
+    <string name="org_member_developer_id_placeholder">developerId an úsáideora</string>
+    <string name="org_member_name_label">Ainm taispeána</string>
+    <string name="org_member_name_placeholder">Roghnach</string>
+    <string name="org_change_role">Athraigh ról</string>
+    <string name="org_change_role_title">Athraigh ról — %1$s</string>
+    <string name="org_remove_confirm">Bain “%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d bhall</item>
+        <item quantity="many">%1$d mball</item>
+        <item quantity="one">%1$d bhall</item>
+        <item quantity="two">%1$d bhall</item>
+        <item quantity="other">%1$d ball</item>
+    </plurals>
+</resources>

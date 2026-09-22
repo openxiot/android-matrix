@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">कृपया पहले प्रोजेक्ट सूची से एक प्रोजेक्ट चुनें</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">बदलाव छोड़ें?</string>
+    <string name="home_discard_message">आपके पास बिना सहेजे बदलाव हैं। अभी बाहर जाने पर वे खो जाएँगे।</string>
+    <string name="home_dashboard_empty">अभी कोई कार्ड नहीं — एक जोड़ने के लिए नीचे “जोड़ें” टैप करें</string>
+    <string name="home_add_card">+ जोड़ें</string>
+    <string name="home_default_layout_loaded">डिफ़ॉल्ट लेआउट लोड हुआ — लागू करने के लिए सहेजें</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">एक बड़ी संख्या: डिवाइस / सेवा / अलार्म / त्रुटियाँ</string>
+    <string name="home_card_kind_line">प्रति घंटे अलार्म गणना, या एक सेवा फ़ील्ड</string>
+    <string name="home_card_kind_distribution">डिवाइस / सेवा / अलार्म / त्रुटि के अनुसार वितरण</string>
+    <string name="home_card_kind_device">एक डिवाइस की एक संपत्ति</string>
+    <string name="home_card_kind_service">एक फ़ंक्शन के फ़ील्ड का एक समूह</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">चार्ट</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">डिवाइस</string>
+    <string name="home_card_default_service">सेवा</string>
+    <string name="home_card_default_unknown">कार्ड</string>
+    <string name="home_edit_card_title">संपादित करें · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">पूरी चौड़ाई</string>
+    <string name="home_size_half">आधी चौड़ाई</string>
+    <string name="home_section_metric">मीट्रिक</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">कुल डिवाइस</string>
+    <string name="home_metric_devices_online">ऑनलाइन डिवाइस</string>
+    <string name="home_metric_services_total">कुल सेवाएँ</string>
+    <string name="home_metric_alarms_today">आज के अलार्म</string>
+    <string name="home_metric_alarms_window">विंडो में अलार्म</string>
+    <string name="home_metric_failures_total">विंडो में सैंपलिंग विफलताएँ</string>
+    <string name="home_section_dimension">इसके अनुसार वितरण</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">डिवाइस प्रकार</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">सैंपलिंग विफलता प्रकार</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">डेटा स्रोत</string>
+    <string name="home_source_label">स्रोत</string>
+    <string name="home_source_alarm_curve">प्रति घंटे अलार्म गणना</string>
+    <string name="home_source_service_field">एक सेवा फ़ील्ड</string>
+    <string name="home_show_failure_shadow">संग्रह विफलता की रेखाएँ दिखाएँ</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">सेवा · फ़ंक्शन · फ़ील्ड</string>
+    <string name="home_service_placeholder">सेवा चुनें</string>
+    <string name="home_service_unnamed">बिना नाम की सेवा</string>
+    <string name="home_function_placeholder">फ़ंक्शन चुनें</string>
+    <string name="home_function_fallback">फ़ंक्शन %1$d</string>
+    <string name="home_pick_service_first">पहले सेवा चुनें</string>
+    <string name="home_show_unit">इकाई दिखाएँ</string>
+    <string name="home_section_device_prop">डिवाइस · संपत्ति</string>
+    <string name="home_device_placeholder">डिवाइस चुनें</string>
+    <string name="home_prop_label">प्रॉपर्टी</string>
+    <string name="home_pick_device_first">पहले डिवाइस चुनें</string>
+    <string name="home_prop_none">इस मॉडल के लिए कोई संपत्ति नहीं</string>
+    <string name="home_prop_placeholder">संपत्ति चुनें</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, कोई सीमा नहीं के लिए रिक्त छोड़ें</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">पिछला</string>
+    <string name="home_window_custom">कस्टम</string>
+    <string name="home_pick_dates">आरंभ और समाप्ति तिथियाँ चुनें</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d दिन</item>
+        <item quantity="other">%1$d दिनों</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d घंटा</item>
+        <item quantity="other">%1$d घंटे</item>
+    </plurals>
+    <string name="home_card_unknown_type">अज्ञात कार्ड प्रकार</string>
+    <string name="home_empty_no_data">कोई डेटा नहीं</string>
+    <string name="home_empty_no_reading">अभी कोई रीडिंग नहीं</string>
+    <string name="home_empty_not_sampled">अभी तक संग्रह नहीं हुआ</string>
+    <string name="home_sampled_at">सैंपल किया %1$s पर</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">डिवाइस</string>
+    <string name="home_unit_services">सेवा</string>
+</resources>

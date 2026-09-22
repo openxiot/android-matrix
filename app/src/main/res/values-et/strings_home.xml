@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Valige esmalt projektide loendist projekt</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Loobu muudatustest?</string>
+    <string name="home_discard_message">Sul on salvestamata muudatusi. Väljumisel lähevad need kaotsi.</string>
+    <string name="home_dashboard_empty">Kaarte veel pole — lisa üks, puudutades all „Lisa”</string>
+    <string name="home_add_card">+ Lisa</string>
+    <string name="home_default_layout_loaded">Vaikepaigutus on laaditud — rakendamiseks salvesta see</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Üks suur number: seadmed / teenused / alarmid / tõrked</string>
+    <string name="home_card_kind_line">Alarmide arv tunni kaupa või üks teenuse väli</string>
+    <string name="home_card_kind_distribution">Jaotus seadme / teenuse / alarmi / tõrke järgi</string>
+    <string name="home_card_kind_device">Ühe seadme üks omadus</string>
+    <string name="home_card_kind_service">Ühe funktsiooni väljade kogum</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Graafik</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Seade</string>
+    <string name="home_card_default_service">Teenused</string>
+    <string name="home_card_default_unknown">Kaart</string>
+    <string name="home_edit_card_title">Muuda · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Täislaius</string>
+    <string name="home_size_half">Poollaius</string>
+    <string name="home_section_metric">Näitaja</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Seadmeid kokku</string>
+    <string name="home_metric_devices_online">Seadmeid võrgus</string>
+    <string name="home_metric_services_total">Teenuseid kokku</string>
+    <string name="home_metric_alarms_today">Tänased alarmid</string>
+    <string name="home_metric_alarms_window">Alarmid vahemikus</string>
+    <string name="home_metric_failures_total">Kogumise tõrked vahemikus</string>
+    <string name="home_section_dimension">Jaotus</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Seadme tüüp</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Kogumise tõrke tüüp</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Andmeallikas</string>
+    <string name="home_source_label">Allikas</string>
+    <string name="home_source_alarm_curve">Alarmide arv tunni kaupa</string>
+    <string name="home_source_service_field">Üks teenuse väli</string>
+    <string name="home_show_failure_shadow">Näita ebaõnnestunud kogumise jooni</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Teenus · Funktsioon · Väli</string>
+    <string name="home_service_placeholder">Vali teenus</string>
+    <string name="home_service_unnamed">Nimetu teenus</string>
+    <string name="home_function_placeholder">Vali funktsioon</string>
+    <string name="home_function_fallback">Funktsioon %1$d</string>
+    <string name="home_pick_service_first">Vali esmalt teenus</string>
+    <string name="home_show_unit">Näita ühikut</string>
+    <string name="home_section_device_prop">Seade · Omadus</string>
+    <string name="home_device_placeholder">Vali seade</string>
+    <string name="home_prop_label">Omadused</string>
+    <string name="home_pick_device_first">Vali esmalt seade</string>
+    <string name="home_prop_none">Sellel mudelil pole omadusi</string>
+    <string name="home_prop_placeholder">Vali omadus</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, jäta tühjaks, kui piirangut pole</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Viimane</string>
+    <string name="home_window_custom">Kohandatud</string>
+    <string name="home_pick_dates">Vali algus- ja lõppkuupäev</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d päev</item>
+        <item quantity="other">%1$d päeva</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d tund</item>
+        <item quantity="other">%1$d tundi</item>
+    </plurals>
+    <string name="home_card_unknown_type">Tundmatu kaardi tüüp</string>
+    <string name="home_empty_no_data">Andmed puuduvad</string>
+    <string name="home_empty_no_reading">Näite veel pole</string>
+    <string name="home_empty_not_sampled">Pole veel kogutud</string>
+    <string name="home_sampled_at">Kogutud %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">seadet</string>
+    <string name="home_unit_services">teenust</string>
+</resources>

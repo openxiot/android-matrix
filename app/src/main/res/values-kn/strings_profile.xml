@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">ಭಾಷೆ</string>
+    <string name="profile_language_system">ಸಿಸ್ಟಮ್ ಅನುಸರಿಸಿ</string>
+    <string name="profile_language_search">ಭಾಷೆಗಳನ್ನು ಹುಡುಕಿ</string>
+    <string name="profile_language_search_clear">ಅಳಿಸಿ</string>
+    <string name="profile_language_no_match">ಹೊಂದಾಣಿಕೆಯ ಯಾವುದೇ ಭಾಷೆ ಇಲ್ಲ</string>
+    <string name="profile_not_logged_in">ಲಾಗಿನ್ ಆಗಿಲ್ಲ</string>
+    <string name="profile_current_org">ಪ್ರಸ್ತುತ ಸಂಸ್ಥೆ</string>
+    <string name="profile_current_project">ಪ್ರಸ್ತುತ ಯೋಜನೆ</string>
+    <string name="profile_no_org_selected">ಸಂಸ್ಥೆ ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ</string>
+    <string name="profile_no_project_selected">ಯೋಜನೆ ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ</string>
+    <string name="profile_org_subtitle">ಯೋಜನೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಒಂದನ್ನು ಆರಿಸಿ</string>
+    <string name="profile_project_subtitle_pick">ಯೋಜನೆಯನ್ನು ಆರಿಸಿ</string>
+    <string name="profile_project_subtitle_switch">ಯೋಜನೆಯನ್ನು ಬದಲಾಯಿಸಲು ಒತ್ತಿರಿ</string>
+    <string name="profile_project_subtitle_org_first">ದಯವಿಟ್ಟು ಮೊದಲು ಸಂಸ್ಥೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="profile_section_settings">ಸೆಟ್ಟಿಂಗ್‌ಗಳು</string>
+    <string name="profile_dark_mode">ಡಾರ್ಕ್ ಮೋಡ್</string>
+    <string name="profile_light_mode">ಲೈಟ್ ಮೋಡ್</string>
+    <string name="profile_theme_subtitle">ಥೀಮ್ ಬದಲಾಯಿಸಲು ಒತ್ತಿರಿ</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">ಸಾಧನ ಪಾಯಿಂಟ್ ಟೇಬಲ್</string>
+    <string name="profile_modbus_subtitle">Modbus ರಿಜಿಸ್ಟರ್ ನಕ್ಷೆಗಳು (ಓದಲು-ಮಾತ್ರ)</string>
+    <string name="profile_alarm_title">ಎಚ್ಚರಿಕೆಗಳು</string>
+    <string name="profile_alarm_subtitle">Modbus ಎಚ್ಚರಿಕೆ ದಾಖಲೆ ಮತ್ತು ನಿರ್ವಹಣೆ</string>
+    <string name="profile_history_title">ಇತಿಹಾಸ</string>
+    <string name="profile_history_subtitle">ಸ್ಯಾಂಪ್ಲಿಂಗ್ ಇತಿಹಾಸ ಮತ್ತು ಚಾರ್ಟ್‌ಗಳು</string>
+    <string name="profile_about_subtitle">ಅಪ್ ಮಾಹಿತಿ ಮತ್ತು ಆವೃತ್ತಿ</string>
+    <string name="account_title">ಖಾತೆ</string>
+    <string name="account_username">ಬಳಕೆದಾರ ಹೆಸರು</string>
+    <string name="account_platform">ವೇದಿಕೆ</string>
+    <string name="account_not_selected">ಆಯ್ಕೆ ಮಾಡಿಲ್ಲ</string>
+    <string name="account_org_toggle">ಸಂಸ್ಥೆ</string>
+    <string name="account_org_toggle_subtitle">ಸಂಸ್ಥೆಗಳನ್ನು ನಿರ್ವಹಿಸಲು ಆನ್ ಮಾಡಿ</string>
+    <string name="account_logout">ಲಾಗ್ ಔಟ್</string>
+    <string name="about_title">ಬಗ್ಗೆ</string>
+    <string name="about_tagline">IoT ಸಾಧನ ನಿರ್ವಹಣೆ ಮತ್ತು ಮೇಲ್ವಿಚಾರಣಾ ವೇದಿಕೆ</string>
+    <string name="about_version">ಆವೃತ್ತಿ %1$s</string>
+    <string name="about_check_update">ನವೀಕರಣಗಳನ್ನು ಪರಿಶೀಲಿಸಿ</string>
+    <string name="about_checking">ಪರಿಶೀಲಿಸುತ್ತಿದೆ…</string>
+    <string name="about_up_to_date">ನೀವು ಅತ್ಯಾಧುನಿಕ ಆವೃತ್ತಿಯಲ್ಲಿದ್ದೀರಿ</string>
+    <string name="about_update_now">ಈಗ ನವೀಕರಿಸಿ</string>
+    <string name="about_downloading">ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ…</string>
+    <string name="about_downloading_percent">ಡೌನ್‌ಲೋಡ್ %1$d%%</string>
+    <string name="about_install_now">ಈಗ ಅನುಸ್ಥಾಪಿಸಿ</string>
+    <string name="about_install">ಅನುಸ್ಥಾಪಿಸಿ</string>
+    <string name="about_retry_download">ಡೌನ್‌ಲೋಡ್ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ</string>
+    <string name="about_later">ನಂತರ</string>
+    <string name="about_install_dialog_title">ನವೀಕರಣವನ್ನು ಅನುಸ್ಥಾಪಿಸಿ</string>
+    <string name="about_new_version_found">ಆವೃತ್ತಿ %1$s ಲಭ್ಯವಿದೆ</string>
+    <string name="about_ready_hint">ಡೌನ್‌ಲೋಡ್ ಪೂರ್ಣ — ಸಿಸ್ಟಮ್ ಅನುಸ್ಥಾಪಕಕ್ಕೆ ವರ್ಗಾಯಿಸಲು Install ಒತ್ತಿರಿ.</string>
+    <string name="about_need_install_permission">ಮೊದಲು ಈ ಅಪ್ ಅಪರಿಚಿತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸಲು ಅನುಮತಿಸಿ</string>
+    <string name="about_keep_app_alive">ನೀವು ಪುಟಗಳನ್ನು ಬದಲಾಯಿಸಬಹುದು — ಆದರೆ ಅಪ್ ಅನ್ನು ಮುಚ್ಚಬೇಡಿ</string>
+    <string name="about_metered">ನೀವು ಮೊಬೈಲ್ ಡೇಟಾದಲ್ಲಿದ್ದೀರಿ — ಡೌನ್‌ಲೋಡ್ ಬಹಳಷ್ಟು ಬಳಸಬಹುದು</string>
+    <string name="about_metered_size">ನೀವು ಮೊಬೈಲ್ ಡೇಟಾದಲ್ಲಿದ್ದೀರಿ — ಪ್ಯಾಕೇಜ್ ಸುಮಾರು %1$s</string>
+    <string name="about_install_settings_failed">“ಅಪರಿಚಿತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸಿ” ಸೆಟ್ಟಿಂಗ್ ತೆರೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ — ಸಿಸ್ಟಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಹಸ್ತಚಾಲಿತವಾಗಿ ಅನುಮತಿಸಿ</string>
+    <string name="about_no_installer">ಯಾವುದೇ ಅನುಸ್ಥಾಪಕ ಅಪ್ ಲಭ್ಯವಿಲ್ಲ — ಪ್ಯಾಕೇಜ್ ಅಪ್ ಫೋಲ್ಡರ್‌ನಲ್ಲಿ ಉಳಿಸಲಾಗಿದೆ</string>
+    <string name="about_update_notes_empty">ಈ ಬಿಡುಗಡೆಯಲ್ಲಿ ಯಾವುದೇ ಟಿಪ್ಪಣಿಗಳಿಲ್ಲ.</string>
+</resources>

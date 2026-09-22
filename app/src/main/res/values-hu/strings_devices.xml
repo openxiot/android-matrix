@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="devices_select_project_first">Először válasszon projektet a Profil alatt</string>
+    <string name="devices_empty">Még nincsenek eszközök</string>
+    <string name="devices_unknown">Ismeretlen eszköz</string>
+    <plurals name="devices_count">
+        <item quantity="one">%1$d eszköz</item>
+        <item quantity="other">Összesen %1$d eszköz</item>
+    </plurals>
+</resources>

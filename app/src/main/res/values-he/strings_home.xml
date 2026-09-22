@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">נא לבחור פרויקט מרשימת הפרויקטים תחילה</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">לבטל את השינויים?</string>
+    <string name="home_discard_message">יש לך שינויים שלא נשמרו. היציאה כעת תאבד אותם.</string>
+    <string name="home_dashboard_empty">אין עדיין כרטיסים — לחץ על הוסף למטה כדי להוסיף אחד</string>
+    <string name="home_add_card">+ הוסף</string>
+    <string name="home_default_layout_loaded">פריסת ברירת המחדל נטענה — שמור אותה כדי להחיל</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">מספר בולט אחד: מכשירים / שירותים / התראות / תקלות</string>
+    <string name="home_card_kind_line">ספירת התראות לפי שעה, או שדה שירות אחד</string>
+    <string name="home_card_kind_distribution">התפלגות לפי מכשיר / שירות / התראה / תקלה</string>
+    <string name="home_card_kind_device">תכונה אחת של מכשיר אחד</string>
+    <string name="home_card_kind_service">קבוצת שדות מפונקציה אחת</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">גרף</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">התקן</string>
+    <string name="home_card_default_service">שירותים</string>
+    <string name="home_card_default_unknown">כרטיס</string>
+    <string name="home_edit_card_title">עריכה · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">רוחב מלא</string>
+    <string name="home_size_half">חצי רוחב</string>
+    <string name="home_section_metric">מדד</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">סה\"כ מכשירים</string>
+    <string name="home_metric_devices_online">מכשירים מקוונים</string>
+    <string name="home_metric_services_total">סה\"כ שירותים</string>
+    <string name="home_metric_alarms_today">התראות היום</string>
+    <string name="home_metric_alarms_window">התראות בחלון</string>
+    <string name="home_metric_failures_total">תקלות איסוף בחלון</string>
+    <string name="home_section_dimension">התפלגות לפי</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">סוג התקן</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">סוג תקלת האיסוף</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">מקור נתונים</string>
+    <string name="home_source_label">מקור</string>
+    <string name="home_source_alarm_curve">ספירת התראות לפי שעה</string>
+    <string name="home_source_service_field">שדה שירות אחד</string>
+    <string name="home_show_failure_shadow">הצג קווים של איסוף שנכשל</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">שירות · פונקציה · שדה</string>
+    <string name="home_service_placeholder">בחר שירות</string>
+    <string name="home_service_unnamed">שירות ללא שם</string>
+    <string name="home_function_placeholder">בחר פונקציה</string>
+    <string name="home_function_fallback">פונקציה %1$d</string>
+    <string name="home_pick_service_first">בחר תחילה שירות</string>
+    <string name="home_show_unit">הצג יחידה</string>
+    <string name="home_section_device_prop">מכשיר · תכונה</string>
+    <string name="home_device_placeholder">בחר מכשיר</string>
+    <string name="home_prop_label">מאפיינים</string>
+    <string name="home_pick_device_first">בחר תחילה מכשיר</string>
+    <string name="home_prop_none">אין תכונות לדגם זה</string>
+    <string name="home_prop_placeholder">בחר תכונה</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, השאר ריק ללא הגבלה</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">אחרון</string>
+    <string name="home_window_custom">מותאם אישית</string>
+    <string name="home_pick_dates">בחר תאריכי התחלה וסיום</string>
+    <plurals name="home_window_days">
+        <item quantity="many">%1$d ימים</item>
+        <item quantity="one">%1$d יום</item>
+        <item quantity="two">%1$d ימים</item>
+        <item quantity="other">%1$d ימים</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="many">%1$d שעות</item>
+        <item quantity="one">%1$d שעה</item>
+        <item quantity="two">%1$d שעות</item>
+        <item quantity="other">%1$d שעות</item>
+    </plurals>
+    <string name="home_card_unknown_type">סוג כרטיס לא ידוע</string>
+    <string name="home_empty_no_data">אין נתונים</string>
+    <string name="home_empty_no_reading">אין עדיין קריאות</string>
+    <string name="home_empty_not_sampled">טרם נאסף</string>
+    <string name="home_sampled_at">נאסף %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">התקנים</string>
+    <string name="home_unit_services">שירותים</string>
+</resources>

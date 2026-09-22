@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">भाषा</string>
+    <string name="profile_language_system">सिस्टम का पालन करें</string>
+    <string name="profile_language_search">भाषाएँ खोजें</string>
+    <string name="profile_language_search_clear">साफ़ करें</string>
+    <string name="profile_language_no_match">कोई मिलती-जुलती भाषा नहीं</string>
+    <string name="profile_not_logged_in">साइन इन नहीं किया गया</string>
+    <string name="profile_current_org">वर्तमान संगठन</string>
+    <string name="profile_current_project">वर्तमान प्रोजेक्ट</string>
+    <string name="profile_no_org_selected">कोई संगठन चयनित नहीं</string>
+    <string name="profile_no_project_selected">कोई प्रोजेक्ट चयनित नहीं</string>
+    <string name="profile_org_subtitle">प्रोजेक्ट चुनने के लिए एक चुनें</string>
+    <string name="profile_project_subtitle_pick">एक प्रोजेक्ट चुनें</string>
+    <string name="profile_project_subtitle_switch">प्रोजेक्ट बदलने के लिए टैप करें</string>
+    <string name="profile_project_subtitle_org_first">कृपया पहले संगठन चुनें</string>
+    <string name="profile_section_settings">सेटिंग्स</string>
+    <string name="profile_dark_mode">डार्क मोड</string>
+    <string name="profile_light_mode">लाइट मोड</string>
+    <string name="profile_theme_subtitle">थीम बदलने के लिए टैप करें</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">डिवाइस पॉइंट टेबल</string>
+    <string name="profile_modbus_subtitle">Modbus रजिस्टर मैप (केवल पढ़ने के लिए)</string>
+    <string name="profile_alarm_title">अलार्म</string>
+    <string name="profile_alarm_subtitle">Modbus अलार्म लॉग और प्रबंधन</string>
+    <string name="profile_history_title">इतिहास</string>
+    <string name="profile_history_subtitle">सैंपलिंग इतिहास और चार्ट</string>
+    <string name="profile_about_subtitle">ऐप जानकारी और संस्करण</string>
+    <string name="account_title">खाता</string>
+    <string name="account_username">उपयोगकर्ता नाम</string>
+    <string name="account_platform">प्लेटफ़ॉर्म</string>
+    <string name="account_not_selected">चयनित नहीं</string>
+    <string name="account_org_toggle">संगठन</string>
+    <string name="account_org_toggle_subtitle">संगठन प्रबंधित करने के लिए चालू करें</string>
+    <string name="account_logout">साइन आउट करें</string>
+    <string name="about_title">जानकारी</string>
+    <string name="about_tagline">IoT डिवाइस प्रबंधन और निगरानी प्लेटफ़ॉर्म</string>
+    <string name="about_version">संस्करण %1$s</string>
+    <string name="about_check_update">अपडेट जाँचें</string>
+    <string name="about_checking">जाँच की जा रही है…</string>
+    <string name="about_up_to_date">आप नवीनतम संस्करण पर हैं</string>
+    <string name="about_update_now">अभी अपडेट करें</string>
+    <string name="about_downloading">डाउनलोड हो रहा है…</string>
+    <string name="about_downloading_percent">डाउनलोड हो रहा है %1$d%%</string>
+    <string name="about_install_now">अभी इंस्टॉल करें</string>
+    <string name="about_install">इंस्टॉल करें</string>
+    <string name="about_retry_download">डाउनलोड फिर से आज़माएँ</string>
+    <string name="about_later">बाद में</string>
+    <string name="about_install_dialog_title">अपडेट इंस्टॉल करें</string>
+    <string name="about_new_version_found">संस्करण %1$s उपलब्ध है</string>
+    <string name="about_ready_hint">डाउनलोड पूरा — सिस्टम इंस्टॉलर को देने के लिए इंस्टॉल टैप करें।</string>
+    <string name="about_need_install_permission">पहले इस ऐप को अज्ञात ऐप इंस्टॉल करने की अनुमति दें</string>
+    <string name="about_keep_app_alive">आप पेज बदल सकते हैं — बस ऐप बंद मत करें</string>
+    <string name="about_metered">आप मोबाइल डेटा पर हैं — डाउनलोड से अधिक डेटा खर्च हो सकता है</string>
+    <string name="about_metered_size">आप मोबाइल डेटा पर हैं — पैकेज लगभग %1$s है</string>
+    <string name="about_install_settings_failed">“अज्ञात ऐप इंस्टॉल करें” सेटिंग नहीं खुल सकी — इसे सिस्टम सेटिंग में मैन्युअली अनुमति दें</string>
+    <string name="about_no_installer">कोई इंस्टॉलर ऐप उपलब्ध नहीं है — पैकेज ऐप के फ़ोल्डर में सहेजा गया है</string>
+    <string name="about_update_notes_empty">इस अपडेट के साथ कोई नोट नहीं आया।</string>
+</resources>

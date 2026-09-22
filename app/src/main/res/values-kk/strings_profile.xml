@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Тіл</string>
+    <string name="profile_language_system">Жүйемен бірге</string>
+    <string name="profile_language_search">Тілдерді іздеу</string>
+    <string name="profile_language_search_clear">Тазалау</string>
+    <string name="profile_language_no_match">Сәйкес тіл табылмады</string>
+    <string name="profile_not_logged_in">Кірілмеген</string>
+    <string name="profile_current_org">Ағымдағы ұйым</string>
+    <string name="profile_current_project">Ағымдағы жоба</string>
+    <string name="profile_no_org_selected">Ұйым таңдалмаған</string>
+    <string name="profile_no_project_selected">Жоба таңдалмаған</string>
+    <string name="profile_org_subtitle">Жоба таңдау үшін біреуін таңдаңыз</string>
+    <string name="profile_project_subtitle_pick">Жобаны таңдаңыз</string>
+    <string name="profile_project_subtitle_switch">Жобаны ауыстыру үшін түртіңіз</string>
+    <string name="profile_project_subtitle_org_first">Алдымен ұйымды таңдаңыз</string>
+    <string name="profile_section_settings">Параметрлер</string>
+    <string name="profile_dark_mode">Қараңғы режим</string>
+    <string name="profile_light_mode">Жарық режим</string>
+    <string name="profile_theme_subtitle">Тақырыпты ауыстыру үшін түртіңіз</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Құрылғы нүктелер кестесі</string>
+    <string name="profile_modbus_subtitle">Modbus регистр карталары (тек оқу)</string>
+    <string name="profile_alarm_title">Дабылдар</string>
+    <string name="profile_alarm_subtitle">Modbus дабыл журналы және өңдеу</string>
+    <string name="profile_history_title">Тарих</string>
+    <string name="profile_history_subtitle">Алу тарихы және графиктер</string>
+    <string name="profile_about_subtitle">Қолданба ақпараты және нұсқасы</string>
+    <string name="account_title">Тіркелгі</string>
+    <string name="account_username">Пайдаланушы аты</string>
+    <string name="account_platform">Платформа</string>
+    <string name="account_not_selected">Таңдалмаған</string>
+    <string name="account_org_toggle">Ұйым</string>
+    <string name="account_org_toggle_subtitle">Ұйымдарды басқару үшін қосыңыз</string>
+    <string name="account_logout">Шығу</string>
+    <string name="about_title">Ақпарат</string>
+    <string name="about_tagline">IoT құрылғыларын басқару және бақылау платформасы</string>
+    <string name="about_version">%1$s нұсқасы</string>
+    <string name="about_check_update">Жаңартуларды тексеру</string>
+    <string name="about_checking">Тексерілуде…</string>
+    <string name="about_up_to_date">Нұсқаңыз ең жаңа</string>
+    <string name="about_update_now">Қазір жаңарту</string>
+    <string name="about_downloading">Жүктелуде…</string>
+    <string name="about_downloading_percent">Жүктелуде %1$d%%</string>
+    <string name="about_install_now">Қазір орнату</string>
+    <string name="about_install">Орнату</string>
+    <string name="about_retry_download">Жүктеуді қайталау</string>
+    <string name="about_later">Кейін</string>
+    <string name="about_install_dialog_title">Жаңартуды орнату</string>
+    <string name="about_new_version_found">%1$s нұсқасы қолжетімді</string>
+    <string name="about_ready_hint">Жүктеу аяқталды — «Орнату» түймесін басып, жүйе орнатушысына беріңіз.</string>
+    <string name="about_need_install_permission">Алдымен осы қолданбаға белгісіз көздерден қолданба орнатуға рұқсат беріңіз</string>
+    <string name="about_keep_app_alive">Беттерді ауыстыруға болады — тек қолданбаны жаппаңыз</string>
+    <string name="about_metered">Мобильді желідеміз — жүктеу оны көп жұмсауы мүмкін</string>
+    <string name="about_metered_size">Мобильді желідеміз — пакет шамамен %1$s</string>
+    <string name="about_install_settings_failed">«Белгісіз қолданбаларды орнату» параметрін ашу мүмкін болмады — жүйе параметрлерінде қолмен рұқсат беріңіз</string>
+    <string name="about_no_installer">Орнату бағдарламасы жоқ — пакет қолданбаның қалтасында сақталды</string>
+    <string name="about_update_notes_empty">Бұл шығарылымда ескертулер жоқ.</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">उत्पादन</string>
+    <string name="product_detail_title">उत्पादन विवरण</string>
+    <string name="product_not_found">उत्पादन फेला परेन</string>
+    <string name="product_empty">अहिलेसम्म कुनै उत्पादन छैन</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d उत्पादन</item>
+        <item quantity="other">%1$d उत्पादनहरू</item>
+    </plurals>
+    <string name="product_model_inline">मोडेल: %1$s</string>
+    <string name="product_id_label">उत्पादन ID</string>
+    <string name="product_model_label">उत्पादन मोडेल</string>
+    <string name="product_org_label">संस्था</string>
+    <string name="product_buy_jd">JD.com मा किन्नुहोस्</string>
+    <string name="product_buy_taobao">Taobao मा किन्नुहोस्</string>
+    <string name="product_status_released">प्रकाशित</string>
+    <string name="product_status_preview">पूर्वावलोकन</string>
+    <string name="product_status_development">विकासमा</string>
+    <string name="product_empty_data">कुनै उत्पादन डेटा छैन</string>
+</resources>

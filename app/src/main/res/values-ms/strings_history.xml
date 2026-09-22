@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Sejarah</string>
+    <string name="history_section_overview">Gambaran keseluruhan perkhidmatan</string>
+    <string name="history_no_services">Belum ada perkhidmatan Modbus dalam projek ini</string>
+    <string name="history_service_count_label">Bilangan Perkhidmatan</string>
+    <string name="history_device_count_label">Bilangan Peranti</string>
+    <string name="history_sampled_at_label">Masa pengumpulan</string>
+    <string name="history_function_count_label">Bilangan Kaedah</string>
+    <string name="history_faults_section">Pengecualian pengumpulan</string>
+    <string name="history_faults_label">Pengecualian pengumpulan</string>
+    <string name="history_no_faults">Tiada kegagalan pensampelan dalam tempoh ini</string>
+    <string name="history_no_data">Tiada data disampel dalam tempoh ini</string>
+    <string name="history_field_label">Medan</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="other">Data sampel (%1$d baris)</item>
+    </plurals>
+    <string name="service_history_all_functions">Semua kaedah</string>
+    <string name="service_history_field_selection">Medan %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Kegagalan %1$s × %2$d</string>
+    <string name="service_history_no_curve">Tiada medan dalam perkhidmatan ini yang boleh dicarta</string>
+    <string name="service_history_no_curve_for_function">Tiada medan yang boleh dicarta dalam fungsi ini</string>
+    <string name="service_history_no_fields_selected">Tiada medan dipilih</string>
+    <string name="service_history_failure_hint">Garisan menegak menandakan masa kegagalan pengumpulan</string>
+    <string name="service_history_downsampled_hint">Titik data banyak, jadi data dinyahsampel mengikut selang masa (nilai ialah purata selang itu, dalam kurungan minimum~maksimum)</string>
+    <string name="service_history_keepalive">Dikekalkan</string>
+    <string name="service_history_view_table">Jadual</string>
+    <string name="service_history_view_chart">Graf</string>
+</resources>

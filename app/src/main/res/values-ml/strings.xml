@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">മാട്രിക്സ്</string>
+    <string name="common_back">മടങ്ങുക</string>
+    <string name="common_retry">വീണ്ടും ശ്രമിക്കുക</string>
+    <string name="common_confirm">സ്ഥിരീകരിക്കുക</string>
+    <string name="common_cancel">റദ്ദാക്കുക</string>
+    <string name="common_close">അടയ്ക്കുക</string>
+    <string name="common_detail">വിശദാംശങ്ങൾ</string>
+    <string name="common_collapse">ചുരുക്കുക</string>
+    <string name="common_expand">വികസിപ്പിക്കുക</string>
+    <string name="common_all">എല്ലാം</string>
+    <string name="common_add">ചേർക്കുക</string>
+    <string name="common_create">സൃഷ്ടിക്കുക</string>
+    <string name="common_delete">ഇല്ലാതാക്കുക</string>
+    <string name="common_unnamed">പേരില്ലാത്ത</string>
+    <string name="common_unknown">അജ്ഞാതം</string>
+    <string name="common_me">നിങ്ങൾ</string>
+    <string name="common_rename_action">പുനർനാമകരണം</string>
+    <string name="common_role_label">റോൾ</string>
+    <string name="common_role_admin">അഡ്മിൻ</string>
+    <string name="common_role_member">അംഗങ്ങൾ</string>
+    <string name="common_role_member_option">സാധാരണ അംഗം</string>
+    <string name="common_member_add">അംഗത്തെ ചേർക്കുക</string>
+    <string name="common_member_remove">അംഗത്തെ നീക്കം ചെയ്യുക</string>
+    <string name="common_edit">തിരുത്തുക</string>
+    <string name="common_refresh">പുതുക്കുക</string>
+    <string name="common_change">മാറ്റുക</string>
+    <string name="common_handle">കൈകാര്യം</string>
+    <string name="common_handled">കൈകാര്യം ചെയ്തു</string>
+    <string name="common_unhandled">കൈകാര്യം ചെയ്തിട്ടില്ല</string>
+    <string name="common_recovered">വീണ്ടെടുത്തു</string>
+    <string name="common_unrecovered">വീണ്ടെടുത്തിട്ടില്ല</string>
+    <string name="common_online">ഓൺലൈൻ</string>
+    <string name="common_offline">ഓഫ്ലൈൻ</string>
+    <string name="common_switch_on">ഓൺ</string>
+    <string name="common_switch_off">ഓഫ്</string>
+    <string name="common_please_select">തിരഞ്ഞെടുക്കുക</string>
+    <string name="common_ok">ശരി</string>
+    <string name="common_no_range">സമയ ശ്രേണി തിരഞ്ഞെടുത്തിട്ടില്ല</string>
+    <string name="common_range_text">%1$s മുതൽ %2$s വരെ</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">സേവനങ്ങൾ</string>
+    <string name="common_function_label">രീതികൾ</string>
+    <string name="common_device_label">ഉപകരണം</string>
+    <string name="common_protocol_label">പ്രോട്ടോക്കോൾ</string>
+    <string name="common_unknown_product">അജ്ഞാത ഉൽപ്പന്നം</string>
+    <string name="common_truncated_hint">അപവാദ രേഖകൾ പരിധി കവിഞ്ഞു, ഏറ്റവും പുതിയ ഭാഗം മാത്രം പട്ടികപ്പെടുത്തിയിട്ടുണ്ട്</string>
+    <string name="err_network">നെറ്റ്വർക്ക് ലഭ്യമല്ല. നിങ്ങളുടെ കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.</string>
+    <string name="err_unknown">എന്തോ കുഴപ്പം സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക.</string>
+    <string name="space_type_site">സൈറ്റ്</string>
+    <string name="space_type_building">കെട്ടിടം</string>
+    <string name="space_type_floor">നില</string>
+    <string name="space_type_room">മുറി</string>
+    <string name="space_type_zone">സോൺ</string>
+    <string name="space_type_field">ഫീൽഡ്</string>
+    <string name="space_type_workshop">വർക്ക്ഷോപ്പ്</string>
+    <string name="space_type_parking">പാർക്കിംഗ് സ്ഥലം</string>
+</resources>

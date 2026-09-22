@@ -148,6 +148,21 @@ jobs:
 
           chmod 600 keystore.properties app/keystore/wematrix-release.jks
 
+      # 发布链路此前**一道测试都没有**：只有 build-debug.yml 跑 testDebugUnitTest，
+      # 而 debug 那条不发布。于是「62 个语言目录里有一个格式坏了」这种错，会一路走到
+      # 公网 APK 上才被用户发现。多语言扩展后 i18n 门禁必须卡在这条链路上。
+      #
+      # 放在 assembleRelease 之前：坏了就别浪费一次构建，也别让产物先落到 artifacts。
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest
+
+      # Kotlin 门禁查不了「俄语该有哪几档复数」—— 那需要一张语言表，抄进 Kotlin 就是
+      # 第二个真源。所以那条规则只在这里查：表由 tools/i18n/langs.py 给出，且被
+      # cldr_check.py 拿真实 CLDR 核对过。缺一档不会报错，只会让俄语的 5 显示成
+      # 语法错的 «5 товаров»，正是那种「全绿但用户看得见」的错，必须有人守。
+      - name: 独立校验语言目录
+        run: python3 tools/i18n/validate.py
+
       - name: Build release APK
         run: |
           ./gradlew assembleRelease \

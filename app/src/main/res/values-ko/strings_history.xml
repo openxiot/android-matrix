@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">이력</string>
+    <string name="history_section_overview">서비스 개요</string>
+    <string name="history_no_services">이 프로젝트에 아직 Modbus 서비스가 없습니다</string>
+    <string name="history_service_count_label">서비스 수</string>
+    <string name="history_device_count_label">디바이스 수</string>
+    <string name="history_sampled_at_label">수집 시간</string>
+    <string name="history_function_count_label">메서드 수</string>
+    <string name="history_faults_section">수집 예외</string>
+    <string name="history_faults_label">수집 예외</string>
+    <string name="history_no_faults">이 기간에 수집 오류가 없습니다</string>
+    <string name="history_no_data">이 기간에 수집된 데이터가 없습니다</string>
+    <string name="history_field_label">필드</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="other">수집 데이터(%1$d행)</item>
+    </plurals>
+    <string name="service_history_all_functions">전체 메서드</string>
+    <string name="service_history_field_selection">필드 %1$d / %2$d</string>
+    <string name="service_history_fault_chip">오류 %1$s × %2$d</string>
+    <string name="service_history_no_curve">이 서비스에는 차트로 표시할 수 있는 필드가 없습니다</string>
+    <string name="service_history_no_curve_for_function">이 기능에는 차트로 표시할 수 있는 필드가 없습니다</string>
+    <string name="service_history_no_fields_selected">선택된 필드 없음</string>
+    <string name="service_history_failure_hint">세로선은 수집 실패 시점을 나타냅니다</string>
+    <string name="service_history_downsampled_hint">데이터 포인트가 많아 시간 구간별로 다운샘플링했습니다（값은 해당 구간의 평균，괄호 안은 최소~최대）</string>
+    <string name="service_history_keepalive">유지</string>
+    <string name="service_history_view_table">테이블</string>
+    <string name="service_history_view_chart">차트</string>
+</resources>

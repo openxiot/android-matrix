@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,6 +30,7 @@ import cc.openxiot.wematrix.ui.theme.Blue500
 import cc.openxiot.wematrix.ui.theme.Gray500
 import cc.openxiot.wematrix.ui.theme.Green
 import cc.openxiot.wematrix.ui.theme.Orange
+import cc.openxiot.wematrix.util.mirrorInRtl
 
 /**
  * 设备点表列表（只读）。
@@ -185,6 +187,7 @@ private fun ModbusConfigCard(config: ModbusConfig, onClick: () -> Unit) {
             Icon(
                 Icons.Default.ChevronRight,
                 contentDescription = null,
+                modifier = Modifier.mirrorInRtl(),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

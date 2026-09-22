@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Langue</string>
+    <string name="profile_language_system">Suivre le système</string>
+    <string name="profile_language_search">Rechercher des langues</string>
+    <string name="profile_language_search_clear">Effacer</string>
+    <string name="profile_language_no_match">Aucune langue correspondante</string>
+    <string name="profile_not_logged_in">Non connecté</string>
+    <string name="profile_current_org">Organisation actuelle</string>
+    <string name="profile_current_project">Projet actuel</string>
+    <string name="profile_no_org_selected">Aucune organisation sélectionnée</string>
+    <string name="profile_no_project_selected">Aucun projet sélectionné</string>
+    <string name="profile_org_subtitle">Choisissez-en une pour choisir un projet</string>
+    <string name="profile_project_subtitle_pick">Choisir un projet</string>
+    <string name="profile_project_subtitle_switch">Touchez pour changer de projet</string>
+    <string name="profile_project_subtitle_org_first">Veuillez d\'abord sélectionner une organisation</string>
+    <string name="profile_section_settings">Paramètres</string>
+    <string name="profile_dark_mode">Mode sombre</string>
+    <string name="profile_light_mode">Mode clair</string>
+    <string name="profile_theme_subtitle">Touchez pour changer de thème</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Table de points de l\'appareil</string>
+    <string name="profile_modbus_subtitle">Tables de registres Modbus (lecture seule)</string>
+    <string name="profile_alarm_title">Alarmes</string>
+    <string name="profile_alarm_subtitle">Journal et traitement des alarmes Modbus</string>
+    <string name="profile_history_title">Historique</string>
+    <string name="profile_history_subtitle">Historique d\'acquisition et courbes</string>
+    <string name="profile_about_subtitle">Infos sur l\'application et version</string>
+    <string name="account_title">Compte</string>
+    <string name="account_username">Nom d\'utilisateur</string>
+    <string name="account_platform">Plateforme</string>
+    <string name="account_not_selected">Non sélectionné</string>
+    <string name="account_org_toggle">Organisation</string>
+    <string name="account_org_toggle_subtitle">Activez pour gérer les organisations</string>
+    <string name="account_logout">Se déconnecter</string>
+    <string name="about_title">À propos</string>
+    <string name="about_tagline">Plateforme de gestion et de supervision des appareils IoT</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_check_update">Rechercher des mises à jour</string>
+    <string name="about_checking">Vérification…</string>
+    <string name="about_up_to_date">Vous êtes à jour</string>
+    <string name="about_update_now">Mettre à jour</string>
+    <string name="about_downloading">Téléchargement…</string>
+    <string name="about_downloading_percent">Téléchargement %1$d%%</string>
+    <string name="about_install_now">Installer maintenant</string>
+    <string name="about_install">Installer</string>
+    <string name="about_retry_download">Relancer le téléchargement</string>
+    <string name="about_later">Plus tard</string>
+    <string name="about_install_dialog_title">Installer la mise à jour</string>
+    <string name="about_new_version_found">Version %1$s disponible</string>
+    <string name="about_ready_hint">Téléchargement terminé — touchez Installer pour le confier à l\'installateur système.</string>
+    <string name="about_need_install_permission">Autorisez d\'abord cette application à installer des applications inconnues</string>
+    <string name="about_keep_app_alive">Vous pouvez changer de page — ne fermez pas l\'application</string>
+    <string name="about_metered">Vous êtes sur les données cellulaires — le téléchargement peut en consommer beaucoup</string>
+    <string name="about_metered_size">Vous êtes sur les données cellulaires — le paquet fait environ %1$s</string>
+    <string name="about_install_settings_failed">Impossible d\'ouvrir le réglage « Installer des applications inconnues » — autorisez-le manuellement dans les réglages système</string>
+    <string name="about_no_installer">Aucune application d\'installation disponible — le paquet est enregistré dans le dossier de l\'application</string>
+    <string name="about_update_notes_empty">Cette version ne fournit aucune note.</string>
+</resources>

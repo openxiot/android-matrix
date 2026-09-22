@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Նախ ընտրեք նախագիծ նախագծերի ցանկից</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Հրաժարվե՞լ փոփոխություններից</string>
+    <string name="home_discard_message">Դուք ունեք չպահված փոփոխություններ։ Դուրս գալը կկորցնի դրանք։</string>
+    <string name="home_dashboard_empty">Դեռ քարտեր չկան — սեղմեք ներքևի «Ավելացնել»-ը՝ մեկը ավելացնելու համար</string>
+    <string name="home_add_card">+ Ավելացնել</string>
+    <string name="home_default_layout_loaded">Լռելյայն դասավորությունը բեռնված է — պահեք այն կիրառելու համար</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Մեկ մեծ թիվ՝ սարքեր / ծառայություններ / ահազանգեր / խափանումներ</string>
+    <string name="home_card_kind_line">Ամենժամյա ահազանգերի քանակը կամ մեկ ծառայության դաշտ</string>
+    <string name="home_card_kind_distribution">Բաշխում ըստ սարքի / ծառայության / ահազանգի / խափանման</string>
+    <string name="home_card_kind_device">Մեկ սարքի մեկ հատկություն</string>
+    <string name="home_card_kind_service">Մեկ ֆունկցիայի դաշտերի հավաքածու</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Գրաֆիկ</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Սարք</string>
+    <string name="home_card_default_service">Ծառայություններ</string>
+    <string name="home_card_default_unknown">Քարտ</string>
+    <string name="home_edit_card_title">Խմբագրել · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Ամբողջ լայնքը</string>
+    <string name="home_size_half">Կիսալայնք</string>
+    <string name="home_section_metric">Ցուցանիշ</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Սարքերի ընդհանուր քանակը</string>
+    <string name="home_metric_devices_online">Առցանց սարքեր</string>
+    <string name="home_metric_services_total">Ծառայությունների ընդհանուր քանակը</string>
+    <string name="home_metric_alarms_today">Այսօրվա ահազանգեր</string>
+    <string name="home_metric_alarms_window">Ահազանգեր ժամանակահատվածում</string>
+    <string name="home_metric_failures_total">Նմուշառման խափանումներ ժամանակահատվածում</string>
+    <string name="home_section_dimension">Բաշխում ըստ</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Սարքի տեսակ</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Նմուշառման խափանման տեսակը</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Տվյալների աղբյուր</string>
+    <string name="home_source_label">Աղբյուր</string>
+    <string name="home_source_alarm_curve">Ամենժամյա ահազանգերի քանակը</string>
+    <string name="home_source_service_field">Մեկ ծառայության դաշտ</string>
+    <string name="home_show_failure_shadow">Ցուցադրել ձախողված հավաքման գծերը</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Ծառայություն · Ֆունկցիա · Դաշտ</string>
+    <string name="home_service_placeholder">Ընտրեք ծառայություն</string>
+    <string name="home_service_unnamed">Անանուն ծառայություն</string>
+    <string name="home_function_placeholder">Ընտրեք ֆունկցիա</string>
+    <string name="home_function_fallback">Ֆունկցիա %1$d</string>
+    <string name="home_pick_service_first">Նախ ընտրեք ծառայություն</string>
+    <string name="home_show_unit">Ցուցադրել միավորը</string>
+    <string name="home_section_device_prop">Սարք · Հատկություն</string>
+    <string name="home_device_placeholder">Ընտրեք սարք</string>
+    <string name="home_prop_label">Հատկություններ</string>
+    <string name="home_pick_device_first">Նախ ընտրեք սարք</string>
+    <string name="home_prop_none">Այս մոդելի համար հատկություններ չկան</string>
+    <string name="home_prop_placeholder">Ընտրեք հատկություն</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, դատարկ թողեք՝ առանց սահմանափակման</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Վերջին</string>
+    <string name="home_window_custom">Անհատական</string>
+    <string name="home_pick_dates">Ընտրեք սկզբի և ավարտի ամսաթվերը</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d օր</item>
+        <item quantity="other">%1$d օրեր</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d ժամ</item>
+        <item quantity="other">%1$d ժամեր</item>
+    </plurals>
+    <string name="home_card_unknown_type">Քարտի անհայտ տեսակ</string>
+    <string name="home_empty_no_data">Տվյալներ չկան</string>
+    <string name="home_empty_no_reading">Դեռ ցուցմունքներ չկան</string>
+    <string name="home_empty_not_sampled">Դեռ հավաքված չէ</string>
+    <string name="home_sampled_at">Նմուշառվել է %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">սարք</string>
+    <string name="home_unit_services">ծառայություն</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="device_detail_title">Enhedsdetaljer</string>
+    <string name="device_operation_title">Enhedsbetjening</string>
+    <string name="device_not_found">Enheden blev ikke fundet</string>
+    <string name="device_id_label">Enheds-ID</string>
+    <string name="device_type_label">Enhedstype</string>
+    <string name="device_online_label">Status</string>
+    <string name="device_last_online_label">Senest online</string>
+    <string name="device_last_offline_label">Senest offline</string>
+    <string name="device_space_label">Rum</string>
+</resources>

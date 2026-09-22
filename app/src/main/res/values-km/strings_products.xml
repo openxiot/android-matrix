@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">ផលិតផល</string>
+    <string name="product_detail_title">ព័ត៌មានលម្អិតផលិតផល</string>
+    <string name="product_not_found">រកមិនឃើញផលិតផល</string>
+    <string name="product_empty">មិនទាន់មានផលិតផល</string>
+    <plurals name="product_count">
+        <item quantity="other">%1$d ផលិតផល</item>
+    </plurals>
+    <string name="product_model_inline">ម៉ូដែល៖ %1$s</string>
+    <string name="product_id_label">លេខសម្គាល់ផលិតផល</string>
+    <string name="product_model_label">ម៉ូដែលផលិតផល</string>
+    <string name="product_org_label">អង្គការដែលស្ថិតនៅ</string>
+    <string name="product_buy_jd">ទិញនៅ JD.com</string>
+    <string name="product_buy_taobao">ទិញនៅ Taobao</string>
+    <string name="product_status_released">បានផ្សព្វផ្សាយ</string>
+    <string name="product_status_preview">មើលជាមុន</string>
+    <string name="product_status_development">កំពុងអភិវឌ្ឍ</string>
+    <string name="product_empty_data">គ្មានទិន្នន័យផលិតផល</string>
+</resources>

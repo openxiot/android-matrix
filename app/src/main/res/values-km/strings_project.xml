@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">គម្រោងបច្ចុប្បន្ន</string>
+    <string name="project_manage_title">គ្រប់គ្រងគម្រោង</string>
+    <string name="project_empty">មិនទាន់មានគម្រោង — ចុច + ដើម្បីបង្កើតមួយ</string>
+    <string name="project_create_title">បង្កើតគម្រោង</string>
+    <string name="project_name_label">ឈ្មោះគម្រោង</string>
+    <string name="project_name_placeholder">បញ្ចូលឈ្មោះគម្រោង</string>
+    <string name="project_rename_title">ប្ដូរឈ្មោះគម្រោង</string>
+    <string name="project_rename_action">ប្ដូរឈ្មោះ</string>
+    <string name="project_delete_title">លុបគម្រោង</string>
+    <string name="project_delete_confirm">លុបគម្រោងនេះ? គម្រោងដែលនៅមានលំហមិនអាចលុបបានទេ។</string>
+    <string name="project_swipe_delete">អូសដើម្បីលុប</string>
+    <string name="project_type_label">ប្រភេទ៖ %1$s</string>
+    <string name="project_members_title">សមាជិកគម្រោង</string>
+    <string name="project_members_empty">មិនទាន់មានសមាជិក — ចុច + ដើម្បីបន្ថែមមួយ</string>
+    <string name="project_members_label">សមាជិក</string>
+    <string name="project_user_id">លេខសម្គាល់អ្នកប្រើ</string>
+    <string name="project_user_id_placeholder">ID គណនីរបស់អ្នកប្រើ</string>
+    <string name="project_remark_hint">ចុចដើម្បីបន្ថែមកំណត់សម្គាល់</string>
+    <string name="project_remark_title">កែកំណត់សម្គាល់ — %1$s</string>
+    <string name="project_remark_label">កំណត់សម្គាល់</string>
+    <string name="project_role_adjust">ផ្លាស់ប្តូរតួនាទី</string>
+    <string name="project_role_adjust_title">ប្ដូរតួនាទី — %1$s</string>
+    <string name="project_remove_confirm">ដក “%1$s” ចេញ?</string>
+    <string name="project_exit">ចាកចេញពីគម្រោង</string>
+    <string name="project_exit_confirm">ចាកចេញពីគម្រោងនេះ? អ្នកនឹងបាត់បង់សិទ្ធិចូលប្រើវា។</string>
+    <string name="project_device_added">បានបន្ថែមឧបករណ៍</string>
+    <string name="project_device_moved">បានផ្លាស់ទីឧបករណ៍</string>
+    <string name="space_manage_title">គ្រប់គ្រងលំហ</string>
+    <string name="space_add">បន្ថែមលំហ</string>
+    <string name="space_add_child">បន្ថែមលំហរង</string>
+    <string name="space_add_device">បន្ថែមឧបករណ៍</string>
+    <string name="space_name_label">ឈ្មោះលំហ</string>
+    <string name="space_name_placeholder">បញ្ចូលឈ្មោះ</string>
+    <string name="space_type_label">ប្រភេទលំហ</string>
+    <string name="space_empty">គ្មានទិន្នន័យលំហ</string>
+    <string name="space_empty_editable">បន្ថែមលំហដើម្បីចាប់ផ្ដើម</string>
+    <string name="space_empty_readonly">គម្រោងនេះមិនទាន់មានលំហ ឬឧបករណ៍</string>
+    <string name="space_delete_title">លុបលំហ</string>
+    <string name="space_delete_confirm">លុបលំហនេះ? លំហដែលនៅមានលំហរងមិនអាចលុបបានទេ។</string>
+    <string name="space_move_title">ផ្លាស់ទីទៅលំហ</string>
+    <string name="space_move_action">ផ្លាស់ទី</string>
+    <string name="space_device_adding">កំពុងបន្ថែមឧបករណ៍…</string>
+    <string name="space_device_waiting">កំពុងរង់ចាំ… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d ឧបករណ៍</item>
+    </plurals>
+</resources>

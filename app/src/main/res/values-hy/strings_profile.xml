@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Լեզու</string>
+    <string name="profile_language_system">Հետևել համակարգին</string>
+    <string name="profile_language_search">Որոնել լեզուներ</string>
+    <string name="profile_language_search_clear">Մաքրել</string>
+    <string name="profile_language_no_match">Համապատասխան լեզու չի գտնվել</string>
+    <string name="profile_not_logged_in">Մուտք չի գործվել</string>
+    <string name="profile_current_org">Ընթացիկ կազմակերպությունը</string>
+    <string name="profile_current_project">Ընթացիկ նախագիծը</string>
+    <string name="profile_no_org_selected">Կազմակերպություն ընտրված չէ</string>
+    <string name="profile_no_project_selected">Նախագիծ ընտրված չէ</string>
+    <string name="profile_org_subtitle">Ընտրեք մեկը՝ նախագիծ ընտրելու համար</string>
+    <string name="profile_project_subtitle_pick">Ընտրեք նախագիծ</string>
+    <string name="profile_project_subtitle_switch">Սեղմեք՝ նախագիծը փոխելու համար</string>
+    <string name="profile_project_subtitle_org_first">Նախ ընտրեք կազմակերպություն</string>
+    <string name="profile_section_settings">Կարգավորումներ</string>
+    <string name="profile_dark_mode">Մուգ ռեժիմ</string>
+    <string name="profile_light_mode">Բաց ռեժիմ</string>
+    <string name="profile_theme_subtitle">Սեղմեք՝ թեման փոխելու համար</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Սարքի կետերի աղյուսակ</string>
+    <string name="profile_modbus_subtitle">Modbus ռեգիստրների քարտեզներ (միայն ընթերցման)</string>
+    <string name="profile_alarm_title">Ահազանգեր</string>
+    <string name="profile_alarm_subtitle">Modbus ահազանգերի մատյան և մշակում</string>
+    <string name="profile_history_title">Պատմություն</string>
+    <string name="profile_history_subtitle">Նմուշառման պատմություն և գրաֆիկներ</string>
+    <string name="profile_about_subtitle">Հավելվածի տեղեկություններ և տարբերակ</string>
+    <string name="account_title">Հաշիվ</string>
+    <string name="account_username">Օգտանուն</string>
+    <string name="account_platform">Հարթակ</string>
+    <string name="account_not_selected">Ընտրված չէ</string>
+    <string name="account_org_toggle">Կազմակերպություն</string>
+    <string name="account_org_toggle_subtitle">Միացրեք կազմակերպությունները կառավարելու համար</string>
+    <string name="account_logout">Դուրս գալ</string>
+    <string name="about_title">Ծրագրի մասին</string>
+    <string name="about_tagline">IoT սարքերի կառավարման և մշտադիտարկման հարթակ</string>
+    <string name="about_version">Տարբերակ %1$s</string>
+    <string name="about_check_update">Ստուգել թարմացումները</string>
+    <string name="about_checking">Ստուգվում է…</string>
+    <string name="about_up_to_date">Դուք ունեք ամենավերջին տարբերակը</string>
+    <string name="about_update_now">Թարմացնել հիմա</string>
+    <string name="about_downloading">Ներբեռնվում է…</string>
+    <string name="about_downloading_percent">Ներբեռնվում է %1$d%%</string>
+    <string name="about_install_now">Տեղադրել հիմա</string>
+    <string name="about_install">Տեղադրել</string>
+    <string name="about_retry_download">Կրկնել ներբեռնումը</string>
+    <string name="about_later">Ավելի ուշ</string>
+    <string name="about_install_dialog_title">Տեղադրել թարմացումը</string>
+    <string name="about_new_version_found">Հասանելի է %1$s տարբերակը</string>
+    <string name="about_ready_hint">Ներբեռնումն ավարտված է — սեղմեք «Տեղադրել»՝ փաթեթը համակարգի տեղադրիչին հանձնելու համար։</string>
+    <string name="about_need_install_permission">Նախ թույլատրեք այս հավելվածին տեղադրել անհայտ աղբյուրներից հավելվածներ</string>
+    <string name="about_keep_app_alive">Կարող եք փոխել էջերը — պարզապես չփակեք հավելվածը</string>
+    <string name="about_metered">Դուք բջջային տվյալների ցանցում եք — ներբեռնումը կարող է շատ տրաֆիկ ծախսել</string>
+    <string name="about_metered_size">Դուք բջջային տվյալների ցանցում եք — փաթեթը մոտ %1$s է</string>
+    <string name="about_install_settings_failed">Չհաջողվեց բացել «Անհայտ հավելվածների տեղադրում» կարգավորումը — թույլատրեք այն ձեռքով համակարգի կարգավորումներում</string>
+    <string name="about_no_installer">Տեղադրիչ հավելված հասանելի չէ — փաթեթը պահվել է հավելվածի պանակում</string>
+    <string name="about_update_notes_empty">Այս թողարկումը նկարագրություն չունի։</string>
+</resources>

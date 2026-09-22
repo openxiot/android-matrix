@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">ماتریس</string>
+    <string name="common_back">بازگشت</string>
+    <string name="common_retry">تلاش مجدد</string>
+    <string name="common_confirm">تأیید</string>
+    <string name="common_cancel">لغو</string>
+    <string name="common_close">بستن</string>
+    <string name="common_detail">جزئیات</string>
+    <string name="common_collapse">جمع کردن</string>
+    <string name="common_expand">گسترش</string>
+    <string name="common_all">همه</string>
+    <string name="common_add">افزودن</string>
+    <string name="common_create">ایجاد</string>
+    <string name="common_delete">حذف</string>
+    <string name="common_unnamed">بی‌نام</string>
+    <string name="common_unknown">ناشناس</string>
+    <string name="common_me">من</string>
+    <string name="common_rename_action">تغییر نام</string>
+    <string name="common_role_label">نقش</string>
+    <string name="common_role_admin">مدیر</string>
+    <string name="common_role_member">اعضا</string>
+    <string name="common_role_member_option">عضو عادی</string>
+    <string name="common_member_add">افزودن عضو</string>
+    <string name="common_member_remove">حذف عضو</string>
+    <string name="common_edit">ویرایش</string>
+    <string name="common_refresh">بازخوانی</string>
+    <string name="common_change">تغییر</string>
+    <string name="common_handle">رسیدگی</string>
+    <string name="common_handled">رسیدگی‌شده</string>
+    <string name="common_unhandled">رسیدگی‌نشده</string>
+    <string name="common_recovered">رفع شده</string>
+    <string name="common_unrecovered">برقرار</string>
+    <string name="common_online">آنلاین</string>
+    <string name="common_offline">آفلاین</string>
+    <string name="common_switch_on">روشن</string>
+    <string name="common_switch_off">خاموش</string>
+    <string name="common_please_select">لطفاً انتخاب کنید</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">بازه زمانی انتخاب نشده</string>
+    <string name="common_range_text">از %1$s تا %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">سرویس‌ها</string>
+    <string name="common_function_label">متد‌ها</string>
+    <string name="common_device_label">دستگاه</string>
+    <string name="common_protocol_label">پروتکل</string>
+    <string name="common_unknown_product">محصول ناشناس</string>
+    <string name="common_truncated_hint">تعداد رکوردهای استثنا از حد مجاز بیشتر است؛ فقط موارد اخیر فهرست شده‌اند</string>
+    <string name="err_network">شبکه در دسترس نیست. اتصال خود را بررسی و دوباره تلاش کنید.</string>
+    <string name="err_unknown">مشکلی پیش آمد. لطفاً دوباره تلاش کنید.</string>
+    <string name="space_type_site">سایت</string>
+    <string name="space_type_building">ساختمان</string>
+    <string name="space_type_floor">طبقه</string>
+    <string name="space_type_room">اتاق</string>
+    <string name="space_type_zone">ناحیه</string>
+    <string name="space_type_field">زمین</string>
+    <string name="space_type_workshop">کارگاه</string>
+    <string name="space_type_parking">پارکینگ</string>
+</resources>

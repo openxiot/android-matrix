@@ -2,6 +2,9 @@
 <resources>
     <string name="profile_language_title">语言</string>
     <string name="profile_language_system">跟随系统</string>
+    <string name="profile_language_search">搜索语言</string>
+    <string name="profile_language_search_clear">清除</string>
+    <string name="profile_language_no_match">没有匹配的语言</string>
     <string name="about_update_notes_empty">本次更新没有提供说明。</string>
 
     <!-- 「我」页 -->

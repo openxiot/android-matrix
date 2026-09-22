@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">پروژه فعلی</string>
+    <string name="project_manage_title">مدیریت پروژه‌ها</string>
+    <string name="project_empty">هنوز پروژه‌ای نیست؛ برای ایجاد، روی + بزنید</string>
+    <string name="project_create_title">ایجاد پروژه</string>
+    <string name="project_name_label">نام پروژه</string>
+    <string name="project_name_placeholder">نام پروژه را وارد کنید</string>
+    <string name="project_rename_title">تغییر نام پروژه</string>
+    <string name="project_rename_action">تغییر نام</string>
+    <string name="project_delete_title">حذف پروژه</string>
+    <string name="project_delete_confirm">این پروژه حذف شود؟ پروژه‌ای که هنوز فضا دارد قابل حذف نیست.</string>
+    <string name="project_swipe_delete">برای حذف بکشید</string>
+    <string name="project_type_label">نوع: %1$s</string>
+    <string name="project_members_title">اعضای پروژه</string>
+    <string name="project_members_empty">هنوز عضوی نیست؛ برای افزودن، روی + بزنید</string>
+    <string name="project_members_label">اعضا</string>
+    <string name="project_user_id">شناسه کاربر</string>
+    <string name="project_user_id_placeholder">شناسه حساب کاربر</string>
+    <string name="project_remark_hint">برای افزودن یادداشت بزنید</string>
+    <string name="project_remark_title">ویرایش یادداشت - %1$s</string>
+    <string name="project_remark_label">یادداشت</string>
+    <string name="project_role_adjust">تغییر نقش</string>
+    <string name="project_role_adjust_title">تغییر نقش - %1$s</string>
+    <string name="project_remove_confirm">«%1$s» حذف شود؟</string>
+    <string name="project_exit">خروج از پروژه</string>
+    <string name="project_exit_confirm">از این پروژه خارج شویم؟ دسترسی شما به آن از بین می‌رود.</string>
+    <string name="project_device_added">دستگاه اضافه شد</string>
+    <string name="project_device_moved">دستگاه جابه‌جا شد</string>
+    <string name="space_manage_title">مدیریت فضاها</string>
+    <string name="space_add">افزودن فضا</string>
+    <string name="space_add_child">افزودن فضای فرزند</string>
+    <string name="space_add_device">افزودن دستگاه</string>
+    <string name="space_name_label">نام فضا</string>
+    <string name="space_name_placeholder">یک نام وارد کنید</string>
+    <string name="space_type_label">نوع فضا</string>
+    <string name="space_empty">داده فضا خالی است</string>
+    <string name="space_empty_editable">برای شروع، یک فضا اضافه کنید</string>
+    <string name="space_empty_readonly">این پروژه هنوز فضا یا دستگاهی ندارد</string>
+    <string name="space_delete_title">حذف فضا</string>
+    <string name="space_delete_confirm">این فضا حذف شود؟ فضایی که هنوز زیرفضا دارد قابل حذف نیست.</string>
+    <string name="space_move_title">انتقال به فضا</string>
+    <string name="space_move_action">جابه‌جایی</string>
+    <string name="space_device_adding">در حال افزودن دستگاه…</string>
+    <string name="space_device_waiting">در حال انتظار… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d دستگاه</item>
+        <item quantity="other">%1$d دستگاه‌ها</item>
+    </plurals>
+</resources>

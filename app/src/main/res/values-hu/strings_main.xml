@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="tab_home">Kezdőlap</string>
+    <string name="tab_project">Projekt</string>
+    <string name="tab_device">Eszköz</string>
+    <string name="tab_product">Termékek</string>
+    <string name="tab_profile">Profil</string>
+    <string name="main_switch_project">Projektváltás</string>
+    <string name="main_pick_org_first">Először válasszon szervezetet</string>
+    <string name="main_pick_org">Szervezet kiválasztása</string>
+    <string name="main_pick_project_first">Először válasszon projektet</string>
+    <string name="main_pick_project">Projekt kiválasztása</string>
+</resources>

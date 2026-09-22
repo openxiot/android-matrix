@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Aktuelt projekt</string>
+    <string name="project_manage_title">Administrer projekter</string>
+    <string name="project_empty">Ingen projekter endnu — tryk på + for at oprette et</string>
+    <string name="project_create_title">Opret projekt</string>
+    <string name="project_name_label">Projektnavn</string>
+    <string name="project_name_placeholder">Indtast et projektnavn</string>
+    <string name="project_rename_title">Omdøb projekt</string>
+    <string name="project_rename_action">Omdøb</string>
+    <string name="project_delete_title">Slet projekt</string>
+    <string name="project_delete_confirm">Slet dette projekt? Et projekt med rum kan ikke slettes.</string>
+    <string name="project_swipe_delete">Stryg for at slette</string>
+    <string name="project_type_label">Type: %1$s</string>
+    <string name="project_members_title">Projektmedlemmer</string>
+    <string name="project_members_empty">Ingen medlemmer endnu — tryk på + for at tilføje et</string>
+    <string name="project_members_label">Medlemmer</string>
+    <string name="project_user_id">Bruger-ID</string>
+    <string name="project_user_id_placeholder">Brugerens konto-ID</string>
+    <string name="project_remark_hint">Tryk for at tilføje en note</string>
+    <string name="project_remark_title">Rediger note — %1$s</string>
+    <string name="project_remark_label">Note</string>
+    <string name="project_role_adjust">Skift rolle</string>
+    <string name="project_role_adjust_title">Skift rolle — %1$s</string>
+    <string name="project_remove_confirm">Fjern \"%1$s\"?</string>
+    <string name="project_exit">Forlad projekt</string>
+    <string name="project_exit_confirm">Forlad dette projekt? Adgangen til det mistes.</string>
+    <string name="project_device_added">Enhed tilføjet</string>
+    <string name="project_device_moved">Enhed flyttet</string>
+    <string name="space_manage_title">Administrer rum</string>
+    <string name="space_add">Tilføj rum</string>
+    <string name="space_add_child">Tilføj underlokale</string>
+    <string name="space_add_device">Tilføj enhed</string>
+    <string name="space_name_label">Lokalenavn</string>
+    <string name="space_name_placeholder">Indtast et navn</string>
+    <string name="space_type_label">Lokaletype</string>
+    <string name="space_empty">Ingen rumdata</string>
+    <string name="space_empty_editable">Tilføj et rum for at komme i gang</string>
+    <string name="space_empty_readonly">Dette projekt har endnu ingen rum eller enheder</string>
+    <string name="space_delete_title">Slet rum</string>
+    <string name="space_delete_confirm">Slet dette rum? Et rum med underrum kan ikke slettes.</string>
+    <string name="space_move_title">Flyt til rum</string>
+    <string name="space_move_action">Flyt</string>
+    <string name="space_device_adding">Tilføjer enhed…</string>
+    <string name="space_device_waiting">Venter… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d enhed</item>
+        <item quantity="other">%1$d enheder</item>
+    </plurals>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Bahasa</string>
+    <string name="profile_language_system">Ikut sistem</string>
+    <string name="profile_language_search">Cari bahasa</string>
+    <string name="profile_language_search_clear">Kosongkan</string>
+    <string name="profile_language_no_match">Tiada bahasa sepadan</string>
+    <string name="profile_not_logged_in">Belum log masuk</string>
+    <string name="profile_current_org">Organisasi semasa</string>
+    <string name="profile_current_project">Projek semasa</string>
+    <string name="profile_no_org_selected">Tiada organisasi dipilih</string>
+    <string name="profile_no_project_selected">Tiada projek dipilih</string>
+    <string name="profile_org_subtitle">Pilih satu untuk memilih projek</string>
+    <string name="profile_project_subtitle_pick">Pilih projek</string>
+    <string name="profile_project_subtitle_switch">Ketik untuk tukar projek</string>
+    <string name="profile_project_subtitle_org_first">Sila pilih organisasi terlebih dahulu</string>
+    <string name="profile_section_settings">Tetapan</string>
+    <string name="profile_dark_mode">Mod gelap</string>
+    <string name="profile_light_mode">Mod cerah</string>
+    <string name="profile_theme_subtitle">Ketik untuk tukar tema</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Jadual Titik Peranti</string>
+    <string name="profile_modbus_subtitle">Peta daftar Modbus (baca sahaja)</string>
+    <string name="profile_alarm_title">Penggera</string>
+    <string name="profile_alarm_subtitle">Log dan pengendalian penggera Modbus</string>
+    <string name="profile_history_title">Sejarah</string>
+    <string name="profile_history_subtitle">Sejarah pensampelan dan carta</string>
+    <string name="profile_about_subtitle">Maklumat aplikasi dan versi</string>
+    <string name="account_title">Akaun</string>
+    <string name="account_username">Nama pengguna</string>
+    <string name="account_platform">Platform</string>
+    <string name="account_not_selected">Belum dipilih</string>
+    <string name="account_org_toggle">Organisasi</string>
+    <string name="account_org_toggle_subtitle">Hidupkan untuk mengurus organisasi</string>
+    <string name="account_logout">Log keluar</string>
+    <string name="about_title">Perihal</string>
+    <string name="about_tagline">Platform pengurusan dan pemantauan peranti IoT</string>
+    <string name="about_version">Versi %1$s</string>
+    <string name="about_check_update">Semak kemas kini</string>
+    <string name="about_checking">Menyemak…</string>
+    <string name="about_up_to_date">Anda sudah menggunakan versi terkini</string>
+    <string name="about_update_now">Kemas kini sekarang</string>
+    <string name="about_downloading">Memuat turun…</string>
+    <string name="about_downloading_percent">Memuat turun %1$d%%</string>
+    <string name="about_install_now">Pasang sekarang</string>
+    <string name="about_install">Pasang</string>
+    <string name="about_retry_download">Cuba muat turun semula</string>
+    <string name="about_later">Kemudian</string>
+    <string name="about_install_dialog_title">Pasang kemas kini</string>
+    <string name="about_new_version_found">Versi %1$s tersedia</string>
+    <string name="about_ready_hint">Muat turun selesai — ketik Pasang untuk serahkan kepada pemasang sistem.</string>
+    <string name="about_need_install_permission">Benarkan aplikasi ini memasang aplikasi tidak diketahui dahulu</string>
+    <string name="about_keep_app_alive">Anda boleh tukar halaman — cuma jangan tutup aplikasi</string>
+    <string name="about_metered">Anda guna data mudah alih — muat turun ini mungkin memakan banyak data</string>
+    <string name="about_metered_size">Anda guna data mudah alih — pakej ini kira-kira %1$s</string>
+    <string name="about_install_settings_failed">Tidak dapat membuka tetapan “Pasang aplikasi tidak diketahui” — benarkan secara manual dalam tetapan sistem</string>
+    <string name="about_no_installer">Tiada aplikasi pemasang tersedia — pakej disimpan dalam folder aplikasi</string>
+    <string name="about_update_notes_empty">Keluaran ini tiada nota.</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Pierakstīties ar WeChat</string>
+    <string name="login_test_account">Pierakstīties ar testa kontu</string>
+    <string name="login_err_wechat_missing">WeChat nav instalēts vai tā versija ir pārāk veca</string>
+    <string name="login_err_no_code">Netika saņemts autorizācijas kods</string>
+    <string name="login_err_cancelled">WeChat pierakstīšanās tika atcelta</string>
+    <string name="login_err_wechat">WeChat autorizācija neizdevās (%1$d)</string>
+    <string name="login_err_no_token">Pierakstīšanās neizdevās: token netika atgriezts</string>
+</resources>

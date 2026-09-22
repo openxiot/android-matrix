@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Histórico</string>
+    <string name="history_section_overview">Visão geral dos serviços</string>
+    <string name="history_no_services">Ainda não há serviços Modbus neste projeto</string>
+    <string name="history_service_count_label">Número de serviços</string>
+    <string name="history_device_count_label">Número de dispositivos</string>
+    <string name="history_sampled_at_label">Hora da recolha</string>
+    <string name="history_function_count_label">Métodos</string>
+    <string name="history_faults_section">Exceções de recolha</string>
+    <string name="history_faults_label">Exceções de recolha</string>
+    <string name="history_no_faults">Sem falhas de recolha neste período</string>
+    <string name="history_no_data">Sem dados recolhidos neste período</string>
+    <string name="history_field_label">Campo</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="many">Dados recolhidos (%1$d linhas)</item>
+        <item quantity="one">Dados recolhidos (%1$d linha)</item>
+        <item quantity="other">Dados recolhidos (%1$d linhas)</item>
+    </plurals>
+    <string name="service_history_all_functions">Todos os métodos</string>
+    <string name="service_history_field_selection">Campos %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Falha %1$s × %2$d</string>
+    <string name="service_history_no_curve">Nenhum campo deste serviço pode ser traçado</string>
+    <string name="service_history_no_curve_for_function">Nenhum campo desta função pode ser traçado</string>
+    <string name="service_history_no_fields_selected">Nenhum campo selecionado</string>
+    <string name="service_history_failure_hint">As linhas verticais marcam o momento da falha de recolha</string>
+    <string name="service_history_downsampled_hint">Há muitos pontos de dados, pelo que os dados foram reduzidos por intervalo de tempo (o valor é a média desse intervalo, entre parênteses mínimo~máximo)</string>
+    <string name="service_history_keepalive">Mantido</string>
+    <string name="service_history_view_table">Tabela</string>
+    <string name="service_history_view_chart">Gráfico</string>
+</resources>

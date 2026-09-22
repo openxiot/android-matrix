@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Organização atual</string>
+    <string name="org_detail_title">Detalhes da organização</string>
+    <string name="org_empty">Ainda não há organizações — toque em + para criar uma</string>
+    <string name="org_create_title">Criar org.</string>
+    <string name="org_id_label">ID da organização</string>
+    <string name="org_id_placeholder">ex.: my-company</string>
+    <string name="org_id_hint">Comece com uma letra — apenas letras, dígitos e hífenes</string>
+    <string name="org_name_label">Nome</string>
+    <string name="org_name_placeholder">ex.: A Minha Empresa</string>
+    <string name="org_rename_title">Mudar o nome da organização</string>
+    <string name="org_delete_title">Excluir organização</string>
+    <string name="org_delete_confirm">Eliminar esta organização?</string>
+    <string name="org_manage">Gerir</string>
+    <string name="org_swipe_delete">Deslize para eliminar</string>
+    <string name="org_members_empty">Ainda não há membros</string>
+    <string name="org_member_developer_id">ID de programador</string>
+    <string name="org_member_developer_id_placeholder">O developerId do utilizador</string>
+    <string name="org_member_name_label">Nome a apresentar</string>
+    <string name="org_member_name_placeholder">Opcional</string>
+    <string name="org_change_role">Alterar papel</string>
+    <string name="org_change_role_title">Alterar papel — %1$s</string>
+    <string name="org_remove_confirm">Remover «%1$s»?</string>
+    <plurals name="org_member_count">
+        <item quantity="many">%1$d membros</item>
+        <item quantity="one">%1$d membro</item>
+        <item quantity="other">%1$d membros</item>
+    </plurals>
+</resources>

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,7 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
@@ -34,6 +36,7 @@ import cc.openxiot.wematrix.ui.components.ConfirmDialog
 import cc.openxiot.wematrix.ui.components.EmptyState
 import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
+import cc.openxiot.wematrix.util.dirSign
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -260,7 +263,14 @@ private fun MemberCard(
     val maxOffset = 180.dp
     val maxOffsetPx = with(density) { maxOffset.toPx() }
     val offsetX = remember { Animatable(0f) }
-    val isRightSwipe by remember { derivedStateOf { offsetX.value >= 0f } }
+    // offsetX 与 dragAmount 都是**物理像素**。卡片刻意用 `absoluteOffset`（rtlAware=false、
+    // 落在物理 x），**不能**用 `offset` —— 后者是 rtlAware 的（Compose 里走
+    // `placeRelativeWithLayer`，RTL 下落到 `parentWidth - width - x`），拿它配物理 dragAmount
+    // 会让阿拉伯语下卡片朝手指的**反方向**滑。背景 Row 相反：它**要**镜像（露出哪一侧跟着
+    // 拖动方向走），所以判定乘方向符号与之对齐，否则「往左拖露出删除、执行的却是改名」。
+    // LTR 下 absoluteOffset 与 offset 同义、dirSign = 1f，像素与算式逐字不变。
+    val dirSign = dirSign(LocalLayoutDirection.current)
+    val isRightSwipe by remember(dirSign) { derivedStateOf { offsetX.value * dirSign >= 0f } }
     val isPastTwoThirds by remember { derivedStateOf { abs(offsetX.value) > maxOffsetPx * 2f / 3f } }
 
     Box(
@@ -270,7 +280,8 @@ private fun MemberCard(
             .padding(horizontal = 16.dp, vertical = 4.dp)
             .clipToBounds()
     ) {
-        // Background 两侧提示
+        // Background 两侧提示。RTL 下这个 Row 会**自动镜像**（删除跑到右边），
+        // 这是想要的：露出哪一侧始终跟着拖动方向走。判定端靠 dirSign 与之对齐。
         Row(
             modifier = Modifier
                 .matchParentSize()
@@ -350,15 +361,15 @@ private fun MemberCard(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .offset { IntOffset(offsetX.value.roundToInt(), 0) }
+                .absoluteOffset { IntOffset(offsetX.value.roundToInt(), 0) }
                 .then(
                     if (canInteract) {
-                        Modifier.pointerInput(onChangeRole, onRemove) {
+                        Modifier.pointerInput(onChangeRole, onRemove, dirSign) {
                             detectHorizontalDragGestures(
                                 onDragEnd = {
                                     scope.launch {
                                         if (abs(offsetX.value) > maxOffsetPx * 2f / 3f) {
-                                            if (offsetX.value >= 0f) onRemove() else onChangeRole()
+                                            if (offsetX.value * dirSign >= 0f) onRemove() else onChangeRole()
                                         }
                                         offsetX.animateTo(0f)
                                     }

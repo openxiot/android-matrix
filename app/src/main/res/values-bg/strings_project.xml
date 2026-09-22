@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Текущ проект</string>
+    <string name="project_manage_title">Управление на проекти</string>
+    <string name="project_empty">Още няма проекти — натиснете +, за да създадете</string>
+    <string name="project_create_title">Създаване на проект</string>
+    <string name="project_name_label">Име на проект</string>
+    <string name="project_name_placeholder">Въведете име на проект</string>
+    <string name="project_rename_title">Преименуване на проект</string>
+    <string name="project_rename_action">Преименувай</string>
+    <string name="project_delete_title">Изтриване на проект</string>
+    <string name="project_delete_confirm">Да се изтрие ли този проект? Проект, който още има пространства, не може да бъде изтрит.</string>
+    <string name="project_swipe_delete">Плъзнете за изтриване</string>
+    <string name="project_type_label">Тип: %1$s</string>
+    <string name="project_members_title">Членове на проекта</string>
+    <string name="project_members_empty">Още няма членове — натиснете +, за да добавите</string>
+    <string name="project_members_label">Членове</string>
+    <string name="project_user_id">ID на потребител</string>
+    <string name="project_user_id_placeholder">ID на акаунта на потребителя</string>
+    <string name="project_remark_hint">Натиснете, за да добавите бележка</string>
+    <string name="project_remark_title">Редакция на бележка — %1$s</string>
+    <string name="project_remark_label">Бележка</string>
+    <string name="project_role_adjust">Промяна на роля</string>
+    <string name="project_role_adjust_title">Промяна на роля — %1$s</string>
+    <string name="project_remove_confirm">Да се премахне ли „%1$s“?</string>
+    <string name="project_exit">Напускане на проект</string>
+    <string name="project_exit_confirm">Да напуснете ли този проект? Ще загубите достъп до него.</string>
+    <string name="project_device_added">Устройството е добавено</string>
+    <string name="project_device_moved">Устройството е преместено</string>
+    <string name="space_manage_title">Управление на пространства</string>
+    <string name="space_add">Добави пространство</string>
+    <string name="space_add_child">Добавяне на подпространство</string>
+    <string name="space_add_device">Добавяне на устройство</string>
+    <string name="space_name_label">Име на пространство</string>
+    <string name="space_name_placeholder">Въведете име</string>
+    <string name="space_type_label">Тип пространство</string>
+    <string name="space_empty">Няма данни за пространството</string>
+    <string name="space_empty_editable">Добавете пространство, за да започнете</string>
+    <string name="space_empty_readonly">Този проект още няма пространства или устройства</string>
+    <string name="space_delete_title">Изтриване на пространство</string>
+    <string name="space_delete_confirm">Да се изтрие ли това пространство? Пространство, което още има подпространства, не може да бъде изтрито.</string>
+    <string name="space_move_title">Преместване в пространство</string>
+    <string name="space_move_action">Премести</string>
+    <string name="space_device_adding">Добавяне на устройство…</string>
+    <string name="space_device_waiting">Изчакване… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d устройство</item>
+        <item quantity="other">%1$d устройства</item>
+    </plurals>
+</resources>

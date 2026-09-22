@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">הארגון הנוכחי</string>
+    <string name="org_detail_title">פרטי ארגון</string>
+    <string name="org_empty">אין עדיין ארגונים — הקש + ליצירת אחד</string>
+    <string name="org_create_title">צור ארגון</string>
+    <string name="org_id_label">מזהה ארגון</string>
+    <string name="org_id_placeholder">למשל: my-company</string>
+    <string name="org_id_hint">התחל באות — רק אותיות, ספרות ומקפים</string>
+    <string name="org_name_label">שם ארגון</string>
+    <string name="org_name_placeholder">למשל: החברה שלי</string>
+    <string name="org_rename_title">שנה שם הארגון</string>
+    <string name="org_delete_title">מחק ארגון</string>
+    <string name="org_delete_confirm">למחוק ארגון זה?</string>
+    <string name="org_manage">ניהול</string>
+    <string name="org_swipe_delete">גרור כדי למחוק</string>
+    <string name="org_members_empty">אין עדיין חברים</string>
+    <string name="org_member_developer_id">מזהה מפתח</string>
+    <string name="org_member_developer_id_placeholder">ה-developerId של המשתמש</string>
+    <string name="org_member_name_label">שם תצוגה</string>
+    <string name="org_member_name_placeholder">אופציונלי</string>
+    <string name="org_change_role">שנה תפקיד</string>
+    <string name="org_change_role_title">שנה תפקיד — %1$s</string>
+    <string name="org_remove_confirm">להסיר את %1$s?</string>
+    <plurals name="org_member_count">
+        <item quantity="many">%1$d חברים</item>
+        <item quantity="one">%1$d חבר</item>
+        <item quantity="two">%1$d חברים</item>
+        <item quantity="other">%1$d חברים</item>
+    </plurals>
+</resources>

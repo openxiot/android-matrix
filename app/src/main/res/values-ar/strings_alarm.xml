@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">التنبيهات</string>
+    <string name="alarm_action_ok">تمت العملية بنجاح</string>
+    <string name="alarm_empty">لا إنذارات في هذه الفترة</string>
+    <string name="alarm_all_services">كل الخدمات</string>
+    <string name="alarm_level_label">مستوى التنبيه</string>
+    <string name="alarm_handled_label">معالجة</string>
+    <string name="alarm_status_label">الحالة</string>
+    <string name="alarm_summary_title">قائمة التنبيهات</string>
+    <string name="alarm_text_label">نص التنبيه</string>
+    <string name="alarm_field_label">الحقل</string>
+    <string name="alarm_trigger_label">شرط التشغيل</string>
+    <string name="alarm_current_value_label">القيمة الحالية</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Пријавите се преко WeChat-а</string>
+    <string name="login_test_account">Пријавите се тестним налогом</string>
+    <string name="login_err_wechat_missing">WeChat није инсталиран или је верзија престара</string>
+    <string name="login_err_no_code">Није враћен код за ауторизацију</string>
+    <string name="login_err_cancelled">WeChat пријава је отказана</string>
+    <string name="login_err_wechat">WeChat ауторизација није успела (%1$d)</string>
+    <string name="login_err_no_token">Пријава није успела: токен није враћен</string>
+</resources>

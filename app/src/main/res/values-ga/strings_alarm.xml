@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Alaraim</string>
+    <string name="alarm_action_ok">D\'éirigh leis an oibríocht</string>
+    <string name="alarm_empty">Níl aon aláram sa tréimhse seo</string>
+    <string name="alarm_all_services">Gach seirbhís</string>
+    <string name="alarm_level_label">Leibhéal Alaraim</string>
+    <string name="alarm_handled_label">Láimhseáil</string>
+    <string name="alarm_status_label">Stádas</string>
+    <string name="alarm_summary_title">Liosta Alaraim</string>
+    <string name="alarm_text_label">Téacs Alaraim</string>
+    <string name="alarm_field_label">Réimse</string>
+    <string name="alarm_trigger_label">Coinníoll Spreagtha</string>
+    <string name="alarm_current_value_label">Luach Reatha</string>
+</resources>

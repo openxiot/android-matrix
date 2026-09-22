@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matris</string>
+    <string name="common_back">Geri</string>
+    <string name="common_retry">Yenidən cəhd et</string>
+    <string name="common_confirm">Təsdiqlə</string>
+    <string name="common_cancel">Ləğv et</string>
+    <string name="common_close">Bağla</string>
+    <string name="common_detail">Təfərrüatlar</string>
+    <string name="common_collapse">Yığcamlaşdır</string>
+    <string name="common_expand">Genişləndir</string>
+    <string name="common_all">Hamısı</string>
+    <string name="common_add">Əlavə et</string>
+    <string name="common_create">Yarat</string>
+    <string name="common_delete">Sil</string>
+    <string name="common_unnamed">Adsız</string>
+    <string name="common_unknown">Naməlum</string>
+    <string name="common_me">Siz</string>
+    <string name="common_rename_action">Adını dəyiş</string>
+    <string name="common_role_label">Rol</string>
+    <string name="common_role_admin">Administrator</string>
+    <string name="common_role_member">Üzvlər</string>
+    <string name="common_role_member_option">Adi Üzv</string>
+    <string name="common_member_add">Üzv Əlavə Et</string>
+    <string name="common_member_remove">Üzvü Çıxar</string>
+    <string name="common_edit">Redaktə et</string>
+    <string name="common_refresh">Yenilə</string>
+    <string name="common_change">Dəyiş</string>
+    <string name="common_handle">İşlə</string>
+    <string name="common_handled">İşlənib</string>
+    <string name="common_unhandled">İşlənməyib</string>
+    <string name="common_recovered">Bərpa edildi</string>
+    <string name="common_unrecovered">Davam edir</string>
+    <string name="common_online">Onlayn</string>
+    <string name="common_offline">Oflayn</string>
+    <string name="common_switch_on">Açıq</string>
+    <string name="common_switch_off">Bağlı</string>
+    <string name="common_please_select">Xahiş edirik seçin</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Vaxt aralığı seçilməyib</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Xidmətlər</string>
+    <string name="common_function_label">Metodlar</string>
+    <string name="common_device_label">Cihaz</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Naməlum Məhsul</string>
+    <string name="common_truncated_hint">İstisna qeydləri limiti keçir, yalnız sonuncular göstərilir</string>
+    <string name="err_network">Şəbəkə əlçatan deyil. Bağlantınızı yoxlayıb yenidən cəhd edin.</string>
+    <string name="err_unknown">Nəsə səhv getdi. Yenidən cəhd edin.</string>
+    <string name="space_type_site">Məntəqə</string>
+    <string name="space_type_building">Bina</string>
+    <string name="space_type_floor">Mərtəbə</string>
+    <string name="space_type_room">Otaq</string>
+    <string name="space_type_zone">Zona</string>
+    <string name="space_type_field">Sahə</string>
+    <string name="space_type_workshop">Emalatxana</string>
+    <string name="space_type_parking">Avtodayanacaq</string>
+</resources>

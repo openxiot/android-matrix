@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Előzmények</string>
+    <string name="history_section_overview">Szolgáltatások áttekintése</string>
+    <string name="history_no_services">Ebben a projektben még nincs Modbus szolgáltatás</string>
+    <string name="history_service_count_label">Szolgáltatások száma</string>
+    <string name="history_device_count_label">Eszközök száma</string>
+    <string name="history_sampled_at_label">Gyűjtés ideje</string>
+    <string name="history_function_count_label">Metódusok</string>
+    <string name="history_faults_section">Gyűjtési kivételek</string>
+    <string name="history_faults_label">Gyűjtési kivételek</string>
+    <string name="history_no_faults">Ebben az időszakban nincs mintavételezési hiba</string>
+    <string name="history_no_data">Ebben az időszakban nincs mintavételezett adat</string>
+    <string name="history_field_label">Mező</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Mintavételezett adatok (%1$d sor)</item>
+        <item quantity="other">Mintavételezett adatok (összesen %1$d sor)</item>
+    </plurals>
+    <string name="service_history_all_functions">Minden metódus</string>
+    <string name="service_history_field_selection">Mezők %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Hiba %1$s × %2$d</string>
+    <string name="service_history_no_curve">Ennek a szolgáltatásnak egyetlen mezője sem ábrázolható</string>
+    <string name="service_history_no_curve_for_function">Ebben a függvényben nincs ábrázolható mező</string>
+    <string name="service_history_no_fields_selected">Nincs kijelölt mező</string>
+    <string name="service_history_failure_hint">A függőleges vonalak a sikertelen gyűjtés időpontjait jelölik</string>
+    <string name="service_history_downsampled_hint">Sok adatpont; időintervallumonként csökkentett mintavétel történt (az érték az intervallum átlaga, zárójelben a minimum~maximum)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Táblázat</string>
+    <string name="service_history_view_chart">Grafikon</string>
+</resources>

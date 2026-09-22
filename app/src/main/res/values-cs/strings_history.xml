@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Historie</string>
+    <string name="history_section_overview">Přehled služeb</string>
+    <string name="history_no_services">V tomto projektu zatím nejsou žádné služby Modbus</string>
+    <string name="history_service_count_label">Počet služeb</string>
+    <string name="history_device_count_label">Počet zařízení</string>
+    <string name="history_sampled_at_label">Čas sběru</string>
+    <string name="history_function_count_label">Metody</string>
+    <string name="history_faults_section">Výjimky při sběru</string>
+    <string name="history_faults_label">Výjimky při sběru</string>
+    <string name="history_no_faults">V tomto období nejsou žádné chyby sběru</string>
+    <string name="history_no_data">V tomto období nebyla naměřena žádná data</string>
+    <string name="history_field_label">Pole</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Naměřená data (%1$d řádky)</item>
+        <item quantity="many">Naměřená data (%1$d řádku)</item>
+        <item quantity="one">Naměřená data (%1$d řádek)</item>
+        <item quantity="other">Naměřená data (%1$d řádků)</item>
+    </plurals>
+    <string name="service_history_all_functions">Všechny metody</string>
+    <string name="service_history_field_selection">Pole %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Chyba %1$s × %2$d</string>
+    <string name="service_history_no_curve">Žádné pole této služby nelze vykreslit</string>
+    <string name="service_history_no_curve_for_function">V této funkci není žádné vykreslitelné pole</string>
+    <string name="service_history_no_fields_selected">Nejsou vybrána žádná pole</string>
+    <string name="service_history_failure_hint">Svislé čáry označují okamžiky neúspěšného sběru</string>
+    <string name="service_history_downsampled_hint">Mnoho datových bodů; vzorkování bylo zředěno podle časových intervalů (hodnota je průměr za interval, v závorce minimum~maximum)</string>
+    <string name="service_history_keepalive">Udržování</string>
+    <string name="service_history_view_table">Tabulka</string>
+    <string name="service_history_view_chart">Graf</string>
+</resources>

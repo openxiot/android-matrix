@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">განგაშები</string>
+    <string name="alarm_action_ok">მოქმედება წარმატებით შესრულდა</string>
+    <string name="alarm_empty">ამ პერიოდში განგაში არ არის</string>
+    <string name="alarm_all_services">ყველა სერვისი</string>
+    <string name="alarm_level_label">განგაშის დონე</string>
+    <string name="alarm_handled_label">დამუშავება</string>
+    <string name="alarm_status_label">სტატუსი</string>
+    <string name="alarm_summary_title">განგაშების სია</string>
+    <string name="alarm_text_label">განგაშის ტექსტი</string>
+    <string name="alarm_field_label">ველი</string>
+    <string name="alarm_trigger_label">გამოწვევის პირობა</string>
+    <string name="alarm_current_value_label">მიმდინარე მნიშვნელობა</string>
+</resources>

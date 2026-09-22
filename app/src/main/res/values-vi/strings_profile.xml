@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Ngôn ngữ</string>
+    <string name="profile_language_system">Theo hệ thống</string>
+    <string name="profile_language_search">Tìm kiếm ngôn ngữ</string>
+    <string name="profile_language_search_clear">Xóa</string>
+    <string name="profile_language_no_match">Không có ngôn ngữ phù hợp</string>
+    <string name="profile_not_logged_in">Chưa đăng nhập</string>
+    <string name="profile_current_org">Tổ chức hiện tại</string>
+    <string name="profile_current_project">Dự án hiện tại</string>
+    <string name="profile_no_org_selected">Chưa chọn tổ chức</string>
+    <string name="profile_no_project_selected">Chưa chọn dự án</string>
+    <string name="profile_org_subtitle">Chọn một tổ chức để chọn dự án</string>
+    <string name="profile_project_subtitle_pick">Chọn dự án</string>
+    <string name="profile_project_subtitle_switch">Nhấn để chuyển dự án</string>
+    <string name="profile_project_subtitle_org_first">Vui lòng chọn tổ chức trước</string>
+    <string name="profile_section_settings">Cài đặt</string>
+    <string name="profile_dark_mode">Chế độ tối</string>
+    <string name="profile_light_mode">Chế độ sáng</string>
+    <string name="profile_theme_subtitle">Nhấn để đổi giao diện</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Bảng điểm thiết bị</string>
+    <string name="profile_modbus_subtitle">Bảng thanh ghi Modbus (chỉ đọc)</string>
+    <string name="profile_alarm_title">Cảnh báo</string>
+    <string name="profile_alarm_subtitle">Nhật ký và xử lý cảnh báo Modbus</string>
+    <string name="profile_history_title">Lịch sử</string>
+    <string name="profile_history_subtitle">Lịch sử thu thập và biểu đồ</string>
+    <string name="profile_about_subtitle">Thông tin ứng dụng và phiên bản</string>
+    <string name="account_title">Tài khoản</string>
+    <string name="account_username">Tên đăng nhập</string>
+    <string name="account_platform">Nền tảng</string>
+    <string name="account_not_selected">Chưa chọn</string>
+    <string name="account_org_toggle">Tổ chức</string>
+    <string name="account_org_toggle_subtitle">Bật để quản lý tổ chức</string>
+    <string name="account_logout">Đăng xuất</string>
+    <string name="about_title">Giới thiệu</string>
+    <string name="about_tagline">Nền tảng quản lý và giám sát thiết bị IoT</string>
+    <string name="about_version">Phiên bản %1$s</string>
+    <string name="about_check_update">Kiểm tra cập nhật</string>
+    <string name="about_checking">Đang kiểm tra…</string>
+    <string name="about_up_to_date">Bạn đang dùng bản mới nhất</string>
+    <string name="about_update_now">Cập nhật ngay</string>
+    <string name="about_downloading">Đang tải xuống…</string>
+    <string name="about_downloading_percent">Đang tải xuống %1$d%%</string>
+    <string name="about_install_now">Cài đặt ngay</string>
+    <string name="about_install">Cài đặt</string>
+    <string name="about_retry_download">Thử tải lại</string>
+    <string name="about_later">Để sau</string>
+    <string name="about_install_dialog_title">Cài đặt bản cập nhật</string>
+    <string name="about_new_version_found">Đã có phiên bản %1$s</string>
+    <string name="about_ready_hint">Đã tải xong — nhấn Cài đặt để chuyển cho trình cài đặt hệ thống.</string>
+    <string name="about_need_install_permission">Cần cho phép ứng dụng này cài đặt ứng dụng không xác định trước</string>
+    <string name="about_keep_app_alive">Có thể chuyển trang — chỉ đừng đóng ứng dụng</string>
+    <string name="about_metered">Bạn đang dùng dữ liệu di động — tải xuống sẽ tốn khá nhiều dữ liệu</string>
+    <string name="about_metered_size">Bạn đang dùng dữ liệu di động — gói cài đặt khoảng %1$s</string>
+    <string name="about_install_settings_failed">Không mở được mục “Cài đặt ứng dụng không xác định” — hãy cho phép thủ công trong cài đặt hệ thống</string>
+    <string name="about_no_installer">Không có ứng dụng cài đặt nào — gói cài đặt đã được lưu trong thư mục ứng dụng</string>
+    <string name="about_update_notes_empty">Bản phát hành này không kèm ghi chú.</string>
+</resources>

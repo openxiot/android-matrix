@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">მატრიცა</string>
+    <string name="common_back">უკან</string>
+    <string name="common_retry">ხელახლა</string>
+    <string name="common_confirm">დადასტურება</string>
+    <string name="common_cancel">გაუქმება</string>
+    <string name="common_close">დახურვა</string>
+    <string name="common_detail">დეტალები</string>
+    <string name="common_collapse">ჩაკეცვა</string>
+    <string name="common_expand">გაშლა</string>
+    <string name="common_all">ყველა</string>
+    <string name="common_add">დამატება</string>
+    <string name="common_create">შექმნა</string>
+    <string name="common_delete">წაშლა</string>
+    <string name="common_unnamed">უსახელო</string>
+    <string name="common_unknown">უცნობი</string>
+    <string name="common_me">მე</string>
+    <string name="common_rename_action">სახელის შეცვლა</string>
+    <string name="common_role_label">როლი</string>
+    <string name="common_role_admin">ადმინისტრატორი</string>
+    <string name="common_role_member">წევრები</string>
+    <string name="common_role_member_option">ჩვეულებრივი წევრი</string>
+    <string name="common_member_add">წევრის დამატება</string>
+    <string name="common_member_remove">წევრის მოცილება</string>
+    <string name="common_edit">რედაქტირება</string>
+    <string name="common_refresh">განახლება</string>
+    <string name="common_change">შეცვლა</string>
+    <string name="common_handle">დამუშავება</string>
+    <string name="common_handled">დამუშავებული</string>
+    <string name="common_unhandled">დაუმუშავებელი</string>
+    <string name="common_recovered">აღდგა</string>
+    <string name="common_unrecovered">არ აღდგა</string>
+    <string name="common_online">ონლაინ</string>
+    <string name="common_offline">ოფლაინ</string>
+    <string name="common_switch_on">ჩართული</string>
+    <string name="common_switch_off">გამორთული</string>
+    <string name="common_please_select">აირჩიეთ</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">დროის შუალედი არჩეული არ არის</string>
+    <string name="common_range_text">%1$s – %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">სერვისები</string>
+    <string name="common_function_label">მეთოდები</string>
+    <string name="common_device_label">მოწყობილობა</string>
+    <string name="common_protocol_label">პროტოკოლი</string>
+    <string name="common_unknown_product">უცნობი პროდუქტი</string>
+    <string name="common_truncated_hint">გამონაკლისები ლიმიტს აღემატება; ნაჩვენებია მხოლოდ უახლესი</string>
+    <string name="err_network">ქსელი მიუწვდომელია. შეამოწმეთ კავშირი და სცადეთ ხელახლა.</string>
+    <string name="err_unknown">რაღაც შეცდომა მოხდა. სცადეთ ხელახლა.</string>
+    <string name="space_type_site">ობიექტი</string>
+    <string name="space_type_building">შენობა</string>
+    <string name="space_type_floor">სართული</string>
+    <string name="space_type_room">ოთახი</string>
+    <string name="space_type_zone">ზონა</string>
+    <string name="space_type_field">მინდორი</string>
+    <string name="space_type_workshop">სახელოსნო</string>
+    <string name="space_type_parking">ავტოსადგომი</string>
+</resources>

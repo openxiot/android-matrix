@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Језик</string>
+    <string name="profile_language_system">Прати систем</string>
+    <string name="profile_language_search">Претражи језике</string>
+    <string name="profile_language_search_clear">Очисти</string>
+    <string name="profile_language_no_match">Нема одговарајућег језика</string>
+    <string name="profile_not_logged_in">Нисте пријављени</string>
+    <string name="profile_current_org">Тренутна организација</string>
+    <string name="profile_current_project">Тренутни пројекат</string>
+    <string name="profile_no_org_selected">Није изабрана организација</string>
+    <string name="profile_no_project_selected">Није изабран пројекат</string>
+    <string name="profile_org_subtitle">Изаберите једну да бисте изабрали пројекат</string>
+    <string name="profile_project_subtitle_pick">Изаберите пројекат</string>
+    <string name="profile_project_subtitle_switch">Додирните да промените пројекат</string>
+    <string name="profile_project_subtitle_org_first">Прво изаберите организацију</string>
+    <string name="profile_section_settings">Подешавања</string>
+    <string name="profile_dark_mode">Тамни режим</string>
+    <string name="profile_light_mode">Светли режим</string>
+    <string name="profile_theme_subtitle">Додирните да промените тему</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Табела тачака уређаја</string>
+    <string name="profile_modbus_subtitle">Modbus мапе регистара (само за читање)</string>
+    <string name="profile_alarm_title">Аларми</string>
+    <string name="profile_alarm_subtitle">Евиденција и обрада Modbus аларма</string>
+    <string name="profile_history_title">Историја</string>
+    <string name="profile_history_subtitle">Историја прикупљања и графикони</string>
+    <string name="profile_about_subtitle">Подаци о апликацији и верзија</string>
+    <string name="account_title">Налог</string>
+    <string name="account_username">Корисничко име</string>
+    <string name="account_platform">Платформа</string>
+    <string name="account_not_selected">Није изабрано</string>
+    <string name="account_org_toggle">Организација</string>
+    <string name="account_org_toggle_subtitle">Укључите да бисте управљали организацијама</string>
+    <string name="account_logout">Одјави се</string>
+    <string name="about_title">О апликацији</string>
+    <string name="about_tagline">Платформа за управљање и праћење IoT уређаја</string>
+    <string name="about_version">Верзија %1$s</string>
+    <string name="about_check_update">Провери ажурирања</string>
+    <string name="about_checking">Провера…</string>
+    <string name="about_up_to_date">Имате најновију верзију</string>
+    <string name="about_update_now">Ажурирај сада</string>
+    <string name="about_downloading">Преузимање…</string>
+    <string name="about_downloading_percent">Преузимање %1$d%%</string>
+    <string name="about_install_now">Инсталирај сада</string>
+    <string name="about_install">Инсталирај</string>
+    <string name="about_retry_download">Покушај поново преузимање</string>
+    <string name="about_later">Касније</string>
+    <string name="about_install_dialog_title">Инсталирај ажурирање</string>
+    <string name="about_new_version_found">Доступна је верзија %1$s</string>
+    <string name="about_ready_hint">Преузимање је завршено — додирните Инсталирај да га предате системском инсталатеру.</string>
+    <string name="about_need_install_permission">Прво дозволите овој апликацији инсталирање непознатих апликација</string>
+    <string name="about_keep_app_alive">Можете да мењате странице — само не затварајте апликацију</string>
+    <string name="about_metered">Користите мобилне податке — преузимање може потрошити много саобраћаја</string>
+    <string name="about_metered_size">Користите мобилне податке — пакет је око %1$s</string>
+    <string name="about_install_settings_failed">Није могуће отворити подешавање „Инсталирај непознате апликације“ — дозволите то ручно у системским подешавањима</string>
+    <string name="about_no_installer">Нема доступне апликације за инсталирање — пакет је сачуван у фасцикли апликације</string>
+    <string name="about_update_notes_empty">Ово издање нема напомене.</string>
+</resources>

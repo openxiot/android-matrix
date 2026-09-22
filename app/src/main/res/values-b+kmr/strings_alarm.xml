@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Hişyarî</string>
+    <string name="alarm_action_ok">Çalakî bi serkeftî hate kirin</string>
+    <string name="alarm_empty">Di vê heyamê de tu alarm tune</string>
+    <string name="alarm_all_services">Hemû xizmet</string>
+    <string name="alarm_level_label">Asta hişyariyê</string>
+    <string name="alarm_handled_label">Çareserkirin</string>
+    <string name="alarm_status_label">Rewş</string>
+    <string name="alarm_summary_title">Lîsteya hişyariyan</string>
+    <string name="alarm_text_label">Nivîsa hişyariyê</string>
+    <string name="alarm_field_label">Qad</string>
+    <string name="alarm_trigger_label">Mercê destpêkirinê</string>
+    <string name="alarm_current_value_label">Nirxa niha</string>
+</resources>

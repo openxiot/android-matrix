@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">請先在項目列表中選擇一個項目</string>
+    <string name="home_edit_layout_title">編輯佈局</string>
+    <string name="home_reset_layout">恢復預設</string>
+    <string name="home_save_layout">儲存佈局</string>
+    <string name="home_discard_title">放棄變更？</string>
+    <string name="home_discard_message">還有未儲存的變更，離開將會遺失。</string>
+    <string name="home_dashboard_empty">還沒有卡片，點下方「新增」加一張</string>
+    <string name="home_add_card">＋ 新增</string>
+    <string name="home_default_layout_loaded">已載入預設版面，仍需手動儲存</string>
+    <string name="home_add_card_title">添加卡片</string>
+    <string name="home_card_kind_stat">一個主數字：裝置 / 服務 / 告警 / 故障</string>
+    <string name="home_card_kind_line">整點告警曲線，或一條服務欄位曲線</string>
+    <string name="home_card_kind_distribution">依裝置 / 服務 / 告警 / 故障分佈</string>
+    <string name="home_card_kind_device">某台裝置的某個屬性</string>
+    <string name="home_card_kind_service">某個方法的一組欄位</string>
+    <string name="home_card_default_stat">統計數字</string>
+    <string name="home_card_default_line">曲線圖</string>
+    <string name="home_card_default_distribution">數據分佈</string>
+    <string name="home_card_default_device">設備</string>
+    <string name="home_card_default_service">服務</string>
+    <string name="home_card_default_unknown">卡片</string>
+    <string name="home_edit_card_title">編輯 · %1$s</string>
+    <string name="home_card_title_label">卡片標題</string>
+    <string name="home_card_title_placeholder">留空則用預設名稱</string>
+    <string name="home_size_label">尺寸</string>
+    <string name="home_size_full">整寬</string>
+    <string name="home_size_half">半寬</string>
+    <string name="home_section_metric">統計指標</string>
+    <string name="home_metric_label">指標</string>
+    <string name="home_metric_devices_total">裝置總數</string>
+    <string name="home_metric_devices_online">在線裝置數</string>
+    <string name="home_metric_services_total">服務總數</string>
+    <string name="home_metric_alarms_today">今日警報</string>
+    <string name="home_metric_alarms_window">時間範圍內告警</string>
+    <string name="home_metric_failures_total">時間範圍內採集失敗數</string>
+    <string name="home_section_dimension">分佈維度</string>
+    <string name="home_dimension_label">維度</string>
+    <string name="home_dimension_device_type">設備類型</string>
+    <string name="home_dimension_service_type">服務類型</string>
+    <string name="home_dimension_alarm_type">告警類型</string>
+    <string name="home_dimension_failure_type">採集失敗類型</string>
+    <string name="home_slice_limit_label">顯示片數</string>
+    <string name="home_section_source">資料來源</string>
+    <string name="home_source_label">來源</string>
+    <string name="home_source_alarm_curve">整點告警曲線</string>
+    <string name="home_source_service_field">一條服務欄位曲線</string>
+    <string name="home_show_failure_shadow">顯示採集失敗豎線</string>
+    <string name="home_max_points_label">最大點數</string>
+    <string name="home_section_service_field">服務 · 方法 · 欄位</string>
+    <string name="home_service_placeholder">請選擇服務</string>
+    <string name="home_service_unnamed">未命名服務</string>
+    <string name="home_function_placeholder">請選擇方法</string>
+    <string name="home_function_fallback">方法 %1$d</string>
+    <string name="home_pick_service_first">請先選擇服務</string>
+    <string name="home_show_unit">顯示單位</string>
+    <string name="home_section_device_prop">裝置 · 屬性</string>
+    <string name="home_device_placeholder">請選擇裝置</string>
+    <string name="home_prop_label">屬性</string>
+    <string name="home_pick_device_first">請先選擇裝置</string>
+    <string name="home_prop_none">此型號尚無屬性</string>
+    <string name="home_prop_placeholder">請選擇屬性</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d，留空則不限制</string>
+    <string name="home_section_window">時間區間</string>
+    <string name="home_window_last">最近</string>
+    <string name="home_window_custom">自訂</string>
+    <string name="home_pick_dates">選擇起訖日期</string>
+    <plurals name="home_window_days">
+        <item quantity="other">%1$d 天</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="other">%1$d 小時</item>
+    </plurals>
+    <string name="home_card_unknown_type">未知卡片類型</string>
+    <string name="home_empty_no_data">暫無數據</string>
+    <string name="home_empty_no_reading">尚未取得讀數</string>
+    <string name="home_empty_not_sampled">尚未採集</string>
+    <string name="home_sampled_at">採集於 %1$s</string>
+    <string name="home_donut_other">其他</string>
+    <string name="home_unit_devices">台</string>
+    <string name="home_unit_services">個</string>
+</resources>

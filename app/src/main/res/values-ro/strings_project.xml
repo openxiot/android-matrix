@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Proiectul curent</string>
+    <string name="project_manage_title">Administrare proiecte</string>
+    <string name="project_empty">Încă nu există proiecte — apăsați + pentru a crea unul</string>
+    <string name="project_create_title">Creează proiect</string>
+    <string name="project_name_label">Nume proiect</string>
+    <string name="project_name_placeholder">Introduceți numele proiectului</string>
+    <string name="project_rename_title">Redenumire proiect</string>
+    <string name="project_rename_action">Redenumire</string>
+    <string name="project_delete_title">Ștergere proiect</string>
+    <string name="project_delete_confirm">Ștergeți acest proiect? Un proiect care are încă spații nu poate fi șters.</string>
+    <string name="project_swipe_delete">Glisați pentru a șterge</string>
+    <string name="project_type_label">Tip: %1$s</string>
+    <string name="project_members_title">Membrii proiectului</string>
+    <string name="project_members_empty">Încă nu există membri — apăsați + pentru a adăuga unul</string>
+    <string name="project_members_label">Membri</string>
+    <string name="project_user_id">ID utilizator</string>
+    <string name="project_user_id_placeholder">ID-ul contului utilizatorului</string>
+    <string name="project_remark_hint">Apăsați pentru a adăuga o notă</string>
+    <string name="project_remark_title">Editare notă — %1$s</string>
+    <string name="project_remark_label">Notă</string>
+    <string name="project_role_adjust">Schimbă rolul</string>
+    <string name="project_role_adjust_title">Schimbare rol — %1$s</string>
+    <string name="project_remove_confirm">Eliminați „%1$s”?</string>
+    <string name="project_exit">Părăsește proiectul</string>
+    <string name="project_exit_confirm">Părăsiți acest proiect? Veți pierde accesul la el.</string>
+    <string name="project_device_added">Dispozitiv adăugat</string>
+    <string name="project_device_moved">Dispozitiv mutat</string>
+    <string name="space_manage_title">Administrare spații</string>
+    <string name="space_add">Adăugare spațiu</string>
+    <string name="space_add_child">Adaugă subspațiu</string>
+    <string name="space_add_device">Adaugă dispozitiv</string>
+    <string name="space_name_label">Nume spațiu</string>
+    <string name="space_name_placeholder">Introduceți un nume</string>
+    <string name="space_type_label">Tip spațiu</string>
+    <string name="space_empty">Fără date despre spații</string>
+    <string name="space_empty_editable">Adăugați un spațiu pentru a începe</string>
+    <string name="space_empty_readonly">Acest proiect nu are încă spații sau dispozitive</string>
+    <string name="space_delete_title">Ștergere spațiu</string>
+    <string name="space_delete_confirm">Ștergeți acest spațiu? Un spațiu care are încă subspații nu poate fi șters.</string>
+    <string name="space_move_title">Mutare în spațiu</string>
+    <string name="space_move_action">Mutare</string>
+    <string name="space_device_adding">Se adaugă dispozitivul…</string>
+    <string name="space_device_waiting">Se așteaptă… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d dispozitive</item>
+        <item quantity="one">%1$d dispozitiv</item>
+        <item quantity="other">%1$d de dispozitive</item>
+    </plurals>
+</resources>

@@ -35,6 +35,13 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest
 
+      # 与上面的 Kotlin 门禁**互为对照**：两边都查语言目录，但用的不是同一份知识。
+      # Kotlin 侧不抄「哪个语言需要哪几档复数」那张表（抄了就是第二个真源），
+      # 那张表只在这里查 —— 由 langs.py 提供，且被 cldr_check.py 拿真实 CLDR 核对过。
+      # 缺一档复数不会报错，只会让俄语的 5 显示成语法错的 «5 товаров»，所以必须有人守。
+      - name: 独立校验语言目录
+        run: python3 tools/i18n/validate.py
+
       - name: Build with Gradle
         run: ./gradlew assembleDebug
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">將鏡頭對準裝置的二維碼或 IMEI</string>
+    <string name="scan_torch">手電筒</string>
+    <string name="scan_torch_on">開啟手電筒</string>
+    <string name="scan_torch_off">關閉手電筒</string>
+    <string name="scan_permission_required">需要相機權限才能掃描新增裝置</string>
+    <string name="scan_grant">授予存取權</string>
+</resources>

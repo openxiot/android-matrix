@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">ภาษา</string>
+    <string name="profile_language_system">ตามระบบ</string>
+    <string name="profile_language_search">ค้นหาภาษา</string>
+    <string name="profile_language_search_clear">ล้าง</string>
+    <string name="profile_language_no_match">ไม่มีภาษาที่ตรงกัน</string>
+    <string name="profile_not_logged_in">ยังไม่ได้เข้าสู่ระบบ</string>
+    <string name="profile_current_org">องค์กรปัจจุบัน</string>
+    <string name="profile_current_project">โครงการปัจจุบัน</string>
+    <string name="profile_no_org_selected">ยังไม่ได้เลือกองค์กร</string>
+    <string name="profile_no_project_selected">ยังไม่ได้เลือกโครงการ</string>
+    <string name="profile_org_subtitle">เลือกองค์กรก่อนจึงจะเลือกโครงการได้</string>
+    <string name="profile_project_subtitle_pick">เลือกโครงการ</string>
+    <string name="profile_project_subtitle_switch">แตะเพื่อสลับโครงการ</string>
+    <string name="profile_project_subtitle_org_first">โปรดเลือกองค์กรก่อน</string>
+    <string name="profile_section_settings">การตั้งค่า</string>
+    <string name="profile_dark_mode">โหมดมืด</string>
+    <string name="profile_light_mode">โหมดสว่าง</string>
+    <string name="profile_theme_subtitle">แตะเพื่อสลับธีม</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">ตารางจุดอุปกรณ์</string>
+    <string name="profile_modbus_subtitle">ตารางรีจิสเตอร์ Modbus (อ่านอย่างเดียว)</string>
+    <string name="profile_alarm_title">การแจ้งเตือน</string>
+    <string name="profile_alarm_subtitle">บันทึกและจัดการสัญญาณเตือน Modbus</string>
+    <string name="profile_history_title">ประวัติ</string>
+    <string name="profile_history_subtitle">ประวัติการเก็บข้อมูลและกราฟ</string>
+    <string name="profile_about_subtitle">ข้อมูลแอปและเวอร์ชัน</string>
+    <string name="account_title">บัญชี</string>
+    <string name="account_username">ชื่อผู้ใช้</string>
+    <string name="account_platform">แพลตฟอร์ม</string>
+    <string name="account_not_selected">ยังไม่ได้เลือก</string>
+    <string name="account_org_toggle">องค์กร</string>
+    <string name="account_org_toggle_subtitle">เปิดเพื่อจัดการองค์กร</string>
+    <string name="account_logout">ออกจากระบบ</string>
+    <string name="about_title">เกี่ยวกับ</string>
+    <string name="about_tagline">แพลตฟอร์มจัดการและตรวจสอบอุปกรณ์ IoT</string>
+    <string name="about_version">เวอร์ชัน %1$s</string>
+    <string name="about_check_update">ตรวจสอบอัปเดต</string>
+    <string name="about_checking">กำลังตรวจสอบ…</string>
+    <string name="about_up_to_date">เป็นเวอร์ชันล่าสุดแล้ว</string>
+    <string name="about_update_now">อัปเดตเลย</string>
+    <string name="about_downloading">กำลังดาวน์โหลด…</string>
+    <string name="about_downloading_percent">กำลังดาวน์โหลด %1$d%%</string>
+    <string name="about_install_now">ติดตั้งเลย</string>
+    <string name="about_install">ติดตั้ง</string>
+    <string name="about_retry_download">ดาวน์โหลดใหม่</string>
+    <string name="about_later">ภายหลัง</string>
+    <string name="about_install_dialog_title">ติดตั้งอัปเดต</string>
+    <string name="about_new_version_found">มีเวอร์ชัน %1$s ให้อัปเดต</string>
+    <string name="about_ready_hint">ดาวน์โหลดเสร็จแล้ว แตะ “ติดตั้ง” เพื่อส่งต่อให้ตัวติดตั้งของระบบ</string>
+    <string name="about_need_install_permission">ต้องอนุญาตให้แอปนี้ติดตั้งแอปจากแหล่งที่ไม่รู้จักก่อน</string>
+    <string name="about_keep_app_alive">สลับหน้าได้ แต่ห้ามปิดแอป</string>
+    <string name="about_metered">ขณะนี้ใช้ข้อมูลมือถือ การดาวน์โหลดอาจใช้ปริมาณมาก</string>
+    <string name="about_metered_size">ขณะนี้ใช้ข้อมูลมือถือ แพ็กเกจมีขนาดประมาณ %1$s</string>
+    <string name="about_install_settings_failed">เปิดการตั้งค่า “ติดตั้งแอปที่ไม่รู้จัก” ไม่ได้ — โปรดอนุญาตด้วยตนเองในการตั้งค่าระบบ</string>
+    <string name="about_no_installer">ไม่พบแอปติดตั้ง แพ็กเกจถูกบันทึกไว้ในโฟลเดอร์ของแอปแล้ว</string>
+    <string name="about_update_notes_empty">เวอร์ชันนี้ไม่มีบันทึกการอัปเดต</string>
+</resources>

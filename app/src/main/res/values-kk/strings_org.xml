@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Ағымдағы ұйым</string>
+    <string name="org_detail_title">Ұйым мәліметтері</string>
+    <string name="org_empty">Әзірге ұйымдар жоқ — құру үшін + түймесін басыңыз</string>
+    <string name="org_create_title">Ұйым жасау</string>
+    <string name="org_id_label">Ұйым ID</string>
+    <string name="org_id_placeholder">Мысалы, my-company</string>
+    <string name="org_id_hint">Әріппен бастаңыз — тек әріптер, цифрлар және дефис</string>
+    <string name="org_name_label">Ұйым атауы</string>
+    <string name="org_name_placeholder">Мысалы, Менің Компания</string>
+    <string name="org_rename_title">Ұйымды қайта атау</string>
+    <string name="org_delete_title">Ұйымды жою</string>
+    <string name="org_delete_confirm">Бұл ұйымды жою керек пе?</string>
+    <string name="org_manage">Басқару</string>
+    <string name="org_swipe_delete">Жою үшін сырғытыңыз</string>
+    <string name="org_members_empty">Әзірге мүшелер жоқ</string>
+    <string name="org_member_developer_id">Әзірлеуші ID</string>
+    <string name="org_member_developer_id_placeholder">Пайдаланушының әзірлеуші ID-сі</string>
+    <string name="org_member_name_label">Көрсетілетін атау</string>
+    <string name="org_member_name_placeholder">Қосымша</string>
+    <string name="org_change_role">Рөлді өзгерту</string>
+    <string name="org_change_role_title">Рөлді өзгерту — %1$s</string>
+    <string name="org_remove_confirm">«%1$s» алып тастау керек пе?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d мүше</item>
+        <item quantity="other">Барлығы %1$d мүше</item>
+    </plurals>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">התחבר עם WeChat</string>
+    <string name="login_test_account">התחבר עם חשבון בדיקה</string>
+    <string name="login_err_wechat_missing">WeChat אינו מותקן, או שהגרסה ישנה מדי</string>
+    <string name="login_err_no_code">לא התקבל קוד הרשאה</string>
+    <string name="login_err_cancelled">התחברות WeChat בוטלה</string>
+    <string name="login_err_wechat">אימות WeChat נכשל (%1$d)</string>
+    <string name="login_err_no_token">ההתחברות נכשלה: לא הוחזר אסימון</string>
+</resources>

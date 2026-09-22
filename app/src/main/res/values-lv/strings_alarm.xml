@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Trauksmes</string>
+    <string name="alarm_action_ok">Darbība veiksmīga</string>
+    <string name="alarm_empty">Šajā periodā nav trauksmju</string>
+    <string name="alarm_all_services">Visi pakalpojumi</string>
+    <string name="alarm_level_label">Trauksmes līmenis</string>
+    <string name="alarm_handled_label">Apstrādāt</string>
+    <string name="alarm_status_label">Statuss</string>
+    <string name="alarm_summary_title">Trauksmju saraksts</string>
+    <string name="alarm_text_label">Trauksmes teksts</string>
+    <string name="alarm_field_label">Lauks</string>
+    <string name="alarm_trigger_label">Ierosināšanas nosacījums</string>
+    <string name="alarm_current_value_label">Pašreizējā vērtība</string>
+</resources>

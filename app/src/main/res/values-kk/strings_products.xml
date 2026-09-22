@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Өнімдер</string>
+    <string name="product_detail_title">Өнім мәліметтері</string>
+    <string name="product_not_found">Өнім табылмады</string>
+    <string name="product_empty">Әзірге өнімдер жоқ</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d өнім</item>
+        <item quantity="other">Барлығы %1$d өнім</item>
+    </plurals>
+    <string name="product_model_inline">Үлгі: %1$s</string>
+    <string name="product_id_label">Өнім ID</string>
+    <string name="product_model_label">Өнім үлгісі</string>
+    <string name="product_org_label">Ұйым</string>
+    <string name="product_buy_jd">JD.com-нан сатып алу</string>
+    <string name="product_buy_taobao">Taobao-дан сатып алу</string>
+    <string name="product_status_released">Жарияланды</string>
+    <string name="product_status_preview">Алдын ала қарау</string>
+    <string name="product_status_development">Әзірленуде</string>
+    <string name="product_empty_data">Өнім деректері жоқ</string>
+</resources>

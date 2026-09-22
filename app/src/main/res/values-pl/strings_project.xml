@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Bieżący projekt</string>
+    <string name="project_manage_title">Zarządzanie projektami</string>
+    <string name="project_empty">Brak projektów — dotknij +, aby utworzyć</string>
+    <string name="project_create_title">Utwórz projekt</string>
+    <string name="project_name_label">Nazwa projektu</string>
+    <string name="project_name_placeholder">Wprowadź nazwę projektu</string>
+    <string name="project_rename_title">Zmień nazwę projektu</string>
+    <string name="project_rename_action">Zmień nazwę</string>
+    <string name="project_delete_title">Usuń projekt</string>
+    <string name="project_delete_confirm">Usunąć ten projekt? Projekt, który ma przestrzenie, nie może zostać usunięty.</string>
+    <string name="project_swipe_delete">Przesuń, aby usunąć</string>
+    <string name="project_type_label">Typ: %1$s</string>
+    <string name="project_members_title">Członkowie projektu</string>
+    <string name="project_members_empty">Brak członków — dotknij +, aby dodać</string>
+    <string name="project_members_label">Członkowie</string>
+    <string name="project_user_id">ID użytkownika</string>
+    <string name="project_user_id_placeholder">ID konta użytkownika</string>
+    <string name="project_remark_hint">Dotknij, aby dodać notatkę</string>
+    <string name="project_remark_title">Edytuj notatkę — %1$s</string>
+    <string name="project_remark_label">Notatka</string>
+    <string name="project_role_adjust">Zmień rolę</string>
+    <string name="project_role_adjust_title">Zmień rolę — %1$s</string>
+    <string name="project_remove_confirm">Usunąć „%1$s”?</string>
+    <string name="project_exit">Opuść projekt</string>
+    <string name="project_exit_confirm">Opuścić ten projekt? Spowoduje to utratę dostępu.</string>
+    <string name="project_device_added">Dodano urządzenie</string>
+    <string name="project_device_moved">Przeniesiono urządzenie</string>
+    <string name="space_manage_title">Zarządzanie przestrzeniami</string>
+    <string name="space_add">Dodaj przestrzeń</string>
+    <string name="space_add_child">Dodaj podprzestrzeń</string>
+    <string name="space_add_device">Dodaj urządzenie</string>
+    <string name="space_name_label">Nazwa przestrzeni</string>
+    <string name="space_name_placeholder">Wprowadź nazwę</string>
+    <string name="space_type_label">Typ przestrzeni</string>
+    <string name="space_empty">Brak danych przestrzeni</string>
+    <string name="space_empty_editable">Dodaj przestrzeń, aby rozpocząć</string>
+    <string name="space_empty_readonly">W tym projekcie nie ma jeszcze przestrzeni ani urządzeń</string>
+    <string name="space_delete_title">Usuń przestrzeń</string>
+    <string name="space_delete_confirm">Usunąć tę przestrzeń? Przestrzeń, która ma podprzestrzenie, nie może zostać usunięta.</string>
+    <string name="space_move_title">Przenieś do przestrzeni</string>
+    <string name="space_move_action">Przenieś</string>
+    <string name="space_device_adding">Dodawanie urządzenia…</string>
+    <string name="space_device_waiting">Oczekiwanie… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="few">%1$d urządzenia</item>
+        <item quantity="many">%1$d urządzeń</item>
+        <item quantity="one">%1$d urządzenie</item>
+        <item quantity="other">%1$d urządzenia</item>
+    </plurals>
+</resources>

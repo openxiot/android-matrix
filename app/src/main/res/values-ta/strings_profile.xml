@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">மொழி</string>
+    <string name="profile_language_system">கணினியைப் பின்பற்று</string>
+    <string name="profile_language_search">மொழிகளைத் தேடு</string>
+    <string name="profile_language_search_clear">அழி</string>
+    <string name="profile_language_no_match">பொருந்தும் மொழி எதுவும் இல்லை</string>
+    <string name="profile_not_logged_in">உள்நுழையவில்லை</string>
+    <string name="profile_current_org">தற்போதைய நிறுவனம்</string>
+    <string name="profile_current_project">தற்போதைய திட்டம்</string>
+    <string name="profile_no_org_selected">நிறுவனம் தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="profile_no_project_selected">திட்டம் தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="profile_org_subtitle">ஒன்றைத் தேர்ந்தெடுத்து ஒரு திட்டத்தைத் தேர்வு செய்யவும்</string>
+    <string name="profile_project_subtitle_pick">ஒரு திட்டத்தைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="profile_project_subtitle_switch">திட்டத்தை மாற்றத் தொடவும்</string>
+    <string name="profile_project_subtitle_org_first">முதலில் ஒரு அமைப்பைத் தேர்ந்தெடுக்கவும்</string>
+    <string name="profile_section_settings">அமைப்புகள்</string>
+    <string name="profile_dark_mode">இருண்ட முறை</string>
+    <string name="profile_light_mode">வெளிர் முறை</string>
+    <string name="profile_theme_subtitle">கருப்பொருளை மாற்றத் தொடவும்</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">சாதன புள்ளி அட்டவணை</string>
+    <string name="profile_modbus_subtitle">Modbus ரெஜிஸ்டர் வரைபடங்கள் (படிக்க மட்டும்)</string>
+    <string name="profile_alarm_title">எச்சரிக்கைகள்</string>
+    <string name="profile_alarm_subtitle">Modbus எச்சரிக்கை பதிவு மற்றும் கையாளுதல்</string>
+    <string name="profile_history_title">வரலாறு</string>
+    <string name="profile_history_subtitle">சேகரிப்பு வரலாறு மற்றும் வரைபடங்கள்</string>
+    <string name="profile_about_subtitle">பயன்பாட்டு தகவல் மற்றும் பதிப்பு</string>
+    <string name="account_title">கணக்கு</string>
+    <string name="account_username">பயனர் பெயர்</string>
+    <string name="account_platform">தளம்</string>
+    <string name="account_not_selected">தேர்ந்தெடுக்கப்படவில்லை</string>
+    <string name="account_org_toggle">அமைப்பு</string>
+    <string name="account_org_toggle_subtitle">நிறுவனங்களை நிர்வகிக்க இயக்கவும்</string>
+    <string name="account_logout">வெளியேறு</string>
+    <string name="about_title">பற்றி</string>
+    <string name="about_tagline">IoT சாதன மேலாண்மை மற்றும் கண்காணிப்பு தளம்</string>
+    <string name="about_version">பதிப்பு %1$s</string>
+    <string name="about_check_update">புதுப்பிப்புகளைச் சரிபார்</string>
+    <string name="about_checking">சரிபார்க்கிறது…</string>
+    <string name="about_up_to_date">நீங்கள் புதுப்பித்த நிலையில் உள்ளீர்கள்</string>
+    <string name="about_update_now">இப்போது புதுப்பி</string>
+    <string name="about_downloading">பதிவிறக்குகிறது…</string>
+    <string name="about_downloading_percent">பதிவிறக்குகிறது %1$d%%</string>
+    <string name="about_install_now">இப்போது நிறுவு</string>
+    <string name="about_install">நிறுவு</string>
+    <string name="about_retry_download">பதிவிறக்கத்தை மீண்டும் முயற்சி</string>
+    <string name="about_later">பிறகு</string>
+    <string name="about_install_dialog_title">புதுப்பிப்பை நிறுவு</string>
+    <string name="about_new_version_found">பதிப்பு %1$s கிடைக்கிறது</string>
+    <string name="about_ready_hint">பதிவிறக்கம் முடிந்தது — கணினி நிறுவிக்கு அனுப்ப Install என்பதைத் தொடவும்.</string>
+    <string name="about_need_install_permission">தெரியாத பயன்பாடுகளை நிறுவ இந்த பயன்பாட்டை முதலில் அனுமதிக்கவும்</string>
+    <string name="about_keep_app_alive">பக்கங்களை மாற்றலாம் — பயன்பாட்டை மூடாதீர்கள்</string>
+    <string name="about_metered">நீங்கள் மொபைல் டேட்டாவில் உள்ளீர்கள் — பதிவிறக்கத்திற்கு அதிக டேட்டா செலவாகலாம்</string>
+    <string name="about_metered_size">நீங்கள் மொபைல் டேட்டாவில் உள்ளீர்கள் — பேக்கேஜ் சுமார் %1$s</string>
+    <string name="about_install_settings_failed">“தெரியாத பயன்பாடுகளை நிறுவு” அமைப்பைத் திறக்க இயலவில்லை — கணினி அமைப்புகளில் கைமுறையாக அனுமதிக்கவும்</string>
+    <string name="about_no_installer">நிறுவி பயன்பாடு இல்லை — பேக்கேஜ் பயன்பாட்டின் கோப்புறையில் சேமிக்கப்பட்டுள்ளது</string>
+    <string name="about_update_notes_empty">இந்த வெளியீட்டிற்கு குறிப்புகள் இல்லை.</string>
+</resources>

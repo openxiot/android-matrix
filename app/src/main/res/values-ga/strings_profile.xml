@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Teanga</string>
+    <string name="profile_language_system">Lean an córas</string>
+    <string name="profile_language_search">Cuardaigh teangacha</string>
+    <string name="profile_language_search_clear">Glan</string>
+    <string name="profile_language_no_match">Gan aon teanga a mheaitseálann</string>
+    <string name="profile_not_logged_in">Níl tú sínithe isteach</string>
+    <string name="profile_current_org">Eagraíocht reatha</string>
+    <string name="profile_current_project">Tionscadal reatha</string>
+    <string name="profile_no_org_selected">Níl aon eagraíocht roghnaithe</string>
+    <string name="profile_no_project_selected">Níl aon tionscadal roghnaithe</string>
+    <string name="profile_org_subtitle">Roghnaigh ceann chun tionscadal a roghnú</string>
+    <string name="profile_project_subtitle_pick">Roghnaigh tionscadal</string>
+    <string name="profile_project_subtitle_switch">Tapáil chun tionscadal a athrú</string>
+    <string name="profile_project_subtitle_org_first">Roghnaigh eagraíocht ar dtús</string>
+    <string name="profile_section_settings">Socruithe</string>
+    <string name="profile_dark_mode">Mód dorcha</string>
+    <string name="profile_light_mode">Mód geal</string>
+    <string name="profile_theme_subtitle">Tapáil chun téama a athrú</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Tábla Pointí Gléis</string>
+    <string name="profile_modbus_subtitle">Register Map Modbus (inléite amháin)</string>
+    <string name="profile_alarm_title">Alaraim</string>
+    <string name="profile_alarm_subtitle">Loga agus láimhseáil aláram Modbus</string>
+    <string name="profile_history_title">Stair</string>
+    <string name="profile_history_subtitle">Stair samplála agus graif</string>
+    <string name="profile_about_subtitle">Eolas faoin aip agus an leagan</string>
+    <string name="account_title">Cuntas</string>
+    <string name="account_username">Ainm úsáideora</string>
+    <string name="account_platform">Ardán</string>
+    <string name="account_not_selected">Gan roghnú</string>
+    <string name="account_org_toggle">Eagraíocht</string>
+    <string name="account_org_toggle_subtitle">Cas air chun eagraíochtaí a bhainistiú</string>
+    <string name="account_logout">Sínigh amach</string>
+    <string name="about_title">Maidir le</string>
+    <string name="about_tagline">Ardán bainistíochta agus monatóireachta gléasanna IoT</string>
+    <string name="about_version">Leagan %1$s</string>
+    <string name="about_check_update">Seiceáil le haghaidh nuashonruithe</string>
+    <string name="about_checking">Á sheiceáil…</string>
+    <string name="about_up_to_date">Tá tú cothrom le dáta</string>
+    <string name="about_update_now">Nuashonraigh anois</string>
+    <string name="about_downloading">Á íoslódáil…</string>
+    <string name="about_downloading_percent">Ag íoslódáil %1$d%%</string>
+    <string name="about_install_now">Suiteáil anois</string>
+    <string name="about_install">Suiteáil</string>
+    <string name="about_retry_download">Atriail an íoslódáil</string>
+    <string name="about_later">Níos déanaí</string>
+    <string name="about_install_dialog_title">Suiteáil an nuashonrú</string>
+    <string name="about_new_version_found">Tá leagan %1$s ar fáil</string>
+    <string name="about_ready_hint">Tá an íoslódáil críochnaithe — tapáil “Suiteáil” chun é a thabhairt do shuiteálaí an chórais.</string>
+    <string name="about_need_install_permission">Ceadaigh don aip seo aipeanna anaithnide a shuiteáil ar dtús</string>
+    <string name="about_keep_app_alive">Is féidir leat leathanaigh a mhalartú — ná dún an aip</string>
+    <string name="about_metered">Tá tú ar shonraí móibíleacha — féadfaidh an íoslódáil a lán a úsáid</string>
+    <string name="about_metered_size">Tá tú ar shonraí móibíleacha — tá an pacáiste thart ar %1$s</string>
+    <string name="about_install_settings_failed">Níorbh fhéidir an socrú “Suiteáil aipeanna anaithnide” a oscailt — ceadaigh de láimh é i socruithe an chórais</string>
+    <string name="about_no_installer">Níl aon aip suiteála ar fáil — sábháladh an pacáiste i bhfillteán na haipe</string>
+    <string name="about_update_notes_empty">Níor tháinig aon nótaí leis an eisiúint seo.</string>
+</resources>

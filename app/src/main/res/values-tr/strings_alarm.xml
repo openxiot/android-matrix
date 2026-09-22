@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Alarmlar</string>
+    <string name="alarm_action_ok">İşlem başarılı</string>
+    <string name="alarm_empty">Bu dönemde alarm yok</string>
+    <string name="alarm_all_services">Tüm hizmetler</string>
+    <string name="alarm_level_label">Alarm seviyesi</string>
+    <string name="alarm_handled_label">İşle</string>
+    <string name="alarm_status_label">Durum</string>
+    <string name="alarm_summary_title">Alarm listesi</string>
+    <string name="alarm_text_label">Alarm metni</string>
+    <string name="alarm_field_label">Alan</string>
+    <string name="alarm_trigger_label">Tetikleme koşulu</string>
+    <string name="alarm_current_value_label">Geçerli değer</string>
+</resources>

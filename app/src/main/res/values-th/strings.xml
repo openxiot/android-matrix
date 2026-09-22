@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">เมทริกซ์</string>
+    <string name="common_back">ย้อนกลับ</string>
+    <string name="common_retry">ลองใหม่</string>
+    <string name="common_confirm">ยืนยัน</string>
+    <string name="common_cancel">ยกเลิก</string>
+    <string name="common_close">ปิด</string>
+    <string name="common_detail">รายละเอียด</string>
+    <string name="common_collapse">ย่อ</string>
+    <string name="common_expand">ขยาย</string>
+    <string name="common_all">ทั้งหมด</string>
+    <string name="common_add">เพิ่ม</string>
+    <string name="common_create">สร้าง</string>
+    <string name="common_delete">ลบ</string>
+    <string name="common_unnamed">ไม่ได้ตั้งชื่อ</string>
+    <string name="common_unknown">ไม่ทราบ</string>
+    <string name="common_me">ฉัน</string>
+    <string name="common_rename_action">เปลี่ยนชื่อ</string>
+    <string name="common_role_label">บทบาท</string>
+    <string name="common_role_admin">ผู้ดูแลระบบ</string>
+    <string name="common_role_member">สมาชิก</string>
+    <string name="common_role_member_option">สมาชิกทั่วไป</string>
+    <string name="common_member_add">เพิ่มสมาชิก</string>
+    <string name="common_member_remove">นำสมาชิกออก</string>
+    <string name="common_edit">แก้ไข</string>
+    <string name="common_refresh">รีเฟรช</string>
+    <string name="common_change">เปลี่ยน</string>
+    <string name="common_handle">จัดการ</string>
+    <string name="common_handled">จัดการแล้ว</string>
+    <string name="common_unhandled">ยังไม่จัดการ</string>
+    <string name="common_recovered">กู้คืนแล้ว</string>
+    <string name="common_unrecovered">ใช้งานอยู่</string>
+    <string name="common_online">ออนไลน์</string>
+    <string name="common_offline">ออฟไลน์</string>
+    <string name="common_switch_on">เปิด</string>
+    <string name="common_switch_off">ปิด</string>
+    <string name="common_please_select">โปรดเลือก</string>
+    <string name="common_ok">ตกลง</string>
+    <string name="common_no_range">ยังไม่ได้เลือกช่วงเวลา</string>
+    <string name="common_range_text">%1$s ถึง %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">บริการ</string>
+    <string name="common_function_label">เมธอด</string>
+    <string name="common_device_label">อุปกรณ์</string>
+    <string name="common_protocol_label">โปรโตคอล</string>
+    <string name="common_unknown_product">ผลิตภัณฑ์ที่ไม่รู้จัก</string>
+    <string name="common_truncated_hint">รายการข้อผิดพลาดเกินขีดจำกัด แสดงเฉพาะรายการล่าสุดเท่านั้น</string>
+    <string name="err_network">เครือข่ายใช้งานไม่ได้ ตรวจสอบการเชื่อมต่อแล้วลองใหม่</string>
+    <string name="err_unknown">เกิดข้อผิดพลาดบางอย่าง ลองใหม่อีกครั้ง</string>
+    <string name="space_type_site">สถานที่</string>
+    <string name="space_type_building">อาคาร</string>
+    <string name="space_type_floor">ชั้น</string>
+    <string name="space_type_room">ห้อง</string>
+    <string name="space_type_zone">โซน</string>
+    <string name="space_type_field">สนาม</string>
+    <string name="space_type_workshop">โรงงาน</string>
+    <string name="space_type_parking">ลานจอดรถ</string>
+</resources>

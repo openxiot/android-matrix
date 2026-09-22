@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">میٹرکس</string>
+    <string name="common_back">واپس</string>
+    <string name="common_retry">دوبارہ کوشش</string>
+    <string name="common_confirm">تصدیق کریں</string>
+    <string name="common_cancel">منسوخ کریں</string>
+    <string name="common_close">بند کریں</string>
+    <string name="common_detail">تفصیلات</string>
+    <string name="common_collapse">سکیڑیں</string>
+    <string name="common_expand">پھیلائیں</string>
+    <string name="common_all">سب</string>
+    <string name="common_add">شامل کریں</string>
+    <string name="common_create">بنائیں</string>
+    <string name="common_delete">حذف کریں</string>
+    <string name="common_unnamed">بے نام</string>
+    <string name="common_unknown">نامعلوم</string>
+    <string name="common_me">آپ</string>
+    <string name="common_rename_action">نام تبدیل کریں</string>
+    <string name="common_role_label">کردار</string>
+    <string name="common_role_admin">منتظم</string>
+    <string name="common_role_member">اراکین</string>
+    <string name="common_role_member_option">عام رکن</string>
+    <string name="common_member_add">رکن شامل کریں</string>
+    <string name="common_member_remove">رکن ہٹائیں</string>
+    <string name="common_edit">ترمیم</string>
+    <string name="common_refresh">تازہ کریں</string>
+    <string name="common_change">تبدیل کریں</string>
+    <string name="common_handle">کارروائی</string>
+    <string name="common_handled">کارروائی ہو گئی</string>
+    <string name="common_unhandled">کارروائی نہیں ہوئی</string>
+    <string name="common_recovered">بحال</string>
+    <string name="common_unrecovered">برقرار</string>
+    <string name="common_online">آن لائن</string>
+    <string name="common_offline">آف لائن</string>
+    <string name="common_switch_on">آن</string>
+    <string name="common_switch_off">آف</string>
+    <string name="common_please_select">براہ کرم منتخب کریں</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">کوئی وقت کی حد منتخب نہیں</string>
+    <string name="common_range_text">%1$s سے %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">سروسز</string>
+    <string name="common_function_label">میتھڈز</string>
+    <string name="common_device_label">آلہ</string>
+    <string name="common_protocol_label">پروٹوکول</string>
+    <string name="common_unknown_product">نامعلوم مصنوعات</string>
+    <string name="common_truncated_hint">استثناء کے ریکارڈ حد سے زیادہ ہیں، صرف حالیہ ریکارڈ دکھائے گئے ہیں</string>
+    <string name="err_network">نیٹ ورک دستیاب نہیں۔ اپنا کنکشن چیک کریں اور دوبارہ کوشش کریں۔</string>
+    <string name="err_unknown">کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔</string>
+    <string name="space_type_site">سائٹ</string>
+    <string name="space_type_building">عمارت</string>
+    <string name="space_type_floor">منزل</string>
+    <string name="space_type_room">کمرہ</string>
+    <string name="space_type_zone">زون</string>
+    <string name="space_type_field">میدان</string>
+    <string name="space_type_workshop">ورکشاپ</string>
+    <string name="space_type_parking">پارکنگ لاٹ</string>
+</resources>

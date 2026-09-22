@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Inicia la sessió amb WeChat</string>
+    <string name="login_test_account">Inicia la sessió amb un compte de prova</string>
+    <string name="login_err_wechat_missing">WeChat no està instal·lat o la versió és massa antiga</string>
+    <string name="login_err_no_code">No s\'ha rebut cap codi d\'autorització</string>
+    <string name="login_err_cancelled">S\'ha cancel·lat l\'inici de sessió amb WeChat</string>
+    <string name="login_err_wechat">L\'autorització amb WeChat ha fallat (%1$d)</string>
+    <string name="login_err_no_token">No s\'ha pogut iniciar la sessió: no s\'ha retornat cap token</string>
+</resources>

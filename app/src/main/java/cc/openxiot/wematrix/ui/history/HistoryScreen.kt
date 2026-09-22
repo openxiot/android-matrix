@@ -21,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -62,6 +63,7 @@ import cc.openxiot.wematrix.ui.modbus.formatEpochMillis
 import cc.openxiot.wematrix.ui.theme.Gray500
 import cc.openxiot.wematrix.ui.theme.Green
 import cc.openxiot.wematrix.ui.theme.Red
+import cc.openxiot.wematrix.util.mirrorInRtl
 
 /**
  * 项目级历史（当前项目下所有服务的采集历史），对齐 webapp-matrix 的 `pages/main/history/`。
@@ -397,6 +399,7 @@ private fun ServiceCard(
                 Icon(
                     Icons.Default.ChevronRight,
                     contentDescription = null,
+                    modifier = Modifier.mirrorInRtl(),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }

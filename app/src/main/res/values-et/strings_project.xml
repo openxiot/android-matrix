@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Praegune projekt</string>
+    <string name="project_manage_title">Projektide haldamine</string>
+    <string name="project_empty">Projekte veel pole — loo üks, puudutades +</string>
+    <string name="project_create_title">Loo projekt</string>
+    <string name="project_name_label">Projekti nimi</string>
+    <string name="project_name_placeholder">Sisesta projekti nimi</string>
+    <string name="project_rename_title">Nimeta projekt ümber</string>
+    <string name="project_rename_action">Nimeta ümber</string>
+    <string name="project_delete_title">Kustuta projekt</string>
+    <string name="project_delete_confirm">Kas kustutada see projekt? Projekti, milles on veel ruume, ei saa kustutada.</string>
+    <string name="project_swipe_delete">Kustutamiseks libista</string>
+    <string name="project_type_label">Tüüp: %1$s</string>
+    <string name="project_members_title">Projekti liikmed</string>
+    <string name="project_members_empty">Liikmeid veel pole — lisa üks, puudutades +</string>
+    <string name="project_members_label">Liikmed</string>
+    <string name="project_user_id">Kasutaja ID</string>
+    <string name="project_user_id_placeholder">Kasutaja konto ID</string>
+    <string name="project_remark_hint">Puuduta märkuse lisamiseks</string>
+    <string name="project_remark_title">Muuda märkust — %1$s</string>
+    <string name="project_remark_label">Märkus</string>
+    <string name="project_role_adjust">Muuda rolli</string>
+    <string name="project_role_adjust_title">Muuda rolli — %1$s</string>
+    <string name="project_remove_confirm">Kas eemaldada „%1$s”?</string>
+    <string name="project_exit">Lahku projektist</string>
+    <string name="project_exit_confirm">Kas lahkuda sellest projektist? Kaotad juurdepääsu sellele.</string>
+    <string name="project_device_added">Seade on lisatud</string>
+    <string name="project_device_moved">Seade on teisaldatud</string>
+    <string name="space_manage_title">Ruumide haldamine</string>
+    <string name="space_add">Lisa ruum</string>
+    <string name="space_add_child">Lisa alamruum</string>
+    <string name="space_add_device">Lisa seade</string>
+    <string name="space_name_label">Ruumi nimi</string>
+    <string name="space_name_placeholder">Sisesta nimi</string>
+    <string name="space_type_label">Ruumi tüüp</string>
+    <string name="space_empty">Ruumiandmed puuduvad</string>
+    <string name="space_empty_editable">Alustamiseks lisa ruum</string>
+    <string name="space_empty_readonly">Selles projektis pole veel ruume ega seadmeid</string>
+    <string name="space_delete_title">Kustuta ruum</string>
+    <string name="space_delete_confirm">Kas kustutada see ruum? Ruumi, milles on veel alamruume, ei saa kustutada.</string>
+    <string name="space_move_title">Teisalda ruumi</string>
+    <string name="space_move_action">Teisalda</string>
+    <string name="space_device_adding">Seadme lisamine…</string>
+    <string name="space_device_waiting">Ootan… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d seade</item>
+        <item quantity="other">%1$d seadet</item>
+    </plurals>
+</resources>

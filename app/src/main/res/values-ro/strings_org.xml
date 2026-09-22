@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Organizația curentă</string>
+    <string name="org_detail_title">Detalii organizație</string>
+    <string name="org_empty">Încă nu există organizații — apăsați + pentru a crea una</string>
+    <string name="org_create_title">Creează organizație</string>
+    <string name="org_id_label">ID organizație</string>
+    <string name="org_id_placeholder">de ex. firma-mea</string>
+    <string name="org_id_hint">Începeți cu o literă — doar litere, cifre și cratime</string>
+    <string name="org_name_label">Nume organizație</string>
+    <string name="org_name_placeholder">de ex. Firma Mea</string>
+    <string name="org_rename_title">Redenumire organizație</string>
+    <string name="org_delete_title">Șterge organizația</string>
+    <string name="org_delete_confirm">Ștergeți această organizație?</string>
+    <string name="org_manage">Administrare</string>
+    <string name="org_swipe_delete">Glisați pentru a șterge</string>
+    <string name="org_members_empty">Încă nu există membri</string>
+    <string name="org_member_developer_id">ID dezvoltator</string>
+    <string name="org_member_developer_id_placeholder">developerId-ul utilizatorului</string>
+    <string name="org_member_name_label">Nume afișat</string>
+    <string name="org_member_name_placeholder">Opțional</string>
+    <string name="org_change_role">Schimbare rol</string>
+    <string name="org_change_role_title">Schimbare rol — %1$s</string>
+    <string name="org_remove_confirm">Eliminați „%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d membri</item>
+        <item quantity="one">%1$d membru</item>
+        <item quantity="other">%1$d de membri</item>
+    </plurals>
+</resources>

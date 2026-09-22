@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Trenutačna organizacija</string>
+    <string name="org_detail_title">Pojedinosti organizacije</string>
+    <string name="org_empty">Još nema organizacija — dodirnite + da je stvorite</string>
+    <string name="org_create_title">Stvori organizaciju</string>
+    <string name="org_id_label">ID organizacije</string>
+    <string name="org_id_placeholder">npr. moja-tvrtka</string>
+    <string name="org_id_hint">Započnite slovom — samo slova, znamenke i crtice</string>
+    <string name="org_name_label">Naziv organizacije</string>
+    <string name="org_name_placeholder">npr. Moja tvrtka</string>
+    <string name="org_rename_title">Preimenuj organizaciju</string>
+    <string name="org_delete_title">Izbriši organizaciju</string>
+    <string name="org_delete_confirm">Izbrisati ovu organizaciju?</string>
+    <string name="org_manage">Upravljaj</string>
+    <string name="org_swipe_delete">Povucite za brisanje</string>
+    <string name="org_members_empty">Još nema članova</string>
+    <string name="org_member_developer_id">ID programera</string>
+    <string name="org_member_developer_id_placeholder">developerId korisnika</string>
+    <string name="org_member_name_label">Prikazano ime</string>
+    <string name="org_member_name_placeholder">Neobavezno</string>
+    <string name="org_change_role">Promijeni ulogu</string>
+    <string name="org_change_role_title">Promijeni ulogu — %1$s</string>
+    <string name="org_remove_confirm">Ukloniti „%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="few">%1$d člana</item>
+        <item quantity="one">%1$d član</item>
+        <item quantity="other">%1$d članova</item>
+    </plurals>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">Аларми</string>
+    <string name="alarm_action_ok">Успешно извршено</string>
+    <string name="alarm_empty">Нема аларми во овој период</string>
+    <string name="alarm_all_services">Сите услуги</string>
+    <string name="alarm_level_label">Ниво на аларм</string>
+    <string name="alarm_handled_label">Обработи</string>
+    <string name="alarm_status_label">Статус</string>
+    <string name="alarm_summary_title">Список на аларми</string>
+    <string name="alarm_text_label">Текст на аларм</string>
+    <string name="alarm_field_label">Поле</string>
+    <string name="alarm_trigger_label">Услов за активирање</string>
+    <string name="alarm_current_value_label">Тековна вредност</string>
+</resources>

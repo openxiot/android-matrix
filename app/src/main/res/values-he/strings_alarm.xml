@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">התראות</string>
+    <string name="alarm_action_ok">הפעולה בוצעה בהצלחה</string>
+    <string name="alarm_empty">אין התראות בתקופה זו</string>
+    <string name="alarm_all_services">כל השירותים</string>
+    <string name="alarm_level_label">רמת התראה</string>
+    <string name="alarm_handled_label">טיפול</string>
+    <string name="alarm_status_label">סטטוס</string>
+    <string name="alarm_summary_title">רשימת התראות</string>
+    <string name="alarm_text_label">טקסט התראה</string>
+    <string name="alarm_field_label">שדה</string>
+    <string name="alarm_trigger_label">תנאי הפעלה</string>
+    <string name="alarm_current_value_label">ערך נוכחי</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">ម៉ាទ្រីស</string>
+    <string name="common_back">ត្រឡប់ក្រោយ</string>
+    <string name="common_retry">ព្យាយាមម្ដងទៀត</string>
+    <string name="common_confirm">បញ្ជាក់</string>
+    <string name="common_cancel">បោះបង់</string>
+    <string name="common_close">បិទ</string>
+    <string name="common_detail">ព័ត៌មានលម្អិត</string>
+    <string name="common_collapse">បង្រួម</string>
+    <string name="common_expand">ពង្រីក</string>
+    <string name="common_all">ទាំងអស់</string>
+    <string name="common_add">បន្ថែម</string>
+    <string name="common_create">បង្កើត</string>
+    <string name="common_delete">លុប</string>
+    <string name="common_unnamed">គ្មានឈ្មោះ</string>
+    <string name="common_unknown">មិនស្គាល់</string>
+    <string name="common_me">អ្នក</string>
+    <string name="common_rename_action">ប្ដូរឈ្មោះ</string>
+    <string name="common_role_label">តួនាទី</string>
+    <string name="common_role_admin">អ្នកគ្រប់គ្រង</string>
+    <string name="common_role_member">សមាជិក</string>
+    <string name="common_role_member_option">សមាជិកធម្មតា</string>
+    <string name="common_member_add">បន្ថែមសមាជិក</string>
+    <string name="common_member_remove">ដកសមាជិកចេញ</string>
+    <string name="common_edit">កែសម្រួល</string>
+    <string name="common_refresh">ផ្ទុកឡើងវិញ</string>
+    <string name="common_change">ផ្លាស់ប្ដូរ</string>
+    <string name="common_handle">ដោះស្រាយ</string>
+    <string name="common_handled">បានដោះស្រាយ</string>
+    <string name="common_unhandled">មិនទាន់ដោះស្រាយ</string>
+    <string name="common_recovered">បានស្តារឡើងវិញ</string>
+    <string name="common_unrecovered">កំពុងសកម្ម</string>
+    <string name="common_online">អនឡាញ</string>
+    <string name="common_offline">អុហ្វឡាញ</string>
+    <string name="common_switch_on">បើក</string>
+    <string name="common_switch_off">បិទ</string>
+    <string name="common_please_select">សូមជ្រើសរើស</string>
+    <string name="common_ok">យល់ព្រម</string>
+    <string name="common_no_range">មិនបានជ្រើសរើសចន្លោះពេល</string>
+    <string name="common_range_text">%1$s ដល់ %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">សេវា</string>
+    <string name="common_function_label">វិធីសាស្ត្រ</string>
+    <string name="common_device_label">ឧបករណ៍</string>
+    <string name="common_protocol_label">ពិធីការ</string>
+    <string name="common_unknown_product">ផលិតផលមិនស្គាល់</string>
+    <string name="common_truncated_hint">ករណីលើកលែងលើសដែនកំណត់; បង្ហាញតែផ្នែកថ្មីៗបំផុត</string>
+    <string name="err_network">បណ្ដាញមិនអាចប្រើបាន។ ពិនិត្យការតភ្ជាប់ ហើយព្យាយាមម្ដងទៀត។</string>
+    <string name="err_unknown">មានបញ្ហាកើតឡើង។ ព្យាយាមម្ដងទៀត។</string>
+    <string name="space_type_site">ទីតាំង</string>
+    <string name="space_type_building">អគារ</string>
+    <string name="space_type_floor">ជាន់</string>
+    <string name="space_type_room">បន្ទប់</string>
+    <string name="space_type_zone">តំបន់</string>
+    <string name="space_type_field">ទីលាន</string>
+    <string name="space_type_workshop">រោងជាង</string>
+    <string name="space_type_parking">ចំណតរថយន្ត</string>
+</resources>

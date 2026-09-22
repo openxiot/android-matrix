@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Selectați mai întâi un proiect din lista de proiecte</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Renunțați la modificări?</string>
+    <string name="home_discard_message">Aveți modificări nesalvate. Dacă ieșiți acum, le veți pierde.</string>
+    <string name="home_dashboard_empty">Încă nu există carduri — apăsați „Adăugare” mai jos pentru a adăuga unul</string>
+    <string name="home_add_card">+ Adăugare</string>
+    <string name="home_default_layout_loaded">Aspectul implicit a fost încărcat — salvați-l pentru a-l aplica</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Un număr mare: dispozitive / servicii / alarme / eșecuri</string>
+    <string name="home_card_kind_line">Număr de alarme pe ore sau un câmp de serviciu</string>
+    <string name="home_card_kind_distribution">Distribuție pe dispozitiv / serviciu / alarmă / eșec</string>
+    <string name="home_card_kind_device">O proprietate a unui dispozitiv</string>
+    <string name="home_card_kind_service">Un set de câmpuri dintr-o funcție</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Grafic</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Dispozitiv</string>
+    <string name="home_card_default_service">Servicii</string>
+    <string name="home_card_default_unknown">Card</string>
+    <string name="home_edit_card_title">Editare · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Lățime completă</string>
+    <string name="home_size_half">Jumătate de lățime</string>
+    <string name="home_section_metric">Indicator</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Total dispozitive</string>
+    <string name="home_metric_devices_online">Dispozitive online</string>
+    <string name="home_metric_services_total">Total servicii</string>
+    <string name="home_metric_alarms_today">Alarme de astăzi</string>
+    <string name="home_metric_alarms_window">Alarme în interval</string>
+    <string name="home_metric_failures_total">Eșecuri de colectare în interval</string>
+    <string name="home_section_dimension">Distribuție după</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Tip dispozitiv</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Tip de eșec la colectare</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Sursă de date</string>
+    <string name="home_source_label">Sursă</string>
+    <string name="home_source_alarm_curve">Număr de alarme pe ore</string>
+    <string name="home_source_service_field">Un câmp de serviciu</string>
+    <string name="home_show_failure_shadow">Afișează liniile de colectare eșuată</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Serviciu · Funcție · Câmp</string>
+    <string name="home_service_placeholder">Selectați un serviciu</string>
+    <string name="home_service_unnamed">Serviciu fără nume</string>
+    <string name="home_function_placeholder">Selectați o funcție</string>
+    <string name="home_function_fallback">Funcția %1$d</string>
+    <string name="home_pick_service_first">Selectați mai întâi un serviciu</string>
+    <string name="home_show_unit">Afișează unitatea</string>
+    <string name="home_section_device_prop">Dispozitiv · Proprietate</string>
+    <string name="home_device_placeholder">Selectați un dispozitiv</string>
+    <string name="home_prop_label">Proprietăți</string>
+    <string name="home_pick_device_first">Selectați mai întâi un dispozitiv</string>
+    <string name="home_prop_none">Nu există proprietăți pentru acest model</string>
+    <string name="home_prop_placeholder">Selectați o proprietate</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, lăsați gol pentru nelimitat</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Ultimele</string>
+    <string name="home_window_custom">Personalizat</string>
+    <string name="home_pick_dates">Selectați datele de început și de sfârșit</string>
+    <plurals name="home_window_days">
+        <item quantity="few">%1$d zile</item>
+        <item quantity="one">%1$d zi</item>
+        <item quantity="other">%1$d de zile</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="few">%1$d ore</item>
+        <item quantity="one">%1$d oră</item>
+        <item quantity="other">%1$d de ore</item>
+    </plurals>
+    <string name="home_card_unknown_type">Tip de card necunoscut</string>
+    <string name="home_empty_no_data">Nu există date</string>
+    <string name="home_empty_no_reading">Încă nu există citiri</string>
+    <string name="home_empty_not_sampled">Încă necolectat</string>
+    <string name="home_sampled_at">Colectat %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">dispozitive</string>
+    <string name="home_unit_services">servicii</string>
+</resources>

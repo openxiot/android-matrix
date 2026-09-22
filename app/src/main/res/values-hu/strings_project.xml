@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Jelenlegi projekt</string>
+    <string name="project_manage_title">Projektek kezelése</string>
+    <string name="project_empty">Még nincs projekt — koppintson a + gombra az új létrehozásához</string>
+    <string name="project_create_title">Projekt létrehozása</string>
+    <string name="project_name_label">Projekt neve</string>
+    <string name="project_name_placeholder">Adja meg a projekt nevét</string>
+    <string name="project_rename_title">Projekt átnevezése</string>
+    <string name="project_rename_action">Átnevezés</string>
+    <string name="project_delete_title">Projekt törlése</string>
+    <string name="project_delete_confirm">Törli ezt a projektet? Az a projekt, amelyben még vannak helyszínek, nem törölhető.</string>
+    <string name="project_swipe_delete">Törléshez húzza el</string>
+    <string name="project_type_label">Típus: %1$s</string>
+    <string name="project_members_title">Projekt tagjai</string>
+    <string name="project_members_empty">Még nincsenek tagok — koppintson a + gombra a hozzáadásukhoz</string>
+    <string name="project_members_label">Tagok</string>
+    <string name="project_user_id">Felhasználó ID</string>
+    <string name="project_user_id_placeholder">A felhasználó fiókazonosítója</string>
+    <string name="project_remark_hint">Koppintson a megjegyzés hozzáadásához</string>
+    <string name="project_remark_title">Megjegyzés szerkesztése — %1$s</string>
+    <string name="project_remark_label">Megjegyzés</string>
+    <string name="project_role_adjust">Szerep módosítása</string>
+    <string name="project_role_adjust_title">Szerepkör módosítása — %1$s</string>
+    <string name="project_remove_confirm">Eltávolítja: „%1$s”?</string>
+    <string name="project_exit">Projekt elhagyása</string>
+    <string name="project_exit_confirm">Kilép ebből a projektből? Ezzel elveszíti a hozzáférést.</string>
+    <string name="project_device_added">Eszköz hozzáadva</string>
+    <string name="project_device_moved">Eszköz áthelyezve</string>
+    <string name="space_manage_title">Helyszínek kezelése</string>
+    <string name="space_add">Helyszín hozzáadása</string>
+    <string name="space_add_child">Altér hozzáadása</string>
+    <string name="space_add_device">Eszköz hozzáadása</string>
+    <string name="space_name_label">Tér neve</string>
+    <string name="space_name_placeholder">Adja meg a nevet</string>
+    <string name="space_type_label">Tér típusa</string>
+    <string name="space_empty">Nincs helyszínadat</string>
+    <string name="space_empty_editable">Kezdéshez adjon hozzá egy helyszínt</string>
+    <string name="space_empty_readonly">Ebben a projektben még nincs helyszín vagy eszköz</string>
+    <string name="space_delete_title">Helyszín törlése</string>
+    <string name="space_delete_confirm">Törli ezt a helyszínt? Az a helyszín, amely alatt még vannak további helyszínek, nem törölhető.</string>
+    <string name="space_move_title">Áthelyezés helyszínre</string>
+    <string name="space_move_action">Áthelyezés</string>
+    <string name="space_device_adding">Eszköz hozzáadása…</string>
+    <string name="space_device_waiting">Várakozás… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d eszköz</item>
+        <item quantity="other">Összesen %1$d eszköz</item>
+    </plurals>
+</resources>

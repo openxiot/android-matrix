@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">כוון את המצלמה ל-QR code או ל-IMEI של המכשיר</string>
+    <string name="scan_torch">פנס</string>
+    <string name="scan_torch_on">הדלק את הפנס</string>
+    <string name="scan_torch_off">כבה את הפנס</string>
+    <string name="scan_permission_required">נדרשת גישת מצלמה כדי לסרוק ולהוסיף מכשירים</string>
+    <string name="scan_grant">הענק גישה</string>
+</resources>

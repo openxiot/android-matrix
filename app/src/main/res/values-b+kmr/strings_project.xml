@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Projeya niha</string>
+    <string name="project_manage_title">Birêvebirina projeyan</string>
+    <string name="project_empty">Hîn tu proje tune — ji bo afirandinê + bitikînin</string>
+    <string name="project_create_title">Projeyê çêke</string>
+    <string name="project_name_label">Navê projeyê</string>
+    <string name="project_name_placeholder">Navê projeyê binivîsin</string>
+    <string name="project_rename_title">Navê projeyê biguhere</string>
+    <string name="project_rename_action">Nav biguhere</string>
+    <string name="project_delete_title">Projeyê jê bibe</string>
+    <string name="project_delete_confirm">Vê projeyê jê bibin? Projeyeke ku hîn cihên wê hene nayê jêbirin.</string>
+    <string name="project_swipe_delete">Ji bo jêbirinê bikşînin</string>
+    <string name="project_type_label">Cure: %1$s</string>
+    <string name="project_members_title">Endamên projeyê</string>
+    <string name="project_members_empty">Hîn tu endam tune — ji bo zêdekirinê + bitikînin</string>
+    <string name="project_members_label">Endam</string>
+    <string name="project_user_id">ID ya bikarhêner</string>
+    <string name="project_user_id_placeholder">ID ya hesabê bikarhêner</string>
+    <string name="project_remark_hint">Ji bo zêdekirina notê bitikînin</string>
+    <string name="project_remark_title">Notê sererast bike — %1$s</string>
+    <string name="project_remark_label">Not</string>
+    <string name="project_role_adjust">Rolê biguherîne</string>
+    <string name="project_role_adjust_title">Rolê biguhere — %1$s</string>
+    <string name="project_remove_confirm">“%1$s” bê rakirin?</string>
+    <string name="project_exit">Ji projeyê derkeve</string>
+    <string name="project_exit_confirm">Ji vê projeyê derkevin? Dê gihîştina we pê re winda bibe.</string>
+    <string name="project_device_added">Amûr hat zêdekirin</string>
+    <string name="project_device_moved">Amûr hat veguhastin</string>
+    <string name="space_manage_title">Birêvebirina cihan</string>
+    <string name="space_add">Cih zêde bike</string>
+    <string name="space_add_child">Cihê zarok zêde bike</string>
+    <string name="space_add_device">Amûr zêde bike</string>
+    <string name="space_name_label">Navê cihî</string>
+    <string name="space_name_placeholder">Navê binivîsin</string>
+    <string name="space_type_label">Cureyê cihî</string>
+    <string name="space_empty">Daneyên cihê tune</string>
+    <string name="space_empty_editable">Ji bo destpêkirinê cihekê zêde bikin</string>
+    <string name="space_empty_readonly">Di vê projeyê de hîn tu cih an amûr tune</string>
+    <string name="space_delete_title">Cihê jê bibe</string>
+    <string name="space_delete_confirm">Vê cihê jê bibin? Ciheke ku hîn bin-cihên wê hene nayê jêbirin.</string>
+    <string name="space_move_title">Veguhastin bo cihê</string>
+    <string name="space_move_action">Veguhêze</string>
+    <string name="space_device_adding">Amûr tê zêdekirin…</string>
+    <string name="space_device_waiting">Li bendê… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d amûr</item>
+        <item quantity="other">%1$d amûran</item>
+    </plurals>
+</resources>

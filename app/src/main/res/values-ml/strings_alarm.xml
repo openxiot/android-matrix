@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">അലാറങ്ങൾ</string>
+    <string name="alarm_action_ok">പ്രവർത്തനം വിജയകരമായി പൂർത്തിയായി</string>
+    <string name="alarm_empty">ഈ കാലയളവിൽ അലാറങ്ങളില്ല</string>
+    <string name="alarm_all_services">എല്ലാ സേവനങ്ങളും</string>
+    <string name="alarm_level_label">അലാറം നില</string>
+    <string name="alarm_handled_label">കൈകാര്യം</string>
+    <string name="alarm_status_label">അവസ്ഥ</string>
+    <string name="alarm_summary_title">അലാറം പട്ടിക</string>
+    <string name="alarm_text_label">അലാറം വാചകം</string>
+    <string name="alarm_field_label">ഫീൽഡ്</string>
+    <string name="alarm_trigger_label">ട്രിഗർ വ്യവസ്ഥ</string>
+    <string name="alarm_current_value_label">നിലവിലെ മൂല്യം</string>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">โครงการปัจจุบัน</string>
+    <string name="project_manage_title">จัดการโครงการ</string>
+    <string name="project_empty">ยังไม่มีโครงการ แตะ + เพื่อสร้าง</string>
+    <string name="project_create_title">สร้างโครงการ</string>
+    <string name="project_name_label">ชื่อโครงการ</string>
+    <string name="project_name_placeholder">กรอกชื่อโครงการ</string>
+    <string name="project_rename_title">เปลี่ยนชื่อโครงการ</string>
+    <string name="project_rename_action">เปลี่ยนชื่อ</string>
+    <string name="project_delete_title">ลบโครงการ</string>
+    <string name="project_delete_confirm">ลบโครงการนี้หรือไม่? โครงการที่ยังมีพื้นที่อยู่จะลบไม่ได้</string>
+    <string name="project_swipe_delete">ปัดเพื่อลบ</string>
+    <string name="project_type_label">ประเภท: %1$s</string>
+    <string name="project_members_title">สมาชิกโครงการ</string>
+    <string name="project_members_empty">ยังไม่มีสมาชิก แตะ + เพื่อเพิ่ม</string>
+    <string name="project_members_label">สมาชิก</string>
+    <string name="project_user_id">ID ผู้ใช้</string>
+    <string name="project_user_id_placeholder">รหัสบัญชีของผู้ใช้</string>
+    <string name="project_remark_hint">แตะเพื่อเพิ่มหมายเหตุ</string>
+    <string name="project_remark_title">แก้ไขหมายเหตุ — %1$s</string>
+    <string name="project_remark_label">หมายเหตุ</string>
+    <string name="project_role_adjust">เปลี่ยนบทบาท</string>
+    <string name="project_role_adjust_title">เปลี่ยนบทบาท — %1$s</string>
+    <string name="project_remove_confirm">ลบ “%1$s” หรือไม่?</string>
+    <string name="project_exit">ออกจากโครงการ</string>
+    <string name="project_exit_confirm">ออกจากโครงการนี้หรือไม่? คุณจะเข้าถึงโครงการนี้ไม่ได้อีก</string>
+    <string name="project_device_added">เพิ่มอุปกรณ์แล้ว</string>
+    <string name="project_device_moved">ย้ายอุปกรณ์แล้ว</string>
+    <string name="space_manage_title">จัดการพื้นที่</string>
+    <string name="space_add">เพิ่มพื้นที่</string>
+    <string name="space_add_child">เพิ่มพื้นที่ย่อย</string>
+    <string name="space_add_device">เพิ่มอุปกรณ์</string>
+    <string name="space_name_label">ชื่อพื้นที่</string>
+    <string name="space_name_placeholder">กรอกชื่อ</string>
+    <string name="space_type_label">ประเภทพื้นที่</string>
+    <string name="space_empty">ข้อมูลพื้นที่ว่างเปล่า</string>
+    <string name="space_empty_editable">เพิ่มพื้นที่เพื่อเริ่มต้น</string>
+    <string name="space_empty_readonly">โครงการนี้ยังไม่มีพื้นที่หรืออุปกรณ์</string>
+    <string name="space_delete_title">ลบพื้นที่</string>
+    <string name="space_delete_confirm">ลบพื้นที่นี้หรือไม่? พื้นที่ที่ยังมีพื้นที่ย่อยอยู่จะลบไม่ได้</string>
+    <string name="space_move_title">ย้ายไปยังพื้นที่</string>
+    <string name="space_move_action">ย้าย</string>
+    <string name="space_device_adding">กำลังเพิ่มอุปกรณ์…</string>
+    <string name="space_device_waiting">กำลังรอ… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="other">%1$d อุปกรณ์</item>
+    </plurals>
+</resources>

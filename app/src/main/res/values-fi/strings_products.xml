@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">Tuotteet</string>
+    <string name="product_detail_title">Tuotteen tiedot</string>
+    <string name="product_not_found">Tuotetta ei löytynyt</string>
+    <string name="product_empty">Ei vielä tuotteita</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d tuote</item>
+        <item quantity="other">%1$d tuotetta</item>
+    </plurals>
+    <string name="product_model_inline">Malli: %1$s</string>
+    <string name="product_id_label">Tuotteen ID</string>
+    <string name="product_model_label">Tuotemalli</string>
+    <string name="product_org_label">Organisaatio</string>
+    <string name="product_buy_jd">Osta JD.comista</string>
+    <string name="product_buy_taobao">Osta Taobaosta</string>
+    <string name="product_status_released">Julkaistu</string>
+    <string name="product_status_preview">Esikatselu</string>
+    <string name="product_status_development">Kehitteillä</string>
+    <string name="product_empty_data">Ei tuotetietoja</string>
+</resources>

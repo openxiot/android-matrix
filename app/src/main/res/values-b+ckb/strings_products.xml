@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="product_title">بەرهەمەکان</string>
+    <string name="product_detail_title">وردەکارییەکانی بەرهەم</string>
+    <string name="product_not_found">بەرهەم نەدۆزرایەوە</string>
+    <string name="product_empty">هێشتا هیچ بەرهەمێک نییە</string>
+    <plurals name="product_count">
+        <item quantity="one">%1$d بەرهەم</item>
+        <item quantity="other">%1$d بەرهەمان</item>
+    </plurals>
+    <string name="product_model_inline">مۆدێل: %1$s</string>
+    <string name="product_id_label">IDی بەرهەم</string>
+    <string name="product_model_label">مۆدێلی بەرهەم</string>
+    <string name="product_org_label">ڕێکخراو</string>
+    <string name="product_buy_jd">کڕینی لە JD.com</string>
+    <string name="product_buy_taobao">کڕینی لە Taobao</string>
+    <string name="product_status_released">بڵاوکراوەتەوە</string>
+    <string name="product_status_preview">وەشانی پیشاندان</string>
+    <string name="product_status_development">لە ژێر گەشەپێداندا</string>
+    <string name="product_empty_data">هیچ داتایەکی بەرهەم نییە</string>
+</resources>

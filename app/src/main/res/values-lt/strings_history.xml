@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Istorija</string>
+    <string name="history_section_overview">Paslaugų apžvalga</string>
+    <string name="history_no_services">Šiame projekte dar nėra Modbus paslaugų</string>
+    <string name="history_service_count_label">Paslaugų skaičius</string>
+    <string name="history_device_count_label">Įrenginių skaičius</string>
+    <string name="history_sampled_at_label">Rinkimo laikas</string>
+    <string name="history_function_count_label">Metodai</string>
+    <string name="history_faults_section">Rinkimo išimtys</string>
+    <string name="history_faults_label">Rinkimo išimtys</string>
+    <string name="history_no_faults">Šiuo laikotarpiu rinkimo sutrikimų nebuvo</string>
+    <string name="history_no_data">Šiuo laikotarpiu duomenų nesurinkta</string>
+    <string name="history_field_label">Laukas</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="few">Surinkti duomenys (%1$d eilutės)</item>
+        <item quantity="many">Surinkti duomenys (%1$d eilutės)</item>
+        <item quantity="one">Surinkti duomenys (%1$d eilutė)</item>
+        <item quantity="other">Surinkti duomenys (%1$d eilučių)</item>
+    </plurals>
+    <string name="service_history_all_functions">Visi metodai</string>
+    <string name="service_history_field_selection">Laukai %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Sutrikimas %1$s × %2$d</string>
+    <string name="service_history_no_curve">Nė vieno šios paslaugos lauko negalima atvaizduoti grafiku</string>
+    <string name="service_history_no_curve_for_function">Šioje funkcijoje nėra laukų, kuriuos galima atvaizduoti grafiku</string>
+    <string name="service_history_no_fields_selected">Nepasirinkta jokių laukų</string>
+    <string name="service_history_failure_hint">Vertikalios linijos žymi rinkimo gedimo momentą</string>
+    <string name="service_history_downsampled_hint">Duomenų taškų daug, todėl atrinkta pagal laiko intervalus (reikšmė yra to intervalo vidurkis, skliaustuose mažiausia~didžiausia)</string>
+    <string name="service_history_keepalive">Išlaikyta</string>
+    <string name="service_history_view_table">Lentelė</string>
+    <string name="service_history_view_chart">Grafikas</string>
+</resources>

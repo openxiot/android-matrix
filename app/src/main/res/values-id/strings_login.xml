@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Masuk dengan WeChat</string>
+    <string name="login_test_account">Masuk dengan akun uji</string>
+    <string name="login_err_wechat_missing">WeChat tidak terpasang atau versinya terlalu lama</string>
+    <string name="login_err_no_code">Kode otorisasi tidak diterima</string>
+    <string name="login_err_cancelled">Login WeChat dibatalkan</string>
+    <string name="login_err_wechat">Otorisasi WeChat gagal (%1$d)</string>
+    <string name="login_err_no_token">Gagal masuk: token tidak dikembalikan</string>
+</resources>

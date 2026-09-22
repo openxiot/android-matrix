@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">ಪ್ರಸ್ತುತ ಸಂಸ್ಥೆ</string>
+    <string name="org_detail_title">ಸಂಸ್ಥೆಯ ವಿವರಗಳು</string>
+    <string name="org_empty">ಇನ್ನೂ ಸಂಸ್ಥೆಗಳಿಲ್ಲ — ಒಂದನ್ನು ರಚಿಸಲು + ಒತ್ತಿರಿ</string>
+    <string name="org_create_title">ಸಂಸ್ಥೆ ರಚಿಸಿ</string>
+    <string name="org_id_label">ಸಂಸ್ಥೆ ಐಡಿ</string>
+    <string name="org_id_placeholder">ಉದಾ. my-company</string>
+    <string name="org_id_hint">ಅಕ್ಷರದಿಂದ ಪ್ರಾರಂಭಿಸಿ — ಅಕ್ಷರಗಳು, ಅಂಕೆಗಳು ಮತ್ತು ಹೈಫನ್‌ಗಳು ಮಾತ್ರ</string>
+    <string name="org_name_label">ಸಂಸ್ಥೆಯ ಹೆಸರು</string>
+    <string name="org_name_placeholder">ಉದಾ. My Company</string>
+    <string name="org_rename_title">ಸಂಸ್ಥೆಯನ್ನು ಮರುಹೆಸರಿಸಿ</string>
+    <string name="org_delete_title">ಸಂಸ್ಥೆಯನ್ನು ಅಳಿಸಿ</string>
+    <string name="org_delete_confirm">ಈ ಸಂಸ್ಥೆಯನ್ನು ಅಳಿಸಬೇಕೇ?</string>
+    <string name="org_manage">ನಿರ್ವಹಿಸಿ</string>
+    <string name="org_swipe_delete">ಅಳಿಸಲು ಸ್ವೈಪ್ ಮಾಡಿ</string>
+    <string name="org_members_empty">ಇನ್ನೂ ಸದಸ್ಯರಿಲ್ಲ</string>
+    <string name="org_member_developer_id">ಡೆವಲಪರ್ ಐಡಿ</string>
+    <string name="org_member_developer_id_placeholder">ಬಳಕೆದಾರರ developerId</string>
+    <string name="org_member_name_label">ಪ್ರದರ್ಶನ ಹೆಸರು</string>
+    <string name="org_member_name_placeholder">ಐಚ್ಛಿಕ</string>
+    <string name="org_change_role">ಪಾತ್ರವನ್ನು ಬದಲಾಯಿಸಿ</string>
+    <string name="org_change_role_title">ಪಾತ್ರವನ್ನು ಬದಲಾಯಿಸಿ — %1$s</string>
+    <string name="org_remove_confirm">“%1$s” ಅನ್ನು ತೆಗೆದುಹಾಕಬೇಕೇ?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d ಸದಸ್ಯ</item>
+        <item quantity="other">%1$d ಸದಸ್ಯರು</item>
+    </plurals>
+</resources>

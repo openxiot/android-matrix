@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Камерыг төхөөрөмжийн QR код эсвэл IMEI-д чиглүүлнэ үү</string>
+    <string name="scan_torch">Гар чийдэн</string>
+    <string name="scan_torch_on">Гар чийдэнг асаах</string>
+    <string name="scan_torch_off">Гар чийдэнг унтраах</string>
+    <string name="scan_permission_required">Скан хийж төхөөрөмж нэмэхийн тулд камераас хандах зөвшөөрөл хэрэгтэй</string>
+    <string name="scan_grant">Зөвшөөрөл олгох</string>
+</resources>

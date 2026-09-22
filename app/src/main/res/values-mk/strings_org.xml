@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Тековна организација</string>
+    <string name="org_detail_title">Детали за организација</string>
+    <string name="org_empty">Засега нема организации — допрете + за да создадете</string>
+    <string name="org_create_title">Креирај организација</string>
+    <string name="org_id_label">ID на организација</string>
+    <string name="org_id_placeholder">на пр. my-company</string>
+    <string name="org_id_hint">Започнете со буква — само букви, цифри и цртички</string>
+    <string name="org_name_label">Име на организација</string>
+    <string name="org_name_placeholder">на пр. Мојата компанија</string>
+    <string name="org_rename_title">Преименувај организација</string>
+    <string name="org_delete_title">Избриши организација</string>
+    <string name="org_delete_confirm">Да се избрише оваа организација?</string>
+    <string name="org_manage">Управувај</string>
+    <string name="org_swipe_delete">Повлечете за да избришете</string>
+    <string name="org_members_empty">Засега нема членови</string>
+    <string name="org_member_developer_id">ID на развивач</string>
+    <string name="org_member_developer_id_placeholder">developerId на корисникот</string>
+    <string name="org_member_name_label">Име за приказ</string>
+    <string name="org_member_name_placeholder">Изборно</string>
+    <string name="org_change_role">Промени улога</string>
+    <string name="org_change_role_title">Промена на улога — %1$s</string>
+    <string name="org_remove_confirm">Да се отстрани „%1$s“?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d член</item>
+        <item quantity="other">%1$d члена</item>
+    </plurals>
+</resources>

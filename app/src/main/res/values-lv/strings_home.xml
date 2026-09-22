@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">Vispirms sarakstā atlasiet projektu</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">Atmest izmaiņas?</string>
+    <string name="home_discard_message">Ir nesaglabātas izmaiņas. Izejot tās tiks zaudētas.</string>
+    <string name="home_dashboard_empty">Vēl nav kartīšu — pieskarieties „Pievienot” zemāk, lai to pievienotu</string>
+    <string name="home_add_card">+ Pievienot</string>
+    <string name="home_default_layout_loaded">Noklusējuma izkārtojums ielādēts — saglabājiet to, lai piemērotu</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">Viens liels skaitlis: ierīces / servisi / trauksmes / kļūdas</string>
+    <string name="home_card_kind_line">Trauksmju skaits pa stundām vai viena servisa lauks</string>
+    <string name="home_card_kind_distribution">Sadalījums pa ierīcēm / servisiem / trauksmēm / kļūdām</string>
+    <string name="home_card_kind_device">Viena ierīces viena īpašība</string>
+    <string name="home_card_kind_service">Lauku kopa no vienas funkcijas</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">Grafiks</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">Ierīce</string>
+    <string name="home_card_default_service">Pakalpojumi</string>
+    <string name="home_card_default_unknown">Kartīte</string>
+    <string name="home_edit_card_title">Rediģēt · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">Pilns platums</string>
+    <string name="home_size_half">Puse platuma</string>
+    <string name="home_section_metric">Rādītājs</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">Ierīču kopskaits</string>
+    <string name="home_metric_devices_online">Ierīces tiešsaistē</string>
+    <string name="home_metric_services_total">Servisu kopskaits</string>
+    <string name="home_metric_alarms_today">Šodienas trauksmes</string>
+    <string name="home_metric_alarms_window">Trauksmes logā</string>
+    <string name="home_metric_failures_total">Ievākšanas kļūdas logā</string>
+    <string name="home_section_dimension">Sadalījums pēc</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">Ierīces tips</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">Ievākšanas kļūdas veids</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">Datu avots</string>
+    <string name="home_source_label">Avots</string>
+    <string name="home_source_alarm_curve">Trauksmju skaits pa stundām</string>
+    <string name="home_source_service_field">Viens servisa lauks</string>
+    <string name="home_show_failure_shadow">Rādīt neizdevušos vākšanas līnijas</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">Serviss · Funkcija · Lauks</string>
+    <string name="home_service_placeholder">Atlasiet servisu</string>
+    <string name="home_service_unnamed">Serviss bez nosaukuma</string>
+    <string name="home_function_placeholder">Atlasiet funkciju</string>
+    <string name="home_function_fallback">Funkcija %1$d</string>
+    <string name="home_pick_service_first">Vispirms atlasiet servisu</string>
+    <string name="home_show_unit">Rādīt mērvienību</string>
+    <string name="home_section_device_prop">Ierīce · Īpašība</string>
+    <string name="home_device_placeholder">Atlasiet ierīci</string>
+    <string name="home_prop_label">Īpašības</string>
+    <string name="home_pick_device_first">Vispirms atlasiet ierīci</string>
+    <string name="home_prop_none">Šim modelim nav īpašību</string>
+    <string name="home_prop_placeholder">Atlasiet īpašību</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d, atstājiet tukšu bez ierobežojuma</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">Pēdējās</string>
+    <string name="home_window_custom">Pielāgots</string>
+    <string name="home_pick_dates">Izvēlieties sākuma un beigu datumus</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d diena</item>
+        <item quantity="zero">%1$d dienu</item>
+        <item quantity="other">%1$d dienas</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d stunda</item>
+        <item quantity="zero">%1$d stundu</item>
+        <item quantity="other">%1$d stundas</item>
+    </plurals>
+    <string name="home_card_unknown_type">Nezināms kartītes tips</string>
+    <string name="home_empty_no_data">Nav datu</string>
+    <string name="home_empty_no_reading">Vēl nav nolasījumu</string>
+    <string name="home_empty_not_sampled">Vēl nav vākts</string>
+    <string name="home_sampled_at">Ievākts %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">ierīces</string>
+    <string name="home_unit_services">pakalpojumi</string>
+</resources>

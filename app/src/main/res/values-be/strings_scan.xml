@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">Навядзіце камеру на QR-код або IMEI прылады</string>
+    <string name="scan_torch">Ліхтарык</string>
+    <string name="scan_torch_on">Уключыць ліхтарык</string>
+    <string name="scan_torch_off">Выключыць ліхтарык</string>
+    <string name="scan_permission_required">Для сканавання і дадання прылад патрэбны доступ да камеры</string>
+    <string name="scan_grant">Дазволіць доступ</string>
+</resources>

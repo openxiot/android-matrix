@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matris</string>
+    <string name="common_back">Tillbaka</string>
+    <string name="common_retry">Försök igen</string>
+    <string name="common_confirm">Bekräfta</string>
+    <string name="common_cancel">Avbryt</string>
+    <string name="common_close">Stäng</string>
+    <string name="common_detail">Detaljer</string>
+    <string name="common_collapse">Fäll ihop</string>
+    <string name="common_expand">Expandera</string>
+    <string name="common_all">Alla</string>
+    <string name="common_add">Lägg till</string>
+    <string name="common_create">Skapa</string>
+    <string name="common_delete">Ta bort</string>
+    <string name="common_unnamed">Namnlös</string>
+    <string name="common_unknown">Okänd</string>
+    <string name="common_me">Du</string>
+    <string name="common_rename_action">Byt namn</string>
+    <string name="common_role_label">Roll</string>
+    <string name="common_role_admin">Administratör</string>
+    <string name="common_role_member">Medlemmar</string>
+    <string name="common_role_member_option">Vanlig medlem</string>
+    <string name="common_member_add">Lägg till medlem</string>
+    <string name="common_member_remove">Ta bort medlem</string>
+    <string name="common_edit">Redigera</string>
+    <string name="common_refresh">Uppdatera</string>
+    <string name="common_change">Ändra</string>
+    <string name="common_handle">Hantera</string>
+    <string name="common_handled">Hanterad</string>
+    <string name="common_unhandled">Ohanterad</string>
+    <string name="common_recovered">Återställd</string>
+    <string name="common_unrecovered">Aktiv</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">På</string>
+    <string name="common_switch_off">Av</string>
+    <string name="common_please_select">Välj</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Inget tidsintervall valt</string>
+    <string name="common_range_text">%1$s till %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Tjänster</string>
+    <string name="common_function_label">Metoder</string>
+    <string name="common_device_label">Enhet</string>
+    <string name="common_protocol_label">Protokoll</string>
+    <string name="common_unknown_product">Okänd produkt</string>
+    <string name="common_truncated_hint">Antalet undantagsposter överstiger gränsen; endast de senaste visas</string>
+    <string name="err_network">Nätverket är inte tillgängligt. Kontrollera anslutningen och försök igen.</string>
+    <string name="err_unknown">Något gick fel. Försök igen.</string>
+    <string name="space_type_site">Plats</string>
+    <string name="space_type_building">Byggnad</string>
+    <string name="space_type_floor">Våning</string>
+    <string name="space_type_room">Rum</string>
+    <string name="space_type_zone">Zon</string>
+    <string name="space_type_field">Område</string>
+    <string name="space_type_workshop">Verkstad</string>
+    <string name="space_type_parking">Parkering</string>
+</resources>

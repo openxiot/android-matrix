@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">Τρέχον έργο</string>
+    <string name="project_manage_title">Διαχείριση έργων</string>
+    <string name="project_empty">Δεν υπάρχουν έργα — πατήστε + για να δημιουργήσετε ένα</string>
+    <string name="project_create_title">Δημιουργία έργου</string>
+    <string name="project_name_label">Όνομα έργου</string>
+    <string name="project_name_placeholder">Εισαγάγετε όνομα έργου</string>
+    <string name="project_rename_title">Μετονομασία έργου</string>
+    <string name="project_rename_action">Μετονομασία</string>
+    <string name="project_delete_title">Διαγραφή έργου</string>
+    <string name="project_delete_confirm">Διαγραφή αυτού του έργου; Ένα έργο που έχει ακόμη χώρους δεν μπορεί να διαγραφεί.</string>
+    <string name="project_swipe_delete">Σύρετε για διαγραφή</string>
+    <string name="project_type_label">Τύπος: %1$s</string>
+    <string name="project_members_title">Μέλη έργου</string>
+    <string name="project_members_empty">Δεν υπάρχουν μέλη — πατήστε + για να προσθέσετε ένα</string>
+    <string name="project_members_label">Μέλη</string>
+    <string name="project_user_id">ID χρήστη</string>
+    <string name="project_user_id_placeholder">Το ID λογαριασμού του χρήστη</string>
+    <string name="project_remark_hint">Πατήστε για προσθήκη σημείωσης</string>
+    <string name="project_remark_title">Επεξεργασία σημείωσης — %1$s</string>
+    <string name="project_remark_label">Σημείωση</string>
+    <string name="project_role_adjust">Αλλαγή ρόλου</string>
+    <string name="project_role_adjust_title">Αλλαγή ρόλου — %1$s</string>
+    <string name="project_remove_confirm">Αφαίρεση του «%1$s»;</string>
+    <string name="project_exit">Αποχώρηση από το έργο</string>
+    <string name="project_exit_confirm">Να αποχωρήσετε από αυτό το έργο; Θα χάσετε την πρόσβαση σε αυτό.</string>
+    <string name="project_device_added">Η συσκευή προστέθηκε</string>
+    <string name="project_device_moved">Η συσκευή μετακινήθηκε</string>
+    <string name="space_manage_title">Διαχείριση χώρων</string>
+    <string name="space_add">Προσθήκη χώρου</string>
+    <string name="space_add_child">Προσθήκη υποχώρου</string>
+    <string name="space_add_device">Προσθήκη συσκευής</string>
+    <string name="space_name_label">Όνομα χώρου</string>
+    <string name="space_name_placeholder">Εισαγάγετε όνομα</string>
+    <string name="space_type_label">Τύπος χώρου</string>
+    <string name="space_empty">Δεν υπάρχουν δεδομένα χώρου</string>
+    <string name="space_empty_editable">Προσθέστε έναν χώρο για να ξεκινήσετε</string>
+    <string name="space_empty_readonly">Αυτό το έργο δεν έχει ακόμη χώρους ή συσκευές</string>
+    <string name="space_delete_title">Διαγραφή χώρου</string>
+    <string name="space_delete_confirm">Διαγραφή αυτού του χώρου; Ένας χώρος που έχει ακόμη υποχώρους δεν μπορεί να διαγραφεί.</string>
+    <string name="space_move_title">Μετακίνηση σε χώρο</string>
+    <string name="space_move_action">Μετακίνηση</string>
+    <string name="space_device_adding">Προσθήκη συσκευής…</string>
+    <string name="space_device_waiting">Αναμονή… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d συσκευή</item>
+        <item quantity="other">%1$d συσκευές</item>
+    </plurals>
+</resources>

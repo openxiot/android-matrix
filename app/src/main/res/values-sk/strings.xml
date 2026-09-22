@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matica</string>
+    <string name="common_back">Späť</string>
+    <string name="common_retry">Skúsiť znova</string>
+    <string name="common_confirm">Potvrdiť</string>
+    <string name="common_cancel">Zrušiť</string>
+    <string name="common_close">Zavrieť</string>
+    <string name="common_detail">Podrobnosti</string>
+    <string name="common_collapse">Zbaliť</string>
+    <string name="common_expand">Rozbaliť</string>
+    <string name="common_all">Všetky</string>
+    <string name="common_add">Pridať</string>
+    <string name="common_create">Vytvoriť</string>
+    <string name="common_delete">Odstrániť</string>
+    <string name="common_unnamed">Bez názvu</string>
+    <string name="common_unknown">Neznáme</string>
+    <string name="common_me">Vy</string>
+    <string name="common_rename_action">Premenovať</string>
+    <string name="common_role_label">Rola</string>
+    <string name="common_role_admin">Správca</string>
+    <string name="common_role_member">Členovia</string>
+    <string name="common_role_member_option">Bežný člen</string>
+    <string name="common_member_add">Pridať člena</string>
+    <string name="common_member_remove">Odobrať člena</string>
+    <string name="common_edit">Upraviť</string>
+    <string name="common_refresh">Obnoviť</string>
+    <string name="common_change">Zmeniť</string>
+    <string name="common_handle">Vyriadiť</string>
+    <string name="common_handled">Vyriadené</string>
+    <string name="common_unhandled">Nevyriadené</string>
+    <string name="common_recovered">Obnovený</string>
+    <string name="common_unrecovered">Aktívny</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">Zapnuté</string>
+    <string name="common_switch_off">Vypnuté</string>
+    <string name="common_please_select">Vyberte</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Nie je vybraný časový rozsah</string>
+    <string name="common_range_text">%1$s až %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Služby</string>
+    <string name="common_function_label">Metódy</string>
+    <string name="common_device_label">Zariadenie</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Neznámy produkt</string>
+    <string name="common_truncated_hint">Záznamov o výnimkách je viac než limit; zobrazujú sa len najnovšie</string>
+    <string name="err_network">Sieť nie je dostupná. Skontrolujte pripojenie a skúste znova.</string>
+    <string name="err_unknown">Niečo sa pokazilo. Skúste to znova.</string>
+    <string name="space_type_site">Lokalita</string>
+    <string name="space_type_building">Budova</string>
+    <string name="space_type_floor">Poschodie</string>
+    <string name="space_type_room">Miestnosť</string>
+    <string name="space_type_zone">Zóna</string>
+    <string name="space_type_field">Pozemok</string>
+    <string name="space_type_workshop">Dielňa</string>
+    <string name="space_type_parking">Parkovisko</string>
+</resources>

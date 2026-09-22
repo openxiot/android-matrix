@@ -45,6 +45,7 @@ import cc.openxiot.wematrix.ui.components.ErrorMessage
 import cc.openxiot.wematrix.ui.components.LoadingIndicator
 import cc.openxiot.wematrix.ui.components.SpaceTypeChip
 import cc.openxiot.wematrix.ui.core.asString
+import cc.openxiot.wematrix.util.mirrorInRtl
 import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
 import kotlin.collections.get
@@ -465,7 +466,7 @@ private fun SpacePickerItem(
                     if (expanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(18.dp).mirrorInRtl()
                 )
             }
         } else {
@@ -699,7 +700,7 @@ private fun SpaceTreeNode(
                     if (isExpanded) Icons.Default.ExpandMore else Icons.Default.ChevronRight,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(20.dp).mirrorInRtl()
                 )
             } else {
                 Spacer(modifier = Modifier.width(20.dp))
@@ -816,7 +817,7 @@ private fun DeviceItem(
                         contentDescription = if (isExpanded) stringResource(R.string.common_collapse)
                             else stringResource(R.string.common_expand),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp).mirrorInRtl()
                     )
                 }
             } else {
@@ -884,7 +885,7 @@ private fun DeviceItem(
                         Icons.Default.ChevronRight,
                         contentDescription = stringResource(R.string.common_detail),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp).mirrorInRtl()
                     )
                 }
             }

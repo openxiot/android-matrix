@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">ប្រវត្តិ</string>
+    <string name="history_section_overview">ទិដ្ឋភាពរួមសេវា</string>
+    <string name="history_no_services">គម្រោងនេះមិនទាន់មានសេវា Modbus</string>
+    <string name="history_service_count_label">ចំនួនសេវា</string>
+    <string name="history_device_count_label">ចំនួនឧបករណ៍</string>
+    <string name="history_sampled_at_label">ពេលវេលាប្រមូល</string>
+    <string name="history_function_count_label">ចំនួនវិធីសាស្ត្រ</string>
+    <string name="history_faults_section">ករណីលើកលែងប្រមូល</string>
+    <string name="history_faults_label">ករណីលើកលែងប្រមូល</string>
+    <string name="history_no_faults">គ្មានកំហុសប្រមូលក្នុងអំឡុងពេលនេះ</string>
+    <string name="history_no_data">គ្មានទិន្នន័យប្រមូលក្នុងអំឡុងពេលនេះ</string>
+    <string name="history_field_label">វាល</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="other">ទិន្នន័យប្រមូល (%1$d ជួរ)</item>
+    </plurals>
+    <string name="service_history_all_functions">វិធីសាស្ត្រទាំងអស់</string>
+    <string name="service_history_field_selection">វាល %1$d / %2$d</string>
+    <string name="service_history_fault_chip">កំហុស %1$s × %2$d</string>
+    <string name="service_history_no_curve">គ្មានវាលរបស់សេវានេះអាចគូរជាក្រាហ្វបានទេ</string>
+    <string name="service_history_no_curve_for_function">គ្មានវាលដែលគូរជាក្រាហ្វបានក្នុង Function នេះទេ</string>
+    <string name="service_history_no_fields_selected">មិនបានជ្រើសរើសវាល</string>
+    <string name="service_history_failure_hint">បន្ទាត់ឈរបង្ហាញពេលវេលាដែលការប្រមូលបរាជ័យ</string>
+    <string name="service_history_downsampled_hint">ចំណុចទិន្នន័យច្រើនពេក; បានបញ្ចុះគំរូតាមចន្លោះពេល (តម្លៃគឺជាមធ្យមនៃចន្លោះនោះ ក្នុងវង់ក្រចកគឺអប្បបរមា~អតិបរមា)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">តារាង</string>
+    <string name="service_history_view_chart">ក្រាហ្វ</string>
+</resources>

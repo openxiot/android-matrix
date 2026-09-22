@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">Aktuell organisation</string>
+    <string name="org_detail_title">Organisationsdetaljer</string>
+    <string name="org_empty">Inga organisationer ännu – tryck på + för att skapa en</string>
+    <string name="org_create_title">Skapa organisation</string>
+    <string name="org_id_label">Organisations-ID</string>
+    <string name="org_id_placeholder">t.ex. mitt-foretag</string>
+    <string name="org_id_hint">Börja med en bokstav – endast bokstäver, siffror och bindestreck</string>
+    <string name="org_name_label">Organisationsnamn</string>
+    <string name="org_name_placeholder">t.ex. Mitt företag</string>
+    <string name="org_rename_title">Byt namn på organisation</string>
+    <string name="org_delete_title">Ta bort organisation</string>
+    <string name="org_delete_confirm">Radera den här organisationen?</string>
+    <string name="org_manage">Hantera</string>
+    <string name="org_swipe_delete">Svep för att radera</string>
+    <string name="org_members_empty">Inga medlemmar ännu</string>
+    <string name="org_member_developer_id">Utvecklar-ID</string>
+    <string name="org_member_developer_id_placeholder">Användarens developerId</string>
+    <string name="org_member_name_label">Visningsnamn</string>
+    <string name="org_member_name_placeholder">Valfritt</string>
+    <string name="org_change_role">Ändra roll</string>
+    <string name="org_change_role_title">Ändra roll – %1$s</string>
+    <string name="org_remove_confirm">Ta bort ”%1$s”?</string>
+    <plurals name="org_member_count">
+        <item quantity="one">%1$d medlem</item>
+        <item quantity="other">%1$d medlemmar</item>
+    </plurals>
+</resources>

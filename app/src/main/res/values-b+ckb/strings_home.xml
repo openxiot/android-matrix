@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">تکایە سەرەتا پڕۆژەیەک لە لیستی پڕۆژەکان هەڵبژێرە</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">وازت لە گۆڕانکارییەکان؟</string>
+    <string name="home_discard_message">گۆڕانکاریی نەپاشەکەوتکراویت هەیە. ئەگەر ئێستا بچیتە دەرەوە لە گەڕان بە دەبا گیران.</string>
+    <string name="home_dashboard_empty">هێشتا هیچ کارتێک نییە — «زیادکردن» ی خوارەوە داکوت بۆ زیادکردنی کارتێک</string>
+    <string name="home_add_card">+ زیادکردن</string>
+    <string name="home_default_layout_loaded">ڕوونووسی سەرەکی بار کرا — پاشەکەوتی بکە بۆ جێبەجێکردنی</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">یەک ژمارەی گەورە: ئامێرەکان / سەرڤیسەکان / ئاگادارییەکان / هەڵەکان</string>
+    <string name="home_card_kind_line">ژماردنی ئاگاداری بە کاتژمێر، یان یەک کلیدداری سەرڤیس</string>
+    <string name="home_card_kind_distribution">دابەشکراوە بە پێی ئامێر / سەرڤیس / ئاگاداری / هەڵە</string>
+    <string name="home_card_kind_device">تایبەتمەندییەکی یەک ئامێر</string>
+    <string name="home_card_kind_service">کۆمەڵێک کلیددار لە یەک فەنکشن</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">هێڵکاری</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">ئامێر</string>
+    <string name="home_card_default_service">خزمەتگوزارییەکان</string>
+    <string name="home_card_default_unknown">کارت</string>
+    <string name="home_edit_card_title">دەستکاری · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">پانی تەواو</string>
+    <string name="home_size_half">نیو پان</string>
+    <string name="home_section_metric">ئاماری</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">ژمارەی گشتی ئامێرەکان</string>
+    <string name="home_metric_devices_online">ئامێرە سەرهێڵەکان</string>
+    <string name="home_metric_services_total">ژمارەی گشتی سەرڤیسەکان</string>
+    <string name="home_metric_alarms_today">ئاگادارییەکانی ئەمڕۆ</string>
+    <string name="home_metric_alarms_window">ئاگادارییەکان لە ماوەکەدا</string>
+    <string name="home_metric_failures_total">هەڵەکانی سامپڵینگ لە ماوەکەدا</string>
+    <string name="home_section_dimension">دابەشکراوە بە پێی</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">جۆری ئامێر</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">جۆری هەڵەی سامپڵینگ</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">سەرچاوەی داتا</string>
+    <string name="home_source_label">سەرچاوە</string>
+    <string name="home_source_alarm_curve">ژماردنی ئاگاداری بە کاتژمێری</string>
+    <string name="home_source_service_field">یەک کلیدداری سەرڤیس</string>
+    <string name="home_show_failure_shadow">پیشاندانی هێڵەکانی کۆکردنەوەی سەرنەکەوتوو</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">سەرڤیس · فەنکشن · کلیددار</string>
+    <string name="home_service_placeholder">سەرڤیسێک هەڵبژێرە</string>
+    <string name="home_service_unnamed">سەرڤیسی بێناو</string>
+    <string name="home_function_placeholder">فەنکشنێک هەڵبژێرە</string>
+    <string name="home_function_fallback">فەنکشنی %1$d</string>
+    <string name="home_pick_service_first">سەرەتا سەرڤیسێک هەڵبژێرە</string>
+    <string name="home_show_unit">پیشاندانی یەکە</string>
+    <string name="home_section_device_prop">ئامێر · تایبەتمەندی</string>
+    <string name="home_device_placeholder">ئامێرێک هەڵبژێرە</string>
+    <string name="home_prop_label">تایبەتمەندییەکان</string>
+    <string name="home_pick_device_first">سەرەتا ئامێرێک هەڵبژێرە</string>
+    <string name="home_prop_none">ئەم مۆدێلە هیچ تایبەتمەندییەکی نییە</string>
+    <string name="home_prop_placeholder">تایبەتمەندییەک هەڵبژێرە</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d، بەتاڵی بێڵە بۆ بێسنوور</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">دوایین</string>
+    <string name="home_window_custom">دیاریکراو</string>
+    <string name="home_pick_dates">ڕۆژی دەستپێک و کۆتایی هەڵبژێرە</string>
+    <plurals name="home_window_days">
+        <item quantity="one">%1$d ڕۆژ</item>
+        <item quantity="other">%1$d ڕۆژەکان</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="one">%1$d کاتژمێر</item>
+        <item quantity="other">%1$d کاتژمێرەکان</item>
+    </plurals>
+    <string name="home_card_unknown_type">جۆری کارتی نەناسراو</string>
+    <string name="home_empty_no_data">داتا نییە</string>
+    <string name="home_empty_no_reading">هێشتا هیچ خوێندنەوەیەک نییە</string>
+    <string name="home_empty_not_sampled">هێشتا کۆنەکراوەتەوە</string>
+    <string name="home_sampled_at">سامپڵ کرا لە %1$s</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">ئامێر</string>
+    <string name="home_unit_services">خزمەتگوزاری</string>
+</resources>

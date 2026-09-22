@@ -108,7 +108,11 @@ fun alarmCondition(
     state: String?,
     unit: String? = null
 ): UiText {
-    // 单位原样缀在数值后面（它是点表里的数据，不翻译）
+    // 单位原样缀在数值后面（它是点表里的数据，不翻译）。
+    // RTL 注意：数值与单位之间**没有分隔符**，两者在 bidi 里是两个独立 run，顺序仍然正确
+    // （阿拉伯语下「数值在右、单位在左」正是该有的读法），但边界会**贴死**、没有间隙。
+    // 这里不改 —— 加空格会动到 LTR 下「220V」这个既有且刻意的写法，而在没有截图测试、
+    // 也没有模拟器的前提下改 bidi 是纯赌。列为 RTL 真机目视的检查点。
     val target = if (threshold != null) {
         "${configNumberText(threshold)}${unit ?: ""}"
     } else {
@@ -134,6 +138,7 @@ fun alarmCondition(alarm: ModbusAlarm): UiText =
  */
 fun alarmSampleText(sample: Any?, unit: String?): String {
     val text = valueText(sample)
+    // 同 [alarmCondition]：数值与单位之间无分隔符，RTL 下边界贴死（真机目视项）
     return if (sample is Number) "$text${unit ?: ""}" else text
 }
 

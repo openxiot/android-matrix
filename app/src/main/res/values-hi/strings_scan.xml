@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="scan_hint">कैमरे को डिवाइस के QR कोड या IMEI पर रखें</string>
+    <string name="scan_torch">टॉर्च</string>
+    <string name="scan_torch_on">टॉर्च चालू करें</string>
+    <string name="scan_torch_off">टॉर्च बंद करें</string>
+    <string name="scan_permission_required">स्कैन करने और डिवाइस जोड़ने के लिए कैमरा पहुँच आवश्यक है</string>
+    <string name="scan_grant">पहुँच अनुमति दें</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Kieli</string>
+    <string name="profile_language_system">Seuraa järjestelmää</string>
+    <string name="profile_language_search">Hae kieliä</string>
+    <string name="profile_language_search_clear">Tyhjennä</string>
+    <string name="profile_language_no_match">Ei vastaavaa kieltä</string>
+    <string name="profile_not_logged_in">Ei kirjautunut</string>
+    <string name="profile_current_org">Nykyinen organisaatio</string>
+    <string name="profile_current_project">Nykyinen projekti</string>
+    <string name="profile_no_org_selected">Organisaatiota ei ole valittu</string>
+    <string name="profile_no_project_selected">Projektia ei ole valittu</string>
+    <string name="profile_org_subtitle">Valitse organisaatio, niin voit valita projektin</string>
+    <string name="profile_project_subtitle_pick">Valitse projekti</string>
+    <string name="profile_project_subtitle_switch">Vaihda projekti napauttamalla</string>
+    <string name="profile_project_subtitle_org_first">Valitse ensin organisaatio</string>
+    <string name="profile_section_settings">Asetukset</string>
+    <string name="profile_dark_mode">Tumma tila</string>
+    <string name="profile_light_mode">Vaalea tila</string>
+    <string name="profile_theme_subtitle">Vaihda teema napauttamalla</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Laitteen pistetaulukko</string>
+    <string name="profile_modbus_subtitle">Modbus-rekisterikartat (vain luku)</string>
+    <string name="profile_alarm_title">Hälytykset</string>
+    <string name="profile_alarm_subtitle">Modbus-hälytysten loki ja käsittely</string>
+    <string name="profile_history_title">Historia</string>
+    <string name="profile_history_subtitle">Keräyshistoria ja kaaviot</string>
+    <string name="profile_about_subtitle">Sovelluksen tiedot ja versio</string>
+    <string name="account_title">Tili</string>
+    <string name="account_username">Käyttäjätunnus</string>
+    <string name="account_platform">Alusta</string>
+    <string name="account_not_selected">Ei valittu</string>
+    <string name="account_org_toggle">Organisaatio</string>
+    <string name="account_org_toggle_subtitle">Ota käyttöön, niin voit hallita organisaatioita</string>
+    <string name="account_logout">Kirjaudu ulos</string>
+    <string name="about_title">Tietoja</string>
+    <string name="about_tagline">IoT-laitteiden hallinta- ja seuranta-alusta</string>
+    <string name="about_version">Versio %1$s</string>
+    <string name="about_check_update">Tarkista päivitykset</string>
+    <string name="about_checking">Tarkistetaan…</string>
+    <string name="about_up_to_date">Käytössäsi on uusin versio</string>
+    <string name="about_update_now">Päivitä nyt</string>
+    <string name="about_downloading">Ladataan…</string>
+    <string name="about_downloading_percent">Ladataan %1$d %%</string>
+    <string name="about_install_now">Asenna nyt</string>
+    <string name="about_install">Asenna</string>
+    <string name="about_retry_download">Yritä latausta uudelleen</string>
+    <string name="about_later">Myöhemmin</string>
+    <string name="about_install_dialog_title">Asenna päivitys</string>
+    <string name="about_new_version_found">Versio %1$s on saatavilla</string>
+    <string name="about_ready_hint">Lataus valmis – napauta Asenna ja anna paketti järjestelmän asentajalle.</string>
+    <string name="about_need_install_permission">Salli ensin tämän sovelluksen asentaa tuntemattomia sovelluksia</string>
+    <string name="about_keep_app_alive">Voit vaihtaa sivua – älä vain sulje sovellusta</string>
+    <string name="about_metered">Käytössä on mobiilidata – lataus voi kuluttaa sitä runsaasti</string>
+    <string name="about_metered_size">Käytössä on mobiilidata – paketti on noin %1$s</string>
+    <string name="about_install_settings_failed">Asetusta ”Tuntemattomien sovellusten asentaminen” ei voitu avata – salli se manuaalisesti järjestelmäasetuksissa</string>
+    <string name="about_no_installer">Asennussovellusta ei ole saatavilla – paketti on tallennettu sovelluksen kansioon</string>
+    <string name="about_update_notes_empty">Tässä julkaisussa ei ole muistiinpanoja.</string>
+</resources>

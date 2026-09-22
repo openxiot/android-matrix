@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="home_no_project">先にプロジェクト一覧からプロジェクトを選択してください</string>
+    <string name="home_edit_layout_title">Edit Layout</string>
+    <string name="home_reset_layout">Reset to Default</string>
+    <string name="home_save_layout">Save Layout</string>
+    <string name="home_discard_title">変更を破棄しますか？</string>
+    <string name="home_discard_message">保存されていない変更があります。ここを離れると失われます</string>
+    <string name="home_dashboard_empty">カードがまだありません。下の「追加」をタップして追加してください</string>
+    <string name="home_add_card">＋ 追加</string>
+    <string name="home_default_layout_loaded">デフォルトレイアウトを読み込みました。適用するには保存してください</string>
+    <string name="home_add_card_title">Add Card</string>
+    <string name="home_card_kind_stat">1 つの大きな数字: デバイス / サービス / アラーム / 失敗</string>
+    <string name="home_card_kind_line">毎時のアラーム件数、または 1 つのサービスフィールド</string>
+    <string name="home_card_kind_distribution">デバイス / サービス / アラーム / 失敗別の内訳</string>
+    <string name="home_card_kind_device">1 台のデバイスの 1 つのプロパティ</string>
+    <string name="home_card_kind_service">1 つのファンクションのフィールド群</string>
+    <string name="home_card_default_stat">Statistics</string>
+    <string name="home_card_default_line">グラフ</string>
+    <string name="home_card_default_distribution">Distribution</string>
+    <string name="home_card_default_device">デバイス</string>
+    <string name="home_card_default_service">サービス</string>
+    <string name="home_card_default_unknown">カード</string>
+    <string name="home_edit_card_title">編集 · %1$s</string>
+    <string name="home_card_title_label">Card title</string>
+    <string name="home_card_title_placeholder">Leave blank to use the default name</string>
+    <string name="home_size_label">Size</string>
+    <string name="home_size_full">全幅</string>
+    <string name="home_size_half">半幅</string>
+    <string name="home_section_metric">統計指標</string>
+    <string name="home_metric_label">Metric</string>
+    <string name="home_metric_devices_total">デバイス総数</string>
+    <string name="home_metric_devices_online">オンラインのデバイス</string>
+    <string name="home_metric_services_total">サービス総数</string>
+    <string name="home_metric_alarms_today">本日のアラーム</string>
+    <string name="home_metric_alarms_window">期間内のアラーム</string>
+    <string name="home_metric_failures_total">期間内のサンプリング失敗数</string>
+    <string name="home_section_dimension">内訳の基準</string>
+    <string name="home_dimension_label">Dimension</string>
+    <string name="home_dimension_device_type">デバイス種別</string>
+    <string name="home_dimension_service_type">Service type</string>
+    <string name="home_dimension_alarm_type">Alarm type</string>
+    <string name="home_dimension_failure_type">サンプリング失敗の種類</string>
+    <string name="home_slice_limit_label">Slices shown</string>
+    <string name="home_section_source">データソース</string>
+    <string name="home_source_label">ソース</string>
+    <string name="home_source_alarm_curve">毎時のアラーム件数</string>
+    <string name="home_source_service_field">1 つのサービスフィールド</string>
+    <string name="home_show_failure_shadow">収集失敗の縦線を表示</string>
+    <string name="home_max_points_label">Max points</string>
+    <string name="home_section_service_field">サービス · ファンクション · フィールド</string>
+    <string name="home_service_placeholder">サービスを選択</string>
+    <string name="home_service_unnamed">名称未設定のサービス</string>
+    <string name="home_function_placeholder">ファンクションを選択</string>
+    <string name="home_function_fallback">ファンクション %1$d</string>
+    <string name="home_pick_service_first">先にサービスを選択してください</string>
+    <string name="home_show_unit">単位を表示</string>
+    <string name="home_section_device_prop">デバイス · プロパティ</string>
+    <string name="home_device_placeholder">デバイスを選択</string>
+    <string name="home_prop_label">プロパティ</string>
+    <string name="home_pick_device_first">先にデバイスを選択してください</string>
+    <string name="home_prop_none">このモデルにプロパティはありません</string>
+    <string name="home_prop_placeholder">プロパティを選択</string>
+    <string name="home_number_range_hint">%1$d ~ %2$d、空欄で無制限</string>
+    <string name="home_section_window">Time window</string>
+    <string name="home_window_last">直近</string>
+    <string name="home_window_custom">カスタム</string>
+    <string name="home_pick_dates">開始日と終了日を選択</string>
+    <plurals name="home_window_days">
+        <item quantity="other">%1$d 日</item>
+    </plurals>
+    <plurals name="home_window_hours">
+        <item quantity="other">%1$d 時間</item>
+    </plurals>
+    <string name="home_card_unknown_type">不明なカードタイプ</string>
+    <string name="home_empty_no_data">データがありません</string>
+    <string name="home_empty_no_reading">まだ読み取り値がありません</string>
+    <string name="home_empty_not_sampled">未収集</string>
+    <string name="home_sampled_at">%1$s にサンプリング</string>
+    <string name="home_donut_other">Other</string>
+    <string name="home_unit_devices">台</string>
+    <string name="home_unit_services">件</string>
+</resources>

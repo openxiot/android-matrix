@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Γλώσσα</string>
+    <string name="profile_language_system">Ακολουθεί το σύστημα</string>
+    <string name="profile_language_search">Αναζήτηση γλωσσών</string>
+    <string name="profile_language_search_clear">Καθαρισμός</string>
+    <string name="profile_language_no_match">Δεν βρέθηκε αντίστοιχη γλώσσα</string>
+    <string name="profile_not_logged_in">Δεν έχετε συνδεθεί</string>
+    <string name="profile_current_org">Τρέχων οργανισμός</string>
+    <string name="profile_current_project">Τρέχον έργο</string>
+    <string name="profile_no_org_selected">Δεν έχει επιλεγεί οργανισμός</string>
+    <string name="profile_no_project_selected">Δεν έχει επιλεγεί έργο</string>
+    <string name="profile_org_subtitle">Επιλέξτε έναν για να διαλέξετε έργο</string>
+    <string name="profile_project_subtitle_pick">Επιλέξτε έργο</string>
+    <string name="profile_project_subtitle_switch">Πατήστε για αλλαγή έργου</string>
+    <string name="profile_project_subtitle_org_first">Παρακαλώ επιλέξτε πρώτα έναν οργανισμό</string>
+    <string name="profile_section_settings">Ρυθμίσεις</string>
+    <string name="profile_dark_mode">Σκούρο θέμα</string>
+    <string name="profile_light_mode">Φωτεινό θέμα</string>
+    <string name="profile_theme_subtitle">Πατήστε για αλλαγή θέματος</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Πίνακας σημείων συσκευής</string>
+    <string name="profile_modbus_subtitle">Χάρτες καταχωρητών Modbus (μόνο ανάγνωση)</string>
+    <string name="profile_alarm_title">Συναγερμοί</string>
+    <string name="profile_alarm_subtitle">Μητρώο και διαχείριση συναγερμών Modbus</string>
+    <string name="profile_history_title">Ιστορικό</string>
+    <string name="profile_history_subtitle">Ιστορικό συλλογής και γραφήματα</string>
+    <string name="profile_about_subtitle">Πληροφορίες και έκδοση εφαρμογής</string>
+    <string name="account_title">Λογαριασμός</string>
+    <string name="account_username">Όνομα χρήστη</string>
+    <string name="account_platform">Πλατφόρμα</string>
+    <string name="account_not_selected">Δεν έχει επιλεγεί</string>
+    <string name="account_org_toggle">Οργανισμός</string>
+    <string name="account_org_toggle_subtitle">Ενεργοποιήστε για διαχείριση οργανισμών</string>
+    <string name="account_logout">Αποσύνδεση</string>
+    <string name="about_title">Σχετικά</string>
+    <string name="about_tagline">Πλατφόρμα διαχείρισης και παρακολούθησης συσκευών IoT</string>
+    <string name="about_version">Έκδοση %1$s</string>
+    <string name="about_check_update">Έλεγχος για ενημερώσεις</string>
+    <string name="about_checking">Γίνεται έλεγχος…</string>
+    <string name="about_up_to_date">Έχετε την τελευταία έκδοση</string>
+    <string name="about_update_now">Ενημέρωση τώρα</string>
+    <string name="about_downloading">Γίνεται λήψη…</string>
+    <string name="about_downloading_percent">Γίνεται λήψη %1$d%%</string>
+    <string name="about_install_now">Εγκατάσταση τώρα</string>
+    <string name="about_install">Εγκατάσταση</string>
+    <string name="about_retry_download">Επανάληψη λήψης</string>
+    <string name="about_later">Αργότερα</string>
+    <string name="about_install_dialog_title">Εγκατάσταση ενημέρωσης</string>
+    <string name="about_new_version_found">Η έκδοση %1$s είναι διαθέσιμη</string>
+    <string name="about_ready_hint">Η λήψη ολοκληρώθηκε — πατήστε «Εγκατάσταση» για να το παραδώσετε στο πρόγραμμα εγκατάστασης του συστήματος.</string>
+    <string name="about_need_install_permission">Επιτρέψτε πρώτα σε αυτή την εφαρμογή να εγκαθιστά άγνωστες εφαρμογές</string>
+    <string name="about_keep_app_alive">Μπορείτε να αλλάζετε σελίδες — απλώς μην κλείσετε την εφαρμογή</string>
+    <string name="about_metered">Είστε σε δίκτυο κινητής — η λήψη μπορεί να καταναλώσει πολλά δεδομένα</string>
+    <string name="about_metered_size">Είστε σε δίκτυο κινητής — το πακέτο είναι περίπου %1$s</string>
+    <string name="about_install_settings_failed">Δεν άνοιξε η ρύθμιση «Εγκατάσταση άγνωστων εφαρμογών» — επιτρέψτε την χειροκίνητα στις ρυθμίσεις συστήματος</string>
+    <string name="about_no_installer">Δεν υπάρχει διαθέσιμη εφαρμογή εγκατάστασης — το πακέτο αποθηκεύτηκε στον φάκελο της εφαρμογής</string>
+    <string name="about_update_notes_empty">Αυτή η έκδοση δεν συνοδεύεται από σημειώσεις.</string>
+</resources>

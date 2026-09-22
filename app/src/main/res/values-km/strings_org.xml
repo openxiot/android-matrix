@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="org_title">អង្គការបច្ចុប្បន្ន</string>
+    <string name="org_detail_title">ព័ត៌មានលម្អិតអង្គការ</string>
+    <string name="org_empty">មិនទាន់មានអង្គការ — ចុច + ដើម្បីបង្កើតមួយ</string>
+    <string name="org_create_title">បង្កើតអង្គការ</string>
+    <string name="org_id_label">ID អង្គការ</string>
+    <string name="org_id_placeholder">ឧ. my-company</string>
+    <string name="org_id_hint">ចាប់ផ្ដើមដោយអក្សរ — ប្រើបានតែអក្សរ លេខ និងសញ្ញាដក</string>
+    <string name="org_name_label">ឈ្មោះអង្គការ</string>
+    <string name="org_name_placeholder">ឧ. ក្រុមហ៊ុនខ្ញុំ</string>
+    <string name="org_rename_title">ប្ដូរឈ្មោះអង្គការ</string>
+    <string name="org_delete_title">លុបអង្គការ</string>
+    <string name="org_delete_confirm">លុបអង្គការនេះ?</string>
+    <string name="org_manage">គ្រប់គ្រង</string>
+    <string name="org_swipe_delete">អូសដើម្បីលុប</string>
+    <string name="org_members_empty">មិនទាន់មានសមាជិក</string>
+    <string name="org_member_developer_id">Developer ID</string>
+    <string name="org_member_developer_id_placeholder">developerId របស់អ្នកប្រើ</string>
+    <string name="org_member_name_label">ឈ្មោះបង្ហាញ</string>
+    <string name="org_member_name_placeholder">ជាជម្រើស</string>
+    <string name="org_change_role">ប្ដូរតួនាទី</string>
+    <string name="org_change_role_title">ប្ដូរតួនាទី — %1$s</string>
+    <string name="org_remove_confirm">ដក “%1$s” ចេញ?</string>
+    <plurals name="org_member_count">
+        <item quantity="other">%1$d សមាជិក</item>
+    </plurals>
+</resources>

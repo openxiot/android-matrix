@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">Език</string>
+    <string name="profile_language_system">Както в системата</string>
+    <string name="profile_language_search">Търсене на езици</string>
+    <string name="profile_language_search_clear">Изчисти</string>
+    <string name="profile_language_no_match">Няма съответстващ език</string>
+    <string name="profile_not_logged_in">Не сте влезли</string>
+    <string name="profile_current_org">Текуща организация</string>
+    <string name="profile_current_project">Текущ проект</string>
+    <string name="profile_no_org_selected">Не е избрана организация</string>
+    <string name="profile_no_project_selected">Не е избран проект</string>
+    <string name="profile_org_subtitle">Изберете организация, за да изберете проект</string>
+    <string name="profile_project_subtitle_pick">Изберете проект</string>
+    <string name="profile_project_subtitle_switch">Натиснете за смяна на проекта</string>
+    <string name="profile_project_subtitle_org_first">Първо изберете организация</string>
+    <string name="profile_section_settings">Настройки</string>
+    <string name="profile_dark_mode">Тъмен режим</string>
+    <string name="profile_light_mode">Светъл режим</string>
+    <string name="profile_theme_subtitle">Натиснете за смяна на темата</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">Таблица с точки на устройство</string>
+    <string name="profile_modbus_subtitle">Modbus карти на регистрите (само за четене)</string>
+    <string name="profile_alarm_title">Аларми</string>
+    <string name="profile_alarm_subtitle">Дневник и обработка на Modbus аларми</string>
+    <string name="profile_history_title">История</string>
+    <string name="profile_history_subtitle">История на събирането и графики</string>
+    <string name="profile_about_subtitle">Информация и версия на приложението</string>
+    <string name="account_title">Акаунт</string>
+    <string name="account_username">Потребителско име</string>
+    <string name="account_platform">Платформа</string>
+    <string name="account_not_selected">Не е избрано</string>
+    <string name="account_org_toggle">Организация</string>
+    <string name="account_org_toggle_subtitle">Включете, за да управлявате организации</string>
+    <string name="account_logout">Изход</string>
+    <string name="about_title">Относно</string>
+    <string name="about_tagline">Платформа за управление и мониторинг на IoT устройства</string>
+    <string name="about_version">Версия %1$s</string>
+    <string name="about_check_update">Провери за актуализации</string>
+    <string name="about_checking">Проверка…</string>
+    <string name="about_up_to_date">Имате най-новата версия</string>
+    <string name="about_update_now">Актуализирай сега</string>
+    <string name="about_downloading">Изтегляне…</string>
+    <string name="about_downloading_percent">Изтегляне %1$d%%</string>
+    <string name="about_install_now">Инсталирай сега</string>
+    <string name="about_install">Инсталирай</string>
+    <string name="about_retry_download">Опитай изтеглянето отново</string>
+    <string name="about_later">По-късно</string>
+    <string name="about_install_dialog_title">Инсталиране на актуализация</string>
+    <string name="about_new_version_found">Налична е версия %1$s</string>
+    <string name="about_ready_hint">Изтеглянето завърши — натиснете „Инсталирай“, за да го предадете на системния инсталатор.</string>
+    <string name="about_need_install_permission">Първо разрешете на това приложение да инсталира неизвестни приложения</string>
+    <string name="about_keep_app_alive">Можете да сменяте страниците — само не затваряйте приложението</string>
+    <string name="about_metered">На мобилни данни сте — изтеглянето може да изразходва много трафик</string>
+    <string name="about_metered_size">На мобилни данни сте — пакетът е около %1$s</string>
+    <string name="about_install_settings_failed">Настройката „Инсталиране на неизвестни приложения“ не се отвори — разрешете я ръчно в системните настройки</string>
+    <string name="about_no_installer">Няма налично приложение за инсталиране — пакетът е запазен в папката на приложението</string>
+    <string name="about_update_notes_empty">Тази версия е без бележки.</string>
+</resources>

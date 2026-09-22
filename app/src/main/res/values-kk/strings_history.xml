@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="history_title">Тарих</string>
+    <string name="history_section_overview">Қызмет шолуы</string>
+    <string name="history_no_services">Бұл жобада әзірге Modbus қызметтері жоқ</string>
+    <string name="history_service_count_label">Қызмет саны</string>
+    <string name="history_device_count_label">Құрылғы саны</string>
+    <string name="history_sampled_at_label">Жинау уақыты</string>
+    <string name="history_function_count_label">Әдіс саны</string>
+    <string name="history_faults_section">Жинау ерекше жағдайлары</string>
+    <string name="history_faults_label">Жинау ерекше жағдайлары</string>
+    <string name="history_no_faults">Бұл кезеңде алу ақаулары жоқ</string>
+    <string name="history_no_data">Бұл кезеңде деректер алынбаған</string>
+    <string name="history_field_label">Өріс</string>
+    <plurals name="service_history_rows_title">
+        <item quantity="one">Алынған деректер (%1$d қатар)</item>
+        <item quantity="other">Алынған деректер (барлығы %1$d қатар)</item>
+    </plurals>
+    <string name="service_history_all_functions">Барлық әдістер</string>
+    <string name="service_history_field_selection">Өрістер %1$d / %2$d</string>
+    <string name="service_history_fault_chip">Ақау %1$s × %2$d</string>
+    <string name="service_history_no_curve">Бұл қызметтің ешбір өрісіне график салу мүмкін емес</string>
+    <string name="service_history_no_curve_for_function">Бұл функцияда графикке жарамды өріс жоқ</string>
+    <string name="service_history_no_fields_selected">Өрістер таңдалмаған</string>
+    <string name="service_history_failure_hint">Тік сызықтар жинау сәтсіз болған сәттерді көрсетеді</string>
+    <string name="service_history_downsampled_hint">Деректер нүктелері тым көп; уақыт аралықтары бойынша төмендетіп іріктелді (мән – аралықтың орташасы, жақшада минимум~максимум)</string>
+    <string name="service_history_keepalive">Keep-alive</string>
+    <string name="service_history_view_table">Кесте</string>
+    <string name="service_history_view_chart">График</string>
+</resources>

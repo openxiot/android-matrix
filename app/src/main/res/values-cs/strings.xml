@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matice</string>
+    <string name="common_back">Zpět</string>
+    <string name="common_retry">Zkusit znovu</string>
+    <string name="common_confirm">Potvrdit</string>
+    <string name="common_cancel">Zrušit</string>
+    <string name="common_close">Zavřít</string>
+    <string name="common_detail">Podrobnosti</string>
+    <string name="common_collapse">Sbalit</string>
+    <string name="common_expand">Rozbalit</string>
+    <string name="common_all">Vše</string>
+    <string name="common_add">Přidat</string>
+    <string name="common_create">Vytvořit</string>
+    <string name="common_delete">Smazat</string>
+    <string name="common_unnamed">Nepojmenované</string>
+    <string name="common_unknown">Neznámé</string>
+    <string name="common_me">Vy</string>
+    <string name="common_rename_action">Přejmenovat</string>
+    <string name="common_role_label">Role</string>
+    <string name="common_role_admin">Správce</string>
+    <string name="common_role_member">Členové</string>
+    <string name="common_role_member_option">Běžný člen</string>
+    <string name="common_member_add">Přidat člena</string>
+    <string name="common_member_remove">Odebrat člena</string>
+    <string name="common_edit">Upravit</string>
+    <string name="common_refresh">Obnovit</string>
+    <string name="common_change">Změnit</string>
+    <string name="common_handle">Vyřídit</string>
+    <string name="common_handled">Vyřízeno</string>
+    <string name="common_unhandled">Nevyřízeno</string>
+    <string name="common_recovered">Obnovený</string>
+    <string name="common_unrecovered">Aktivní</string>
+    <string name="common_online">Online</string>
+    <string name="common_offline">Offline</string>
+    <string name="common_switch_on">Zapnuto</string>
+    <string name="common_switch_off">Vypnuto</string>
+    <string name="common_please_select">Vyberte</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Není vybráno časové rozmezí</string>
+    <string name="common_range_text">%1$s až %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Služby</string>
+    <string name="common_function_label">Metody</string>
+    <string name="common_device_label">Zařízení</string>
+    <string name="common_protocol_label">Protokol</string>
+    <string name="common_unknown_product">Neznámý produkt</string>
+    <string name="common_truncated_hint">Záznamů výjimek je více než limit; zobrazují se jen nejnovější</string>
+    <string name="err_network">Síť není dostupná. Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="err_unknown">Něco se pokazilo. Zkuste to znovu.</string>
+    <string name="space_type_site">Stanoviště</string>
+    <string name="space_type_building">Budova</string>
+    <string name="space_type_floor">Patro</string>
+    <string name="space_type_room">Místnost</string>
+    <string name="space_type_zone">Zóna</string>
+    <string name="space_type_field">Místo</string>
+    <string name="space_type_workshop">Dílna</string>
+    <string name="space_type_parking">Parkoviště</string>
+</resources>

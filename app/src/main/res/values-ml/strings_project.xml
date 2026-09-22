@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">നിലവിലെ പ്രോജക്റ്റ്</string>
+    <string name="project_manage_title">പ്രോജക്റ്റുകൾ കൈകാര്യം ചെയ്യുക</string>
+    <string name="project_empty">ഇതുവരെ പ്രോജക്റ്റുകളില്ല — ഒന്ന് സൃഷ്ടിക്കാൻ + ടാപ്പ് ചെയ്യുക</string>
+    <string name="project_create_title">പ്രോജക്റ്റ് സൃഷ്ടിക്കുക</string>
+    <string name="project_name_label">പ്രോജക്റ്റ് പേര്</string>
+    <string name="project_name_placeholder">ഒരു പ്രോജക്റ്റ് പേര് നൽകുക</string>
+    <string name="project_rename_title">പ്രോജക്റ്റ് പുനർനാമകരണം</string>
+    <string name="project_rename_action">പുനർനാമകരണം</string>
+    <string name="project_delete_title">പ്രോജക്റ്റ് ഇല്ലാതാക്കുക</string>
+    <string name="project_delete_confirm">ഈ പ്രോജക്റ്റ് ഇല്ലാതാക്കണോ? ഇനിയും സ്പേസുകളുള്ള ഒരു പ്രോജക്റ്റ് ഇല്ലാതാക്കാനാകില്ല.</string>
+    <string name="project_swipe_delete">ഇല്ലാതാക്കാൻ സ്വൈപ്പ് ചെയ്യുക</string>
+    <string name="project_type_label">തരം: %1$s</string>
+    <string name="project_members_title">പ്രോജക്റ്റ് അംഗങ്ങൾ</string>
+    <string name="project_members_empty">ഇതുവരെ അംഗങ്ങളില്ല — ഒരെണ്ണം ചേർക്കാൻ + ടാപ്പ് ചെയ്യുക</string>
+    <string name="project_members_label">അംഗങ്ങൾ</string>
+    <string name="project_user_id">ഉപയോക്താവ് ID</string>
+    <string name="project_user_id_placeholder">ഉപയോക്താവിന്റെ അക്കൗണ്ട് ID</string>
+    <string name="project_remark_hint">ഒരു കുറിപ്പ് ചേർക്കാൻ ടാപ്പ് ചെയ്യുക</string>
+    <string name="project_remark_title">കുറിപ്പ് തിരുത്തുക - %1$s</string>
+    <string name="project_remark_label">കുറിപ്പ്</string>
+    <string name="project_role_adjust">റോൾ മാറ്റുക</string>
+    <string name="project_role_adjust_title">റോൾ മാറ്റുക - %1$s</string>
+    <string name="project_remove_confirm">“%1$s” നീക്കം ചെയ്യണോ?</string>
+    <string name="project_exit">പ്രോജക്റ്റ് വിടുക</string>
+    <string name="project_exit_confirm">ഈ പ്രോജക്റ്റ് വിടണോ? ഇതിലേക്കുള്ള ആക്സസ് നിങ്ങൾക്ക് നഷ്ടമാകും.</string>
+    <string name="project_device_added">ഉപകരണം ചേർത്തു</string>
+    <string name="project_device_moved">ഉപകരണം മാറ്റി</string>
+    <string name="space_manage_title">സ്പേസുകൾ കൈകാര്യം ചെയ്യുക</string>
+    <string name="space_add">സ്പേസ് ചേർക്കുക</string>
+    <string name="space_add_child">ഉപ സ്പേസ് ചേർക്കുക</string>
+    <string name="space_add_device">ഉപകരണം ചേർക്കുക</string>
+    <string name="space_name_label">സ്പേസ് പേര്</string>
+    <string name="space_name_placeholder">ഒരു പേര് നൽകുക</string>
+    <string name="space_type_label">സ്പേസ് തരം</string>
+    <string name="space_empty">സ്പേസ് ഡാറ്റയില്ല</string>
+    <string name="space_empty_editable">ആരംഭിക്കാൻ ഒരു സ്പേസ് ചേർക്കുക</string>
+    <string name="space_empty_readonly">ഈ പ്രോജക്റ്റിന് ഇതുവരെ സ്പേസുകളോ ഉപകരണങ്ങളോ ഇല്ല</string>
+    <string name="space_delete_title">സ്പേസ് ഇല്ലാതാക്കുക</string>
+    <string name="space_delete_confirm">ഈ സ്പേസ് ഇല്ലാതാക്കണോ? ഇനിയും സബ്-സ്പേസുകളുള്ള ഒരു സ്പേസ് ഇല്ലാതാക്കാനാകില്ല.</string>
+    <string name="space_move_title">സ്പേസിലേക്ക് മാറ്റുക</string>
+    <string name="space_move_action">മാറ്റുക</string>
+    <string name="space_device_adding">ഉപകരണം ചേർക്കുന്നു…</string>
+    <string name="space_device_waiting">കാത്തിരിക്കുന്നു... %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d ഉപകരണം</item>
+        <item quantity="other">%1$d ഉപകരണങ്ങൾ</item>
+    </plurals>
+</resources>

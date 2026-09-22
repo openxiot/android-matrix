@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="alarm_title">الرٹس</string>
+    <string name="alarm_action_ok">عمل کامیابی سے ہو گیا</string>
+    <string name="alarm_empty">اس مدت میں کوئی الارم نہیں</string>
+    <string name="alarm_all_services">تمام سروسز</string>
+    <string name="alarm_level_label">الرٹ کی سطح</string>
+    <string name="alarm_handled_label">کارروائی</string>
+    <string name="alarm_status_label">حالت</string>
+    <string name="alarm_summary_title">الرٹ کی فہرست</string>
+    <string name="alarm_text_label">الرٹ کا متن</string>
+    <string name="alarm_field_label">فیلڈ</string>
+    <string name="alarm_trigger_label">ٹرگر کی شرط</string>
+    <string name="alarm_current_value_label">موجودہ قدر</string>
+</resources>

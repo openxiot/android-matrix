@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Conectare cu WeChat</string>
+    <string name="login_test_account">Conectare cu un cont de test</string>
+    <string name="login_err_wechat_missing">WeChat nu este instalat sau versiunea este prea veche</string>
+    <string name="login_err_no_code">Nu s-a primit niciun cod de autorizare</string>
+    <string name="login_err_cancelled">Autentificarea cu WeChat a fost anulată</string>
+    <string name="login_err_wechat">Autorizarea WeChat a eșuat (%1$d)</string>
+    <string name="login_err_no_token">Autentificarea a eșuat: nu s-a returnat niciun token</string>
+</resources>

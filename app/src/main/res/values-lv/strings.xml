@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">Matrica</string>
+    <string name="common_back">Atpakaļ</string>
+    <string name="common_retry">Atkārtot</string>
+    <string name="common_confirm">Apstiprināt</string>
+    <string name="common_cancel">Atcelt</string>
+    <string name="common_close">Aizvērt</string>
+    <string name="common_detail">Sīkāka informācija</string>
+    <string name="common_collapse">Sakļaut</string>
+    <string name="common_expand">Izvērst</string>
+    <string name="common_all">Visi</string>
+    <string name="common_add">Pievienot</string>
+    <string name="common_create">Izveidot</string>
+    <string name="common_delete">Dzēst</string>
+    <string name="common_unnamed">Bez nosaukuma</string>
+    <string name="common_unknown">Nezināms</string>
+    <string name="common_me">Jūs</string>
+    <string name="common_rename_action">Pārdēvēt</string>
+    <string name="common_role_label">Loma</string>
+    <string name="common_role_admin">Administrators</string>
+    <string name="common_role_member">Dalībnieki</string>
+    <string name="common_role_member_option">Parasts dalībnieks</string>
+    <string name="common_member_add">Pievienot dalībnieku</string>
+    <string name="common_member_remove">Noņemt dalībnieku</string>
+    <string name="common_edit">Rediģēt</string>
+    <string name="common_refresh">Atjaunot</string>
+    <string name="common_change">Mainīt</string>
+    <string name="common_handle">Apstrādāt</string>
+    <string name="common_handled">Apstrādāta</string>
+    <string name="common_unhandled">Neapstrādāta</string>
+    <string name="common_recovered">Atjaunota</string>
+    <string name="common_unrecovered">Aktīva</string>
+    <string name="common_online">Tiešsaistē</string>
+    <string name="common_offline">Bezsaistē</string>
+    <string name="common_switch_on">Ieslēgts</string>
+    <string name="common_switch_off">Izslēgts</string>
+    <string name="common_please_select">Atlasiet</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">Nav atlasīts laika intervāls</string>
+    <string name="common_range_text">%1$s līdz %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">Pakalpojumi</string>
+    <string name="common_function_label">Metodes</string>
+    <string name="common_device_label">Ierīce</string>
+    <string name="common_protocol_label">Protokols</string>
+    <string name="common_unknown_product">Nezināms produkts</string>
+    <string name="common_truncated_hint">Izņēmumu ierakstu ir vairāk par limitu, rādīti tikai jaunākie</string>
+    <string name="err_network">Tīkls nav pieejams. Pārbaudiet savienojumu un mēģiniet vēlreiz.</string>
+    <string name="err_unknown">Kaut kas nogāja greizi. Mēģiniet vēlreiz.</string>
+    <string name="space_type_site">Objekts</string>
+    <string name="space_type_building">Ēka</string>
+    <string name="space_type_floor">Stāvs</string>
+    <string name="space_type_room">Istaba</string>
+    <string name="space_type_zone">Zona</string>
+    <string name="space_type_field">Lauks</string>
+    <string name="space_type_workshop">Darbnīca</string>
+    <string name="space_type_parking">Autostāvvieta</string>
+</resources>

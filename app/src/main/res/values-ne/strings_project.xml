@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="project_title">वर्तमान परियोजना</string>
+    <string name="project_manage_title">परियोजनाहरू व्यवस्थापन गर्नुहोस्</string>
+    <string name="project_empty">अहिलेसम्म कुनै परियोजना छैन — एउटा सिर्जना गर्न + ट्याप गर्नुहोस्</string>
+    <string name="project_create_title">परियोजना सिर्जना गर्नुहोस्</string>
+    <string name="project_name_label">परियोजनाको नाम</string>
+    <string name="project_name_placeholder">परियोजना नाम प्रविष्ट गर्नुहोस्</string>
+    <string name="project_rename_title">परियोजना नाम बदल्नुहोस्</string>
+    <string name="project_rename_action">नाम बदल्नुहोस्</string>
+    <string name="project_delete_title">परियोजना मेटाउनुहोस्</string>
+    <string name="project_delete_confirm">यो परियोजना मेटाउने हो? अझै स्पेसहरू भएको परियोजना मेटाउन सकिँदैन।</string>
+    <string name="project_swipe_delete">मेटाउन स्वाइप गर्नुहोस्</string>
+    <string name="project_type_label">प्रकार: %1$s</string>
+    <string name="project_members_title">परियोजना सदस्यहरू</string>
+    <string name="project_members_empty">अहिलेसम्म कुनै सदस्य छैन — एउटा थप्न + ट्याप गर्नुहोस्</string>
+    <string name="project_members_label">सदस्यहरू</string>
+    <string name="project_user_id">प्रयोगकर्ता ID</string>
+    <string name="project_user_id_placeholder">प्रयोगकर्ताको खाता ID</string>
+    <string name="project_remark_hint">नोट थप्न ट्याप गर्नुहोस्</string>
+    <string name="project_remark_title">नोट सम्पादन — %1$s</string>
+    <string name="project_remark_label">नोट</string>
+    <string name="project_role_adjust">भूमिका परिवर्तन गर्नुहोस्</string>
+    <string name="project_role_adjust_title">भूमिका बदल्नुहोस् — %1$s</string>
+    <string name="project_remove_confirm">“%1$s” हटाउने हो?</string>
+    <string name="project_exit">परियोजना छोड्नुहोस्</string>
+    <string name="project_exit_confirm">यो परियोजना छोड्ने हो? तपाईंले यसको पहुँच गुमाउनुहुनेछ।</string>
+    <string name="project_device_added">यन्त्र थपियो</string>
+    <string name="project_device_moved">यन्त्र सारियो</string>
+    <string name="space_manage_title">स्पेसहरू व्यवस्थापन गर्नुहोस्</string>
+    <string name="space_add">स्पेस थप्नुहोस्</string>
+    <string name="space_add_child">उप-स्पेस थप्नुहोस्</string>
+    <string name="space_add_device">उपकरण थप्नुहोस्</string>
+    <string name="space_name_label">स्पेसको नाम</string>
+    <string name="space_name_placeholder">नाम प्रविष्ट गर्नुहोस्</string>
+    <string name="space_type_label">स्पेसको प्रकार</string>
+    <string name="space_empty">कुनै स्पेस डेटा छैन</string>
+    <string name="space_empty_editable">सुरु गर्न स्पेस थप्नुहोस्</string>
+    <string name="space_empty_readonly">यस परियोजनामा अहिलेसम्म कुनै स्पेस वा यन्त्र छैन</string>
+    <string name="space_delete_title">स्पेस मेटाउनुहोस्</string>
+    <string name="space_delete_confirm">यो स्पेस मेटाउने हो? अझै उप-स्पेसहरू भएको स्पेस मेटाउन सकिँदैन।</string>
+    <string name="space_move_title">स्पेसमा सार्नुहोस्</string>
+    <string name="space_move_action">सार्नुहोस्</string>
+    <string name="space_device_adding">यन्त्र थप भइरहेको छ…</string>
+    <string name="space_device_waiting">पर्खँदै… %1$ds</string>
+    <plurals name="space_device_count">
+        <item quantity="one">%1$d यन्त्र</item>
+        <item quantity="other">%1$d यन्त्रहरू</item>
+    </plurals>
+</resources>

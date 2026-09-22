@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="login_wechat">Prijava z WeChatom</string>
+    <string name="login_test_account">Prijava s testnim računom</string>
+    <string name="login_err_wechat_missing">WeChat ni nameščen ali pa je različica prestara</string>
+    <string name="login_err_no_code">Avtorizacijska koda ni bila vrnjena</string>
+    <string name="login_err_cancelled">Prijava z WeChatom je bila preklicana</string>
+    <string name="login_err_wechat">Avtorizacija z WeChatom ni uspela (%1$d)</string>
+    <string name="login_err_no_token">Prijava ni uspela: žeton ni bil vrnjen</string>
+</resources>

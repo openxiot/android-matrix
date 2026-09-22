@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="profile_language_title">زبان</string>
+    <string name="profile_language_system">سسٹم کے مطابق</string>
+    <string name="profile_language_search">زبانیں تلاش کریں</string>
+    <string name="profile_language_search_clear">صاف کریں</string>
+    <string name="profile_language_no_match">کوئی مماثل زبان نہیں</string>
+    <string name="profile_not_logged_in">سائن ان نہیں</string>
+    <string name="profile_current_org">موجودہ تنظیم</string>
+    <string name="profile_current_project">موجودہ پروجیکٹ</string>
+    <string name="profile_no_org_selected">کوئی تنظیم منتخب نہیں</string>
+    <string name="profile_no_project_selected">کوئی پروجیکٹ منتخب نہیں</string>
+    <string name="profile_org_subtitle">پروجیکٹ منتخب کرنے کے لیے ایک تنظیم چنیں</string>
+    <string name="profile_project_subtitle_pick">پروجیکٹ منتخب کریں</string>
+    <string name="profile_project_subtitle_switch">پروجیکٹ تبدیل کرنے کے لیے ٹیپ کریں</string>
+    <string name="profile_project_subtitle_org_first">براہ کرم پہلے تنظیم منتخب کریں</string>
+    <string name="profile_section_settings">ترتیبات</string>
+    <string name="profile_dark_mode">ڈارک موڈ</string>
+    <string name="profile_light_mode">لائٹ موڈ</string>
+    <string name="profile_theme_subtitle">تھیم تبدیل کرنے کے لیے ٹیپ کریں</string>
+    <string name="profile_section_other">Other</string>
+    <string name="profile_modbus_title">آلہ پوائنٹ ٹیبل</string>
+    <string name="profile_modbus_subtitle">Modbus رجسٹر میپس (صرف پڑھنے کے لیے)</string>
+    <string name="profile_alarm_title">الرٹس</string>
+    <string name="profile_alarm_subtitle">Modbus الارم ریکارڈ اور کارروائی</string>
+    <string name="profile_history_title">تاریخ</string>
+    <string name="profile_history_subtitle">سیمپلنگ ہسٹری اور چارٹس</string>
+    <string name="profile_about_subtitle">ایپ کی معلومات اور ورژن</string>
+    <string name="account_title">اکاؤنٹ</string>
+    <string name="account_username">صارف نام</string>
+    <string name="account_platform">پلیٹ فارم</string>
+    <string name="account_not_selected">منتخب نہیں</string>
+    <string name="account_org_toggle">تنظیم</string>
+    <string name="account_org_toggle_subtitle">تنظیموں کے انتظام کے لیے آن کریں</string>
+    <string name="account_logout">سائن آؤٹ</string>
+    <string name="about_title">تعارف</string>
+    <string name="about_tagline">IoT ڈیوائس مینجمنٹ اور مانیٹرنگ پلیٹ فارم</string>
+    <string name="about_version">ورژن %1$s</string>
+    <string name="about_check_update">اپ ڈیٹ کی جانچ کریں</string>
+    <string name="about_checking">جانچ جاری ہے…</string>
+    <string name="about_up_to_date">آپ تازہ ترین ورژن پر ہیں</string>
+    <string name="about_update_now">ابھی اپ ڈیٹ کریں</string>
+    <string name="about_downloading">ڈاؤن لوڈ جاری ہے…</string>
+    <string name="about_downloading_percent">ڈاؤن لوڈ %1$d%%</string>
+    <string name="about_install_now">ابھی انسٹال کریں</string>
+    <string name="about_install">انسٹال کریں</string>
+    <string name="about_retry_download">ڈاؤن لوڈ دوبارہ کریں</string>
+    <string name="about_later">بعد میں</string>
+    <string name="about_install_dialog_title">اپ ڈیٹ انسٹال کریں</string>
+    <string name="about_new_version_found">ورژن %1$s دستیاب ہے</string>
+    <string name="about_ready_hint">ڈاؤن لوڈ مکمل — سسٹم انسٹالر کو دینے کے لیے “انسٹال کریں” پر ٹیپ کریں۔</string>
+    <string name="about_need_install_permission">پہلے اس ایپ کو نامعلوم ایپس انسٹال کرنے کی اجازت دیں</string>
+    <string name="about_keep_app_alive">آپ صفحات تبدیل کر سکتے ہیں — بس ایپ بند نہ کریں</string>
+    <string name="about_metered">آپ موبائل ڈیٹا پر ہیں — ڈاؤن لوڈ میں کافی ڈیٹا خرچ ہو سکتا ہے</string>
+    <string name="about_metered_size">آپ موبائل ڈیٹا پر ہیں — پیکج تقریباً %1$s ہے</string>
+    <string name="about_install_settings_failed">“نامعلوم ایپس انسٹال کریں” کی ترتیب نہیں کھل سکی — سسٹم ترتیبات میں خود اجازت دیں</string>
+    <string name="about_no_installer">کوئی انسٹالر ایپ دستیاب نہیں — پیکج ایپ کے فولڈر میں محفوظ ہے</string>
+    <string name="about_update_notes_empty">اس ریلیز کے ساتھ کوئی نوٹس نہیں آیا۔</string>
+</resources>

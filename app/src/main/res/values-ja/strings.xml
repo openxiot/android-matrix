@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+本文件由 tools/i18n/build_xml.py 生成，请勿手改；改文案请改 out/ 下的源包后重跑。
+-->
+<resources>
+    <string name="app_name">マトリクス</string>
+    <string name="common_back">戻る</string>
+    <string name="common_retry">再試行</string>
+    <string name="common_confirm">確認</string>
+    <string name="common_cancel">キャンセル</string>
+    <string name="common_close">閉じる</string>
+    <string name="common_detail">詳細</string>
+    <string name="common_collapse">折りたたむ</string>
+    <string name="common_expand">展開</string>
+    <string name="common_all">すべて</string>
+    <string name="common_add">追加</string>
+    <string name="common_create">作成</string>
+    <string name="common_delete">削除</string>
+    <string name="common_unnamed">名称未設定</string>
+    <string name="common_unknown">不明</string>
+    <string name="common_me">自分</string>
+    <string name="common_rename_action">名前を変更</string>
+    <string name="common_role_label">役割</string>
+    <string name="common_role_admin">管理者</string>
+    <string name="common_role_member">メンバー</string>
+    <string name="common_role_member_option">一般メンバー</string>
+    <string name="common_member_add">メンバー追加</string>
+    <string name="common_member_remove">メンバー削除</string>
+    <string name="common_edit">編集</string>
+    <string name="common_refresh">更新</string>
+    <string name="common_change">変更</string>
+    <string name="common_handle">対応</string>
+    <string name="common_handled">対応済み</string>
+    <string name="common_unhandled">未対応</string>
+    <string name="common_recovered">復旧済み</string>
+    <string name="common_unrecovered">未復旧</string>
+    <string name="common_online">オンライン</string>
+    <string name="common_offline">オフライン</string>
+    <string name="common_switch_on">オン</string>
+    <string name="common_switch_off">オフ</string>
+    <string name="common_please_select">選択してください</string>
+    <string name="common_ok">OK</string>
+    <string name="common_no_range">期間が選択されていません</string>
+    <string name="common_range_text">%1$s 〜 %2$s</string>
+    <string name="common_unlimited">No limit</string>
+    <string name="common_service_label">サービス</string>
+    <string name="common_function_label">メソッド</string>
+    <string name="common_device_label">デバイス</string>
+    <string name="common_protocol_label">プロトコル</string>
+    <string name="common_unknown_product">不明な製品</string>
+    <string name="common_truncated_hint">例外記録が上限を超えているため、最近の一部のみを表示しています</string>
+    <string name="err_network">ネットワークに接続できません。接続を確認してもう一度お試しください</string>
+    <string name="err_unknown">問題が発生しました。もう一度お試しください</string>
+    <string name="space_type_site">拠点</string>
+    <string name="space_type_building">棟</string>
+    <string name="space_type_floor">フロア</string>
+    <string name="space_type_room">部屋</string>
+    <string name="space_type_zone">エリア</string>
+    <string name="space_type_field">フィールド</string>
+    <string name="space_type_workshop">工場</string>
+    <string name="space_type_parking">駐車場</string>
+</resources>

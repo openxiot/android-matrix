@@ -162,7 +162,7 @@ data class ServiceHistoryUiState(
             val refs = mutableListOf<FieldRef>()
             for (func in readFunctions) {
                 if (pick > 0 && func.index != pick) continue
-                for (field in func.response) {
+                for (field in func.response?.fields.orEmpty()) {
                     refs += fieldRef(func, field, step = false)
                     for (bit in field.bitList) {
                         val name = bit.field ?: continue

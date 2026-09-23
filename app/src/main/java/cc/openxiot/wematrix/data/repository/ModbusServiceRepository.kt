@@ -39,17 +39,25 @@ class ModbusServiceRepository {
     /**
      * 调用一个方法。返回「字段名 → 值」；写方法返回空表。
      *
+     * [values] 只在写方法上用（读方法传了后端会拒），缺省 null = 不传；后端对未给值的
+     * 字段回落到定义里的缺省值。移动端暂无填值入口，写方法调用暂以缺省值下发。
+     *
      * 失败信息是后端原样下发的设备侧描述（如 `no response from parent device`、
      * 父设备错误描述），调用方直接展示即可。
      */
     suspend fun invoke(
         spaceId: String,
         serviceId: String,
-        functionIndex: Int
+        functionIndex: Int,
+        values: Map<String, Any?>? = null
     ): Result<Map<String, Any?>> = runCatching {
         val response = service.invokeModbusService(
             spaceId,
-            InvokeModbusServiceRequest(service = serviceId, function = functionIndex)
+            InvokeModbusServiceRequest(
+                service = serviceId,
+                function = functionIndex,
+                values = if (values.isNullOrEmpty()) null else values
+            )
         )
         if (response.isSuccessful && response.body()?.success == true) {
             response.body()!!.data ?: emptyMap()

@@ -416,7 +416,7 @@ private fun ServiceCascade(
     )
 
     val function = functions.firstOrNull { it.index == functionIndex }
-    val fields = function?.response ?: emptyList()
+    val fields = function?.response?.fields.orEmpty()
     if (single) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             fields.forEach { f ->
@@ -645,7 +645,10 @@ private fun dayLabel(ms: Long): String =
 
 /** 有可读字段的服务（至少一个读方法）。写方法没有可选字段，排除。 */
 private fun readServices(catalog: MobileCatalog?): List<ModbusService> =
-    catalog?.services?.filter { it.functions.any { f -> f.response.isNotEmpty() } } ?: emptyList()
+    catalog?.services?.filter { it.functions.any { f -> f.response?.fields.isNotEmptyOrNull() } } ?: emptyList()
 
 private fun readFunctions(service: ModbusService?): List<ModbusServiceFunction> =
-    service?.functions?.filter { it.response.isNotEmpty() } ?: emptyList()
+    service?.functions?.filter { it.response?.fields.isNotEmptyOrNull() } ?: emptyList()
+
+/** null（写方法）或空表都当「没可读字段」。 */
+private fun List<*>?.isNotEmptyOrNull(): Boolean = !this.isNullOrEmpty()

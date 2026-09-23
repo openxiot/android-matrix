@@ -247,7 +247,8 @@ private fun MethodCard(
 
             Spacer(Modifier.height(4.dp))
 
-            // 请求帧：完整 RTU 帧（含 CRC16），原样交给设备发送
+            // 请求：v2 定义里 request 是结构化对象（slaveId/fc/start/quantity|fields），不是完整帧。
+            // 本端不自己组帧 —— 帧由后端在 invoke 时现组（含 CRC16）；这里只展示方向摘要。
             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(
                     // 与「命令」对话框里那张帧的标题同一句，共用一个 key
@@ -256,8 +257,8 @@ private fun MethodCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = function.request?.takeIf { it.isNotBlank() } ?: "-",
-                    style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace),
+                    text = describeFunctionRequest(function),
+                    style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Medium
                 )
             }

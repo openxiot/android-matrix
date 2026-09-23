@@ -25,17 +25,17 @@ import com.google.gson.Gson
  */
 
 /**
- * 请求帧里的功能码（两位大写 16 进制）：帧结构 `[slave][fc][...]`，即第二个字节。
- *
- * 帧缺失 / 太短 / 不是 16 进制时返回 null —— 判不出功能码就当「不是读方法」，
- * 与后端从请求帧第二字节判定读写的口径一致（服务定义里不存 fc，只有这条帧）。
+ * v2 起功能码直接存在 `request.fc` 里，不再从 hex 帧第二字节猜。
+ * 返回两位大写 16 进制；缺省 / 非标准时返回 null。注册的读码与写码见 [READ_FCS] / [WRITE_FCS]。
  */
-fun functionFcOf(request: String?): String? {
-    val hex = request.orEmpty().replace(Regex("\\s+"), "")
-    if (hex.length < 4) return null
-    val fc = hex.substring(2, 4).uppercase()
-    return if (fc.matches(Regex("^[0-9A-F]{2}$"))) fc else null
-}
+fun functionFcOf(function: ModbusServiceFunction): String? =
+    function.request?.fc?.uppercase()?.takeIf { it.matches(Regex("^[0-9A-F]{2}$")) }
+
+/** 读方法功能码（v2 口径；与后端 `READ_FCS` 一致） */
+internal val READ_FCS: Set<String> = setOf("01", "02", "03", "04")
+
+/** 写方法功能码（v2 口径；与后端 `WRITE_FCS` 一致） */
+internal val WRITE_FCS: Set<String> = setOf("05", "06", "0F", "10")
 
 /**
  * 方法是否读方法（fc 01/02/03/04）。
@@ -44,7 +44,61 @@ fun functionFcOf(request: String?): String? {
  * 写值，后端会直接拒。故「周期 / 轮询」两列对写方法恒为 `-`。
  */
 fun isReadFunction(function: ModbusServiceFunction): Boolean =
-    functionFcOf(function.request) in setOf("01", "02", "03", "04")
+    functionFcOf(function) in READ_FCS
+
+/** 写方法：应答是请求回显、没有读值，v2 里整个 `response` 键不存在（== null） */
+fun isWriteFunction(function: ModbusServiceFunction): Boolean =
+    functionFcOf(function) in WRITE_FCS
+
+/** 功能码 → 功能码名称的 string 资源；未知/空值返回 null（对齐 web 的 `fcLabelKey`）。 */
+fun fcLabelResOf(fc: String?): Int? = when (fc) {
+    "01" -> R.string.modbus_fc_read_coils
+    "02" -> R.string.modbus_fc_read_discrete
+    "03" -> R.string.modbus_fc_read_holding
+    "04" -> R.string.modbus_fc_read_input
+    "05" -> R.string.modbus_fc_write_coil
+    "06" -> R.string.modbus_fc_write_register
+    "0F" -> R.string.modbus_fc_write_coils
+    "10" -> R.string.modbus_fc_write_registers
+    else -> null
+}
+
+/**
+ * 请求帧的一行摘要（对齐 web 的 `describeFunctionRequest`）。
+ *
+ * 读方法：`Slave address 4 · fc 03 Read holding registers · Start address 1 · Quantity 1`；
+ * 写方法：… `Quantity 2`（写方法的方向不含「数量」区段，个数由 fields 推出）。
+ *
+ * `@Composable` 而非纯函数：方向词与标签从资源取（web 是传 `t()`；本文件不认识 i18n 服务，
+ * 而这些都是要翻译的界面文案，故直接在组合里取，与 [responseSummary] 同一套做法）。
+ * `fc` 那两位 hex 不翻译（与定义里存的值逐字对齐）；分隔符「 · 」（U+00B7）中英通用，是字面量。
+ * `describeFunctionRequest` 不组帧、不含 CRC16 —— 帧由后端 invoke 时现组（见 detail 卡片）。
+ */
+@Composable
+fun describeFunctionRequest(function: ModbusServiceFunction): String {
+    val request = function.request ?: return "-"
+    val fc = functionFcOf(function)
+    val slaveLabel = stringResource(R.string.modbus_label_slave_address)
+    val startLabel = stringResource(R.string.modbus_field_start_address)
+    val quantityLabel = stringResource(R.string.modbus_field_quantity)
+    val fcLabel = fc?.let { fcLabelResOf(it) }?.let { stringResource(it) }
+    val separator = " · "
+
+    val fcChunk = fc?.let { fcLabel?.let { label -> "fc $it $label" } ?: "fc $it" }
+    val base = listOfNotNull(
+        request.slaveId?.let { "$slaveLabel $it" },
+        fcChunk
+    ).joinToString(separator)
+
+    if (isReadFunction(function)) {
+        val start = request.start?.let { "$startLabel $it" } ?: return base
+        val quantity = request.quantity?.let { "$quantityLabel $it" }
+        return listOfNotNull(base, start, quantity).joinToString(separator)
+    }
+    // 写：个数由 fields 推出，不显示具体区段
+    val fields = request.fields?.size ?: 0
+    return listOfNotNull(base, "$quantityLabel $fields").joinToString(separator)
+}
 
 /**
  * 方法的自动调用周期：没配周期（含全部写方法）= 只手动调用，显示 `-`；
@@ -103,7 +157,7 @@ data class ServiceOutputAlarms(
 
 fun alarmedOutputs(function: ModbusServiceFunction): List<ServiceOutputAlarms> {
     val outputs = mutableListOf<ServiceOutputAlarms>()
-    for (field in function.response) {
+    for (field in function.response?.fields.orEmpty()) {
         val fieldKey = field.field.orEmpty()
         if (field.alarms.isNotEmpty()) outputs += ServiceOutputAlarms(fieldKey, field.alarms)
         for (bit in field.bitList) {
@@ -131,7 +185,7 @@ fun definedAlarmCount(function: ModbusServiceFunction): Int =
  * —— 光看「整段位掩码」那一行，用户不知道里面还拆出了哪几位。
  */
 fun bitListRows(function: ModbusServiceFunction): List<Pair<String, String>> =
-    function.response.flatMap { field ->
+    function.response?.fields.orEmpty().flatMap { field ->
         field.bitList.map { bit -> (field.field.orEmpty()) to (bit.field.orEmpty()) }
     }
 
@@ -149,9 +203,6 @@ fun coordinateLabel(device: ModbusServiceDevice?): UiText {
             device.argument?.toString() ?: "-")
     )
 }
-
-/** 写方法：应答是请求回显、没有读值，response 为空数组 */
-fun isWriteFunction(function: ModbusServiceFunction): Boolean = function.response.isEmpty()
 
 /**
  * 单个应答字段的规格描述：`格式/字节数 [字节序] [×缩放] [单位]`，
@@ -183,14 +234,14 @@ fun fieldSpec(field: ModbusServiceField): String {
 fun responseSummary(function: ModbusServiceFunction): String {
     if (isWriteFunction(function)) return stringResource(R.string.modbus_service_write_hint)
     val separator = stringResource(R.string.modbus_service_field_separator)
-    return function.response.joinToString(separator) { field ->
+    return function.response?.fields.orEmpty().joinToString(separator) { field ->
         "${field.field ?: "-"} ${fieldSpec(field)}"
     }
 }
 
 /** 调用结果里某一列的单位：从该方法的应答定义里按字段名回查（值本身后端已经解好了） */
 fun unitOf(function: ModbusServiceFunction?, fieldName: String): String? =
-    function?.response?.find { it.field == fieldName }?.unit?.takeIf { it.isNotBlank() }
+    function?.response?.fields?.find { it.field == fieldName }?.unit?.takeIf { it.isNotBlank() }
 
 /**
  * 调用结果里的一个值 → 展示串。

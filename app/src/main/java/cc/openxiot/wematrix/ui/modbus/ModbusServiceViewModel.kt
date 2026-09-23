@@ -100,14 +100,17 @@ class ModbusServiceViewModel : ViewModel() {
     }
 
     /**
-     * 调用一个方法：把该方法的请求帧发给依赖设备。
+     * 调用一个方法：把该方法的请求帧（v2 由后端现组）发给依赖设备。
+     *
+     * [values] 只写方法用，读方法必须不传（后端会拒）。移动端暂无填值入口，调用点不带，
+     * 写方法以定义里的缺省值下发。
      *
      * 读方法与写方法都放开 —— 写方法的应答是请求回显，返回空表，界面按「设备已收到该帧」提示。
      */
-    fun invoke(spaceId: String, serviceId: String, functionIndex: Int) {
+    fun invoke(spaceId: String, serviceId: String, functionIndex: Int, values: Map<String, Any?>? = null) {
         viewModelScope.launch {
             _invoke.value = InvokeUiState(invokingIndex = functionIndex)
-            repository.invoke(spaceId, serviceId, functionIndex)
+            repository.invoke(spaceId, serviceId, functionIndex, values)
                 .onSuccess { data ->
                     val name = _detail.value.service?.functions
                         ?.find { it.index == functionIndex }?.name

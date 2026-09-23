@@ -126,18 +126,65 @@ data class ModbusServiceField(
 )
 
 /**
+ * v2（version == 2）起：请求是**结构化定义**，不再是整串 hex 帧。
+ * 帧由后端在 invoke 时现组（含 CRC16），前端不再自己算。方向由 [fc] 直接得出
+ * （01/02/03/04 读、05/06/0F/10 写），不再解析 hex 串。
+ */
+data class ModbusFunctionRequest(
+    /** 从站地址（帧首字节） */
+    @SerializedName("slaveId") val slaveId: Int? = null,
+    /** 功能码（读 01/02/03/04、写 05/06/0F/10） */
+    @SerializedName("fc") val fc: String? = null,
+    /** 起始地址（0 基数据地址） */
+    @SerializedName("start") val start: Int? = null,
+    /** 帧里那个数量字段的**字面值**：读方法（03/04 = 寄存器数、01/02 = 位数）才有；写方法不写 */
+    @SerializedName("quantity") val quantity: Int? = null,
+    /** 写方法的写入字段；读方法不写 */
+    @SerializedName("fields") val fields: List<ModbusFunctionRequestField>? = null
+)
+
+/** 写方法的一个写入字段（fc 05/06/0F/10）。[value] 是缺省值：invoke 时人没填就用它。 */
+data class ModbusFunctionRequestField(
+    /** 字段序号（1 起自然数，写入字段内唯一） */
+    @SerializedName("index") val index: Int? = null,
+    /** 字段名称（invoke 时 `values` 里的 key） */
+    @SerializedName("field") val field: String? = null,
+    /** 偏移（0F 位偏移 / 10 寄存器偏移，相对 start，从 0 起）；05/06 写单值，不许填 */
+    @SerializedName("offset") val offset: Int? = null,
+    /** bit | int16 | uint16 | ...（05/06 只有 bit / int16 / uint16） */
+    @SerializedName("format") val format: String? = null,
+    /** 字节序（跨度 4 字节时才要求）；bits 无此键 */
+    @SerializedName("byteOrder") val byteOrder: String? = null,
+    /**
+     * 缺省值：`Boolean`（bit）或 `Number`（寄存器）。**别用 `||` 判空** —— `false` / `0` 是有效值。
+     * 类型不固定故收 [Any]；invoke 时原样回填。
+     */
+    @SerializedName("value") val value: Any? = null
+)
+
+/**
+ * 应答定义（与 request 对称）：boolean-ish 的 `{fields:[...]}`。
+ * 写方法的应答是请求回显、没有读值，**整个 response 键都不存在** → [ModbusServiceFunction.response] == null。
+ * [fields] 为 null / 空时 codec 不出键。
+ */
+data class ModbusFunctionResponse(
+    /** 应答解析规则；空表表示读方法没有可解析的出值 */
+    @SerializedName("fields") val fields: List<ModbusServiceField>? = null
+)
+
+/**
  * 服务里的一个方法：一次依赖设备调用 = 一帧请求 + 一条应答解析规则。
  *
  * 读方法（点表 fc 01/02/03/04）有 [response]；写方法（05/06/0F/10）的应答是请求回显、
- * 没有读值，[response] 为空数组。
+ * 没有读值，[response] 整个没有（null）。
  */
 data class ModbusServiceFunction(
     /** 方法序号（1 起自然数，服务内唯一；通常取点表功能码动作的 index） */
     @SerializedName("index") val index: Int? = null,
     /** 方法名称（展示用，如 读蒸发器进水温度） */
     @SerializedName("name") val name: String? = null,
-    /** 请求帧：完整的 Modbus RTU 帧 16 进制字符串（含 CRC16），原样交给设备发送 */
-    @SerializedName("request") val request: String? = null,
+    /** 请求帧的结构化定义（v2）；不再是整串 hex */
+    @SerializedName("request") val request: ModbusFunctionRequest? = null,
     /**
      * 服务端自动调用本方法的周期（秒）：到点自动 invoke 一次，再按 response 解出字段值；
      * 缺省表示没配周期 —— 后端用 null 表达同一件事，不用 0。取值 5 ~ 3600 秒。
@@ -150,8 +197,8 @@ data class ModbusServiceFunction(
      * 缺省 = **按 [interval] 判定**，配了周期即启用 —— 与加这个字段之前的定义一致。
      */
     @SerializedName("polling") val polling: Boolean? = null,
-    /** 应答解析规则；空数组表示写方法 */
-    @SerializedName("response") val response: List<ModbusServiceField> = emptyList()
+    /** 应答定义；null = 写方法（request 回显，无读值） */
+    @SerializedName("response") val response: ModbusFunctionResponse? = null
 )
 
 /** Modbus 服务完整定义（后端 /matrix/v1/modbus/service） */
@@ -178,10 +225,14 @@ data class ModbusService(
  * 调用方法的请求体（对齐后端 `InvokeModbusServiceRequest`）。
  *
  * 线上键名就是 Kotlin 属性名，无需 `@SerializedName`，故照 `MoveDeviceRequest` 的写法放在这里。
+ * [values] 只在写方法上传（读方法传了后端会拒）；缺省值随定义下发，人没填时后端回落、
+ * 这里不补。
  */
 data class InvokeModbusServiceRequest(
     /** 服务 id（十六进制字符串） */
     @SerializedName("service") val service: String,
     /** 方法序号（服务内唯一，1 起） */
-    @SerializedName("function") val function: Int
+    @SerializedName("function") val function: Int,
+    /** 写入值（字段名 → 原始值，如 {"开机": true}）；只写方法用 */
+    @SerializedName("values") val values: Map<String, Any?>? = null
 )

@@ -1,6 +1,8 @@
 package cc.openxiot.wematrix
 
+import android.util.Log
 import cc.openxiot.wematrix.R
+import cc.openxiot.wematrix.data.AppException
 import cc.openxiot.wematrix.data.repository.CheckOutcome
 import cc.openxiot.wematrix.data.repository.UpdateInfo
 import cc.openxiot.wematrix.data.repository.UpdateRepository
@@ -118,6 +120,7 @@ object AppUpdate {
                     }
                 },
                 onFailure = { e ->
+                    logFailure(e)
                     _state.value = if (silent) {
                         UpdateState.Idle
                     } else {
@@ -150,6 +153,7 @@ object AppUpdate {
             }.fold(
                 onSuccess = { file -> _state.value = UpdateState.Ready(info, file) },
                 onFailure = { e ->
+                    logFailure(e)
                     _state.value =
                         UpdateState.DownloadFailed(info, e.toUiText(R.string.err_update_download))
                 }
@@ -157,5 +161,24 @@ object AppUpdate {
         }
     }
 
+    /**
+     * 把失败的**真实原因**写进日志。之前这里什么都不打：异步 task 的异常都被 `.fold`
+     * 消化成 UI 状态了，真机上一旦下载/校验失败，logcat 里什么都看不到，只能靠读者
+     * 复现。这里对 [AppException] 把资源 id 具体名（如 `err_update_signature_mismatch`）
+     * 和参数打出来，一眼能分清是「签名对不上（多半是拿 debug/CI 包在测）」还是「校验和
+     * 不符」；非 [AppException]（网络 IO 之类）则打 message + 完整堆栈。
+     */
+    private fun logFailure(e: Throwable) {
+        val reason = if (e is AppException) {
+            val resName = runCatching { WeMatrixApp.instance.resources.getResourceName(e.resId) }
+                .getOrNull() ?: "resId=#${e.resId}"
+            "$resName args=${e.args}"
+        } else {
+            e.message
+        }
+        Log.e(TAG, "Update failed: ${BuildConfig.VERSION_NAME} reason=$reason", e)
+    }
+
+    private const val TAG = "AppUpdate"
     private const val AUTO_CHECK_THROTTLE_MS = 30_000L
 }

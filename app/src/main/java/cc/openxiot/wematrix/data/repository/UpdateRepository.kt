@@ -155,8 +155,11 @@ class UpdateRepository(private val context: Context) {
 
             try {
                 UpdateApi.download(info.url, part, onProgress)
-                // 这里 checkHash 用默认的 true：刚下完的那一份还从没验过哈希
-                verify(part, info)?.let { throw Exception(it) }
+                // 这里 checkHash 用默认的 true：刚下完的那一份还从没验过哈希。
+                // AppException 本身就是 Throwable，直接抛它而不是 `Exception(it)` 包装 ——
+                // 包装会把它的 message 变成 `toString()` (=类名)，UI 只能显示出
+                // "cc...AppException" 这种废话，真正的 resId 原因反而丢了。
+                verify(part, info)?.let { throw it }
                 if (!part.renameTo(target)) failWith(R.string.err_update_save_failed)
             } catch (t: Throwable) {
                 part.delete()

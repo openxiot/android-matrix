@@ -101,15 +101,27 @@ data class ModbusCommand(
     @SerializedName("registers") val registers: List<ModbusRegisterItem> = emptyList()
 )
 
-/** 从站设备信息（厂家/型号/从站地址/描述），服务端收拢在 slave 子对象下 */
+/** 从站设备信息（厂家/型号/设备类型/从站地址/描述），服务端收拢在 slave 子对象下 */
 data class ModbusSlave(
     /** 厂家/品牌，如 特灵/开利/麦克维尔 */
     @SerializedName("manufacturer") val manufacturer: String? = null,
     /** 设备型号，如 19XRV/CVHG */
     @SerializedName("model") val model: String? = null,
+    /** 设备类型（可选，自由字符串，如 离心式冷水机组） */
+    @SerializedName("type") val type: String? = null,
     /** Modbus 从站地址 0-247 */
     @SerializedName("slaveId") val slaveId: Int? = null,
     @SerializedName("description") val description: String? = null
+)
+
+/** 点表归属主体：一条点表可属于一个组织，也可属于某个人（无组织个人点表）。 */
+data class ModbusConfigOwner(
+    /** 主体 ID：组织编码 或 账号 ID */
+    @SerializedName("id") val id: String? = null,
+    /** organization 组织 / user 个人 */
+    @SerializedName("type") val type: String? = null,
+    /** 名称快照（展示用） */
+    @SerializedName("name") val name: String? = null
 )
 
 /** 操作人记录：创建者 / 最后更新者 */
@@ -123,7 +135,8 @@ data class ModbusPerson(
 /** 设备点表配置 */
 data class ModbusConfig(
     @SerializedName("id") val id: String? = null,
-    @SerializedName("orgId") val orgId: String? = null,
+    /** 归属主体（organization/user；后端以它为鉴权锚点） */
+    @SerializedName("owner") val owner: ModbusConfigOwner? = null,
     /** 从站设备信息 */
     @SerializedName("slave") val slave: ModbusSlave? = null,
     /** private 私有 / public 公开 */

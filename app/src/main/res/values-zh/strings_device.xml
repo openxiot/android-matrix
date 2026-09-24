@@ -16,4 +16,6 @@
     <string name="device_last_online_label">最后上线</string>
     <string name="device_last_offline_label">最后下线</string>
     <string name="device_space_label">所属空间</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">暂无可用的控制页</string>
 </resources>

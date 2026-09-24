@@ -12,4 +12,6 @@
     <string name="device_last_online_label">अन्तिम अनलाइन</string>
     <string name="device_last_offline_label">अन्तिम अफलाइन</string>
     <string name="device_space_label">स्पेस</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">कुनै नियन्त्रण पृष्ठ उपलब्ध छैन</string>
 </resources>

@@ -12,4 +12,6 @@
     <string name="device_last_online_label">সর্বশেষ অনলাইন</string>
     <string name="device_last_offline_label">সর্বশেষ অফলাইন</string>
     <string name="device_space_label">স্পেস</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">কোনো নিয়ন্ত্রণ পৃষ্ঠা উপলব্ধ নেই</string>
 </resources>

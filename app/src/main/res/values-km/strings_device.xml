@@ -12,4 +12,6 @@
     <string name="device_last_online_label">អនឡាញចុងក្រោយ</string>
     <string name="device_last_offline_label">អុហ្វឡាញចុងក្រោយ</string>
     <string name="device_space_label">លំហ</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">មិនមានទំព័រគ្រប់គ្រងទេ</string>
 </resources>

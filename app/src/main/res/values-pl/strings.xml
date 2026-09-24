@@ -5,8 +5,6 @@
 <resources>
     <string name="app_name">Matryca</string>
 
-    <!-- 设备详情页内嵌的第三方设备控制页（category=mobile）区块标题 -->
-    <string name="device_control_card_title">Device Control</string>
     <string name="common_back">Wstecz</string>
     <string name="common_retry">Ponów</string>
     <string name="common_confirm">Potwierdź</string>

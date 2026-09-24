@@ -12,4 +12,6 @@
     <string name="device_last_online_label">ออนไลน์ล่าสุด</string>
     <string name="device_last_offline_label">ออฟไลน์ล่าสุด</string>
     <string name="device_space_label">พื้นที่</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">ไม่มีหน้าควบคุมที่ใช้งานได้</string>
 </resources>

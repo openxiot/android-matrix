@@ -12,4 +12,6 @@
     <string name="device_last_online_label">கடைசியாக ஆன்லைன்</string>
     <string name="device_last_offline_label">கடைசியாக ஆஃப்லைன்</string>
     <string name="device_space_label">இடம்</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">கட்டுப்பாட்டு பக்கம் கிடைக்கவில்லை</string>
 </resources>

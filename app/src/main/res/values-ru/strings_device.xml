@@ -12,4 +12,6 @@
     <string name="device_last_online_label">Последнее подключение</string>
     <string name="device_last_offline_label">Последнее отключение</string>
     <string name="device_space_label">Пространство</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">Нет доступной страницы управления</string>
 </resources>

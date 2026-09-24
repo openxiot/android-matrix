@@ -12,4 +12,6 @@
     <string name="device_last_online_label">Τελευταία σύνδεση</string>
     <string name="device_last_offline_label">Τελευταία αποσύνδεση</string>
     <string name="device_space_label">Χώρος</string>
+    <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
+    <string name="device_operation_unavailable">Δεν υπάρχει διαθέσιμη σελίδα ελέγχου</string>
 </resources>

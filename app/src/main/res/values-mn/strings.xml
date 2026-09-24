@@ -5,8 +5,6 @@
 <resources>
     <string name="app_name">Матриц</string>
 
-    <!-- 设备详情页内嵌的第三方设备控制页（category=mobile）区块标题 -->
-    <string name="device_control_card_title">Device Control</string>
     <string name="common_back">Буцах</string>
     <string name="common_retry">Дахин оролдох</string>
     <string name="common_confirm">Баталгаажуулах</string>

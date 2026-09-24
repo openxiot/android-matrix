@@ -4,7 +4,7 @@ Openxiot Generic Application for Android —— the Android client for the Openx
 
 **WeMatrix（矩阵）** is an IoT device and space management app for Android, built with Jetpack Compose. It gives mobile access to organizations, projects, spaces, devices, products, and Modbus services inside the Openxiot ecosystem, mirroring the `iphone-matrix` app with an identical UI and shared API contracts.
 
-Package: `cc.openxiot.wematrix` · Current version: **v1.0.10** (derived from git tags)
+Package: `cc.openxiot.matrix` · Current version: **v1.0.15** (derived from git tags)
 
 ## Features
 
@@ -51,9 +51,9 @@ android-matrix/
 │       │   │   ├── values-zh/, -zh-rHK/, -zh-rTW/   # Chinese + Traditional Chinese
 │       │   │   ├── values-*/                  # ~60 more locales (66 languages, incl. RTL)
 │       │   │   ├── drawable/  xml/  mipmap-*/  # network security config, icons
-│       │   └── java/cc/openxiot/wematrix/
+│       │   └── java/cc/openxiot/matrix/
 │       │       ├── MainActivity.kt            # OAuth deep-link entry, theme + navigation
-│       │       ├── WeMatrixApp.kt             # Application: TokenManager init
+│       │       ├── MatrixApp.kt             # Application: TokenManager init
 │       │       ├── AppState.kt                # global Compose state (login, dark mode)
 │       │       ├── AppLanguages.kt / AppLocale.kt   # language list & locale resolution
 │       │       ├── AppUpdate.kt               # version update state machine
@@ -83,7 +83,7 @@ android-matrix/
 │       │       │   └── components/            # shared views (AppWebView, filters, …)
 │       │       ├── util/                      # Constants, Rtl, VersionCompare, ApkInstaller
 │       │       └── wxapi/WXEntryActivity.kt   # WeChat callback activity
-│       └── test/java/cc/openxiot/wematrix/    # JVM unit tests (no emulator)
+│       └── test/java/cc/openxiot/matrix/    # JVM unit tests (no emulator)
 │           ├── i18n/          # StringsParity, NoHardcodedChinese, AppLocale, AppLanguages, UiText
 │           ├── ui/home/       # DashboardLayout/Folding/Types tests
 │           ├── ui/modbus/     # RequestFrame, ModbusFormat byte-exact tests
@@ -130,7 +130,7 @@ The version (`versionName` / `versionCode`) is derived from the nearest `vX.Y.Z`
 Two GitHub Actions pipelines guard buildability and release integrity:
 
 - **build-debug.yml** (push / PR to `main`): runs the i18n JVM unit tests (`testDebugUnitTest`) → the independent language-directory check (`python3 tools/i18n/validate.py`) → `assembleDebug`, uploading the APK and test report as artifacts.
-- **build-release.yml** (git tag `v*`, or `workflow_dispatch`): parses and validates the version (must exceed the max historical versionCode), restores the signing keystore from secrets, runs the same tests + validate gate, builds a **signed** release APK, verifies `versionName`/`versionCode` and the signing SHA-256 fingerprint with `apksigner` as a hard gate, uploads it to Azure Blob (both a versioned URL and a stable `wematrix-latest.apk` alias), probes anonymous reachability, updates the release notes in the official site repo (`openxiot/webapp-matrix-site`) so in-app updates pick up the new build, and writes a job summary.
+- **build-release.yml** (git tag `v*`, or `workflow_dispatch`): parses and validates the version (must exceed the max historical versionCode), restores the signing keystore from secrets, runs the same tests + validate gate, builds a **signed** release APK, verifies `versionName`/`versionCode` and the signing SHA-256 fingerprint with `apksigner` as a hard gate, uploads it to Azure Blob (both a versioned URL and a stable `matrix-latest.apk` alias), probes anonymous reachability, updates the release notes in the official site repo (`openxiot/webapp-matrix-site`) so in-app updates pick up the new build, and writes a job summary.
 
 Both pipelines stop rather than publish broken or unsigned packages — the release path is fully dry-run-able (`dry_run` default `true`).
 

@@ -137,16 +137,16 @@ jobs:
 
           # 路径要与 app/build.gradle.kts 里 signingConfigs 读的 storeFile 一致
           mkdir -p app/keystore
-          printf '%s' "$KEYSTORE_BASE64" | base64 -d > app/keystore/wematrix-release.jks
+          printf '%s' "$KEYSTORE_BASE64" | base64 -d > app/keystore/matrix-release.jks
 
           cat > keystore.properties <<PROPS
-          storeFile=app/keystore/wematrix-release.jks
+          storeFile=app/keystore/matrix-release.jks
           storePassword=${KEYSTORE_PASSWORD}
           keyAlias=${KEY_ALIAS}
           keyPassword=${KEY_PASSWORD}
           PROPS
 
-          chmod 600 keystore.properties app/keystore/wematrix-release.jks
+          chmod 600 keystore.properties app/keystore/matrix-release.jks
 
       # 发布链路此前**一道测试都没有**：只有 build-debug.yml 跑 testDebugUnitTest，
       # 而 debug 那条不发布。于是「62 个语言目录里有一个格式坏了」这种错，会一路走到
@@ -271,7 +271,7 @@ jobs:
 
           # 传两份：带版本号的直链 + 稳定别名（给用户一个不变的链接）
           # 用 --connection-string 就不必再给 --account-name：账户在连接字符串里
-          for NAME in "wematrix-${APP_VERSION_NAME}.apk" "wematrix-latest.apk"; do
+          for NAME in "matrix-${APP_VERSION_NAME}.apk" "matrix-latest.apk"; do
             az storage blob upload \
               --connection-string "$CONNECTION_STRING" \
               --container-name "$CONTAINER" \
@@ -281,7 +281,7 @@ jobs:
               --overwrite
           done
 
-          echo "BLOB_URL=https://${ACCOUNT}.blob.core.windows.net/${CONTAINER}/wematrix-${APP_VERSION_NAME}.apk" >> "$GITHUB_ENV"
+          echo "BLOB_URL=https://${ACCOUNT}.blob.core.windows.net/${CONTAINER}/matrix-${APP_VERSION_NAME}.apk" >> "$GITHUB_ENV"
 
       # 直接检验「外部用户能拿到」这个目标本身：容器没开公共读时前面全绿、下载却是 403/404，
       # 只有这一步能发现。
@@ -464,7 +464,7 @@ jobs:
             echo
             if [ "${PUBLISH}" = "true" ]; then
               echo "- 下载（带版本号）：${BLOB_URL:-（上传步骤未完成）}"
-              echo "- 下载（稳定别名）：$(printf '%s' "${BLOB_URL:-}" | sed 's|/[^/]*$|/wematrix-latest.apk|')"
+              echo "- 下载（稳定别名）：$(printf '%s' "${BLOB_URL:-}" | sed 's|/[^/]*$|/matrix-latest.apk|')"
               # 清单没更新成功的话整个 job 已经失败了，这里只是把「App 该去读哪个地址」
               # 摆在明面上，便于手动核对
               echo "- 更新清单：${SITE_MANIFEST_URL:-（未写入）}"
@@ -494,4 +494,4 @@ jobs:
       - name: 清理 runner 上的密钥
         if: always()
         shell: bash
-        run: rm -f keystore.properties app/keystore/wematrix-release.jks
+        run: rm -f keystore.properties app/keystore/matrix-release.jks

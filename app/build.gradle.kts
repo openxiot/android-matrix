@@ -21,11 +21,11 @@ val tagVersion: Pair<Int, String>? = runCatching {
 }.getOrNull()
 
 android {
-    namespace = "cc.openxiot.wematrix"
+    namespace = "cc.openxiot.matrix"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "cc.openxiot.wematrix"
+        applicationId = "cc.openxiot.matrix"
         minSdk = 29
         targetSdk = 37
         // 兜底值必须与上面的公式自洽：1.0.3 → 1*10000 + 0*100 + 3 = 10003，别写成 103

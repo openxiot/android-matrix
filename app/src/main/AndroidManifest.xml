@@ -19,7 +19,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".WeMatrixApp"
+        android:name=".MatrixApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -27,13 +27,13 @@
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WeMatrix">
+        android:theme="@style/Theme.Matrix">
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.WeMatrix">
+            android:theme="@style/Theme.Matrix">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -51,7 +51,7 @@
 
         <!--
           把下载好的安装包交给系统安装器。authority 用 ${applicationId} 占位符而不是写死
-          "cc.openxiot.wematrix.fileprovider"：将来若加 applicationIdSuffix（比如 .debug），
+          "cc.openxiot.matrix.fileprovider"：将来若加 applicationIdSuffix（比如 .debug），
           写死的那份会与调用点（ApkInstaller 用 packageName 拼）悄悄对不上，症状是安装时
           抛 IllegalArgumentException，而这里看起来毫无问题。
         -->
@@ -69,7 +69,7 @@
             android:name=".ui.scan.ScanQrActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.WeMatrix.Scan" />
+            android:theme="@style/Theme.Matrix.Scan" />
 
         <activity
             android:name=".wxapi.WXEntryActivity"

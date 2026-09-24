@@ -16,6 +16,7 @@ import cc.openxiot.matrix.MatrixApp
 import cc.openxiot.matrix.R
 import cc.openxiot.matrix.data.api.RetrofitClient
 import cc.openxiot.matrix.ui.components.AppWebView
+import cc.openxiot.matrix.ui.device.controller.DeviceControllerScreen
 import cc.openxiot.matrix.util.Constants
 
 /**
@@ -87,19 +88,16 @@ fun DeviceOperationScreen(
                 )
             }
             else -> {
-                Box(
+                // 双模式兜底：没有配置控制页的产品，用原生动态渲染的通用控制界面
+                //（一个服务一张卡片，读/写/执行），对齐 webapp DeviceControllerComponent。
+                DeviceControllerScreen(
+                    spaceId = spaceId,
+                    did = deviceDid,
+                    type = deviceType,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(padding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.device_operation_unavailable),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(24.dp)
-                    )
-                }
+                )
             }
         }
     }

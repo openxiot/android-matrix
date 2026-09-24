@@ -150,16 +150,24 @@ interface MatrixService {
         @Query("pid") pid: List<String>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
+    /**
+     * 写属性。body 是**数组**（[{pid,value}]），与 web 端
+     * `PropertyOperationCodec.Set.QUERY.encodeArray` 同口型（返回值也是数组的 {pid,status}）。
+     */
     @POST("matrix/v1/device/properties/{spaceId}")
     suspend fun setDeviceProperties(
         @Path("spaceId") spaceId: String,
-        @Body body: Map<String, @JvmSuppressWildcards Any?>
+        @Body body: List<@JvmSuppressWildcards Map<String, @JvmSuppressWildcards Any?>>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
+    /**
+     * 执行方法。body 是**数组**（[{aid,in:[{piid,values}]}]），与 web 端
+     * `ActionOperationCodec.Query.encodeArray` 同口型（返回值也是数组的 {aid,status,out}）。
+     */
     @POST("matrix/v1/device/actions/{spaceId}")
     suspend fun invokeDeviceAction(
         @Path("spaceId") spaceId: String,
-        @Body body: Map<String, @JvmSuppressWildcards Any?>
+        @Body body: List<@JvmSuppressWildcards Map<String, @JvmSuppressWildcards Any?>>
     ): Response<ApiResponse<List<Map<String, Any?>>>>
 
     // ---- 设备点表（只读） ----

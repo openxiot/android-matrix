@@ -19,4 +19,23 @@
     <string name="device_space_label">Space</string>
     <!-- 设备操作页：未找到可用的移动端控制页面时的占位提示 -->
     <string name="device_operation_unavailable">No control page available</string>
+
+    <!-- ============ 通用设备控制（无控制页时的原生动态渲染，webapp DeviceController 同口径） ============
+         反馈文案是页面自有词（"已更新" 等），与设备功能标签无关；translatable="false" 固定中文，
+         是因为它们出现在设备中文标签丛中、却要绕开 60+ 语言目录的翻译管线 —— 与 DeviceControllerViewModel
+         顶注的说明一致。设备/服务/属性/方法/枚举标签本身是服务端数据（DeviceControlParser），原样上屏。 -->
+    <string name="dc_no_data" translatable="false">设备没有可操作的功能</string>
+    <string name="dc_identify" translatable="false">点亮设备</string>
+    <string name="dc_updated" translatable="false">%1$s 已更新</string>
+    <string name="dc_read" translatable="false">%1$s 已读取</string>
+    <string name="dc_executed" translatable="false">%1$s 已执行</string>
+    <string name="dc_executed_pending" translatable="false">%1$s 已执行（等待设备确认）</string>
+    <string name="dc_status_fmt" translatable="false">%1$s：%2$s</string>
+    <string name="dc_status_cannot_read" translatable="false">不可读</string>
+    <string name="dc_status_cannot_write" translatable="false">不可写</string>
+    <string name="dc_status_not_found" translatable="false">属性不存在</string>
+    <string name="dc_status_internal" translatable="false">内部错误</string>
+    <string name="dc_status_value_invalid" translatable="false">取值不合法</string>
+    <string name="dc_status_arg_invalid" translatable="false">参数不合法</string>
+    <string name="dc_status_verify_fail" translatable="false">验证失败</string>
 </resources>

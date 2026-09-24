@@ -4,6 +4,9 @@
 -->
 <resources>
     <string name="app_name">മാട്രിക്സ്</string>
+
+    <!-- 设备详情页内嵌的第三方设备控制页（category=mobile）区块标题 -->
+    <string name="device_control_card_title">Device Control</string>
     <string name="common_back">മടങ്ങുക</string>
     <string name="common_retry">വീണ്ടും ശ്രമിക്കുക</string>
     <string name="common_confirm">സ്ഥിരീകരിക്കുക</string>

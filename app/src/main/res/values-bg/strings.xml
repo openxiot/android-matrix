@@ -4,6 +4,9 @@
 -->
 <resources>
     <string name="app_name">Матрица</string>
+
+    <!-- 设备详情页内嵌的第三方设备控制页（category=mobile）区块标题 -->
+    <string name="device_control_card_title">Device Control</string>
     <string name="common_back">Назад</string>
     <string name="common_retry">Опитай отново</string>
     <string name="common_confirm">Потвърди</string>

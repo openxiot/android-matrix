@@ -160,3 +160,21 @@ data class ProductEntity(
      */
     val displayName: String? get() = name?.zhCN ?: model ?: id
 }
+
+/** 产品控制页（列表项）：只解析本端要用的 `web.url` 与 `version.code`，其余字段（lifecycle/instance/creator/updater）不解析。 */
+data class ProductController(
+    @SerializedName("category") val category: String? = null,
+    @SerializedName("type") val type: String? = null,
+    @SerializedName("web") val web: ControllerWeb? = null,
+    @SerializedName("version") val version: ControllerVersion? = null
+)
+
+data class ControllerWeb(
+    @SerializedName("format") val format: String? = null,
+    @SerializedName("url") val url: String? = null
+)
+
+data class ControllerVersion(
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("code") val code: Int? = null
+)

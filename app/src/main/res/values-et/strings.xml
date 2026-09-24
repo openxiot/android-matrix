@@ -4,6 +4,9 @@
 -->
 <resources>
     <string name="app_name">Maatriks</string>
+
+    <!-- 设备详情页内嵌的第三方设备控制页（category=mobile）区块标题 -->
+    <string name="device_control_card_title">Device Control</string>
     <string name="common_back">Tagasi</string>
     <string name="common_retry">Proovi uuesti</string>
     <string name="common_confirm">Kinnita</string>

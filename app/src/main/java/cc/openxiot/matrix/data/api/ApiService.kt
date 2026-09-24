@@ -380,6 +380,16 @@ interface ProductService {
 
     @GET("v1/product/basic/one")
     suspend fun getProductDetail(@Query("productId") productId: String): Response<ApiResponse<ProductEntity>>
+
+    /**
+     * 按设备类型 + category 取产品控制页列表（设备详情页要内嵌的控制页，category=移动端的 `mobile`）。
+     * product 主机在 RetrofitClient 里被当作公开主机、不加鉴权头 —— 与 web 端口径一致。
+     */
+    @GET("v1/product/controller/many/by-device-type")
+    suspend fun getControllersByDeviceType(
+        @Query("deviceType") deviceType: String,
+        @Query("category") category: String
+    ): Response<ApiResponse<List<ProductController>>>
 }
 
 interface DtuService {

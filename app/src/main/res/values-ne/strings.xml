@@ -4,6 +4,9 @@
 -->
 <resources>
     <string name="app_name">म्याट्रिक्स</string>
+
+    <!-- 设备详情页内嵌的第三方设备控制页（category=mobile）区块标题 -->
+    <string name="device_control_card_title">Device Control</string>
     <string name="common_back">फिर्ता</string>
     <string name="common_retry">पुन: प्रयास गर्नुहोस्</string>
     <string name="common_confirm">पुष्टि गर्नुहोस्</string>

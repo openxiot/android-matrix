@@ -77,11 +77,13 @@ fun DeviceOperationScreen(
                 }
             }
             controlUrl!!.isNotEmpty() -> {
+                // 设备控制页是固定看板：锁死竖向拖动，仅保留页面自带的顶部下拉刷新
                 AppWebView(
                     url = controlUrl!!,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(padding)
+                        .padding(padding),
+                    lockScroll = true
                 )
             }
             else -> {

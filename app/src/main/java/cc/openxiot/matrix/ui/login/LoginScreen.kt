@@ -128,30 +128,6 @@ fun LoginScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
-
-                OutlinedButton(
-                    onClick = { viewModel.useTestToken() },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(52.dp),
-                    shape = RoundedCornerShape(26.dp),
-                    colors = ButtonDefaults.outlinedButtonColors(
-                        contentColor = MaterialTheme.colorScheme.onPrimary
-                    )
-                ) {
-                    Icon(
-                        Icons.Default.QrCode,
-                        contentDescription = null,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = stringResource(R.string.login_test_account),
-                        fontWeight = FontWeight.Medium,
-                        fontSize = 16.sp
-                    )
-                }
             }
 
             if (uiState.error != null) {
